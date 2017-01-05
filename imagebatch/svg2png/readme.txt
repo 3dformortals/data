@@ -18,7 +18,7 @@ source code links:
 
 https://github.com/lenivaya10001/data/tree/master/imagebatch/png
 
-https://bitbucket.org/lenivaya10001/data/src/7f475ecc0727ca5bdf301698c2b353703525617a/imagebatch/png/
+https://bitbucket.org/lenivaya10001/data/src/d9a8e9e023317bf10b4aa85f3ab167f766557f01/imagebatch/svg2png/?at=master
 
 exe win7x64 links created use pyinstaller:
 
