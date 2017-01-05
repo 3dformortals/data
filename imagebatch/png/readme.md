@@ -134,7 +134,8 @@ source code links:
 
 https://github.com/lenivaya10001/data/tree/master/imagebatch/png
 
-https://bitbucket.org/lenivaya10001/data/src/432026a0203c015556139e6e28747d12b5e5916b/imagebatch/png/?at=master
+https://bitbucket.org/lenivaya10001/data/src
+
 
 exe win7x64 links created use pyinstaller:
 
