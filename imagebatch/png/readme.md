@@ -3,8 +3,8 @@
 png batch edit / пакетное редактирование png.
 Обработка всех png файлов находящихся в папке програмы на уровне файла програмы(вложеные папки не трогает). Файл результат начинается с "_".
 
-требуется библиотека pillow и python
-тестировалась под pillow 3.4.2, python 3.4.4 win7x64
+требуется библиотека pillow и python.
+Тестировалось под pillow 3.4.2, python 3.4.4 win7x64
 
 --------------------------------------------------
 
@@ -41,7 +41,7 @@ png batch edit / пакетное редактирование png.
 - если один параметр, то только альфу трогает
 
 ![original](pic/testoriginal.png?raw=true "before")
-![edited](pic/pngbatchAtocolor_1.png?raw=true "after")
+![edited](pic/pngbatchAtocolor_1.png?raw=true "0 0 0 255")
 
 --------------------------------------------------
 
@@ -81,8 +81,8 @@ exe версии - портативные, созданы командой
 png batch edit / batch editing png.
 Processing all png files in the program folder on the program file-level (sub-folders do not touch). The result file begins with "_".
 
-It requires pillow and python library
-I tested under the pillow 3.4.2, python 3.4.4 win7x64
+It requires pillow and python library.
+Tested under the pillow 3.4.2, python 3.4.4 win7x64
 
 --------------------------------------------------
 
@@ -134,7 +134,7 @@ source code links:
 
 https://github.com/lenivaya10001/data/tree/master/imagebatch/png
 
-https://bitbucket.org/lenivaya10001/data/src/d9a8e9e023317bf10b4aa85f3ab167f766557f01/imagebatch/png/?at=master
+https://bitbucket.org/lenivaya10001/data/src/432026a0203c015556139e6e28747d12b5e5916b/imagebatch/png/?at=master
 
 exe win7x64 links created use pyinstaller:
 
