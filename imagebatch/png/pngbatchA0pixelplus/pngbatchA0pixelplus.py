@@ -37,7 +37,7 @@ try:
 		
 		adres=mydir+os.sep+fname
 		print(adres)
-		im = Image.open(adres)
+		im = Image.open(adres).convert('RGBA')
 		im.load()
 		w,h=im.size
 		w=range(w)
@@ -49,11 +49,17 @@ try:
 		alp=list(im.getdata(3)) #alpha tuple 0...255 кортеж прозрачности пикселей
 		oldalp=list(h)
 		newalp=list(h)
+		newr=list(h)
+		newg=list(h)
+		newb=list(h)
 		for y in h:
 			a=y*len(w)
 			b=(y+1)*len(w)
 			oldalp[y]=alp[a:b]
 			newalp[y]=alp[a:b]
+			newr[y]=R[a:b]
+			newg[y]=G[a:b]
+			newb[y]=B[a:b]
 		
 		for y in h:
 			for x in w:
@@ -62,14 +68,23 @@ try:
 						if x>0 and x<w[-1]: #не левый и не правый столбец
 							for y3 in [y-1,y,y+1]:
 								for x3 in [x-1,x,x+1]:
-									newalp[y3][x3]=color[3]
+									if oldalp[y3][x3]==0:
+										newr[y3][x3]=color[0]
+										newg[y3][x3]=color[1]
+										newb[y3][x3]=color[2]
+										newalp[y3][x3]=color[3]
 		_alp=[]
-		
+		_r=[]
+		_g=[]
+		_b=[]
 		for y in h:
 			_alp+=newalp[y]
+			_r+=newr[y]
+			_g+=newg[y]
+			_b+=newb[y]
 		
 		for i in range(len(_alp)):
-			alp[i]=(R[i],G[i],B[i],_alp[i])
+			alp[i]=(_r[i],_g[i],_b[i],_alp[i])
 		print("recount complete")
 		print(datetime.datetime.now().time())
 		print("------------------ V ----------------------")

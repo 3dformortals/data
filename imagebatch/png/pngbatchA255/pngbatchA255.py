@@ -22,7 +22,7 @@ try:
 		
 		adres=mydir+os.sep+fname
 		print(adres)
-		im = Image.open(adres)
+		im = Image.open(adres).convert('RGBA')
 		im.load()
 		w,h=im.size
 		w=range(w)
