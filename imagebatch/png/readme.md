@@ -8,7 +8,7 @@ png batch edit / пакетное редактирование png.
 
 --------------------------------------------------
 
- - ## pngbatchA0pixelplus ##
+## pngbatchA0pixelplus ##
  - все пиксели с альфой равной 0, касающиеся пикселя с альфой больше 0, получают заданый цвет
 
  ![original](pic/testoriginal.png?raw=true "before")
