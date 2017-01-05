@@ -10,9 +10,9 @@ png batch edit / пакетное редактирование png.
 
  - pngbatchA0pixelplus - все пиксели с альфой равной 0, касающиеся пикселя с альфой больше 0, получают заданый цвет
 
- ![original](/pic/testoriginal.png?raw=true "before")
- ![edited](/pic/pngbatchA0pixelplus_1.png?raw=true "after")
- ![edited2time](/pic/pngbatchA0pixelplus_2.png?raw=true "after2time")
+ ![original](pic/testoriginal.png?raw=true "before")
+ ![edited](pic/pngbatchA0pixelplus_1.png?raw=true "after")
+ ![edited2time](pic/pngbatchA0pixelplus_2.png?raw=true "after2time")
  
  --------------------------------------------------
  
