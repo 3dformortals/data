@@ -1,10 +1,40 @@
 ﻿--------------------------------------------------
 
+english description bottom
+
+--------------------------------------------------
+
 png batch edit / пакетное редактирование png.
 Обработка всех png файлов находящихся в папке програмы на уровне файла програмы(вложеные папки не трогает). Файл результат начинается с "_".
 
 требуется библиотека pillow и python.
 Тестировалось под pillow 3.4.2, python 3.4.4 win7x64
+
+--------------------------------------------------
+
+##pngbatchAborderblurplusfull##
+- добавляет вокруг пикселей , у которых альфа больше 0, контуры с равномерно изменяющейся прозрачностью, заполняет весь холст. Быстрее для обычных изображений (фото без фона) . Медленее для изображений малой насыщености (1 пиксель в середине холста) .
+
+![original](pic/testoriginal.png?raw=true "before")
+![edited](pic/pngbatchAborderblurplusfull_1_20.png?raw=true "1 20")
+![edited](pic/pngbatchAborderblurplusfull_1__20.png?raw=true "1 -20")
+
+--------------------------------------------------
+
+##pngbatchAborderblurplusfullslowcontour##
+- добавляет вокруг пикселей , у которых альфа больше 0, контуры с равномерно изменяющейся прозрачностью, заполняет весь холст. Медленее для обычных изображений (фото) . Быстрее для изображений малой насыщености (1 пиксель в середине холста) .
+
+![original](pic/testoriginal.png?raw=true "before")
+![edited](pic/pngbatchAborderblurplusfullslowcontour_1_20.png?raw=true "1 20")
+![edited](pic/pngbatchAborderblurplusfullslowcontour_1__20.png?raw=true "1 -20")
+
+--------------------------------------------------
+
+##pngbatchA0tocolor##
+- все пиксели с альфой равной 0, получают заданый цвет
+
+![original](pic/testoriginal.png?raw=true "before")
+![edited](pic/pngbatchA0tocolor_1.png?raw=true "after")
 
 --------------------------------------------------
 
@@ -83,6 +113,21 @@ Processing all png files in the program folder on the program file-level (sub-fo
 
 It requires pillow and python library.
 Tested under the pillow 3.4.2, python 3.4.4 win7x64
+
+--------------------------------------------------
+
+## PngbatchAborderblurplusfull ##
+- Adds surrounding pixels that have alpha greater than 0, the contours with uniformly changing the transparency, fills the entire canvas. Faster for ordinary images (picture without background). Slower for low saturation of the image (1 pixel in the middle of the canvas).
+
+--------------------------------------------------
+
+## PngbatchAborderblurplusfullslowcontour ##
+- Adds surrounding pixels that have alpha greater than 0, the contours with uniformly changing the transparency, fills the entire canvas. Slow for conventional images (photos). Faster for low saturation of the image (1 pixel in the middle of the canvas).
+
+--------------------------------------------------
+
+## PngbatchA0tocolor ##
+- All pixels with alpha set to 0, the color gets the job
 
 --------------------------------------------------
 
