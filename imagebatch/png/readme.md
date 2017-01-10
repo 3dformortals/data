@@ -22,7 +22,7 @@ png batch edit / пакетное редактирование png.
 --------------------------------------------------
 
 ##pngbatchAborderblurplusfullslowcontour##
-- добавляет вокруг пикселей , у которых альфа больше 0, контуры с равномерно изменяющейся прозрачностью, заполняет весь холст. Медленее для обычных изображений (фото) . Быстрее для изображений малой насыщености (1 пиксель в середине холста) .
+- добавляет вокруг пикселей , у которых альфа больше 0, контуры с равномерно изменяющейся прозрачностью, заполняет весь холст. Медленее для обычных изображений (фото без фона) . Быстрее для изображений малой насыщености (1 пиксель в середине холста) .
 
 ![original](pic/testoriginal.png?raw=true "before")
 ![edited](pic/pngbatchAborderblurplusfullslowcontour_1_20.png?raw=true "1 20")
@@ -122,7 +122,7 @@ Tested under the pillow 3.4.2, python 3.4.4 win7x64
 --------------------------------------------------
 
 ## PngbatchAborderblurplusfullslowcontour ##
-- Adds surrounding pixels that have alpha greater than 0, the contours with uniformly changing the transparency, fills the entire canvas. Slow for conventional images (photos). Faster for low saturation of the image (1 pixel in the middle of the canvas).
+- Adds surrounding pixels that have alpha greater than 0, the contours with uniformly changing the transparency, fills the entire canvas. Slow for conventional images (picture without background). Faster for low saturation of the image (1 pixel in the middle of the canvas).
 
 --------------------------------------------------
 
