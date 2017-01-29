@@ -43,14 +43,20 @@ try:
             files[ad]= os.stat(ad).st_size
     while True:
         nextfor=False
+        stillhere=[]
         for (p, d, f) in os.walk(path):
             if nextfor==True:break
             for file in f:
                 if nextfor==True:break
                 ad=p+s+file
-                oldsize=files[ad]
+                if ad in files:
+                    oldsize=files[ad]
+                else:
+                    oldsize=os.stat(ad).st_size
+                    nextfor=True
                 newsize=os.stat(ad).st_size
-                if oldsize!=newsize:
+                if oldsize!=newsize:nextfor=True
+                if nextfor:
                     files[ad]=newsize
                     txt = open(path + s + "codingtime.txt", "rt",encoding="utf-8")
                     sum=int(txt.readline().strip())+dt
@@ -58,7 +64,15 @@ try:
                     txt = open(path + s + "codingtime.txt", "w",encoding="utf-8")
                     txt.write(str(sum))
                     txt.close()
-                    nextfor=True
+        #сбор списка файлов для очистки удаленых
+        for (p, d, f) in os.walk(path):
+            for file in f:
+                ad=p+s+file
+                stillhere.append(str(ad))
+        oldhere=list(files.keys())
+        for i in oldhere:
+            if i not in stillhere:
+                del files[i]
         print(sectotime(sum))
         time.sleep(dt)
 except:
