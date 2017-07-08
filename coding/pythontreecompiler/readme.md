@@ -2,7 +2,7 @@ python tree compiler
 
 script have two compile options  
 0 -compile to *.pyc all subfolder *.py files  
-1 -django compile to *.pyc all subfolder *.py files, except "manage.py" file of "pythontreecompiler.py" script level, and except subfolders start with combination "os separator + underscore". For linux is "/\_" , for windows is "\\\_" . For example the "\_temp" or "/\_temp" folder will be not included in result of compilation.  
+1 -django compile to *.pyc all subfolder *.py files, except "manage.py" file of "pythontreecompiler.py" script level, and except subfolders start with combination "os separator + underscore". For linux is "/\_" , for windows is "\\\_" . For example the "\\\_temp" or "/\_temp" folder will be not included in result of compilation.  
 
 The result will be placed in the path placed on parent folder level, with unique name (\_+datetime+\_+parent folder of "pythontreecompiler.py" file name). The result will include all files of included folders, but python files will have *.pyc form. The django app in this case work same, but code can't be readed easy.  
 
