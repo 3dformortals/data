@@ -13,7 +13,7 @@ imagevideo / png to video.
 
 ##pngonefiletomp4fps24##
 - конвертирует каждый файл png, в папке скрипта, на уровне файла скрипта, в видео с расширением mp4 24fps, заданой длительности в секундах.  
-need installed "moviepy" library  
+- требует установленой библиотеки "moviepy"  
 https://zulko.github.io/moviepy/install.html
 
 --------------------------------------------------
@@ -39,7 +39,7 @@ Tested under the pillow 3.4.2, python 3.4.4 win7x64
 
 ##pngonefiletomp4fps24##
 -  convert each png file, on script level, inside script folder, into video file with extension mp4 24fps, with input duration in seconds.  
-need installed "moviepy" library  
+- need installed "moviepy" library  
 https://zulko.github.io/moviepy/install.html
 
 --------------------------------------------------
