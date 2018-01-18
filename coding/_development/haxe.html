@@ -1,0 +1,210 @@
+<!DOCTYPE>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>haxe syntax</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+        
+        <link rel="stylesheet" href="css/highlight/styles/zenburn.css">
+        <script src="css/highlight/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+    <body>
+    <a class="up" id="c0" href="index.html">development &lt;&lt;&lt; haxe syntax</a>
+    
+    <ol>
+        <li><a class="up" href="#c1" >number sequence generator (range Array&lt;Int&gt; generator)</a></li>
+        <li><a class="up" href="#c2" >2d Array syntax</a></li>
+        <li><a class="up" href="#c3" >one line FlxTimer</a></li>
+        <li><a class="up" href="#c4" >conditional compilation (targeting mobile desktop web ios)</a></li>
+        <li><a class="up" href="#c5" >$type | Type.typeof | Types | Reflect</a></li>
+        <li><a class="up" href="#c6" >FlxSprite</a></li>
+        <li><a class="up" href="#c7" >haxeflixel http requests, response, open url, html parser</a></li>
+        <li><a class="up" href="#c8" >haxeflixel FlxG.save</a></li>
+        <li><a class="up" href="#c9" >variable sign | if short form | "+=" vs "+ ="</a></li>
+        <li><a class="up" href="#c10" >Array slice срез последовательности масива</a></li>
+        <li><a class="up" href="#c11" >Array move slice сдвинуть срез</a></li>
+        <li><a class="up" href="#c12" >Array move element сдвинуть элемент</a></li>
+        <li><a class="up" href="#c13" >for loop</a></li>
+        <!--<li><a class="up" href="#c" ></a></li>-->
+    </ol>
+    <ol class="cover">
+    <hr><li id="c1"><a href="#c0">number sequence generator (range Array<Int> generator)</a></li>
+    <a href="https://haxe.org/manual/lf-array-comprehension.html" target="_blank">Array comprehension</a>
+    <pre><code class="haxe">var x:Array&lt;Int&gt;=[for (i in 0...10) i];// [0,...,9]
+x.reverse();// [9,...,0]
+// "trace(x.reverse());" create error because reverse():Void return Void
+x.reverse(); trace(x); // work done</code></pre>
+    
+    <hr><li id="c2"><a href="#c0">2d Array syntax</a></li>
+    <pre><code class="haxe">var t = [
+        [1.2,1.2,1.2],
+        [2.2,2.2,2.2]
+    ];
+trace(t);
+$type(t); // can't use for compare "if ($type(t) == ".<br>It will trace the variable type into console,<br>when "lime build android" etc compile process<br><a href="https://haxe.org/manual/type-system-type-inference.html">type system type interface</a>
+
+var t = [];
+t.push([1.2,1.2,1.2]);
+t.push([2.2,2.2,2.2]);
+trace(t);
+
+var t:Array&lt;Array&lt;Float&gt;&gt; = new Array();
+t.push([1.2,2]);
+t.push([2,3/2]);
+trace(t);
+</code></pre>
+    <hr><li id="c3"><a href="#c0">one line FlxTimer</a></li>
+    
+    <pre><code>mytimer.start(3,function(t:FlxTimer):Void{FlxG.switchState(new PS());});</code></pre>
+    дополнительный синтаксис для таймеров в стороку (не проверено, со слов gama11)
+    <br>mytimer.start(3,function(t) FlxG.switchState(new PS())) would work too
+    <br>or mytimer.start(3, t -&gt; FlxG.switchState(new PS())) in haxe 4
+    
+    <hr><li id="c4"><a href="#c0">conditional compilation (targeting mobile desktop web ios)</a></li>
+    <br><a href="http://haxeflixel.com/documentation/haxeflixel-conditionals/" target="_blank" >haxeflixel conditionals</a>
+    <br><a href="http://haxeflixel.com/documentation/compiler-conditionals/" target="_blank" >compiler conditionals</a>
+    <pre><code class="nohighlight">
+#if (web || desktop)
+//code ...
+#elseif android
+//code ...
+#elseif ios
+//code ...
+#else
+//code ...
+#end
+</code></pre>
+    
+    <hr><li id="c5"><a href="#c0">$type | Type.typeof | Types | Reflect</a></li>
+    <a href="https://haxe.org/manual/type-system-type-inference.html" target="_blank">$type</a> show the type only in compiling process. Can't be used to compare data.
+    <pre><code class="haxe">$type(x);</code></pre>
+    <hr><a href="" target="_blank">Type.typeof</a> can be used to compare data.
+    <pre><code class="haxe">var x:Int=1;
+var typex:Type.ValueType=Type.ValueType.TInt;
+trace(Type.typeof(x)==typex); // -&gt; true
+</code></pre>
+    or
+    <pre><code class="haxe">import Type.ValueType;
+import Type.typeof;
+var x:Int=1;
+trace(typeof(x)==TInt); // -&gt; true
+</code></pre>
+    <a href="http://api.haxe.org/ValueType.html" target="_blank">Type.ValueType.</a> TNull TInt TFloat TBool TObject TFunction TClass(c:Class&lt;Dynamic&gt;) TEnum(e:Enum&lt;Dynamic&gt;) TUnknown
+    <hr><a href="http://haxe.org/manual/types.html" target="_blank">Types</a> 
+    <br>Type groups: Class instance | Enum instance | Structure | Function | Dynamic | Abstract | Monomorph .
+    <br>Basic types: Bool(true, false) | Int(-1, 0, 1, 0xFF0000) | Float(-1.0, 0.0, 1.0, 1e10) .
+    <br><a href="http://haxe.org/manual/types-numeric-operators.html" target="_blank">numeric operators</a>:
+    Arithmetic(++ -- + - * / %)
+    | Comparison(== != &lt; &lt;= &gt; &gt;=)
+    | Bitwise(~ &amp; | ^ &lt;&lt; &gt;&gt; &gt;&gt;&gt;)
+    | <a href="http://haxe.org/manual/types-bool.html" target="_blank">Bool</a>(&amp;&amp; || !)
+    
+    <hr><a href="http://api.haxe.org/Reflect.html" target="_blank">Reflect</a> isEnumValue isFunction isObject callMethod compare compareMethods
+    
+    <hr><a href="http://old.haxe.org/doc/cross/reflect" target="_blank">Using Reflect and Type</a> examples of typeof and reflect syntax
+    
+    <hr><li id="c6"><a href="#c0">FlxSprite</a></li>
+    <pre><code class="haxe">mysprite.fill(FlxColor.TRANSPARENT);</code></pre>
+    clear the "var mysprite:FlxSprite" from makeGraphic objects (not checked, from gama11)
+    
+    <hr><li id="c7"><a href="#c0">haxeflixel http requests, response, open url, html parser</a></li>
+    http requests, response
+    <pre><code class="haxe">import haxe.Http;
+...
+FlxG.log.redirectTraces = true; // trace in debug window of worked app, which can be opened "\" or "F2" keyboard button
+var testserver:Bool=true;
+var serverlink:String;
+if (Main.testserver){serverlink="http://127.0.0.1:8000/myapp/";}
+else {serverlink="http://mysite.pythonanywhere.com/myapp/";}
+var req:Http = new Http(serverlink);
+req.setParameter("appname","ClockworkPlanetPuzzle");
+req.setParameter("x","value always string");
+req.request( true ); // false=GET, true=POST . DESKTOP WORK DONE ONLY CPP TAGETING. NEKO AND HTML5 IS FALL
+trace(req.responseData); // string data. Trace to show data inside vscode "output" tab or app debug window "\" or "F2"
+</code></pre>
+    <hr>open url
+    <pre><code class="haxe">import flixel.FlxG;
+...
+FlxG.openURL(serverlink,"_blank"); //without "_blank" work too
+</code></pre>
+    <hr>html parser
+    <br>Install library use haxelib. Console
+    <pre><code class="bash">haxelib install HtmlParser</code></pre>"Enter", wait. If all done then next.
+    <br>Add to haxeflixel "Project.xml" (for example into Libraries section)
+    <pre><code class="xml">&lt;haxelib name="HtmlParser" /&gt;</code></pre>
+    Add to *.hx file
+    <pre><code class="haxe">import htmlparser.HtmlParser;</code></pre>
+    compile once ("Ctrl+Shift+p" for vscode or "lime build cpp -debug" use console from "Project.xml" directory), then can use it with intellisense autocomplete.
+    
+    <hr><li id="c8"><a href="#c0">haxeflixel FlxG.save</a></li>
+    The calling to FlxG.save, inside Main.hx public function new() method, must be placed/realised only after creating the game object, for example:
+    <pre><code class="haxe">_game = new FlxGame(720, 1280, PS, true);
+this.usersave_load();
+addChild(_game);</code></pre>
+    or will be raised error "Null object reference", after compiling when app try to run
+    <hr>edit Main.hx for standart haxeflixel project
+    <pre><code class="haxe">import flixel.FlxG;
+import flixel.util.FlxSave;
+
+class Main extends Sprite
+{
+	public static var x:Float=0;
+	public static var y:Float=0;
+	public static var ss:FlxSave;
+	
+	public static function saveall():Void
+	{
+		ss=FlxG.save;
+		ss.data.x=x;
+		ss.data.y=y;
+		ss.flush();
+	}
+	
+	public static function loadall():Void
+	{
+		ss=FlxG.save;
+		if(ss.data.x != null){
+			x=ss.data.x;
+			y=ss.data.y;
+		}
+	}
+</code></pre>
+    later, inside PlayState.hx etc, use syntax
+    <pre><code class="haxe">Main.saveall(); // to save data
+Main.loadall(); // to load data
+</code></pre>
+    that delete saved data from windows, find and delete the "appname" folder, for example, placed "C:\Users\user\AppData\Roaming\HaxeFlixel".
+    That erase saved data from code, use "ss.data.x=null;ss.data.y=null;ss.flush();" syntax or use "ss.erase();ss.flush();" (not tested,was some problems with same syntax, <a href="https://github.com/HaxeFlixel/flixel/issues/1302" target="_blank">look like bug 1302</a>)
+    
+    <hr><li id="c9"><a href="#c0">variable sign | if short form | "+=" vs "+ ="</a></li>
+    <pre><code class="haxe">var myvar:Int=0;
+var myvarsign:Int=(myvar<0)?-1:1;
+myvar+=1; //work good("myvar+ =1;"create error)
+</code></pre>
+    <hr><li id="c10"><a href="#c0">Array slice срез последовательности масива</a></li>
+    <pre><code class="haxe">var x:Array&lt;Int&gt;[1,2,3].slice(1);// -&gt; [2,3]
+var x:Array&lt;Int&gt;[1,2,3].slice(-2);// -&gt; [2,3]
+</code></pre>
+    <hr><li id="c11"><a href="#c0">Array move slice сдвинуть срез</a></li>
+    <pre><code class="haxe">var x:Array&lt;Int&gt;=[1,2,3,4,5];
+x=x.concat(x.splice(0,2)); // -> x=[3,4,5,1,2]
+x=x.splice(3,2).concat(x); // -> x=[1,2,3,4,5]
+</code></pre>
+    <hr><li id="c12"><a href="#c0">Array move element сдвинуть элемент</a></li>
+    <a href="http://code.haxe.org/category/beginner/arrays.html" target="_blank">Using arrays</a>
+    <pre><code class="haxe">var x:Array&lt;Int&gt;=[1,2,3,4,5];
+x.push(x.splice(0,1)[0]); // -> x=[2,3,4,5,1]
+x.push(x.shift()); // -> x=[3,4,5,1,2]
+x.unshift(x.splice(4,1)[0]) // -> x=[2,3,4,5,1]
+x.insert(0,x.splice(4,1)[0]); // -> x=[1,2,3,4,5]</code></pre>
+    
+    <hr><li id="c13"><a href="#c0">for loop</a></li><pre><code class="haxe">for (i in 0 ... 3) //0 1 2
+for (i in [1,3,2]) //1 3 2</code></pre>
+    
+    <!--<hr><li id="c"><a href="#c0">covertext</a></li><pre><code class="haxe"></code></pre>-->
+    </ol>
+    </body>
+</html>

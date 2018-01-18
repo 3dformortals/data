@@ -1,0 +1,95 @@
+<!DOCTYPE>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>openfl syntax</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+        
+        <link rel="stylesheet" href="css/highlight/styles/zenburn.css">
+        <script src="css/highlight/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+    <body>
+    <a class="up" id="c0" href="index.html">development &lt;&lt;&lt; openfl syntax</a>
+    
+    <br><br>
+    <ul class="cover">
+        <li><a href="#c1" >TextField - input text field with softkeyboard for android haxe conditions compilation(#if android)</a></li>
+        <li><a href="#c2" >"extension-wake-lock" Turn off/on screen autolock for android target</a></li>
+        <!--<li><a href="#c1" ></a></li>-->
+    </ul>
+    
+    <hr><a class="up" id="c1" href="#c0">TextField - input text field with softkeyboard for android haxe conditions compilation(#if android)</a>
+    <pre><code class="haxe" >import flixel.addons.ui.FlxInputText;
+import openfl.text.TextField;
+import openfl.text.TextFormatAlign;
+
+class StatS extends FlxState {
+    var uname:FlxInputText;
+    var muname:TextField;
+    
+    function onMobileEnter(e:openfl.events.KeyboardEvent){
+        if (e.keyCode == 13) {
+            muname.__dismissSoftKeyboard();
+            muname.removeEventListener(openfl.events.KeyboardEvent.KEY_DOWN, onMobileEnter);
+            FlxG.removeChild(muname);
+        }
+    }
+    
+    function namemaker():Void
+    {
+        #if mobile
+        muname=new TextField();
+        muname.x=10;
+        muname.y=160;
+        muname.type = openfl.text.TextFieldType.INPUT;
+        muname.textColor=0x00FFFF;
+        muname.border=true;
+        muname.borderColor=0x00FFFF;
+        muname.background=false;
+        muname.backgroundColor=0x000000;
+        muname.width=700;
+        muname.height=60;
+        muname.defaultTextFormat = new openfl.text.TextFormat("assets/data/RobotoMono-Bold.ttf", 32,0x00FFFF,false,false,false,null,null,TextFormatAlign.CENTER);
+        muname.needsSoftKeyboard = true;
+        muname.addEventListener(openfl.events.KeyboardEvent.KEY_DOWN, onMobileEnter);
+        muname.maxChars=11;
+        muname.text="noname";
+        FlxG.addChildBelowMouse(muname);
+        #else
+        uname=new FlxInputText(0,160,720,"touch",60,FlxColor.WHITE,FlxColor.BLACK);
+        uname.filterMode=3;
+        uname.lines=1;
+        uname.maxLength=11;
+        uname.caretColor=FlxColor.WHITE;
+        add(uname);
+        #end
+    }
+    
+    public override function create():Void {
+        super.create();
+        namemaker();//textfield depend of android || other
+    }
+}
+</code></pre>
+    <hr><a href="https://github.com/SempaiGames/extension-wake-lock" target="_blank">github link</a> <a class="up" id="c2" href="#c0">"extension-wake-lock" Turn off/on screen autolock for android target</a>
+    <br>console
+    <pre><code class="bash" >haxelib install extension-wake-lock</code></pre>"Enter". Then
+    addon in "Project.xml"
+    <pre><code class="xml" >&lt;haxelib name="extension-wake-lock" /&gt;</code></pre>
+    Then inside source code, for example, inside "override public function create()" of PlayState.hx
+    <pre><code class="haxe" >override public function create():Void{
+    super.create();
+    extension.wakeLock.WakeLock.allowScreenTimeout = false; // to disable screen Lock
+    extension.wakeLock.WakeLock.allowScreenTimeout = true; // to enable screen Lock
+    ... }
+</code></pre>
+    
+    <!--<hr><a class="up" id="c1" href="#c0">info</a>
+    <br><pre><code class="haxe" ></code></pre>-->
+    
+    
+    </body>
+</html>
