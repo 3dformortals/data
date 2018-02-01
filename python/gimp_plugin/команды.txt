@@ -1,0 +1,50 @@
+﻿image=gimp.image_list()[0]
+active_layer = pdb.gimp_image_get_active_layer(image)
+active_layer
+layer_copy = pdb.gimp_layer_copy(active_layer, True)
+pdb.plug_in_gauss(image, layer_copy, radiusfloat, radiusfloat, 1)
+
+pdb.gimp_layer_set_visible(layer_copy, True)
+pdb.gimp_item_set_name(layer_copy, "ww2")
+pdb.gimp_image_insert_layer(image, layer_copy, None, 1)
+ww2 видно на панели и вообще... None parent(group) , 1 position(from 0)
+
+layer = pdb.gimp_image_get_layer_by_name(image, "ww2")
+pdb.gimp_image_set_active_layer(image, layer)
+pdb.gimp_image_set_active_layer(image, active_layer)#из библиотеки
+кеша активный - выделен для редактирования...а вот и хуйюшки.. не работает молча
+
+pdb.file_png_save_defaults(image, layer_copy, "555/kewa.png", "555/kewaraw.png")
+
+----------
+num_channels, pixel = pdb.gimp_drawable_get_pixel(active_layer, x_coord, y_coord)
+pdb.gimp_drawable_set_pixel(drawable, x_coord, y_coord, num_channels, pixel)
+----------
+
+pdb.gimp_selection_all(image)
+width = pdb.gimp_image_width(image)
+height = pdb.gimp_image_height(image)
+pdb.gimp_image_resize(image,width  + border_width,height  + border_width,border_width / 2,border_width / 2)
+pdb.gimp_layer_resize_to_image_size(active_layer)
+pdb.gimp_selection_invert(image)
+
+old_background = pdb.gimp_context_get_background()
+pdb.gimp_context_set_background(border_color)
+
+pdb.gimp_edit_bucket_fill(active_layer, 1, 0, 100, 255, TRUE, 1, 1)
+pdb.gimp_context_set_background(old_background)
+
+layer = pdb.gimp_text_layer_new(image, "testtext", "PT Sans", 12, 0)
+
+решил не создавать массив эталона, а читать верхний слой
+для каждого нового шага сдвига hsv в выбранном направлении:
+	-создать новый слой(или с одним работать чтобы память не грузить)
+		для каждого пикселя нового слоя
+			-прочитать эталон(верхний слой)
+			-конвертировать в hsv
+			-произвести сдвиг hsv
+			-пересчет обратно в rgb
+			-изменить значение пикселя нового слоя
+		след пиксель
+след слой(сдвиг hsv)
+

@@ -1,0 +1,1 @@
+scan subfolders and create file inside each folder name musiclist.txt with list of music file names
