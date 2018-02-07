@@ -91,6 +91,7 @@ class MyDialog(object):
         button.grid(row=4,column=0,columnspan=2)
 
     def show(self):
+        self.toplevel.wait_visibility()
         self.toplevel.grab_set()
         self.toplevel.wait_window()
         # value = [self.iname.get(),self.ihref.get(),self.idone.get()]
@@ -104,6 +105,7 @@ class MyDialog(object):
 def i_maker(name,tabname,tab):
     ind=int(name.split("i",1)[1])
     MyDialog(mainframe,"element editor",tabname,ind).show()
+    global buffer
     d=buffer
     if d:
         db[tabname][ind]=d
@@ -320,6 +322,6 @@ for i in range(4):
     x_canvas[i].bind_all("<Button-5>", on_linuxscrolldn)
 
 cocoa = ttk.Button(mainframe,text="(: на какао разработчику (топливо для меня)") # add button to mainframe - worked
-cocoa.place(height=40,width=600,relx=0.4,rely=0)
+cocoa.place(height=26,width=600,relx=0.4,rely=0)
 cocoa.bind("<Button-1>",cocoa_click)
 mainframe.mainloop()
