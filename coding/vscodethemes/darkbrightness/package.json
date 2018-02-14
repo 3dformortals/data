@@ -1,0 +1,22 @@
+{
+    "name": "darkbrightness",
+    "displayName": "theme-dark-boxcolor-brightness",
+    "description": "dark theme high contrast brightness, 4color",
+    "version": "0.0.1",
+    "publisher": "lenivaya10001",
+    "engines": {
+        "vscode": "^1.10.0"
+    },
+    "categories": [
+        "Themes"
+    ],
+    "contributes": {
+        "themes": [
+            {
+                "label": "Dark High Contrast Boxcolors Brightness",
+                "uiTheme": "vs-dark",
+                "path": "./themes/darkplastic100brightness.tmTheme"
+            }
+        ]
+    }
+}

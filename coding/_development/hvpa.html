@@ -33,7 +33,13 @@
             <li>run vscode -> tab files explorer -> open folder -> choose "way/appname/appname"</li>
             <li>vscode 'Ctrl + Shift + P' -> type 'run task' -> press 'Enter' -> press 'down arrow' and choose 'html5 debug/neko debug/cpp debug', press 'Enter', will be run debug your project, and will created 'export' path. Keep html5/neko export path in project and this path allow vscode haxe highlight working good. The "cpp debug" is prefered way, but first compilation need some times, depend from your PC speed, 10 .. 20 minutes. The "html5 debug/neko debug" faster but not full functional sometimes.</li>
             <li>vscode -> Ctrl+Shift+P -> Haxe: Restart Language Server -> "Enter" . If haxe code highlighting freeze or other problems</li>
-            <li>"appname/.vscode/tasks.json" -> move the" 'isBuildCommand': true," syntax from "flash debug" section to "cpp debug" section. Now "Ctrl+Shift+b" will run "cpp debug" build</li>
+            <li>"appname/.vscode/tasks.json" -> move the <codebox>'isBuildCommand': true,</codebox> syntax from "flash debug" section to "cpp debug" section. Now "Ctrl+Shift+b" will run "cpp debug" build.<br>Deprecated 2018-01-26, now need move
+                <codebox>
+                    "group": {
+                        "kind": "build",
+                        "isDefault": true
+                    },
+                </codebox></li>
             <li>"appname/.vscode/settings.json" move up targets and comment others
                 <pre><code class="nohighlight">
     "haxe.displayConfigurations": [

@@ -21,6 +21,7 @@
         <li><a href="#c3" class="up">move list element</a></li>
         <li><a href="#c4" class="up">open URL in webbrowser</a></li>
         <li><a href="#c5" class="up">pyinstaller create onefile exe</a></li>
+        <li><a href="#c6" class="up">string - save only numbers and letters</a></li>
         <!--<li><a href="#c1" class="up"></a></li>-->
     </ol>
     <ol class="cover">
@@ -38,6 +39,8 @@ x.insert(len(x)-1,x.pop(2)) # x==[2,0,3,1]</code></pre>
     <br>- wxPython (not crossplatform code syntax... linux addon gui elements every next to top, windows - every next to back)
     <br>PyQt not supported ... after creating when try to run create errors.
     <br>Django (version 1.8) not supported(2017 tried few times with help/cheats from official pyinstaller site, but no result... the images not reading from sources)
+    
+    <hr><li id="c6"><a href="#c0">string - save only numbers and letters</a></li><a href="https://docs.python.org/3.4/library/re.html" target="_blank">re - Regular expression operations</a><pre><code class="python">import re<br>x="test@gmail.com"<br>regexp=re.compile(r'[a-zA-Z0-9]')<br>a="".join(re.findall(regexp,x))<br>b=re.sub(r"[^a-zA-Z0-9]", "", x)<br>c="".join(filter(str.isalnum, x))<br>a==b==c=="testgmailcom" # true</code></pre>All ways work for english letters and numbers. Last "c" way save numbers and not only english letters, but other language too.
     
     <!--<hr><li id="c"><a href="#c0">text</a></li><a href="" target="_blank">github link</a><pre><code class="python">python code</code></pre>description-->
     
