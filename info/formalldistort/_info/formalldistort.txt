@@ -1,0 +1,30 @@
+email:
+
+formalldistort@gmail.com
+
+
+---------------------------------
+
+----------------------------------
+liveinternet счетчик
+http://formalldistort.heliohost.org/
+12345678
+----------------------------------
+
+http://www.liveinternet.ru
+счетчик
+
+<!--LiveInternet counter--><script type="text/javascript"><!--
+document.write("<a href='//www.liveinternet.ru/click' "+
+"target=_blank><img src='//counter.yadro.ru/hit?t44.10;r"+
+escape(document.referrer)+((typeof(screen)=="undefined")?"":
+";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
+screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
+";h"+escape(document.title.substring(0,80))+";"+Math.random()+
+"' alt='' title='LiveInternet' "+
+"border='0' width='31' height='31'><\/a>")
+//--></script><!--/LiveInternet-->
+
+светлосиний... но после регистрации адреса сайта, прежний серый
+счетчик заработал. его оставил разницы нет, только цвет
+

@@ -1,0 +1,31 @@
+,"+++<b><r>дл€ продольной составл€ющей(prod)"
+,"+++ ","+++ ","+++ ","+++ ","+++ "
+,"+++&#916;E<sub>[okr_prod]</sub> = (&#916;&#945;<sub>[wstu(0)]</sub> - &#916;&#945;<sub>[prot(0)]</sub>)&#149;cos&#966;<sub>[L<sub>[kol]</sub>,L<sub>[ko_prod]</sub>]</sub>&#149;C<sub>[win_okr_prod]</sub>"
+,"+++E<sub>[okr_prod]</sub> = E<sub>[okr(0)_prod]</sub> + &#916;E<sub>[okr_prod]</sub>"
+,"+++E<sub>[kol_prod]</sub> = E<sub>[kol]</sub>&#149;cos&#966;<sub>[L<sub>[kol]</sub>,L<sub>[ko_prod]</sub>]</sub>"
+,"+++E<sub>[torm_prod]</sub> = E<sub>[torm]</sub>&#149;cos&#966;<sub>[L<sub>[kol]</sub>,L<sub>[ko_prod]</sub>]</sub>"
+,"+++E<sub>[okr_prod]</sub> = E<sub>[okr]</sub>&#149;cos&#966;<sub>[L<sub>[kol]</sub>,L<sub>[ko_prod]</sub>]</sub>"
+,"+++ ","+++ ","+++ ","+++ ","+++ "
+
+,"+++E<sub>[wstu_prod]</sub> = E<sub>[kol_prod]</sub> + E<sub>[torm_prod]</sub> - E<sub>[kord_prod]</sub> + E<sub>[i(0)wstu_prod]</sub> + E<sub>[k(0)wstu_prod]</sub>"
+,"+++E<sub>[kord_prod]</sub> = (E<sub>[wstu_prod]</sub> + E<sub>[prot_prod]</sub>)&#149;0.5 - E<sub>[okr_prod]</sub> + E<sub>[i(0)kord_prod]</sub> + E<sub>[k(0)kord_prod]</sub>"
+,"+++E<sub>[prot_prod]</sub> = E<sub>[tre_prod]</sub> + E<sub>[kord_prod]</sub> + E<sub>[i(0)prot_prod]</sub> + E<sub>[k(0)prot_prod]</sub>"
+,"+++ ","+++ ","+++ ","+++ ","+++ "
+
+,"+++E<sub>[wstu_prod]</sub> = <r>(</r>E<sub>[kol_prod]</sub> + E<sub>[torm_prod]</sub> - E<sub>[kord_prod]</sub> + E<sub>[i(0)wstu_prod]</sub> + E<sub>[k(0)wstu_prod]</sub><r>)</r>"
+,"+++<b>E<sub>[kord_prod]</sub> = (<r>(</r>E<sub>[kol_prod]</sub> + E<sub>[torm_prod]</sub></b> <r><i>- E<sub>[kord_prod]</sub></i></r> <b>+ E<sub>[i(0)wstu_prod]</sub> + E<sub>[k(0)wstu_prod]</sub><r>)</r><e>+(</e>E<sub>[tre_prod]</sub></b> <e><i>+ E<sub>[kord_prod]</sub></i></e> <b>+ E<sub>[i(0)prot_prod]</sub> + E<sub>[k(0)prot_prod]</sub><e>)</e>)&#149;0.5 - E<sub>[okr_prod]</sub> + E<sub>[i(0)kord_prod]</sub> + E<sub>[k(0)kord_prod]</sub></b>"
+,"+++E<sub>[prot_prod]</sub> = <e>(</e>E<sub>[tre_prod]</sub> + E<sub>[kord_prod]</sub> + E<sub>[i(0)prot_prod]</sub> + E<sub>[k(0)prot_prod]</sub><e>)</e>"
+,"+++ ","+++ ","+++ ","+++ ","+++ "
+,"+++E<sub>[kord_prod]</sub> = (E<sub>[kol_prod]</sub> + E<sub>[torm_prod]</sub> + E<sub>[i(0)wstu_prod]</sub> + E<sub>[k(0)wstu_prod]</sub> + E<sub>[tre_prod]</sub> + E<sub>[i(0)prot_prod]</sub> + E<sub>[k(0)prot_prod]</sub>)&#149;0.5-E<sub>[okr_prod]</sub> + E<sub>[i(0)kord_prod]</sub> + E<sub>[k(0)kord_prod]</sub>"
+
+,"+++ ","+++ ","+++ ","+++ ","+++ "
+,"+++|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
+,"+++ ","+++ ","+++ ","+++ ","+++ "
+
+,"+++E<sub>[wstu_prod]</sub> = E<sub>[kol_prod]</sub> + E<sub>[torm_prod]</sub> <r>- (</r>(E<sub>[kol_prod]</sub> + E<sub>[torm_prod]</sub> + E<sub>[i(0)wstu_prod]</sub> + E<sub>[k(0)wstu_prod]</sub> + E<sub>[tre_prod]</sub> + E<sub>[i(0)prot_prod]</sub> + E<sub>[k(0)prot_prod]</sub>)&#149;0.5-E<sub>[okr_prod]</sub> + E<sub>[i(0)kord_prod]</sub> + E<sub>[k(0)kord_prod]</sub><r>)</r> + E<sub>[i(0)wstu_prod]</sub> + E<sub>[k(0)wstu_prod]</sub>"
+,"+++E<sub>[kord_prod]</sub> = <r>(</r>(E<sub>[kol_prod]</sub> + E<sub>[torm_prod]</sub> + E<sub>[i(0)wstu_prod]</sub> + E<sub>[k(0)wstu_prod]</sub> + E<sub>[tre_prod]</sub> + E<sub>[i(0)prot_prod]</sub> + E<sub>[k(0)prot_prod]</sub>)&#149;0.5-E<sub>[okr_prod]</sub> + E<sub>[i(0)kord_prod]</sub> + E<sub>[k(0)kord_prod]</sub><r>)</r>"
+,"+++E<sub>[prot_prod]</sub> = E<sub>[tre_prod]</sub> + <r>(</r>(E<sub>[kol_prod]</sub> + E<sub>[torm_prod]</sub> + E<sub>[i(0)wstu_prod]</sub> + E<sub>[k(0)wstu_prod]</sub> + E<sub>[tre_prod]</sub> + E<sub>[i(0)prot_prod]</sub> + E<sub>[k(0)prot_prod]</sub>)&#149;0.5-E<sub>[okr_prod]</sub> + E<sub>[i(0)kord_prod]</sub> + E<sub>[k(0)kord_prod]</sub><r>)</r> + E<sub>[i(0)prot_prod]</sub> + E<sub>[k(0)prot_prod]</sub>"
+
+,"+++ ","+++ ","+++ ","+++ ","+++ "
+,"+++|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
+,"+++ ","+++ ","+++ ","+++ ","+++ "

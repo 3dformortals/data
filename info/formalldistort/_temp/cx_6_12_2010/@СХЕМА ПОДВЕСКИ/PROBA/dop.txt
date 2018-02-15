@@ -1,0 +1,2 @@
+,"+++&#916;&#945;<sub>[wstu(1)]</sub> = (&#916;&#945;<sub>[wstu_vert(1)]</sub><sup>2</sup>+&#916;&#945;<sub>[wstu_pop(1)]</sub><sup>2</sup>+&#916;&#945;<sub>[wstu_prod(1)]</sub><sup>2</sup>)<sup>0.5</sup>"
+,"+++&#916;&#945;<sub>[prot(1)]</sub> = (&#916;&#945;<sub>[prot_vert(1)]</sub><sup>2</sup>+&#916;&#945;<sub>[prot_pop(1)]</sub><sup>2</sup>+&#916;&#945;<sub>[prot_prod(1)]</sub><sup>2</sup>)<sup>0.5</sup>"

@@ -1,0 +1,514 @@
+/**
+ * Don't remove skin-version definition - POA uses this version for skin detection
+ */
+#skin-version {
+ top: 2px;
+}
+/**
+ * Don't remove skin-version definition - POA uses this version for skin detection
+ */
+ 
+.loginTop #headerArea,
+.providerTop #headerArea,
+#topMenuArea {
+  background-image:  url(../images/misc/header_bg.jpg);
+  background-position: right top;
+  background-repeat: no-repeat;
+}
+
+.loginBody {
+  background: #ffffff;
+  padding: 0;
+}
+
+.providerTop {
+  background-color: #FFFFFF;
+}
+
+.clientTop {
+  margin: 0;
+  padding: 0; 
+  background-color: #FFFFFF;
+}
+
+.loginTop, 
+.providerTop,
+.clientTop {
+  background: #FFFFFF url('../images/misc/top_bg.gif') 0 0 repeat-x;
+}
+
+.providerNavigation {
+  background-color: #D6DFF7;
+}
+
+.clientNavigation {
+  background-color: #A2B7DD;
+  padding: 0 5px;
+}
+
+body {
+  background: #f9f9f9;
+}
+
+#company_logo {
+  vertical-align: top;
+}
+
+/**
+ * forms ========================================
+ */
+ 
+a.external:link,
+a.external:visited,
+.listContentArea a.external:link,
+.listContentArea a.external:visited {
+  color: #395C9D;
+}
+.summaryGrid a,
+.summaryGrid a:visited {color:#0240A3;}
+.summaryGrid a:hover {text-decoration:underline;}
+legend {
+  color: #454545;
+}
+
+.fieldsLayout th {
+  color: #000000;
+}
+
+/**
+ * "powered by" =================================
+ */
+#poweredBy a:link,
+#poweredBy a:visited,
+#copyright a:link,
+#copyright a:visited {
+  text-decoration: none;
+  color: #4D72B8;
+  white-space: nowrap;
+}
+
+#copyright {
+  margin: 5px 0pt;
+  border-top: 1px solid #7C9AD1;
+  padding-top: 5px;
+}
+
+/**
+ * general ======================================
+ */
+
+a {
+  color: #000;
+}
+
+a:visited {
+  color: #000;
+}
+
+a:hover {
+  color: #000;
+}
+
+/**
+ * provider's top frame =========================
+ */
+
+#headerArea {
+  background-image:  url(../images/misc/logo_bg.gif);
+  background-repeat: no-repeat;
+  background-position: top left;
+  margin: 0;
+}
+
+#headerLayout {
+}
+
+#headerLayout td {
+}
+
+#headerLayout #logo {
+  width: 100%;
+}
+
+#headerLayout .sysTool {
+  white-space: nowrap;
+  vertical-align: middle;
+  text-align: center;
+  padding: 3px 15px 0 0; 
+}
+
+.sysTool a:link,
+.sysTool a:visited {
+  color: #4269B3;
+  font-size: 90%;
+  text-decoration: none;
+}
+
+.sysTool a:hover {
+}
+
+.sysTool a img {
+  vertical-align: middle;
+}
+
+.sysTool a br {
+}
+
+/**
+ * customer's top frame =========================
+ */
+
+#topMenuItems {
+  text-align: left;
+  vertical-align: bottom;
+  white-space: nowrap;
+}
+
+#topMenuItems td {
+  padding: 8px 12px 8px 12px;
+  color: #8BA6D6;
+  white-space: nowrap;
+  font-weight: bold;
+}
+
+#leftMenuItems {
+  text-align: left;
+}
+
+#topMenuItems #rightMenuItems {
+  text-align: right;
+  background-color: #4269B3;
+  padding-right: 12px;
+}
+
+#topMenuItems #leftMenuItems {
+  text-align: left;
+  background-image: url(../images/client_cp/top_menu_left_bg.gif);
+  background-position: top left;
+  background-repeat: no-repeat;
+  background-color: #4269B3;
+}
+
+
+#topMenuItems td a:link, 
+#topMenuItems td a:visited {
+  color: #FFFFFF;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+#topMenuItems a.menuItemActive:link, 
+#topMenuItems a.menuItemActive:visited {
+  color: #B6C6E4;
+}
+
+#topMenuItems #userName {
+  text-align: right;
+  color: #444444;
+  padding: 2px 12px 5px 0;
+  font-weight:normal;
+}
+
+#ccp_logo {
+  text-align: right;
+  vertical-align: middle;
+}
+
+/**
+ * lists ========================================
+ */
+a.listAction:link,
+a.listAction:visited,
+a.listAction:active,
+a.listAction:link {
+	color:#000000;
+}
+
+.listSearchArea {
+	border: none;	
+}
+
+.listSearchArea td {
+  padding-bottom: 3px;
+}
+
+.listSearchArea td td {
+  padding-bottom: 0;
+}
+
+.listSearchArea .searchHeader {vertical-align: top; padding-right: 5px;}
+.listContentArea th {
+  text-align: left;
+  color: #535353;
+  vertical-align: middle;
+  white-space: nowrap;
+  font-weight:bold;
+  border-bottom: 1px solid #E9E9E9;
+}
+
+
+.oddrow {background: #FFFFFF;}
+.evenrow {background: #F0F0F0;}
+.lastrow td {padding-bottom: 8px;}
+
+.oddrowHi td, .evenrowHi td {background-color:#DDDDDD;}
+
+.specificrow {
+  font-weight: bold;
+  background: #FFFFFF;
+}
+
+/**
+ * login screen =================================
+ */
+
+#loginArea #title {
+  font-size: 15px;
+}
+
+#loginArea #titleArea {
+  background: #D7E0F0;
+  border-bottom: 1px solid #c8c8c8;
+}
+
+#footerArea {
+  margin: 0px auto 30px auto;
+  width: 450px;
+  text-align: left;
+}
+
+
+#footerLayout td {
+  color: #666666;
+  padding-left: 10px;
+}
+
+.formControls .miscButtons a:link,
+.formControls .miscButtons a:visited {
+  color: #444444;
+}
+
+/**
+ * navboard =====================================
+ */
+
+.navDescription a {
+  text-decoration: none;
+}
+
+/**
+ * custmer's navigation==========================
+ */
+
+#clientNavLayout {
+  border: 1px solid #597DC1;
+}
+
+#clientNavLayout a:link,
+#clientNavLayout  a:visited {
+  text-decoration: none ;
+}
+
+#clientNavLayout a:hover {
+}
+
+.nav1Opened td,
+.nav1Selected td {
+  background: #3D61A5;
+  border: 1px solid #A2B7DD;
+  height: 16px;
+  padding-left: 6px;
+  font-weight: bold;
+}
+
+.nav1 td {
+  background: #6A8BC8;
+  border: 1px solid #A2B7DD;
+  height: 16px;
+  padding-left: 6px;
+  font-weight: bold;
+}
+
+.nav1 a:link,
+.nav1 a:visited, 
+.nav1Opened a:link,
+.nav1Opened a:visited,
+.nav1Selected a:link,
+.nav1Selected a:visited {
+  color: #ffffff;
+}
+
+.nav2 td,
+.nav2Opened td,
+.nav2Selected td {
+  background: #E3E9F5;
+  border: 1px solid #A4B8DD;
+}
+
+.nav2Opened td {
+  background: #ffffff;
+  border-bottom: none;
+  font-weight: bold;
+}
+
+.nav2Selected td {
+  background: #e6e6e6;
+  border-bottom: none;
+  font-weight: bold;
+}
+
+.nav3 img,
+.nav3Opened img,
+.nav3Selected img  {
+  margin-right: 3px;
+}
+
+.nav3 td,
+.nav3Opened td,
+.nav3Selected td {
+  background: #ffffff;
+  padding-left: 19px;
+}
+
+.nav3Selected td {
+  background: #e6e6e6;
+}
+
+.nav4 td,
+.nav4Opened td,
+.nav4Selected td {
+  background: #ffffff;
+  padding-left: 35px;
+}
+
+.nav4Selected td {
+  background: #e6e6e6;
+}
+
+#currentDomain .nav1 td {
+	color: #4269B3;
+	font-weight: bold;
+  border: none;
+  background: transparent;
+}
+/**
+ * tabs =========================================
+ */
+
+.tab .top a:link {
+  text-decoration: none;
+}
+
+.tab .top a:visited {
+  text-decoration: none;
+}
+
+.tab .top a:hover {
+  text-decoration: none;
+}
+
+#tabActive .top {
+  background-color: #A2B7DD;
+}
+
+#tabActive .top a:link,
+#tabActive .top a:visited {
+  color: #000000;
+}
+
+#tabActive .bottom {
+  background-color: #A2B7DD;
+}
+
+#tabActive .bottomLeft {
+  background-color: #A2B7DD;
+}
+
+#tabActive .bottomRight {
+  background-color: #A2B7DD;
+}
+
+/**
+ * subtabs ======================================
+ */
+
+#tabSubItemActive {
+  background: #5B80C4; 
+}
+
+#tabSubItemActive,
+#tabSubItemActive a:link,
+#tabSubItemActive a:visited {
+  color: #ffffff; 
+}
+
+#tabSubItemsRow {
+  background-image: url(../images/tab/subitem_bg.gif);
+  background-position: top;
+  background-repeat: repeat-x;
+  background-color: #AFC1E2;
+  padding: 4px 0px 1px 10px; 
+}
+
+#tabSubItemsRow a {
+  text-decoration: none;
+}
+
+/**
+ * title ========================================
+ */
+
+#title {
+  font-weight: bold;
+  font-size: 15px;
+  font-family: Trebuchet MS, Verdana, Arial, Helvetica, sans-serif;
+}
+
+#screenID,
+.pathbar,
+.pathbar a,
+.pathbar a:visited,
+.pathbar a:link,
+.pathbar a:active,
+.uplevel a,
+.uplevel a:link,
+.uplevel a:visited,
+.uplevel a:active
+  {
+   color: #444444;
+}
+
+
+/**
+ * loader =======================================
+ */
+
+#loader p {
+  border: 3px solid #92A7E0;
+  padding: 10px;
+  margin: 0;
+  background: #F1F4FA;
+}
+
+/**
+ * provider's tree ==============================
+ */
+
+#navArea .node a:link,
+#navArea .node a:visited,
+#navArea .nodeActive a:link,
+#navArea .nodeActive a:visited {
+  text-decoration: none;
+  color: #002C9F;  
+}
+
+#navArea .node a:hover {
+  text-decoration: underline;
+}
+
+#navArea .nodeActive .name,
+#navArea .nodeActive a.name:link,
+#navArea .nodeActive a.name:visited {
+  background: #3878BF;
+  color: #F6F6EC;
+}

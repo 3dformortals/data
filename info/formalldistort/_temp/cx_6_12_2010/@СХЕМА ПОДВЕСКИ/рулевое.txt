@@ -1,0 +1,8 @@
+Xvkolmax=(arcsin(CE/((CE)^2+((AD-BC)/2)^2)^0,5)-(arccos(((BC+((CE)^2+((AD-BC)/2)^2)^0,5)^2+(AD)^2-(((CE)^2+((AD-BC)/2)^2)^0,5)^2)/(2*(BC+((CE)^2+((AD-BC)/2)^2)^0,5)*(AD)))
+Xnkolmax=(arccos(((AD)^2+(((CE)^2+((AD-BC)/2)^2)^0,5)^2-(BC+((CE)^2+((AD-BC)/2)^2)^0,5)^2)/(2*(AD)*(((CE)^2+((AD-BC)/2)^2)^0,5)))-(arcsin(CE/((CE)^2+((AD-BC)/2)^2)^0,5)
+
+поворот
+
+Xvkol - ведет поворот
+Xnkol = Xnkolmax*Xvkol/Xvkolmax
+

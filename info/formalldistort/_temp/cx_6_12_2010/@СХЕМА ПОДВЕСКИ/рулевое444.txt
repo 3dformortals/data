@@ -1,0 +1,8 @@
+&#966;<sub>vmax</sub> = (arcsin(C<sub>[rul]</sub>/((C<sub>[rul]</sub>)<sup>2</sup>+((A<sub>[rul]</sub>-B<sub>[rul]</sub>)/2)<sup>2</sup>)<sup>0.5</sup>)-(arccos(((B<sub>[rul]</sub>+((C<sub>[rul]</sub>)<sup>2</sup>+((A<sub>[rul]</sub>-B<sub>[rul]</sub>)/2)<sup>2</sup>)<sup>0.5</sup>)<sup>2</sup>+(A<sub>[rul]</sub>)<sup>2</sup>-(((C<sub>[rul]</sub>)<sup>2</sup>+((A<sub>[rul]</sub>-B<sub>[rul]</sub>)/2)<sup>2</sup>)<sup>0.5</sup>)<sup>2</sup>)/(2*(B<sub>[rul]</sub>+((C<sub>[rul]</sub>)<sup>2</sup>+((A<sub>[rul]</sub>-B<sub>[rul]</sub>)/2)<sup>2</sup>)<sup>0.5</sup>)*(A<sub>[rul]</sub>)))
+&#966;<sub>nmax</sub> = (arccos(((A<sub>[rul]</sub>)<sup>2</sup>+(((C<sub>[rul]</sub>)<sup>2</sup>+((A<sub>[rul]</sub>-B<sub>[rul]</sub>)/2)<sup>2</sup>)<sup>0.5</sup>)<sup>2</sup>-(B<sub>[rul]</sub>+((C<sub>[rul]</sub>)<sup>2</sup>+((A<sub>[rul]</sub>-B<sub>[rul]</sub>)/2)<sup>2</sup>)<sup>0.5</sup>)<sup>2</sup>)/(2*(A<sub>[rul]</sub>)*(((C<sub>[rul]</sub>)<sup>2</sup>+((A<sub>[rul]</sub>-B<sub>[rul]</sub>)/2)<sup>2</sup>)<sup>0.5</sup>)))-(arcsin(C<sub>[rul]</sub>/((C<sub>[rul]</sub>)<sup>2</sup>+((A<sub>[rul]</sub>-B<sub>[rul]</sub>)/2)<sup>2</sup>)<sup>0.5</sup>)
+
+поворот
+
+Xvkol - ведет поворот
+Xnkol = Xnkolmax*Xvkol/Xvkolmax
+

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Матрица формы комбинации дискретных параметров</title>
+	<meta name="url" content="http://formalldistort.heliohost.org/formatrix_009.html">
+
+	<meta name="description" content="Матрица формы. Комбинации дискретных параметров. Изменение формы вселеной. Этапы изменения формы от прямой до окружности.">
+	<meta name="keywords" content="матрица,формы,вселеной,дискретные,комбинации,правильный,многоугольник,наблюдаемый,параметры,связь,изменение,мироустройство,устройство,wxmaxima,smath,studio,desktop,portable,mathcad,maple,число,пи,&pi;,pi">
+
+	<meta http-equiv="expires" content="0">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta http-equiv="content-language" content="ru-RU">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta name="robots" content="index,follow">
+	<meta name="document-state" content="dynamic">
+	<meta name="distribution" content="global">
+	<meta name="resource-type" content="document">
+	<LINK rel="stylesheet" href="svg/style.css" type="text/css">
+</head>
+
+<body>
+
+<div id='menu_up'>
+<a class='menu_up' href='index.html' title='index' target='_blank'><img src='menu_svg/menu_index.svg' alt='Изображение полупрозрачная луна. svg' title='index'></a>
+<a class='menu_up' href='formatrix.html' title='formatrix' target='_blank'><img src='menu_svg/menu_formatrix.svg' alt='Изображение матрица формы. svg' title='formatrix'></a>
+</div>
+
+<div id='menu_left'>
+<br><a class='menu_left' href='index.html' target='_self'>начало</a>
+
+<br><div id='menu_sep'></div>
+<a class='menu_left' href='formatrix.html' target='_self'>матрица формы</a><br><br>
+<b>009<br>комбинации параметров</b>
+</div>
+
+<div id='menu_right'>
+<a class='menu_right' href='http://vk.com/information_trash_can' target='_self' rel='nofollow'>ваша реклама</a>
+</div>
+
+<div id='info' class='info'>
+
+Используя разные комбинации строк содержащих параметры пяти многоугольников(двухугольник, трехугольник, четырехугольник, шестиугольник, бесконечностьугольник) можно составлять квадратные матрицы.
+<br><br>Размеры квадратных матриц могут быть 2x2 3x3 4x4 5x5.
+<br><br>Определители некоторых матриц позволяют вычислить приближеные значения числа &pi;. Число &pi; - отношение периметра окружности к диаметру окружности.
+
+<br><br><span>Матрица S_T_RT_SS_PP.</span>
+<br><br>
+<table><tbody>
+	<tr class='tablehead'>
+		<td></td>
+		<td>2</td>
+		<td>3</td>
+		<td>4</td>
+		<td></td>
+		<td>6</td>
+		<td>&infin;</td>
+		</tr>
+	<tr>
+		<td>S</td>
+		<td>0</td>
+		<td>3<sup>3/2</sup>/4</td>
+		<td>2</td>
+		<td></td>
+		<td>3<sup>3/2</sup>/2</td>
+		<td>&pi;</td>
+		</tr>
+	<tr>
+		<td>T</td>
+		<td>0</td>
+		<td>1/2</td>
+		<td>1/2<sup>1/2</sup></td>
+		<td></td>
+		<td>3<sup>1/2</sup>/2</td>
+		<td>1</td>
+		</tr>
+	<tr>
+		<td>RT</td>
+		<td>1</td>
+		<td>1/2</td>
+		<td>1-1/2<sup>1/2</sup></td>
+		<td></td>
+		<td>1-3<sup>1/2</sup>/2</td>
+		<td>0</td>
+		</tr>
+	<tr>
+		<td>SS</td>
+		<td>0</td>
+		<td>27/16</td>
+		<td>4</td>
+		<td></td>
+		<td>27/4</td>
+		<td>&pi;<sup>2</sup></td>
+		</tr>
+	<tr>
+		<td>PP</td>
+		<td>16</td>
+		<td>27</td>
+		<td>32</td>
+		<td></td>
+		<td>36</td>
+		<td>4&pi;<sup>2</sup></td>
+		</tr>
+</tbody></table>
+
+<br><br>wxMaxima:
+<br>matrix([0,3^(3/2)/4,2,3^(3/2)/2,pi],[0,1/2,1/sqrt(2),sqrt(3)/2,1],[1,1/2,(sqrt(2)-1)/sqrt(2),(2-sqrt(3))/2,0],[0,27/16,4,27/4,pi^2],[16,27,32,36,4*pi^2]);
+
+
+<br><br>Maple:
+<br>Matrix([[0, (1/4)*3^(3/2), 2, (1/2)*3^(3/2), pi], [0, 1/2, 1/sqrt(2), (1/2)*sqrt(3), 1], [1, 1/2, (sqrt(2)-1)/sqrt(2), (2-sqrt(3))*(1/2), 0], [0, 27/16, 4, 27/4, pi^2], [16, 27, 32, 36, 4*pi^2]]);
+
+<br><br><span>Определитель матрицы S_T_RT_SS_PP.</span>
+
+<br><br>SMath Studio Desktop Portable (определитель в численой форме):
+<br>4.27036737631281*10<sup>-6</sup>.
+<br><br>скачать файл SMath Studio Desktop Portable <a download href='download/matrix_S_T_RT_SS_PP.smz'>matrix_S_T_RT_SS_PP.smz</a>
+
+<br><br>wxMaxima (определитель в численой форме):
+<br>4.2703673718280655*10<sup>-6</sup>.
+<br><br>wxMaxima:
+<br>
+-(3^(3/2)*(-(8*(2-sqrt(3))*&pi;^2-9*&pi;^2)/sqrt(2)+(sqrt(3)*(2^(7/2)*(sqrt(2)-1)*&pi;^2-16*&pi;^2))/2+32*(2-sqrt(3))-27*(sqrt(2)-1)*2^(3/2)+72))/4+2*(-(8*(2-sqrt(3))*&pi;^2-9*&pi;^2)/2-(49*sqrt(3)*&pi;^2)/8+(27*(2-sqrt(3)))/2+135/2)-(3^(3/2)*(-(2^(7/2)*(sqrt(2)-1)*&pi;^2-16*&pi;^2)/2-(49*&pi;^2)/2^(5/2)+(27*(sqrt(2)-1))/sqrt(2)+22))/2+(-((-(27*(sqrt(2)-1))/sqrt(2)-22)*sqrt(3))/2+(-(27*(2-sqrt(3)))/2-135/2)/sqrt(2)-(-32*(2-sqrt(3))+27*2^(3/2)*(sqrt(2)-1)-72)/2)*&pi;
+<br><br>приравниваем к нулю и решаем относительно &pi;:
+<br>[&pi;=-2.456835020069227,&pi;=3.141598827047773].
+<br><br>скачать файл wxMaxima <a download href='download/matrix_S_T_RT_SS_PP.wxm'>matrix_S_T_RT_SS_PP.wxm</a>
+
+<br><br>Maple:
+<br>(22+(27/2*(sqrt(2)-1))*sqrt(2))*((11/38)*sqrt(3)-10/19-((1/2)*sqrt(2)-16/19+(4/19*(sqrt(2)-1))*sqrt(2))*(189/38-(27/38)*sqrt(3))/(22/19+(27/38*(sqrt(2)-1))*sqrt(2)))*(&pi;-(3/19)*sqrt(3)*&pi;^2-(49/76)*(2-(3/76)*sqrt(3)*(32-(8*(sqrt(2)-1))*sqrt(2)))*&pi;^2/(22/19+(27/38*(sqrt(2)-1))*sqrt(2))-((3/2)*sqrt(3)-(3/76)*sqrt(3)*(20+8*sqrt(3))-(2-(3/76)*sqrt(3)*(32-(8*(sqrt(2)-1))*sqrt(2)))*(189/38-(27/38)*sqrt(3))/(22/19+(27/38*(sqrt(2)-1))*sqrt(2)))*(1-(2/19)*&pi;^2-(49/76)*((1/2)*sqrt(2)-16/19+(4/19*(sqrt(2)-1))*sqrt(2))*&pi;^2/(22/19+(27/38*(sqrt(2)-1))*sqrt(2)))/((11/38)*sqrt(3)-10/19-((1/2)*sqrt(2)-16/19+(4/19*(sqrt(2)-1))*sqrt(2))*(189/38-(27/38)*sqrt(3))/(22/19+(27/38*(sqrt(2)-1))*sqrt(2))))
+
+<br><br>приравниваем к нулю и решаем относительно &pi;:
+<br>[&pi;=-2.456835020128510, &pi;=3.141598827104790].
+<br><br>скачать файл Maple <a download href='download/matrix_S_T_RT_SS_PP.mpl'>matrix_S_T_RT_SS_PP.mpl</a>
+
+<br><br>Mathcad:
+<br>некоторые варианты в зависимости от представления выражения перед вычислением десятичного числа
+<br>3.141598827111913
+<br>3.141598827111912
+<br>3.14159882710663
+<br>3.141598827111935
+<br>3.141598827111943
+<br>3.141598827112818
+<br>3.141598827106619.
+
+<br><br>скачать файл Mathcad <a download href='download/matrix_S_T_RT_SS_PP.xmcdz'>matrix_S_T_RT_SS_PP.xmcdz</a>
+
+<br><br><span>Матрица S_T_DT_SS_PP.</span>
+<br><br>
+<table><tbody>
+	<tr class='tablehead'>
+		<td></td>
+		<td>2</td>
+		<td>3</td>
+		<td>4</td>
+		<td></td>
+		<td>6</td>
+		<td>&infin;</td>
+		</tr>
+	<tr>
+		<td>S</td>
+		<td>0</td>
+		<td>3<sup>3/2</sup>/4</td>
+		<td>2</td>
+		<td></td>
+		<td>3<sup>3/2</sup>/2</td>
+		<td>&pi;</td>
+		</tr>
+	<tr>
+		<td>T</td>
+		<td>0</td>
+		<td>1/2</td>
+		<td>1/2<sup>1/2</sup></td>
+		<td></td>
+		<td>3<sup>1/2</sup>/2</td>
+		<td>1</td>
+		</tr>
+	<tr>
+		<td>DT</td>
+		<td>2</td>
+		<td>3/2</td>
+		<td>(2<sup>3/2</sup>-1)/2<sup>1/2</sup></td>
+		<td></td>
+		<td>(4-3<sup>1/2</sup>)/2</td>
+		<td>1</td>
+		</tr>
+	<tr>
+		<td>SS</td>
+		<td>0</td>
+		<td>27/16</td>
+		<td>4</td>
+		<td></td>
+		<td>27/4</td>
+		<td>&pi;<sup>2</sup></td>
+		</tr>
+	<tr>
+		<td>PP</td>
+		<td>16</td>
+		<td>27</td>
+		<td>32</td>
+		<td></td>
+		<td>36</td>
+		<td>4&pi;<sup>2</sup></td>
+		</tr>
+</tbody></table>
+
+<br><br>wxMaxima:
+<br>matrix([0,3^(3/2)/4,2,3^(3/2)/2,pi],[0,1/2,1/sqrt(2),sqrt(3)/2,1],[2,3/2,(2^(3/2)-1)/sqrt(2),(4-sqrt(3))/2,1],[0,27/16,4,27/4,pi^2],[16,27,32,36,4*pi^2]);
+
+<br><br>Maple:
+<br>Matrix([[0,3^(3/2)/4,2,3^(3/2)/2,pi],[0,1/2,1/sqrt(2),sqrt(3)/2,1],[2,3/2,(2^(3/2)-1)/sqrt(2),(4-sqrt(3))/2,1],[0,27/16,4,27/4,pi^2],[16,27,32,36,4*pi^2]]);
+
+<br><br><span>Определитель матрицы S_T_DT_SS_PP.</span>
+
+<br><br>SMath Studio Desktop Portable (определитель в численой форме):
+<br>8.54073476311602*10<sup>-6</sup>.
+<br><br>скачать файл SMath Studio Desktop Portable <a download href='download/matrix_S_T_DT_SS_PP.smz'>matrix_S_T_DT_SS_PP.smz</a>
+
+<br><br>wxMaxima (определитель в численой форме):
+<br>8.5407347620858332*10<sup>-6</sup>.
+<br><br>wxMaxima:
+<br>
+-(3^(3/2)*(-(8*(4-sqrt(3))*&pi;^2-18*&pi;^2-108)/sqrt(2)+(sqrt(3)*(2^(7/2)*(2^(3/2)-1)*&pi;^2-32*&pi;^2-64))/2+32*(4-sqrt(3))-27*(2^(3/2)-1)*2^(3/2)+144))/4+2*(-(8*(4-sqrt(3))*&pi;^2-18*&pi;^2-108)/2+(sqrt(3)*(-(33*&pi;^2)/2-27))/2+(27*(4-sqrt(3)))/2+81)-(3^(3/2)*(-(2^(7/2)*(2^(3/2)-1)*&pi;^2-32*&pi;^2-64)/2+(-(33*&pi;^2)/2-27)/sqrt(2)+(27*(2^(3/2)-1))/sqrt(2)+12))/2+(-((-(27*(2^(3/2)-1))/sqrt(2)-12)*sqrt(3))/2+(-(27*(4-sqrt(3)))/2-81)/sqrt(2)-(-32*(4-sqrt(3))+27*2^(3/2)*(2^(3/2)-1)-144)/2)*&pi;
+
+<br><br>приравниваем к нулю и решаем относительно &pi;:
+<br>[&pi;=-2.456835020085364,&pi;=3.141598827063844].
+<br><br>скачать файл wxMaxima <a download href='download/matrix_S_T_DT_SS_PP.wxm'>matrix_S_T_DT_SS_PP.wxm</a>
+
+<br><br>Maple:
+<br>
+(12+(27/2*(2*sqrt(2)-1))*sqrt(2))*((11/30)*sqrt(3)-2/3-((1/2)*sqrt(2)-16/15+(2/15*(2*sqrt(2)-1))*sqrt(2))*(9/2-(9/20)*sqrt(3))/(2/5+(9/20*(2*sqrt(2)-1))*sqrt(2)))*(&pi;-(1/20)*sqrt(3)*(4*&pi;^2-8)-(2-(1/20)*sqrt(3)*(32-(4*(2*sqrt(2)-1))*sqrt(2)))*((11/20)*&pi;^2+9/10)/(2/5+(9/20*(2*sqrt(2)-1))*sqrt(2))-((3/2)*sqrt(3)-(1/20)*sqrt(3)*(20+4*sqrt(3))-(2-(1/20)*sqrt(3)*(32-(4*(2*sqrt(2)-1))*sqrt(2)))*(9/2-(9/20)*sqrt(3))/(2/5+(9/20*(2*sqrt(2)-1))*sqrt(2)))*(19/15-(2/15)*&pi;^2-((1/2)*sqrt(2)-16/15+(2/15*(2*sqrt(2)-1))*sqrt(2))*((11/20)*&pi;^2+9/10)/(2/5+(9/20*(2*sqrt(2)-1))*sqrt(2)))/((11/30)*sqrt(3)-2/3-((1/2)*sqrt(2)-16/15+(2/15*(2*sqrt(2)-1))*sqrt(2))*(9/2-(9/20)*sqrt(3))/(2/5+(9/20*(2*sqrt(2)-1))*sqrt(2))))
+
+<br><br>приравниваем к нулю и решаем относительно &pi;:
+<br>[&pi;=-2.456835020126580,&pi;=3.141598827104770].
+<br><br>скачать файл Maple <a download href='download/matrix_S_T_DT_SS_PP.mpl'>matrix_S_T_DT_SS_PP.mpl</a>
+
+<br><br><span>Матрица S_RT_DT_SS_PP.</span>
+<br><br>
+<table><tbody>
+	<tr class='tablehead'>
+		<td></td>
+		<td>2</td>
+		<td>3</td>
+		<td>4</td>
+		<td></td>
+		<td>6</td>
+		<td>&infin;</td>
+		</tr>
+	<tr>
+		<td>S</td>
+		<td>0</td>
+		<td>3<sup>3/2</sup>/4</td>
+		<td>2</td>
+		<td></td>
+		<td>3<sup>3/2</sup>/2</td>
+		<td>&pi;</td>
+		</tr>
+	<tr>
+		<td>RT</td>
+		<td>0</td>
+		<td>1/2</td>
+		<td>(2<sup>1/2</sup>-1)/2<sup>1/2</sup></td>
+		<td></td>
+		<td>(2-3<sup>1/2</sup>)/2</td>
+		<td>1</td>
+		</tr>
+	<tr>
+		<td>DT</td>
+		<td>2</td>
+		<td>3/2</td>
+		<td>(2<sup>3/2</sup>-1)/2<sup>1/2</sup></td>
+		<td></td>
+		<td>(4-3<sup>1/2</sup>)/2</td>
+		<td>1</td>
+		</tr>
+	<tr>
+		<td>SS</td>
+		<td>0</td>
+		<td>27/16</td>
+		<td>4</td>
+		<td></td>
+		<td>27/4</td>
+		<td>&pi;<sup>2</sup></td>
+		</tr>
+	<tr>
+		<td>PP</td>
+		<td>16</td>
+		<td>27</td>
+		<td>32</td>
+		<td></td>
+		<td>36</td>
+		<td>4&pi;<sup>2</sup></td>
+		</tr>
+</tbody></table>
+
+<br><br>wxMaxima:
+<br>matrix([0,3^(3/2)/4,2,3^(3/2)/2,pi],[1,1/2,(sqrt(2)-1)/sqrt(2),(2-sqrt(3))/2,0],[2,3/2,(2^(3/2)-1)/sqrt(2),(4-sqrt(3))/2,1],[0,27/16,4,27/4,pi^2],[16,27,32,36,4*pi^2]);
+
+<br><br>Maple:
+<br>Matrix([[0,3^(3/2)/4,2,3^(3/2)/2,pi],[1,1/2,(sqrt(2)-1)/sqrt(2),(2-sqrt(3))/2,0],[2,3/2,(2^(3/2)-1)/sqrt(2),(4-sqrt(3))/2,1],[0,27/16,4,27/4,pi^2],[16,27,32,36,4*pi^2]]);
+
+
+
+<br><br><span>Определитель матрицы S_RT_DT_SS_PP.</span>
+
+<br><br>SMath Studio Desktop Portable(определитель в численой форме):
+<br>-4.27036739647045*10<sup>-6</sup>.
+<br><br>скачать файл SMath Studio Desktop Portable <a download href='download/matrix_S_RT_DT_SS_PP.smz'>matrix_S_RT_DT_SS_PP.smz</a>
+
+
+<br><br>wxMaxima (определитель в численой форме):
+<br>-4.2703672985533458*10<sup>-6</sup>.
+<br><br>wxMaxima:
+<br>
+-(3^(3/2)*(-((sqrt(2)-1)*(8*(4-sqrt(3))*&pi;^2-18*&pi;^2-108))/sqrt(2)+((2-sqrt(3))*(2^(7/2)*(2^(3/2)-1)*&pi;^2-32*&pi;^2-64))/2+8*(4-sqrt(3))*&pi;^2-(9*(2^(3/2)-1)*&pi;^2)/sqrt(2)-72))/4+2*(-(8*(4-sqrt(3))*&pi;^2-18*&pi;^2-108)/2+(81*(4-sqrt(3))*&pi;^2)/8-(27*&pi;^2)/2+((2-sqrt(3))*(-(33*&pi;^2)/2-27))/2-243/2)-(3^(3/2)*(-(2^(7/2)*(2^(3/2)-1)*&pi;^2-32*&pi;^2-64)/2+(81*(2^(3/2)-1)*&pi;^2)/2^(5/2)-24*&pi;^2+((sqrt(2)-1)*(-(33*&pi;^2)/2-27))/sqrt(2)-54))/2+(-27*(4-sqrt(3))-((-(27*(2^(3/2)-1))/sqrt(2)-12)*(2-sqrt(3)))/2+((sqrt(2)-1)*(-(27*(4-sqrt(3)))/2-81))/sqrt(2)-(-32*(4-sqrt(3))+27*2^(3/2)*(2^(3/2)-1)-144)/2+(243*(2^(3/2)-1))/2^(3/2)-108)*&pi;
+
+
+<br><br>приравниваем к нулю и решаем относительно &pi;:
+<br>[&pi;=-2.456835020069227,&pi;=3.141598827047773].
+<br><br>скачать файл wxMaxima <a download href='download/matrix_S_RT_DT_SS_PP.wxm'>matrix_S_RT_DT_SS_PP.wxm</a>
+
+<br><br>Maple:
+<br>
+(-22-(27/2*(sqrt(2)-1))*sqrt(2))*((11/38)*sqrt(3)-10/19-((1/2*(2*sqrt(2)-1))*sqrt(2)-(15/19*(sqrt(2)-1))*sqrt(2)-16/19)*(189/38-(27/38)*sqrt(3))/(22/19+(27/38*(sqrt(2)-1))*sqrt(2)))*(&pi;-(3/19)*sqrt(3)*&pi;^2-(49/76)*(2-(3/76)*sqrt(3)*(32-(8*(sqrt(2)-1))*sqrt(2)))*&pi;^2/(22/19+(27/38*(sqrt(2)-1))*sqrt(2))-((3/2)*sqrt(3)-(3/76)*sqrt(3)*(20+8*sqrt(3))-(2-(3/76)*sqrt(3)*(32-(8*(sqrt(2)-1))*sqrt(2)))*(189/38-(27/38)*sqrt(3))/(22/19+(27/38*(sqrt(2)-1))*sqrt(2)))*(1-(2/19)*&pi;^2-(49/76)*((1/2*(2*sqrt(2)-1))*sqrt(2)-(15/19*(sqrt(2)-1))*sqrt(2)-16/19)*&pi;^2/(22/19+(27/38*(sqrt(2)-1))*sqrt(2)))/((11/38)*sqrt(3)-10/19-((1/2*(2*sqrt(2)-1))*sqrt(2)-(15/19*(sqrt(2)-1))*sqrt(2)-16/19)*(189/38-(27/38)*sqrt(3))/(22/19+(27/38*(sqrt(2)-1))*sqrt(2))))
+
+<br><br>приравниваем к нулю и решаем относительно &pi;:
+<br>[&pi;=-2.456835020126720,&pi;=3.141598827104790].
+<br><br>скачать файл Maple <a download href='download/matrix_S_RT_DT_SS_PP.mpl'>matrix_S_RT_DT_SS_PP.mpl</a>
+
+<br><br>Использованые програмы, настроеные на одинаковую точность вычислений (15 цифр после запятой) и выполнение одной задачи, выдают различающиеся результаты вычислений.
+<br><br>Совпадение десятичной части результатов определения числа &pi; в представленых случаях сохраняется включая 9 цифру после запятой.
+9/15=3/5.
+Совпадение десятичной части 60%. Дополнительное неудобство.
+<br><br>Результаты вычисления определителя при помощи компьютреных програм указывают - матрицы не являются вырождеными.
+
+</div>
+
+
+
+
+</body></html>

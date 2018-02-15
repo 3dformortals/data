@@ -1,0 +1,83 @@
+﻿<html><head>
+
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" href="style.css" type="text/css">
+<title>инвертирование содержимого html таблицы</title>
+
+
+
+<script type="text/javascript">
+</script>
+<script type="text/javascript" src="htmltableinverter.js">
+</script>
+
+
+
+<form>
+        
+        
+<table rules="cols" border="0" width="100%">    
+<tbody><tr>
+<td align="left"><span>htmltableinverter</span></td>
+<td>переставляет в обратном порядке строки, ячейки в сторках, в html таблице</td>
+
+</tr>
+
+<tr>
+<td colspan=""><input id="trinvert" size="7" type="checkbox" checked>переставить строки</td>
+<td></td>
+</tr>
+
+<tr>
+<td colspan=""><input id="tdinvert" size="7" type="checkbox" checked>переставить ячейки в строке</td>
+<td><a href='http://www.l4soft.narod.ru'>&copy; 2014 llll</a></td>
+</tr>
+
+</tbody></table>
+<!-- <hr align="left" noshade="noshade" width="99%"> -->
+
+</form>
+
+<form>
+
+<table width="100%">
+<tbody>
+<tr>
+<td>
+<button type="button" onclick="resetokno('okno1')">reset</button>
+<button type="button" onclick="htmltableinverter()">переставить</button>
+</td>
+<td>
+<text align="right">результат</text>
+<button class="fr" type='button' name='' id='' onclick='buferfig();' >СПАСИБО</button>
+</td>
+</tr>
+<tr>
+<td><textarea id="okno1" rows="14">
+<tr id="string12345">
+<td style="float:right;">1</td>
+<td style="float:right;">2</td>
+<td style="float:right;">3</td>
+<td style="float:right;">4</td>
+<td style="float:right;">5</td>
+</tr>
+
+<tr id="string6789">
+<td style="float:right;">6</td>
+<td style="float:right;">7</td>
+<td style="float:right;">8</td>
+<td style="float:right;">9</td>
+<td></td>
+</tr>
+
+</textarea></td>
+<td align="right"><textarea id="okno2" rows="14"></textarea></td>
+</tr>
+</tbody></table>
+</form>
+
+
+
+
+
+</body></html>

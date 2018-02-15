@@ -1,0 +1,37 @@
+﻿body {
+text-align:justify;
+min-width:900px;
+background-color: rgb(0, 100, 0); color: rgb(0, 200, 0);
+background-attachment:fixed;
+font-family:'PT Sans';font-size: 100%;line-height:2;
+}
+/*
+a{
+border: 3px solid;
+padding-left:10px; 
+padding-right:10px;
+border-top-left-radius:10px;
+border-bottom-left-radius:10px;
+border-top-right-radius:10px;
+border-bottom-right-radius:10px;
+background-image: url('svg/background_a.svgz'); 
+background-repeat:repeat-x;
+background-attachment:scroll;
+font-weight:bold;
+}
+a:link{color:rgb(0,255,150);text-decoration:none;}
+a:visited{color:rgb(0,0,0);text-decoration:none;}
+a:hover,a:active{color:rgb(0,255,0);text-decoration:none;}
+
+a.none{border:0px;background-image: none;}
+*/
+
+@font-face {font-family: 'PT Sans'; 
+	src: url('fonts/pts55f_w.eot'); 
+	src: local('PT Sans'), url('fonts/PTS55F_W.woff') format('woff'),url('fonts/PTS55F_W.ttf') format('truetype');}
+
+
+
+/*для страницы - ошибки замеченные в книгах*/
+
+e{color: red;} r{color: gold;} c{color: white;} v{text-decoration: overline;} up{text-transform: uppercase;} mig{text-decoration: blink;}

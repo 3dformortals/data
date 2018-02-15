@@ -1,0 +1,429 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="590"
+   height="300"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.2 r9819"
+   sodipodi:docname="energable_002.svg">
+  <title
+     id="title2992">контролируемая образующая энергия</title>
+  <defs
+     id="defs3">
+    <linearGradient
+       id="linearGradient3894">
+      <stop
+         style="stop-color:#00fcff;stop-opacity:1;"
+         offset="0"
+         id="stop3896" />
+      <stop
+         id="stop3906"
+         offset="0.47146422"
+         style="stop-color:#00fcff;stop-opacity:1;" />
+      <stop
+         id="stop3904"
+         offset="0.51460391"
+         style="stop-color:#01ff01;stop-opacity:1;" />
+      <stop
+         style="stop-color:#01ff01;stop-opacity:1;"
+         offset="1"
+         id="stop3898" />
+    </linearGradient>
+    <style
+       type="text/css"
+       id="style5">
+    @font-face {font-family: 'PT Sans'; 
+	src: url('fonts/pts55f_w.eot'); 
+	src: local('PT Sans'), url('fonts/PTS55F_W.woff') format('woff'),url('fonts/PTS55F_W.ttf') format('truetype');
+	}
+
+   </style>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3894"
+       id="linearGradient3902"
+       x1="450"
+       y1="49.466877"
+       x2="551.09375"
+       y2="151.11703"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#818181"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="1"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.979899"
+     inkscape:cx="106.21314"
+     inkscape:cy="176.50649"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1024"
+     inkscape:window-height="706"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:snap-page="true"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     guidecolor="#ebff00"
+     guideopacity="0.49803922"
+     inkscape:snap-global="true"
+     inkscape:object-paths="true"
+     inkscape:snap-intersection-paths="true"
+     inkscape:snap-smooth-nodes="true"
+     inkscape:object-nodes="true"
+     inkscape:snap-midpoints="true"
+     inkscape:snap-object-midpoints="true"
+     inkscape:snap-center="true"
+     inkscape:snap-bbox="true"
+     inkscape:bbox-paths="true"
+     inkscape:bbox-nodes="true"
+     inkscape:snap-bbox-midpoints="true"
+     inkscape:snap-bbox-edge-midpoints="true">
+    <sodipodi:guide
+       orientation="0,1"
+       position="0,150"
+       id="guide2995" />
+    <sodipodi:guide
+       orientation="-0.5,0.8660254"
+       position="450,150"
+       id="guide3765" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="295,109.28571"
+       id="guide3767" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="585,193.57143"
+       id="guide3769" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="440,294.99999"
+       id="guide3771" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="501.42857,4.9999874"
+       id="guide3773" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="5,0"
+       id="guide3076" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="350,0"
+       id="guide3110" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="0,60"
+       id="guide3112" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="381.42857,395.71429"
+       id="guide3114" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="335,0"
+       id="guide3998" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="0,45"
+       id="guide4004" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>контролируемая образующая энергия</dc:title>
+        <dc:date>2012-04-25</dc:date>
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/publicdomain/" />
+        <dc:language>ru-RU</dc:language>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>развитие</rdf:li>
+            <rdf:li>развитие структуры</rdf:li>
+            <rdf:li>величина развития структуры</rdf:li>
+            <rdf:li>энергия</rdf:li>
+            <rdf:li>контроль</rdf:li>
+            <rdf:li>образующая энергия</rdf:li>
+            <rdf:li>окружающая энергия</rdf:li>
+            <rdf:li>контролируемая энергия</rdf:li>
+            <rdf:li>образующая энергия структуры</rdf:li>
+            <rdf:li>окружающая энергия структуры</rdf:li>
+            <rdf:li>контролируемая энергия структуры</rdf:li>
+            <rdf:li>энергия тела</rdf:li>
+            <rdf:li>контролируемая энергия тела</rdf:li>
+            <rdf:li>внутренняя энергия тела</rdf:li>
+            <rdf:li>энергия внутри тела</rdf:li>
+            <rdf:li>контроль тела</rdf:li>
+            <rdf:li>контроль энергии</rdf:li>
+            <rdf:li>образующая энергия</rdf:li>
+            <rdf:li>образующая энергия тела</rdf:li>
+            <rdf:li>энергия разумной структуры</rdf:li>
+            <rdf:li>энергия разума</rdf:li>
+            <rdf:li>возможности</rdf:li>
+            <rdf:li>возможности разумной структуры</rdf:li>
+            <rdf:li>возможность</rdf:li>
+            <rdf:li>development</rdf:li>
+            <rdf:li>structure development</rdf:li>
+            <rdf:li>size of development of structure</rdf:li>
+            <rdf:li>energy</rdf:li>
+            <rdf:li>control</rdf:li>
+            <rdf:li>forming energy</rdf:li>
+            <rdf:li>surrounding energy</rdf:li>
+            <rdf:li>controllable energy</rdf:li>
+            <rdf:li>forming energy of structure</rdf:li>
+            <rdf:li>surrounding energy of structure</rdf:li>
+            <rdf:li>controllable energy of structure</rdf:li>
+            <rdf:li>energy of a body</rdf:li>
+            <rdf:li>controllable energy of a body</rdf:li>
+            <rdf:li>internal energy of a body</rdf:li>
+            <rdf:li>energy in a body</rdf:li>
+            <rdf:li>body control</rdf:li>
+            <rdf:li>energy control</rdf:li>
+            <rdf:li>forming energy</rdf:li>
+            <rdf:li>forming energy of a body</rdf:li>
+            <rdf:li>energy of reasonable structure</rdf:li>
+            <rdf:li>energy of reason</rdf:li>
+            <rdf:li>possibility of reasonable structure</rdf:li>
+            <rdf:li>possibility</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:coverage>уровень развития энергия тела структура возможности</dc:coverage>
+        <dc:description>величина развития структуры цветная схема</dc:description>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>formalldistort.org</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:rights>
+          <cc:Agent>
+            <dc:title>formalldistort.org</dc:title>
+          </cc:Agent>
+        </dc:rights>
+        <dc:publisher>
+          <cc:Agent>
+            <dc:title>formalldistort.org</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:identifier>http://www.formalldistort.org/svg/energable_001.svg</dc:identifier>
+        <dc:source>http://www.l4soft.narod.ru/</dc:source>
+        <dc:relation>http://www.l4soft.narod.ru/svg/download/energable_001.svg</dc:relation>
+        <dc:contributor>
+          <cc:Agent>
+            <dc:title>http://www.iskazkigolos.narod.ru http://www.nashsever.narod.ru</dc:title>
+          </cc:Agent>
+        </dc:contributor>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/publicdomain/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-752.36217)"
+     style="display:inline">
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;display:inline;font-family:Sans"
+       x="3.7680664"
+       y="906.52234"
+       id="text2986-4"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan2988-0"
+         x="3.7680664"
+         y="906.52234"
+         style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#ffffff;fill-opacity:1;font-family:PT Sans">контролируемая образующая энергия</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#00a6ff;fill-opacity:1;stroke:none;display:inline;font-family:Sans"
+       x="5"
+       y="1047.3622"
+       id="text2986-4-1"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan2988-0-7"
+         x="5"
+         y="1047.3622"
+         style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#00a6ff;fill-opacity:1;font-family:PT Sans">energable_002.svg</tspan></text>
+    <rect
+       style="fill:#00a6ff;fill-opacity:1;stroke:none;display:inline"
+       id="rect2984-1"
+       width="290"
+       height="290"
+       x="295"
+       y="757.36218" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#01fcff;fill-opacity:1;stroke:none;display:inline;font-family:Sans"
+       x="3.7680664"
+       y="768.96228"
+       id="text2986-4-4-1-4"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="3.7680664"
+         y="768.96228"
+         style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#01fcff;fill-opacity:1;font-family:PT Sans"
+         id="tspan3821-7-0">возможности ума</tspan><tspan
+         sodipodi:role="line"
+         x="3.7680664"
+         y="788.96228"
+         style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#01fcff;fill-opacity:1;font-family:PT Sans"
+         id="tspan4008">минус потребности ума</tspan></text>
+    <path
+       transform="matrix(1.7837407,0,0,0.89522732,-452.6833,858.07807)"
+       sodipodi:type="arc"
+       style="fill:url(#linearGradient3902);stroke:none;stroke-width:1.58269584000000000;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline;fill-opacity:1"
+       id="path3001-82"
+       sodipodi:cx="450"
+       sodipodi:cy="150"
+       sodipodi:rx="100.53313"
+       sodipodi:ry="100.53313"
+       d="M 450,49.466873 C 505.52291,49.466874 550.53313,94.477088 550.53313,150 L 450,150 z"
+       sodipodi:start="4.712389"
+       sodipodi:end="6.2831853" />
+    <path
+       sodipodi:type="star"
+       style="fill:#ffffff;fill-opacity:1;stroke:none"
+       id="path3116"
+       sodipodi:sides="3"
+       sodipodi:cx="350"
+       sodipodi:cy="-95.714287"
+       sodipodi:r1="12.892415"
+       sodipodi:r2="6.4462075"
+       sodipodi:arg1="-1.5707963"
+       sodipodi:arg2="-0.52359878"
+       inkscape:flatsided="true"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 350,-108.6067 11.16516,19.338621 -22.33032,-10e-7 z"
+       transform="matrix(0.44782166,0,0,0.43762061,193.26242,808.89071)"
+       inkscape:transform-center-y="-1.4104993" />
+    <path
+       sodipodi:type="star"
+       style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline"
+       id="path3116-1"
+       sodipodi:sides="3"
+       sodipodi:cx="350"
+       sodipodi:cy="-95.714287"
+       sodipodi:r1="12.892415"
+       sodipodi:r2="6.4462075"
+       sodipodi:arg1="-1.5707963"
+       sodipodi:arg2="-0.52359878"
+       inkscape:flatsided="true"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 350,-108.6067 11.16516,19.338621 -22.33032,-10e-7 z"
+       transform="matrix(0,0.44782166,-0.43762061,0,533.47147,835.62459)"
+       inkscape:transform-center-x="-1.4105002" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;display:inline;font-family:Sans"
+       x="332.68054"
+       y="1013.451"
+       id="text2986-4-4-2"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="332.68054"
+         y="1013.451"
+         style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#ffffff;fill-opacity:1;font-family:PT Sans"
+         id="tspan3821-6">0</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;display:inline;font-family:Sans"
+       x="328.46674"
+       y="775.30347"
+       id="text2986-4-4-2-0-9"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="328.46674"
+         y="775.30347"
+         style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#ffffff;fill-opacity:1;font-family:PT Sans"
+         id="tspan3821-6-4-4">∞</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;display:inline;font-family:Sans"
+       x="565.6521"
+       y="1009.5853"
+       id="text2986-4-4-2-0-6"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="565.6521"
+         y="1009.5853"
+         style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#ffffff;fill-opacity:1;font-family:PT Sans"
+         id="tspan3821-6-4-0">∞</tspan></text>
+    <rect
+       style="fill:#01fcff;stroke:none;fill-opacity:1"
+       id="rect4002"
+       width="15"
+       height="90"
+       x="335"
+       y="150"
+       transform="translate(0,752.36217)" />
+    <rect
+       style="fill:#01ff01;fill-opacity:1;stroke:none"
+       id="rect4006"
+       width="179.57248"
+       height="15"
+       x="350"
+       y="240"
+       transform="translate(0,752.36217)" />
+    <path
+       style="fill:none;stroke:#ffffff;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:inline"
+       d="m 350,1047.3622 0,-280.35803"
+       id="path3005-7"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#01ff01;fill-opacity:1;stroke:none;display:inline;font-family:Sans"
+       x="3.7680664"
+       y="819.85437"
+       id="text2986-4-4-3"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="3.7680664"
+         y="819.85437"
+         style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#01ff01;fill-opacity:1;font-family:PT Sans"
+         id="tspan4031">возможности тела</tspan><tspan
+         sodipodi:role="line"
+         x="3.7680664"
+         y="839.85437"
+         style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#01ff01;fill-opacity:1;font-family:PT Sans"
+         id="tspan4035">минус потребности тела</tspan></text>
+    <path
+       style="fill:none;stroke:#ffffff;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:inline"
+       d="m 295,992.36217 280.35801,0"
+       id="path3005-1"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+  </g>
+</svg>

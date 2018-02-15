@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html><head>
+<meta content="text/html;charset=UTF-8"
+ http-equiv="Content-Type">
+  <LINK rel="stylesheet" href="style.css" type="text/css">
+<title>@TRIPLIS@ HELP</title></head><body>
+
+<h2 align='justify'>@TRIPLIS@ - простенькая записная книжка с поиском в базе данных db.js и отображением результатов на экране, выполненная в виде HTML-файла index.html, который отображает содержимое базы данных из файла db.js(db_INDEX.js).</h2>
+Для редактирования базы данных используется любой примитивный текстовый редактор например notepad(кодировка в дистрибутиве: windows-1251...тем, кто не знает о чем речь - не парьтесь!).
+Новая запись создается вставкой в файл db.js(db_INDEX.js - чтобы выводилось на главной странице без поиска) новой строки в предусмотренном формате.<br>
+
+Для создания новых записей в базу данных предусмотрено добавление данных тремя способами:<br><br>
+<hr width='90%' size='10'>
+<h3>- добавление нового раздела</h3>
+синтаксис строки:<br>
+<h3>,"Места где можно найти интересные торренты+++"</h3>
+отображение на экране монитора:<br><br>
+<table>
+<tr><td id='forimg'><img src='razdel.png'alt='раздел' title='раздел'></td><td id='forrazdel'><span id='razdel'><span id='razdel'><h3>Места где можно найти интересные торренты</h3></span></td></tr>
+</table>
+
+<hr width='90%' size='10'>
+<h3>- добавление новой стороки коментария со ссылкой на сайт</h3>
+синтаксис строки:<br>
+<h3>,"http://www.torrent-search-bar.com/+++Torrent Search Bar - The Best Way to Search Torrents<r>+++торрент поиск search(дополнительная необязательная часть набора букв, знаков, цифр для поиска - не отображается на экране но участвует в поиске)</r>"</h3>
+отображение на экране монитора:<br><br>
+<table>
+<tr id='zapisi'><td id='forimg'><a href='http://www.torrent-search-bar.com/'><img alt='http://www.torrent-search-bar.com/' title='http://www.torrent-search-bar.com/'  src='stroka.png'></a></td><td><span id='stroka'>Torrent Search Bar - The Best Way to Search Torrents</span></td></tr>
+</table>
+
+<hr width='90%' size='10'>
+<h3>- добавление новой строки коментария без ссылки на сайт</h3>
+синтаксис строки:<br>
+<h3>,"+++не очень быстро пашет но трекеров много, хотя есть и коммерческие...найти что-то ценное возможно<r>+++дополнительная информация для поиска</r>"</h3>
+отображение на экране монитора:<br><br>
+<table>
+<tr id='zapisi'><td id='forimg'><img src='koment.png'alt='запись' title='запись'></td><td><span id='koment'>не очень быстро пашет но трекеров много, хотя есть и коммерческие...найти что-то ценное возможно</span></td></tr>
+</table>
+
+<hr width='90%' size='10'><br><br>
+В файле db.js это будет выглядеть так:<br><br><br>
+<b>
+var db = new Array(<br><br><br>
+...... строки вставленные до примера ......<br><br><br>
+,"Места где можно найти интересные торренты+++"<br>
+,"http://www.torrent-search-bar.com/+++Torrent Search Bar - The Best Way to Search Torrents<r>+++торрент поиск search(дополнительная необязательная часть набора букв, знаков, цифр для поиска - не отображается на экране но участвует в поиске)</r>"<br>
+,"+++не очень быстро пашет но трекеров много, хотя есть и коммерческие...найти что-то ценное возможно<r>+++дополнительная информация для поиска</r>"<br><br><br>
+...... строки вставленные после примера ......<br><br><br>
+);</b><br>
+<hr width='90%' size='10'><br><br>
+На экране монитора это отобразится так:<br><br>
+<b>
+...... изображение до примера ......
+
+<table>
+<tr><td id='forimg'><img src='razdel.png'alt='раздел' title='раздел'></td><td id='forrazdel'><span id='razdel'><span id='razdel'><h3>Места где можно найти интересные торренты</h3></span></td></tr>
+<tr id='zapisi'><td id='forimg'><a href='http://www.torrent-search-bar.com/'><img alt='http://www.torrent-search-bar.com/' title='http://www.torrent-search-bar.com/'  src='stroka.png'></a></td><td><span id='stroka'>Torrent Search Bar - The Best Way to Search Torrents</span></td></tr>
+<tr id='zapisi'><td id='forimg'><img src='koment.png'alt='запись' title='запись'></td><td><span id='koment'>не очень быстро пашет но трекеров много, хотя есть и коммерческие...найти что-то ценное возможно</span></td></tr>
+</table>
+
+...... изображение после примера ......<br><br><br>
+</b>
+
+<b>Необходима поддержка JavaScript!!!<br></b>
+Самая первая строка вашей записи в файле db.js начинается не с запятой(,) а сразу с кавычек. Будьте внимательны при заполнении файла после полной очистки.
+Придерживайтесь формы заполнения как в файле db.js находящемся в дистрибутиве. В области данных не касающихся ссылок на сайты есть возможность использовать теги HTML.<br>
+Тестировалась под лисой(Mozilla Firefox 3.5).<br>
+<h3>Три знака плюс "+++" ВАЖНАЯ ЧАСТЬ ЗАПИСИ!!! Они являются разделителем(например ссылки и коментария) и должны обязательно присутствовать!!!.(хотя бы один раз... повторные +++ ,начинающие дополнительную часть для поиска, не обязательны)<br>
+Cтрока без пробелов шириной больше экрана вызывает ошибки отображения. Не издевайтесь над грамматикой и разделяйте слова пробелами.<br>
+<e>Использование внутри строки двойных кавычек (" ") или одиночных кавычек (' '), необязательно парных, блокирует отображение. Следите затем что копируете в файл db.js.</e> Всегда держите
+дубликат файла db.js на случай невосстанавливаемой порчи.
+</h3>
+
+Спасибо можно сказать сюда:<br>
+WebMoney:<br>
+Z178988330396<br>
+E114984121775<br>
+R281783437757<br>
+<br><br>
+
+@TRIPLIS@ is free software distributed under the GNU GPL.<br>
+Read Copying.html for more infomation about license.<br><br>
+<center><a style="color:white; background:black" target='blank' href="http://l4soft.narod.ru/">Copyright &copy 2009 llll</a></center>
+
+
+</body></html>

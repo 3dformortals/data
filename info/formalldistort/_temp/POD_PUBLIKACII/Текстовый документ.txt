@@ -1,0 +1,204 @@
+Option Explicit
+Global j, i
+Global R_win, dis0, o_phi_udar, o_phi_progib, PI, dis21, V_PROGIB, o_phi_kat, PART_PROGIB, koordinata
+Global F_kat, o_omega_prot, dt, PROGIB_alt, R_kat_alt, SOPROKAT, OTDAET, F_win_rez, C_win_rez, x_ot11
+Global VX, VX1, VX2, VX3, VX4, VX5, VX6, VX7, VX8, VX9, VX10, VX11
+Global omega1, omega2, PROGIB, F_tek, m_tek, m_prot, t_vsled, V_rubber
+
+Sub SOPROKATWIN()
+
+j = 0
+i = 0
+R_win = 0
+dis0 = 0
+o_phi_udar = 0
+o_phi_progib = 0
+PI = 0
+
+dis21 = 0
+V_PROGIB = 0
+o_phi_kat = 0
+PART_PROGIB = 0
+koordinata = 0
+F_kat = 0
+o_omega_prot = 0
+dt = 0
+PROGIB_alt = 0
+R_kat_alt = 0
+SOPROKAT = 0
+OTDAET = 0
+F_win_rez = 0
+C_win_rez = 0
+x_ot11 = 0
+
+VX = 0
+VX1 = 0
+VX2 = 0
+VX3 = 0
+VX4 = 0
+VX5 = 0
+VX6 = 0
+VX7 = 0
+VX8 = 0
+VX9 = 0
+VX10 = 0
+VX11 = 0
+omega1 = 0
+omega2 = 0
+PROGIB = 0
+F_tek = 0
+m_tek = 0
+m_prot = 0
+t_vsled = 0
+V_rubber = 0
+
+
+Dim docell As Object
+Set docell = Workbooks("SOPROKATW.xls").Worksheets("soprokatlist")
+
+docell.Columns("D:G").select
+Selection.ClearContents
+
+R_win = docell.cells(1, 2).value / 1000
+dis0 = docell.cells(2, 2).value / 1000
+
+dis21 = docell.cells(4, 2).value / 1000
+V_PROGIB = docell.cells(6, 2).value * docell.cells(5, 2).value / 100
+omega1 = docell.cells(7, 2).value
+omega2 = docell.cells(8, 2).value
+C_win_rez = docell.cells(9, 2).value
+m_prot = docell.cells(10, 2).value
+PI = 3.141592654
+dt = 0.01
+
+
+o_phi_udar = 2 * Application.WorksheetFunction.Degrees(Application.WorksheetFunction.Acos(dis0 / R_win))
+Rem MsgBox ("o_phi_udar=" & o_phi_udar & Chr(13) & "dis0=" & dis0 & Chr(13) & "R_win=" & R_win)
+For o_phi_progib = 0 To o_phi_udar Step o_phi_udar / 1000
+    If (R_win ^ 2 * PI * o_phi_progib / 360 - R_win ^ 2 * sinus(o_phi_progib) / 2) * dis21 >= V_PROGIB Then
+        i = 1 ' MsgBox ("ñëó÷èëîñü"): i = 1
+        PROGIB = R_win * (1 - cosinus(o_phi_progib / 2))
+        F_win_rez = C_win_rez * PROGIB
+        o_phi_kat = o_phi_progib / 2
+        MsgBox ("o_phi_kat=" & o_phi_kat & Chr(13) & "o_phi_progib=" & o_phi_progib & Chr(13) & "o_phi_udar=" & o_phi_udar)
+        Exit For
+    End If
+Next o_phi_progib
+If i = 0 Then
+MsgBox ("óìåíüøèòå V[PROGIB],[%]" & Chr(13) & "èëè" & Chr(13) & "óìåíüøèòå R[STU],[mm]"): GoTo konec
+Else
+Rem MsgBox ("PROGIB=" & PROGIB)
+End If
+
+koordinata = 0
+
+For o_omega_prot = omega1 To omega2 Step (omega2 - omega1) / 11
+
+x_ot11 = 0
+VX = 0
+
+
+OTDAET = (sinus(o_phi_kat * 0) * OTDAET_YES_NO(o_phi_kat * 0) + sinus(o_phi_kat * 0.1) * OTDAET_YES_NO(o_phi_kat * 0.1) + sinus(o_phi_kat * 0.2) * OTDAET_YES_NO(o_phi_kat * 0.2) + sinus(o_phi_kat * 0.3) * OTDAET_YES_NO(o_phi_kat * 0.3) + sinus(o_phi_kat * 0.4) * OTDAET_YES_NO(o_phi_kat * 0.4) + sinus(o_phi_kat * 0.5) * OTDAET_YES_NO(o_phi_kat * 0.5) + sinus(o_phi_kat * 0.6) * OTDAET_YES_NO(o_phi_kat * 0.6) + sinus(o_phi_kat * 0.7) * OTDAET_YES_NO(o_phi_kat * 0.7) + sinus(o_phi_kat * 0.8) * OTDAET_YES_NO(o_phi_kat * 0.8) + sinus(o_phi_kat * 0.9) * OTDAET_YES_NO(o_phi_kat * 0.9) + sinus(o_phi_kat * 1) * OTDAET_YES_NO(o_phi_kat * 1))
+If x_ot11 > 0 Then
+
+OTDAET = OTDAET /x_ot11
+Else
+OTDAET = 0
+End If
+
+SOPROKAT = (sinus(o_phi_kat * 1) * (S_vpr(o_phi_kat * VX1) / PROGIB) + sinus(o_phi_kat * 0.9) * (S_vpr(o_phi_kat * VX2) / PROGIB) + sinus(o_phi_kat * 0.8) * (S_vpr(o_phi_kat * VX3) / PROGIB) + sinus(o_phi_kat * 0.7) * (S_vpr(o_phi_kat * VX4) / PROGIB) + sinus(o_phi_kat * 0.6) * (S_vpr(o_phi_kat * VX5) / PROGIB) + sinus(o_phi_kat * 0.5) * (S_vpr(o_phi_kat * VX6) / PROGIB) + sinus(o_phi_kat * 0.4) * (S_vpr(o_phi_kat * VX7) / PROGIB) + sinus(o_phi_kat * 0.3) * (S_vpr(o_phi_kat * VX8) / PROGIB) + sinus(o_phi_kat * 0.2) * (S_vpr(o_phi_kat * VX9) / PROGIB) + sinus(o_phi_kat * 0.1) * (S_vpr(o_phi_kat * VX10) / PROGIB) + sinus(o_phi_kat * 0) * (S_vpr(o_phi_kat * VX11) / PROGIB)) / 11
+R_kat_alt = (R_win - PROGIB) * (1 / cosinus(o_phi_kat * 0) + 1 / cosinus(o_phi_kat * 0.1) + 1 / cosinus(o_phi_kat * 0.2) + 1 / cosinus(o_phi_kat * 0.3) + 1 / cosinus(o_phi_kat * 0.4) + 1 / cosinus(o_phi_kat * 0.5) + 1 / cosinus(o_phi_kat * 0.6) + 1 / cosinus(o_phi_kat * 0.7) + 1 / cosinus(o_phi_kat * 0.8) + 1 / cosinus(o_phi_kat * 0.9) + 1 / cosinus(o_phi_kat * 1)) / 11
+PROGIB_alt = R_win - R_kat_alt
+If j = 0 Then MsgBox ("R_kat_alt=" & R_kat_alt & Chr(13) & "PROGIB_alt=" & PROGIB_alt): j = 1
+    docell.cells(1, 4).value = "V"
+    docell.cells(1, 5).value = "F_kat"
+    docell.cells(2, 4).value = "[m/s]"
+    docell.cells(2, 5).value = "[N]"
+    docell.cells(1, 6).value = "SOPROKAT"
+    docell.cells(1, 7).value = "OTDAET"
+    docell.cells(2, 6).value = "[%/100]"
+    docell.cells(2, 7).value = "[%/100]"
+
+    F_kat = o_omega_prot * dt / o_phi_kat * 180 / PI * PROGIB_alt / R_kat_alt * (SOPROKAT - OTDAET) * F_win_rez
+    docell.cells(koordinata + 3, 4).value = o_omega_prot * R_kat_alt
+    docell.cells(koordinata + 3, 5).value = F_kat
+    docell.cells(koordinata + 3, 6).value = SOPROKAT
+    docell.cells(koordinata + 3, 7).value = OTDAET
+koordinata = koordinata + 1
+Next o_omega_prot
+
+konec:
+End Sub
+
+Function OTDAET_YES_NO(x)
+
+F_tek = F_win_rez * (o_phi_kat - x) / o_phi_kat
+
+m_tek = m_prot / 360 * o_phi_kat / 11
+V_rubber = x* PI / 180 / o_omega_prot * F_tek / m_tek
+If V_rubber * cosinus(x) > o_omega_prot * R_kat_alt * sinus(x) Then
+    OTDAET_YES_NO = 1
+    x_ot11 = x_ot11 + 1
+Else
+    OTDAET_YES_NO = 0
+    VX = VX + 1
+    
+    Select Case VX
+
+        Case 1
+            VX1 = x / o_phi_kat
+        Case 2
+            VX2 = x / o_phi_kat
+        Case 3
+            VX3 = x / o_phi_kat
+        Case 4
+            VX4 = x / o_phi_kat
+        Case 5
+            VX5 = x / o_phi_kat
+        Case 6
+            VX6 = x / o_phi_kat
+        Case 7
+            VX7 = x / o_phi_kat
+        Case 8
+            VX8 = x / o_phi_kat
+        Case 9
+            VX9 = x / o_phi_kat
+        Case 10
+            VX10 = x / o_phi_kat
+        Case 11
+            VX11 = x / o_phi_kat
+    
+    End Select
+    
+End If
+
+End Function
+
+Function S_vpr(y)
+F_tek = F_win_rez * (o_phi_kat - y) / o_phi_kat
+
+m_tek = m_prot / 360 * o_phi_kat / 11
+
+t_vsled = (2 * PI - o_phi_kat * PI / 180) / o_omega_prot
+
+PART_PROGIB = F_tek / m_tek * t_vsled ^ 2 / 2 + y* PI / 180 / o_omega_prot * F_tek / m_tek 'Ð½Ð°ÑÐºÐ¾Ð»ÑŒÐºÐ¾ Ð²Ñ‹Ð¿Ñ€ÑÐ¼Ð¸Ð»Ð°ÑÑŒ
+
+If PART_PROGIB >= PROGIB Then
+    S_vpr = PROGIB
+Else
+    S_vpr = PART_PROGIB
+End If
+
+End Function
+
+Function sinus(x)
+Dim y#
+y = sin(x * PI / 180)
+sinus = y
+End Function
+
+Function cosinus(x)
+Dim y#
+y = cos(x * PI / 180)
+cosinus = y
+End Function

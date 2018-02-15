@@ -1,0 +1,31 @@
+,"+++<b><r>дл€ поперечной составл€ющей(pop)"
+,"+++ ","+++ ","+++ ","+++ ","+++ "
+,"+++&#916;E<sub>[okr_pop]</sub> = (&#916;&#945;<sub>[wstu(0)]</sub> - &#916;&#945;<sub>[prot(0)]</sub>)&#149;cos&#966;<sub>[L<sub>[kol]</sub>,L<sub>[ko_pop]</sub>]</sub>&#149;C<sub>[win_okr_pop]</sub>"
+,"+++E<sub>[okr_pop]</sub> = E<sub>[okr(0)_pop]</sub> + &#916;E<sub>[okr_pop]</sub>"
+,"+++E<sub>[kol_pop]</sub> = E<sub>[kol]</sub>&#149;cos&#966;<sub>[L<sub>[kol]</sub>,L<sub>[ko_pop]</sub>]</sub>"
+,"+++E<sub>[torm_pop]</sub> = E<sub>[torm]</sub>&#149;cos&#966;<sub>[L<sub>[kol]</sub>,L<sub>[ko_pop]</sub>]</sub>"
+,"+++E<sub>[okr_pop]</sub> = E<sub>[okr]</sub>&#149;cos&#966;<sub>[L<sub>[kol]</sub>,L<sub>[ko_pop]</sub>]</sub>"
+,"+++ ","+++ ","+++ ","+++ ","+++ "
+
+,"+++E<sub>[wstu_pop]</sub> = E<sub>[kol_pop]</sub> + E<sub>[torm_pop]</sub> - E<sub>[kord_pop]</sub> + E<sub>[i(0)wstu_pop]</sub> + E<sub>[k(0)wstu_pop]</sub>"
+,"+++E<sub>[kord_pop]</sub> = (E<sub>[wstu_pop]</sub> + E<sub>[prot_pop]</sub>)&#149;0.5 - E<sub>[okr_pop]</sub> + E<sub>[i(0)kord_pop]</sub> + E<sub>[k(0)kord_pop]</sub>"
+,"+++E<sub>[prot_pop]</sub> = E<sub>[tre_pop]</sub> + E<sub>[kord_pop]</sub> + E<sub>[i(0)prot_pop]</sub> + E<sub>[k(0)prot_pop]</sub>"
+,"+++ ","+++ ","+++ ","+++ ","+++ "
+
+,"+++E<sub>[wstu_pop]</sub> = <r>(</r>E<sub>[kol_pop]</sub> + E<sub>[torm_pop]</sub> - E<sub>[kord_pop]</sub> + E<sub>[i(0)wstu_pop]</sub> + E<sub>[k(0)wstu_pop]</sub><r>)</r>"
+,"+++<b>E<sub>[kord_pop]</sub> = (<r>(</r>E<sub>[kol_pop]</sub> + E<sub>[torm_pop]</sub></b> <r><i>- E<sub>[kord_pop]</sub></i></r> <b>+ E<sub>[i(0)wstu_pop]</sub> + E<sub>[k(0)wstu_pop]</sub><r>)</r><e>+(</e>E<sub>[tre_pop]</sub></b> <e><i>+ E<sub>[kord_pop]</sub></i></e> <b>+ E<sub>[i(0)prot_pop]</sub> + E<sub>[k(0)prot_pop]</sub><e>)</e>)&#149;0.5 - E<sub>[okr_pop]</sub> + E<sub>[i(0)kord_pop]</sub> + E<sub>[k(0)kord_pop]</sub></b>"
+,"+++E<sub>[prot_pop]</sub> = <e>(</e>E<sub>[tre_pop]</sub> + E<sub>[kord_pop]</sub> + E<sub>[i(0)prot_pop]</sub> + E<sub>[k(0)prot_pop]</sub><e>)</e>"
+,"+++ ","+++ ","+++ ","+++ ","+++ "
+,"+++E<sub>[kord_pop]</sub> = (E<sub>[kol_pop]</sub> + E<sub>[torm_pop]</sub> + E<sub>[i(0)wstu_pop]</sub> + E<sub>[k(0)wstu_pop]</sub> + E<sub>[tre_pop]</sub> + E<sub>[i(0)prot_pop]</sub> + E<sub>[k(0)prot_pop]</sub>)&#149;0.5-E<sub>[okr_pop]</sub> + E<sub>[i(0)kord_pop]</sub> + E<sub>[k(0)kord_pop]</sub>"
+
+,"+++ ","+++ ","+++ ","+++ ","+++ "
+,"+++|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
+,"+++ ","+++ ","+++ ","+++ ","+++ "
+
+,"+++E<sub>[wstu_pop]</sub> = E<sub>[kol_pop]</sub> + E<sub>[torm_pop]</sub> <r>- (</r>(E<sub>[kol_pop]</sub> + E<sub>[torm_pop]</sub> + E<sub>[i(0)wstu_pop]</sub> + E<sub>[k(0)wstu_pop]</sub> + E<sub>[tre_pop]</sub> + E<sub>[i(0)prot_pop]</sub> + E<sub>[k(0)prot_pop]</sub>)&#149;0.5-E<sub>[okr_pop]</sub> + E<sub>[i(0)kord_pop]</sub> + E<sub>[k(0)kord_pop]</sub><r>)</r> + E<sub>[i(0)wstu_pop]</sub> + E<sub>[k(0)wstu_pop]</sub>"
+,"+++E<sub>[kord_pop]</sub> = <r>(</r>(E<sub>[kol_pop]</sub> + E<sub>[torm_pop]</sub> + E<sub>[i(0)wstu_pop]</sub> + E<sub>[k(0)wstu_pop]</sub> + E<sub>[tre_pop]</sub> + E<sub>[i(0)prot_pop]</sub> + E<sub>[k(0)prot_pop]</sub>)&#149;0.5-E<sub>[okr_pop]</sub> + E<sub>[i(0)kord_pop]</sub> + E<sub>[k(0)kord_pop]</sub><r>)</r>"
+,"+++E<sub>[prot_pop]</sub> = E<sub>[tre_pop]</sub> + <r>(</r>(E<sub>[kol_pop]</sub> + E<sub>[torm_pop]</sub> + E<sub>[i(0)wstu_pop]</sub> + E<sub>[k(0)wstu_pop]</sub> + E<sub>[tre_pop]</sub> + E<sub>[i(0)prot_pop]</sub> + E<sub>[k(0)prot_pop]</sub>)&#149;0.5-E<sub>[okr_pop]</sub> + E<sub>[i(0)kord_pop]</sub> + E<sub>[k(0)kord_pop]</sub><r>)</r> + E<sub>[i(0)prot_pop]</sub> + E<sub>[k(0)prot_pop]</sub>"
+
+,"+++ ","+++ ","+++ ","+++ ","+++ "
+,"+++|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
+,"+++ ","+++ ","+++ ","+++ ","+++ "

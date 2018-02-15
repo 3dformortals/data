@@ -1,0 +1,88 @@
+﻿<html><head>
+
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" href="style.css" type="text/css">
+<title>subanal (поджопник) - анализатор субтитров srt</title>
+
+
+
+<script type="text/javascript">
+</script>
+<script type="text/javascript" src="subanal.js">
+</script>
+
+
+
+<form>
+        
+        
+<table rules="cols" border="0" width="100%">    
+<tbody><tr>
+<td align="left"><span>1000=1сек</span></td>
+<td>Сделайте звукозапись, прочитав текст ниже, <br>и запишите секунды звучания * 1000 из редактора.<br>time1>time2</td>
+
+</tr>
+
+<tr>
+<td colspan=""><input id="time1" size="7" type="text" value="4000"> time1</td>
+<td>Это очень хорошо. Положите на комод.</td>
+</tr>
+
+<tr>
+<td colspan=""><input id="time2" size="7" type="text" value="3500"> time2</td>
+<td>Очень хорошо положите это на комод.</td>
+</tr>
+
+<tr>
+<td colspan=""><button type="button" name="" id="" onclick="counttime()">вычислить</button> &rarr;</td>
+<td colspan=""><input id="bukva" size="7" type="text"> буква || <input id="pausa" size="7" type="text"> пауза, запятая, троеточие</td>
+
+</tr>
+</tbody></table>
+<hr align="left" noshade="noshade" width="99%">
+
+</form>
+
+<form>
+
+<table width="100%">
+<tbody>
+<tr>
+<td>
+<button type="button" name="htmlsee" id="htmlsee" onclick="resetokno('okno1')">reset</button>
+<button type="button" name="gBASIC" id="gBASIC" onclick="analiz()">анализ</button>
+</td><td>
+<text align="right">обратите внимание на субтитры №</text></td></tr>
+<tr>
+<td><textarea id="okno1" cols="70" rows="20">
+1
+00:00:57,440 --> 00:00:59,550
+Я знаю, что мы собираемся расстаться.
+
+2
+00:01:00,440 --> 00:01:03,230
+Но несмотря на то, как мы далеки друг от друга...
+
+12
+00:01:46,480 --> 00:01:47,950
+что я влюблен.
+
+13
+00:01:50,800 --> 00:01:51,750
+Извращенец! Извращенец!
+
+14
+00:01:51,760 --> 00:01:52,590
+- Извращенец!
+- Полегче! Полечге!
+</textarea></td>
+<td align="right"><textarea id="okno2" cols="20" rows="20"></textarea></td>
+</tr>
+</tbody></table>
+</form>
+
+
+
+
+
+</body></html>

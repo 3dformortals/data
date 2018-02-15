@@ -1,0 +1,1 @@
+,"+++cos&#966;<sub>[L<sub>ko,tra</sub>,L<sub>ko_vert</sub>]</sub> = (()&#149;A<sub>[1]</sub> + ()&#149;B<sub>[1]</sub> + ()&#149;C<sub>[1]</sub>)/((()<sup>2</sup> + ()<sup>2</sup> + ()<sup>2</sup>)<sup>0.5</sup>&#149;(A<sub>[1]</sub><sup>2</sup> + B<sub>[1]</sub><sup>2</sup> + C<sub>[1]</sub><sup>2</sup>)<sup>0.5</sup>)"

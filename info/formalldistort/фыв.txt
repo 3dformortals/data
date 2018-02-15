@@ -1,0 +1,26 @@
+@!78Tyt#42@
+
+
+эллипс
+
+x = a cos t
+y = b sin t
+
+циклоида
+
+x=r t - r sin t
+y=r - r cos t
+
+<defs>
+  <style type="text/css">
+   <![CDATA[
+    @font-face {
+        font-family: Delicious;
+        src: url('http://nimbupani.com/demo/svgfonts/delicious-roman.otf');
+    }
+   ]]>
+ </style>
+</defs>
+<text x="100" y="100" style="font-family: 'Delicious'; font-weight:normal; font-style: normal">
+ Text using CSS @font-face
+</text> 

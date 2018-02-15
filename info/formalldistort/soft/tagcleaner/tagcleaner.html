@@ -1,0 +1,115 @@
+<html><head>
+
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link rel="stylesheet" href="style.css" type="text/css">
+<title>tagcleaner</title>
+
+
+
+<script type="text/javascript">
+</script>
+<script type="text/javascript" src="tagcleaner.js">
+</script>
+
+
+Выполняет поиск фрагмента от start до end. Оставляет фрагмент и удаляет окружение. Удаляет фрагмент и оставляет окружение.
+<form>
+        
+        
+<table class="px1000">    
+<tbody>
+<tr>
+<td>start
+<button type="button" name="" id="" onclick="saveload('start','savestart1')">save</button>
+<button type="button" name="" id="" onclick="saveload('savestart1','start')">load</button>
+<button type="button" name="" id="" onclick="saveload('savestart1','show')">show</button>
+<button type="button" name="" id="" onclick="resetokno('start')">reset</button>
+</td>
+<td>end
+<button type="button" name="" id="" onclick="saveload('end','saveend1')">save</button>
+<button type="button" name="" id="" onclick="saveload('saveend1','end')">load</button>
+<button type="button" name="" id="" onclick="saveload('saveend1','show')">show</button>
+<button type="button" name="" id="" onclick="resetokno('end')">reset</button>
+</td>
+<td>show
+<button type="button" name="" id="" onclick="tagpreference('<input','/>')">&lt;input.../&gt;</button>
+<button type="button" name="" id="" onclick="tagpreference('name=&quot;','&quot;')">name="..."</button>
+<button type="button" name="" id="" onclick="tagpreference('id=&quot;','&quot;')">id="..."</button>|
+|<button type="button" name="" id="" onclick="saveload('show','start')">start</button>
+<button type="button" name="" id="" onclick="saveload('show','end')">end</button>
+<button type="button" name="" id="" onclick="saveload('show','okno1')">text</button>
+</td>
+</tr>
+
+<tr>
+
+<td colspan=""><textarea class="mini" id="start" size="7" type="text" >=</textarea></td><td><textarea class="mini" id="end" size="7" type="text" >,</textarea></td><td><textarea class="mini" id="show" size="7" type="text" readonly>showbox</textarea></td>
+
+</tr>
+
+<tr>
+<td>start
+<button type="button" name="" id="" onclick="saveload('start','savestart2')">save</button>
+<button type="button" name="" id="" onclick="saveload('savestart2','start')">load</button>
+<button type="button" name="" id="" onclick="saveload('savestart2','show')">show</button>
+<button type="button" name="" id="" onclick="saveload('savestart2','okno1')">text</button>
+</td>
+<td>end
+<button type="button" name="" id="" onclick="saveload('end','saveend2')">save</button>
+<button type="button" name="" id="" onclick="saveload('saveend2','end')">load</button>
+<button type="button" name="" id="" onclick="saveload('saveend2','show')">show</button>
+<button type="button" name="" id="" onclick="saveload('saveend2','okno1')">text</button>
+</td>
+<td>
+<input type="checkbox" id="newstring" checked />с новой стороки, нет пустых строк |
+|<input type="checkbox" id="lowercase" />все строчные
+</td>
+</tr>
+
+</tbody></table>
+<!-- <hr align="left" noshade="noshade" width="99%"> -->
+
+</form>
+
+<form>
+
+<table class="px1000">
+<tbody>
+<tr>
+<td>text
+<button type="button" name="" id="" onclick="resetokno('okno1')">reset</button>
+<button type="button" name="" id="" onclick="cleaninput()">оставить тег</button>
+<button type="button" name="" id="" onclick="deleteinput()">удалить тег</button>|
+|<button type="button" name="" id="" onclick="saveload('okno1','savetext1')">save1</button>
+<button type="button" name="" id="" onclick="saveload('savetext1','okno1')">load1</button>
+<button type="button" name="" id="" onclick="saveload('savetext1','show')">show1</button>|
+|<button type="button" name="" id="" onclick="saveload('okno1','savetext2')">save2</button>
+<button type="button" name="" id="" onclick="saveload('savetext2','okno1')">load2</button>
+<button type="button" name="" id="" onclick="saveload('savetext2','show')">show2</button>|
+|<button type="button" name="" id="" onclick="buferfig()">СПАСИБО</button>
+<a href='http://www.l4soft.narod.ru'>&copy;&nbsp;2014&nbsp;llll</a>
+
+</td>
+</tr>
+<tr>
+<td><textarea id="okno1">
+mnogougolnik,name,arcs,rt1=0,rt2=0,a_s=-1,dp=[2],rt1r=0,rt2r=0,a_sr=0,rt1_ellips=0.55,rt2_ellips=0.55,a_s_ellips=-1</textarea></td>
+</tr>
+<tr><td>свой разделитель найденного <textarea id="ownsep">,</textarea>
+<button type="button" name="" id="" onclick="resetokno('ownsep')">reset</button>
+</td></tr>
+</tbody></table>
+<textarea class="dn" id="savetext1"></textarea>
+<textarea class="dn" id="savetext2"></textarea>
+<textarea class="dn" id="savestart1"></textarea>
+<textarea class="dn" id="savestart2"></textarea>
+<textarea class="dn" id="saveend1"></textarea>
+<textarea class="dn" id="saveend2"></textarea>
+
+</form>
+
+
+
+
+
+</body></html>

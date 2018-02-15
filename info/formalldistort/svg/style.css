@@ -1,0 +1,63 @@
+body {
+background-color: rgb(0, 0, 0); color: rgb(255, 255, 255);
+background-image: url('background.svg'); background-repeat:repeat-x;
+background-attachment:fixed;
+font-family: 'PT Sans';font-size: 100%;}
+
+@font-face {font-family: 'PT Sans'; 
+	src: url('fonts/pts55f_w.eot'); 
+	src: local('PT Sans'), url('fonts/PTS55F_W.woff') format('woff'),url('fonts/PTS55F_W.ttf') format('truetype');}
+
+
+a:link{color:rgb(0,255,255);text-decoration:none;font-weight:bold;}
+a:visited{color:rgb(0,0,0);text-decoration:overline;}
+a:hover,a:active{color:rgb(255,200,255);text-decoration:overline;}
+
+a.menu_left:link{color:rgb(255,255,255); text-decoration:none;}
+a.menu_left:visited{color:rgb(0,0,0); text-decoration:none;}
+a.menu_left:hover{color:rgb(0,0,255); text-decoration:none;}
+a.menu_left:active{color:rgb(255,255,0); text-decoration:none;}
+
+a.menu_right:link{color:rgb(0,166,255); text-decoration:none;}
+a.menu_right:visited{color:rgb(0,166,255); text-decoration:none;}
+a.menu_right:hover{color:rgb(0,0,0); text-decoration:none;}
+a.menu_right:active{color:rgb(0,166,255); text-decoration:none;}
+
+div#menu_up{position: absolute;width:1000px; height:50px;}
+div#menu_left{position: absolute;top: 100px;width: 180px; padding-bottom:250px;}
+div#menu_right{color:rgb(0,166,255);
+position: absolute;top: 50px; left: 820px;max-width: 170px;width: 170px;background-color: rgb(255, 255,0 );
+padding-top:5px;padding-left:5px;padding-right:5px;padding-bottom:5px;
+border-top-left-radius:3px;border-top-right-radius:3px;border-bottom-right-radius:3px;border-bottom-left-radius:3px;
+}
+
+div#menu_sep{
+background:rgb(255,255,255); width:100%; height:2px;
+margin-top:20px;margin-bottom:20px;
+}
+
+div#sep{
+background:rgb(0,166,255); width:610px; height:2px;
+position:relative; left:-5px;
+margin-top:20px;margin-bottom:20px;
+}
+
+div#info{
+position: absolute;top: 150px; left: 200px;width:600px; background-repeat: repeat;
+background-image: url('background_div_info.svg'); color:rgb(0,0,0);
+padding-top:5px;padding-left:5px;padding-right:5px;padding-bottom:250px;
+text-align:left;
+}
+
+div#counter{
+position: absolute;top: 9px; left: 969px;width:31px;height:31px;
+}
+
+td{border:1px solid rgb(0,166,255);}
+.tablehead{font-weight:;color:rgb(0,255,255);}
+span{color:rgb(255,255,233);font-weight:bold;}
+div.sub{margin-left:20px;position:inherit;text-indent:-10px;}
+table.tablecenter{text-align:center;}
+td#tdright{text-align:right;}
+.px150{width:150px;}
+.whitetext{color:white;}

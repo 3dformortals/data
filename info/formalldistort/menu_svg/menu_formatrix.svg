@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="50"
+   height="50"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.2 r9819"
+   sodipodi:docname="menu_formatrix.svg">
+  <title
+     id="title2995">form matrix</title>
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#000000"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.39215686"
+     inkscape:pageshadow="2"
+     inkscape:zoom="7.9195959"
+     inkscape:cx="28.279043"
+     inkscape:cy="27.711315"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     width="1024px"
+     inkscape:window-width="1024"
+     inkscape:window-height="706"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:showpageshadow="false"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     showborder="true"
+     inkscape:snap-global="true"
+     inkscape:snap-bbox="true"
+     inkscape:snap-bbox-midpoints="true"
+     inkscape:snap-page="true" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>form matrix</dc:title>
+        <dc:date>2012-04-25</dc:date>
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/publicdomain/" />
+        <dc:language>ru-RU</dc:language>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>матрица формы</rdf:li>
+            <rdf:li>матрица вселенной</rdf:li>
+            <rdf:li>матрица формы вселенной</rdf:li>
+            <rdf:li>параметрическая матрица вселенной</rdf:li>
+            <rdf:li>параметрическая матрица формы вселенной</rdf:li>
+            <rdf:li>матрица изменения формы во вселенной</rdf:li>
+            <rdf:li>form matrix</rdf:li>
+            <rdf:li>Universe matrix</rdf:li>
+            <rdf:li>matrix of a form of the Universe</rdf:li>
+            <rdf:li>parametrical matrix of the Universe</rdf:li>
+            <rdf:li>parametrical matrix of a form of the Universe</rdf:li>
+            <rdf:li>a matrix of change of a form in the Universe</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:coverage>математика дискретная</dc:coverage>
+        <dc:description>параметрическая матрица изменения формы во вселенной</dc:description>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>formalldistort.org</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:rights>
+          <cc:Agent>
+            <dc:title>formalldistort.org</dc:title>
+          </cc:Agent>
+        </dc:rights>
+        <dc:publisher>
+          <cc:Agent>
+            <dc:title>formalldistort.org</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:identifier>http://www.formalldistort.org/menu_svg/menu_formatrix.svg</dc:identifier>
+        <dc:source>http://www.l4soft.narod.ru/</dc:source>
+        <dc:relation>http://www.l4soft.narod.ru/svg/download/menu_formatrix.svg</dc:relation>
+        <dc:contributor>
+          <cc:Agent>
+            <dc:title>http://www.iskazkigolos.narod.ru http://www.nashsever.narod.ru</dc:title>
+          </cc:Agent>
+        </dc:contributor>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/publicdomain/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-1002.3622)"
+     style="display:inline"
+     sodipodi:insensitive="true">
+    <path
+       style="fill:none;stroke:#ffffff;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="M 45,25 25,25"
+       id="path3838"
+       inkscape:connector-curvature="0"
+       transform="translate(0,1002.3622)"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#ffffff;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="M 25,45 25,5"
+       id="path3840"
+       inkscape:connector-curvature="0"
+       transform="translate(0,1002.3622)" />
+    <path
+       sodipodi:type="star"
+       style="fill:#ffffff;fill-opacity:0;stroke:#ffffff;stroke-width:1.5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path3842"
+       sodipodi:sides="3"
+       sodipodi:cx="25"
+       sodipodi:cy="25"
+       sodipodi:r1="20"
+       sodipodi:r2="10"
+       sodipodi:arg1="-1.5707963"
+       sodipodi:arg2="-0.52359878"
+       inkscape:flatsided="true"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="M 25.000001,5 42.320508,35 7.6794917,35 z"
+       transform="translate(0,1002.3622)"
+       inkscape:transform-center-y="-5" />
+    <path
+       sodipodi:type="star"
+       style="fill:#ffffff;fill-opacity:0;stroke:#ffffff;stroke-width:1.5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path3844"
+       sodipodi:sides="4"
+       sodipodi:cx="25"
+       sodipodi:cy="25"
+       sodipodi:r1="20"
+       sodipodi:r2="14.142136"
+       sodipodi:arg1="-1.5707963"
+       sodipodi:arg2="-0.78539816"
+       inkscape:flatsided="true"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="M 25.000001,5 45,25.000001 24.999999,45 5,24.999999 z"
+       transform="translate(0,1002.3622)" />
+    <path
+       sodipodi:type="star"
+       style="fill:#ffffff;fill-opacity:0;stroke:#ffffff;stroke-width:1.5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path3846"
+       sodipodi:sides="6"
+       sodipodi:cx="25"
+       sodipodi:cy="25"
+       sodipodi:r1="20"
+       sodipodi:r2="17.320507"
+       sodipodi:arg1="-1.5707963"
+       sodipodi:arg2="-1.0471976"
+       inkscape:flatsided="true"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 25.000001,5 17.320507,10 0,20 -17.320509,10 -17.3205073,-10 5e-7,-20 z"
+       transform="translate(0,1002.3622)" />
+    <a
+       xlink:href="formatrix.html"
+       xlink:title="formatrix"
+       id="a3802"
+       target="_blank"
+       style="fill:#ffffff;fill-opacity:0;stroke:#ffffff;stroke-width:1.5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none">
+      <path
+         transform="translate(0,1002.3622)"
+         style="fill:#ffffff;fill-opacity:0;stroke:#ffffff;stroke-width:1.5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         d="M 45,25 C 45,36.045695 36.045695,45 25,45 13.954305,45 5,36.045695 5,25 5,13.954305 13.954305,5 25,5 36.045695,5 45,13.954305 45,25 z"
+         id="path3800"
+         inkscape:connector-curvature="0" />
+    </a>
+  </g>
+</svg>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+<meta content="text/html;charset=UTF-8"
+ http-equiv="Content-Type">
+  <LINK rel="stylesheet" href="css/style.css" type="text/css">
+	</head>
+		<title>KUBIT TETRA</title>
+<body>
+<img src='svg/KUBIT_TETRA.svg' width='100%' ><br>
+<script LANGUAGE='JavaScript' SRC='js/reset.js'></script>
+<script LANGUAGE='JavaScript' SRC='js/KUBIT_TETRA.js'></script>
+<form>
+<table border='1'>
+<tbody>
+	
+<tr><td >na =</td><td ><input type='text' name='ina' id='ina' value='1'> </td><td>- число повторений звена вдоль ребра</td></tr>
+<tr><td >a =</td><td > <input type='text' name='ia' id='ia' value='0.01'> </td><td>- длина звена [м]</td></tr>
+<tr><td >a/d =</td><td > <input type='text' name='iad' id='iad' value='10'> </td><td>- отношение длины звена [м] к диаметру сечения звена [м] </td></tr>
+<tr><td >&#961; =</td><td > <input type='text' name='iro' id='iro' value='2700'> </td><td>- плотность вещества TETRA [кг/м<sup>3</sup>] </td></tr>
+<tr>
+	<td ><a href='KUBIT.html'>другой</a></td>
+	<td > <img src='png/TETRA.png'> </td>
+	<td>
+	<button type='button' onclick='tetra_generator();'>вычислить параметры</button>
+	<button type='button' onclick="resetresult('result')">очистить результаты</button>
+	</td>
+	</tr>
+
+</tbody>
+</table>
+</form>
+
+<div id='result'></div>
+
+<br>
+<center><a href='http://www.l4soft.narod.ru'>Copyright &copy; 2009-2014 llll</a></center>
+<br><br>
+</body></html>

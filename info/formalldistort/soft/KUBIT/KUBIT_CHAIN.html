@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+<meta content="text/html;charset=UTF-8"
+ http-equiv="Content-Type">
+  <LINK rel="stylesheet" href="css/style.css" type="text/css">
+	</head>
+	<title>KUBIT CHAIN</title>
+<body>
+
+<img src='svg/KUBIT_CHAIN.svg' width='100%' ><br>
+<script LANGUAGE='JavaScript' SRC='js/reset.js'></script>
+<script LANGUAGE='JavaScript' SRC='js/KUBIT_CHAIN.js'></script>
+<form>
+<table border='1'>
+<tbody>
+
+<tr>
+	<td >d =</td>
+	<td ><input type='text' name='izd' id='izd' value='0.0001'> </td>
+	<td>- диаметр сечения звена цепи [м] &gt;0</td>
+	</tr>
+
+<tr>
+	<td >l/d =</td>
+	<td > <input type='text' name='ild' id='ild' value='1'> </td>
+	<td>- отношение длины цилиндрической части звена цепи [м] к диаметру звена [м] &ge;1</td>
+	</tr>
+
+<tr>
+	<td >shag/d =</td>
+	<td > <input type='text' name='ishagd' id='ishagd' value='1'> </td>
+	<td>- отношение расстояния между цепями [м] одной пластины к диаметру сечения звена [м] &ge;0</td>
+	</tr>
+
+<tr>
+	<td >dist/d =</td>
+	<td > <input type='text' name='idistd' id='idistd' value='1'> </td>
+	<td>- отношение дистанции между пластинами [м] к диаметру сечения звена [м] &ge;0</td>
+	</tr>
+
+<tr>
+	<td >zv =</td>
+	<td > <input type='text' name='izv' id='izv' value='1'> </td>
+	<td>- число звеньев в цепи &ge;1</td>
+	</tr>
+
+<tr>
+	<td >ch =</td>
+	<td > <input type='text' name='ich' id='ich' value='1'> </td>
+	<td>- число цепей в пластине &ge;1</td>
+	</tr>
+
+<tr>
+	<td >pl =</td>
+	<td > <input type='text' name='ipl' id='ipl' value='1'> </td>
+	<td>- число пластин &ge;1</td>
+	</tr>
+
+<tr>
+	<td >&#961; =</td>
+	<td > <input type='text' name='iro' id='iro' value='2700'> </td>
+	<td>- плотность вещества KUBIT CHINA [кг/м<sup>3</sup>] </td>
+	</tr>
+
+<tr>
+	<td ><a href='KUBIT.html'>другой</a></td>
+	<td > <img src='png/KUBITCH.png'> </td>
+	<td>
+	<button type='button' onclick='china_generator()'>вычислить параметры</button>
+	<button type='button' onclick="resetresult('result')">очистить результаты</button>
+	</td>
+	</tr>
+
+</tbody>
+</table>
+</form>
+
+<div id='result'></div>
+
+<br>
+<center><a href='http://www.l4soft.narod.ru'>Copyright &copy; 2009-2014 llll</a></center>
+<br><br>
+</body></html>

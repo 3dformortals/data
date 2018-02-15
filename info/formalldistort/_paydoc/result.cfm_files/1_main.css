@@ -1,0 +1,142 @@
+﻿body,input,textarea,select {font:12px Verdana;}
+body {width:100%; color:#000000; background:#ffffff; }
+form {margin:0;padding:0}
+img{ border:none;}
+html,body {margin:0;padding:0;height: 99%;}
+* html{ height: 100%;}
+.site {width:900px; margin:0 auto;position:relative; min-height: 100%; height: auto !important; height: 100%;}
+.content{padding-bottom:104px;}
+
+
+a{color:#326532; text-decoration:underline; font:12px Verdana;}
+a:hover{color:#326532; text-decoration: none;}
+
+/*------cap--------------*/
+
+.logotip {display:block; background:url('/template/logo/1_logo.gif') no-repeat left; width:900px; height:74px; }
+.logotip_eng {display:block; background:url('/template/logo/1_logo_eng.gif') no-repeat left; width:900px; height:74px; }
+.test{display:block; background:url('/template/img/redring.gif') no-repeat; color:#b40000; font:11px Verdana; font-weight:bold; padding-left:24px; float:right; height:21px; line-height:21px; margin:29px 0 auto auto;}
+.greenblock{ background-color:#ecf9ee; border:1px solid #dce9de; width:898px; min-height:84px;}
+.greenblock_otstup{ margin:5px auto auto 20px; color:#666666; font:12px Verdana; line-height:24px;}
+.greenblock .generalinfo{font:12px Verdana; font-weight:bold;}
+
+/*-------gray block----*/
+
+
+.gradfon{ background:url('/template/img/gradient.gif') repeat-x; overflow:hidden; border:1px solid #dfdfdf; width:898px; height:25px; margin-top:22px;}
+.gradfon .title{ font:14px Arial; color:#000000; text-transform:uppercase; font-weight:bold; font-style:italic; line-height:25px; margin-left:20px;}
+.grayfon{ background-color:#f7f7f7;border:1px solid #dfdfdf; width:898px; min-height:100px; margin-top:1px; }
+
+div.grayfon div.step2 iframe {overflow: hidden; width:100%; padding:0; margin:0; border:0 none}
+
+.css_button { display:block;
+              background:#40753f url('/template/img/greenbut.gif') repeat-x;
+			  border:1px solid #6ba469;
+			  width:173px;
+			  height:26px;
+			  text-align:center;
+			  text-decoration:none;
+			  color:#FFFFFF;
+			  font:12px Verdana;
+			  font-weight:bold;
+			  line-height:26px;
+			  margin:10px 0 20px auto;}
+
+.css_button:hover {background-position: 0 -26px; color:#FFFFFF; text-decoration:none;    }
+
+.css_button input{position:absolute; width:173px;; height:26px; right:0;
+                    opacity:0; filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0);  /* ������������ ��� ��6-7 */
+                   cursor:pointer; border: none; z-index: 2;  }
+
+/*-------reclama block----*/
+
+.whitefon{ background-color:#ffffff;border:1px solid #dfdfdf; width:898px; margin-top:1px;  overflow: hidden; }
+.whitefon div, .smalltext{ margin:16px 20px 16px 20px; font:11px Verdana; color:#666666;}
+.whitefon .red2{ color:#b40000; font:11px Verdana;}
+.whitefon a{color:#326532; text-decoration:underline;}
+.whitefon a:hover{color:#326532; text-decoration: none;}
+
+
+
+/*----------radiobutton----------*/
+
+.niceRadio{ width:18px; height:18px; display: inline-block; cursor: pointer; background: url(/template/img/radio1.png);overflow: hidden;}
+.radioChecked{ background-position: 0 -20px;}
+.niceRadio input{margin-left: -17px;}
+.step1 .radiotext{ margin-bottom:15px;color:#000000; font:12px Verdana; font-weight:bold;}
+.step1 #eltext{ margin:0 auto 10px 22px;}
+
+
+
+/*---------- content----------*/
+
+.step1, .step2{margin:20px;}
+.step3{ margin:20px auto 20px auto}
+.commentaccount{font:11px Verdana; color:#666666; margin: 5px auto auto 22px;}
+.commentaccount img{ vertical-align:middle;}
+.comment{ font:11px Verdana; color:#666666; margin: 0 auto  5px 247px;}
+
+.step2 .card{ font:24px Arial; color:#000000; margin-left:10px;}
+.step2 .card img{ margin-left:20px; vertical-align:text-bottom;}
+
+.attention{ text-align:center; font:14px Verdana; line-height:24px; margin-top:150px;}
+.attention a{font:14px Verdana; color:#b40000;}
+
+
+/*------------input-------------*/
+.form_name{ width:227px; text-align:right; margin-right:20px; font:12px Verdana; color:#333333; line-height:18px; float:left;  clear:left;}
+.form_name span, .red{ color:#b40000; font:12px Verdana;}
+
+.form_pole1 input, .form_pole2 input, .form_pole3 input{ background:url('/template/img/pole.gif') repeat-x;
+                                                         border:1px solid #b5b5b5;
+														 height:20px;
+														 font:12px Verdana;
+														 color:#333333; line-height:20px;
+														 padding:0; padding-left:4px;
+														 margin:0; }
+.form_pole1 input{width:400px;}
+.form_pole2 input{width:246px;}
+.form_pole3 input{width:70px; margin-right:6px; vertical-align:top;}
+input.form_pole4{ width:234px; margin:0; padding:0; vertical-align:top;}
+.form_pole2 img{margin-left:10px; vertical-align: top;}
+
+.form_pole2 select, .form_pole3 select{ background:url('/template/img/pole.gif') repeat-x;
+                                       border:1px solid #b5b5b5;
+										height:22px;
+										font:12px Verdana;
+										color:#333333;
+										padding:2px;
+										margin:0;}
+.form_pole2 select{ width:246px;}
+.form_pole3 select{ width:80px; margin-right:6px;}
+.form_pole1, .form_pole2, .form_pole3{ height:22px; margin:6px auto 6px; vertical-align:top;}
+.point { background:url('/template/img/point.gif') repeat-x; width:100%; height:1px; margin:30px auto 20px;}
+
+
+
+
+
+/*---------result---------*/
+
+.result_text_green{ font:12px Verdana; font-weight:bold; color:#326532; text-align:center; margin-bottom:10px;}
+.result_text_red{ font:12px Verdana; font-weight:bold; color:#b40000; text-align:center; margin-bottom:10px;}
+.result{ border:1px solid #cacaca;  width:858px; margin:0; padding:0;}
+.result table{ border-collapse:collapse;padding:0; border:none; margin:0;}
+.result table td{ margin:0; padding:0;}
+.result legend{font:12px Verdana; color:#000000; font-weight:bold;}
+td.name{width:227px; text-align:right; margin-right:20px; font:12px Verdana; color:#333333; line-height:18px; height:30px;}
+td.result_fon div {background-color:#ededed; width:400px; font:12px Verdana; color:#333333;  line-height:22px;  margin-left:10px; padding-left:10px;  width:604px;}
+
+/*-------------footer--------*/
+
+
+.footerline{ background-color:#b2b2b2; width:900px; height:1px; margin: 2px auto 10px; clear:both;}
+.footer{ position: relative; margin:auto; width:900px; height:100px; margin-top:-100px; clear: both;}
+
+.copy{ font:12px Verdana; color:#666666;  }
+.footer img { float:left; margin:0; padding:0; }
+img.ftr_img { margin-right:102px;}
+
+.errormessage{color:#b40000;}
+
+

@@ -1,0 +1,5 @@
+function parall_P_dist_D(X,Y,Z,A,B,C)
+parall_P_dist_D = -A*X-B*Y-C*Z
+end function
+
+X,Y,Z,A,B,C- координаты точки и направляющего вектора плоскости
