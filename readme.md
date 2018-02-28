@@ -1,7 +1,7 @@
 personal repository which have images, fonts, and text files html,css,js,python,haxe,txt etc.
 
 - coding  
---_development - notes about development  
+-- _development - notes about development  
 --- publishing in playstore  
 --- python syntax  
 --- haxe syntax  
