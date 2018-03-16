@@ -44,6 +44,6 @@
     "workbench.colorTheme": "Dark High Contrast Boxcolors",
     "hxmanager.projectsRoot": "/home/user/development/hfp",
     
-    //keyboard section
+    "editor.multiCursorModifier": "ctrlCmd",
     
 }
