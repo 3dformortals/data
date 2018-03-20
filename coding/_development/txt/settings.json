@@ -1,5 +1,6 @@
 {
     "terminal.integrated.fontSize": 20,
+    "editor.fontSize": 20,
     "workbench.colorCustomizations": {
         "input.placeholderForeground":"#ffffffd5",
         "input.border":"#bae8c1",
@@ -13,15 +14,15 @@
         "editorLineNumber.foreground": "#ffffffd5",
         "tab.inactiveForeground":"#ffffffd5",
         "tab.border":"#2790c4",
-        "editor.selectionBackground":"#2790c4d5",
-        "editor.selectionHighlightBackground":"#bae8c1a5",
+        "editor.selectionBackground":"#2790c4a5",
+        "editor.selectionHighlightBackground":"#2790c495",
         "editor.findMatchBackground":"#ffff00b7",
         "editor.findMatchHighlightBackground":"#ffbb00a5",
         "editor.findRangeHighlightBackground":"#2790c4d5",
         "editor.hoverHighlightBackground":"#2790c4d5",
         //"editor.lineHighlightBorder":"#2790c4d5",
         "editorBracketMatch.background":"#2790c4",
-        "editorBracketMatch.border":"#ffffff",
+        "editorBracketMatch.border":"#ffffff00",
         "panel.border":"#2790c4",
         "statusBar.border":"#2790c4",
         "statusBar.background":"#2790c4d5",
@@ -45,5 +46,6 @@
     "hxmanager.projectsRoot": "/home/user/development/hfp",
     
     "editor.multiCursorModifier": "ctrlCmd",
+    // "haxe.displayConfigurations":["build.hxml"]
     
 }
