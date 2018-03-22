@@ -2,6 +2,152 @@ package;
 
 class GeometryXD{
     public static function main(){trace("GeometryXD");}
+    
+    public static function recounter_I_F(what:Array<Int>):Array<Float>{
+        var rez:Array<Float> = [];
+        return [for (i in 0...what.length) rez.push(what[i])];
+    }
+    public static function recounter_F_I(what:Array<Float>):Array<Int>{
+        var rez:Array<Int> = [];
+        return [for (i in 0...what.length) rez.push(Std.int(what[i]))];
+    }
+    public static function recounter_I_S(what:Array<Int>):Array<String>{
+        var rez:Array<String> = [];
+        rez = [for (i in 0...what.length) Std.string(what[i])];
+        return rez;
+    }
+    public static function recounter_F_S(what:Array<Float>):Array<String>{
+        var rez:Array<String> = [];
+        rez = [for (i in 0...what.length) Std.string(what[i])];
+        return rez;
+    }
+    public static function recounter_S_I(what:Array<String>):Array<Int>{
+        var rez:Array<Int> = [];
+        rez = [for (i in 0...what.length) Std.parseInt(what[i])];
+        return rez;
+    }
+    public static function recounter_S_F(what:Array<String>):Array<Float>{
+        var rez:Array<Float> = [];
+        rez = [for (i in 0...what.length) Std.parseFloat(what[i])];
+        return rez;
+    }
+    
+    public static function repeater_F_F(n:Int, what:Array<Float>, full:Bool = false):Array<Float>{
+        var rez:Array<Float> = null;
+        if (n == 0){ return rez; }
+        var wl:Int = what.length;
+        rez = [];
+        if (wl == 0){ return rez; }
+        if (n < 0){ what.reverse(); n = Std.int(Math.abs(n));}
+        var ind:Int =(full) ? n : Math.ceil(n / wl);
+        rez = [for (_ in 0...ind) for (i in 0...wl) what[i]];
+        if(!full){rez = rez.slice(0,n);}
+        return rez;
+    }
+    public static function repeater_I_I(n:Int, what:Array<Int>, full:Bool = false):Array<Int>{
+        var rez:Array<Int> = null;
+        if (n == 0){ return rez; }
+        var wl:Int = what.length;
+        rez = [];
+        if (wl == 0){ return rez; }
+        if (n < 0){ what.reverse(); n = Std.int(Math.abs(n));}
+        var ind:Int =(full) ? n : Math.ceil(n / wl);
+        rez = [for (_ in 0...ind) for (i in 0...wl) what[i]];
+        if(!full){rez = rez.slice(0,n);}
+        return rez;
+    }
+    public static function repeater_S_S(n:Int, what:Array<String>, full:Bool = false):Array<String>{
+        var rez:Array<String> = null;
+        if (n == 0){ return rez; }
+        var wl:Int = what.length;
+        rez = [];
+        if (wl == 0){ return rez; }
+        if (n < 0){ what.reverse(); n = Std.int(Math.abs(n));}
+        var ind:Int =(full) ? n : Math.ceil(n / wl);
+        rez = [for (_ in 0...ind) for (i in 0...wl) what[i]];
+        if(!full){rez = rez.slice(0,n);}
+        return rez;
+    }
+    public static function repeater_F_I(n:Int, what_:Array<Float>, full:Bool = false):Array<Int>{
+        var rez:Array<Int> = null;
+        var what:Array<Int> = recounter_F_I(what_);
+        if (n == 0){ return rez; }
+        var wl:Int = what.length;
+        rez = [];
+        if (wl == 0){ return rez; }
+        if (n < 0){ what.reverse(); n = Std.int(Math.abs(n));}
+        var ind:Int =(full) ? n : Math.ceil(n / wl);
+        rez = [for (_ in 0...ind) for (i in 0...wl) what[i]];
+        if(!full){rez = rez.slice(0,n);}
+        return rez;
+    }
+    public static function repeater_S_I(n:Int, what_:Array<String>, full:Bool = false):Array<Int>{
+        var rez:Array<Int> = null;
+        var what:Array<Int> = recounter_S_I(what_);
+        if (n == 0){ return rez; }
+        var wl:Int = what.length;
+        rez = [];
+        if (wl == 0){ return rez; }
+        if (n < 0){ what.reverse(); n = Std.int(Math.abs(n));}
+        var ind:Int =(full) ? n : Math.ceil(n / wl);
+        rez = [for (_ in 0...ind) for (i in 0...wl) what[i]];
+        if(!full){rez = rez.slice(0,n);}
+        return rez;
+    }
+    public static function repeater_I_F(n:Int, what_:Array<Int>, full:Bool = false):Array<Float>{
+        var rez:Array<Float> = null;
+        var what:Array<Float> = recounter_I_F(what_);
+        if (n == 0){ return rez; }
+        var wl:Int = what.length;
+        rez = [];
+        if (wl == 0){ return rez; }
+        if (n < 0){ what.reverse(); n = Std.int(Math.abs(n));}
+        var ind:Int =(full) ? n : Math.ceil(n / wl);
+        rez = [for (_ in 0...ind) for (i in 0...wl) what[i]];
+        if(!full){rez = rez.slice(0,n);}
+        return rez;
+    }
+    public static function repeater_S_F(n:Int, what_:Array<String>, full:Bool = false):Array<Float>{
+        var rez:Array<Float> = null;
+        var what:Array<Float> = recounter_S_F(what_);
+        if (n == 0){ return rez; }
+        var wl:Int = what.length;
+        rez = [];
+        if (wl == 0){ return rez; }
+        if (n < 0){ what.reverse(); n = Std.int(Math.abs(n));}
+        var ind:Int =(full) ? n : Math.ceil(n / wl);
+        rez = [for (_ in 0...ind) for (i in 0...wl) what[i]];
+        if(!full){rez = rez.slice(0,n);}
+        return rez;
+    }
+    public static function repeater_I_S(n:Int, what_:Array<Int>, full:Bool = false):Array<String>{
+        var rez:Array<String> = null;
+        var what:Array<String> = recounter_I_S(what_);
+        if (n == 0){ return rez; }
+        var wl:Int = what.length;
+        rez = [];
+        if (wl == 0){ return rez; }
+        if (n < 0){ what.reverse(); n = Std.int(Math.abs(n));}
+        var ind:Int =(full) ? n : Math.ceil(n / wl);
+        rez = [for (_ in 0...ind) for (i in 0...wl) what[i]];
+        if(!full){rez = rez.slice(0,n);}
+        return rez;
+    }
+    public static function repeater_F_S(n:Int, what_:Array<Float>, full:Bool = false):Array<String>{
+        var rez:Array<String> = null;
+        var what:Array<String> = recounter_F_S(what_);
+        if (n == 0){ return rez; }
+        var wl:Int = what.length;
+        rez = [];
+        if (wl == 0){ return rez; }
+        if (n < 0){ what.reverse(); n = Std.int(Math.abs(n));}
+        var ind:Int =(full) ? n : Math.ceil(n / wl);
+        rez = [for (_ in 0...ind) for (i in 0...wl) what[i]];
+        if(!full){rez = rez.slice(0,n);}
+        return rez;
+    }
+    // aninb etc recode from begin again
+    
     public static function sin_cos_cut(x:Float):Float { return (x>1)?1:(x<-1)?-1:x; }
     public static function degrees(radians:Float):Float { return radians * 180 / Math.PI; }
     public static function radians(degrees:Float):Float { return degrees / 180 * Math.PI; }
@@ -169,7 +315,7 @@ class GeometryXD{
     public static function dotXDoffset(dotXD:Array<Float>, vecXD:Array<Float>, t:Float):Array<Float>{
         var rez:Array<Float> = null;
         if (t != 0){
-            var lv:Float = vecXD.length;
+            var lv:Int = vecXD.length;
             if (dotXD.length == lv){
                 rez = [];
                 t = t / vecXDmod(vecXD);
@@ -181,7 +327,7 @@ class GeometryXD{
         }else{return dotXD;}
     }
     public static function dot3Dline_x_plane(dot3D0:Array<Float>, vec3D0:Array<Float>, vec3Dplane:Array<Float>, dplane:Float = 0):Array<Float>{
-        rez:Array<Float> = null;
+        var rez:Array<Float> = null;
         var ldot:Int = dot3D0.length;
         var lvec:Int = vec3D0.length;
         var lplane:Int = vec3Dplane.length;
@@ -206,7 +352,7 @@ class GeometryXD{
         }return rez;
     }
     public static function dot3Dprojection_on_plane(dot3D:Array<Float>, vec3Dplane:Array<Float>, dplane:Float):Array<Float>{
-        rez:Array<Float> = null;
+        var rez:Array<Float> = null;
         var ldot:Int = dot3D.length;
         var lplane:Int = vec3Dplane.length;
         if (ldot == 3 && ldot == lplane){
@@ -225,7 +371,7 @@ class GeometryXD{
             else if (checkup == 0){return dot3D;}
             else {
                 var t:Float = checkup / checkdn;
-                rez = [for (i in 0...3) dot3D[i] + vec3D[i] * t];
+                rez = [for (i in 0...3) dot3D[i] + vec3Dplane[i] * t];
             }
         }return rez;
     }
