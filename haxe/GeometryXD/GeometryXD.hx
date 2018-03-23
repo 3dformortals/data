@@ -146,7 +146,121 @@ class GeometryXD{
         if(!full){rez = rez.slice(0,n);}
         return rez;
     }
-    // aninb etc recode from begin again
+    
+    public static function an_in_b_S(a:Array<String>, b:Array<String>):Array<Array<Int>>{
+        var rez:Array<Array<Int>> = null;
+        for (ia in 0...a.length){
+            for (ib in 0...b.length){
+                if (a[ia] == b[ib]) { rez.push([ia, ib]); }
+            }
+        }return rez;
+    }
+    public static function an_in_bn_S(a:Array<String>, b:Array<Array<String>>):Array<Array<Int>>{
+        var rez:Array<Array<Int>> = null;
+        for (ia in 0...a.length){
+            for (ib in 0...b.length){
+                for (ibn in 0...b[ib].length){
+                    if (a[ia] == b[ib][ibn]) { rez.push([ia, ib, ibn]); }
+                }
+            }
+        }return rez;
+    }
+    public static function an_in_b_I(a:Array<Int>, b:Array<Int>):Array<Array<Int>>{
+        var rez:Array<Array<Int>> = null;
+        for (ia in 0...a.length){
+            for (ib in 0...b.length){
+                if (a[ia] == b[ib]) { rez.push([ia, ib]); }
+            }
+        }return rez;
+    }
+    public static function an_in_bn_I(a:Array<Int>, b:Array<Array<Int>>):Array<Array<Int>>{
+        var rez:Array<Array<Int>> = null;
+        for (ia in 0...a.length){
+            for (ib in 0...b.length){
+                for (ibn in 0...b[ib].length){
+                    if (a[ia] == b[ib][ibn]) { rez.push([ia, ib, ibn]); }
+                }
+            }
+        }return rez;
+    }
+    public static function an_in_b_F(a:Array<Float>, b:Array<Float>):Array<Array<Int>>{
+        var rez:Array<Array<Int>> = null;
+        for (ia in 0...a.length){
+            for (ib in 0...b.length){
+                if (a[ia] == b[ib]) { rez.push([ia, ib]); }
+            }
+        }return rez;
+    }
+    public static function an_in_bn_F(a:Array<Float>, b:Array<Array<Float>>):Array<Array<Int>>{
+        var rez:Array<Array<Int>> = null;
+        for (ia in 0...a.length){
+            for (ib in 0...b.length){
+                for (ibn in 0...b[ib].length){
+                    if (a[ia] == b[ib][ibn]) { rez.push([ia, ib, ibn]); }
+                }
+            }
+        }return rez;
+    }
+    public static function chain_indexes(a_l:Int, n:Int, ring:Bool):Array<Array<Int>>{
+        var rez:Array<Array<Int>> = null;
+        if (n > a_l || n < 1){ return rez; }
+        var ind:Array<Int> = [];
+        if (ring){
+            ind = [for (b in 0...2) for (i in 0...a_l) (b < 1)? i : (i < n - 1) ? i : continue];
+        }else{
+            ind = [for (i in 0...1 + a_l - n) i];
+        }return rez;
+    }
+    public static function chain_S(a:Array<String> ,n:Int ,ring:Bool = false):Array<Array<String>>{
+        var rez:Array<Array<String>> = null;
+        var a_l:Int = a.length;
+        if (n > a_l || n < 1){ return rez; }
+        var ind:Array<Array<Int>> = chain_indexes(a_l, n, ring);
+        rez = [for (i in 0...ind.length) [for (j in 0...n) a[ind[i][j]]]];
+        return rez;
+    }
+    public static function chain_I(a:Array<Int> ,n:Int ,ring:Bool = false):Array<Array<Int>>{
+        var rez:Array<Array<Int>> = null;
+        var a_l:Int = a.length;
+        if (n > a_l || n < 1){ return rez; }
+        var ind:Array<Array<Int>> = chain_indexes(a_l, n, ring);
+        rez = [for (i in 0...ind.length) [for (j in 0...n) a[ind[i][j]]]];
+        return rez;
+    }
+    public static function chain_F(a:Array<Float> ,n:Int ,ring:Bool = false):Array<Array<Float>>{
+        var rez:Array<Array<Float>> = null;
+        var a_l:Int = a.length;
+        if (n > a_l || n < 1){ return rez; }
+        var ind:Array<Array<Int>> = chain_indexes(a_l, n, ring);
+        rez = [for (i in 0...ind.length) [for (j in 0...n) a[ind[i][j]]]];
+        return rez;
+    }
+    public static function steps_internal(xmin:Float, xmax:Float, n:Int, borders:Bool = false):Array<Float>{
+        var rez:Array<Float> = null;
+        if (n < 1){ return rez; }
+        var st:Float = (xmax - xmin) / (n + 1);
+        if (borders){
+            rez = [for (i in 0...n + 2) (i > 0 && i < n + 1) ? xmin + st * i : (i == 0) ? xmin : xmax ];
+        }else{
+            rez = [for (i in 1...n + 1) xmin + st * i];
+        }return rez;
+    }
+    public static function steps_external(smin:Float, smax:Float, n:Int, direction:Int):Array<Float>{
+        var rez:Array<Float> = null;
+        if (n < 1 || direction < -1 || direction > 1){ return rez; }
+        var st:Float = smax - smin;
+        if (direction > 0){
+            rez = [for (i in 0...n + 2) smin + st * i ];
+        }else if (direction < 0){
+            var full:Float = smin - st * n;
+            rez = [for (i in 0...n + 2) full + st * i ];
+        }else{
+            var full:Float = smin - st * n;
+            rez = [for (b in 0...2) for (i in 0...n + 2) (b == 0) ? full + st * i : (i > 1) ? smin + st * i : continue];
+        }return rez;
+    }
+    
+    // list_repeater etc recode from begin again
     
     public static function sin_cos_cut(x:Float):Float { return (x>1)?1:(x<-1)?-1:x; }
     public static function degrees(radians:Float):Float { return radians * 180 / Math.PI; }
