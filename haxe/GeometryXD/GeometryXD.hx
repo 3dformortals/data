@@ -114,8 +114,6 @@ class GeometryXD{
         }return rez;
     }
     
-    
-    
     public static function recounter_I_F(what:Array<Int>):Array<Float>{
         var rez:Array<Float> = [];
         return [for (i in 0...what.length) rez.push(what[i])];
@@ -373,8 +371,6 @@ class GeometryXD{
         }return rez;
     }
     
-    // list_repeater etc recode from begin again
-    
     public static function sin_cos_cut(x:Float):Float { return (x>1)?1:(x<-1)?-1:x; }
     public static function degrees(radians:Float):Float { return radians * 180 / Math.PI; }
     public static function radians(degrees:Float):Float { return degrees / 180 * Math.PI; }
@@ -385,6 +381,9 @@ class GeometryXD{
         k=(x>0)?1:(x>90)?2:(x>180)?3:(x>270)?4:(x<0)?4:(x<=-90)?3:(x<=-180)?2:(x<=-270)?1:4;
         return k;
     }
+    
+    
+    
     public static function vecXDmod(vecXD:Array<Float>):Float{
         var sum:Float = 0;
         for (i in vecXD){sum += i*i;}
@@ -569,6 +568,36 @@ class GeometryXD{
                 rez = [for (i in 0...3) dot3D[i] + vec3Dplane[i] * t];
             }
         }return rez;
+    }
+    public static function dot3D_to_dot2Dviewplane(dot3D:Array<Float>, dot3Dox:Array<Float>, dot3Doz:Array<Float>):Array<Float>{
+        var rez:Array<Float> = null;
+        var t:Float = vecXDmod(dot3D);
+        var cosox0t:Float = sum_F(multiply_xF([dot3Dox,dot3D])) / (t + vecXDmod(dot3Dox));
+        var cosoz0t:Float = sum_F(multiply_xF([dot3Doz,dot3D])) / (t + vecXDmod(dot3Doz));
+        // var cosox0t:Float = (
+        //     dot3Dox[0] * dot3D[0] +
+        //     dot3Dox[1] * dot3D[1] +
+        //     dot3Dox[2] * dot3D[2]
+        //     ) / (
+        //         t + vecXDmod(dot3Dox)
+        //     );
+        // var cosoz0t:Float = (
+        //     dot3Doz[0] * dot3D[0] +
+        //     dot3Doz[1] * dot3D[1] +
+        //     dot3Doz[2] * dot3D[2]
+        //     ) / (
+        //         t + vecXDmod(dot3Doz)
+        //     );
+        rez = [t * cosox0t, t * cosoz0t];
+        return rez;
+    }
+    public static function dotXDscale(dotXD:Array<Float>, scaleXD:Array<Float>, dotXDc:Array<Float>):Array<Float>{
+        var rez:Array<Float> = null;
+        var sdot:Array<Float> = [for(i in 0...dotXD.length) dotXD[i] * scaleXD[i]];
+        var stc:Array<Float> = [for(i in 0...dotXD.length) dotXDc[i] * scaleXD[i]];
+        var vec:Array<Float> = vecXD(stc.concat(dotXDc));
+        rez = dotXDoffset(sdot,vec,vecXDmod(vec));
+        return rez;
     }
     
     // next recount_xyz_to_xy надо проверить может нельзя
