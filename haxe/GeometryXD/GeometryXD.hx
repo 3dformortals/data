@@ -3,6 +3,119 @@ package;
 class GeometryXD{
     public static function main(){trace("GeometryXD");}
     
+    public static function sum_I(a:Array<Int>):Int{
+        var rez:Int = 0;
+        for (i in 0...a.length){ rez += i;}
+        return rez;
+    }
+    public static function sum_F(a:Array<Float>):Float{
+        var rez:Float = 0;
+        for (i in 0...a.length){ rez += i;}
+        return rez;
+    }
+    public static function diff_I(a:Array<Int>):Int{
+        var rez:Int = a[0];
+        for (i in 1...a.length){ rez -= i;}
+        return rez;
+    }
+    public static function diff_F(a:Array<Float>):Float{
+        var rez:Float = a[0];
+        for (i in 1...a.length){ rez -= i;}
+        return rez;
+    }
+    public static function middle_F(a:Array<Float>):Float{
+        return sum_F(a) / a.length;
+    }
+    public static function multiply_FperF(a:Array<Float>, n:Float):Array<Float>{
+        return [for (i in 0...a.length) a[i] * n];
+    }
+    public static function multiply_I(a:Array<Int>):Int{
+        var rez:Int = a[0];
+        for (i in 1...a.length){ rez *= i;}
+        return rez;
+    }
+    public static function multiply_F(a:Array<Float>):Float{
+        var rez:Float = a[0];
+        for (i in 1...a.length){ rez *= i;}
+        return rez;
+    }
+    public static function minus_I(a:Array<Int>):Array<Int>{
+        return [for (i in 0...a.length) -a[i]];
+    }
+    public static function minus_F(a:Array<Float>):Array<Float>{
+        return [for (i in 0...a.length) -a[i]];
+    }
+    
+    public static function sum_xI(a:Array<Array<Int>>):Array<Int>{
+        return [for (i in 0...a[0].length) sum_I([for (ai in 0...a.length) a[ai][i] ]) ];
+    }
+    public static function sum_xF(a:Array<Array<Float>>):Array<Float>{
+        return [for (i in 0...a[0].length) sum_F([for (ai in 0...a.length) a[ai][i] ]) ];
+    }
+    public static function diff_xI(a:Array<Array<Int>>):Array<Int>{
+        return [for (i in 0...a[0].length) diff_I([for (ai in 0...a.length) a[ai][i] ]) ];
+    }
+    public static function diff_xF(a:Array<Array<Float>>):Array<Float>{
+        return [for (i in 0...a[0].length) diff_F([for (ai in 0...a.length) a[ai][i] ]) ];
+    }
+    public static function middle_xF(a:Array<Array<Float>>):Array<Float>{
+        return [for (i in 0...a[0].length) middle_F([for (ai in 0...a.length) a[ai][i] ]) ];
+    }
+    public static function multiply_xFperF(a:Array<Array<Float>>, n:Float):Array<Array<Float>>{
+        return [for (i in 0...a.length) multiply_FperF(a[i], n) ];
+    }
+    public static function multiply_xI(a:Array<Array<Int>>):Array<Int>{
+        return [for (i in 0...a[0].length) multiply_I([for (ai in 0...a.length) a[ai][i] ]) ];
+    }
+    public static function multiply_xF(a:Array<Array<Float>>):Array<Float>{
+        return [for (i in 0...a[0].length) multiply_F([for (ai in 0...a.length) a[ai][i] ]) ];
+    }
+    
+    
+    public static function sum_previous_I(a:Array<Int>):Array<Int>{
+        return [for (i in 0...a.length) (i == 0) ? a[i] : a[i] + a[i - 1]];
+    }
+    public static function diff_previous_I(a:Array<Int>):Array<Int>{
+        return [for (i in 0...a.length) (i == 0) ? a[i] : a[i] - a[i - 1]];
+    }
+    public static function sum_before_I(a:Array<Int>):Array<Int>{
+        var rez:Array<Int> = [];
+        var x:Int = 0;
+        for (i in 0...a.length){
+            x += a[i];
+            rez.push(x);
+        }return rez;
+    }
+    public static function diff_before_I(a:Array<Int>):Array<Int>{
+        var rez:Array<Int> = [a[0]];
+        for (i in 1...a.length){
+            rez.push(a[i] - a[i-1]);
+        }return rez;
+    }
+    
+    public static function sum_previous_F(a:Array<Float>):Array<Float>{
+        return [for (i in 0...a.length) (i == 0) ? a[i] : a[i] + a[i - 1]];
+    }
+    public static function diff_previous_F(a:Array<Float>):Array<Float>{
+        return [for (i in 0...a.length) (i == 0) ? a[i] : a[i] - a[i - 1]];
+    }
+    public static function sum_before_F(a:Array<Float>):Array<Float>{
+        var rez:Array<Float> = [];
+        var x:Float = 0;
+        for (i in 0...a.length){
+            x += a[i];
+            rez.push(x);
+        }return rez;
+    }
+    public static function diff_before_F(a:Array<Float>):Array<Float>{
+        var rez:Array<Float> = [a[0]];
+        for (i in 1...a.length){
+            rez.push(a[i] - a[i-1]);
+        }return rez;
+    }
+    
+    
+    
     public static function recounter_I_F(what:Array<Int>):Array<Float>{
         var rez:Array<Float> = [];
         return [for (i in 0...what.length) rez.push(what[i])];
@@ -323,43 +436,19 @@ class GeometryXD{
         return v1;
     }
     public static function vecXDsum(vecXDa:Array<Float>, vecXDb:Array<Float>):Array<Float>{
-        var rez:Array<Float>=[];
-        if (vecXDa.length == vecXDb.length){
-            var lv:Int = vecXDa.length;
-            for (i in 0...lv){
-                rez.push(vecXDa[i] + vecXDb[i]);
-            }
-        }return rez;
+        return sum_xF([vecXDa, vecXDb]);
     }
     public static function vecXDfieldsum(vecXDfield:Array<Array<Float>>):Array<Float>{
-        var rez:Array<Float> = [];
-        var lv:Int = vecXDfield[0].length;
-        for (i in 1...vecXDfield.length){
-            if (vecXDfield[i].length != lv) {return rez;}
-        }rez = vecXDfield[0];
-        for (i in 1...vecXDfield.length) {rez = vecXDsum(rez, vecXDfield[i]);}
-        return rez;
+        return sum_xF(vecXDfield);
     }
     public static function vecXDdiff(vecXDa:Array<Float>, vecXDb:Array<Float>):Array<Float>{
-        var rez:Array<Float>=[];
-        if (vecXDa.length == vecXDb.length){
-            var lv:Int = vecXDa.length;
-            for (i in 0...lv){
-                rez.push(vecXDa[i] - vecXDb[i]);
-            }
-        }return rez;
+        return diff_xF([vecXDa, vecXDb]);
     }
     public static function vecXDfielddiff(vecXDfield:Array<Array<Float>>):Array<Float>{
-        var rez:Array<Float> = [];
-        var lv:Int = vecXDfield[0].length;
-        for (i in 1...vecXDfield.length){
-            if (vecXDfield[i].length != lv) {return rez;}
-        }rez = vecXDfield[0];
-        for (i in 1...vecXDfield.length) {rez = vecXDdiff(rez, vecXDfield[i]);}
-        return rez;
+        return diff_xF(vecXDfield);
     }
     public static function vecXDback(vecXD:Array<Float>):Array<Float>{
-        return [for (i in 0...vecXD.length) -vecXD[i]];
+        return minus_F(vecXD);
     }
     public static function vecXDfieldback(vecXDfield:Array<Array<Float>>):Array<Array<Float>>{
         return [for (i in 0...vecXDfield.length) vecXDback(vecXDfield[i])];
@@ -407,11 +496,7 @@ class GeometryXD{
         return rez;
     }
     public static function vecXDmiddle(vecXDa:Array<Float>, vecXDb:Array<Float>){
-        var rez:Array<Float> = null;
-        var lv:Int = vecXDa.length;
-        if (lv == vecXDb.length){
-            rez = [for (i in 0...lv) (vecXDa[i]+vecXDb[i])/2];
-        }return rez;
+        return middle_xF([vecXDa, vecXDb]);
     }
     public static function vecXDfieldsamesize(vecXDfield:Array<Array<Float>>):Bool{
         var thesize:Int = vecXDfield[0].length;
@@ -420,11 +505,7 @@ class GeometryXD{
         }return true;
     }
     public static function vecXDfieldmiddle(vecXDfield:Array<Array<Float>>):Array<Float>{
-        var rez:Array<Float> = null;
-        if (vecXDfieldsamesize(vecXDfield)){
-            rez = vecXDfieldsum(vecXDfield);
-            rez = [for (i in 0...rez.length) rez[i] / vecXDfield.length];
-        }return rez;
+        return middle_xF(vecXDfield);
     }
     public static function dotXDoffset(dotXD:Array<Float>, vecXD:Array<Float>, t:Float):Array<Float>{
         var rez:Array<Float> = null;
