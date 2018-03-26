@@ -785,6 +785,46 @@ class GeometryXD{
         rez = line3Dbeziercubic_2dots(dot3D, dotXDoffset(dot3D, vec3D, distance));
         return rez;
     }
-    
-    // next derivative  надо проверить может нельзя
+    public static function beziercubic3D_12coordinates(curve:Array<Array<Float>>):Array<Float>{
+        var rez:Array<Float> = null;
+        if (
+            curve.length == 4 &&
+            curve[0].length == 3 &&
+            vecXDfieldsamesize(curve)
+        ){
+            rez = [for (i in 0...4) for (ai in 0...3) curve[i][ai]];
+        }return rez;
+    }
+    public static function beziercubic3D_4dots(curve:Array<Float>):Array<Array<Float>>{
+        var rez:Array<Array<Float>> = null;
+        if (curve.length == 12){
+            rez = [for (i in [0,3,6,9]) [ for (ai in 0...3) curve[ai+i]]];
+        }return rez;
+    }
+    public static function beziercubic3D_derivativeparameters(curve:Array<Array<Float>>):Array<Array<Float>>{
+        var rez:Array<Array<Float>> = null;
+        var cl:Int = curve.length;
+        if ( cl == 4 && curve[0].length == 3 && vecXDfieldsamesize(curve)){
+            rez = [for (i in 0...3) [for (p in 0...4) curve[p][i]]];
+        }return rez;
+    }
+    public static function beziercubic_derivative(bcp:Array<Float>, p:Float):Float{
+        var rez:Float = null;
+        if (bcp.length == 4){
+            rez = 3 * (1 - p) * (1 - p) * (bcp[1] - bcp[0]) +
+            6 * (1 - p) * p * (bcp[2] - bcp[1]) +
+            3 * p * p * (bcp[3] - bcp[2]);
+        }return rez;
+    }
+    public static function beziercubic3D_derivative(curve:Array<Array<Float>>, p:Float):Array<Float>{
+        var rez:Array<Float> = null;
+        if (
+            curve.length == 4 &&
+            curve[0].length == 3 &&
+            vecXDfieldsamesize(curve)
+        ){
+            rez = [for (i in beziercubic3D_derivativeparameters(curve)) beziercubic_derivative(i, p)];
+        }return rez;
+    }
+    // next vector_projection_on_plane
 }
