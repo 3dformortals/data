@@ -717,5 +717,74 @@ class GeometryXD{
         return rez;
     }
     
-    // next recount_xyz_to_xy надо проверить может нельзя
+    public static function curve3Dbeziercubic(dot3D1:Array<Float>, vec3D1:Array<Float>, distance1:Float, dot3D2:Array<Float>, vec3D2:Array<Float>, distance2:Float):Array<Array<Float>>{
+        var rez:Array<Array<Float>> = null;
+        if (
+            !vecXDfieldsamesize([dot3D1, vec3D1, dot3D2, vec3D2]) ||
+            dot3D1.length != 3
+        ){ return rez; }
+        var r1:Array<Float> = dotXDoffset(dot3D1, vec3D1, distance1);
+        var r2:Array<Float> = dotXDoffset(dot3D2, vec3D2, distance2);
+        rez = [dot3D1, r1, r2, dot3D2];
+        return rez;
+    }
+    public static function arc3Dbeziercubic_3dots(dot3D0:Array<Float>, dot3D1:Array<Float>, dot3D2:Array<Float>, lever1:Float = 0.55, lever2:Float = 0.55, a_s:Int = -1):Array<Array<Float>>{
+        var rez:Array<Array<Float>> = null;
+        if (
+            !vecXDfieldsamesize([dot3D0, dot3D1, dot3D2]) ||
+            dot3D0.length != 3
+            ){ return rez; }
+        var v1:Array<Float> = vecXD(dot3D0.concat(dot3D1));
+        var v2:Array<Float> = vecXD(dot3D0.concat(dot3D2));
+        var v12:Array<Float> = vecXD(dot3D1.concat(dot3D2));
+        var t:Array<Float> = dotXDoffset(dot3D1, v12, vecXDmod(v12) / 2);
+        var v:Array<Float> = vecXD(dot3D0, t);
+        var r1:Float = null;
+        var r2:Float = null;
+        if (a_s < 0){
+            if (lever1 > 0){ r1 = dotXDoffset(dot3D1, v2, vecXDmod(v2) * lever1); }
+            else if (lever1 < 0){ r1 = dotXDoffset(dot3D1, v1, vecXDmod(v1) * lever1); }
+            else{ r1 = dot3D1; }
+            if (lever2 > 0){ r2 = dotXDoffset(dot3D2, v1, vecXDmod(v1) * lever2); }
+            else if (lever2 < 0){ r2 = dotXDoffset(dot3D2, v2, vecXDmod(v2) * lever2); }
+            else{ r2 = dot3D2; }
+        }else if (a_s > 0){
+            if (lever1 > 0){ r1 = dotXDoffset(dot3D1, v1, vecXDmod(v2) * lever1); }
+            else if (lever1 < 0){ r1 = dotXDoffset(dot3D1, v2, vecXDmod(v1) * lever1); }
+            else{ r1 = dot3D1; }
+            if (lever2 > 0){ r2 = dotXDoffset(dot3D2, v2, vecXDmod(v1) * lever2); }
+            else if (lever2 < 0){ r2 = dotXDoffset(dot3D2, v1, vecXDmod(v2) * lever2); }
+            else{ r2 = dot3D2; }
+        }else{
+            r1 = dotXDoffset(dot3D1, v, vecXDmod(v) * lever1);
+            r2 = dotXDoffset(dot3D2, v, vecXDmod(v) * lever2);
+        }rez = [dot3D1, r1, r2, dot3D2];
+        return rez;
+    }
+    public static function line3Dbeziercubic_2dots(dot3D0:Array<Float>, dot3D1:Array<Float>):Array<Array<Float>>{
+        var rez:Array<Array<Float>> = null;
+        if (
+            !vecXDsamesize(dot3D0, dot3D1) ||
+            dot3D0.length != 3
+        ){ return rez; }
+        var v:Array<Float> = vecXD(dot3D0.concat(dot3D1));
+        var lv:Float = vecXDmod(v);
+        var lever0:Array<Float> = dotXDoffset(dot3D0, v, lv * 1 / 3);
+        var lever1:Array<Float> = dotXDoffset(dot3D0, v, lv * 2 / 3);
+        rez = [dot3D0, lever0, lever1, dot3D1];
+        return rez;
+    }
+    public static function line3Dbeziercubic(dot3D:Array<Float>, vec3D:Array<Float>, distance:Float)Array<Array<Float>>{
+        rez:Array<Array<Float>> = null;
+        if(
+            distance == 0 ||
+            !vecXDsamesize(dot3D, vec3D) ||
+            dot3D.length != 3 ||
+            vecXDmod(vec3D) == 0
+        ){ return rez; }
+        rez = line3Dbeziercubic_2dots(dot3D, dotXDoffset(dot3D, vec3D, distance));
+        return rez;
+    }
+    
+    // next derivative  надо проверить может нельзя
 }
