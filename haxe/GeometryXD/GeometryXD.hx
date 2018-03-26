@@ -716,5 +716,6 @@ class GeometryXD{
         rez = dotXDoffset(dot3D, vec3D, radius * Math.random());
         return rez;
     }
+    
     // next recount_xyz_to_xy надо проверить может нельзя
 }
