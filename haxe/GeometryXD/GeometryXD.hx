@@ -468,12 +468,12 @@ class GeometryXD{
     }
     public static function vecXDparalleled_sameside(vecXDa:Array<Float>, vecXDb:Array<Float>):Bool{
         var rez:Bool = null;
-        if (vecXDa.length != vecXDb){ return rez; }
+        if (vecXDa.length != vecXDb.length){ return rez; }
         return vecXDsame(vecXDone(vecXDa), vecXDone(vecXDb));
     }
     public static function vecXDparalleled_opposite(vecXDa:Array<Float>, vecXDb:Array<Float>):Bool{
         var rez:Bool = null;
-        if (vecXDa.length != vecXDb){ return rez; }
+        if (vecXDa.length != vecXDb.length){ return rez; }
         return vecXDparalleled_sameside(vecXDa,vecXDback(vecXDb));
     }
     public static function vecXDparalleled(vecXDa:Array<Float>, vecXDb:Array<Float>):Bool{
@@ -754,8 +754,8 @@ class GeometryXD{
         var v12:Array<Float> = vecXD(dot3D1, dot3D2);
         var t:Array<Float> = dotXDoffset(dot3D1, v12, vecXDmod(v12) / 2);
         var v:Array<Float> = vecXD(dot3D0, t);
-        var r1:Float = null;
-        var r2:Float = null;
+        var r1:Array<Float> = null;
+        var r2:Array<Float> = null;
         if (a_s < 0){
             if (lever1 > 0){ r1 = dotXDoffset(dot3D1, v2, vecXDmod(v2) * lever1); }
             else if (lever1 < 0){ r1 = dotXDoffset(dot3D1, v1, vecXDmod(v1) * lever1); }
@@ -789,8 +789,8 @@ class GeometryXD{
         rez = [dot3D0, lever0, lever1, dot3D1];
         return rez;
     }
-    public static function line3Dbeziercubic(dot3D:Array<Float>, vec3D:Array<Float>, distance:Float)Array<Array<Float>>{
-        rez:Array<Array<Float>> = null;
+    public static function line3Dbeziercubic(dot3D:Array<Float>, vec3D:Array<Float>, distance:Float):Array<Array<Float>>{
+        var rez:Array<Array<Float>> = null;
         if(
             distance == 0 ||
             !vecXDsamesize(dot3D, vec3D) ||
@@ -849,8 +849,8 @@ class GeometryXD{
         var vp:Array<Float> = [for (i in 0...3) plane3D[i]];
         if(
             vecXDparalleled(vec3D, vp) ||
-            (vecXDmod(vec3D) == 0 ||
-            vecXDmod(vp)) == 0
+            vecXDmod(vec3D) == 0 ||
+            vecXDmod(vp) == 0
             ){ return rez; }
         rez = vec3D;
         var t0:Array<Float> = [0,0,0];
