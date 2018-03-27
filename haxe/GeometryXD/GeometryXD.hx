@@ -400,12 +400,15 @@ class GeometryXD{
         for (i in vecXD){if (Math.abs(i) > Math.abs(rez)){rez = i;}}
         return rez;
     }
-    public static function vecXD(dotdot:Array<Float>):Array<Float>{
-        var vecXD:Array<Float> = [];
-        for (i in 0...Std.int(dotdot.length / 2)){
-            vecXD.push( dotdot[i + Std.int(dotdot.length / 2)] - dotdot[i] );
-        }
-        return vecXD;
+    public static function vecXD(dot3Da:Array<Float>, dot3Db:Array<Float>):Array<Float>{
+        var rez:Array<Float> = null;
+        if (
+            !vecXDsamesize(dot3Da, dot3Db) ||
+            vecXDsame(dot3Da, dot3Db)
+            ){ return rez; }
+        rez = [];
+        for (i in 0...dot3Da.length){ rez.push(dot3Db[i] - dot3Da[i]); }
+        return rez;
     }
     public static function vecXDone(vecXD:Array<Float>):Array<Float>{
         var rez:Array<Float> = [];
@@ -418,9 +421,7 @@ class GeometryXD{
     }
     public static function vecXDfield(dots:Array<Array<Float>>):Array<Array<Float>>{
         var rez:Array<Array<Float>> = [];
-        for (i in 1...dots.length){
-            rez.push(vecXD(dots[0].concat(dots[i])));
-        }
+        for (i in 1...dots.length){ rez.push(vecXD(dots[0], dots[i])); }
         return rez;
     }
     public static function vecXDsame(vecXDa:Array<Float>,vecXDb:Array<Float>):Bool{
@@ -465,6 +466,20 @@ class GeometryXD{
     public static function vecXDfieldback(vecXDfield:Array<Array<Float>>):Array<Array<Float>>{
         return [for (i in 0...vecXDfield.length) vecXDback(vecXDfield[i])];
     }
+    public static function vecXDparalleled_sameside(vecXDa:Array<Float>, vecXDb:Array<Float>):Bool{
+        var rez:Bool = null;
+        if (vecXDa.length != vecXDb){ return rez; }
+        return vecXDsame(vecXDone(vecXDa), vecXDone(vecXDb));
+    }
+    public static function vecXDparalleled_opposite(vecXDa:Array<Float>, vecXDb:Array<Float>):Bool{
+        var rez:Bool = null;
+        if (vecXDa.length != vecXDb){ return rez; }
+        return vecXDparalleled_sameside(vecXDa,vecXDback(vecXDb));
+    }
+    public static function vecXDparalleled(vecXDa:Array<Float>, vecXDb:Array<Float>):Bool{
+        return vecXDparalleled_sameside(vecXDa, vecXDb) || vecXDparalleled_opposite(vecXDa, vecXDb);
+    }
+    
     public static function vecXDscalar(vecXDa:Array<Float>, vecXDb:Array<Float>):Float{
         var rez:Float = null;
         if (vecXDa.length == vecXDb.length){
@@ -607,7 +622,7 @@ class GeometryXD{
         var rez:Array<Float> = null;
         var sdot:Array<Float> = [for(i in 0...dotXD.length) dotXD[i] * scaleXD[i]];
         var stc:Array<Float> = [for(i in 0...dotXD.length) dotXDc[i] * scaleXD[i]];
-        var vec:Array<Float> = vecXD(stc.concat(dotXDc));
+        var vec:Array<Float> = vecXD(stc, dotXDc);
         rez = dotXDoffset(sdot,vec,vecXDmod(vec));
         return rez;
     }
@@ -622,10 +637,10 @@ class GeometryXD{
         var vc:Array<Float> = vec3Dnormal(vb, vec3Daxis);
         var t0:Array<Float> = dotXDoffset(t, vec3Daxis, vecXDmod(vec3D) * vecXDcos(vec3Daxis, vec3D));
         var t1:Array<Float> = vec3D;
-        var v:Array<Float> = vecXD(t0.concat(t1));
+        var v:Array<Float> = vecXD(t0, t1);
         t1 = dotXDoffset(t0, vb, vecXDmod(v) * Math.sin(angle));
         t1 = dotXDoffset(t1, vc, vecXDmod(v) * Math.cos(angle));
-        rez = vecXD(t.concat(t1));
+        rez = vecXD(t, t1);
         return rez;
     }
     public static function dot3Drotate(dot3D:Array<Float>, dot3Dc:Array<Float>, vec3D:Array<Float>, angle:Float, rad:Bool = false):Array<Float>{
@@ -636,7 +651,7 @@ class GeometryXD{
             vecXDsame(dot3D, dot3Dc) ||
             angle == 0
             ) { return rez; }
-        var vdot:Array<Float> = vecXD(dot3Dc.concat(dot3D));
+        var vdot:Array<Float> = vecXD(dot3Dc, dot3D);
         var d:Float = vecXDmod(vdot);
         vdot = vec3Drotate(vdot, vec3D, angle, rad);
         rez = dotXDoffset(dot3Dc, vdot, d);
@@ -669,8 +684,8 @@ class GeometryXD{
             ){ return rez; }
         rez = plane3D_dot_vec_vec(
             dot3D,
-            vecXD(dot3D.concat(dot3Da)),
-            vecXD(dot3D.concat(dot3Db))
+            vecXD(dot3D, dot3Da),
+            vecXD(dot3D, dot3Db)
         );
         return rez;
     }
@@ -680,7 +695,7 @@ class GeometryXD{
             !vecXDsamesize(dot3D, dot3Da) ||
             vecXDsame(dot3D, dot3Da)
         ){ return rez; }
-        rez = plane3D_dot_normal(dot3D, vecXD(dot3D.concat(dot3Da)));
+        rez = plane3D_dot_normal(dot3D, vecXD(dot3D, dot3Da));
         return rez;
     }
     public static function distance3D_dot_plane(dot3D:Array<Float>, plane3D:Array<Float>):Float{
@@ -701,7 +716,7 @@ class GeometryXD{
             t1 = [];
             for (i in 0...3){t1.push(t0[i] + Math.random() - 0.5);}
             t1 = dot3Dprojection_on_plane(t1, plane3D);
-        }rez = vecXD(t0.concat(t1));
+        }rez = vecXD(t0, t1);
         return rez;
     }
     public static function random3D_dot_in_plane(plane3D:Array<Float>, dot3D:Array<Float>, radius:Float):Array<Float>{
@@ -734,9 +749,9 @@ class GeometryXD{
             !vecXDfieldsamesize([dot3D0, dot3D1, dot3D2]) ||
             dot3D0.length != 3
             ){ return rez; }
-        var v1:Array<Float> = vecXD(dot3D0.concat(dot3D1));
-        var v2:Array<Float> = vecXD(dot3D0.concat(dot3D2));
-        var v12:Array<Float> = vecXD(dot3D1.concat(dot3D2));
+        var v1:Array<Float> = vecXD(dot3D0, dot3D1);
+        var v2:Array<Float> = vecXD(dot3D0, dot3D2);
+        var v12:Array<Float> = vecXD(dot3D1, dot3D2);
         var t:Array<Float> = dotXDoffset(dot3D1, v12, vecXDmod(v12) / 2);
         var v:Array<Float> = vecXD(dot3D0, t);
         var r1:Float = null;
@@ -767,7 +782,7 @@ class GeometryXD{
             !vecXDsamesize(dot3D0, dot3D1) ||
             dot3D0.length != 3
         ){ return rez; }
-        var v:Array<Float> = vecXD(dot3D0.concat(dot3D1));
+        var v:Array<Float> = vecXD(dot3D0, dot3D1);
         var lv:Float = vecXDmod(v);
         var lever0:Array<Float> = dotXDoffset(dot3D0, v, lv * 1 / 3);
         var lever1:Array<Float> = dotXDoffset(dot3D0, v, lv * 2 / 3);
@@ -826,5 +841,24 @@ class GeometryXD{
             rez = [for (i in beziercubic3D_derivativeparameters(curve)) beziercubic_derivative(i, p)];
         }return rez;
     }
-    // next vector_projection_on_plane
+    public static function vec3Dprojection_on_plane(vec3D:Array<Float>, plane3D:Array<Float>){
+        var rez:Array<Float> = null;
+        if (vec3D.length != 3 || plane3D.length != 4){
+            return rez;
+        }
+        var vp:Array<Float> = [for (i in 0...3) plane3D[i]];
+        if(
+            vecXDparalleled(vec3D, vp) ||
+            (vecXDmod(vec3D) == 0 ||
+            vecXDmod(vp)) == 0
+            ){ return rez; }
+        rez = vec3D;
+        var t0:Array<Float> = [0,0,0];
+        var t1:Array<Float> = dotXDoffset(t0, vec3D, 1);
+        t1 = dot3Dprojection_on_plane(t1, plane3D);
+        rez = vecXD(t0, t1);
+        return rez;
+    }
+    
+    // next ugol_vector_vector_znak
 }
