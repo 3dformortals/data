@@ -551,7 +551,7 @@ class GeometryXD{
             return rez;
         }else{return dotXD;}
     }
-    public static function dot3Dline_x_plane(dot3D0:Array<Float>, vec3D0:Array<Float>, vec3Dplane:Array<Float>, dplane:Float = 0):Array<Float>{
+    public static function dot3Dline3D_x_plane3D(dot3D0:Array<Float>, vec3D0:Array<Float>, vec3Dplane:Array<Float>, dplane:Float = 0):Array<Float>{
         var rez:Array<Float> = null;
         var ldot:Int = dot3D0.length;
         var lvec:Int = vec3D0.length;
@@ -576,7 +576,7 @@ class GeometryXD{
             }
         }return rez;
     }
-    public static function dot3Dprojection_on_plane(dot3D:Array<Float>, plane3D:Array<Float>):Array<Float>{
+    public static function projection_dot3D_on_plane3D(dot3D:Array<Float>, plane3D:Array<Float>):Array<Float>{
         var rez:Array<Float> = null;
         var ldot:Int = dot3D.length;
         var lplane:Int = plane3D.length;
@@ -657,7 +657,7 @@ class GeometryXD{
         rez = dotXDoffset(dot3Dc, vdot, d);
         return rez;
     }
-    public static function plane3D_dot_normal(dot3D:Array<Float>, vec3D:Array<Float>):Array<Float>{
+    public static function plane3D_dot3Dnormal(dot3D:Array<Float>, vec3D:Array<Float>):Array<Float>{
         var rez:Array<Float> = null;
         if (vecXDmod(vec3D) == 0){ return rez; }
         var d:Float = - multisum_xF([vec3D, dot3D]);
@@ -671,7 +671,7 @@ class GeometryXD{
             vecXDmod(vec3Da) == 0 ||
             vecXDmod(vec3Db) == 0
         ){ return rez; }
-        rez = plane3D_dot_normal(dot3D, vec3Dnormal(vec3Da, vec3Db));
+        rez = plane3D_dot3Dnormal(dot3D, vec3Dnormal(vec3Da, vec3Db));
         return rez;
     }
     public static function plane3D_3dots(dot3D:Array<Float>, dot3Da:Array<Float>, dot3Db:Array<Float>):Array<Float>{
@@ -695,10 +695,10 @@ class GeometryXD{
             !vecXDsamesize(dot3D, dot3Da) ||
             vecXDsame(dot3D, dot3Da)
         ){ return rez; }
-        rez = plane3D_dot_normal(dot3D, vecXD(dot3D, dot3Da));
+        rez = plane3D_dot3Dnormal(dot3D, vecXD(dot3D, dot3Da));
         return rez;
     }
-    public static function distance3D_dot_plane(dot3D:Array<Float>, plane3D:Array<Float>):Float{
+    public static function distance_dot3D_plane3D(dot3D:Array<Float>, plane3D:Array<Float>):Float{
         var rez:Float = null;
         if (vecXDmod(plane3D.slice(0,3)) == 0) { return rez; }
         rez = Math.abs(
@@ -706,20 +706,20 @@ class GeometryXD{
         ) / vecXDmod(plane3D.slice(0,3));
         return rez;
     }
-    public static function random3D_vec_in_plane(plane3D:Array<Float>):Array<Float>{
+    public static function random_vec3D_in_plane3D(plane3D:Array<Float>):Array<Float>{
         var rez:Array<Float> = null;
         if (vecXDmod(plane3D.slice(0,3)) == 0){ return rez; }
         var t0:Array<Float> = vecXDrandom(3);
-        t0 = dot3Dprojection_on_plane(t0, plane3D);
+        t0 = projection_dot3D_on_plane3D(t0, plane3D);
         var t1:Array<Float> = t0;
         while (vecXDsame(t0, t1)){
             t1 = [];
             for (i in 0...3){t1.push(t0[i] + Math.random() - 0.5);}
-            t1 = dot3Dprojection_on_plane(t1, plane3D);
+            t1 = projection_dot3D_on_plane3D(t1, plane3D);
         }rez = vecXD(t0, t1);
         return rez;
     }
-    public static function random3D_dot_in_plane(plane3D:Array<Float>, dot3D:Array<Float>, radius:Float):Array<Float>{
+    public static function random_dot3D_in_plane3D(plane3D:Array<Float>, dot3D:Array<Float>, radius:Float):Array<Float>{
         var rez:Array<Float> = null;
         if (
             plane3D.length != 4 ||
@@ -727,7 +727,7 @@ class GeometryXD{
         ){ return rez; }
         rez = dot3D;
         if (radius == 0){ return rez; }
-        var vec3D:Array<Float> = random3D_vec_in_plane(plane3D);
+        var vec3D:Array<Float> = random_vec3D_in_plane3D(plane3D);
         rez = dotXDoffset(dot3D, vec3D, radius * Math.random());
         return rez;
     }
@@ -743,7 +743,7 @@ class GeometryXD{
         rez = [dot3D1, r1, r2, dot3D2];
         return rez;
     }
-    public static function arc3Dbeziercubic_3dots(dot3D0:Array<Float>, dot3D1:Array<Float>, dot3D2:Array<Float>, lever1:Float = 0.55, lever2:Float = 0.55, a_s:Int = -1):Array<Array<Float>>{
+    public static function curve3Dbeziercubic_3dots(dot3D0:Array<Float>, dot3D1:Array<Float>, dot3D2:Array<Float>, lever1:Float = 0.55, lever2:Float = 0.55, a_s:Int = -1):Array<Array<Float>>{
         var rez:Array<Array<Float>> = null;
         if (
             !vecXDfieldsamesize([dot3D0, dot3D1, dot3D2]) ||
@@ -800,7 +800,7 @@ class GeometryXD{
         rez = line3Dbeziercubic_2dots(dot3D, dotXDoffset(dot3D, vec3D, distance));
         return rez;
     }
-    public static function beziercubic3D_12coordinates(curve:Array<Array<Float>>):Array<Float>{
+    public static function beziercubic3D_4to12(curve:Array<Array<Float>>):Array<Float>{
         var rez:Array<Float> = null;
         if (
             curve.length == 4 &&
@@ -810,7 +810,7 @@ class GeometryXD{
             rez = [for (i in 0...4) for (ai in 0...3) curve[i][ai]];
         }return rez;
     }
-    public static function beziercubic3D_4dots(curve:Array<Float>):Array<Array<Float>>{
+    public static function beziercubic3D_12to4(curve:Array<Float>):Array<Array<Float>>{
         var rez:Array<Array<Float>> = null;
         if (curve.length == 12){
             rez = [for (i in [0,3,6,9]) [ for (ai in 0...3) curve[ai+i]]];
@@ -841,7 +841,7 @@ class GeometryXD{
             rez = [for (i in beziercubic3D_derivativeparameters(curve)) beziercubic_derivative(i, p)];
         }return rez;
     }
-    public static function vec3Dprojection_on_plane(vec3D:Array<Float>, plane3D:Array<Float>){
+    public static function projection_vec3D_on_plane3D(vec3D:Array<Float>, plane3D:Array<Float>){
         var rez:Array<Float> = null;
         if (vec3D.length != 3 || plane3D.length != 4){
             return rez;
@@ -855,10 +855,33 @@ class GeometryXD{
         rez = vec3D;
         var t0:Array<Float> = [0,0,0];
         var t1:Array<Float> = dotXDoffset(t0, vec3D, 1);
-        t1 = dot3Dprojection_on_plane(t1, plane3D);
+        t1 = projection_dot3D_on_plane3D(t1, plane3D);
         rez = vecXD(t0, t1);
         return rez;
     }
-    
+    public static function angle_vec3Dvec3D_projection_on_plane3D(vec3D1:Array<Float>, vec3D2:Array<Float>, plane3D:Array<Float>, rad:Bool = false):Float{
+        var rez:Float = null;
+        var v1:Array<Float> = vec3D1;
+        var v2:Array<Float> = vec3D2;
+        var v1l:Int = v1.length;
+        var v2l:Int = v2.length;
+        var v1mod:Float = vecXDmod(v1);
+        var v2mod:Float = vecXDmod(v2);
+        if ( v1l != 3 || v2l != 3 || v1mod == 0 || v2mod == 0){ return rez; }
+        var p:Array<Float> = plane3D;
+        if (p.length < 3){ return rez; }
+        var vn:Array<Float> = [for (i in 0...3) p[i]];
+        if ( vecXDmod(vn) == 0 ){ return rez; }
+        rez = 0;
+        if (vecXDparalleled_sameside(v1, v2)){ return rez;}
+        var pv1:Array<Float> = projection_vec3D_on_plane3D(v1, vn);
+        var pv2:Array<Float> = projection_vec3D_on_plane3D(v2, vn);
+        var pvn:Array<Float> = (vecXDparalleled(pv1, pv2)) ? vn : vec3Dnormal(pv1, pv2);
+        var uvnpvn:Float = vecXDangle(vn, pvn, rad);
+        var uvv:Float = vecXDangle(v1, v2, rad);
+        var uznak:Float = (rad) ? radians(90) : 90;
+        rez = (uvnpvn > uznak) ? -uvv : uvv;
+        return rez;
+    }
     // next ugol_vector_vector_znak
 }
