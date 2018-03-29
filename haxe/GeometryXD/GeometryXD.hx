@@ -903,7 +903,7 @@ class GeometryXD{
         c[2] = beziercubic3Ddot(c, 2 / 3);
         return c;
     }
-    public static function ellipse2Ddot(angle:Float, semiaxis_a_ox:Float, semiaxis_b_oy:Float, rad:Bool):Array<Float>{
+    public static function ellipse2Ddot(angle:Float, semiaxis_a_ox:Float, semiaxis_b_oy:Float, rad:Bool = false):Array<Float>{
         var u:Float = angle;
         var a:Float = semiaxis_a_ox;
         var b:Float = semiaxis_b_oy;
@@ -915,7 +915,7 @@ class GeometryXD{
         angle1:Float,
         semiaxis_a_ox:Float,
         semiaxis_b_oy:Float,
-        rad:Bool
+        rad:Bool = false
     ):Array<Array<Float>>{
         var rez:Array<Array<Float>> = null;
         var a0:Float = (rad) ? degrees(angle0) : angle0;
@@ -926,7 +926,7 @@ class GeometryXD{
         var du:Float = a1 - a0;
         var ae:Float = semiaxis_a_ox;
         var be:Float = semiaxis_b_oy;
-        rez = [for (a in [a0, a0 + du / 3, a0 + du * 2 / 3, a0 + du]) ellipse2Ddot(a, ae, be)];
+        rez = [for (a in [a0, a0 + du / 3, a0 + du * 2 / 3, a0 + du]) ellipse2Ddot(a, ae, be, rad)];
         return rez;
     }
     public static function beziercubic3D_elliptic_shape_restricted_to_quarter(
@@ -937,15 +937,18 @@ class GeometryXD{
         semiaxis_b_oy:Float,
         angle0:Float,
         angle1:Float,
-        rad:Bool
+        rad:Bool = false
     ):Array<Array<Float>>{
         var rez:Array<Array<Float>> = null;
         var tc:Array<Float> = dot3Dc;
         var va:Array<Float> = vec3D_a_ox;
         var vb:Array<Float> = vec3D_b_ox;
+        var a:Float = semiaxis_a_ox;
+        var b:Float = semiaxis_b_oy;
         var dxdy:Array<Array<Float>> = curve2D_4dots_elliptic_shape_restricted_to_quarter(angle0, angle1, a, b, rad);
         rez = [for (i in dxdy) dotXDoffset(dotXDoffset(tc, va, i[0]), vb, i[1])];
         rez = beziercubic3D_follow_4dots_trajectory(rez);
+        return rez;
     }
     //next ugol_duga_ellips_xy_counter
     
