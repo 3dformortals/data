@@ -732,6 +732,7 @@ class GeometryXD{
         return rez;
     }
     
+    
     public static function curve3Dbeziercubic(dot3D1:Array<Float>, vec3D1:Array<Float>, distance1:Float, dot3D2:Array<Float>, vec3D2:Array<Float>, distance2:Float):Array<Array<Float>>{
         var rez:Array<Array<Float>> = null;
         if (
@@ -841,6 +842,46 @@ class GeometryXD{
             rez = [for (i in beziercubic3D_derivativeparameters(curve)) beziercubic_derivative(i, p)];
         }return rez;
     }
+    public static function beziercubic_support_dot_one(beziercubic_one_axis_coordinates:Array<Float>):Float{
+        var c:Array<Float> = beziercubic_one_axis_coordinates;
+        var rez:Float = null;
+        if (c.length != 4){ return rez;}
+        return (-5 * c[0] + 18 * c[1] - 9 * c[2] + 2 * c[3]) / 6;
+    }
+    public static function beziercubic3D_support_dot_one(curve3D_4dots:Array<Array<Float>>):Array<Float>{
+        var rez:Array<Float> = null;
+        var c:Array<Array<Float>> = curve3D_4dots;
+        if (c.length != 4 || !vecXDfieldsamesize(c)){ return rez; }
+        rez = [for (i in beziercubic3D_derivativeparameters(c)) beziercubic_support_dot_one(i)];
+        return rez;
+    }
+    public static function beziercubic_support_dot_two(beziercubic_one_axis_coordinates:Array<Float>):Float{
+        var c:Array<Float> = beziercubic_one_axis_coordinates;
+        var rez:Float = null;
+        if (c.length != 4){ return rez;}
+        return (2 * c[0] - 9 * c[1] + 18 * c[2] - 5 * c[3]) / 6;
+    }
+    public static function beziercubic3D_support_dot_two(curve3D_4dots:Array<Array<Float>>):Array<Float>{
+        var rez:Array<Float> = null;
+        var c:Array<Array<Float>> = curve3D_4dots;
+        if (c.length != 4 || !vecXDfieldsamesize(c)){ return rez; }
+        rez = [for (i in beziercubic3D_derivativeparameters(c)) beziercubic_support_dot_two(i)];
+        return rez;
+    }
+    public static function beziercubic3D_follow_4dots_trajectory(dots:Array<Array<Float>>):Array<Array<Float>>{
+        var rez:Array<Array<Float>> = null;
+        if (dots.length != 4 || !vecXDfieldsamesize(dots)){ return rez; }
+        var dot_one:Array<Float> = beziercubic3D_support_dot_one(dots);
+        var dot_two:Array<Float> = beziercubic3D_support_dot_two(dots);
+        rez = [dots[0], dot_one, dot_two, dots[3]];
+        return rez;
+    }
+    public static function beziercubic_coordinate(beziercubic_one_axis_coordinates:Array<Float>):Float{
+        var rez:Float = null;
+        var c:Array<Float> = beziercubic_one_axis_coordinates;
+        
+    }
+    
     public static function projection_vec3D_on_plane3D(vec3D:Array<Float>, plane3D:Array<Float>){
         var rez:Array<Float> = null;
         if (vec3D.length != 3 || plane3D.length != 4){
@@ -883,5 +924,5 @@ class GeometryXD{
         rez = (uvnpvn > uznak) ? -uvv : uvv;
         return rez;
     }
-    // next ugol_vector_vector_znak
+    // ugol_vector_vector_znak -> angle_vec3Dvec3D_projection_on_plane3D
 }
