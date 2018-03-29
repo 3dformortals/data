@@ -950,6 +950,31 @@ class GeometryXD{
         rez = beziercubic3D_follow_4dots_trajectory(rez);
         return rez;
     }
+    public static function angle_required_to_place_curve_on_ellipse(
+        curve_length:Float,
+        semiaxis_a_ox:Float,
+        semiaxis_b_oy:Float,
+        angle0:Float,
+        rad:Bool = false
+    ):Float{
+        var rez:Float = null;
+        var cl:Float = curve_length;
+        var a:Float = semiaxis_a_ox;
+        var b:Float = semiaxis_b_oy;
+        var u:Float = angle0;
+        var le:Float = 0;
+        var xy:Array<Float> = null;
+        if (cl > 0 && a > 0 && b > 0){
+            var xy0:Array<Float> = ellipse2Ddot(u, a, b, rad);
+            if (rad){ u = degrees(u);}
+            for (ue in 1...361){
+                xy = ellipse2Ddot(u + ue, a, b);
+                le += vecXDmod(vecXD(xy0, xy));
+                if (le >= cl){ return (rad) ? radians(ue) : ue; }
+                xy0 = xy;
+            }rez = (rad) ? radians(360) : 360;
+        }return rez;
+    }
     //next ugol_duga_ellips_xy_counter
     
     
