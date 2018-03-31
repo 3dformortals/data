@@ -1083,18 +1083,19 @@ class GeometryXD{
     polygon3D_vec3Dfield_distance(
         dot3D:Array<Float>,
         vec3Dfield:Array<Array<Float>>,
-        distances:Array<Float>,
-        angle_proportions:Array<Float>
+        distances:Array<Float>
     ):Array<Array<Float>>{
         var rez:Array<Array<Float>> = null;
         if (
             dot3D.length != 3 ||
             !vecXDfieldsamesize(vec3Dfield) ||
-            vec3Dfield.length != distance.length ||
-            vec3Dfield.length != angle_proportions.length ||
+            vec3Dfield.length != distances.length ||
             vec3Dfield.length[0] != 3
         ){ return rez; }
-        
+        rez = [];
+        for (i in 0...vec3Dfield){
+            rez.push(dotXDoffset(dot3D, vec3Dfield[i], distances[i]));
+        }return rez;
     }
     polygon3D_in_plane()
     
