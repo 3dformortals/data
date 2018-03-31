@@ -4,28 +4,28 @@ class GeometryXD{
     public static function main(){trace("GeometryXD");}
     
     public static function positive_inside_I(a:Array<Int>):Bool{
-        for (i in a){ if (a > 0){ return true; } }
+        for (i in a){ if (i > 0){ return true; } }
         return false;
     }
     public static function zero_inside_I(a:Array<Int>):Bool{
-        for (i in a){ if (a == 0){ return true; } }
+        for (i in a){ if (i == 0){ return true; } }
         return false;
     }
     public static function negative_inside_I(a:Array<Int>):Bool{
-        for (i in a){ if (a < 0){ return true; } }
+        for (i in a){ if (i < 0){ return true; } }
         return false;
     }
     
     public static function positive_inside_F(a:Array<Float>):Bool{
-        for (i in a){ if (a > 0){ return true; } }
+        for (i in a){ if (i > 0){ return true; } }
         return false;
     }
     public static function zero_inside_F(a:Array<Float>):Bool{
-        for (i in a){ if (a == 0){ return true; } }
+        for (i in a){ if (i == 0){ return true; } }
         return false;
     }
     public static function negative_inside_F(a:Array<Float>):Bool{
-        for (i in a){ if (a < 0){ return true; } }
+        for (i in a){ if (i < 0){ return true; } }
         return false;
     }
     
@@ -939,22 +939,21 @@ class GeometryXD{
             !vecXDfieldsamesize(vec3Dsemiaxes) ||
             semiaxes.length != 4
         ){ return rez; }
-        rez = [];
         var t0:Array<Float> = dot3D;
         var va:Array<Float> = vec3Dsemiaxes[0];
         var vb:Array<Float> = vec3Dsemiaxes[1];
         var vad:Array<Float> = vec3Dsemiaxes[2];
         var vbd:Array<Float> = vec3Dsemiaxes[3];
-        var a:Array<Float> = semiaxes[0];
-        var b:Array<Float> = semiaxes[1];
-        var ad:Array<Float> = semiaxes[2];
-        var bd:Array<Float> = semiaxes[3];
+        var a:Float = semiaxes[0];
+        var b:Float = semiaxes[1];
+        var ad:Float = semiaxes[2];
+        var bd:Float = semiaxes[3];
         var cos45:Float = Math.cos(radians(45));
         var v:Array<Array<Float>> = [va,vb,vad,vbd];
         var d:Array<Float> = [a*cos45,b*cos45,ad*cos45,bd*cos45];
         var vv:Array<Array<Float>> = [vb,vad,vbd,va];
         var dd:Array<Float> = [b*cos45,ad*cos45,bd*cos45,a*cos45];
-        rez.push(t0);
+        rez = [t0];
         for (i in 0...4){
             rez.push(dotXDoffset(t0, vec3Dsemiaxes[i], semiaxes[i]));
             rez.push(dotXDoffset(dotXDoffset(t0, v[i], d[i]), vv[i], dd[i]));
@@ -1033,13 +1032,13 @@ class GeometryXD{
             }rez = (rad) ? radians(360) : 360;
         }return rez;
     }
-    polygon3D_inside_ellipse(
+    public static function polygon3D_inside_ellipse(
         dot3D:Array<Float>,
         vec3Dsemiaxes:Array<Array<Float>>,
         semiaxes:Array<Float>,
         angle_proportions:Array<Float>
         ):Array<Array<Float>>{
-            var rez:Array<Array<Float>> = null;
+        var rez:Array<Array<Float>> = null;
         if(
             dot3D.length != 3 ||
             vec3Dsemiaxes.length != 4 ||
@@ -1049,16 +1048,15 @@ class GeometryXD{
             negative_inside_F(angle_proportions) ||
             sum_F(angle_proportions) == 0
         ){ return rez; }
-        rez = [];
         var t0:Array<Float> = dot3D;
         var va:Array<Float> = vec3Dsemiaxes[0];
         var vb:Array<Float> = vec3Dsemiaxes[1];
         var vad:Array<Float> = vec3Dsemiaxes[2];
         var vbd:Array<Float> = vec3Dsemiaxes[3];
-        var a:Array<Float> = semiaxes[0];
-        var b:Array<Float> = semiaxes[1];
-        var ad:Array<Float> = semiaxes[2];
-        var bd:Array<Float> = semiaxes[3];
+        var a:Float = semiaxes[0];
+        var b:Float = semiaxes[1];
+        var ad:Float = semiaxes[2];
+        var bd:Float = semiaxes[3];
         var doli:Array<Float> = angle_proportions;
         var u:Float = 0;
         var x:Float = 360 / sum_F(doli);
@@ -1070,8 +1068,9 @@ class GeometryXD{
         var d:Float;
         var vv:Array<Float>;
         var dd:Float;
+        rez = [t0];
         for (i in doli){
-            axis_a = va; dlina_a = a; axis_b = vb; alina_b = b;
+            axis_a = va; dlina_a = a; axis_b = vb; dlina_b = b;
             u += i * x;
             if (u > 90 && u <= 270){ axis_a = vad; dlina_a = ad; }
             if (u > 180){ axis_b = vbd; dlina_b = bd;}
@@ -1080,7 +1079,7 @@ class GeometryXD{
             rez.push(dotXDoffset(dotXDoffset(t0, v, d), vv, dd));
         }return rez;
     }
-    polygon3D_vec3Dfield_distance(
+    public static function polygon3D_vec3Dfield_distance(
         dot3D:Array<Float>,
         vec3Dfield:Array<Array<Float>>,
         distances:Array<Float>
@@ -1090,14 +1089,40 @@ class GeometryXD{
             dot3D.length != 3 ||
             !vecXDfieldsamesize(vec3Dfield) ||
             vec3Dfield.length != distances.length ||
-            vec3Dfield.length[0] != 3
+            vec3Dfield[0].length != 3
         ){ return rez; }
-        rez = [];
-        for (i in 0...vec3Dfield){
+        rez = [dot3D];
+        for (i in 0...vec3Dfield.length){
             rez.push(dotXDoffset(dot3D, vec3Dfield[i], distances[i]));
         }return rez;
     }
-    polygon3D_in_plane()
+    public static function polygon3D_in_plane(
+        dot3D:Array<Float>,
+        vec3Dplane_normal:Array<Float>,
+        vec3Dsemiaxis_a_direction:Array<Float>,
+        angle_proportions:Array<Float>,
+        distances:Array<Float>
+    ):Array<Array<Float>>{
+        var rez:Array<Array<Float>> = null;
+        var t:Array<Float> = dot3D;
+        var vn:Array<Float> = vec3Dplane_normal;
+        var va:Array<Float> = vec3Dsemiaxis_a_direction;
+        var ap:Array<Float> = angle_proportions;
+        var d:Array<Float> = distances;
+        if (
+            t.length != 3 ||
+            vn.length != 3 ||
+            va.length != 3 ||
+            ap.length != d.length ||
+            vecXDparalleled(va, vn)
+        ){ return rez; }
+        var x:Float = 360 / sum_F(ap);
+        va = projection_vec3D_on_plane3D(va, [vn[0], vn[1], vn[2], 0]);
+        rez = [t];
+        for (i in 0...d.length){
+            rez.push( dotXDoffset( t, vec3Drotate(va, vn, x * ap[i]), distances[i] ) );
+        }return rez;
+    }
     
     
     public static function projection_vec3D_on_plane3D(vec3D:Array<Float>, plane3D:Array<Float>){
