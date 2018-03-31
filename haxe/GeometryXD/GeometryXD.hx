@@ -929,8 +929,68 @@ class GeometryXD{
         c[2] = beziercubic3Ddot(c, 2 / 3);
         return c;
     }
+    public static function curve3Doffset(
+        curve3D:Array<Array<Float>>,
+        vec3D:Array<Float>,
+        distance:Float
+    ):Array<Array<Float>>{
+        var rez:Array<Array<Float>> = null;
+        if (
+            curve3D.length != 4 ||
+            curve3D[0].length != 3 ||
+            !vecXDfieldsamesize(curve3D) ||
+            vec3D.length != 3
+        ){ return rez; }
+        return [for (i in curve3D) dotXDoffset(i, vec3D, distance)];
+    }
+    public static function curve3Drotate(
+        curve3D:Array<Array<Float>>,
+        dot3D:Array<Float>,
+        vec3D:Array<Float>,
+        angle:Float,
+        rad:Bool = false
+    ):Array<Array<Float>>{
+        var rez:Array<Array<Float>> = null;
+        if (
+            curve3D.length != 4 ||
+            curve3D[0].length != 3 ||
+            !vecXDfieldsamesize(curve3D) ||
+            dot3D.length != 3 ||
+            vec3D.length != 3 ||
+            vecXDmod(vec3D) == 0
+        ){ return rez; }
+        if (angle == 0){return curve3D;}
+        return [for (i in curve3D) dot3Drotate(i, dot3D, vec3D, angle, rad)];
+    }
+    public static function curve3Dscale(
+        curve3D:Array<Array<Float>>,
+        scale_xyz:Array<Float>,
+        dot3D:Array<Float>
+    ):Array<Array<Float>>{
+        var rez:Array<Array<Float>> = null;
+        if (
+            curve3D.length != 4 ||
+            curve3D[0].length != 3 ||
+            !vecXDfieldsamesize(curve3D) ||
+            dot3D.length != 3 ||
+            scale_xyz.length != 3
+        ){ return rez; }
+        if (vecXDmod(scale_xyz) == 0){return [for (i in 0...4) [0,0,0]];}
+        return [for (i in curve3D) dotXDscale(i, scale_xyz, dot3D)];
+    }
+    
     
     //ellipse section
+    public static function ellipse2Dperimeter_ramanujan(
+        semiaxis_a:Float,
+        semiaxis_b:Float
+    ):Float{
+        var rez:Float = null;
+        var a:Float = semiaxis_a;
+        var b:Float = semiaxis_b;
+        if (a < 0 || b < 0){ return rez; }
+        return Math.PI * (3 * (a + b) - Math.sqrt((3 * a + b) * (a + 3 * b)));
+    }
     public static function ellipse3D_dots(dot3D:Array<Float>, vec3Dsemiaxes:Array<Array<Float>>, semiaxes:Array<Float>):Array<Array<Float>>{
         var rez:Array<Array<Float>> = null;
         if(
