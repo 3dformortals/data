@@ -1027,7 +1027,7 @@ class GeometryXD{
         
         var x:Float;
         var y:Float;
-        var v:Array<Array<Float>>;
+        var v:Array<Array<Float>> = null;
         if (x0 != 0){
             x = 0.9 * x0;
             if (x0 > 0){
@@ -1085,6 +1085,7 @@ class GeometryXD{
         var e:Float = ellipse_e_parameter(a, b);
         
         rez = (a >= b) ? a * e : b * e;
+        return rez;
     }
     public static function tangent_vec3D_in_plane_of_ellipse2D_placed_in_3Dspace(
         dot3D:Array<Float>,
@@ -1096,8 +1097,8 @@ class GeometryXD{
         semiaxis_b_negative:Float,
         angle:Float,
         rad:Bool
-    ):Array<Array<Float>>{
-        var rez:Array<Array<Float>> = null;
+    ):Array<Float>{
+        var rez:Array<Float> = null;
         var t:Array<Float> = dot3D;
         var vn:Array<Float> = vec3Dnormal_ellipse_plane;
         var va:Array<Float> = vec3Dsemiaxis_a_direction;
@@ -1106,7 +1107,7 @@ class GeometryXD{
         var an:Float = semiaxis_a_negative;
         var bn:Float = semiaxis_b_negative;
         
-        var ea:Float; var eb:Float;
+        var ea:Float = null; var eb:Float = null;
         switch(angle_quadrant(angle, rad)){
             case 1 : ea = a; eb = b;
             case 2 : ea = an; eb = b;
@@ -1120,10 +1121,10 @@ class GeometryXD{
         var edot:Array<Float> = ellipse2Ddot(angle, ea, eb, rad);
         var dxy0dxy1:Array<Array<Float>> = tangent_centered_ellipse2Ddot(ea, eb, edot);
         
-        var te:Float = dotXDoffset(t, va, dxy0dxy1[0][0]);
-        var te:Float = dotXDoffset(te, vb, dxy0dxy1[0][1]);
-        var tt:Float = dotXDoffset(t, va, dxy0dxy1[1][0]);
-        var tt:Float = dotXDoffset(tt, vb, dxy0dxy1[1][1]);
+        var te:Array<Float> = dotXDoffset(t, va, dxy0dxy1[0][0]);
+        var te:Array<Float> = dotXDoffset(te, vb, dxy0dxy1[0][1]);
+        var tt:Array<Float> = dotXDoffset(t, va, dxy0dxy1[1][0]);
+        var tt:Array<Float> = dotXDoffset(tt, vb, dxy0dxy1[1][1]);
         rez = vecXD(te, tt);
         return rez;
     }
