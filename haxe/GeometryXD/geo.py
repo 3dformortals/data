@@ -36,7 +36,7 @@ class Enum:
 class GeometryXD:
     _hx_class_name = "GeometryXD"
     __slots__ = ()
-    _hx_statics = ["main", "positive_inside_I", "zero_inside_I", "negative_inside_I", "positive_inside_F", "zero_inside_F", "negative_inside_F", "sum_I", "sum_F", "diff_I", "diff_F", "middle_F", "multiply_FperF", "multiply_I", "multiply_F", "minus_I", "minus_F", "sum_xI", "sum_xF", "diff_xI", "diff_xF", "middle_xF", "multiply_xFperF", "multiply_xI", "multiply_xF", "multisum_xI", "multisum_xF", "sum_previous_I", "diff_previous_I", "sum_before_I", "diff_before_I", "sum_previous_F", "diff_previous_F", "sum_before_F", "diff_before_F", "recounter_I_F", "recounter_F_I", "recounter_I_S", "recounter_F_S", "recounter_S_I", "recounter_S_F", "repeater_F_F", "repeater_I_I", "repeater_S_S", "repeater_F_I", "repeater_S_I", "repeater_I_F", "repeater_S_F", "repeater_I_S", "repeater_F_S", "an_in_b_S", "an_in_bn_S", "an_in_b_I", "an_in_bn_I", "an_in_b_F", "an_in_bn_F", "chain_indexes", "chain_S", "chain_I", "chain_F", "steps_internal", "steps_external", "sin_cos_cut", "degrees", "radians", "angle_quadrant", "vecXDmod", "maxabs", "vecXD", "vecXDone", "vecXDfield", "vecXDsame", "vecXDfieldsame", "vecXDrandom", "vecXDsum", "vecXDfieldsum", "vecXDdiff", "vecXDfielddiff", "vecXDback", "vecXDfieldback", "vecXDparalleled_sameside", "vecXDparalleled_opposite", "vecXDparalleled", "vecXDscalar", "vecXDcos", "vecXDangle", "vec3Dnormal", "vec3Dfieldnormal", "vecXDmiddle", "vecXDsamesize", "vecXDfieldsamesize", "vecXDfieldmiddle", "dotXDoffset", "dot3Dline3D_x_plane3D", "projection_dot3D_on_plane3D", "dot3D_to_dot2Dviewplane", "dotXDscale", "vec3Drotate", "dot3Drotate", "plane3D_dot3Dnormal", "plane3D_dot_vec_vec", "plane3D_3dots", "plane3D_2dots", "distance_dot3D_plane3D", "random_vec3D_in_plane3D", "random_dot3D_in_plane3D", "curve3Dbeziercubic", "curve3Dbeziercubic_3dots", "line3Dbeziercubic_2dots", "line3Dbeziercubic", "beziercubic3D_4to12", "beziercubic3D_12to4", "beziercubic3D_derivativeparameters", "beziercubic_derivative", "beziercubic3D_derivative", "beziercubic_support_dot_one", "beziercubic3D_support_dot_one", "beziercubic_support_dot_two", "beziercubic3D_support_dot_two", "beziercubic3D_follow_4dots_trajectory", "beziercubic_coordinate", "beziercubic3Ddot", "curve3D_4dots_follow_beziercubic_trajectory", "curve3Doffset", "curve3Drotate", "curve3Dscale", "ellipse2Dperimeter_ramanujan", "tangent_centered_ellipse2Ddot", "ellipse_e_parameter", "ellipse_c_parameter", "tangent_vec3D_in_plane_of_ellipse2D_placed_in_3Dspace", "ellipse3D_dots", "ellipse2Ddot", "curve2D_4dots_elliptic_shape_restricted_to_quarter", "beziercubic3D_elliptic_shape_restricted_to_quarter", "angle_required_to_place_curve_on_ellipse", "polygon3D_inside_ellipse", "polygon3D_vec3Dfield_distance", "polygon3D_in_plane", "projection_vec3D_on_plane3D", "angle_vec3Dvec3D_projection_on_plane3D"]
+    _hx_statics = ["main", "positive_inside_I", "zero_inside_I", "negative_inside_I", "positive_inside_F", "zero_inside_F", "negative_inside_F", "sum_I", "sum_F", "diff_I", "diff_F", "middle_F", "multiply_FperF", "multiply_I", "multiply_F", "minus_I", "minus_F", "sum_xI", "sum_xF", "diff_xI", "diff_xF", "middle_xF", "multiply_xFperF", "multiply_xI", "multiply_xF", "multisum_xI", "multisum_xF", "sum_previous_I", "diff_previous_I", "sum_before_I", "diff_before_I", "sum_previous_F", "diff_previous_F", "sum_before_F", "diff_before_F", "recounter_I_F", "recounter_F_I", "recounter_I_S", "recounter_F_S", "recounter_S_I", "recounter_S_F", "repeater_F_F", "repeater_I_I", "repeater_S_S", "repeater_F_I", "repeater_S_I", "repeater_I_F", "repeater_S_F", "repeater_I_S", "repeater_F_S", "an_in_b_S", "an_in_bn_S", "an_in_b_I", "an_in_bn_I", "an_in_b_F", "an_in_bn_F", "chain_indexes", "chain_S", "chain_I", "chain_F", "steps_internal", "steps_external", "sin_cos_cut", "degrees", "radians", "angle_quadrant", "vecXDmod", "vecXDfieldmod", "maxabs", "vecXD", "vecXDone", "vecXDfield", "vecXDsame", "vecXDfieldsame", "vecXDrandom", "vecXDsum", "vecXDfieldsum", "vecXDdiff", "vecXDfielddiff", "vecXDback", "vecXDfieldback", "vecXDparalleled_sameside", "vecXDparalleled_opposite", "vecXDparalleled", "vecXDscalar", "vecXDcos", "vecXDangle", "vec3Dnormal", "vec3Dfieldnormal", "vecXDmiddle", "vecXDsamesize", "vecXDfieldsamesize", "vecXDfieldmiddle", "dotXDoffset", "dot3Dline3D_x_plane3D", "projection_dot3D_on_plane3D", "dot3D_to_dot2Dviewplane", "dotXDscale", "vec3Drotate", "vec3Dfield_rotate_around_vec3Daxes", "dot3Drotate", "plane3D_dot3Dnormal", "plane3D_dot_vec_vec", "plane3D_3dots", "plane3D_2dots", "distance_dot3D_plane3D", "random_vec3D_in_plane3D", "random_dot3D_in_plane3D", "curve3Dbeziercubic", "curve3Dbeziercubic_3dots", "line3Dbeziercubic_2dots", "line3Dbeziercubic", "beziercubic3D_4to12", "beziercubic3D_12to4", "beziercubic3D_derivativeparameters", "beziercubic_derivative", "beziercubic3D_derivative", "beziercubic_support_dot_one", "beziercubic3D_support_dot_one", "beziercubic_support_dot_two", "beziercubic3D_support_dot_two", "beziercubic3D_follow_4dots_trajectory", "beziercubic_coordinate", "beziercubic3Ddot", "curve3D_4dots_follow_beziercubic_trajectory", "curve3Doffset", "curve3Drotate", "curve3Dscale", "ellipse2Dperimeter_ramanujan", "tangent_centered_ellipse2Ddot", "ellipse_e_parameter", "ellipse_c_parameter", "tangent_vec3D_in_plane_of_ellipse2D_placed_in_3Dspace", "ellipse3D_dots", "ellipse2Ddot", "curve2D_4dots_elliptic_shape_restricted_to_quarter", "beziercubic3D_elliptic_shape_restricted_to_quarter", "angle_required_to_place_curve_on_ellipse", "polygon3D_inside_ellipse", "polygon3D_vec3Dfield_distance", "polygon3D_in_plane", "polygon3D_to_vec3Dfield", "projection_vec3D_on_plane3D", "angle_vec3Dvec3D_projection_on_plane3D"]
 
     @staticmethod
     def main():
@@ -1254,6 +1254,19 @@ class GeometryXD:
             return python_lib_Math.sqrt(sum)
 
     @staticmethod
+    def vecXDfieldmod(vecXDfield):
+        rez = None
+        _g = []
+        _g1 = 0
+        while (_g1 < len(vecXDfield)):
+            i = (vecXDfield[_g1] if _g1 >= 0 and _g1 < len(vecXDfield) else None)
+            _g1 = (_g1 + 1)
+            x = GeometryXD.vecXDmod(i)
+            _g.append(x)
+        rez = _g
+        return rez
+
+    @staticmethod
     def maxabs(vecXD):
         rez = 0
         _g = 0
@@ -1604,11 +1617,8 @@ class GeometryXD:
     def vec3Drotate(vec3D,vec3Daxis,angle,rad = False):
         if (rad is None):
             rad = False
-        rez = None
-        if GeometryXD.vecXDsame(vec3D,vec3Daxis):
-            return rez
         rez = vec3D
-        if (angle == 0):
+        if (GeometryXD.vecXDparalleled(vec3D,vec3Daxis) or ((angle == 0))):
             return rez
         if rad:
             angle = angle
@@ -1623,6 +1633,27 @@ class GeometryXD:
         t1 = GeometryXD.dotXDoffset(t0,vb,(GeometryXD.vecXDmod(v) * ((Math.NaN if (((angle == Math.POSITIVE_INFINITY) or ((angle == Math.NEGATIVE_INFINITY)))) else python_lib_Math.sin(angle)))))
         t1 = GeometryXD.dotXDoffset(t1,vc,(GeometryXD.vecXDmod(v) * ((Math.NaN if (((angle == Math.POSITIVE_INFINITY) or ((angle == Math.NEGATIVE_INFINITY)))) else python_lib_Math.cos(angle)))))
         rez = GeometryXD.vecXD(t,t1)
+        return rez
+
+    @staticmethod
+    def vec3Dfield_rotate_around_vec3Daxes(vec3Dfield,vec3Daxes,angles,rad = False):
+        if (rad is None):
+            rad = False
+        rez = None
+        if ((((((((not GeometryXD.vecXDfieldsamesize(vec3Dfield)) or (not GeometryXD.vecXDfieldsamesize(vec3Daxes))) or ((len((vec3Dfield[0] if 0 < len(vec3Dfield) else None)) != 3))) or ((len((vec3Daxes[0] if 0 < len(vec3Daxes) else None)) != 3))) or GeometryXD.zero_inside_F(GeometryXD.vecXDfieldmod(vec3Dfield))) or GeometryXD.zero_inside_F(GeometryXD.vecXDfieldmod(vec3Daxes))) or ((len(angles) != len(vec3Dfield)))) or ((len(angles) != len(vec3Daxes)))):
+            return rez
+        rez = vec3Dfield
+        _g1 = 0
+        _g = len(angles)
+        while (_g1 < _g):
+            i = _g1
+            _g1 = (_g1 + 1)
+            _g3 = 0
+            _g2 = len(vec3Dfield)
+            while (_g3 < _g2):
+                j = _g3
+                _g3 = (_g3 + 1)
+                python_internal_ArrayImpl._set(rez, j, GeometryXD.vec3Drotate((rez[j] if j >= 0 and j < len(rez) else None),(vec3Daxes[i] if i >= 0 and i < len(vec3Daxes) else None),(angles[i] if i >= 0 and i < len(angles) else None),rad))
         return rez
 
     @staticmethod
@@ -2102,6 +2133,8 @@ class GeometryXD:
         rez = None
         a = semiaxis_a
         b = semiaxis_b
+        if (((a < 0) or ((b < 0))) or (((a <= 0) and ((b <= 0))))):
+            return rez
         if (a >= b):
             v = (1 - (((b * b) / ((a * a)))))
             if (v < 0):
@@ -2119,6 +2152,8 @@ class GeometryXD:
         a = semiaxis_a
         b = semiaxis_b
         e = GeometryXD.ellipse_e_parameter(a,b)
+        if (e is None):
+            return rez
         if (a >= b):
             rez = (a * e)
         else:
@@ -2388,6 +2423,18 @@ class GeometryXD:
             x1 = GeometryXD.dotXDoffset(t,GeometryXD.vec3Drotate(va,vn,(x * (ap[i] if i >= 0 and i < len(ap) else None))),(distances[i] if i >= 0 and i < len(distances) else None))
             rez.append(x1)
         return rez
+
+    @staticmethod
+    def polygon3D_to_vec3Dfield(polygon3D):
+        _g = []
+        _g2 = 1
+        _g1 = len(polygon3D)
+        while (_g2 < _g1):
+            i = _g2
+            _g2 = (_g2 + 1)
+            x = GeometryXD.vecXD((polygon3D[0] if 0 < len(polygon3D) else None),(polygon3D[i] if i >= 0 and i < len(polygon3D) else None))
+            _g.append(x)
+        return _g
 
     @staticmethod
     def projection_vec3D_on_plane3D(vec3D,plane3D):

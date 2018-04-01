@@ -428,6 +428,11 @@ class GeometryXD{
         for (i in vecXD){sum += i*i;}
         return Math.sqrt(sum);
     }
+    public static function vecXDfieldmod(vecXDfield:Array<Array<Float>>):Array<Float>{
+        var rez:Array<Float> = null;
+        rez = [for (i in vecXDfield) vecXDmod(i)];
+        return rez;
+    }
     public static function maxabs(vecXD:Array<Float>):Float{
         var rez:Float = 0;
         for (i in vecXD){if (Math.abs(i) > Math.abs(rez)){rez = i;}}
@@ -660,10 +665,11 @@ class GeometryXD{
         return rez;
     }
     public static function vec3Drotate(vec3D:Array<Float>, vec3Daxis:Array<Float>, angle:Float, rad:Bool = false){
-        var rez:Array<Float> = null;
-        if (vecXDsame(vec3D, vec3Daxis)){ return rez;}
-        rez = vec3D;
-        if (angle == 0) { return rez; }
+        var rez:Array<Float> = vec3D;
+        if (
+            vecXDparalleled(vec3D, vec3Daxis) ||
+            angle == 0
+            ){ return rez;}
         angle = (rad) ? angle : radians(angle);
         var t:Array<Float> = [0,0,0];
         var vb:Array<Float> = vec3Dnormal(vec3Daxis, vec3D);
@@ -675,6 +681,30 @@ class GeometryXD{
         t1 = dotXDoffset(t1, vc, vecXDmod(v) * Math.cos(angle));
         rez = vecXD(t, t1);
         return rez;
+    }
+    public static function vec3Dfield_rotate_around_vec3Daxes(
+        vec3Dfield:Array<Array<Float>>,
+        vec3Daxes:Array<Array<Float>>,
+        angles:Array<Float>,
+        rad:Bool = false
+    ):Array<Array<Float>>{
+        var rez:Array<Array<Float>> = null;
+        if (
+            !vecXDfieldsamesize(vec3Dfield) ||
+            !vecXDfieldsamesize(vec3Daxes) ||
+            vec3Dfield[0].length != 3 ||
+            vec3Daxes[0].length != 3 ||
+            zero_inside_F(vecXDfieldmod(vec3Dfield)) ||
+            zero_inside_F(vecXDfieldmod(vec3Daxes)) ||
+            angles.length != vec3Dfield.length ||
+            angles.length != vec3Daxes.length
+        ){ return rez; }
+        rez = vec3Dfield;
+        for (i in 0...angles.length){
+            for (j in 0...vec3Dfield.length){
+                rez[j] = vec3Drotate(rez[j], vec3Daxes[i], angles[i], rad);
+            }
+        }return rez;
     }
     public static function dot3Drotate(dot3D:Array<Float>, dot3Dc:Array<Float>, vec3D:Array<Float>, angle:Float, rad:Bool = false):Array<Float>{
         var rez:Array<Float> = null;
@@ -1071,7 +1101,11 @@ class GeometryXD{
         var rez:Float = null;
         var a:Float = semiaxis_a;
         var b:Float = semiaxis_b;
-        
+        if (
+            a < 0 ||
+            b < 0 ||
+            a <= 0 && b <= 0
+        ){ return rez; }
         rez = (a >= b) ? Math.sqrt(1 - b * b / (a * a)) : -Math.sqrt(1 - a * a / (b * b)) ;
         return rez;
     }
@@ -1083,7 +1117,7 @@ class GeometryXD{
         var a:Float = semiaxis_a;
         var b:Float = semiaxis_b;
         var e:Float = ellipse_e_parameter(a, b);
-        
+        if (e == null){ return rez; }
         rez = (a >= b) ? a * e : b * e;
         return rez;
     }
@@ -1320,7 +1354,11 @@ class GeometryXD{
             rez.push( dotXDoffset( t, vec3Drotate(va, vn, x * ap[i]), distances[i] ) );
         }return rez;
     }
-    
+    public static function polygon3D_to_vec3Dfield(
+        polygon3D:Array<Array<Float>>
+    ):Array<Array<Float>>{
+        return [for (i in 1...polygon3D.length) vecXD(polygon3D[0], polygon3D[i])];
+    }
     
     public static function projection_vec3D_on_plane3D(vec3D:Array<Float>, plane3D:Array<Float>){
         var rez:Array<Float> = null;
