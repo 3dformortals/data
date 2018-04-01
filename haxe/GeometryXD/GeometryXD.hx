@@ -410,7 +410,14 @@ class GeometryXD{
         var k:Int=4; // 0 case
         if (rad){angle=degrees(angle);}
         var x:Float=angle%360;
-        k=(x>0)?1:(x>90)?2:(x>180)?3:(x>270)?4:(x<0)?4:(x<=-90)?3:(x<=-180)?2:(x<=-270)?1:4;
+        if (x > 270){ k = 4; }
+        else if (x > 180){ k = 3; }
+        else if (x > 90){ k = 2; }
+        else if (x > 0){ k = 1; }
+        else if (x <= -270){ k = 1; }
+        else if (x <= -180){ k = 2; }
+        else if (x <= -90){ k = 3; }
+        else if (x <= 0){ k = 4; }
         return k;
     }
     
@@ -989,7 +996,136 @@ class GeometryXD{
         var a:Float = semiaxis_a;
         var b:Float = semiaxis_b;
         if (a < 0 || b < 0){ return rez; }
-        return Math.PI * (3 * (a + b) - Math.sqrt((3 * a + b) * (a + 3 * b)));
+        var l1:Float = Math.PI * (3 * (a + b) - Math.sqrt((3 * a + b) * (a + 3 * b)));
+        var l2:Float = Math.PI * (a + b) *
+            (
+                1 +
+                (
+                    3 * (a - b) * (a - b) / (a + b) / (a + b) /
+                    (
+                        10 +
+                        Math.sqrt(
+                            4 -
+                            3 * (a - b) * (a - b) / (a + b) / (a + b)
+                        )
+                    )
+                )
+            );
+        rez = Math.max(l1, l2);
+        return rez;
+    }
+    public static function tangent_centered_ellipse2Ddot(
+        semiaxis_a:Float,
+        semiaxis_b:Float,
+        ellipse_dot2D:Array<Float>
+    ):Array<Array<Float>>{
+        var rez:Array<Array<Float>> = null;
+        var a:Float = semiaxis_a;
+        var b:Float = semiaxis_b;
+        var x0:Float = ellipse_dot2D[0];
+        var y0:Float = ellipse_dot2D[1];
+        
+        var x:Float;
+        var y:Float;
+        var v:Array<Array<Float>>;
+        if (x0 != 0){
+            x = 0.9 * x0;
+            if (x0 > 0){
+                if (y0 == 0){ v = [[x0, y0], [x0, 1]]; }
+                else{
+                    y = (1 - x * x0 / (a * a)) * b * b / y0;
+                    if (y0 > 0){ v = [[x0, y0], [x, y]]; }
+                    else{ v = [[x, y], [x0, y0]]; }
+                }
+            }else if (x0 < 0){
+                if (y0 == 0){ v = [[x0, y0], [x0, -1]]; }
+                else{
+                    y = (1 - x * x0 / (a * a)) * b * b / y0;
+                    if (y0 > 0){ v = [[x, y], [x0, y0]]; }
+					else{ v = [[x0, y0], [x, y]]; }
+                }
+            }
+        }else{
+            y = 0.9 * y0;
+            if (y0 > 0){
+                if (x0 == 0){ v = [[x0, y0], [-1, y0]]; }
+                else{
+                    x = (1 - y * y0 /(b * b)) * a * a / x0;
+                    if (x0 > 0){ v = [[x, y], [x0, y0]]; }
+                    else{ v = [[x0, y0], [x, y]]; }
+                }
+            }else if (y0 < 0){
+                if (x0 == 0){ v = [[x0, y0], [1, y0]]; }
+                else{
+                    x = (1 - y * y0 /(b * b)) * a * a / x0;
+                    if (x0 < 0){ v = [[x, y], [x0, y0]]; }
+                    else{ v = [[x0, y0], [x, y]]; }
+                }
+            }
+        }return v;
+    }
+    public static function ellipse_e_parameter(
+        semiaxis_a:Float,
+        semiaxis_b:Float
+    ):Float{
+        var rez:Float = null;
+        var a:Float = semiaxis_a;
+        var b:Float = semiaxis_b;
+        
+        rez = (a >= b) ? Math.sqrt(1 - b * b / (a * a)) : -Math.sqrt(1 - a * a / (b * b)) ;
+        return rez;
+    }
+    public static function ellipse_c_parameter(
+        semiaxis_a:Float,
+        semiaxis_b:Float
+    ):Float{
+        var rez:Float = null;
+        var a:Float = semiaxis_a;
+        var b:Float = semiaxis_b;
+        var e:Float = ellipse_e_parameter(a, b);
+        
+        rez = (a >= b) ? a * e : b * e;
+    }
+    public static function tangent_vec3D_in_plane_of_ellipse2D_placed_in_3Dspace(
+        dot3D:Array<Float>,
+        vec3Dnormal_ellipse_plane:Array<Float>,
+        vec3Dsemiaxis_a_direction:Array<Float>,
+        semiaxis_a:Float,
+        semiaxis_b:Float,
+        semiaxis_a_negative:Float,
+        semiaxis_b_negative:Float,
+        angle:Float,
+        rad:Bool
+    ):Array<Array<Float>>{
+        var rez:Array<Array<Float>> = null;
+        var t:Array<Float> = dot3D;
+        var vn:Array<Float> = vec3Dnormal_ellipse_plane;
+        var va:Array<Float> = vec3Dsemiaxis_a_direction;
+        var a:Float = semiaxis_a;
+        var b:Float = semiaxis_b;
+        var an:Float = semiaxis_a_negative;
+        var bn:Float = semiaxis_b_negative;
+        
+        var ea:Float; var eb:Float;
+        switch(angle_quadrant(angle, rad)){
+            case 1 : ea = a; eb = b;
+            case 2 : ea = an; eb = b;
+            case 3 : ea = an; eb = bn;
+            case 4 : ea = a; eb = bn;
+        }
+        var ep:Array<Float> = plane3D_dot3Dnormal(t, vn);
+        var va:Array<Float> = projection_vec3D_on_plane3D(va, ep);
+        var vb:Array<Float> = vec3Dnormal(vn, va);
+        
+        var edot:Array<Float> = ellipse2Ddot(angle, ea, eb, rad);
+        var dxy0dxy1:Array<Array<Float>> = tangent_centered_ellipse2Ddot(ea, eb, edot);
+        
+        var te:Float = dotXDoffset(t, va, dxy0dxy1[0][0]);
+        var te:Float = dotXDoffset(te, vb, dxy0dxy1[0][1]);
+        var tt:Float = dotXDoffset(t, va, dxy0dxy1[1][0]);
+        var tt:Float = dotXDoffset(tt, vb, dxy0dxy1[1][1]);
+        rez = vecXD(te, tt);
+        return rez;
     }
     public static function ellipse3D_dots(dot3D:Array<Float>, vec3Dsemiaxes:Array<Array<Float>>, semiaxes:Array<Float>):Array<Array<Float>>{
         var rez:Array<Array<Float>> = null;
