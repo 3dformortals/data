@@ -13,7 +13,7 @@
 	<key>comment</key>
 	<string>https:&#x2f;&#x2f;</string>
 	<key>semanticClass</key>
-	<string>theme.dark.kimbie_dark</string>
+	<string>theme.dark.darkplastic</string>
 	<key>colorSpaceName</key>
 	<string>sRGB</string>
 	<key>gutterSettings</key>
@@ -311,7 +311,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#FF0000</string>
+				<string>#FFFFFF</string>
 			</dict>
 		</dict>
 		<dict>
@@ -366,7 +366,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#0000FF</string>
+				<string>#00FFFF</string>
 			</dict>
 		</dict>
 		<dict>
@@ -377,7 +377,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#FF00FF</string>
+				<string>#BAE8C1</string>
 			</dict>
 		</dict>
 		<dict>
@@ -413,6 +413,8 @@
 			<dict>
 				<key>foreground</key>
 				<string>#E8E800</string>
+				<key>background</key>
+				<string>#5C4000</string>
 			</dict>
 		</dict>
 		<dict>
@@ -423,9 +425,9 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#E80000</string>
+				<string>#FFFFFF</string>
 				<key>background</key>
-				<string></string>
+				<string>#737373</string>
 			</dict>
 		</dict>
 		<dict>
@@ -436,9 +438,9 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#E8A600</string>
+				<string>#00E8E8</string>
 				<key>background</key>
-				<string></string>
+				<string>#001C5C</string>
 			</dict>
 		</dict>
 		<dict>
@@ -449,7 +451,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#00E827</string>
+				<string>#FFFFFF</string>
 			</dict>
 		</dict>
 		<dict>
@@ -461,6 +463,8 @@
 			<dict>
 				<key>foreground</key>
 				<string>#00E8E8</string>
+				<key>background</key>
+				<string></string>
 			</dict>
 		</dict>
 		<dict>
@@ -471,7 +475,9 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#E80000</string>
+				<string>#000000</string>
+				<key>background</key>
+				<string>#FFFFFF</string>
 			</dict>
 		</dict>
 		<dict>
@@ -482,9 +488,9 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#E800E8</string>
+				<string>#BAE8C1</string>
 				<key>background</key>
-				<string></string>
+				<string>#005C1C</string>
 			</dict>
 		</dict>
 		<dict>
@@ -495,9 +501,9 @@
 			<key>settings</key>
 			<dict>
 				<key>background</key>
-				<string></string>
+				<string>#D10700</string>
 				<key>foreground</key>
-				<string>#FF0000</string>
+				<string>#FFFFFF</string>
 			</dict>
 		</dict>
 	</array>

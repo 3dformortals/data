@@ -306,7 +306,7 @@ variable.function</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#FF0000</string>
+				<string>#FFFFFF</string>
 			</dict>
 		</dict>
 		<dict>
@@ -361,7 +361,7 @@ variable.function</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#0000FF</string>
+				<string>#00FFFF</string>
 			</dict>
 		</dict>
 		<dict>
@@ -372,7 +372,7 @@ variable.function</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#FF00FF</string>
+				<string>#D4FFDA</string>
 			</dict>
 		</dict>
 		<dict>
@@ -408,6 +408,8 @@ variable.function</string>
 			<dict>
 				<key>foreground</key>
 				<string>#FFFF00</string>
+				<key>background</key>
+				<string>#694900</string>
 			</dict>
 		</dict>
 		<dict>
@@ -418,9 +420,9 @@ variable.function</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#FF00FF</string>
+				<string>#FFFFFF</string>
 				<key>background</key>
-				<string></string>
+				<string>#808080</string>
 			</dict>
 		</dict>
 		<dict>
@@ -433,7 +435,7 @@ variable.function</string>
 				<key>foreground</key>
 				<string>#00FFFF</string>
 				<key>background</key>
-				<string></string>
+				<string>#001F69</string>
 			</dict>
 		</dict>
 		<dict>
@@ -466,7 +468,9 @@ variable.function</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#FF0000</string>
+				<string>#000000</string>
+				<key>background</key>
+				<string>#FFFFFF</string>
 			</dict>
 		</dict>
 		<dict>
@@ -477,9 +481,9 @@ variable.function</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#FFFFFF</string>
+				<string>#D4FFDA</string>
 				<key>background</key>
-				<string>#FF00FF</string>
+				<string>#00691F</string>
 			</dict>
 		</dict>
 		<dict>

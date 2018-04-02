@@ -1,16 +1,19 @@
-GeometryXD
+# GeometryXD
 
-readme under development
+## readme under development
 
-multidimensional geometry lib
-<br>lot of functions targeted for work with 3D elements
+multidimensional geometry lib  
+lot of functions targeted for work with 3D elements
 
 - dot
- - offset
- - rotate
- - scale
+  - offset
+  - rotate
+  - scale
 - vector
- - rotate
- - resize to 1 lenght
-
- <code>test code</code>
+  - rotate
+  - resize to 1 lenght
+- curve
+  - offset
+  - rotate
+  - scale
+ `test code` 
