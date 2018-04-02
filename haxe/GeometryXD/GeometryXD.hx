@@ -560,7 +560,7 @@ class GeometryXD{
         }
         return rez;
     }
-    public static function vecXDmiddle(vecXDa:Array<Float>, vecXDb:Array<Float>){
+    public static function vecXDmiddle(vecXDa:Array<Float>, vecXDb:Array<Float>):Array<Float>{
         return middle_xF([vecXDa, vecXDb]);
     }
     public static function vecXDsamesize(vecXDa:Array<Float>, vecXDb:Array<Float>):Bool{
@@ -664,7 +664,7 @@ class GeometryXD{
         rez = dotXDoffset(sdot,vec,vecXDmod(vec));
         return rez;
     }
-    public static function vec3Drotate(vec3D:Array<Float>, vec3Daxis:Array<Float>, angle:Float, rad:Bool = false){
+    public static function vec3Drotate(vec3D:Array<Float>, vec3Daxis:Array<Float>, angle:Float, rad:Bool = false):Array<Float>{
         var rez:Array<Float> = vec3D;
         if (
             vecXDparalleled(vec3D, vec3Daxis) ||
@@ -1268,7 +1268,7 @@ class GeometryXD{
         vec3Dsemiaxes:Array<Array<Float>>,
         semiaxes:Array<Float>,
         angle_proportions:Array<Float>
-        ):Array<Array<Float>>{
+    ):Array<Array<Float>>{
         var rez:Array<Array<Float>> = null;
         if(
             dot3D.length != 3 ||
@@ -1360,7 +1360,7 @@ class GeometryXD{
         return [for (i in 1...polygon3D.length) vecXD(polygon3D[0], polygon3D[i])];
     }
     
-    public static function projection_vec3D_on_plane3D(vec3D:Array<Float>, plane3D:Array<Float>){
+    public static function projection_vec3D_on_plane3D(vec3D:Array<Float>, plane3D:Array<Float>):Array<Float>{
         var rez:Array<Float> = null;
         if (vec3D.length != 3 || plane3D.length != 4){
             return rez;
