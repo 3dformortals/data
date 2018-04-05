@@ -35,18 +35,6 @@ a:hover {text-decoration: none;}
 p {margin: 0 0 18px}
 img {border: none;}
 input {vertical-align: middle;}
-/* gui section new code*/
-input {width:50px;}
-td {width:50px;text-align: center;}
-button.b50px{
-	width:46px;height:24px;
-	text-align: center;
-	margin-bottom: 4px;
-	padding: 0;
-	border-width:0;}
-button:hover{
-	background-color: #333;
-}
 
 /* Additional */
 #head, #footer {
@@ -87,7 +75,7 @@ button:hover{
 	text-transform: uppercase;
 	
 	z-index: 1;}
-.tabs input[type="radio"] {
+.tabs input.x4menu[type="radio"] {
 	position: absolute;
 	left: -9999px;}
 #tab_1:checked  ~ #tab_l1,
@@ -129,3 +117,19 @@ button:hover{
 	opacity: 1;}
 table.data{ background:yellow;}
 table.data td input{width:55px !important;height:35 px !important;background:lightgreen !important;left:0;}
+
+/* gui section new code*/
+input {width:50px;}
+td {width:50px;text-align: center;}
+button.b50px{
+	width:46px;height:24px;
+	text-align: center;
+	margin-bottom: 4px;
+	padding: 0;
+	border-width:0;}
+button:hover{
+	background-color: #333;
+}
+input.guiradio{
+	clear;
+}

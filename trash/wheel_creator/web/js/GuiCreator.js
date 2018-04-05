@@ -34,6 +34,7 @@ function ok_gui_creator(){
     table.appendChild(tbody);
     box.appendChild(table);
 }
+
 function td_text(text){
     var td = document.createElement('td');
     td.innerHTML = text;
@@ -46,7 +47,6 @@ function td_input(id){
     td.appendChild(input);
     return td;
 }
-
 function size_gui_tr(i){
     var tr = document.createElement('tr');
     var td1 = td_text('h'+ i.toString());
@@ -76,5 +76,77 @@ function size_gui_creator(){
     box.appendChild(table);
 }
 
+function td_cbox(cboxid, checked = false){
+    var td = document.createElement('td');
+    var cbox = document.createElement('input');
+    cbox.type = "checkbox";
+    cbox.defaultChecked = checked;
+    td.appendChild(cbox);
+    return td;
+}
+function td_radio(id, name, value, checked = false){
+    var td = document.createElement('td');
+    var radio = document.createElement('input');
+    radio.type = "radio";
+    radio.className = "guiradio";
+    radio.name = name;
+    radio.defaultChecked = checked;
+    radio.value = value;
+    td.appendChild(radio);
+    return td;
+}
+
+function look_gui_tbody(){
+    var tbody = document.createElement('tbody');
+    var tr1 = document.createElement('tr');
+    tr1.appendChild(td_text("s1")); tr1.appendChild(td_input("s1"));
+    var td = td_text("|||"); td.style.textAlign = "right";
+    tr1.appendChild(td);
+    td = td_radio("g1","grip","|||",true);
+    tr1.appendChild(td);
+    
+    var tr2 = document.createElement('tr');
+    tr2.appendChild(td_text("s2")); tr2.appendChild(td_input("s2"));
+    td = td_text(">>>"); td.style.textAlign = "right";
+    tr2.appendChild(td);
+    td = td_radio("g2","grip",">>>");
+    tr2.appendChild(td);
+    
+    var tr3 = document.createElement('tr');
+    tr3.appendChild(td_text("s3")); tr3.appendChild(td_input("s3"));
+    td = td_text(")))"); td.style.textAlign = "right";
+    tr3.appendChild(td);
+    td = td_radio("g3","grip",")))");
+    tr3.appendChild(td);
+    
+    var tr4 = document.createElement('tr');
+    tr4.appendChild(td_text("s4")); tr4.appendChild(td_input("s4"));
+    td = td_text("ooo"); td.style.textAlign = "right";
+    tr4.appendChild(td);
+    td = td_radio("g4","grip","ooo");
+    tr4.appendChild(td);
+    
+    var tr5 = document.createElement('tr');
+    
+    var tr6 = document.createElement('tr');
+    
+    var tr7 = document.createElement('tr');
+    
+    var tr8 = document.createElement('tr');
+    
+    var tr9 = document.createElement('tr');
+    
+    var tbox = [tr1,tr2,tr3,tr4,tr5,tr6,tr7,tr8,tr9];
+    for (i=0;i<tbox.length;i++) {tbody.appendChild(tbox[i]);}
+    return tbody;
+}
+function look_gui_creator(){
+    var table = document.createElement('table');
+    table.appendChild(look_gui_tbody());
+    var box = document.getElementById("tab_c2");
+    box.appendChild(table);
+}
+
 ok_gui_creator();
 size_gui_creator();
+look_gui_creator();
