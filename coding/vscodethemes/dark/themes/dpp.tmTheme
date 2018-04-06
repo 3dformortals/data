@@ -412,9 +412,9 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#E8E800</string>
+				<string>#00E800</string>
 				<key>background</key>
-				<string>#5C4000</string>
+				<string></string>
 			</dict>
 		</dict>
 		<dict>
@@ -425,9 +425,9 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#FFFFFF</string>
+				<string>#E88000</string>
 				<key>background</key>
-				<string>#737373</string>
+				<string></string>
 			</dict>
 		</dict>
 		<dict>
@@ -438,9 +438,9 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#00E8E8</string>
+				<string>#E8E800</string>
 				<key>background</key>
-				<string>#001C5C</string>
+				<string></string>
 			</dict>
 		</dict>
 		<dict>
@@ -475,9 +475,9 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#000000</string>
-				<key>background</key>
 				<string>#FFFFFF</string>
+				<key>background</key>
+				<string></string>
 			</dict>
 		</dict>
 		<dict>
@@ -488,9 +488,9 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#BAE8C1</string>
+				<string>#74E885</string>
 				<key>background</key>
-				<string>#005C1C</string>
+				<string></string>
 			</dict>
 		</dict>
 		<dict>
@@ -501,9 +501,9 @@
 			<key>settings</key>
 			<dict>
 				<key>background</key>
-				<string>#D10700</string>
+				<string></string>
 				<key>foreground</key>
-				<string>#FFFFFF</string>
+				<string>#FF8080</string>
 			</dict>
 		</dict>
 	</array>

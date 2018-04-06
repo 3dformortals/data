@@ -95,6 +95,25 @@ function td_radio(id, name, value, checked = false){
     td.appendChild(radio);
     return td;
 }
+function td_color(id, co = "#000000"){
+    var td = document.createElement('td');
+    var color = document.createElement('input');
+    color.type = "color";
+    color.className = "guicolor";
+    color.id = id;
+    color.value = co;
+    td.appendChild(color);
+    return td;
+}
+function balert(x){
+    alert(x);//need two
+}
+function td_button(text, callback){
+    var td = document.createElement('td');
+    var btn = "<button onclick=\""+callback+"\">"+text+"</button>";
+    td.innerHTML = btn;
+    return td;
+}
 
 function look_gui_tbody(){
     var tbody = document.createElement('tbody');
@@ -127,14 +146,24 @@ function look_gui_tbody(){
     tr4.appendChild(td);
     
     var tr5 = document.createElement('tr');
+    tr5.appendChild(td_cbox("cbox_s1")); tr5.appendChild(td_color("c1","#808080"));
+    tr5.appendChild(td_input("s5")); tr5.appendChild(td_text("s5")); //repeat input
     
     var tr6 = document.createElement('tr');
+    tr6.appendChild(td_cbox("cbox_s2")); tr6.appendChild(td_color("c2","#808080"));
+    tr6.appendChild(td_input("s6")); tr6.appendChild(td_text("s6")); //grips
     
     var tr7 = document.createElement('tr');
+    tr7.appendChild(td_cbox("cbox_s3")); tr7.appendChild(td_color("c3","#000000"));
+    tr7.appendChild(td_input("s7")); tr7.appendChild(td_text("s7")); //% grip from grip + hole = steps
     
     var tr8 = document.createElement('tr');
+    tr8.appendChild(td_cbox("cbox_s4")); tr8.appendChild(td_color("c4","#ffff00"));
+    tr8.appendChild(td_input("s8")); tr8.appendChild(td_text("s8")); //bolt angles
     
     var tr9 = document.createElement('tr');
+    tr9.appendChild(td_cbox("cbox_s5")); tr9.appendChild(td_color("c5","#000000"));
+    tr9.appendChild(td_button("mix","balert('testalerttext')")); tr9.appendChild(td_text("00"));
     
     var tbox = [tr1,tr2,tr3,tr4,tr5,tr6,tr7,tr8,tr9];
     for (i=0;i<tbox.length;i++) {tbody.appendChild(tbox[i]);}

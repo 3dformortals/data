@@ -130,6 +130,9 @@ button.b50px{
 button:hover{
 	background-color: #333;
 }
-input.guiradio{
-	clear;
+input[type="checkbox"]{
+	width: 10px;
+}
+input[type="radio"]{
+	width: 10px;
 }
