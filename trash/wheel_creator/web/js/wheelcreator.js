@@ -277,5 +277,12 @@ function mesh2(tc,r,full=false){
 	mesh2=mesh_maker(tc,r,full);
 	scene.add(mesh2);
 }
+function change_camera_test(a,b,c){
+	// camera.lookAt(new THREE.Vector3(-1000, 0, 0)); // wrong code
+	// controls.target = new THREE.Vector3(0, -100, 0); // offset orbit center but not rotate
+	// controls.reset(); // worked reset to default
+	camera.position.set(a,b,c);
+	controls.target = new THREE.Vector3();
+}
 
 
