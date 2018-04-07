@@ -188,7 +188,6 @@ function td_cbox_text_colspan(cboxid, text, checked = false, colspan = 1, align 
     var td = document.createElement('td');
     td.colSpan = colspan;
     td.setAttribute('style','text-align :'+align+';');
-    
     var cbox = document.createElement('input');
     cbox.id = cboxid;
     cbox.type = "checkbox";
@@ -284,7 +283,45 @@ function lamp_gui_creator(){
     box.appendChild(table);
 }
 
+function id_value(id,value){
+    document.getElementById(id).value=value;
+}
+function start_data_writer(){
+    var ids = [
+        "h1","h2","h3","h4","h5","h6","h7","h8","h9",
+        "w1","w2","w3","w4","w5","b1","b2","b3","b4",
+        "s1","s2","s3","s4","s5","s6","s7","s8",
+        "intensity_ambient",
+        "intensity_directional",
+        "x_directional","y_directional","z_directional",
+        "smsw_directional","smsh_directional","scn_directional","scf_directional",
+        "intensity_point",
+        "x_point","y_point","z_point",
+        "distance_point","decay_point",
+        "smsw_point","smsh_point","scn_point","scf_point",
+        "zoom_view","distance_view","y_view","z_view",
+        "length_track"
+    ];
+    var values = [
+        0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,
+        100,100,100,100,100,100,100,100,
+        1,
+        1,
+        500,500,500,
+        512,512,0.5,500,
+        1,
+        500,500,500,
+        1000,2,
+        512,512,0.5,500,
+        1,1000,0,0,
+        1000
+    ];
+    for (i=0;i<ids.length;i++){id_value(ids[i],values[i])}
+}
+
 ok_gui_creator();
 size_gui_creator();
 look_gui_creator();
 lamp_gui_creator();
+start_data_writer();
