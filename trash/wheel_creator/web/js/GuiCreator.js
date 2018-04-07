@@ -35,15 +35,23 @@ function ok_gui_creator(){
     box.appendChild(table);
 }
 
+function td_hr(colspan = 1){
+    var td = document.createElement('td');
+    td.colSpan = colspan;
+    td.appendChild(document.createElement('hr'));
+    return td;
+}
 function td_text(text){
     var td = document.createElement('td');
+    td.setAttribute("style","vertical-align:middle;")
     td.innerHTML = text;
     return td;
 }
-function td_input(id){
+function td_input(id, title = ""){
     var td = document.createElement('td');
     var input = document.createElement('input');
     input.id = id;
+    if(title != ""){input.title = title;}
     td.appendChild(input);
     return td;
 }
@@ -76,11 +84,12 @@ function size_gui_creator(){
     box.appendChild(table);
 }
 
-function td_cbox(cboxid, checked = false){
+function td_cbox(cboxid, checked = false, title = ""){
     var td = document.createElement('td');
     var cbox = document.createElement('input');
     cbox.type = "checkbox";
     cbox.defaultChecked = checked;
+    if (title != ""){cbox.title = title;}
     td.appendChild(cbox);
     return td;
 }
@@ -114,7 +123,6 @@ function td_button(text, callback){
     td.innerHTML = btn;
     return td;
 }
-
 function look_gui_tbody(){
     var tbody = document.createElement('tbody');
     var tr1 = document.createElement('tr');
@@ -146,23 +154,23 @@ function look_gui_tbody(){
     tr4.appendChild(td);
     
     var tr5 = document.createElement('tr');
-    tr5.appendChild(td_cbox("cbox_s1")); tr5.appendChild(td_color("c1","#808080"));
+    tr5.appendChild(td_cbox("cbox_s1",true)); tr5.appendChild(td_color("c1","#808080"));
     tr5.appendChild(td_input("s5")); tr5.appendChild(td_text("s5")); //repeat input
     
     var tr6 = document.createElement('tr');
-    tr6.appendChild(td_cbox("cbox_s2")); tr6.appendChild(td_color("c2","#808080"));
+    tr6.appendChild(td_cbox("cbox_s2",true)); tr6.appendChild(td_color("c2","#808080"));
     tr6.appendChild(td_input("s6")); tr6.appendChild(td_text("s6")); //grips
     
     var tr7 = document.createElement('tr');
-    tr7.appendChild(td_cbox("cbox_s3")); tr7.appendChild(td_color("c3","#000000"));
+    tr7.appendChild(td_cbox("cbox_s3",true)); tr7.appendChild(td_color("c3","#000000"));
     tr7.appendChild(td_input("s7")); tr7.appendChild(td_text("s7")); //% grip from grip + hole = steps
     
     var tr8 = document.createElement('tr');
-    tr8.appendChild(td_cbox("cbox_s4")); tr8.appendChild(td_color("c4","#ffff00"));
+    tr8.appendChild(td_cbox("cbox_s4",true)); tr8.appendChild(td_color("c4","#ffff00"));
     tr8.appendChild(td_input("s8")); tr8.appendChild(td_text("s8")); //bolt angles
     
     var tr9 = document.createElement('tr');
-    tr9.appendChild(td_cbox("cbox_s5")); tr9.appendChild(td_color("c5","#000000"));
+    tr9.appendChild(td_cbox("cbox_s5",true)); tr9.appendChild(td_color("c5","#000000"));
     tr9.appendChild(td_button("mix","balert('testalerttext')")); tr9.appendChild(td_text("00"));
     
     var tbox = [tr1,tr2,tr3,tr4,tr5,tr6,tr7,tr8,tr9];
@@ -176,6 +184,107 @@ function look_gui_creator(){
     box.appendChild(table);
 }
 
+function td_cbox_text_colspan(cboxid, text, checked = false, colspan = 1, align = "left"){
+    var td = document.createElement('td');
+    td.colSpan = colspan;
+    td.setAttribute('style','text-align :'+align+';');
+    
+    var cbox = document.createElement('input');
+    cbox.id = cboxid;
+    cbox.type = "checkbox";
+    cbox.checked = checked;
+    var text = document.createTextNode(text);
+    td.appendChild(cbox);
+    td.appendChild(text);
+    return td;
+}
+function lamp_gui_tbody(){
+    var tbody = document.createElement('tbody');
+    var tr1 = document.createElement('tr');
+    tr1.appendChild(td_cbox_text_colspan("cbox_ambient","ambient",true,2));
+    tr1.appendChild(td_color("color_ambient","#ffffff"));
+    tr1.appendChild(td_input("intensity_ambient"));
+    
+    var tr2 = document.createElement('tr');
+    tr2.appendChild(td_hr(4));
+    
+    var tr3 = document.createElement('tr');
+    tr3.appendChild(td_cbox_text_colspan("cbox_directional","directional",true,2));
+    tr3.appendChild(td_color("color_directional","#ffffff"));
+    tr3.appendChild(td_input("intensity_directional"));
+    
+    
+    var tr4 = document.createElement('tr');
+    tr4.appendChild(td_input("x_directional","x"));
+    tr4.appendChild(td_input("y_directional","y"));
+    tr4.appendChild(td_input("z_directional","z"));
+    tr4.appendChild(td_cbox("shadow_directional",false,"shadow"));
+    
+    var tr5 = document.createElement('tr');
+    tr5.appendChild(td_input("smsw_directional","shadow.mapSize.width"));
+    tr5.appendChild(td_input("smsh_directional","shadow.mapSize.height"));
+    tr5.appendChild(td_input("scn_directional","shadow.camera.near"));
+    tr5.appendChild(td_input("scf_directional","shadow.camera.far"));
+    
+    var tr6 = document.createElement('tr');
+    tr6.appendChild(td_hr(4));
+    
+    var tr7 = document.createElement('tr');
+    tr7.appendChild(td_cbox_text_colspan("cbox_point","point",true,2));
+    tr7.appendChild(td_color("color_point","#ffffff"));
+    tr7.appendChild(td_input("intensity_point","intensity"));
+    
+    var tr8 = document.createElement('tr');
+    tr8.appendChild(td_input("x_point","x"));
+    tr8.appendChild(td_input("y_point","y"));
+    tr8.appendChild(td_input("z_point","z"));
+    tr8.appendChild(td_cbox("marker_point",false,"show marker"));
+    
+    var tr9 = document.createElement('tr');
+    tr9.appendChild(td_input("distance_point","distance"));
+    tr9.appendChild(td_input("decay_point","decay"));
+    tr9.appendChild(td_text("00"));
+    tr9.appendChild(td_cbox("shadow_point",false,"shadow"));
+    
+    var tr10 = document.createElement('tr');
+    tr10.appendChild(td_input("smsw_point","shadow.mapSize.width"));
+    tr10.appendChild(td_input("smsh_point","shadow.mapSize.height"));
+    tr10.appendChild(td_input("scn_point","shadow.camera.near"));
+    tr10.appendChild(td_input("scf_point","shadow.camera.far"));
+    
+    var tr11 = document.createElement('tr');
+    tr11.appendChild(td_hr(4));
+    
+    var tr12 = document.createElement('tr');
+    tr12.appendChild(td_text("view"));
+    tr12.appendChild(td_cbox_text_colspan("perspective_view","perspective",false,4,"center"));
+    
+    var tr13 = document.createElement('tr');
+    tr13.appendChild(td_input("zoom_view","zoom"));
+    tr13.appendChild(td_input("distance_view","distance"));
+    tr13.appendChild(td_input("y_view","y angle degrees"));
+    tr13.appendChild(td_input("z_view","z angle degrees"));
+    
+    var tr14 = document.createElement('tr');
+    tr14.appendChild(td_hr(4));
+    
+    var tr15 = document.createElement('tr');
+    tr15.appendChild(td_cbox_text_colspan("cbox_track","draw track",false,2));
+    tr15.appendChild(td_color("color_track","#808080"));
+    tr15.appendChild(td_input("length_track","track length"));
+    
+    var tbox = [tr1,tr2,tr3,tr4,tr5,tr6,tr7,tr8,tr9,tr10,tr11,tr12,tr13,tr14,tr15];
+    for (i=0;i<tbox.length;i++) {tbody.appendChild(tbox[i]);}
+    return tbody;
+}
+function lamp_gui_creator(){
+    var table = document.createElement('table');
+    table.appendChild(lamp_gui_tbody());
+    var box = document.getElementById("tab_c3");
+    box.appendChild(table);
+}
+
 ok_gui_creator();
 size_gui_creator();
 look_gui_creator();
+lamp_gui_creator();

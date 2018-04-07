@@ -116,10 +116,11 @@ input {vertical-align: middle;}
 	left: 0;
 	opacity: 1;}
 table.data{ background:yellow;}
-table.data td input{width:55px !important;height:35 px !important;background:lightgreen !important;left:0;}
+/* table.data td input{width:55px !important;height:35 px !important;background:lightgreen !important;left:0;} */
+
 
 /* gui section new code*/
-input {width:50px;}
+input {width:36px;padding: 0;}
 td {width:50px;text-align: center;}
 button.b50px{
 	width:46px;height:24px;
@@ -135,4 +136,9 @@ input[type="checkbox"]{
 }
 input[type="radio"]{
 	width: 10px;
+}
+input[type="color"]{
+	/* width: 20px;
+	padding: 0;
+	border-width:0; */
 }
