@@ -15,6 +15,7 @@ function ok_gui_creator(){
     b_ok.className = "b50px";
     b_ok.textContent = "ok";
     b_ok.tabIndex = 1;
+    b_ok.onclick = function() {wheel_creator();};
     b_png.className = "b50px";
     b_png.textContent = "png";
     b_save.className = "b50px";
@@ -135,6 +136,7 @@ function td_radio(id, name, value, checked = false){
     radio.type = "radio";
     radio.className = "guiradio";
     radio.name = name;
+    radio.id = id;
     radio.defaultChecked = checked;
     radio.value = value;
     td.appendChild(radio);
@@ -153,9 +155,9 @@ function td_color(id, co = "#000000"){
 function balert(x){
     alert(x);//need two
 }
-function td_button(text, callback){
+function td_button(text, callback, title = ""){
     var td = document.createElement('td');
-    var btn = "<button onclick=\""+callback+"\">"+text+"</button>";
+    var btn = "<button title=\""+title+"\" onclick=\""+callback+"\">"+text+"</button>";
     td.innerHTML = btn;
     return td;
 }
@@ -191,23 +193,23 @@ function look_gui_tbody(){
     
     var tr5 = document.createElement('tr');
     tr5.appendChild(td_cbox("cbox_s1",true)); tr5.appendChild(td_color("c1","#808080"));
-    tr5.appendChild(td_input("s5")); tr5.appendChild(td_text("s5")); //repeat input
+    tr5.appendChild(td_input("s5","repeat by width")); tr5.appendChild(td_text("s5")); //repeat input
     
     var tr6 = document.createElement('tr');
     tr6.appendChild(td_cbox("cbox_s2",true)); tr6.appendChild(td_color("c2","#808080"));
-    tr6.appendChild(td_input("s6")); tr6.appendChild(td_text("s6")); //grips
+    tr6.appendChild(td_input("s6","grips number by lenght")); tr6.appendChild(td_text("s6")); //grips
     
     var tr7 = document.createElement('tr');
     tr7.appendChild(td_cbox("cbox_s3",true)); tr7.appendChild(td_color("c3","#000000"));
-    tr7.appendChild(td_input("s7")); tr7.appendChild(td_text("s7")); //% grip from grip + hole = steps
+    tr7.appendChild(td_input("s7","grip % by grip + hole")); tr7.appendChild(td_text("s7")); //% grip from grip + hole = steps
     
     var tr8 = document.createElement('tr');
     tr8.appendChild(td_cbox("cbox_s4",true)); tr8.appendChild(td_color("c4","#ffff00"));
-    tr8.appendChild(td_input("s8")); tr8.appendChild(td_text("s8")); //bolt angles
+    tr8.appendChild(td_input("s8","bolt angles space separated")); tr8.appendChild(td_text("s8")); //bolt angles
     
     var tr9 = document.createElement('tr');
     tr9.appendChild(td_cbox("cbox_s5",true)); tr9.appendChild(td_color("c5","#000000"));
-    tr9.appendChild(td_button("mix","balert('testalerttext')")); tr9.appendChild(td_text("00"));
+    tr9.appendChild(td_button("mix","balert('testalerttext')","mix bolt angles")); tr9.appendChild(td_text("00"));
     
     var tbox = [tr1,tr2,tr3,tr4,tr5,tr6,tr7,tr8,tr9];
     for (i=0;i<tbox.length;i++) {tbody.appendChild(tbox[i]);}
@@ -353,7 +355,7 @@ function start_data_writer(){
     var values = [
         0,0,0,0,0,0,0,0,0,
         0,0,0,0,0,0,0,0,0,
-        100,100,100,100,100,100,100,100,
+        100,100,100,100,4,32,50,0,
         1,
         1,
         500,500,500,

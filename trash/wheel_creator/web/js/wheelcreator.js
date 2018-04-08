@@ -1,3 +1,4 @@
+var maxsize = 1000; // radius max size for wheel , that scaling other sizes to camera field;
 
 var geo = new GeometryXD();
 
@@ -283,6 +284,48 @@ function change_camera_test(a,b,c){
 	// controls.reset(); // worked reset to default
 	camera.position.set(a,b,c);
 	controls.target = new THREE.Vector3();
+}
+
+function inputs_reader(ids,rez = []){
+	for (i=0;i<ids.length;i++){
+		rez.push(parseFloat(document.getElementById(ids[i]).value));
+	}return rez;
+}
+function hsize_reader(prefix=[]){
+	var inputs = ["h1","h2","h3","h4","h5","h6","h7","h8","h9"];
+	var invals = inputs_reader(inputs,prefix);
+	return invals;
+}
+function wsize_reader(prefix=[]){
+	var inputs = ["w1","w2","w3","w4","w5"];
+	var invals = inputs_reader(inputs,prefix);
+	return invals;
+}
+function bsize_reader(prefix=[]){
+	var inputs = ["b1","b2","b3","b4"];
+	var invals = inputs_reader(inputs,prefix);
+	return invals;
+}
+function ssize_reader(prefix=[]){
+	var inputs = ["s1","s2","s3","s4","s5","s6","s7","s8"];
+	var invals = inputs_reader(inputs,prefix);
+	return invals;
+}
+function grip_reader(){
+	var rez="";
+	if (document.getElementById("g1").checked){rez = document.getElementById("g1").value;}
+	else if (document.getElementById("g2").checked){rez = document.getElementById("g2").value;}
+	else if (document.getElementById("g3").checked){rez = document.getElementById("g3").value;}
+	else if (document.getElementById("g4").checked){rez = document.getElementById("g4").value;}
+	return rez;
+}
+function wheel_creator(){
+	var h = hsize_reader(["undefined"]);
+	var w = wsize_reader(["undefined"]);
+	var b = bsize_reader(["undefined"]);
+	var s = ssize_reader(["undefined"]);
+	var g = grip_reader();
+	alert(g);
 }
 
 
