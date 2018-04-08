@@ -41,12 +41,48 @@ function td_hr(colspan = 1){
     td.appendChild(document.createElement('hr'));
     return td;
 }
-function td_text(text){
+function td_text(text, color = ""){
     var td = document.createElement('td');
-    td.setAttribute("style","vertical-align:middle;")
+    var style = "";
+    if (color == ""){ style = "vertical-align:middle;"; }
+    else{style = "vertical-align:middle;color:"+color+";";}
+    td.setAttribute("style",style);
     td.innerHTML = text;
     return td;
 }
+function text_tag(text,color){
+    var t = document.createElement('text');
+    t.innerHTML = text;
+    t.setAttribute("style", "vertical-align:middle;color:"+color+";");
+    return t;
+}
+function cbox_tag(id,checked = false){
+    var cbox = document.createElement('input');
+    cbox.type = "checkbox";
+    cbox.defaultChecked = checked;;
+    return cbox;
+}
+function td_text_multicolor(texts = [], colors = []){
+    var td = document.createElement("td");
+    if (texts.length == colors.length){
+        for (i=0;i<texts.length;i++){
+            td.appendChild(text_tag(texts[i],colors[i]));
+        }
+    }
+    return td;
+}
+function td_cbox_text_multicolor_colspan(id, checked = false, texts = [], colors = [], colspan = 1){
+    var td = document.createElement("td");
+    td.colSpan = colspan;
+    td.appendChild(cbox_tag(id, checked));
+    if (texts.length == colors.length){
+        for (i=0;i<texts.length;i++){
+            td.appendChild(text_tag(texts[i],colors[i]));
+        }
+    }
+    return td;
+}
+
 function td_input(id, title = ""){
     var td = document.createElement('td');
     var input = document.createElement('input');
@@ -268,11 +304,22 @@ function lamp_gui_tbody(){
     tr14.appendChild(td_hr(4));
     
     var tr15 = document.createElement('tr');
-    tr15.appendChild(td_cbox_text_colspan("cbox_track","draw track",false,2));
-    tr15.appendChild(td_color("color_track","#808080"));
-    tr15.appendChild(td_input("length_track","track length"));
+    tr15.appendChild(td_cbox_text_colspan("wireframe","hull",false));
+    tr15.appendChild(td_cbox_text_multicolor_colspan("axes",false,["x","y","z"],["red","green","blue"]));
+    tr15.appendChild(td_input("angle","wheel angle"));
+    tr15.appendChild(td_input("extrude","wheel extrude %"));
     
-    var tbox = [tr1,tr2,tr3,tr4,tr5,tr6,tr7,tr8,tr9,tr10,tr11,tr12,tr13,tr14,tr15];
+    var tr16 = document.createElement('tr');
+    tr16.appendChild(td_hr(4));
+    
+    var tr17 = document.createElement('tr');
+    tr17.appendChild(td_cbox_text_colspan("cbox_track","draw track",false,2));
+    tr17.appendChild(td_color("color_track","#808080"));
+    tr17.appendChild(td_input("length_track","track length"));
+    
+    
+    
+    var tbox = [tr1,tr2,tr3,tr4,tr5,tr6,tr7,tr8,tr9,tr10,tr11,tr12,tr13,tr14,tr15,tr16,tr17];
     for (i=0;i<tbox.length;i++) {tbody.appendChild(tbox[i]);}
     return tbody;
 }
@@ -300,6 +347,7 @@ function start_data_writer(){
         "distance_point","decay_point",
         "smsw_point","smsh_point","scn_point","scf_point",
         "zoom_view","distance_view","y_view","z_view",
+        "angle","extrude",
         "length_track"
     ];
     var values = [
@@ -315,6 +363,7 @@ function start_data_writer(){
         1000,2,
         512,512,0.5,500,
         1,1000,0,0,
+        0,100,
         1000
     ];
     for (i=0;i<ids.length;i++){id_value(ids[i],values[i])}
