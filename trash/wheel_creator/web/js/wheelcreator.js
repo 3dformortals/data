@@ -319,6 +319,12 @@ function grip_reader(){
 	else if (document.getElementById("g4").checked){rez = document.getElementById("g4").value;}
 	return rez;
 }
+function hfull(h){
+	
+}
+function scale_counter(h,w){
+	var scale = Math.max([hfull(h),wfull(w)]);
+}
 function wheel_creator(){
 	var h = hsize_reader(["undefined"]);
 	var w = wsize_reader(["undefined"]);
