@@ -1,16 +1,16 @@
 <html>
     <body>
-        <table>
+        <table style="width:800px;">
             <tbody>
                 <tr>
                     <td colspan="2"><button onclick="md_creator()">vscode codedox haxe to md file shallow docs generator</button></td>
                 </tr>
                 <tr>
-                    <td>
-                        <textarea id="incoming" title="haxe with codedox syntax"></textarea>
+                    <td style="height:400px;">
+                        <textarea id="incoming" title="haxe with codedox syntax" style="width:100%;height: 100%;border:none;"></textarea>
                     </td>
-                    <td>
-                        <textarea id="output" title="md sytnax"></textarea>
+                    <td style="height:400px;">
+                        <textarea id="output" title="md result sytnax" style="width:100%; height:100%;border:none;"></textarea>
                     </td>
                 </tr>
             </tbody>
@@ -42,8 +42,8 @@
         rez = rez.split("{")[0];
         rez = rez.split(";")[0];
         rez = rez.split("=")[0];
-        rez = rez.replace("<","&lt;");
-        rez = rez.replace(">","&gt;");
+        // rez = rez.replace("<","&lt;");
+        // rez = rez.replace(">","&gt;");
         rez = monospace_creator(rez);
         rez = "```haxe  \n"+rez+"\n```  ";
         return rez;
