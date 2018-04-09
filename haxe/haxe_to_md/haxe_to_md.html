@@ -45,6 +45,7 @@
         rez = rez.replace("<","&lt;");
         rez = rez.replace(">","&gt;");
         rez = monospace_creator(rez);
+        rez = "```haxe  \n"+rez+"\n```  ";
         return rez;
     }
     function md_builder(texts,methods){
