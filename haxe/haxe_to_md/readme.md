@@ -1,25 +1,3 @@
-
----
-```haxe  
- class GeometryXD
-```    
- * test string for docs
- 
----
-```haxe  
- public static function main()
-```    
- * sht docs gen not working again
- 
----
-```haxe  
- public static function positive_inside_I(a:Array<Int>):Bool
-```    
- * return true if incoming array have at least one positive element
- * 
----
-```haxe  
- public static function zero_inside_I(a:Array<Int>):Bool
-```    
- return true if incoming Int Array have at least one zero element
- 
+# Convert haxe codedox syntax to md shallow docs syntax.  
+## html file with embedded javascript.  
+### Not completed, should be lags. Tested and work done only with limit variants of codedox syntax(standard form declared functions).
