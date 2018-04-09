@@ -30,6 +30,8 @@
         var rez = x.split("@param")[0];
         rez = rez.split("@return")[0];
         rez = rez.split("*/")[0];
+        rez = rez.replace("<","&lt;");
+        rez = rez.replace(">","&gt;");
         rez = monospace_creator(rez);
         return rez;
     }
@@ -40,6 +42,8 @@
         rez = rez.split("{")[0];
         rez = rez.split(";")[0];
         rez = rez.split("=")[0];
+        rez = rez.replace("<","&lt;");
+        rez = rez.replace(">","&gt;");
         rez = monospace_creator(rez);
         return rez;
     }
