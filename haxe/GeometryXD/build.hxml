@@ -1,6 +1,6 @@
 -cp .
 -D doc-gen
---macro include('geo')
+--macro include('geometryxd')
 --no-output
 --each
 
