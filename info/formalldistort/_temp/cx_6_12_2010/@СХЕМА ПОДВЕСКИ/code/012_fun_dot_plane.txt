@@ -1,8 +1,0 @@
-function D_dot_plane(X,Y,Z,A,B,C,D)
-
-D_dot_plane = abs(A*X + B*Y + C*Z + D)/(A^2 + B^2 + C^2)^0.5
-
-end function
-
-X,Y,Z - координаты точки
-A,B,C,D - составляющие нормального вектора плоскости
