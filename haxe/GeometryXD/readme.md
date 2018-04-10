@@ -35,7 +35,7 @@ lot of functions targeted for work with 3D elements
   * `>>> print( geo.vecXDback([3,2,1]))` -> `[-3, -2, -1]`
   ---
   # compiling to javascript  
-  * terminal inside `GeometryXD/js` folder or remove all `static` keywords from `GeometryXD.hx` source except `public static main()` method
+  * terminal inside `GeometryXD/js` folder or remove all `static` keywords from `GeometryXD.hx` source except `public static main()` method, and replace begin string `package;` to `@:expose`
   * `haxe -main GeometryXD -js geo.js`
   ## usage
   for file tree  
