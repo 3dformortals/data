@@ -1,23 +1,25 @@
+/*
+ * Copyright (c) 2018 llll
+*/
 package geo;
 /**
- *  test string for docs
+  GeometryXD - multidimensional geometry manipulations. Primarily targeted for 3D objects (points, vectors, curves). Not pro level library.
  */
 class GeometryXD{
     /**
-     *  sht docs gen not working again
+      trace "GeometryXD" message in time of initialisation
      */
     public static function main(){trace("GeometryXD");}
     
     /**
-     *  return true if incoming array have at least one positive element
-     *  @param a - incoming array
-     *  @return Bool
+      return true if incoming Int Array have at least one positive element
+      @param a - incoming array
+      @return Bool
      */
     public static function positive_inside_I(a:Array<Int>):Bool{
         for (i in a){ if (i > 0){ return true; } }
         return false;
     }
-    
     /**
       return true if incoming Int Array have at least one zero element
       @param a - incoming array
@@ -27,60 +29,139 @@ class GeometryXD{
         for (i in a){ if (i == 0){ return true; } }
         return false;
     }
+    /**
+      return true if incoming Int Array have at least one negative element
+      @param a - incoming array
+      @return Bool
+     */
     public static function negative_inside_I(a:Array<Int>):Bool{
         for (i in a){ if (i < 0){ return true; } }
         return false;
     }
-    
+    /**
+      return true if incoming Float Array have at least one positive element
+      @param a - incoming array
+      @return Bool
+     */
     public static function positive_inside_F(a:Array<Float>):Bool{
         for (i in a){ if (i > 0){ return true; } }
         return false;
     }
+    /**
+      return true if incoming Float Array have at least one zero element
+      @param a - incoming array
+      @return Bool
+     */
     public static function zero_inside_F(a:Array<Float>):Bool{
         for (i in a){ if (i == 0){ return true; } }
         return false;
     }
+    /**
+      return true if incoming Float Array have at least one negative element
+      @param a - 
+      @return Bool
+     */
     public static function negative_inside_F(a:Array<Float>):Bool{
         for (i in a){ if (i < 0){ return true; } }
         return false;
     }
     
-    public static function sum_I(a:Array<Int>):Int{
-        var rez:Int = 0;
-        for (i in 0...a.length){ rez += i;}
+    /**
+      return sum of Int Array elements
+      @param a - incoming array
+      @return Null<Int>
+     */
+    public static function sum_I(a:Array<Int>):Null<Int>{
+        var rez:Null<Int> = null;
+        if (a.length > 0){ rez = 0; for (i in 0...a.length){ rez += i; } }
         return rez;
     }
-    public static function sum_F(a:Array<Float>):Float{
-        var rez:Float = 0;
-        for (i in 0...a.length){ rez += i;}
+    /**
+      return sum of Float Array elements
+      @param a - incoming array
+      @return Null<Float>
+     */
+    public static function sum_F(a:Array<Float>):Null<Float>{
+        var rez:Null<Float> = null;
+        if (a.least > 0){ rez = 0; for (i in 0...a.length){ rez += i; } }
         return rez;
     }
-    public static function diff_I(a:Array<Int>):Int{
-        var rez:Int = a[0];
-        for (i in 1...a.length){ rez -= i;}
+    /**
+      return diff between first and other Int Array elements
+      @param a - incoming array
+      @return Null<Int>
+     */
+    public static function diff_I(a:Array<Int>):Null<Int>{
+        var rez:Null<Int> = null;
+        var al:Int = a.length;
+        if (al > 0){
+            if (al == 1){ rez = a[0]; }
+            else{ rez = a[0] - sum_I([for (i in 1...al)] i); }
+        }return rez;
+    }
+    /**
+      return diff between first and other Float Array elements
+      @param a - incoming array
+      @return Null<Float>
+     */
+    public static function diff_F(a:Array<Float>):Null<Float>{
+        var rez:Null<Float> = null;
+        var al:Int = a.length;
+        if (al > 0){
+            if (al == 1){ rez = a[0]; }
+            else{ rez = a[0] - sum_F([for (i in 1...al)] i); }
+        }return rez;
+    }
+    /**
+      return middle value of Float Array
+      @param a - incoming array
+      @return Null<Float>
+     */
+    public static function middle_F(a:Array<Float>):Null<Float>{
+        var rez:Null<Float> = null;
+        var al:Int = a.length;
+        if (al > 0){ rez = sum_F(a) / al; }
         return rez;
     }
-    public static function diff_F(a:Array<Float>):Float{
-        var rez:Float = a[0];
-        for (i in 1...a.length){ rez -= i;}
-        return rez;
-    }
-    public static function middle_F(a:Array<Float>):Float{
-        return sum_F(a) / a.length;
-    }
+    /**
+      multiplies each element of the Float Array by a Float
+      @param a - incoming array
+      @param n - multiplier of each element
+      @return Array<Float>
+     */
     public static function multiply_FperF(a:Array<Float>, n:Float):Array<Float>{
-        return [for (i in 0...a.length) a[i] * n];
-    }
-    public static function multiply_I(a:Array<Int>):Int{
-        var rez:Int = a[0];
-        for (i in 1...a.length){ rez *= i;}
+        var rez:Array<Float> = null;
+        var al:Int = a.length;
+        if (al > 0){ rez = [for (i in 0...al) a[i] * n]; }
         return rez;
     }
-    public static function multiply_F(a:Array<Float>):Float{
-        var rez:Float = a[0];
-        for (i in 1...a.length){ rez *= i;}
-        return rez;
+    /**
+      multiplies all elements of an Int Array. [1, 2, 3] return 1 * 2 * 3
+      @param a - incoming array
+      @return Null<Int>
+     */
+    public static function multiply_I(a:Array<Int>):Null<Int>{
+        var rez:Null<Int> = null;
+        var al:Int = a.length;
+        if (al > 0){
+            rez = a[0];
+            for(i in 1...al){ rez *= a[i]; }
+        }return rez;
     }
+    /**
+      multiplies all elements of an Float Array. [1.1, 2.0, 3.0] return 1.1 * 2.0 * 3.0
+      @param a - incoming array
+      @return Null<Float>
+     */
+    public static function multiply_F(a:Array<Float>):Null<Float>{
+        var rez:Null<Float> = null;
+        var al:Int = a.length;
+        if (al > 0){
+            rez = a[0];
+            for(i in 1...al){ rez *= a[i]; }
+        }return rez;
+    }
+    //done before
     public static function minus_I(a:Array<Int>):Array<Int>{
         return [for (i in 0...a.length) -a[i]];
     }

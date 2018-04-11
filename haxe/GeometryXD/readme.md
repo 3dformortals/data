@@ -1,9 +1,9 @@
 # GeometryXD
 
 ## readme under development
-
-multidimensional geometry lib  
-lot of functions targeted for work with 3D elements
+multidimensional geometry manipulations.
+Primarily targeted for 3D objects (points, vectors, curves).
+Not pro level library. Just my own result.
 
 - dot
   - offset
