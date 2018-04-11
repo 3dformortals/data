@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018 llll
 */
-package geo;
+package;
 /**
   GeometryXD - multidimensional geometry manipulations. Primarily targeted for 3D objects (points, vectors, curves). Not pro level library.
  */
@@ -65,6 +65,40 @@ class GeometryXD{
         for (i in a){ if (i < 0){ return true; } }
         return false;
     }
+    /**
+      return true if Int Arrays have same size
+      @param a - incoming arrays
+      @return Null<Bool>
+     */
+    public static function same_size_I(a:Array<Array<Int>>):Null<Bool>{
+        var rez:Null<Bool> = null;
+        var al:Int = a.length;
+        if (al > 1){
+            rez = true;
+            var size:Int = a[0].length;
+            for (i in 1...al){
+                if (size != a[i].length) { return false; }
+            }
+        }else{return true;}
+        return rez;
+    }
+    /**
+      return true if Float Arrays have same size
+      @param a - incoming arrays
+      @return Null<Bool>
+     */
+    public static function same_size_F(a:Array<Array<Float>>):Null<Bool>{
+        var rez:Null<Bool> = null;
+        var al:Int = a.length;
+        if (al > 1){
+            rez = true;
+            var size:Int = a[0].length;
+            for (i in 1...al){
+                if (size != a[i].length) { return false; }
+            }
+        }else{return true;}
+        return rez;
+    }
     
     /**
       return sum of Int Array elements
@@ -73,7 +107,8 @@ class GeometryXD{
      */
     public static function sum_I(a:Array<Int>):Null<Int>{
         var rez:Null<Int> = null;
-        if (a.length > 0){ rez = 0; for (i in 0...a.length){ rez += i; } }
+        var al:Int = a.length;
+        if (al > 0){ rez = 0; for (i in 0...al){ rez += i; } }
         return rez;
     }
     /**
@@ -83,11 +118,12 @@ class GeometryXD{
      */
     public static function sum_F(a:Array<Float>):Null<Float>{
         var rez:Null<Float> = null;
-        if (a.least > 0){ rez = 0; for (i in 0...a.length){ rez += i; } }
+        var al:Int = a.length;
+        if (al > 0){ rez = 0; for (i in 0...al){ rez += i; } }
         return rez;
     }
     /**
-      return diff between first and other Int Array elements
+      return diff between first and others Int Array elements
       @param a - incoming array
       @return Null<Int>
      */
@@ -96,11 +132,11 @@ class GeometryXD{
         var al:Int = a.length;
         if (al > 0){
             if (al == 1){ rez = a[0]; }
-            else{ rez = a[0] - sum_I([for (i in 1...al)] i); }
+            else{ rez = a[0] - sum_I([for (i in 1...al) i]); }
         }return rez;
     }
     /**
-      return diff between first and other Float Array elements
+      return diff between first and others Float Array elements
       @param a - incoming array
       @return Null<Float>
      */
@@ -109,7 +145,7 @@ class GeometryXD{
         var al:Int = a.length;
         if (al > 0){
             if (al == 1){ rez = a[0]; }
-            else{ rez = a[0] - sum_F([for (i in 1...al)] i); }
+            else{ rez = a[0] - sum_F([for (i in 1...al) i]); }
         }return rez;
     }
     /**
@@ -124,7 +160,19 @@ class GeometryXD{
         return rez;
     }
     /**
-      multiplies each element of the Float Array by a Float
+      multiplies each element of an Int Array by Int
+      @param a - incoming array
+      @param n - multiplier of each element
+      @return Array<Int>
+     */
+    public static function multiply_IperI(a:Array<Int>, n:Int):Array<Int>{
+        var rez:Array<Int> = null;
+        var al:Int = a.length;
+        if (al > 0){ rez = [for (i in 0...al) a[i] * n]; }
+        return rez;
+    }
+    /**
+      multiplies each element of an Float Array by Float
       @param a - incoming array
       @param n - multiplier of each element
       @return Array<Float>
@@ -161,20 +209,44 @@ class GeometryXD{
             for(i in 1...al){ rez *= a[i]; }
         }return rez;
     }
-    //done before
+    /**
+      multiplies each element of the Int Array by -1
+      @param a - incoming array
+      @return Array<Int>
+     */
     public static function minus_I(a:Array<Int>):Array<Int>{
         return [for (i in 0...a.length) -a[i]];
     }
+    /**
+      multiplies each element of the Float Array by -1
+      @param a - incoming array
+      @return Array<Float>
+     */
     public static function minus_F(a:Array<Float>):Array<Float>{
         return [for (i in 0...a.length) -a[i]];
     }
-    
+    // done recode bottom 
+    /**
+      return Int Array which is Int Arrays sum. [[1, 2, 3], [-3, -2, -1]] return [-2, 0, 2]
+      @param a - incoming arrays
+      @return Array<Int>
+     */
     public static function sum_xI(a:Array<Array<Int>>):Array<Int>{
-        return [for (i in 0...a[0].length) sum_I([for (ai in 0...a.length) a[ai][i] ]) ];
+        var rez:Array<Int> = null;
+        if ( same_size_I(a) ){ rez = [for (i in 0...a[0].length) sum_I([for (ai in 0...a.length) a[ai][i] ]) ]; }
+        return rez;
     }
+    /**
+      return Float Array which is Float Arrays sum. [[1.1, 2, 3], [-3, -2, -1]] return [-1.9, 0, 2]
+      @param a - incoming arrays
+      @return Array<Float>
+     */
     public static function sum_xF(a:Array<Array<Float>>):Array<Float>{
-        return [for (i in 0...a[0].length) sum_F([for (ai in 0...a.length) a[ai][i] ]) ];
+        var rez:Array<Float> = null;
+        if ( same_size_F(a) ){ rez = [for (i in 0...a[0].length) sum_F([for (ai in 0...a.length) a[ai][i] ]) ]; }
+        return rez;
     }
+    
     public static function diff_xI(a:Array<Array<Int>>):Array<Int>{
         return [for (i in 0...a[0].length) diff_I([for (ai in 0...a.length) a[ai][i] ]) ];
     }
@@ -568,7 +640,7 @@ class GeometryXD{
         }return false;
     }
     public static function vecXDfieldsame(vecXDfield:Array<Array<Float>>):Bool{
-        if (vecXDfieldsamesize(vecXDfield)){
+        if (same_size_F(vecXDfield)){
             for (i in 1...vecXDfield.length){
                 if (!vecXDsame(vecXDfield[0], vecXDfield[i])) { return false; }
             }return true;
@@ -660,14 +732,11 @@ class GeometryXD{
     public static function vecXDmiddle(vecXDa:Array<Float>, vecXDb:Array<Float>):Array<Float>{
         return middle_xF([vecXDa, vecXDb]);
     }
-    public static function vecXDsamesize(vecXDa:Array<Float>, vecXDb:Array<Float>):Bool{
-        return vecXDa.length == vecXDb.length;
+    public static function vecXDsamesize(vecXDa:Array<Float>, vecXDb:Array<Float>):Null<Bool>{
+        return same_size_F([vecXDa, vecXDb]);
     }
-    public static function vecXDfieldsamesize(vecXDfield:Array<Array<Float>>):Bool{
-        var thesize:Int = vecXDfield[0].length;
-        for (i in 1...vecXDfield.length){
-            if (thesize != vecXDfield[i].length) {return false;}
-        }return true;
+    public static function vecXDfieldsamesize(vecXDfield:Array<Array<Float>>):Null<Bool>{
+        return same_size_F(vecXDfield);
     }
     public static function vecXDfieldmiddle(vecXDfield:Array<Array<Float>>):Array<Float>{
         return middle_xF(vecXDfield);
@@ -787,8 +856,8 @@ class GeometryXD{
     ):Array<Array<Float>>{
         var rez:Array<Array<Float>> = null;
         if (
-            !vecXDfieldsamesize(vec3Dfield) ||
-            !vecXDfieldsamesize(vec3Daxes) ||
+            !same_size_F(vec3Dfield) ||
+            !same_size_F(vec3Daxes) ||
             vec3Dfield[0].length != 3 ||
             vec3Daxes[0].length != 3 ||
             zero_inside_F(vecXDfieldmod(vec3Dfield)) ||
@@ -837,7 +906,7 @@ class GeometryXD{
     public static function plane3D_3dots(dot3D:Array<Float>, dot3Da:Array<Float>, dot3Db:Array<Float>):Array<Float>{
         var rez:Array<Float> = null;
         if (
-            !vecXDfieldsamesize([dot3D, dot3Da, dot3Db]) ||
+            !same_size_F([dot3D, dot3Da, dot3Db]) ||
             vecXDsame(dot3D, dot3Da) ||
             vecXDsame(dot3D, dot3Db) ||
             vecXDsame(dot3Da, dot3Db)
@@ -896,7 +965,7 @@ class GeometryXD{
     public static function curve3Dbeziercubic(dot3D1:Array<Float>, vec3D1:Array<Float>, distance1:Float, dot3D2:Array<Float>, vec3D2:Array<Float>, distance2:Float):Array<Array<Float>>{
         var rez:Array<Array<Float>> = null;
         if (
-            !vecXDfieldsamesize([dot3D1, vec3D1, dot3D2, vec3D2]) ||
+            !same_size_F([dot3D1, vec3D1, dot3D2, vec3D2]) ||
             dot3D1.length != 3
         ){ return rez; }
         var r1:Array<Float> = dotXDoffset(dot3D1, vec3D1, distance1);
@@ -907,7 +976,7 @@ class GeometryXD{
     public static function curve3Dbeziercubic_3dots(dot3D0:Array<Float>, dot3D1:Array<Float>, dot3D2:Array<Float>, lever1:Float = 0.55, lever2:Float = 0.55, a_s:Int = -1):Array<Array<Float>>{
         var rez:Array<Array<Float>> = null;
         if (
-            !vecXDfieldsamesize([dot3D0, dot3D1, dot3D2]) ||
+            !same_size_F([dot3D0, dot3D1, dot3D2]) ||
             dot3D0.length != 3
             ){ return rez; }
         var v1:Array<Float> = vecXD(dot3D0, dot3D1);
@@ -966,7 +1035,7 @@ class GeometryXD{
         if (
             curve.length == 4 &&
             curve[0].length == 3 &&
-            vecXDfieldsamesize(curve)
+            same_size_F(curve)
         ){
             rez = [for (i in 0...4) for (ai in 0...3) curve[i][ai]];
         }return rez;
@@ -980,7 +1049,7 @@ class GeometryXD{
     public static function beziercubic3D_derivativeparameters(curve:Array<Array<Float>>):Array<Array<Float>>{
         var rez:Array<Array<Float>> = null;
         var cl:Int = curve.length;
-        if ( cl == 4 && curve[0].length == 3 && vecXDfieldsamesize(curve)){
+        if ( cl == 4 && curve[0].length == 3 && same_size_F(curve)){
             rez = [for (i in 0...3) [for (p in 0...4) curve[p][i]]];
         }return rez;
     }
@@ -997,7 +1066,7 @@ class GeometryXD{
         if (
             curve.length == 4 &&
             curve[0].length == 3 &&
-            vecXDfieldsamesize(curve)
+            same_size_F(curve)
         ){
             rez = [for (i in beziercubic3D_derivativeparameters(curve)) beziercubic_derivative(i, p)];
         }return rez;
@@ -1011,7 +1080,7 @@ class GeometryXD{
     public static function beziercubic3D_support_dot_one(curve3D_4dots:Array<Array<Float>>):Array<Float>{
         var rez:Array<Float> = null;
         var c:Array<Array<Float>> = curve3D_4dots;
-        if (c.length != 4 || !vecXDfieldsamesize(c)){ return rez; }
+        if (c.length != 4 || !same_size_F(c)){ return rez; }
         rez = [for (i in beziercubic3D_derivativeparameters(c)) beziercubic_support_dot_one(i)];
         return rez;
     }
@@ -1024,13 +1093,13 @@ class GeometryXD{
     public static function beziercubic3D_support_dot_two(curve3D_4dots:Array<Array<Float>>):Array<Float>{
         var rez:Array<Float> = null;
         var c:Array<Array<Float>> = curve3D_4dots;
-        if (c.length != 4 || !vecXDfieldsamesize(c)){ return rez; }
+        if (c.length != 4 || !same_size_F(c)){ return rez; }
         rez = [for (i in beziercubic3D_derivativeparameters(c)) beziercubic_support_dot_two(i)];
         return rez;
     }
     public static function beziercubic3D_follow_4dots_trajectory(dots:Array<Array<Float>>):Array<Array<Float>>{
         var rez:Array<Array<Float>> = null;
-        if (dots.length != 4 || !vecXDfieldsamesize(dots)){ return rez; }
+        if (dots.length != 4 || !same_size_F(dots)){ return rez; }
         var dot_one:Array<Float> = beziercubic3D_support_dot_one(dots);
         var dot_two:Array<Float> = beziercubic3D_support_dot_two(dots);
         rez = [dots[0], dot_one, dot_two, dots[3]];
@@ -1051,14 +1120,14 @@ class GeometryXD{
         var rez:Array<Float> = null;
         var c:Array<Array<Float>> = beziercubic3D;
         var p:Float = parameter;
-        if (c.length != 4 || c[0].length != 3 || !vecXDfieldsamesize(c)){ return rez; }
+        if (c.length != 4 || c[0].length != 3 || !same_size_F(c)){ return rez; }
         rez = [for (i in beziercubic3D_derivativeparameters(c)) beziercubic_coordinate(i, p)];
         return rez;
     }
     public static function curve3D_4dots_follow_beziercubic_trajectory(beziercubic3D:Array<Array<Float>>):Array<Array<Float>>{
         var rez:Array<Array<Float>> = null;
         var c:Array<Array<Float>> = beziercubic3D;
-        if (c.length != 4 || !vecXDfieldsamesize(c)){ return rez; }
+        if (c.length != 4 || !same_size_F(c)){ return rez; }
         c[1] = beziercubic3Ddot(c, 1 / 3);
         c[2] = beziercubic3Ddot(c, 2 / 3);
         return c;
@@ -1072,7 +1141,7 @@ class GeometryXD{
         if (
             curve3D.length != 4 ||
             curve3D[0].length != 3 ||
-            !vecXDfieldsamesize(curve3D) ||
+            !same_size_F(curve3D) ||
             vec3D.length != 3
         ){ return rez; }
         return [for (i in curve3D) dotXDoffset(i, vec3D, distance)];
@@ -1088,7 +1157,7 @@ class GeometryXD{
         if (
             curve3D.length != 4 ||
             curve3D[0].length != 3 ||
-            !vecXDfieldsamesize(curve3D) ||
+            !same_size_F(curve3D) ||
             dot3D.length != 3 ||
             vec3D.length != 3 ||
             vecXDmod(vec3D) == 0
@@ -1105,7 +1174,7 @@ class GeometryXD{
         if (
             curve3D.length != 4 ||
             curve3D[0].length != 3 ||
-            !vecXDfieldsamesize(curve3D) ||
+            !same_size_F(curve3D) ||
             dot3D.length != 3 ||
             scale_xyz.length != 3
         ){ return rez; }
@@ -1264,7 +1333,7 @@ class GeometryXD{
         if(
             dot3D.length != 3 ||
             vec3Dsemiaxes.length != 4 ||
-            !vecXDfieldsamesize(vec3Dsemiaxes) ||
+            !same_size_F(vec3Dsemiaxes) ||
             semiaxes.length != 4
         ){ return rez; }
         var t0:Array<Float> = dot3D;
@@ -1370,7 +1439,7 @@ class GeometryXD{
         if(
             dot3D.length != 3 ||
             vec3Dsemiaxes.length != 4 ||
-            !vecXDfieldsamesize(vec3Dsemiaxes) ||
+            !same_size_F(vec3Dsemiaxes) ||
             semiaxes.length != 4 ||
             angle_proportions.length < 1 ||
             negative_inside_F(angle_proportions) ||
@@ -1415,7 +1484,7 @@ class GeometryXD{
         var rez:Array<Array<Float>> = null;
         if (
             dot3D.length != 3 ||
-            !vecXDfieldsamesize(vec3Dfield) ||
+            !same_size_F(vec3Dfield) ||
             vec3Dfield.length != distances.length ||
             vec3Dfield[0].length != 3
         ){ return rez; }
