@@ -165,7 +165,7 @@ class GeometryXD{
       @param n - multiplier of each element
       @return Array<Int>
      */
-    public static function multiply_IperI(a:Array<Int>, n:Int):Array<Int>{
+    public static function multiply_I_I(a:Array<Int>, n:Int):Array<Int>{
         var rez:Array<Int> = null;
         var al:Int = a.length;
         if (al > 0){ rez = [for (i in 0...al) a[i] * n]; }
@@ -177,7 +177,7 @@ class GeometryXD{
       @param n - multiplier of each element
       @return Array<Float>
      */
-    public static function multiply_FperF(a:Array<Float>, n:Float):Array<Float>{
+    public static function multiply_F_F(a:Array<Float>, n:Float):Array<Float>{
         var rez:Array<Float> = null;
         var al:Int = a.length;
         if (al > 0){ rez = [for (i in 0...al) a[i] * n]; }
@@ -193,7 +193,7 @@ class GeometryXD{
         var al:Int = a.length;
         if (al > 0){
             rez = a[0];
-            for(i in 1...al){ rez *= a[i]; }
+            if (al>1){for(i in 1...al){ rez *= a[i]; }}
         }return rez;
     }
     /**
@@ -206,7 +206,7 @@ class GeometryXD{
         var al:Int = a.length;
         if (al > 0){
             rez = a[0];
-            for(i in 1...al){ rez *= a[i]; }
+            if (al>1){for(i in 1...al){ rez *= a[i]; }}
         }return rez;
     }
     /**
@@ -246,33 +246,87 @@ class GeometryXD{
         if ( same_size_F(a) ){ rez = [for (i in 0...a[0].length) sum_F([for (ai in 0...a.length) a[ai][i] ]) ]; }
         return rez;
     }
-    
+    /**
+      return Int Array which is result of diff between first Int Array and others. [[1, 2, 3], [-3, -2, -1]] return [4, 4, 4]
+      @param a - incoming arrays
+      @return Array<Int>
+     */
     public static function diff_xI(a:Array<Array<Int>>):Array<Int>{
-        return [for (i in 0...a[0].length) diff_I([for (ai in 0...a.length) a[ai][i] ]) ];
+        var rez:Array<Int> = null;
+        if ( same_size_I(a) ){ rez = [for (i in 0...a[0].length) diff_I([for (ai in 0...a.length) a[ai][i] ]) ]; }
+        return rez;
     }
+    /**
+      return Float Array which is result of diff between first Float Array and others. [[1.1, 2, 3], [-3, -2, -1]] return [4.1, 4, 4]
+      @param a - incoming arrays
+      @return Array<Float>
+     */
     public static function diff_xF(a:Array<Array<Float>>):Array<Float>{
-        return [for (i in 0...a[0].length) diff_F([for (ai in 0...a.length) a[ai][i] ]) ];
+        var rez:Array<Float> = null;
+        if ( same_size_F(a) ){ rez = [for (i in 0...a[0].length) diff_F([for (ai in 0...a.length) a[ai][i] ]) ]; }
+        return rez;
     }
+    /**
+      return Float Array with middle values from arrays. [[1.1, 2, 3], [-3, -2, -1]] return [(1.1 - 3) / 2, (2 - 2) / 2, (3 - 1) / 2]
+      @param a - incoming arrays
+      @return Array<Float>
+     */
     public static function middle_xF(a:Array<Array<Float>>):Array<Float>{
-        return [for (i in 0...a[0].length) middle_F([for (ai in 0...a.length) a[ai][i] ]) ];
+        var rez:Array<Float> = null;
+        if ( same_size_F(a) ){ rez = [for (i in 0...a[0].length) middle_F([for (ai in 0...a.length) a[ai][i] ]) ]; }
+        return rez;
     }
-    public static function multiply_xFperF(a:Array<Array<Float>>, n:Float):Array<Array<Float>>{
-        return [for (i in 0...a.length) multiply_FperF(a[i], n) ];
+    /**
+      return Int arrays which is result of multiplying each element by Int
+      @param a - incoming arrays
+      @param n - multiplier
+      @return Array<Array<Int>>
+     */
+    public static function multiply_xI_I(a:Array<Array<Int>>, n:Int):Array<Array<Int>>{
+        var rez:Array<Int> = null;
+        if ( a.length > 0 ){ rez = [for (i in 0...a.length) multiply_I_I(a[i], n) ]; }
+        return rez;
     }
+    /**
+      return Float arrays which is result of multiplying each element by Float
+      @param a - incoming arrays
+      @param n - multiplier
+      @return Array<Array<Float>>
+     */
+    public static function multiply_xF_F(a:Array<Array<Float>>, n:Float):Array<Array<Float>>{
+        var rez:Array<Float> = null;
+        if ( a.length > 0 ){ rez = [for (i in 0...a.length) multiply_F_F(a[i], n) ]; }
+        return rez;
+    }
+    /**
+      return Int Array which is result of multiplying arrays. [[1, 2], [3, 4]] return [1 * 3, 2 * 4]
+      @param a - incoming arrays
+      @return Array<Int>
+     */
     public static function multiply_xI(a:Array<Array<Int>>):Array<Int>{
-        return [for (i in 0...a[0].length) multiply_I([for (ai in 0...a.length) a[ai][i] ]) ];
+        var rez:Array<Int> = null;
+        var al:Int = a.length;
+        if (al == 1){
+            rez = a[0];
+        }else if (al > 0){
+            rez = [for (i in 0...a[0].length) multiply_I([for (ai in 0...a.length) a[ai][i] ]) ];
+        }return rez;
     }
+    /**
+      return Float Array which is result of multiplying arrays. [[3.1, 2], [3, 4]] return [3.1 * 3, 2 * 4]
+      @param a - incoming arrays
+      @return Array<Float>
+     */
     public static function multiply_xF(a:Array<Array<Float>>):Array<Float>{
-        return [for (i in 0...a[0].length) multiply_F([for (ai in 0...a.length) a[ai][i] ]) ];
+        var rez:Array<Float> = null;
+        var al:Int = a.length;
+        if (al == 1){
+            rez = a[0];
+        }else if (al > 0){
+            rez = [for (i in 0...a[0].length) multiply_F([for (ai in 0...a.length) a[ai][i] ]) ];
+        }return rez;
     }
-    public static function multisum_xI(a:Array<Array<Int>>):Int{
-        return sum_I(multiply_xI(a));
-    }
-    public static function multisum_xF(a:Array<Array<Float>>):Float{
-        return sum_F(multiply_xF(a));
-    }
-    
-    
+    //done. recode bottom
     public static function sum_previous_I(a:Array<Int>):Array<Int>{
         return [for (i in 0...a.length) (i == 0) ? a[i] : a[i] + a[i - 1]];
     }
