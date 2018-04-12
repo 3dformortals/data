@@ -1,21 +1,20 @@
-/*
- * Copyright (c) 2018 llll
-*/
+/**
+ Copyright (c) 2018 llll
+**/
 package;
 /**
   GeometryXD - multidimensional geometry manipulations. Primarily targeted for 3D objects (points, vectors, curves). Not pro level library.
- */
+**/
 class GeometryXD{
     /**
       trace "GeometryXD" message in time of initialisation
-     */
+    **/
     public static function main(){trace("GeometryXD");}
-    
     /**
       return true if incoming Int Array have at least one positive element
       @param a - incoming array
       @return Bool
-     */
+    **/
     public static function positive_inside_I(a:Array<Int>):Bool{
         for (i in a){ if (i > 0){ return true; } }
         return false;
@@ -24,7 +23,7 @@ class GeometryXD{
       return true if incoming Int Array have at least one zero element
       @param a - incoming array
       @return Bool
-     */
+    **/
     public static function zero_inside_I(a:Array<Int>):Bool{
         for (i in a){ if (i == 0){ return true; } }
         return false;
@@ -33,7 +32,7 @@ class GeometryXD{
       return true if incoming Int Array have at least one negative element
       @param a - incoming array
       @return Bool
-     */
+    **/
     public static function negative_inside_I(a:Array<Int>):Bool{
         for (i in a){ if (i < 0){ return true; } }
         return false;
@@ -42,7 +41,7 @@ class GeometryXD{
       return true if incoming Float Array have at least one positive element
       @param a - incoming array
       @return Bool
-     */
+    **/
     public static function positive_inside_F(a:Array<Float>):Bool{
         for (i in a){ if (i > 0){ return true; } }
         return false;
@@ -51,7 +50,7 @@ class GeometryXD{
       return true if incoming Float Array have at least one zero element
       @param a - incoming array
       @return Bool
-     */
+    **/
     public static function zero_inside_F(a:Array<Float>):Bool{
         for (i in a){ if (i == 0){ return true; } }
         return false;
@@ -60,7 +59,7 @@ class GeometryXD{
       return true if incoming Float Array have at least one negative element
       @param a - 
       @return Bool
-     */
+    **/
     public static function negative_inside_F(a:Array<Float>):Bool{
         for (i in a){ if (i < 0){ return true; } }
         return false;
@@ -69,7 +68,7 @@ class GeometryXD{
       return true if Int Arrays have same size
       @param a - incoming arrays
       @return Null<Bool>
-     */
+    **/
     public static function same_size_I(a:Array<Array<Int>>):Null<Bool>{
         var rez:Null<Bool> = null;
         var al:Int = a.length;
@@ -86,7 +85,7 @@ class GeometryXD{
       return true if Float Arrays have same size
       @param a - incoming arrays
       @return Null<Bool>
-     */
+    **/
     public static function same_size_F(a:Array<Array<Float>>):Null<Bool>{
         var rez:Null<Bool> = null;
         var al:Int = a.length;
@@ -104,7 +103,7 @@ class GeometryXD{
       return sum of Int Array elements
       @param a - incoming array
       @return Null<Int>
-     */
+    **/
     public static function sum_I(a:Array<Int>):Null<Int>{
         var rez:Null<Int> = null;
         var al:Int = a.length;
@@ -115,7 +114,7 @@ class GeometryXD{
       return sum of Float Array elements
       @param a - incoming array
       @return Null<Float>
-     */
+    **/
     public static function sum_F(a:Array<Float>):Null<Float>{
         var rez:Null<Float> = null;
         var al:Int = a.length;
@@ -126,7 +125,7 @@ class GeometryXD{
       return diff between first and others Int Array elements
       @param a - incoming array
       @return Null<Int>
-     */
+    **/
     public static function diff_I(a:Array<Int>):Null<Int>{
         var rez:Null<Int> = null;
         var al:Int = a.length;
@@ -139,7 +138,7 @@ class GeometryXD{
       return diff between first and others Float Array elements
       @param a - incoming array
       @return Null<Float>
-     */
+    **/
     public static function diff_F(a:Array<Float>):Null<Float>{
         var rez:Null<Float> = null;
         var al:Int = a.length;
@@ -152,7 +151,7 @@ class GeometryXD{
       return middle value of Float Array
       @param a - incoming array
       @return Null<Float>
-     */
+    **/
     public static function middle_F(a:Array<Float>):Null<Float>{
         var rez:Null<Float> = null;
         var al:Int = a.length;
@@ -164,7 +163,7 @@ class GeometryXD{
       @param a - incoming array
       @param n - multiplier of each element
       @return Array<Int>
-     */
+    **/
     public static function multiply_I_I(a:Array<Int>, n:Int):Array<Int>{
         var rez:Array<Int> = null;
         var al:Int = a.length;
@@ -176,7 +175,7 @@ class GeometryXD{
       @param a - incoming array
       @param n - multiplier of each element
       @return Array<Float>
-     */
+    **/
     public static function multiply_F_F(a:Array<Float>, n:Float):Array<Float>{
         var rez:Array<Float> = null;
         var al:Int = a.length;
@@ -187,7 +186,7 @@ class GeometryXD{
       multiplies all elements of an Int Array. [1, 2, 3] return 1 * 2 * 3
       @param a - incoming array
       @return Null<Int>
-     */
+    **/
     public static function multiply_I(a:Array<Int>):Null<Int>{
         var rez:Null<Int> = null;
         var al:Int = a.length;
@@ -200,7 +199,7 @@ class GeometryXD{
       multiplies all elements of an Float Array. [1.1, 2.0, 3.0] return 1.1 * 2.0 * 3.0
       @param a - incoming array
       @return Null<Float>
-     */
+    **/
     public static function multiply_F(a:Array<Float>):Null<Float>{
         var rez:Null<Float> = null;
         var al:Int = a.length;
@@ -213,7 +212,7 @@ class GeometryXD{
       multiplies each element of the Int Array by -1
       @param a - incoming array
       @return Array<Int>
-     */
+    **/
     public static function minus_I(a:Array<Int>):Array<Int>{
         return [for (i in 0...a.length) -a[i]];
     }
@@ -221,7 +220,7 @@ class GeometryXD{
       multiplies each element of the Float Array by -1
       @param a - incoming array
       @return Array<Float>
-     */
+    **/
     public static function minus_F(a:Array<Float>):Array<Float>{
         return [for (i in 0...a.length) -a[i]];
     }
@@ -230,7 +229,7 @@ class GeometryXD{
       return Int Array which is Int Arrays sum. [[1, 2, 3], [-3, -2, -1]] return [-2, 0, 2]
       @param a - incoming arrays
       @return Array<Int>
-     */
+    **/
     public static function sum_xI(a:Array<Array<Int>>):Array<Int>{
         var rez:Array<Int> = null;
         if ( same_size_I(a) ){ rez = [for (i in 0...a[0].length) sum_I([for (ai in 0...a.length) a[ai][i] ]) ]; }
@@ -240,7 +239,7 @@ class GeometryXD{
       return Float Array which is Float Arrays sum. [[1.1, 2, 3], [-3, -2, -1]] return [-1.9, 0, 2]
       @param a - incoming arrays
       @return Array<Float>
-     */
+    **/
     public static function sum_xF(a:Array<Array<Float>>):Array<Float>{
         var rez:Array<Float> = null;
         if ( same_size_F(a) ){ rez = [for (i in 0...a[0].length) sum_F([for (ai in 0...a.length) a[ai][i] ]) ]; }
@@ -250,7 +249,7 @@ class GeometryXD{
       return Int Array which is result of diff between first Int Array and others. [[1, 2, 3], [-3, -2, -1]] return [4, 4, 4]
       @param a - incoming arrays
       @return Array<Int>
-     */
+    **/
     public static function diff_xI(a:Array<Array<Int>>):Array<Int>{
         var rez:Array<Int> = null;
         if ( same_size_I(a) ){ rez = [for (i in 0...a[0].length) diff_I([for (ai in 0...a.length) a[ai][i] ]) ]; }
@@ -260,7 +259,7 @@ class GeometryXD{
       return Float Array which is result of diff between first Float Array and others. [[1.1, 2, 3], [-3, -2, -1]] return [4.1, 4, 4]
       @param a - incoming arrays
       @return Array<Float>
-     */
+    **/
     public static function diff_xF(a:Array<Array<Float>>):Array<Float>{
         var rez:Array<Float> = null;
         if ( same_size_F(a) ){ rez = [for (i in 0...a[0].length) diff_F([for (ai in 0...a.length) a[ai][i] ]) ]; }
@@ -270,7 +269,7 @@ class GeometryXD{
       return Float Array with middle values from arrays. [[1.1, 2, 3], [-3, -2, -1]] return [(1.1 - 3) / 2, (2 - 2) / 2, (3 - 1) / 2]
       @param a - incoming arrays
       @return Array<Float>
-     */
+    **/
     public static function middle_xF(a:Array<Array<Float>>):Array<Float>{
         var rez:Array<Float> = null;
         if ( same_size_F(a) ){ rez = [for (i in 0...a[0].length) middle_F([for (ai in 0...a.length) a[ai][i] ]) ]; }
@@ -281,7 +280,7 @@ class GeometryXD{
       @param a - incoming arrays
       @param n - multiplier
       @return Array<Array<Int>>
-     */
+    **/
     public static function multiply_xI_I(a:Array<Array<Int>>, n:Int):Array<Array<Int>>{
         var rez:Array<Array<Int>> = null;
         if ( a.length > 0 ){ rez = [for (i in 0...a.length) multiply_I_I(a[i], n) ]; }
@@ -292,7 +291,7 @@ class GeometryXD{
       @param a - incoming arrays
       @param n - multiplier
       @return Array<Array<Float>>
-     */
+    **/
     public static function multiply_xF_F(a:Array<Array<Float>>, n:Float):Array<Array<Float>>{
         var rez:Array<Array<Float>> = null;
         if ( a.length > 0 ){ rez = [for (i in 0...a.length) multiply_F_F(a[i], n) ]; }
@@ -302,7 +301,7 @@ class GeometryXD{
       return Int Array which is result of multiplying arrays. [[1, 2], [3, 4]] return [1 * 3, 2 * 4]
       @param a - incoming arrays
       @return Array<Int>
-     */
+    **/
     public static function multiply_xI(a:Array<Array<Int>>):Array<Int>{
         var rez:Array<Int> = null;
         var al:Int = a.length;
@@ -316,7 +315,7 @@ class GeometryXD{
       return Float Array which is result of multiplying arrays. [[3.1, 2], [3, 4]] return [3.1 * 3, 2 * 4]
       @param a - incoming arrays
       @return Array<Float>
-     */
+    **/
     public static function multiply_xF(a:Array<Array<Float>>):Array<Float>{
         var rez:Array<Float> = null;
         var al:Int = a.length;
@@ -330,7 +329,7 @@ class GeometryXD{
       Int Arrays bonus function. Short form of sum_I(multiply_xI(a)). [[a, b], [c, d]] return a * c + b * d
       @param a - incoming arrays
       @return Null<Int>
-     */
+    **/
     public static function multisum_xI(a:Array<Array<Int>>):Null<Int>{
         var rez:Null<Int> = null;
         if (
@@ -346,7 +345,7 @@ class GeometryXD{
       Float Arrays bonus function. Short form of sum_F(multiply_xF(a)). [[a, b], [c, d]] return a * c + b * d
       @param a - incoming arrays
       @return Null<Float>
-     */
+    **/
     public static function multisum_xF(a:Array<Array<Float>>):Null<Float>{
         var rez:Null<Float> = null;
         if (
@@ -362,29 +361,29 @@ class GeometryXD{
       return Int Array which is result of sum with previous element. [1, 2, 3] return [1, 3, 5]
       @param a - incoming array
       @return Array<Int>
-     */
+    **/
     public static function sum_previous_I(a:Array<Int>):Array<Int>{
         var rez:Array<Int> = null;
         var al:Int = a.length;
-        if (al > 0){ rez = [for (i in 0...a.length) (i == 0) ? a[i] : a[i] + a[i - 1]]; }
+        if (al > 0){ rez = [for (i in 0...al) (i == 0) ? a[i] : a[i] + a[i - 1]]; }
         return rez;
     }
     /**
       return Int Array which is result of diff with previous element. [1, 2, 3] return [1, 1, 1]
       @param a - incoming array
       @return Array<Int>
-     */
+    **/
     public static function diff_previous_I(a:Array<Int>):Array<Int>{
         var rez:Array<Int> = null;
         var al:Int = a.length;
-        if (al > 0){ rez = [for (i in 0...a.length) (i == 0) ? a[i] : a[i] - a[i - 1]]; }
+        if (al > 0){ rez = [for (i in 0...al) (i == 0) ? a[i] : a[i] - a[i - 1]]; }
         return rez;
     }
     /**
       return Int Array which is result of sum each element with before elements sum. [1, 2, 3] return [1, 3, 6]
       @param a - incoming array
       @return Array<Int>
-     */
+    **/
     public static function sum_before_I(a:Array<Int>):Array<Int>{
         var rez:Array<Int> = null;
         var al:Int = a.length;
@@ -399,7 +398,7 @@ class GeometryXD{
       return Int Array which is result of diff each element with before elements diff. [1, 2, 3] return [1, 1, 2]
       @param a - incoming array
       @return Array<Int>
-     */
+    **/
     public static function diff_before_I(a:Array<Int>):Array<Int>{
         var rez:Array<Int> = null;
         var al:Int = a.length;
@@ -410,27 +409,61 @@ class GeometryXD{
             }rez.shift();
         }return rez;
     }
-    //done recode bottom
+    /**
+      return Float Array which is result of sum with previous element. [1.1, 2, 3] return [1.1, 3.1, 5]
+      @param a - incoming array
+      @return Array<Float>
+    **/
     public static function sum_previous_F(a:Array<Float>):Array<Float>{
-        return [for (i in 0...a.length) (i == 0) ? a[i] : a[i] + a[i - 1]];
+        var rez:Array<Float> = null;
+        var al:Int = a.length;
+        if (al > 0){ rez = [for (i in 0...al) (i == 0) ? a[i] : a[i] + a[i - 1]]; }
+        return rez;
     }
+    /**
+      return Float Array which is result of diff with previous element. [1.1, 2, 3] return [1.1, 0.9, 1]
+      @param a - incoming array
+      @return Array<Float>
+    **/
     public static function diff_previous_F(a:Array<Float>):Array<Float>{
-        return [for (i in 0...a.length) (i == 0) ? a[i] : a[i] - a[i - 1]];
+        var rez:Array<Float> = null;
+        var al:Int = a.length;
+        if (al > 0){ rez = [for (i in 0...al) (i == 0) ? a[i] : a[i] - a[i - 1]]; }
+        return rez;
     }
+    /**
+      return Float Array which is result of sum each element with before elements sum. [1.1, 2, 3] return [1.1, 3.1, 6.1]
+      @param a - incoming array
+      @return Array<Float>
+    **/
     public static function sum_before_F(a:Array<Float>):Array<Float>{
-        var rez:Array<Float> = [];
-        var x:Float = 0;
-        for (i in 0...a.length){
-            x += a[i];
-            rez.push(x);
+        var rez:Array<Float> = null;
+        var al:Int = a.length;
+        if (al > 0){
+            rez = [0];
+            for (i in 0...al){
+                rez.push( rez[rez.length - 1] + a[i] );
+            }rez.shift();
         }return rez;
     }
+    /**
+      return Float Array which is result of diff each element with before elements diff. [1.1, 2, 3] return [1.1, 0.9, 2.1]
+      @param a - incoming array
+      @return Array<Float>
+    **/
     public static function diff_before_F(a:Array<Float>):Array<Float>{
-        var rez:Array<Float> = [a[0]];
-        for (i in 1...a.length){
-            rez.push(a[i] - a[i-1]);
+        var rez:Array<Float> = null;
+        var al:Int = a.length;
+        if (al > 0){
+            rez = [0];
+            for (i in 0...al){
+                rez.push( a[i] - rez[rez.length - 1] );
+            }rez.shift();
         }return rez;
     }
+    
+    //done recode bottom
+    
     
     public static function recounter_I_F(what:Array<Int>):Array<Float>{
         var rez:Array<Float> = [];
