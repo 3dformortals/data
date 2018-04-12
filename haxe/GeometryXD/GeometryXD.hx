@@ -396,7 +396,7 @@ class GeometryXD{
         }return rez;
     }
     /**
-      return Int Array which is result of diff each element with before elements diff. [1, 2, 3] return [1, 3, 6]
+      return Int Array which is result of diff each element with before elements diff. [1, 2, 3] return [1, 1, 2]
       @param a - incoming array
       @return Array<Int>
      */

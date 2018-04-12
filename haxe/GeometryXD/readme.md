@@ -276,5 +276,5 @@ opening start.html in browser show you `-3,-2,-1` alert window
 ```haxe  
  public static function diff_before_I(a:Array<Int>):Array<Int>
 ```    
- return Int Array which is result of diff each element with before elements diff. [1, 2, 3] return [1, 3, 6]
+ return Int Array which is result of diff each element with before elements diff. [1, 2, 3] return [1, 1, 2]
  
