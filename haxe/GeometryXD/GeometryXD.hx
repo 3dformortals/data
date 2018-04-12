@@ -225,7 +225,7 @@ class GeometryXD{
     public static function minus_F(a:Array<Float>):Array<Float>{
         return [for (i in 0...a.length) -a[i]];
     }
-    // done recode bottom 
+    
     /**
       return Int Array which is Int Arrays sum. [[1, 2, 3], [-3, -2, -1]] return [-2, 0, 2]
       @param a - incoming arrays
@@ -283,7 +283,7 @@ class GeometryXD{
       @return Array<Array<Int>>
      */
     public static function multiply_xI_I(a:Array<Array<Int>>, n:Int):Array<Array<Int>>{
-        var rez:Array<Int> = null;
+        var rez:Array<Array<Int>> = null;
         if ( a.length > 0 ){ rez = [for (i in 0...a.length) multiply_I_I(a[i], n) ]; }
         return rez;
     }
@@ -294,7 +294,7 @@ class GeometryXD{
       @return Array<Array<Float>>
      */
     public static function multiply_xF_F(a:Array<Array<Float>>, n:Float):Array<Array<Float>>{
-        var rez:Array<Float> = null;
+        var rez:Array<Array<Float>> = null;
         if ( a.length > 0 ){ rez = [for (i in 0...a.length) multiply_F_F(a[i], n) ]; }
         return rez;
     }
@@ -306,10 +306,10 @@ class GeometryXD{
     public static function multiply_xI(a:Array<Array<Int>>):Array<Int>{
         var rez:Array<Int> = null;
         var al:Int = a.length;
-        if (al == 1){
-            rez = a[0];
-        }else if (al > 0){
+        if (al > 1){
             rez = [for (i in 0...a[0].length) multiply_I([for (ai in 0...a.length) a[ai][i] ]) ];
+        }else if (al > 0){
+            rez = a[0];
         }return rez;
     }
     /**
@@ -320,34 +320,97 @@ class GeometryXD{
     public static function multiply_xF(a:Array<Array<Float>>):Array<Float>{
         var rez:Array<Float> = null;
         var al:Int = a.length;
-        if (al == 1){
-            rez = a[0];
-        }else if (al > 0){
+        if (al > 1){
             rez = [for (i in 0...a[0].length) multiply_F([for (ai in 0...a.length) a[ai][i] ]) ];
+        }else if (al > 0){
+            rez = a[0];
         }return rez;
     }
-    //done. recode bottom
+    /**
+      Int Arrays bonus function. Short form of sum_I(multiply_xI(a)). [[a, b], [c, d]] return a * c + b * d
+      @param a - incoming arrays
+      @return Null<Int>
+     */
+    public static function multisum_xI(a:Array<Array<Int>>):Null<Int>{
+        var rez:Null<Int> = null;
+        if (
+            a.length > 1 &&
+            a[0].length > 0 &&
+            same_size_I(a)
+        ){
+            rez = sum_I(multiply_xI(a));
+        }
+        return rez;
+    }
+    /**
+      Float Arrays bonus function. Short form of sum_F(multiply_xF(a)). [[a, b], [c, d]] return a * c + b * d
+      @param a - incoming arrays
+      @return Null<Float>
+     */
+    public static function multisum_xF(a:Array<Array<Float>>):Null<Float>{
+        var rez:Null<Float> = null;
+        if (
+            a.length > 1 &&
+            a[0].length > 0 &&
+            same_size_F(a)
+        ){
+            rez = sum_F(multiply_xF(a));
+        }
+        return rez;
+    }
+    /**
+      return Int Array which is result of sum with previous element. [1, 2, 3] return [1, 3, 5]
+      @param a - incoming array
+      @return Array<Int>
+     */
     public static function sum_previous_I(a:Array<Int>):Array<Int>{
-        return [for (i in 0...a.length) (i == 0) ? a[i] : a[i] + a[i - 1]];
+        var rez:Array<Int> = null;
+        var al:Int = a.length;
+        if (al > 0){ rez = [for (i in 0...a.length) (i == 0) ? a[i] : a[i] + a[i - 1]]; }
+        return rez;
     }
+    /**
+      return Int Array which is result of diff with previous element. [1, 2, 3] return [1, 1, 1]
+      @param a - incoming array
+      @return Array<Int>
+     */
     public static function diff_previous_I(a:Array<Int>):Array<Int>{
-        return [for (i in 0...a.length) (i == 0) ? a[i] : a[i] - a[i - 1]];
+        var rez:Array<Int> = null;
+        var al:Int = a.length;
+        if (al > 0){ rez = [for (i in 0...a.length) (i == 0) ? a[i] : a[i] - a[i - 1]]; }
+        return rez;
     }
+    /**
+      return Int Array which is result of sum each element with before elements sum. [1, 2, 3] return [1, 3, 6]
+      @param a - incoming array
+      @return Array<Int>
+     */
     public static function sum_before_I(a:Array<Int>):Array<Int>{
-        var rez:Array<Int> = [];
-        var x:Int = 0;
-        for (i in 0...a.length){
-            x += a[i];
-            rez.push(x);
+        var rez:Array<Int> = null;
+        var al:Int = a.length;
+        if (al > 0){
+            rez = [0];
+            for (i in 0...al){
+                rez.push( rez[rez.length - 1] + a[i] );
+            }rez.shift();
         }return rez;
     }
+    /**
+      return Int Array which is result of diff each element with before elements diff. [1, 2, 3] return [1, 3, 6]
+      @param a - incoming array
+      @return Array<Int>
+     */
     public static function diff_before_I(a:Array<Int>):Array<Int>{
-        var rez:Array<Int> = [a[0]];
-        for (i in 1...a.length){
-            rez.push(a[i] - a[i-1]);
+        var rez:Array<Int> = null;
+        var al:Int = a.length;
+        if (al > 0){
+            rez = [0];
+            for (i in 0...al){
+                rez.push( a[i] - rez[rez.length - 1] );
+            }rez.shift();
         }return rez;
     }
-    
+    //done recode bottom
     public static function sum_previous_F(a:Array<Float>):Array<Float>{
         return [for (i in 0...a.length) (i == 0) ? a[i] : a[i] + a[i - 1]];
     }
