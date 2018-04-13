@@ -929,13 +929,62 @@ class GeometryXD{
     }
     
     //done. bottom recode
-    public static function sign_I(x:Int):Int{ return (x < 0) ? -1 : 1; }
-    public static function sign_F(x:Float):Int{ return (x < 0) ? -1 : 1; }
-    public static function sign3_I(x:Int):Int{ return (x < 0) ? -1 : (x > 0) ? 1 : 0; }
-    public static function sign3_F(x:Float):Int{ return (x < 0) ? -1 : (x > 0) ? 1 : 0; }
-    public static function sin_cos_cut(x:Float):Float { return (x>1)?1:(x<-1)?-1:x; }
-    public static function degrees(angle:Float):Float { return angle * 180 / Math.PI; }
-    public static function radians(angle:Float):Float { return angle / 180 * Math.PI; }
+    /**
+     return sign of Int. if x < 0 return -1, else return 1.
+     @param x - number, sign of which should be calculated
+     @return Int
+    **/
+    public static inline function sign_I(x:Int):Int{ return (x < 0) ? -1 : 1; }
+    /**
+     return sign of Float. if x < 0 return -1, else return 1.
+     @param x - number, sign of which should be calculated
+     @return Int
+    **/
+    public static inline function sign_F(x:Float):Int{ return (x < 0) ? -1 : 1; }
+    /**
+     return sign of Int or 0. if x < 0 return -1, if x > 0 return 1, if x == 0 return 0.
+     @param x - number, sign of which should be calculated
+     @return Int
+    **/
+    public static inline function sign3_I(x:Int):Int{ return (x < 0) ? -1 : (x > 0) ? 1 : 0; }
+    /**
+     return sign of Float or 0. if x < 0 return -1, if x > 0 return 1, if x == 0 return 0.
+     @param x - number, sign of which should be calculated
+     @return Int
+    **/
+    public static inline function sign3_F(x:Float):Int{ return (x < 0) ? -1 : (x > 0) ? 1 : 0; }
+    /**
+     sin cos bonus function. Normalise sin cos, counted use vectors to -1...1 include boders.
+     Need because sometimes (detected on python3 in the past) result of calculating sin cos
+     uses vectors can be more then 1, or less then -1.
+     For example 1.00000000001 etc. Just tiny correction, just for case.
+     @param x - incoming sin cos value for check
+     @return Float
+    **/
+    public static inline function sin_cos_cut(x:Float):Float { return (x>1)?1:(x<-1)?-1:x; }
+    /**
+     convert radians angle to degrees angle value
+     @param angle - radians angle for recounting
+     @return Float
+    **/
+    public static inline function degrees(angle:Float):Float { return angle * 180 / Math.PI; }
+    /**
+     convert degrees angle to radians angle value
+     @param angle - degrees angle for recounting
+     @return Float
+    **/
+    public static inline function radians(angle:Float):Float { return angle / 180 * Math.PI; }
+    /**
+     return the quadrant of any angle. 0 angle is 4 quadrant.
+     For example use degrees:
+     0< angle <= 90 return 1 quadrant
+     90< angle <= 180 return 2 quadrant
+     180< angle <= 270 return 3 quadrant
+     270< angle <= 360 return 4 quadrant
+     @param angle - angle for quadrant calculating
+     @param rad - if true then radians angle, default false (degrees angle)
+     @return Int
+    **/
     public static function angle_quadrant(angle:Float, rad:Bool = false):Int {
         var k:Int=4; // 0 case
         if (rad){angle=degrees(angle);}
@@ -950,7 +999,6 @@ class GeometryXD{
         else if (x <= 0){ k = 4; }
         return k;
     }
-    
     
     
     public static function vecXDmod(vecXD:Array<Float>):Float{
