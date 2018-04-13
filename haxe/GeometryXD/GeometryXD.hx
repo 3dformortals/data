@@ -462,8 +462,6 @@ class GeometryXD{
         }return rez;
     }
     
-    //done recode bottom
-    
     /**
      recount Int Array to Float Array
      @param what - incoming array
@@ -481,7 +479,7 @@ class GeometryXD{
     **/
     public static function recounter_F_I(what:Array<Float>):Array<Int>{
         var rez:Array<Int> = [];
-        for (i in 0...what.length){ rez.push(Std.int(what[i])) };
+        for (i in 0...what.length){ rez.push(Std.int(what[i])); }
         return rez;
     }
     /**
@@ -886,7 +884,14 @@ class GeometryXD{
         return rez;
     }
     
-    
+    /**
+     split interval to equal steps
+     @param xmin - minimum border
+     @param xmax - maximum border
+     @param n - steps number
+     @param borders - if true then add borders into result
+     @return Array<Float>
+    **/
     public static function steps_internal(xmin:Float, xmax:Float, n:Int, borders:Bool = false):Array<Float>{
         var rez:Array<Float> = null;
         if (n < 1){ return rez; }
@@ -897,6 +902,17 @@ class GeometryXD{
             rez = [for (i in 1...n + 1) xmin + st * i];
         }return rez;
     }
+    /**
+     repeat step multiple times.
+     f(1, 5, 3, -1) return [-11, -7, -3, 1, 5]
+     f(1, 5, 3, 0) return [-11, -7, -3, 1, 5, 9, 13, 17]
+     f(1, 5, 3, 1) return [1, 5, 9, 13, 17]
+     @param smin - step minimum border
+     @param smax - step maximum border
+     @param n - repeat number
+     @param direction - if < 0 then from negative to minimum border direction. if > 0 then from maximum border to positive direction. if == 0 then both
+     @return Array<Float>
+    **/
     public static function steps_external(smin:Float, smax:Float, n:Int, direction:Int):Array<Float>{
         var rez:Array<Float> = null;
         if (n < 1 || direction < -1 || direction > 1){ return rez; }
@@ -912,6 +928,11 @@ class GeometryXD{
         }return rez;
     }
     
+    //done. bottom recode
+    public static function sign_I(x:Int):Int{ return (x < 0) ? -1 : 1; }
+    public static function sign_F(x:Float):Int{ return (x < 0) ? -1 : 1; }
+    public static function sign3_I(x:Int):Int{ return (x < 0) ? -1 : (x > 0) ? 1 : 0; }
+    public static function sign3_F(x:Float):Int{ return (x < 0) ? -1 : (x > 0) ? 1 : 0; }
     public static function sin_cos_cut(x:Float):Float { return (x>1)?1:(x<-1)?-1:x; }
     public static function degrees(angle:Float):Float { return angle * 180 / Math.PI; }
     public static function radians(angle:Float):Float { return angle / 180 * Math.PI; }
