@@ -464,36 +464,74 @@ class GeometryXD{
     
     //done recode bottom
     
-    
+    /**
+     recount Int Array to Float Array
+     @param what - incoming array
+     @return Array<Float>
+    **/
     public static function recounter_I_F(what:Array<Int>):Array<Float>{
         var rez:Array<Float> = [];
-        return [for (i in 0...what.length) rez.push(what[i])];
+        for (i in 0...what.length){ rez.push(what[i]); }
+        return rez;
     }
+    /**
+     recount Float Array to Int Array
+     @param what - incoming array
+     @return Array<Int>
+    **/
     public static function recounter_F_I(what:Array<Float>):Array<Int>{
         var rez:Array<Int> = [];
-        return [for (i in 0...what.length) rez.push(Std.int(what[i]))];
+        for (i in 0...what.length){ rez.push(Std.int(what[i])) };
+        return rez;
     }
+    /**
+     recount Int Array to String Array
+     @param what - incoming array
+     @return Array<String>
+    **/
     public static function recounter_I_S(what:Array<Int>):Array<String>{
         var rez:Array<String> = [];
-        rez = [for (i in 0...what.length) Std.string(what[i])];
+        for (i in 0...what.length){ rez.push(Std.string(what[i])); }
         return rez;
     }
+    /**
+     recount Float Array to String Array
+     @param what - incoming array
+     @return Array<String>
+    **/
     public static function recounter_F_S(what:Array<Float>):Array<String>{
         var rez:Array<String> = [];
-        rez = [for (i in 0...what.length) Std.string(what[i])];
+        for (i in 0...what.length){ rez.push(Std.string(what[i])); }
         return rez;
     }
+    /**
+     recount String Array to Int Array
+     @param what - incoming array
+     @return Array<Int>
+    **/
     public static function recounter_S_I(what:Array<String>):Array<Int>{
         var rez:Array<Int> = [];
-        rez = [for (i in 0...what.length) Std.parseInt(what[i])];
+        for (i in 0...what.length){ rez.push(Std.parseInt(what[i])); }
         return rez;
     }
+    /**
+     recount String Array to Float Array
+     @param what - incoming array
+     @return Array<Float>
+    **/
     public static function recounter_S_F(what:Array<String>):Array<Float>{
         var rez:Array<Float> = [];
-        rez = [for (i in 0...what.length) Std.parseFloat(what[i])];
+        for (i in 0...what.length){ rez.push(Std.parseFloat(what[i])); }
         return rez;
     }
     
+    /**
+     repeat Float Array to predetermined length
+     @param n - result array length
+     @param what - incoming array
+     @param full - if true then result array will be not cutted to result array length parameter
+     @return Array<Float>
+    **/
     public static function repeater_F_F(n:Int, what:Array<Float>, full:Bool = false):Array<Float>{
         var rez:Array<Float> = null;
         if (n == 0){ return rez; }
@@ -506,6 +544,13 @@ class GeometryXD{
         if(!full){rez = rez.slice(0,n);}
         return rez;
     }
+    /**
+     repeat Int Array to predetermined length
+     @param n - result array length
+     @param what - incoming array
+     @param full - if true then result array will be not cutted to result array length parameter
+     @return Array<Int>
+    **/
     public static function repeater_I_I(n:Int, what:Array<Int>, full:Bool = false):Array<Int>{
         var rez:Array<Int> = null;
         if (n == 0){ return rez; }
@@ -518,6 +563,13 @@ class GeometryXD{
         if(!full){rez = rez.slice(0,n);}
         return rez;
     }
+    /**
+     repeat String Array to predetermined length
+     @param n - result array length
+     @param what - incoming array
+     @param full - if true then result array will be not cutted to result array length parameter
+     @return Array<String>
+    **/
     public static function repeater_S_S(n:Int, what:Array<String>, full:Bool = false):Array<String>{
         var rez:Array<String> = null;
         if (n == 0){ return rez; }
@@ -530,6 +582,13 @@ class GeometryXD{
         if(!full){rez = rez.slice(0,n);}
         return rez;
     }
+    /**
+     repeat Float Array to predetermined length Int Array
+     @param n - result array length
+     @param what - incoming array
+     @param full - if true then result array will be not cutted to result array length parameter
+     @return Array<Int>
+    **/
     public static function repeater_F_I(n:Int, what_:Array<Float>, full:Bool = false):Array<Int>{
         var rez:Array<Int> = null;
         var what:Array<Int> = recounter_F_I(what_);
@@ -543,6 +602,13 @@ class GeometryXD{
         if(!full){rez = rez.slice(0,n);}
         return rez;
     }
+    /**
+     repeat String Array to predetermined length Int Array
+     @param n - result array length
+     @param what - incoming array
+     @param full - if true then result array will be not cutted to result array length parameter
+     @return Array<Int>
+    **/
     public static function repeater_S_I(n:Int, what_:Array<String>, full:Bool = false):Array<Int>{
         var rez:Array<Int> = null;
         var what:Array<Int> = recounter_S_I(what_);
@@ -556,6 +622,13 @@ class GeometryXD{
         if(!full){rez = rez.slice(0,n);}
         return rez;
     }
+    /**
+     repeat Int Array to predetermined length Float Array
+     @param n - result array length
+     @param what - incoming array
+     @param full - if true then result array will be not cutted to result array length parameter
+     @return Array<Float>
+    **/
     public static function repeater_I_F(n:Int, what_:Array<Int>, full:Bool = false):Array<Float>{
         var rez:Array<Float> = null;
         var what:Array<Float> = recounter_I_F(what_);
@@ -569,6 +642,13 @@ class GeometryXD{
         if(!full){rez = rez.slice(0,n);}
         return rez;
     }
+    /**
+     repeat String Array to predetermined length Float Array
+     @param n - result array length
+     @param what - incoming array
+     @param full - if true then result array will be not cutted to result array length parameter
+     @return Array<Float>
+    **/
     public static function repeater_S_F(n:Int, what_:Array<String>, full:Bool = false):Array<Float>{
         var rez:Array<Float> = null;
         var what:Array<Float> = recounter_S_F(what_);
@@ -582,6 +662,13 @@ class GeometryXD{
         if(!full){rez = rez.slice(0,n);}
         return rez;
     }
+    /**
+     repeat Int Array to predetermined length String Array
+     @param n - result array length
+     @param what - incoming array
+     @param full - if true then result array will be not cutted to result array length parameter
+     @return Array<String>
+    **/
     public static function repeater_I_S(n:Int, what_:Array<Int>, full:Bool = false):Array<String>{
         var rez:Array<String> = null;
         var what:Array<String> = recounter_I_S(what_);
@@ -595,6 +682,13 @@ class GeometryXD{
         if(!full){rez = rez.slice(0,n);}
         return rez;
     }
+    /**
+     repeat Float Array to predetermined length String Array
+     @param n - result array length
+     @param what - incoming array
+     @param full - if true then result array will be not cutted to result array length parameter
+     @return Array<String>
+    **/
     public static function repeater_F_S(n:Int, what_:Array<Float>, full:Bool = false):Array<String>{
         var rez:Array<String> = null;
         var what:Array<String> = recounter_F_S(what_);
@@ -608,71 +702,151 @@ class GeometryXD{
         if(!full){rez = rez.slice(0,n);}
         return rez;
     }
-    
+    /**
+     return array of arrays with pair indexes which is indexes equivalent elements of a and b arrays.
+     a=["1", "2"] b=["1", "2", "1"] return [[0, 0], [0, 2], [1, 1]]
+     @param a - array what find
+     @param b - array where find
+     @return Array<Array<Int>>
+    **/
     public static function an_in_b_S(a:Array<String>, b:Array<String>):Array<Array<Int>>{
-        var rez:Array<Array<Int>> = null;
-        for (ia in 0...a.length){
-            for (ib in 0...b.length){
+        var rez:Array<Array<Int>> = [];
+        var al:Int = a.length;
+        var bl:Int = b.length;
+        if (al == 0 || bl == 0){ return null; }
+        for (ia in 0...al){
+            for (ib in 0...bl){
                 if (a[ia] == b[ib]) { rez.push([ia, ib]); }
             }
         }return rez;
     }
+    /**
+     return array of arrays with pair indexes which is indexes equivalent elements of a and b arrays.
+     a=["1", "2"] b=[["1", "2", "1"],[0, 2]] return [[0, 0, 0], [0, 0, 2], [1, 0, 1], [1, 1, 1]]. where indexes [1, 0, 1] = [1(a), 0(b), 1(b[0])]
+     @param a - array what find
+     @param b - array where find
+     @return Array<Array<Int>>
+    **/
     public static function an_in_bn_S(a:Array<String>, b:Array<Array<String>>):Array<Array<Int>>{
-        var rez:Array<Array<Int>> = null;
-        for (ia in 0...a.length){
-            for (ib in 0...b.length){
+        var rez:Array<Array<Int>> = [];
+        var al:Int = a.length;
+        var bl:Int = b.length;
+        if (al == 0 || bl == 0){ return null; }
+        for (ia in 0...al){
+            for (ib in 0...bl){
                 for (ibn in 0...b[ib].length){
                     if (a[ia] == b[ib][ibn]) { rez.push([ia, ib, ibn]); }
                 }
             }
         }return rez;
     }
+    /**
+     return array of arrays with pair indexes which is indexes equivalent elements of a and b arrays.
+     a=[1, 2] b=[1, 2, 1] return [[0, 0], [0, 2], [1, 1]]
+     @param a - array what find
+     @param b - array where find
+     @return Array<Array<Int>>
+    **/
     public static function an_in_b_I(a:Array<Int>, b:Array<Int>):Array<Array<Int>>{
-        var rez:Array<Array<Int>> = null;
-        for (ia in 0...a.length){
-            for (ib in 0...b.length){
+        var rez:Array<Array<Int>> = [];
+        var al:Int = a.length;
+        var bl:Int = b.length;
+        if (al == 0 || bl == 0){ return null; }
+        for (ia in 0...al){
+            for (ib in 0...bl){
                 if (a[ia] == b[ib]) { rez.push([ia, ib]); }
             }
         }return rez;
     }
+    /**
+     return array of arrays with pair indexes which is indexes equivalent elements of a and b arrays.
+     a=[1, 2] b=[[1, 2, 1],[0, 2]] return [[0, 0, 0], [0, 0, 2], [1, 0, 1], [1, 1, 1]]. where indexes [1, 0, 1] = [1(a), 0(b), 1(b[0])]
+     @param a - array what find
+     @param b - array where find
+     @return Array<Array<Int>>
+    **/
     public static function an_in_bn_I(a:Array<Int>, b:Array<Array<Int>>):Array<Array<Int>>{
-        var rez:Array<Array<Int>> = null;
-        for (ia in 0...a.length){
-            for (ib in 0...b.length){
+        var rez:Array<Array<Int>> = [];
+        var al:Int = a.length;
+        var bl:Int = b.length;
+        if (al == 0 || bl == 0){ return null; }
+        for (ia in 0...al){
+            for (ib in 0...bl){
                 for (ibn in 0...b[ib].length){
                     if (a[ia] == b[ib][ibn]) { rez.push([ia, ib, ibn]); }
                 }
             }
         }return rez;
     }
+    /**
+     return array of arrays with pair indexes which is indexes equivalent elements of a and b arrays.
+     a=[1.0, 2.0] b=[1.0, 2.0, 1.0] return [[0, 0], [0, 2], [1, 1]]
+     @param a - array what find
+     @param b - array where find
+     @return Array<Array<Int>>
+    **/
     public static function an_in_b_F(a:Array<Float>, b:Array<Float>):Array<Array<Int>>{
-        var rez:Array<Array<Int>> = null;
-        for (ia in 0...a.length){
-            for (ib in 0...b.length){
+        var rez:Array<Array<Int>> = [];
+        var al:Int = a.length;
+        var bl:Int = b.length;
+        if (al == 0 || bl == 0){ return null; }
+        for (ia in 0...al){
+            for (ib in 0...bl){
                 if (a[ia] == b[ib]) { rez.push([ia, ib]); }
             }
         }return rez;
     }
+    /**
+     return array of arrays with pair indexes which is indexes equivalent elements of a and b arrays.
+     a=[1.0, 2.0] b=[[1.0, 2.0, 1.0],[0, 2.0]] return [[0, 0, 0], [0, 0, 2], [1, 0, 1], [1, 1, 1]]. where indexes [1, 0, 1] = [1(a), 0(b), 1(b[0])]
+     @param a - array what find
+     @param b - array where find
+     @return Array<Array<Int>>
+    **/
     public static function an_in_bn_F(a:Array<Float>, b:Array<Array<Float>>):Array<Array<Int>>{
-        var rez:Array<Array<Int>> = null;
-        for (ia in 0...a.length){
-            for (ib in 0...b.length){
+        var rez:Array<Array<Int>> = [];
+        var al:Int = a.length;
+        var bl:Int = b.length;
+        if (al == 0 || bl == 0){ return null; }
+        for (ia in 0...al){
+            for (ib in 0...bl){
                 for (ibn in 0...b[ib].length){
                     if (a[ia] == b[ib][ibn]) { rez.push([ia, ib, ibn]); }
                 }
             }
         }return rez;
     }
+    
+    /**
+     chain bonus function. split range to sequences predetermined length n with same border values.
+     f(6, 3, false) return [[0, 1, 2], [2, 3, 4]]. But f(6, 3, true) return [[0, 1, 2], [2, 3, 4], [4, 5, 0]].
+     Can be used to split dotsXDfield (array of 3D dots) to array of separated 4dots curves trajectories which have same border dots.
+     Just split array of dots length a_l to n = 4. Then recount to beziercurves or create multidot curve use each last three dots.
+     @param a_l - range of indexes (length of array which will be used later as splitted)
+     @param n - length of each sequence (chain link)
+     @param ring - if true then 0 will be added at the end of range of indexes, for the case of strict coincidence
+     @return Array<Array<Int>>
+    **/
     public static function chain_indexes(a_l:Int, n:Int, ring:Bool):Array<Array<Int>>{
         var rez:Array<Array<Int>> = null;
         if (n > a_l || n < 1){ return rez; }
         var ind:Array<Int> = [];
-        if (ring){
-            ind = [for (b in 0...2) for (i in 0...a_l) (b < 1)? i : (i < n - 1) ? i : continue];
+        var indring:Array<Int> = [for (i in 0...a_l) i];
+        if(ring){
+            indring.push(0);
+            ind = [for (i in 0...Std.int((a_l + 1) / (n - 1)) * (n - 1) ) (i%(n-1) == 0 && i+n-1 < a_l + 1)? i : continue ]; // close to for loop(0 to a_l+1 with step=n)
         }else{
-            ind = [for (i in 0...1 + a_l - n) i];
-        }return rez;
+            ind = [for (i in 0...Std.int(a_l / (n - 1)) * (n - 1) ) (i%(n-1) == 0 && i+n-1 < a_l)? i : continue ]; // close to for loop(0 to a_l with step=n)
+        }rez = [for (i in 0...ind.length) [for (j in 0...n) indring[ind[i]+j]] ];
+        return rez;
     }
+    /**
+     create chain from String Array. Sequences with same border values
+     @param a - incoming array
+     @param n - chain link length
+     @param ring - if true then first incoming element will be added at the end of range, for the case of strict coincidence
+     @return Array<Array<String>>
+    **/
     public static function chain_S(a:Array<String> ,n:Int ,ring:Bool = false):Array<Array<String>>{
         var rez:Array<Array<String>> = null;
         var a_l:Int = a.length;
@@ -681,6 +855,13 @@ class GeometryXD{
         rez = [for (i in 0...ind.length) [for (j in 0...n) a[ind[i][j]]]];
         return rez;
     }
+    /**
+     create chain from Int Array. Sequences with same border values
+     @param a - incoming array
+     @param n - chain link length
+     @param ring - if true then first incoming element will be added at the end of range, for the case of strict coincidence
+     @return Array<Array<Int>>
+    **/
     public static function chain_I(a:Array<Int> ,n:Int ,ring:Bool = false):Array<Array<Int>>{
         var rez:Array<Array<Int>> = null;
         var a_l:Int = a.length;
@@ -689,6 +870,13 @@ class GeometryXD{
         rez = [for (i in 0...ind.length) [for (j in 0...n) a[ind[i][j]]]];
         return rez;
     }
+    /**
+     create chain from Float Array. Sequences with same border values
+     @param a - incoming array
+     @param n - chain link length
+     @param ring - if true then first incoming element will be added at the end of range, for the case of strict coincidence
+     @return Array<Array<Float>>
+    **/
     public static function chain_F(a:Array<Float> ,n:Int ,ring:Bool = false):Array<Array<Float>>{
         var rez:Array<Array<Float>> = null;
         var a_l:Int = a.length;
@@ -697,6 +885,8 @@ class GeometryXD{
         rez = [for (i in 0...ind.length) [for (j in 0...n) a[ind[i][j]]]];
         return rez;
     }
+    
+    
     public static function steps_internal(xmin:Float, xmax:Float, n:Int, borders:Bool = false):Array<Float>{
         var rez:Array<Float> = null;
         if (n < 1){ return rez; }
