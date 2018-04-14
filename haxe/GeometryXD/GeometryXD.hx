@@ -928,7 +928,6 @@ class GeometryXD{
         }return rez;
     }
     
-    //done. bottom recode
     /**
      return sign of Int. if x < 0 return -1, else return 1.
      @param x - number, sign of which should be calculated
@@ -1387,7 +1386,16 @@ class GeometryXD{
         }
         return rez;
     }
-    
+    //done. recode bottom
+    /**
+     return dot 2D (x, z) from dot3D projected on view plane, which determined by two vectors. 
+     This vectors is veiw plane horisontal axis vector from (0, 0, 0) to dot3Dox, 
+     and view plane vertical axis vector from (0, 0, 0) to dot3Doz
+     @param dot3D - dot 3D
+     @param dot3Dox - dot 3D
+     @param dot3Doz - dot 3D
+     @return Array<Float>
+    **/
     public static function dot3D_to_dot2Dviewplane(dot3D:Array<Float>, dot3Dox:Array<Float>, dot3Doz:Array<Float>):Array<Float>{
         var rez:Array<Float> = null;
         var t:Float = vecXDnorm(dot3D);
@@ -1410,6 +1418,13 @@ class GeometryXD{
         rez = [t * cosox0t, t * cosoz0t];
         return rez;
     }
+    /**
+     returns dot with scaled values relative to the scaling center
+     @param dotXD - dot . For 3D case [x, y, z]
+     @param scaleXD - scales array . For 3D case [sx, sy, sz]
+     @param dotXDc - scaling center dot . For 3D case [xc, yc, zc]
+     @return Array<Float>
+    **/
     public static function dotXDscale(dotXD:Array<Float>, scaleXD:Array<Float>, dotXDc:Array<Float>):Array<Float>{
         var rez:Array<Float> = null;
         var sdot:Array<Float> = [for(i in 0...dotXD.length) dotXD[i] * scaleXD[i]];
@@ -1418,6 +1433,14 @@ class GeometryXD{
         rez = dotXDoffset(sdot,vec,vecXDnorm(vec));
         return rez;
     }
+    /**
+     returns vector 3D, rotated around axis vector to angle
+     @param vec3D - vector 3D
+     @param vec3Daxis - axis of rotation . vector 3D
+     @param angle - angle of rotation
+     @param rad - it true then radians angle, default false (degrees angle)
+     @return Array<Float>
+    **/
     public static function vec3Drotate(vec3D:Array<Float>, vec3Daxis:Array<Float>, angle:Float, rad:Bool = false):Array<Float>{
         var rez:Array<Float> = vec3D;
         if (
@@ -1436,6 +1459,14 @@ class GeometryXD{
         rez = vecXD(t, t1);
         return rez;
     }
+    /**
+     returns vector 3D field, each vector of which rotated to own angle, around own axis
+     @param vec3Dfield - vector 3D field(array of vectors)
+     @param vec3Daxes - axes 3D field(array of vectors)
+     @param angles - angles of rotating for each vector
+     @param rad - if true then radians angles, default false (degrees angles)
+     @return Array<Array<Float>>
+    **/
     public static function vec3Dfield_rotate_around_vec3Daxes(
         vec3Dfield:Array<Array<Float>>,
         vec3Daxes:Array<Array<Float>>,
@@ -1460,6 +1491,15 @@ class GeometryXD{
             }
         }return rez;
     }
+    /**
+     returns dot 3D, rotated to angle, around center of rotation determined by dot and axis of rotation
+     @param dot3D - dot 3D
+     @param dot3Dc - rotation center dot 3D
+     @param vec3D - rotation axis vector 3D
+     @param angle - rotation angle
+     @param rad - if true then radians angle, default false (degrees angle)
+     @return Array<Float>
+    **/
     public static function dot3Drotate(dot3D:Array<Float>, dot3Dc:Array<Float>, vec3D:Array<Float>, angle:Float, rad:Bool = false):Array<Float>{
         var rez:Array<Float> = null;
         if (vecXDnorm(vec3D) == 0){ return rez; }
@@ -1474,26 +1514,55 @@ class GeometryXD{
         rez = dotXDoffset(dot3Dc, vdot, d);
         return rez;
     }
+    /**
+     returns plane 3D (a, b, c, d) determined by dot 3D and vector 3D.
+     Where (a, b, c) is plane 3D normal vector, and (d) is displacement plane from (0, 0, 0)
+     @param dot3D - dot 3D
+     @param vec3D - plane 3D normal vector 3D
+     @return Array<Float>
+    **/
     public static function plane3D_dot3Dnormal(dot3D:Array<Float>, vec3D:Array<Float>):Array<Float>{
         var rez:Array<Float> = null;
-        if (vecXDnorm(vec3D) == 0){ return rez; }
+        if (dot3D.length != 3 ||
+            vec3D.length != 3 ||
+            vecXDnorm(vec3D) == 0){ return rez; }
         var d:Float = - multisum_xF([vec3D, dot3D]);
         rez = [vec3D[0], vec3D[1], vec3D[2], d];
         return rez;
     }
+    /**
+     returns plane 3D (a, b, c, d), determined by dot and two not paralleled vectors. 
+     Where (a, b, c) is plane 3D normal vector, and (d) is displacement plane from (0, 0, 0)
+     @param dot3D - dot 3D
+     @param vec3Da - vector 3D
+     @param vec3Db - vector 3D
+     @return Array<Float>
+    **/
     public static function plane3D_dot_vec_vec(dot3D:Array<Float>, vec3Da:Array<Float>, vec3Db:Array<Float>):Array<Float>{
         var rez:Array<Float> = null;
         if (
-            vecXDsame(vec3Da, vec3Db) ||
+            dot3D.length != 3 ||
+            vec3Da.length != 3 ||
+            vec3Db.length != 3 ||
+            vecXDparalleled(vec3Da, vec3Db) ||
             vecXDnorm(vec3Da) == 0 ||
             vecXDnorm(vec3Db) == 0
         ){ return rez; }
         rez = plane3D_dot3Dnormal(dot3D, vec3Dnormal(vec3Da, vec3Db));
         return rez;
     }
+    /**
+     returns plane 3D (a, b, c, d), determined by three not equal dots. 
+     Where (a, b, c) is plane 3D normal vector, and (d) is displacement plane from (0, 0, 0)
+     @param dot3D - dot 3D
+     @param dot3Da - dot 3D
+     @param dot3Db - dot 3D
+     @return Array<Float>
+    **/
     public static function plane3D_3dots(dot3D:Array<Float>, dot3Da:Array<Float>, dot3Db:Array<Float>):Array<Float>{
         var rez:Array<Float> = null;
         if (
+            dot3D.length != 3 ||
             !same_size_F([dot3D, dot3Da, dot3Db]) ||
             vecXDsame(dot3D, dot3Da) ||
             vecXDsame(dot3D, dot3Db) ||
@@ -1506,6 +1575,13 @@ class GeometryXD{
         );
         return rez;
     }
+    /**
+     returns plane 3D (a, b, c, d), determined by two not equal dots. 
+     Where (a, b, c) is plane 3D normal vector, and (d) is displacement plane from (0, 0, 0)
+     @param dot3D - dot 3D
+     @param dot3Da - dot 3D
+     @return Array<Float>
+    **/
     public static function plane3D_2dots(dot3D:Array<Float>, dot3Da:Array<Float>):Array<Float>{
         var rez:Array<Float> = null;
         if (
@@ -1515,17 +1591,37 @@ class GeometryXD{
         rez = plane3D_dot3Dnormal(dot3D, vecXD(dot3D, dot3Da));
         return rez;
     }
+    /**
+     returns distance from dot 3D to plane 3D
+     @param dot3D - dot 3D (x, y, z)
+     @param plane3D - plane 3D (a, b, c, d). 
+     Where (a, b, c) is plane 3D normal vector, and (d) is displacement plane from (0, 0, 0)
+     @return Null<Float>
+    **/
     public static function distance_dot3D_plane3D(dot3D:Array<Float>, plane3D:Array<Float>):Null<Float>{
         var rez:Null<Float> = null;
-        if (vecXDnorm(plane3D.slice(0,3)) == 0) { return rez; }
+        if (
+            dot3D.length != 3 ||
+            plane3D.length != 4 ||
+            vecXDnorm([plane3D[0], plane3D[1], plane3D[2]]) == 0
+            ) { return rez; }
         rez = Math.abs(
-            multisum_xF([plane3D.slice(0,3), dot3D]) + plane3D[3]
-        ) / vecXDnorm(plane3D.slice(0,3));
+            multisum_xF([[plane3D[0], plane3D[1], plane3D[2]], dot3D]) + plane3D[3]
+        ) / vecXDnorm([plane3D[0], plane3D[1], plane3D[2]]);
         return rez;
     }
+    /**
+     returns a random vector 3D paralleled to the plane 3D(lies on plane 3D)
+     @param plane3D - plane 3D (a, b, c, d). 
+     Where (a, b, c) is plane 3D normal vector, and (d) is displacement plane from (0, 0, 0)
+     @return Array<Float>
+    **/
     public static function random_vec3D_in_plane3D(plane3D:Array<Float>):Array<Float>{
         var rez:Array<Float> = null;
-        if (vecXDnorm(plane3D.slice(0,3)) == 0){ return rez; }
+        if (
+            plane3D.length != 4 ||
+            vecXDnorm([plane3D[0], plane3D[1], plane3D[2]]) == 0
+            ){ return rez; }
         var t0:Array<Float> = vecXDrandom(3);
         t0 = projection_dot3D_on_plane3D(t0, plane3D);
         var t1:Array<Float> = t0;
@@ -1536,13 +1632,22 @@ class GeometryXD{
         }rez = vecXD(t0, t1);
         return rez;
     }
+    /**
+     returns random dot 3D belongs on plane 3D
+     @param plane3D - plane 3D (a, b, c, d). 
+     Where (a, b, c) is plane 3D normal vector, and (d) is displacement plane from (0, 0, 0)
+     @param dot3D - dot 3D . Determine start position for round area on plane 3D for calculating result. 
+     If dot not in plane , then will be uesd projection this dot on plane
+     @param radius - radius of round area on plane 3D. Result will be calculated inside area
+     @return Array<Float>
+    **/
     public static function random_dot3D_in_plane3D(plane3D:Array<Float>, dot3D:Array<Float>, radius:Float):Array<Float>{
         var rez:Array<Float> = null;
         if (
             plane3D.length != 4 ||
-            vecXDnorm(plane3D.slice(0,3)) == 0
+            vecXDnorm([plane3D[0], plane3D[1], plane3D[2]]) == 0
         ){ return rez; }
-        rez = dot3D;
+        rez = projection_dot3D_on_plane3D(dot3D, plane3D);
         if (radius == 0){ return rez; }
         var vec3D:Array<Float> = random_vec3D_in_plane3D(plane3D);
         rez = dotXDoffset(dot3D, vec3D, radius * Math.random());
