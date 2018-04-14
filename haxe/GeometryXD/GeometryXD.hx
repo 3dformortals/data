@@ -1386,7 +1386,7 @@ class GeometryXD{
         }
         return rez;
     }
-    //done. recode bottom
+    
     /**
      return dot 2D (x, z) from dot3D projected on view plane, which determined by two vectors. 
      This vectors is veiw plane horisontal axis vector from (0, 0, 0) to dot3Dox, 
@@ -1654,8 +1654,20 @@ class GeometryXD{
         return rez;
     }
     
-    
-    public static function curve3Dbeziercubic(dot3D1:Array<Float>, vec3D1:Array<Float>, distance1:Float, dot3D2:Array<Float>, vec3D2:Array<Float>, distance2:Float):Array<Array<Float>>{
+    /**
+     returns curve 3D ((x, y, z), (x, y, z), (x, y, z), (x, y, z)) 
+     with internal dots, calculated use offset from border dots along levers to distances. 
+     The resul curve 3D have 4 dots 3D, two border dots incoming, and two internal dots calculated. 
+     Result will [dot3D1, dot3D1offset, dot3D2offset, dot3D2]
+     @param dot3D1 - dot 3D (x, y, z) start curve incoming dot
+     @param vec3D1 - vector 3D (a, b, c) for offset start internal dot
+     @param distance1 - distance for offset start internal dot along offset vector
+     @param dot3D2 - dot 3D (x, y, z) end curve incoming dot
+     @param vec3D2 - vector 3D (a, b, c) for offset end internal dot
+     @param distance2 - distance for offset end internal dot along offset vector
+     @return Array<Array<Float>>
+    **/
+    public static function curve3D_4dots(dot3D1:Array<Float>, vec3D1:Array<Float>, distance1:Float, dot3D2:Array<Float>, vec3D2:Array<Float>, distance2:Float):Array<Array<Float>>{
         var rez:Array<Array<Float>> = null;
         if (
             !same_size_F([dot3D1, vec3D1, dot3D2, vec3D2]) ||
@@ -1666,7 +1678,25 @@ class GeometryXD{
         rez = [dot3D1, r1, r2, dot3D2];
         return rez;
     }
-    public static function curve3Dbeziercubic_3dots(dot3D0:Array<Float>, dot3D1:Array<Float>, dot3D2:Array<Float>, lever1:Float = 0.55, lever2:Float = 0.55, a_s:Int = -1):Array<Array<Float>>{
+    /**
+     returns curve 3D ((x, y, z), (x, y, z), (x, y, z), (x, y, z)). 
+     Shape of result curve will be close to arc (1/4 ellipse). 
+     Allowed few variants of result curve modification(distortion).
+     Default lever1 and lever2 values equal 0.55.
+     The 0.55 value in case of bezier cubic 3D curve will create shape close to ellipse arc.
+     @param dot3D0 - center of ellipse trajectory dot 3D (x, y, z)
+     @param dot3D1 - first arc dot 3D (x, y, z)
+     @param dot3D2 - last arc dot 3D (x, y, z)
+     @param lever1 - length of offset the first support dot along lever1 vector (depended of a_s)
+     @param lever2 - length of offset the last support dot along lever2 vector (depended of a_s)
+     @param a_s - arc style. Determine of arc calculation way. 
+     if a_s > 0 then lever1 vector will be directed from dot3D0 to dot3D1. lever2 vector from dot3D0 to dot3D2 
+     if a_s < 0 then lever1 vector will be directed from dot3D0 to dot3D2. lever2 vector from dot3D0 to dot3D1 
+     if a_s = 0 then lever1 vector will be paralleled lever2 vector and both will be directed 
+     from dot3D0 to dot between dot3D1 and dot3D2 center dot
+     @return Array<Array<Float>>
+    **/
+    public static function curve3D_3dots(dot3D0:Array<Float>, dot3D1:Array<Float>, dot3D2:Array<Float>, lever1:Float = 0.55, lever2:Float = 0.55, a_s:Int = -1):Array<Array<Float>>{
         var rez:Array<Array<Float>> = null;
         if (
             !same_size_F([dot3D0, dot3D1, dot3D2]) ||
@@ -1699,7 +1729,16 @@ class GeometryXD{
         }rez = [dot3D1, r1, r2, dot3D2];
         return rez;
     }
-    public static function line3Dbeziercubic_2dots(dot3D0:Array<Float>, dot3D1:Array<Float>):Array<Array<Float>>{
+    
+    /**
+     returns line 3D ((x, y, z), (x, y, z), (x, y, z), (x, y, z)). 
+     Which is (dot3D0, 1/3 offset, 2/3 offset, dot3D1). 
+     Comfort for use as bezier cubic curve 3D as straight line
+     @param dot3D0 - start line dot 3D
+     @param dot3D1 - end line dot 3D
+     @return Array<Array<Float>>
+    **/
+    public static function line3D_2dots(dot3D0:Array<Float>, dot3D1:Array<Float>):Array<Array<Float>>{
         var rez:Array<Array<Float>> = null;
         if (
             !vecXDsamesize(dot3D0, dot3D1) ||
@@ -1712,7 +1751,15 @@ class GeometryXD{
         rez = [dot3D0, lever0, lever1, dot3D1];
         return rez;
     }
-    public static function line3Dbeziercubic(dot3D:Array<Float>, vec3D:Array<Float>, distance:Float):Array<Array<Float>>{
+    /**
+     returns line 3D ((x, y, z), (x, y, z), (x, y, z), (x, y, z)). 
+     Just call line3D_2dots with precalculated second dot 3D
+     @param dot3D - start line dot 3D
+     @param vec3D - offset start line dot vector 3D
+     @param distance - offset distance for end line dot
+     @return Array<Array<Float>>
+    **/
+    public static function line3D_dot_offset(dot3D:Array<Float>, vec3D:Array<Float>, distance:Float):Array<Array<Float>>{
         var rez:Array<Array<Float>> = null;
         if(
             distance == 0 ||
@@ -1720,10 +1767,16 @@ class GeometryXD{
             dot3D.length != 3 ||
             vecXDnorm(vec3D) == 0
         ){ return rez; }
-        rez = line3Dbeziercubic_2dots(dot3D, dotXDoffset(dot3D, vec3D, distance));
+        rez = line3D_2dots(dot3D, dotXDoffset(dot3D, vec3D, distance));
         return rez;
     }
-    public static function beziercubic3D_4to12(curve:Array<Array<Float>>):Array<Float>{
+    /**
+     returns curve 3D as 12 coordinates, recounted from 4 dots 3D. 
+     [[x, y, z], [x, y, z], [x, y, z], [x, y, z]] return [x1, y1, z1, x2, y2, z2, x3, y3, z3, x4, y4, z4]
+     @param curve - curve 3D ((x, y, z), (x, y, z), (x, y, z), (x, y, z))
+     @return Array<Float>
+    **/
+    public static function curve3D_4to12(curve:Array<Array<Float>>):Array<Float>{
         var rez:Array<Float> = null;
         if (
             curve.length == 4 &&
@@ -1733,12 +1786,24 @@ class GeometryXD{
             rez = [for (i in 0...4) for (ai in 0...3) curve[i][ai]];
         }return rez;
     }
+    /**
+     returns curve 3D as 4 dots 3D, recounted from 12 coordinates. 
+     [x1, y1, z1, x2, y2, z2, x3, y3, z3, x4, y4, z4] return [[x, y, z], [x, y, z], [x, y, z], [x, y, z]]
+     @param curve - curve 3D data (x1, y1, z1, x2, y2, z2, x3, y3, z3, x4, y4, z4)
+     @return Array<Array<Float>>
+    **/
     public static function beziercubic3D_12to4(curve:Array<Float>):Array<Array<Float>>{
         var rez:Array<Array<Float>> = null;
         if (curve.length == 12){
             rez = [for (i in [0,3,6,9]) [ for (ai in 0...3) curve[ai+i]]];
         }return rez;
     }
+    /**
+     beziercubic3D_derivative bonus function. returns parameters for derivative calculation. 
+     [[x1, y1, z1], [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]] return [[x1,x2,x3,x4],[y1,y2,y3,y4],[z1,z2,z3,z4]]
+     @param curve - bezier cubic curve 3D ((x1, y1, z1), (x2, y2, z2), (x3, y3, z3), (x4, y4, z4))
+     @return Array<Array<Float>>
+    **/
     public static function beziercubic3D_derivativeparameters(curve:Array<Array<Float>>):Array<Array<Float>>{
         var rez:Array<Array<Float>> = null;
         var cl:Int = curve.length;
@@ -1746,6 +1811,12 @@ class GeometryXD{
             rez = [for (i in 0...3) [for (p in 0...4) curve[p][i]]];
         }return rez;
     }
+    /**
+     return bezier cubic curve derivative for each dimension. Usual case "x" or "y" or "z"
+     @param bcp - bezier curve derivative parameters, precalculated uses "beziercubic3D_derivativeparameters(...)""
+     @param p - bezier cubic curve parameter. Standart values equal range 0...1 include borders
+     @return Null<Float>
+    **/
     public static function beziercubic_derivative(bcp:Array<Float>, p:Float):Null<Float>{
         var rez:Null<Float> = null;
         if (bcp.length == 4){
@@ -1754,6 +1825,12 @@ class GeometryXD{
             3 * p * p * (bcp[3] - bcp[2]);
         }return rez;
     }
+    /**
+     returns bezier cubic curve 3D derivative
+     @param curve - bezier cubic curve 3D ((x, y, z), (x, y, z), (x, y, z), (x, y, z))
+     @param p - bezier cubic curve parameter. Standart values equal range 0...1 include borders
+     @return Array<Float>
+    **/
     public static function beziercubic3D_derivative(curve:Array<Array<Float>>, p:Float):Array<Float>{
         var rez:Array<Float> = null;
         if (
@@ -1764,6 +1841,8 @@ class GeometryXD{
             rez = [for (i in beziercubic3D_derivativeparameters(curve)) beziercubic_derivative(i, p)];
         }return rez;
     }
+    
+    //done. recode bottom
     public static function beziercubic_support_dot_one(beziercubic_one_axis_coordinates:Array<Float>):Null<Float>{
         var rez:Null<Float> = null;
         var c:Array<Float> = beziercubic_one_axis_coordinates;
