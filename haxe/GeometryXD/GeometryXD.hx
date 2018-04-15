@@ -7,7 +7,7 @@ package;
 **/
 class GeometryXD{
     /**
-      trace "GeometryXD" message in time of initialisation
+      trace `GeometryXD` message in time of initialisation
     **/
     public static function main(){trace("GeometryXD");}
     /**
@@ -99,6 +99,45 @@ class GeometryXD{
             }
         }else{ rez = true; }
         return rez;
+    }
+    
+    /**
+     compare Int Arrays. Returns true if all arrays have equal data
+     @param a - incoming array field
+     @return Bool
+    **/
+    public static function same_xI(a:Array<Array<Int>>):Null<Bool>{
+        var rez:Null<Bool> = null;
+        var al:Int = a.length;
+        if ( al > 0 && same_size_I(a) ){
+            rez = true;
+            var lv:Int = a[0].length;
+            for (i in 1...al){
+                for (j in 0...lv){
+                    if(rez){ if (a[0][j] != a[i][j]) { rez = false; } }
+                    else{ break; }
+                }if (!rez){ break; }
+            }
+        }return rez;
+    }
+    /**
+     compare Float Arrays. Returns true if all arrays have equal data
+     @param a - incoming array field
+     @return Bool
+    **/
+    public static function same_xF(a:Array<Array<Float>>):Null<Bool>{
+        var rez:Null<Bool> = null;
+        var al:Int = a.length;
+        if ( al > 0 && same_size_F(a) ){
+            rez = true;
+            var lv:Int = a[0].length;
+            for (i in 1...al){
+                for (j in 0...lv){
+                    if(rez){ if (a[0][j] != a[i][j]) { rez = false; } }
+                    else{ break; }
+                }if (!rez){ break; }
+            }
+        }return rez;
     }
     
     /**
@@ -723,7 +762,7 @@ class GeometryXD{
     }
     /**
      return array of arrays with pair indexes which is indexes equivalent elements of a and b arrays.
-     a=["1", "2"] b=[["1", "2", "1"],[0, 2]] return [[0, 0, 0], [0, 0, 2], [1, 0, 1], [1, 1, 1]]. where indexes [1, 0, 1] = [1(a), 0(b), 1(b[0])]
+     a=["1", "2"] b=[["1", "2", "1"],["0", "2"]] return [[0, 0, 0], [0, 0, 2], [1, 0, 1], [1, 1, 1]]. where indexes [1, 0, 1] = [1(a), 0(b), 1(b[0])]
      @param a - array what find
      @param b - array where find
      @return Array<Array<Int>>
@@ -1018,10 +1057,18 @@ class GeometryXD{
      @param vecXDfield - incoming vectors array(vector field)
      @return Array<Float>
     **/
-    public static function vecXDfieldnorm(vecXDfield:Array<Array<Float>>):Array<Float>{
+    public static inline function vecXDfieldnorm(vecXDfield:Array<Array<Float>>):Array<Float>{
         var rez:Array<Float> = null;
         rez = [for (i in vecXDfield) vecXDnorm(i)];
         return rez;
+    }
+    public static inline function zero_vector_inside(vecXDfield:Array<Array<Float>>):Null<Bool>{
+        var rez:Null<Bool> = null;
+        var lv:Int = vecXDfield.length;
+        if (lv > 0){
+            rez = false;
+            for (i in 0...lv){ if (vecXDnorm(vecXDfield[i]) == 0 ) { rez = true; break; } }
+        }return rez;
     }
     /**
      return Float Array element with maximum absolute value with sign.
@@ -1075,31 +1122,23 @@ class GeometryXD{
         return rez;
     }
     /**
-     compare vectors. Return true if vectors have equal data
+     compare vectors. Returns true if vectors have equal data
      @param vecXDa - incoming vector
      @param vecXDb - incoming vector
      @return Bool
     **/
-    public static function vecXDsame(vecXDa:Array<Float>,vecXDb:Array<Float>):Bool{
+    public static inline function vecXDsame(vecXDa:Array<Float>,vecXDb:Array<Float>):Null<Bool>{
+        var rez:Null<Bool> = null;
         if (vecXDa.length == vecXDb.length){
-            var lv:Int = vecXDa.length;
-            for (i in 0...lv){
-                if (vecXDa[i] != vecXDb[i]) {return false;}
-            }return true;
-        }return false;
+            rez = same_xF([vecXDa, vecXDb]);
+        }return rez;
     }
     /**
-     compare vectors from vector field. Return true if all vectors have same data
+     compare vectors from vector field. Returns true if all vectors have same data
      @param vecXDfield - vector field(array of vectors)
      @return Bool
     **/
-    public static function vecXDfieldsame(vecXDfield:Array<Array<Float>>):Bool{
-        if (same_size_F(vecXDfield)){
-            for (i in 1...vecXDfield.length){
-                if (!vecXDsame(vecXDfield[0], vecXDfield[i])) { return false; }
-            }return true;
-        }return false;
-    }
+    public static inline function vecXDfieldsame(vecXDfield:Array<Array<Float>>):Null<Bool>{ return same_xF(vecXDfield); }
     /**
      return random vector with length equal 1
      @param x - number of vector dimension. For example x = 3 -> 3D vector, x = 4 -> 4D vector
@@ -1815,8 +1854,8 @@ class GeometryXD{
         }return rez;
     }
     /**
-     return bezier cubic curve derivative for each dimension. Usual case "x" or "y" or "z"
-     @param bcp - bezier curve derivative parameters, precalculated uses "beziercubic3D_derivativeparameters(...)""
+     return bezier cubic curve derivative for each dimension. Usual case `x` or `y` or `z`
+     @param bcp - bezier curve derivative parameters, precalculated uses `beziercubic3D_derivativeparameters(...)`
      @param p - bezier cubic curve parameter. Standart values equal range 0...1 include borders
      @return Null<Float>
     **/
@@ -1846,8 +1885,8 @@ class GeometryXD{
     }
     
     /**
-     returns cubic bezier curve support dot one(first lever) paramater for each coordinate. Usual case "x" or "y" or "z"
-     @param beziercubic_one_axis_coordinates - [c1,c2,c3,c4]. Where c is cubic bezier curve dots values for one of "x" or "y" or "z"
+     returns cubic bezier curve support dot one(first lever) paramater for each coordinate. Usual case `x` or `y` or `z`
+     @param beziercubic_one_axis_coordinates - [c1,c2,c3,c4]. Where c is cubic bezier curve dots values for one of `x` or `y` or `z`
      @return Null<Float>
     **/
     public static inline function beziercubic_support_dot_one(beziercubic_one_axis_coordinates:Array<Float>):Null<Float>{
@@ -1868,8 +1907,8 @@ class GeometryXD{
         return rez;
     }
     /**
-     returns cubic bezier curve support dot two(second lever) paramater for each coordinate. Usual case "x" or "y" or "z"
-     @param beziercubic_one_axis_coordinates - [c1,c2,c3,c4]. Where c is cubic bezier curve dots values for one of "x" or "y" or "z"
+     returns cubic bezier curve support dot two(second lever) paramater for each coordinate. Usual case `x` or `y` or `z`
+     @param beziercubic_one_axis_coordinates - [c1,c2,c3,c4]. Where c is cubic bezier curve dots values for one of `x` or `y` or `z`
      @return Null<Float>
     **/
     public static inline function beziercubic_support_dot_two(beziercubic_one_axis_coordinates:Array<Float>):Null<Float>{
@@ -1903,7 +1942,7 @@ class GeometryXD{
         }return rez;
     }
     /**
-     returns bezier cubic coordinate for each one axis. Usual case "x" or "y" or "z"
+     returns bezier cubic coordinate for each one axis. Usual case `x` or `y` or `z`
      @param beziercubic_one_axis_coordinates - Must be of the form (c1, c2, c3, c4). 
      For case [[x1, y1, z1], [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]] curve and x axis must be [x1, x2, x3, x4]
      @param parameter - parameter of bezier curve equation. Usual case range 0...1 include borders
@@ -2160,15 +2199,19 @@ class GeometryXD{
     //done. recode bottom
     /**
      returns vector 3D, which is tangent of ellipse, belongs to the plane 3D
-     @param dot3D - 
-     @param vec3Dnormal_ellipse_plane - 
-     @param vec3Dsemiaxis_a_direction - 
-     @param semiaxis_a - 
-     @param semiaxis_b - 
-     @param semiaxis_a_negative - 
-     @param semiaxis_b_negative - 
-     @param angle - 
-     @param rad - 
+     @param dot3D - ellipse center dot 3D (x, y, z)
+     @param vec3Dnormal_ellipse_plane - ellipse plane 3D normal vector (a, b, c)
+     @param vec3Dsemiaxis_a_direction - ellipse semiaxis direction vector 3D (a, b, c). 
+     Will be projected on plane, no need strictly vector in plane. enought not paralleled with 
+     ellipse plane normal vector
+     @param semiaxis_a - ellipse semiaxis a length
+     @param semiaxis_b - ellipse semiaxis b length
+     @param semiaxis_a_negative - ellipse opposite semiaxis a length. 
+     Directed to negative side from projection of vec3Dsemiaxis_a_direction vector
+     @param semiaxis_b_negative - ellipse opposite semiaxis b length. Same but for other semiaxis vector
+     @param angle - angle for calculating dot 3D, belongs to the ellipse. 
+     Calculating will be directed from positive semiaxis a to positive semiaxis b, for positive angle
+     @param rad - if true then radians angle, default false(degrees angle)
      @return Array<Float>
     **/
     public static function tangent_vec3D_in_plane_of_ellipse2D_placed_in_3Dspace(
@@ -2190,35 +2233,50 @@ class GeometryXD{
         var b:Float = semiaxis_b;
         var an:Float = semiaxis_a_negative;
         var bn:Float = semiaxis_b_negative;
-        
-        var ea:Null<Float> = null; var eb:Null<Float> = null;
-        switch(angle_quadrant(angle, rad)){
-            case 1 : ea = a; eb = b;
-            case 2 : ea = an; eb = b;
-            case 3 : ea = an; eb = bn;
-            case 4 : ea = a; eb = bn;
-        }
-        var ep:Array<Float> = plane3D_dot3Dnormal(t, vn);
-        var va:Array<Float> = projection_vec3D_on_plane3D(va, ep);
-        var vb:Array<Float> = vec3Dnormal(vn, va);
-        
-        var edot:Array<Float> = ellipse2Ddot(angle, ea, eb, rad);
-        var dxy0dxy1:Array<Array<Float>> = tangent_centered_ellipse2Ddot(ea, eb, edot);
-        
-        var te:Array<Float> = dotXDoffset(t, va, dxy0dxy1[0][0]);
-        var te:Array<Float> = dotXDoffset(te, vb, dxy0dxy1[0][1]);
-        var tt:Array<Float> = dotXDoffset(t, va, dxy0dxy1[1][0]);
-        var tt:Array<Float> = dotXDoffset(tt, vb, dxy0dxy1[1][1]);
-        rez = vecXD(te, tt);
-        return rez;
+        if (
+            t.length == 3 && vn.length == 3 && va.length == 3 &&
+            vecXDnorm(vn) > 0 && vecXDnorm(va) > 0 && !vecXDparalleled(vn, va) &&
+            a > 0 && b > 0 && an > 0 && bn > 0
+        ){
+            var ea:Null<Float> = null; var eb:Null<Float> = null;
+            switch(angle_quadrant(angle, rad)){
+                case 1 : ea = a; eb = b;
+                case 2 : ea = an; eb = b;
+                case 3 : ea = an; eb = bn;
+                case 4 : ea = a; eb = bn;
+            }
+            var ep:Array<Float> = plane3D_dot3Dnormal(t, vn);
+            var va:Array<Float> = projection_vec3D_on_plane3D(va, ep);
+            var vb:Array<Float> = vec3Dnormal(vn, va);
+            
+            var edot:Array<Float> = ellipse2Ddot(angle, ea, eb, rad);
+            var dxy0dxy1:Array<Array<Float>> = tangent_centered_ellipse2Ddot(ea, eb, edot);
+            
+            var te:Array<Float> = dotXDoffset(t, va, dxy0dxy1[0][0]);
+            var te:Array<Float> = dotXDoffset(te, vb, dxy0dxy1[0][1]);
+            var tt:Array<Float> = dotXDoffset(t, va, dxy0dxy1[1][0]);
+            var tt:Array<Float> = dotXDoffset(tt, vb, dxy0dxy1[1][1]);
+            rez = vecXD(te, tt);
+        }return rez;
     }
+    /**
+     returns 9 dots 3D, ellipse center dot and 8 ellipse perimeter dots
+     @param dot3D - ellipse center dot 3D
+     @param vec3Dsemiaxes - array of semiaxes vectors 3D. Include 4 semiaxes vectors 3D.
+     Must be of the form [[a1, b1, c1], [a2, b2, c2], [a3, b3, c3], [a4, b4, c4]]. 
+     Which is [a, b, an, bn], where an and bn is negative semiaxes direction vectors 
+     @param semiaxes - array of semiaxes lengths. Must be of the form [a, b, an, bn]
+     @return Array<Array<Float>>
+    **/
     public static function ellipse3D_dots(dot3D:Array<Float>, vec3Dsemiaxes:Array<Array<Float>>, semiaxes:Array<Float>):Array<Array<Float>>{
         var rez:Array<Array<Float>> = null;
         if(
             dot3D.length != 3 ||
             vec3Dsemiaxes.length != 4 ||
             !same_size_F(vec3Dsemiaxes) ||
-            semiaxes.length != 4
+            semiaxes.length != 4 ||
+            zero_inside_F(semiaxes) ||
+            zero_vector_inside(vec3Dsemiaxes)
         ){ return rez; }
         var t0:Array<Float> = dot3D;
         var va:Array<Float> = vec3Dsemiaxes[0];
@@ -2241,13 +2299,30 @@ class GeometryXD{
             }
         return rez;
     }
-    public static function ellipse2Ddot(angle:Float, semiaxis_a_ox:Float, semiaxis_b_oy:Float, rad:Bool = false):Array<Float>{
+    /**
+     returns dot 2D, which belongs to ellipse perimeter
+     @param angle - angle of ellipse from semiaxis a to semiaxis b direction, for positive angle
+     @param semiaxis_a_ox - semiaxis a length
+     @param semiaxis_b_oy - semiaxis b length
+     @param rad - if true then radians angle, default false(degrees angle)
+     @return Array<Float>
+    **/
+    public static inline function ellipse2Ddot(angle:Float, semiaxis_a_ox:Float, semiaxis_b_oy:Float, rad:Bool = false):Array<Float>{
         var u:Float = angle;
         var a:Float = semiaxis_a_ox;
         var b:Float = semiaxis_b_oy;
         if (!rad){ a = radians(a); }
         return [a * Math.cos(u), b * Math.sin(u)];
     }
+    /**
+     returns curve 2D, which have ellipse shape restricted to quarter
+     @param angle0 - start angle from semiaxis a to semiaxis b direction
+     @param angle1 - angle from semiaxis a to semiaxis b direction started from end of `angle0`
+     @param semiaxis_a_ox - length of semiaxis a (ox)
+     @param semiaxis_b_oy - length of semiaxis b (oy)
+     @param rad - if true then radians angle, default false(degrees angle)
+     @return Array<Array<Float>>
+    **/
     public static function curve2D_4dots_elliptic_shape_restricted_to_quarter(
         angle0:Float,
         angle1:Float,
@@ -2267,6 +2342,19 @@ class GeometryXD{
         rez = [for (a in [a0, a0 + du / 3, a0 + du * 2 / 3, a0 + du]) ellipse2Ddot(a, ae, be, rad)];
         return rez;
     }
+    /**
+     returns bezier curve 3D, which have ellipse shape restricted to quarter. 
+     Result will have form [[x1, y1, z1], [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]]
+     @param dot3Dc - center ellipse dot 3D
+     @param vec3D_a_ox - semiaxis a direction vector 3D
+     @param vec3D_b_ox - semiaxis b direction vector 3D
+     @param semiaxis_a_ox - semiaxis a length
+     @param semiaxis_b_oy - semiaxis b length
+     @param angle0 - start angle from semiaxis a to semiaxis b direction
+     @param angle1 - angle from semiaxis a to semiaxis b direction started from end of `angle0`
+     @param rad - if true then radians angle, default false(degrees angle)
+     @return Array<Array<Float>>
+    **/
     public static function beziercubic3D_elliptic_shape_restricted_to_quarter(
         dot3Dc:Array<Float>,
         vec3D_a_ox:Array<Float>,
@@ -2283,11 +2371,29 @@ class GeometryXD{
         var vb:Array<Float> = vec3D_b_ox;
         var a:Float = semiaxis_a_ox;
         var b:Float = semiaxis_b_oy;
-        var dxdy:Array<Array<Float>> = curve2D_4dots_elliptic_shape_restricted_to_quarter(angle0, angle1, a, b, rad);
-        rez = [for (i in dxdy) dotXDoffset(dotXDoffset(tc, va, i[0]), vb, i[1])];
-        rez = beziercubic3D_follow_4dots_trajectory(rez);
-        return rez;
+        if (
+            tc.length == 3 &&
+            va.length == 3 &&
+            vb.length == 3 &&
+            vecXDnorm(va) > 0 &&
+            vecXDnorm(vb) > 0
+        ){
+            var dxdy:Array<Array<Float>> = curve2D_4dots_elliptic_shape_restricted_to_quarter(angle0, angle1, a, b, rad);
+            rez = [for (i in dxdy) dotXDoffset(dotXDoffset(tc, va, i[0]), vb, i[1])];
+            rez = beziercubic3D_follow_4dots_trajectory(rez);
+        }return rez;
     }
+    /**
+     returns angle required to place curve on ellipse. 
+     Max returned value is 360 degrees, or radians same value angle
+     @param curve_length - length of curve for placing on ellipse
+     @param semiaxis_a_ox - semiaxis a length
+     @param semiaxis_b_oy - semiaxis b length
+     @param angle0 - start angle from semiaxis a to semiaxis b direction. 
+     Curve placing started from end of `angle0`
+     @param rad - if true then radians angle, default false(degrees angle)
+     @return Null<Float>
+    **/
     public static function angle_required_to_place_curve_on_ellipse(
         curve_length:Float,
         semiaxis_a_ox:Float,
@@ -2313,6 +2419,18 @@ class GeometryXD{
             }rez = (rad) ? radians(360) : 360;
         }return rez;
     }
+    /**
+     returns polygon 3D dots array, which is poligon center dot and array of polygon perimeter dots. 
+     Result will have form [`dot3D`, dot3D(1), ... ,dot3D(`angle_proportion.length`)]
+     @param dot3D - polygon center dot 3D
+     @param vec3Dsemiaxes - base ellipse 4 semiaxes vectors, for creating polygon inside ellipse. 
+     Must be of the form [[a1, b1, c1], [a2, b2, c2], [a3, b3, c3], [a4, b4, c4]]. 
+     Which is [a, b, an, bn], where an and bn is negative semiaxes direction vectors 
+     @param semiaxes - array of displacement values of polygon vetexes from center dot in ellipse plane
+     @param angle_proportions - proportions array for splitting 360 degrees angle(without units, not matter). 
+     [90, 90, 90, 90] returns result same as [1, 1, 1, 1], in both cases will be created quadrangle inside ellipse
+     @return Array<Array<Float>>
+    **/
     public static function polygon3D_inside_ellipse(
         dot3D:Array<Float>,
         vec3Dsemiaxes:Array<Array<Float>>,
@@ -2360,6 +2478,7 @@ class GeometryXD{
             rez.push(dotXDoffset(dotXDoffset(t0, v, d), vv, dd));
         }return rez;
     }
+    
     public static function polygon3D_vec3Dfield_distance(
         dot3D:Array<Float>,
         vec3Dfield:Array<Array<Float>>,
