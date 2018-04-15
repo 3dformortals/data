@@ -15,7 +15,7 @@ class GeometryXD{
       @param a - incoming array
       @return Bool
     **/
-    public static function positive_inside_I(a:Array<Int>):Bool{
+    public static inline function positive_inside_I(a:Array<Int>):Bool{
         for (i in a){ if (i > 0){ return true; } }
         return false;
     }
@@ -24,7 +24,7 @@ class GeometryXD{
       @param a - incoming array
       @return Bool
     **/
-    public static function zero_inside_I(a:Array<Int>):Bool{
+    public static inline function zero_inside_I(a:Array<Int>):Bool{
         for (i in a){ if (i == 0){ return true; } }
         return false;
     }
@@ -33,7 +33,7 @@ class GeometryXD{
       @param a - incoming array
       @return Bool
     **/
-    public static function negative_inside_I(a:Array<Int>):Bool{
+    public static inline function negative_inside_I(a:Array<Int>):Bool{
         for (i in a){ if (i < 0){ return true; } }
         return false;
     }
@@ -42,7 +42,7 @@ class GeometryXD{
       @param a - incoming array
       @return Bool
     **/
-    public static function positive_inside_F(a:Array<Float>):Bool{
+    public static inline function positive_inside_F(a:Array<Float>):Bool{
         for (i in a){ if (i > 0){ return true; } }
         return false;
     }
@@ -51,18 +51,20 @@ class GeometryXD{
       @param a - incoming array
       @return Bool
     **/
-    public static function zero_inside_F(a:Array<Float>):Bool{
-        for (i in a){ if (i == 0){ return true; } }
-        return false;
+    public static inline function zero_inside_F(a:Array<Float>):Bool{
+        var rez:Bool = false;
+        for (i in a){ if (i == 0){ rez = true; } }
+        return rez;
     }
     /**
       return true if incoming Float Array have at least one negative element
-      @param a - 
+      @param a - incoming array
       @return Bool
     **/
-    public static function negative_inside_F(a:Array<Float>):Bool{
-        for (i in a){ if (i < 0){ return true; } }
-        return false;
+    public static inline function negative_inside_F(a:Array<Float>):Bool{
+        var rez:Bool = false;
+        for (i in a){ if (i < 0){ rez = true; } }
+        return rez;
     }
     /**
       return true if Int Arrays have same size
@@ -104,7 +106,7 @@ class GeometryXD{
       @param a - incoming array
       @return Null<Int>
     **/
-    public static function sum_I(a:Array<Int>):Null<Int>{
+    public static inline function sum_I(a:Array<Int>):Null<Int>{
         var rez:Null<Int> = null;
         var al:Int = a.length;
         if (al > 0){ rez = 0; for (i in 0...al){ rez += i; } }
@@ -115,7 +117,7 @@ class GeometryXD{
       @param a - incoming array
       @return Null<Float>
     **/
-    public static function sum_F(a:Array<Float>):Null<Float>{
+    public static inline function sum_F(a:Array<Float>):Null<Float>{
         var rez:Null<Float> = null;
         var al:Int = a.length;
         if (al > 0){ rez = 0; for (i in 0...al){ rez += i; } }
@@ -164,7 +166,7 @@ class GeometryXD{
       @param n - multiplier of each element
       @return Array<Int>
     **/
-    public static function multiply_I_I(a:Array<Int>, n:Int):Array<Int>{
+    public static inline function multiply_I_I(a:Array<Int>, n:Int):Array<Int>{
         var rez:Array<Int> = null;
         var al:Int = a.length;
         if (al > 0){ rez = [for (i in 0...al) a[i] * n]; }
@@ -176,7 +178,7 @@ class GeometryXD{
       @param n - multiplier of each element
       @return Array<Float>
     **/
-    public static function multiply_F_F(a:Array<Float>, n:Float):Array<Float>{
+    public static inline function multiply_F_F(a:Array<Float>, n:Float):Array<Float>{
         var rez:Array<Float> = null;
         var al:Int = a.length;
         if (al > 0){ rez = [for (i in 0...al) a[i] * n]; }
@@ -187,7 +189,7 @@ class GeometryXD{
       @param a - incoming array
       @return Null<Int>
     **/
-    public static function multiply_I(a:Array<Int>):Null<Int>{
+    public static inline function multiply_I(a:Array<Int>):Null<Int>{
         var rez:Null<Int> = null;
         var al:Int = a.length;
         if (al > 0){
@@ -200,7 +202,7 @@ class GeometryXD{
       @param a - incoming array
       @return Null<Float>
     **/
-    public static function multiply_F(a:Array<Float>):Null<Float>{
+    public static inline function multiply_F(a:Array<Float>):Null<Float>{
         var rez:Null<Float> = null;
         var al:Int = a.length;
         if (al > 0){
@@ -213,7 +215,7 @@ class GeometryXD{
       @param a - incoming array
       @return Array<Int>
     **/
-    public static function minus_I(a:Array<Int>):Array<Int>{
+    public static inline function minus_I(a:Array<Int>):Array<Int>{
         return [for (i in 0...a.length) -a[i]];
     }
     /**
@@ -221,7 +223,7 @@ class GeometryXD{
       @param a - incoming array
       @return Array<Float>
     **/
-    public static function minus_F(a:Array<Float>):Array<Float>{
+    public static inline function minus_F(a:Array<Float>):Array<Float>{
         return [for (i in 0...a.length) -a[i]];
     }
     
@@ -362,7 +364,7 @@ class GeometryXD{
       @param a - incoming array
       @return Array<Int>
     **/
-    public static function sum_previous_I(a:Array<Int>):Array<Int>{
+    public static inline function sum_previous_I(a:Array<Int>):Array<Int>{
         var rez:Array<Int> = null;
         var al:Int = a.length;
         if (al > 0){ rez = [for (i in 0...al) (i == 0) ? a[i] : a[i] + a[i - 1]]; }
@@ -373,7 +375,7 @@ class GeometryXD{
       @param a - incoming array
       @return Array<Int>
     **/
-    public static function diff_previous_I(a:Array<Int>):Array<Int>{
+    public static inline function diff_previous_I(a:Array<Int>):Array<Int>{
         var rez:Array<Int> = null;
         var al:Int = a.length;
         if (al > 0){ rez = [for (i in 0...al) (i == 0) ? a[i] : a[i] - a[i - 1]]; }
@@ -384,7 +386,7 @@ class GeometryXD{
       @param a - incoming array
       @return Array<Int>
     **/
-    public static function sum_before_I(a:Array<Int>):Array<Int>{
+    public static inline function sum_before_I(a:Array<Int>):Array<Int>{
         var rez:Array<Int> = null;
         var al:Int = a.length;
         if (al > 0){
@@ -399,7 +401,7 @@ class GeometryXD{
       @param a - incoming array
       @return Array<Int>
     **/
-    public static function diff_before_I(a:Array<Int>):Array<Int>{
+    public static inline function diff_before_I(a:Array<Int>):Array<Int>{
         var rez:Array<Int> = null;
         var al:Int = a.length;
         if (al > 0){
@@ -414,7 +416,7 @@ class GeometryXD{
       @param a - incoming array
       @return Array<Float>
     **/
-    public static function sum_previous_F(a:Array<Float>):Array<Float>{
+    public static inline function sum_previous_F(a:Array<Float>):Array<Float>{
         var rez:Array<Float> = null;
         var al:Int = a.length;
         if (al > 0){ rez = [for (i in 0...al) (i == 0) ? a[i] : a[i] + a[i - 1]]; }
@@ -425,7 +427,7 @@ class GeometryXD{
       @param a - incoming array
       @return Array<Float>
     **/
-    public static function diff_previous_F(a:Array<Float>):Array<Float>{
+    public static inline function diff_previous_F(a:Array<Float>):Array<Float>{
         var rez:Array<Float> = null;
         var al:Int = a.length;
         if (al > 0){ rez = [for (i in 0...al) (i == 0) ? a[i] : a[i] - a[i - 1]]; }
@@ -436,7 +438,7 @@ class GeometryXD{
       @param a - incoming array
       @return Array<Float>
     **/
-    public static function sum_before_F(a:Array<Float>):Array<Float>{
+    public static inline function sum_before_F(a:Array<Float>):Array<Float>{
         var rez:Array<Float> = null;
         var al:Int = a.length;
         if (al > 0){
@@ -451,7 +453,7 @@ class GeometryXD{
       @param a - incoming array
       @return Array<Float>
     **/
-    public static function diff_before_F(a:Array<Float>):Array<Float>{
+    public static inline function diff_before_F(a:Array<Float>):Array<Float>{
         var rez:Array<Float> = null;
         var al:Int = a.length;
         if (al > 0){
@@ -467,7 +469,7 @@ class GeometryXD{
      @param what - incoming array
      @return Array<Float>
     **/
-    public static function recounter_I_F(what:Array<Int>):Array<Float>{
+    public static inline function recounter_I_F(what:Array<Int>):Array<Float>{
         var rez:Array<Float> = [];
         for (i in 0...what.length){ rez.push(what[i]); }
         return rez;
@@ -477,7 +479,7 @@ class GeometryXD{
      @param what - incoming array
      @return Array<Int>
     **/
-    public static function recounter_F_I(what:Array<Float>):Array<Int>{
+    public static inline function recounter_F_I(what:Array<Float>):Array<Int>{
         var rez:Array<Int> = [];
         for (i in 0...what.length){ rez.push(Std.int(what[i])); }
         return rez;
@@ -487,7 +489,7 @@ class GeometryXD{
      @param what - incoming array
      @return Array<String>
     **/
-    public static function recounter_I_S(what:Array<Int>):Array<String>{
+    public static inline function recounter_I_S(what:Array<Int>):Array<String>{
         var rez:Array<String> = [];
         for (i in 0...what.length){ rez.push(Std.string(what[i])); }
         return rez;
@@ -497,7 +499,7 @@ class GeometryXD{
      @param what - incoming array
      @return Array<String>
     **/
-    public static function recounter_F_S(what:Array<Float>):Array<String>{
+    public static inline function recounter_F_S(what:Array<Float>):Array<String>{
         var rez:Array<String> = [];
         for (i in 0...what.length){ rez.push(Std.string(what[i])); }
         return rez;
@@ -507,7 +509,7 @@ class GeometryXD{
      @param what - incoming array
      @return Array<Int>
     **/
-    public static function recounter_S_I(what:Array<String>):Array<Int>{
+    public static inline function recounter_S_I(what:Array<String>):Array<Int>{
         var rez:Array<Int> = [];
         for (i in 0...what.length){ rez.push(Std.parseInt(what[i])); }
         return rez;
@@ -517,7 +519,7 @@ class GeometryXD{
      @param what - incoming array
      @return Array<Float>
     **/
-    public static function recounter_S_F(what:Array<String>):Array<Float>{
+    public static inline function recounter_S_F(what:Array<String>):Array<Float>{
         var rez:Array<Float> = [];
         for (i in 0...what.length){ rez.push(Std.parseFloat(what[i])); }
         return rez;
@@ -530,7 +532,7 @@ class GeometryXD{
      @param full - if true then result array will be not cutted to result array length parameter
      @return Array<Float>
     **/
-    public static function repeater_F_F(n:Int, what:Array<Float>, full:Bool = false):Array<Float>{
+    public static inline function repeater_F_F(n:Int, what:Array<Float>, full:Bool = false):Array<Float>{
         var rez:Array<Float> = null;
         if (n == 0){ return rez; }
         var wl:Int = what.length;
@@ -539,7 +541,7 @@ class GeometryXD{
         if (n < 0){ what.reverse(); n = Std.int(Math.abs(n));}
         var ind:Int =(full) ? n : Math.ceil(n / wl);
         rez = [for (_ in 0...ind) for (i in 0...wl) what[i]];
-        if(!full){rez = rez.slice(0,n);}
+        if(!full){rez = [for (i in 0...n) rez[i]]; }
         return rez;
     }
     /**
@@ -549,7 +551,7 @@ class GeometryXD{
      @param full - if true then result array will be not cutted to result array length parameter
      @return Array<Int>
     **/
-    public static function repeater_I_I(n:Int, what:Array<Int>, full:Bool = false):Array<Int>{
+    public static inline function repeater_I_I(n:Int, what:Array<Int>, full:Bool = false):Array<Int>{
         var rez:Array<Int> = null;
         if (n == 0){ return rez; }
         var wl:Int = what.length;
@@ -558,7 +560,7 @@ class GeometryXD{
         if (n < 0){ what.reverse(); n = Std.int(Math.abs(n));}
         var ind:Int =(full) ? n : Math.ceil(n / wl);
         rez = [for (_ in 0...ind) for (i in 0...wl) what[i]];
-        if(!full){rez = rez.slice(0,n);}
+        if(!full){rez = [for (i in 0...n) rez[i]]; }
         return rez;
     }
     /**
@@ -568,7 +570,7 @@ class GeometryXD{
      @param full - if true then result array will be not cutted to result array length parameter
      @return Array<String>
     **/
-    public static function repeater_S_S(n:Int, what:Array<String>, full:Bool = false):Array<String>{
+    public static inline function repeater_S_S(n:Int, what:Array<String>, full:Bool = false):Array<String>{
         var rez:Array<String> = null;
         if (n == 0){ return rez; }
         var wl:Int = what.length;
@@ -577,7 +579,7 @@ class GeometryXD{
         if (n < 0){ what.reverse(); n = Std.int(Math.abs(n));}
         var ind:Int =(full) ? n : Math.ceil(n / wl);
         rez = [for (_ in 0...ind) for (i in 0...wl) what[i]];
-        if(!full){rez = rez.slice(0,n);}
+        if(!full){rez = [for (i in 0...n) rez[i]]; }
         return rez;
     }
     /**
@@ -597,7 +599,7 @@ class GeometryXD{
         if (n < 0){ what.reverse(); n = Std.int(Math.abs(n));}
         var ind:Int =(full) ? n : Math.ceil(n / wl);
         rez = [for (_ in 0...ind) for (i in 0...wl) what[i]];
-        if(!full){rez = rez.slice(0,n);}
+        if(!full){rez = [for (i in 0...n) rez[i]]; }
         return rez;
     }
     /**
@@ -617,7 +619,7 @@ class GeometryXD{
         if (n < 0){ what.reverse(); n = Std.int(Math.abs(n));}
         var ind:Int =(full) ? n : Math.ceil(n / wl);
         rez = [for (_ in 0...ind) for (i in 0...wl) what[i]];
-        if(!full){rez = rez.slice(0,n);}
+        if(!full){rez = [for (i in 0...n) rez[i]]; }
         return rez;
     }
     /**
@@ -637,7 +639,7 @@ class GeometryXD{
         if (n < 0){ what.reverse(); n = Std.int(Math.abs(n));}
         var ind:Int =(full) ? n : Math.ceil(n / wl);
         rez = [for (_ in 0...ind) for (i in 0...wl) what[i]];
-        if(!full){rez = rez.slice(0,n);}
+        if(!full){rez = [for (i in 0...n) rez[i]]; }
         return rez;
     }
     /**
@@ -657,7 +659,7 @@ class GeometryXD{
         if (n < 0){ what.reverse(); n = Std.int(Math.abs(n));}
         var ind:Int =(full) ? n : Math.ceil(n / wl);
         rez = [for (_ in 0...ind) for (i in 0...wl) what[i]];
-        if(!full){rez = rez.slice(0,n);}
+        if(!full){rez = [for (i in 0...n) rez[i]]; }
         return rez;
     }
     /**
@@ -677,7 +679,7 @@ class GeometryXD{
         if (n < 0){ what.reverse(); n = Std.int(Math.abs(n));}
         var ind:Int =(full) ? n : Math.ceil(n / wl);
         rez = [for (_ in 0...ind) for (i in 0...wl) what[i]];
-        if(!full){rez = rez.slice(0,n);}
+        if(!full){rez = [for (i in 0...n) rez[i]]; }
         return rez;
     }
     /**
@@ -697,9 +699,10 @@ class GeometryXD{
         if (n < 0){ what.reverse(); n = Std.int(Math.abs(n));}
         var ind:Int =(full) ? n : Math.ceil(n / wl);
         rez = [for (_ in 0...ind) for (i in 0...wl) what[i]];
-        if(!full){rez = rez.slice(0,n);}
+        if(!full){rez = [for (i in 0...n) rez[i]]; }
         return rez;
     }
+    
     /**
      return array of arrays with pair indexes which is indexes equivalent elements of a and b arrays.
      a=["1", "2"] b=["1", "2", "1"] return [[0, 0], [0, 2], [1, 1]]
@@ -707,7 +710,7 @@ class GeometryXD{
      @param b - array where find
      @return Array<Array<Int>>
     **/
-    public static function an_in_b_S(a:Array<String>, b:Array<String>):Array<Array<Int>>{
+    public static inline function an_in_b_S(a:Array<String>, b:Array<String>):Array<Array<Int>>{
         var rez:Array<Array<Int>> = [];
         var al:Int = a.length;
         var bl:Int = b.length;
@@ -725,7 +728,7 @@ class GeometryXD{
      @param b - array where find
      @return Array<Array<Int>>
     **/
-    public static function an_in_bn_S(a:Array<String>, b:Array<Array<String>>):Array<Array<Int>>{
+    public static inline function an_in_bn_S(a:Array<String>, b:Array<Array<String>>):Array<Array<Int>>{
         var rez:Array<Array<Int>> = [];
         var al:Int = a.length;
         var bl:Int = b.length;
@@ -745,7 +748,7 @@ class GeometryXD{
      @param b - array where find
      @return Array<Array<Int>>
     **/
-    public static function an_in_b_I(a:Array<Int>, b:Array<Int>):Array<Array<Int>>{
+    public static inline function an_in_b_I(a:Array<Int>, b:Array<Int>):Array<Array<Int>>{
         var rez:Array<Array<Int>> = [];
         var al:Int = a.length;
         var bl:Int = b.length;
@@ -763,7 +766,7 @@ class GeometryXD{
      @param b - array where find
      @return Array<Array<Int>>
     **/
-    public static function an_in_bn_I(a:Array<Int>, b:Array<Array<Int>>):Array<Array<Int>>{
+    public static inline function an_in_bn_I(a:Array<Int>, b:Array<Array<Int>>):Array<Array<Int>>{
         var rez:Array<Array<Int>> = [];
         var al:Int = a.length;
         var bl:Int = b.length;
@@ -783,7 +786,7 @@ class GeometryXD{
      @param b - array where find
      @return Array<Array<Int>>
     **/
-    public static function an_in_b_F(a:Array<Float>, b:Array<Float>):Array<Array<Int>>{
+    public static inline function an_in_b_F(a:Array<Float>, b:Array<Float>):Array<Array<Int>>{
         var rez:Array<Array<Int>> = [];
         var al:Int = a.length;
         var bl:Int = b.length;
@@ -801,7 +804,7 @@ class GeometryXD{
      @param b - array where find
      @return Array<Array<Int>>
     **/
-    public static function an_in_bn_F(a:Array<Float>, b:Array<Array<Float>>):Array<Array<Int>>{
+    public static inline function an_in_bn_F(a:Array<Float>, b:Array<Array<Float>>):Array<Array<Int>>{
         var rez:Array<Array<Int>> = [];
         var al:Int = a.length;
         var bl:Int = b.length;
@@ -845,7 +848,7 @@ class GeometryXD{
      @param ring - if true then first incoming element will be added at the end of range, for the case of strict coincidence
      @return Array<Array<String>>
     **/
-    public static function chain_S(a:Array<String> ,n:Int ,ring:Bool = false):Array<Array<String>>{
+    public static inline function chain_S(a:Array<String> ,n:Int ,ring:Bool = false):Array<Array<String>>{
         var rez:Array<Array<String>> = null;
         var a_l:Int = a.length;
         if (n > a_l || n < 1){ return rez; }
@@ -860,7 +863,7 @@ class GeometryXD{
      @param ring - if true then first incoming element will be added at the end of range, for the case of strict coincidence
      @return Array<Array<Int>>
     **/
-    public static function chain_I(a:Array<Int> ,n:Int ,ring:Bool = false):Array<Array<Int>>{
+    public static inline function chain_I(a:Array<Int> ,n:Int ,ring:Bool = false):Array<Array<Int>>{
         var rez:Array<Array<Int>> = null;
         var a_l:Int = a.length;
         if (n > a_l || n < 1){ return rez; }
@@ -875,7 +878,7 @@ class GeometryXD{
      @param ring - if true then first incoming element will be added at the end of range, for the case of strict coincidence
      @return Array<Array<Float>>
     **/
-    public static function chain_F(a:Array<Float> ,n:Int ,ring:Bool = false):Array<Array<Float>>{
+    public static inline function chain_F(a:Array<Float> ,n:Int ,ring:Bool = false):Array<Array<Float>>{
         var rez:Array<Array<Float>> = null;
         var a_l:Int = a.length;
         if (n > a_l || n < 1){ return rez; }
@@ -892,7 +895,7 @@ class GeometryXD{
      @param borders - if true then add borders into result
      @return Array<Float>
     **/
-    public static function steps_internal(xmin:Float, xmax:Float, n:Int, borders:Bool = false):Array<Float>{
+    public static inline function steps_internal(xmin:Float, xmax:Float, n:Int, borders:Bool = false):Array<Float>{
         var rez:Array<Float> = null;
         if (n < 1){ return rez; }
         var st:Float = (xmax - xmin) / (n + 1);
@@ -1843,6 +1846,7 @@ class GeometryXD{
     }
     
     //done. recode bottom
+    
     public static function beziercubic_support_dot_one(beziercubic_one_axis_coordinates:Array<Float>):Null<Float>{
         var rez:Null<Float> = null;
         var c:Array<Float> = beziercubic_one_axis_coordinates;
@@ -1904,6 +1908,7 @@ class GeometryXD{
         c[2] = beziercubic3Ddot(c, 2 / 3);
         return c;
     }
+    
     public static function curve3Doffset(
         curve3D:Array<Array<Float>>,
         vec3D:Array<Float>,
