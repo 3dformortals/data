@@ -2478,7 +2478,13 @@ class GeometryXD{
             rez.push(dotXDoffset(dotXDoffset(t0, v, d), vv, dd));
         }return rez;
     }
-    
+    /**
+     [Description]
+     @param dot3D - 
+     @param vec3Dfield - 
+     @param distances - 
+     @return Array<Array<Float>>
+    **/
     public static function polygon3D_vec3Dfield_distance(
         dot3D:Array<Float>,
         vec3Dfield:Array<Array<Float>>,
