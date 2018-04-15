@@ -71,16 +71,16 @@ class GeometryXD{
       @param a - incoming arrays
       @return Null<Bool>
     **/
-    public static function same_size_I(a:Array<Array<Int>>):Null<Bool>{
+    public static inline function same_size_I(a:Array<Array<Int>>):Null<Bool>{
         var rez:Null<Bool> = null;
         var al:Int = a.length;
         if (al > 1){
             rez = true;
             var size:Int = a[0].length;
             for (i in 1...al){
-                if (size != a[i].length) { return false; }
+                if (size != a[i].length) { rez = false; break; }
             }
-        }else{return true;}
+        }else{ rez  = true; }
         return rez;
     }
     /**
@@ -88,16 +88,16 @@ class GeometryXD{
       @param a - incoming arrays
       @return Null<Bool>
     **/
-    public static function same_size_F(a:Array<Array<Float>>):Null<Bool>{
+    public static inline function same_size_F(a:Array<Array<Float>>):Null<Bool>{
         var rez:Null<Bool> = null;
         var al:Int = a.length;
         if (al > 1){
             rez = true;
             var size:Int = a[0].length;
             for (i in 1...al){
-                if (size != a[i].length) { return false; }
+                if (size != a[i].length) { rez = false; }
             }
-        }else{return true;}
+        }else{ rez = true; }
         return rez;
     }
     
@@ -526,7 +526,7 @@ class GeometryXD{
     }
     
     /**
-     repeat Float Array to predetermined length
+     repeat Float Array to specified length
      @param n - result array length
      @param what - incoming array
      @param full - if true then result array will be not cutted to result array length parameter
@@ -545,7 +545,7 @@ class GeometryXD{
         return rez;
     }
     /**
-     repeat Int Array to predetermined length
+     repeat Int Array to specified length
      @param n - result array length
      @param what - incoming array
      @param full - if true then result array will be not cutted to result array length parameter
@@ -564,7 +564,7 @@ class GeometryXD{
         return rez;
     }
     /**
-     repeat String Array to predetermined length
+     repeat String Array to specified length
      @param n - result array length
      @param what - incoming array
      @param full - if true then result array will be not cutted to result array length parameter
@@ -583,7 +583,7 @@ class GeometryXD{
         return rez;
     }
     /**
-     repeat Float Array to predetermined length Int Array
+     repeat Float Array to specified length Int Array
      @param n - result array length
      @param what - incoming array
      @param full - if true then result array will be not cutted to result array length parameter
@@ -603,7 +603,7 @@ class GeometryXD{
         return rez;
     }
     /**
-     repeat String Array to predetermined length Int Array
+     repeat String Array to specified length Int Array
      @param n - result array length
      @param what - incoming array
      @param full - if true then result array will be not cutted to result array length parameter
@@ -623,7 +623,7 @@ class GeometryXD{
         return rez;
     }
     /**
-     repeat Int Array to predetermined length Float Array
+     repeat Int Array to specified length Float Array
      @param n - result array length
      @param what - incoming array
      @param full - if true then result array will be not cutted to result array length parameter
@@ -643,7 +643,7 @@ class GeometryXD{
         return rez;
     }
     /**
-     repeat String Array to predetermined length Float Array
+     repeat String Array to specified length Float Array
      @param n - result array length
      @param what - incoming array
      @param full - if true then result array will be not cutted to result array length parameter
@@ -663,7 +663,7 @@ class GeometryXD{
         return rez;
     }
     /**
-     repeat Int Array to predetermined length String Array
+     repeat Int Array to specified length String Array
      @param n - result array length
      @param what - incoming array
      @param full - if true then result array will be not cutted to result array length parameter
@@ -683,7 +683,7 @@ class GeometryXD{
         return rez;
     }
     /**
-     repeat Float Array to predetermined length String Array
+     repeat Float Array to specified length String Array
      @param n - result array length
      @param what - incoming array
      @param full - if true then result array will be not cutted to result array length parameter
@@ -819,7 +819,7 @@ class GeometryXD{
     }
     
     /**
-     chain bonus function. split range to sequences predetermined length n with same border values.
+     chain bonus function. split range to sequences specified length n with same border values.
      f(6, 3, false) return [[0, 1, 2], [2, 3, 4]]. But f(6, 3, true) return [[0, 1, 2], [2, 3, 4], [4, 5, 0]].
      Can be used to split dotsXDfield (array of 3D dots) to array of separated 4dots curves trajectories which have same border dots.
      Just split array of dots length a_l to n = 4. Then recount to beziercurves or create multidot curve use each last three dots.
@@ -1779,7 +1779,7 @@ class GeometryXD{
      @param curve - curve 3D ((x, y, z), (x, y, z), (x, y, z), (x, y, z))
      @return Array<Float>
     **/
-    public static function curve3D_4to12(curve:Array<Array<Float>>):Array<Float>{
+    public static inline function curve3D_4to12(curve:Array<Array<Float>>):Array<Float>{
         var rez:Array<Float> = null;
         if (
             curve.length == 4 &&
@@ -1795,7 +1795,7 @@ class GeometryXD{
      @param curve - curve 3D data (x1, y1, z1, x2, y2, z2, x3, y3, z3, x4, y4, z4)
      @return Array<Array<Float>>
     **/
-    public static function beziercubic3D_12to4(curve:Array<Float>):Array<Array<Float>>{
+    public static inline function curve3D_12to4(curve:Array<Float>):Array<Array<Float>>{
         var rez:Array<Array<Float>> = null;
         if (curve.length == 12){
             rez = [for (i in [0,3,6,9]) [ for (ai in 0...3) curve[ai+i]]];
@@ -1807,7 +1807,7 @@ class GeometryXD{
      @param curve - bezier cubic curve 3D ((x1, y1, z1), (x2, y2, z2), (x3, y3, z3), (x4, y4, z4))
      @return Array<Array<Float>>
     **/
-    public static function beziercubic3D_derivativeparameters(curve:Array<Array<Float>>):Array<Array<Float>>{
+    public static inline function beziercubic3D_derivativeparameters(curve:Array<Array<Float>>):Array<Array<Float>>{
         var rez:Array<Array<Float>> = null;
         var cl:Int = curve.length;
         if ( cl == 4 && curve[0].length == 3 && same_size_F(curve)){
@@ -1820,7 +1820,7 @@ class GeometryXD{
      @param p - bezier cubic curve parameter. Standart values equal range 0...1 include borders
      @return Null<Float>
     **/
-    public static function beziercubic_derivative(bcp:Array<Float>, p:Float):Null<Float>{
+    public static inline function beziercubic_derivative(bcp:Array<Float>, p:Float):Null<Float>{
         var rez:Null<Float> = null;
         if (bcp.length == 4){
             rez = 3 * (1 - p) * (1 - p) * (bcp[1] - bcp[0]) +
@@ -1845,85 +1845,146 @@ class GeometryXD{
         }return rez;
     }
     
-    //done. recode bottom
-    
-    public static function beziercubic_support_dot_one(beziercubic_one_axis_coordinates:Array<Float>):Null<Float>{
+    /**
+     returns cubic bezier curve support dot one(first lever) paramater for each coordinate. Usual case "x" or "y" or "z"
+     @param beziercubic_one_axis_coordinates - [c1,c2,c3,c4]. Where c is cubic bezier curve dots values for one of "x" or "y" or "z"
+     @return Null<Float>
+    **/
+    public static inline function beziercubic_support_dot_one(beziercubic_one_axis_coordinates:Array<Float>):Null<Float>{
         var rez:Null<Float> = null;
         var c:Array<Float> = beziercubic_one_axis_coordinates;
-        if (c.length != 4){ return rez;}
-        return (-5 * c[0] + 18 * c[1] - 9 * c[2] + 2 * c[3]) / 6;
+        if (c.length == 4){ rez = (-5 * c[0] + 18 * c[1] - 9 * c[2] + 2 * c[3]) / 6; }
+        return rez;
     }
+    /**
+     returns dot 3D, which is bezier cubic curve 3D support dot one(first lever)
+     @param curve3D_4dots - curve 3D trajectory, which is [[x1, y1, z1], [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]]
+     @return Array<Float>
+    **/
     public static function beziercubic3D_support_dot_one(curve3D_4dots:Array<Array<Float>>):Array<Float>{
         var rez:Array<Float> = null;
         var c:Array<Array<Float>> = curve3D_4dots;
-        if (c.length != 4 || !same_size_F(c)){ return rez; }
-        rez = [for (i in beziercubic3D_derivativeparameters(c)) beziercubic_support_dot_one(i)];
+        if (c.length == 4 && same_size_F(c)){ rez = [for (i in beziercubic3D_derivativeparameters(c)) beziercubic_support_dot_one(i)]; }
         return rez;
     }
-    public static function beziercubic_support_dot_two(beziercubic_one_axis_coordinates:Array<Float>):Null<Float>{
+    /**
+     returns cubic bezier curve support dot two(second lever) paramater for each coordinate. Usual case "x" or "y" or "z"
+     @param beziercubic_one_axis_coordinates - [c1,c2,c3,c4]. Where c is cubic bezier curve dots values for one of "x" or "y" or "z"
+     @return Null<Float>
+    **/
+    public static inline function beziercubic_support_dot_two(beziercubic_one_axis_coordinates:Array<Float>):Null<Float>{
         var rez:Null<Float> = null;
         var c:Array<Float> = beziercubic_one_axis_coordinates;
-        if (c.length != 4){ return rez;}
-        return (2 * c[0] - 9 * c[1] + 18 * c[2] - 5 * c[3]) / 6;
+        if (c.length == 4){ rez = (2 * c[0] - 9 * c[1] + 18 * c[2] - 5 * c[3]) / 6; }
+        return rez;
     }
+    /**
+     returns dot 3D, which is bezier cubic curve 3D support dot two(second lever)
+     @param curve3D_4dots - curve 3D trajectory, which is [[x1, y1, z1], [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]]
+     @return Array<Float>
+    **/
     public static function beziercubic3D_support_dot_two(curve3D_4dots:Array<Array<Float>>):Array<Float>{
         var rez:Array<Float> = null;
         var c:Array<Array<Float>> = curve3D_4dots;
-        if (c.length != 4 || !same_size_F(c)){ return rez; }
-        rez = [for (i in beziercubic3D_derivativeparameters(c)) beziercubic_support_dot_two(i)];
+        if (c.length == 4 && same_size_F(c)){ rez = [for (i in beziercubic3D_derivativeparameters(c)) beziercubic_support_dot_two(i)]; }
         return rez;
     }
-    public static function beziercubic3D_follow_4dots_trajectory(dots:Array<Array<Float>>):Array<Array<Float>>{
+    /**
+     returns bezier cubic curve 3D, calculated from 4dots 3D(curve 3D trajectory)
+     @param dots - curve 3D trajectory. Must be of the form [[x1, y1, z1], [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]]
+     @return Array<Array<Float>>
+    **/
+    public static inline function beziercubic3D_follow_4dots_trajectory(dots:Array<Array<Float>>):Array<Array<Float>>{
         var rez:Array<Array<Float>> = null;
-        if (dots.length != 4 || !same_size_F(dots)){ return rez; }
-        var dot_one:Array<Float> = beziercubic3D_support_dot_one(dots);
-        var dot_two:Array<Float> = beziercubic3D_support_dot_two(dots);
-        rez = [dots[0], dot_one, dot_two, dots[3]];
-        return rez;
+        if (dots.length == 4 && dots[0].length == 3 && same_size_F(dots)){
+            var dot_one:Array<Float> = beziercubic3D_support_dot_one(dots);
+            var dot_two:Array<Float> = beziercubic3D_support_dot_two(dots);
+            rez = [dots[0], dot_one, dot_two, dots[3]];
+        }return rez;
     }
-    public static function beziercubic_coordinate(beziercubic_one_axis_coordinates:Array<Float>, parameter:Float):Null<Float>{
+    /**
+     returns bezier cubic coordinate for each one axis. Usual case "x" or "y" or "z"
+     @param beziercubic_one_axis_coordinates - Must be of the form (c1, c2, c3, c4). 
+     For case [[x1, y1, z1], [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]] curve and x axis must be [x1, x2, x3, x4]
+     @param parameter - parameter of bezier curve equation. Usual case range 0...1 include borders
+     @return Null<Float>
+    **/
+    public static inline function beziercubic_coordinate(beziercubic_one_axis_coordinates:Array<Float>, parameter:Float):Null<Float>{
         var rez:Null<Float> = null;
         var c:Array<Float> = beziercubic_one_axis_coordinates;
         var p:Float = parameter;
-        if (c.length != 4){ return rez; }
-        rez = (1 - p) * (1 - p) * (1 - p) * c[0] +
-            3 * (1 - p) * (1 - p) * p * c[1] +
-            3 * (1 - p) * p * p * c[2] +
-            p * p * p * c[3];
-        return rez;
+        if ( c.length == 4 ){
+            rez = (1 - p) * (1 - p) * (1 - p) * c[0] +
+                3 * (1 - p) * (1 - p) * p * c[1] +
+                3 * (1 - p) * p * p * c[2] +
+                p * p * p * c[3];
+        }return rez;
     }
+    /**
+     returns dot 3D, belongs on bezier cubic curve 3D
+     @param beziercubic3D - curve 3D, which must be of the form [[x1, y1, z1], [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]]. 
+     Which is [dot3Dstart, lever3Dstart, lever3Dend, dot3Dend]
+     @param parameter - parameter of bezier curve equation. Usual case range 0...1 include borders
+     @return Array<Float>
+    **/
     public static function beziercubic3Ddot(beziercubic3D:Array<Array<Float>>, parameter:Float):Array<Float>{
         var rez:Array<Float> = null;
         var c:Array<Array<Float>> = beziercubic3D;
         var p:Float = parameter;
-        if (c.length != 4 || c[0].length != 3 || !same_size_F(c)){ return rez; }
-        rez = [for (i in beziercubic3D_derivativeparameters(c)) beziercubic_coordinate(i, p)];
-        return rez;
+        if (c.length == 4 && c[0].length == 3 && same_size_F(c)){
+            rez = [for (i in beziercubic3D_derivativeparameters(c)) beziercubic_coordinate(i, p)];
+        }return rez;
     }
-    public static function curve3D_4dots_follow_beziercubic_trajectory(beziercubic3D:Array<Array<Float>>):Array<Array<Float>>{
+    /**
+     returns curve 3D, which is 4 dots 3D bezier cubic curve, recounted to 4 dots 3D curve. 
+     Two internal dots belongs on bezier cubic curve trajectory, with parameter 1/3 and 2/3
+     @param beziercubic3D - curve 3D, which must be of the form [[x1, y1, z1], [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]]
+     @return Array<Array<Float>>
+    **/
+    public static inline function curve3D_4dots_follow_beziercubic_trajectory(beziercubic3D:Array<Array<Float>>):Array<Array<Float>>{
         var rez:Array<Array<Float>> = null;
         var c:Array<Array<Float>> = beziercubic3D;
-        if (c.length != 4 || !same_size_F(c)){ return rez; }
-        c[1] = beziercubic3Ddot(c, 1 / 3);
-        c[2] = beziercubic3Ddot(c, 2 / 3);
-        return c;
+        if (
+            c.length == 4 &&
+            c[0].length == 3 &&
+            same_size_F(c)
+        ){
+            c[1] = beziercubic3Ddot(c, 1 / 3);
+            c[2] = beziercubic3Ddot(c, 2 / 3);
+        }return c;
     }
-    
-    public static function curve3Doffset(
+    /**
+     returns curve 3D, offsetted along vector 3D to specified distance
+     @param curve3D - curve 3D, which must be of the form [[x1, y1, z1], [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]]
+     @param vec3D - vector 3D (a, b, c)
+     @param distance - displacement distance
+     @return Array<Array<Float>>
+    **/
+    public static inline function curve3Doffset(
         curve3D:Array<Array<Float>>,
         vec3D:Array<Float>,
         distance:Float
     ):Array<Array<Float>>{
         var rez:Array<Array<Float>> = null;
         if (
-            curve3D.length != 4 ||
-            curve3D[0].length != 3 ||
-            !same_size_F(curve3D) ||
-            vec3D.length != 3
-        ){ return rez; }
-        return [for (i in curve3D) dotXDoffset(i, vec3D, distance)];
+            curve3D.length == 4 &&
+            curve3D[0].length == 3 &&
+            same_size_F(curve3D) &&
+            vec3D.length == 3
+        ){
+            rez = [for (i in curve3D) dotXDoffset(i, vec3D, distance)];
+        }return rez;
     }
-    public static function curve3Drotate(
+    /**
+     returns curve 3D, rotated around axis(determined by dot 3D and vector 3D) to specified angle
+     @param curve3D - curve 3D, which must be of the form [[x1, y1, z1], [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]]
+     @param dot3D - dot 3D. Used for rotation axis
+     @param vec3D - vector 3D. Used for rotation axis
+     @param angle - rotation angle
+     @param rad - if true then radians angle, default false (degrees angle)
+     @return Array<Array<Float>>
+    **/
+    public static inline function curve3Drotate(
         curve3D:Array<Array<Float>>,
         dot3D:Array<Float>,
         vec3D:Array<Float>,
@@ -1932,126 +1993,158 @@ class GeometryXD{
     ):Array<Array<Float>>{
         var rez:Array<Array<Float>> = null;
         if (
-            curve3D.length != 4 ||
-            curve3D[0].length != 3 ||
-            !same_size_F(curve3D) ||
-            dot3D.length != 3 ||
-            vec3D.length != 3 ||
-            vecXDnorm(vec3D) == 0
-        ){ return rez; }
-        if (angle == 0){return curve3D;}
-        return [for (i in curve3D) dot3Drotate(i, dot3D, vec3D, angle, rad)];
+            curve3D.length == 4 &&
+            curve3D[0].length == 3 &&
+            same_size_F(curve3D) &&
+            dot3D.length == 3 &&
+            vec3D.length == 3 &&
+            vecXDnorm(vec3D) > 0
+        ){
+            if(angle != 0){ rez = [for (i in curve3D) dot3Drotate(i, dot3D, vec3D, angle, rad)]; }
+            else{ rez = curve3D; }
+        }return rez;
     }
-    public static function curve3Dscale(
+    /**
+     returns curve 3D, scaled relative base dot 3D, uses own scale for each axis
+     @param curve3D - curve 3D, which must be of the form [[x1, y1, z1], [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]]
+     @param scale_xyz - scale for each axis. Must be of the form [sx, sy, sz]
+     @param dot3D - scaling center(base) dot 3D
+     @return Array<Array<Float>>
+    **/
+    public static inline function curve3Dscale(
         curve3D:Array<Array<Float>>,
         scale_xyz:Array<Float>,
         dot3D:Array<Float>
     ):Array<Array<Float>>{
         var rez:Array<Array<Float>> = null;
         if (
-            curve3D.length != 4 ||
-            curve3D[0].length != 3 ||
-            !same_size_F(curve3D) ||
-            dot3D.length != 3 ||
-            scale_xyz.length != 3
-        ){ return rez; }
-        if (vecXDnorm(scale_xyz) == 0){return [for (i in 0...4) [0,0,0]];}
-        return [for (i in curve3D) dotXDscale(i, scale_xyz, dot3D)];
+            curve3D.length == 4 &&
+            curve3D[0].length == 3 &&
+            same_size_F(curve3D) &&
+            dot3D.length == 3 &&
+            scale_xyz.length == 3
+        ){
+        if (vecXDnorm(scale_xyz) > 0){ rez = [for (i in curve3D) dotXDscale(i, scale_xyz, dot3D)]; }
+        else{rez = [for (i in 0...4) [0,0,0]];}
+        }return rez;
     }
     
-    
     //ellipse section
-    public static function ellipse2Dperimeter_ramanujan(
+    /**
+     returns ellipse perimeter, calculated use ramanujan method.
+     Result will be max from perimeters, calculated by two ramanujan methods, with negative errors
+     @param semiaxis_a - ellipse a semiaxes. Usual paralleled x axis
+     @param semiaxis_b - ellipse b semiaxes. Usual paralleled y axis
+     @return Null<Float>
+    **/
+    public static inline function ellipse2Dperimeter_ramanujan(
         semiaxis_a:Float,
         semiaxis_b:Float
     ):Null<Float>{
         var rez:Null<Float> = null;
         var a:Float = semiaxis_a;
         var b:Float = semiaxis_b;
-        if (a < 0 || b < 0){ return rez; }
-        var l1:Float = Math.PI * (3 * (a + b) - Math.sqrt((3 * a + b) * (a + 3 * b)));
-        var l2:Float = Math.PI * (a + b) *
-            (
-                1 +
+        if (a > 0 && b > 0){
+            var l1:Float = Math.PI * (3 * (a + b) - Math.sqrt((3 * a + b) * (a + 3 * b)));
+            var l2:Float = Math.PI * (a + b) *
                 (
-                    3 * (a - b) * (a - b) / (a + b) / (a + b) /
+                    1 +
                     (
-                        10 +
-                        Math.sqrt(
-                            4 -
-                            3 * (a - b) * (a - b) / (a + b) / (a + b)
+                        3 * (a - b) * (a - b) / (a + b) / (a + b) /
+                        (
+                            10 +
+                            Math.sqrt(
+                                4 -
+                                3 * (a - b) * (a - b) / (a + b) / (a + b)
+                            )
                         )
                     )
-                )
-            );
-        rez = Math.max(l1, l2);
-        return rez;
+                );
+            rez = Math.max(l1, l2);
+        }return rez;
     }
+    /**
+     returns vector 2D, which is tangent of centered ellipse 2D
+     @param semiaxis_a - ellipse a semiaxes. Usual paralleled x axis
+     @param semiaxis_b - ellipse b semiaxes. Usual paralleled y axis
+     @param ellipse_dot2D - dot 2D belongs to the ellipse perimeter
+     @return Array<Array<Float>>
+    **/
     public static function tangent_centered_ellipse2Ddot(
         semiaxis_a:Float,
         semiaxis_b:Float,
         ellipse_dot2D:Array<Float>
     ):Array<Array<Float>>{
-        var rez:Array<Array<Float>> = null;
+        var v:Array<Array<Float>> = null;
         var a:Float = semiaxis_a;
         var b:Float = semiaxis_b;
-        var x0:Float = ellipse_dot2D[0];
-        var y0:Float = ellipse_dot2D[1];
-        
-        var x:Float;
-        var y:Float;
-        var v:Array<Array<Float>> = null;
-        if (x0 != 0){
-            x = 0.9 * x0;
-            if (x0 > 0){
-                if (y0 == 0){ v = [[x0, y0], [x0, 1]]; }
-                else{
-                    y = (1 - x * x0 / (a * a)) * b * b / y0;
-                    if (y0 > 0){ v = [[x0, y0], [x, y]]; }
-                    else{ v = [[x, y], [x0, y0]]; }
+        if (
+            a > 0 && b > 0 && ellipse_dot2D.length == 2
+        ){
+            var x0:Float = ellipse_dot2D[0];
+            var y0:Float = ellipse_dot2D[1];
+            var x:Float;
+            var y:Float;
+            if (x0 != 0){
+                x = 0.9 * x0;
+                if (x0 > 0){
+                    if (y0 == 0){ v = [[x0, y0], [x0, 1]]; }
+                    else{
+                        y = (1 - x * x0 / (a * a)) * b * b / y0;
+                        if (y0 > 0){ v = [[x0, y0], [x, y]]; }
+                        else{ v = [[x, y], [x0, y0]]; }
+                    }
+                }else if (x0 < 0){
+                    if (y0 == 0){ v = [[x0, y0], [x0, -1]]; }
+                    else{
+                        y = (1 - x * x0 / (a * a)) * b * b / y0;
+                        if (y0 > 0){ v = [[x, y], [x0, y0]]; }
+                        else{ v = [[x0, y0], [x, y]]; }
+                    }
                 }
-            }else if (x0 < 0){
-                if (y0 == 0){ v = [[x0, y0], [x0, -1]]; }
-                else{
-                    y = (1 - x * x0 / (a * a)) * b * b / y0;
-                    if (y0 > 0){ v = [[x, y], [x0, y0]]; }
-					else{ v = [[x0, y0], [x, y]]; }
-                }
-            }
-        }else{
-            y = 0.9 * y0;
-            if (y0 > 0){
-                if (x0 == 0){ v = [[x0, y0], [-1, y0]]; }
-                else{
-                    x = (1 - y * y0 /(b * b)) * a * a / x0;
-                    if (x0 > 0){ v = [[x, y], [x0, y0]]; }
-                    else{ v = [[x0, y0], [x, y]]; }
-                }
-            }else if (y0 < 0){
-                if (x0 == 0){ v = [[x0, y0], [1, y0]]; }
-                else{
-                    x = (1 - y * y0 /(b * b)) * a * a / x0;
-                    if (x0 < 0){ v = [[x, y], [x0, y0]]; }
-                    else{ v = [[x0, y0], [x, y]]; }
+            }else{
+                y = 0.9 * y0;
+                if (y0 > 0){
+                    if (x0 == 0){ v = [[x0, y0], [-1, y0]]; }
+                    else{
+                        x = (1 - y * y0 /(b * b)) * a * a / x0;
+                        if (x0 > 0){ v = [[x, y], [x0, y0]]; }
+                        else{ v = [[x0, y0], [x, y]]; }
+                    }
+                }else if (y0 < 0){
+                    if (x0 == 0){ v = [[x0, y0], [1, y0]]; }
+                    else{
+                        x = (1 - y * y0 /(b * b)) * a * a / x0;
+                        if (x0 < 0){ v = [[x, y], [x0, y0]]; }
+                        else{ v = [[x0, y0], [x, y]]; }
+                    }
                 }
             }
         }return v;
     }
-    public static function ellipse_e_parameter(
+    /**
+     returns ellipse e parameter (ellipse eccentricity)
+     @param semiaxis_a - ellipse a semiaxes. Usual paralleled x axis
+     @param semiaxis_b - ellipse b semiaxes. Usual paralleled y axis
+     @return Null<Float>
+    **/
+    public static inline function ellipse_e_parameter(
         semiaxis_a:Float,
         semiaxis_b:Float
     ):Null<Float>{
         var rez:Null<Float> = null;
         var a:Float = semiaxis_a;
         var b:Float = semiaxis_b;
-        if (
-            a < 0 ||
-            b < 0 ||
-            a <= 0 && b <= 0
-        ){ return rez; }
-        rez = (a >= b) ? Math.sqrt(1 - b * b / (a * a)) : -Math.sqrt(1 - a * a / (b * b)) ;
-        return rez;
+        if ( a >= 0 && b >= 0 && (a + b) > 0){
+            rez = (a >= b) ? Math.sqrt(1 - b * b / (a * a)) : -Math.sqrt(1 - a * a / (b * b)) ;
+        }return rez;
     }
+    /**
+     returns ellipse c parameter (elipse foci) ... фокальное расстояние (полурасстояние между фокусами)
+     @param semiaxis_a - ellipse a semiaxes. Usual paralleled x axis
+     @param semiaxis_b - ellipse b semiaxes. Usual paralleled y axis
+     @return Null<Float>
+    **/
     public static function ellipse_c_parameter(
         semiaxis_a:Float,
         semiaxis_b:Float
@@ -2064,6 +2157,20 @@ class GeometryXD{
         rez = (a >= b) ? a * e : b * e;
         return rez;
     }
+    //done. recode bottom
+    /**
+     returns vector 3D, which is tangent of ellipse, belongs to the plane 3D
+     @param dot3D - 
+     @param vec3Dnormal_ellipse_plane - 
+     @param vec3Dsemiaxis_a_direction - 
+     @param semiaxis_a - 
+     @param semiaxis_b - 
+     @param semiaxis_a_negative - 
+     @param semiaxis_b_negative - 
+     @param angle - 
+     @param rad - 
+     @return Array<Float>
+    **/
     public static function tangent_vec3D_in_plane_of_ellipse2D_placed_in_3Dspace(
         dot3D:Array<Float>,
         vec3Dnormal_ellipse_plane:Array<Float>,
