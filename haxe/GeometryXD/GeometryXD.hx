@@ -2428,7 +2428,7 @@ class GeometryXD{
      Which is [a, b, an, bn], where an and bn is negative semiaxes direction vectors 
      @param semiaxes - array of displacement values of polygon vetexes from center dot in ellipse plane
      @param angle_proportions - proportions array for splitting 360 degrees angle(without units, not matter). 
-     [90, 90, 90, 90] returns result same as [1, 1, 1, 1], in both cases will be created quadrangle inside ellipse
+     `[90, 90, 90, 90]` returns result same as `[1, 1, 1, 1]`, in both cases will be created quadrangle inside ellipse
      @return Array<Array<Float>>
     **/
     public static function polygon3D_inside_ellipse(
@@ -2479,10 +2479,13 @@ class GeometryXD{
         }return rez;
     }
     /**
-     [Description]
-     @param dot3D - 
-     @param vec3Dfield - 
-     @param distances - 
+     polygon on vectors and displacements. Can be not belongs to one plane 3D.
+     returns polygon 3D dots array, which is poligon center dot and array of polygon perimeter dots. 
+     Result will have form [`dot3D`, dot3D(1), ... ,dot3D(`distances.length`)]
+     @param dot3D - polygon center dot 3D
+     @param vec3Dfield - polygon vertexes vector field(array of vectors 3D). 
+     Each Vertex will be offsetted along own vector
+     @param distances - polygon vertexes radial distances array(offset length)
      @return Array<Array<Float>>
     **/
     public static function polygon3D_vec3Dfield_distance(
@@ -2502,6 +2505,20 @@ class GeometryXD{
             rez.push(dotXDoffset(dot3D, vec3Dfield[i], distances[i]));
         }return rez;
     }
+    /**
+     polygon belongs to plane 3D.
+     returns polygon 3D dots array, which is poligon center dot and array of polygon perimeter dots. 
+     Result will have form [`dot3D`, dot3D(1), ... ,dot3D(`angle_proportion.length`)]. 
+     @param dot3D - polygon center dot 3D
+     @param vec3Dplane_normal - polygon plane normal vector 3D
+     @param vec3Dsemiaxis_a_direction - semiaxis a, will be used as start vector of first vertex. 
+     Every next vertex will be calculated uses `vec3Dsemiaxis_a_direction` vector rotation 
+     (CCW direction, if look from end of `vec3Dplane_normal` vector) to specified angle and offset to specified distance
+     @param angle_proportions - proportions array for splitting 360 degrees angle(without units, not matter). 
+     `[90, 90, 90, 90]` returns result same as `[1, 1, 1, 1]`, in both cases will be created quadrangle belongs to plane
+     @param distances - polygon vertexes radial distances array(offset length)
+     @return Array<Array<Float>>
+    **/
     public static function polygon3D_in_plane(
         dot3D:Array<Float>,
         vec3Dplane_normal:Array<Float>,
@@ -2529,12 +2546,24 @@ class GeometryXD{
             rez.push( dotXDoffset( t, vec3Drotate(va, vn, x * ap[i]), distances[i] ) );
         }return rez;
     }
+    /**
+     returns vector field, which is vectors 3D, calculated from polygon center dot to each vertex. 
+     Result will have form [[a, b, c], ... , [a, b, c]], depend of incoming data length
+     @param polygon3D - must be of the form 
+     [ polygon center dot 3D, polygon vertex first dot 3D , ... ,polygon vertex last dot 3D ]
+     @return Array<Array<Float>>
+    **/
     public static function polygon3D_to_vec3Dfield(
         polygon3D:Array<Array<Float>>
     ):Array<Array<Float>>{
         return [for (i in 1...polygon3D.length) vecXD(polygon3D[0], polygon3D[i])];
     }
-    
+    /**
+     returns vector 3D, which is `vec3D` vector projection on `plane3D` plane
+     @param vec3D - vector 3D (a, b, c)
+     @param plane3D - plane 3D (a, b, c, d), where (a, b, c) normal vector of plane, and (d) displacement from (0, 0, 0)
+     @return Array<Float>
+    **/
     public static function projection_vec3D_on_plane3D(vec3D:Array<Float>, plane3D:Array<Float>):Array<Float>{
         var rez:Array<Float> = null;
         if (vec3D.length != 3 || plane3D.length != 4){
@@ -2553,6 +2582,14 @@ class GeometryXD{
         rez = vecXD(t0, t1);
         return rez;
     }
+    /**
+     returns angle, which is projection of angle between `vec3D1` and `vec3D2` vectors to `plane3D`
+     @param vec3D1 - vector 3D (a, b, c)
+     @param vec3D2 - vector 3D (a, b, c)
+     @param plane3D - plane 3D (a, b, c, d), where (a, b, c) normal vector of plane, and (d) displacement from (0, 0, 0)
+     @param rad - if true then radians angle, default false(degrees angle)
+     @return Null<Float>
+    **/
     public static function angle_vec3Dvec3D_projection_on_plane3D(vec3D1:Array<Float>, vec3D2:Array<Float>, plane3D:Array<Float>, rad:Bool = false):Null<Float>{
         var rez:Null<Float> = null;
         var v1:Array<Float> = vec3D1;
@@ -2578,7 +2615,4 @@ class GeometryXD{
         return rez;
     }
     
-    
-    
-    // ugol_vector_vector_znak -> angle_vec3Dvec3D_projection_on_plane3D
 }
