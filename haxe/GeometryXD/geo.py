@@ -33,14 +33,100 @@ class Enum:
 
 
 
-class GeometryXD:
-    _hx_class_name = "GeometryXD"
+class Reflect:
+    _hx_class_name = "Reflect"
     __slots__ = ()
-    _hx_statics = ["main", "positive_inside_I", "zero_inside_I", "negative_inside_I", "positive_inside_F", "zero_inside_F", "negative_inside_F", "sum_I", "sum_F", "diff_I", "diff_F", "middle_F", "multiply_FperF", "multiply_I", "multiply_F", "minus_I", "minus_F", "sum_xI", "sum_xF", "diff_xI", "diff_xF", "middle_xF", "multiply_xFperF", "multiply_xI", "multiply_xF", "multisum_xI", "multisum_xF", "sum_previous_I", "diff_previous_I", "sum_before_I", "diff_before_I", "sum_previous_F", "diff_previous_F", "sum_before_F", "diff_before_F", "recounter_I_F", "recounter_F_I", "recounter_I_S", "recounter_F_S", "recounter_S_I", "recounter_S_F", "repeater_F_F", "repeater_I_I", "repeater_S_S", "repeater_F_I", "repeater_S_I", "repeater_I_F", "repeater_S_F", "repeater_I_S", "repeater_F_S", "an_in_b_S", "an_in_bn_S", "an_in_b_I", "an_in_bn_I", "an_in_b_F", "an_in_bn_F", "chain_indexes", "chain_S", "chain_I", "chain_F", "steps_internal", "steps_external", "sin_cos_cut", "degrees", "radians", "angle_quadrant", "vecXDmod", "vecXDfieldmod", "maxabs", "vecXD", "vecXDone", "vecXDfield", "vecXDsame", "vecXDfieldsame", "vecXDrandom", "vecXDsum", "vecXDfieldsum", "vecXDdiff", "vecXDfielddiff", "vecXDback", "vecXDfieldback", "vecXDparalleled_sameside", "vecXDparalleled_opposite", "vecXDparalleled", "vecXDscalar", "vecXDcos", "vecXDangle", "vec3Dnormal", "vec3Dfieldnormal", "vecXDmiddle", "vecXDsamesize", "vecXDfieldsamesize", "vecXDfieldmiddle", "dotXDoffset", "dot3Dline3D_x_plane3D", "projection_dot3D_on_plane3D", "dot3D_to_dot2Dviewplane", "dotXDscale", "vec3Drotate", "vec3Dfield_rotate_around_vec3Daxes", "dot3Drotate", "plane3D_dot3Dnormal", "plane3D_dot_vec_vec", "plane3D_3dots", "plane3D_2dots", "distance_dot3D_plane3D", "random_vec3D_in_plane3D", "random_dot3D_in_plane3D", "curve3Dbeziercubic", "curve3Dbeziercubic_3dots", "line3Dbeziercubic_2dots", "line3Dbeziercubic", "beziercubic3D_4to12", "beziercubic3D_12to4", "beziercubic3D_derivativeparameters", "beziercubic_derivative", "beziercubic3D_derivative", "beziercubic_support_dot_one", "beziercubic3D_support_dot_one", "beziercubic_support_dot_two", "beziercubic3D_support_dot_two", "beziercubic3D_follow_4dots_trajectory", "beziercubic_coordinate", "beziercubic3Ddot", "curve3D_4dots_follow_beziercubic_trajectory", "curve3Doffset", "curve3Drotate", "curve3Dscale", "ellipse2Dperimeter_ramanujan", "tangent_centered_ellipse2Ddot", "ellipse_e_parameter", "ellipse_c_parameter", "tangent_vec3D_in_plane_of_ellipse2D_placed_in_3Dspace", "ellipse3D_dots", "ellipse2Ddot", "curve2D_4dots_elliptic_shape_restricted_to_quarter", "beziercubic3D_elliptic_shape_restricted_to_quarter", "angle_required_to_place_curve_on_ellipse", "polygon3D_inside_ellipse", "polygon3D_vec3Dfield_distance", "polygon3D_in_plane", "polygon3D_to_vec3Dfield", "projection_vec3D_on_plane3D", "angle_vec3Dvec3D_projection_on_plane3D"]
+    _hx_statics = ["field"]
+
+    @staticmethod
+    def field(o,field):
+        return python_Boot.field(o,field)
+
+
+class Std:
+    _hx_class_name = "Std"
+    __slots__ = ()
+    _hx_statics = ["string", "parseInt", "shortenPossibleNumber", "parseFloat"]
+
+    @staticmethod
+    def string(s):
+        return python_Boot.toString1(s,"")
+
+    @staticmethod
+    def parseInt(x):
+        if (x is None):
+            return None
+        try:
+            return int(x)
+        except Exception as _hx_e:
+            _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
+            e = _hx_e1
+            try:
+                prefix = HxString.substr(x,0,2).lower()
+                if (prefix == "0x"):
+                    return int(x,16)
+                raise _HxException("fail")
+            except Exception as _hx_e:
+                _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
+                e1 = _hx_e1
+                x1 = Std.parseFloat(x)
+                r = None
+                try:
+                    r = int(x1)
+                except Exception as _hx_e:
+                    _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
+                    e2 = _hx_e1
+                    r = None
+                if (r is None):
+                    r1 = Std.shortenPossibleNumber(x)
+                    if (r1 != x):
+                        return Std.parseInt(r1)
+                    else:
+                        return None
+                return r
+
+    @staticmethod
+    def shortenPossibleNumber(x):
+        r = ""
+        _g1 = 0
+        _g = len(x)
+        while (_g1 < _g):
+            i = _g1
+            _g1 = (_g1 + 1)
+            c = ("" if (((i < 0) or ((i >= len(x))))) else x[i])
+            _g2 = HxString.charCodeAt(c,0)
+            if (_g2 is None):
+                break
+            else:
+                _g21 = _g2
+                if (((((((((((_g21 == 57) or ((_g21 == 56))) or ((_g21 == 55))) or ((_g21 == 54))) or ((_g21 == 53))) or ((_g21 == 52))) or ((_g21 == 51))) or ((_g21 == 50))) or ((_g21 == 49))) or ((_g21 == 48))) or ((_g21 == 46))):
+                    r = (("null" if r is None else r) + ("null" if c is None else c))
+                else:
+                    break
+        return r
+
+    @staticmethod
+    def parseFloat(x):
+        try:
+            return float(x)
+        except Exception as _hx_e:
+            _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
+            e = _hx_e1
+            if (x is not None):
+                r1 = Std.shortenPossibleNumber(x)
+                if (r1 != x):
+                    return Std.parseFloat(r1)
+            return Math.NaN
+
+
+class geometryxd_GeometryXD:
+    _hx_class_name = "geometryxd.GeometryXD"
+    __slots__ = ()
+    _hx_statics = ["main", "positive_inside_I", "zero_inside_I", "negative_inside_I", "positive_inside_F", "zero_inside_F", "negative_inside_F", "same_size_I", "same_size_F", "same_xI", "same_xF", "sum_I", "sum_F", "diff_I", "diff_F", "middle_F", "multiply_I_I", "multiply_F_F", "multiply_I", "multiply_F", "minus_I", "minus_F", "sum_xI", "sum_xF", "diff_xI", "diff_xF", "middle_xF", "multiply_xI_I", "multiply_xF_F", "multiply_xI", "multiply_xF", "multisum_xI", "multisum_xF", "sum_previous_I", "diff_previous_I", "sum_before_I", "diff_before_I", "sum_previous_F", "diff_previous_F", "sum_before_F", "diff_before_F", "recounter_I_F", "recounter_F_I", "recounter_I_S", "recounter_F_S", "recounter_S_I", "recounter_S_F", "repeater_F_F", "repeater_I_I", "repeater_S_S", "repeater_F_I", "repeater_S_I", "repeater_I_F", "repeater_S_F", "repeater_I_S", "repeater_F_S", "an_in_b_S", "an_in_bn_S", "an_in_b_I", "an_in_bn_I", "an_in_b_F", "an_in_bn_F", "chain_indexes", "chain_S", "chain_I", "chain_F", "steps_internal", "steps_external", "sign_I", "sign_F", "sign3_I", "sign3_F", "sin_cos_cut", "degrees", "radians", "angle_quadrant", "vecXDnorm", "vecXDfieldnorm", "zero_vector_inside", "maxabs", "vecXD", "vecXDone", "vecXDfield", "vecXDsame", "vecXDfieldsame", "vecXDrandom", "vecXDsum", "vecXDfieldsum", "vecXDdiff", "vecXDfielddiff", "vecXDback", "vecXDfieldback", "vecXDparalleled_sameside", "vecXDparalleled_opposite", "vecXDparalleled", "vecXDscalar", "vecXDcos", "vecXDangle", "vec3Dnormal", "vec3Dfieldnormal", "vecXDmiddle", "vecXDfieldmiddle", "vecXDsamesize", "vecXDfieldsamesize", "dotXDoffset", "dot3Dline3D_x_plane3D", "projection_dot3D_on_plane3D", "dot3D_to_dot2Dviewplane", "dotXDscale", "vec3Drotate", "vec3Dfield_rotate_around_vec3Daxes", "dot3Drotate", "plane3D_dot3Dnormal", "plane3D_dot_vec_vec", "plane3D_3dots", "plane3D_2dots", "distance_dot3D_plane3D", "random_vec3D_in_plane3D", "random_dot3D_in_plane3D", "curve3D_4dots", "curve3D_3dots", "line3D_2dots", "line3D_dot_offset", "curve3D_4to12", "curve3D_12to4", "beziercubic3D_derivativeparameters", "beziercubic_derivative", "beziercubic3D_derivative", "beziercubic_support_dot_one", "beziercubic3D_support_dot_one", "beziercubic_support_dot_two", "beziercubic3D_support_dot_two", "beziercubic3D_follow_4dots_trajectory", "beziercubic_coordinate", "beziercubic3Ddot", "curve3D_4dots_follow_beziercubic_trajectory", "curve3Doffset", "curve3Drotate", "curve3Dscale", "ellipse2Dperimeter_ramanujan", "tangent_centered_ellipse2Ddot", "ellipse_e_parameter", "ellipse_c_parameter", "tangent_vec3D_in_plane_of_ellipse2D_placed_in_3Dspace", "ellipse3D_dots", "ellipse2Ddot", "curve2D_4dots_elliptic_shape_restricted_to_quarter", "beziercubic3D_elliptic_shape_restricted_to_quarter", "angle_required_to_place_curve_on_ellipse", "polygon3D_inside_ellipse", "polygon3D_vec3Dfield_distance", "polygon3D_in_plane", "polygon3D_to_vec3Dfield", "projection_vec3D_on_plane3D", "angle_vec3Dvec3D_projection_on_plane3D"]
 
     @staticmethod
     def main():
-        print("GeometryXD")
+        print("GeometryXD is ready for use")
 
     @staticmethod
     def positive_inside_I(a):
@@ -84,103 +170,316 @@ class GeometryXD:
 
     @staticmethod
     def zero_inside_F(a):
+        rez = False
         _g = 0
         while (_g < len(a)):
             i = (a[_g] if _g >= 0 and _g < len(a) else None)
             _g = (_g + 1)
             if (i == 0):
-                return True
-        return False
+                rez = True
+        return rez
 
     @staticmethod
     def negative_inside_F(a):
+        rez = False
         _g = 0
         while (_g < len(a)):
             i = (a[_g] if _g >= 0 and _g < len(a) else None)
             _g = (_g + 1)
             if (i < 0):
-                return True
-        return False
+                rez = True
+        return rez
+
+    @staticmethod
+    def same_size_I(a):
+        rez = None
+        al = len(a)
+        if (al > 1):
+            rez = True
+            size = len((a[0] if 0 < len(a) else None))
+            _g1 = 1
+            _g = al
+            while (_g1 < _g):
+                i = _g1
+                _g1 = (_g1 + 1)
+                if (size != len((a[i] if i >= 0 and i < len(a) else None))):
+                    rez = False
+                    break
+        else:
+            rez = True
+        return rez
+
+    @staticmethod
+    def same_size_F(a):
+        rez = None
+        al = len(a)
+        if (al > 1):
+            rez = True
+            size = len((a[0] if 0 < len(a) else None))
+            _g1 = 1
+            _g = al
+            while (_g1 < _g):
+                i = _g1
+                _g1 = (_g1 + 1)
+                if (size != len((a[i] if i >= 0 and i < len(a) else None))):
+                    rez = False
+        else:
+            rez = True
+        return rez
+
+    @staticmethod
+    def same_xI(a):
+        rez = None
+        al = len(a)
+        tmp = None
+        if (al > 0):
+            rez1 = None
+            al1 = len(a)
+            if (al1 > 1):
+                rez1 = True
+                size = len((a[0] if 0 < len(a) else None))
+                _g1 = 1
+                _g = al1
+                while (_g1 < _g):
+                    i = _g1
+                    _g1 = (_g1 + 1)
+                    if (size != len((a[i] if i >= 0 and i < len(a) else None))):
+                        rez1 = False
+                        break
+            else:
+                rez1 = True
+            tmp = rez1
+        else:
+            tmp = False
+        if tmp:
+            rez = True
+            lv = len((a[0] if 0 < len(a) else None))
+            _g11 = 1
+            _g2 = al
+            while (_g11 < _g2):
+                i1 = _g11
+                _g11 = (_g11 + 1)
+                _g3 = 0
+                _g21 = lv
+                while (_g3 < _g21):
+                    j = _g3
+                    _g3 = (_g3 + 1)
+                    if rez:
+                        if (python_internal_ArrayImpl._get((a[0] if 0 < len(a) else None), j) != python_internal_ArrayImpl._get((a[i1] if i1 >= 0 and i1 < len(a) else None), j)):
+                            rez = False
+                    else:
+                        break
+                if (not rez):
+                    break
+        return rez
+
+    @staticmethod
+    def same_xF(a):
+        rez = None
+        al = len(a)
+        tmp = None
+        if (al > 0):
+            rez1 = None
+            al1 = len(a)
+            if (al1 > 1):
+                rez1 = True
+                size = len((a[0] if 0 < len(a) else None))
+                _g1 = 1
+                _g = al1
+                while (_g1 < _g):
+                    i = _g1
+                    _g1 = (_g1 + 1)
+                    if (size != len((a[i] if i >= 0 and i < len(a) else None))):
+                        rez1 = False
+            else:
+                rez1 = True
+            tmp = rez1
+        else:
+            tmp = False
+        if tmp:
+            rez = True
+            lv = len((a[0] if 0 < len(a) else None))
+            _g11 = 1
+            _g2 = al
+            while (_g11 < _g2):
+                i1 = _g11
+                _g11 = (_g11 + 1)
+                _g3 = 0
+                _g21 = lv
+                while (_g3 < _g21):
+                    j = _g3
+                    _g3 = (_g3 + 1)
+                    if rez:
+                        if (python_internal_ArrayImpl._get((a[0] if 0 < len(a) else None), j) != python_internal_ArrayImpl._get((a[i1] if i1 >= 0 and i1 < len(a) else None), j)):
+                            rez = False
+                    else:
+                        break
+                if (not rez):
+                    break
+        return rez
 
     @staticmethod
     def sum_I(a):
-        rez = 0
-        _g1 = 0
-        _g = len(a)
-        while (_g1 < _g):
-            i = _g1
-            _g1 = (_g1 + 1)
-            rez = (rez + i)
+        rez = None
+        al = len(a)
+        if (al > 0):
+            rez = 0
+            _g1 = 0
+            _g = al
+            while (_g1 < _g):
+                i = _g1
+                _g1 = (_g1 + 1)
+                rez = (rez + i)
         return rez
 
     @staticmethod
     def sum_F(a):
-        rez = 0
-        _g1 = 0
-        _g = len(a)
-        while (_g1 < _g):
-            i = _g1
-            _g1 = (_g1 + 1)
-            rez = (rez + i)
+        rez = None
+        al = len(a)
+        if (al > 0):
+            rez = 0
+            _g1 = 0
+            _g = al
+            while (_g1 < _g):
+                i = _g1
+                _g1 = (_g1 + 1)
+                rez = (rez + i)
         return rez
 
     @staticmethod
     def diff_I(a):
-        rez = (a[0] if 0 < len(a) else None)
-        _g1 = 1
-        _g = len(a)
-        while (_g1 < _g):
-            i = _g1
-            _g1 = (_g1 + 1)
-            rez = (rez - i)
+        rez = None
+        al = len(a)
+        if (al > 0):
+            if (al == 1):
+                rez = (a[0] if 0 < len(a) else None)
+            else:
+                a1 = (a[0] if 0 < len(a) else None)
+                _g = []
+                _g2 = 1
+                _g1 = al
+                while (_g2 < _g1):
+                    i = _g2
+                    _g2 = (_g2 + 1)
+                    _g.append(i)
+                rez1 = None
+                al1 = len(_g)
+                if (al1 > 0):
+                    rez1 = 0
+                    _g11 = 0
+                    _g3 = al1
+                    while (_g11 < _g3):
+                        i1 = _g11
+                        _g11 = (_g11 + 1)
+                        rez1 = (rez1 + i1)
+                rez = (a1 - rez1)
         return rez
 
     @staticmethod
     def diff_F(a):
-        rez = (a[0] if 0 < len(a) else None)
-        _g1 = 1
-        _g = len(a)
-        while (_g1 < _g):
-            i = _g1
-            _g1 = (_g1 + 1)
-            rez = (rez - i)
+        rez = None
+        al = len(a)
+        if (al > 0):
+            if (al == 1):
+                rez = (a[0] if 0 < len(a) else None)
+            else:
+                a1 = (a[0] if 0 < len(a) else None)
+                _g = []
+                _g2 = 1
+                _g1 = al
+                while (_g2 < _g1):
+                    i = _g2
+                    _g2 = (_g2 + 1)
+                    _g.append(i)
+                rez1 = None
+                al1 = len(_g)
+                if (al1 > 0):
+                    rez1 = 0
+                    _g11 = 0
+                    _g3 = al1
+                    while (_g11 < _g3):
+                        i1 = _g11
+                        _g11 = (_g11 + 1)
+                        rez1 = (rez1 + i1)
+                rez = (a1 - rez1)
         return rez
 
     @staticmethod
     def middle_F(a):
-        return (GeometryXD.sum_F(a) / len(a))
+        rez = None
+        al = len(a)
+        if (al > 0):
+            rez1 = None
+            al1 = len(a)
+            if (al1 > 0):
+                rez1 = 0
+                _g1 = 0
+                _g = al1
+                while (_g1 < _g):
+                    i = _g1
+                    _g1 = (_g1 + 1)
+                    rez1 = (rez1 + i)
+            rez = (rez1 / al)
+        return rez
 
     @staticmethod
-    def multiply_FperF(a,n):
-        _g = []
-        _g2 = 0
-        _g1 = len(a)
-        while (_g2 < _g1):
-            i = _g2
-            _g2 = (_g2 + 1)
-            _g.append(((a[i] if i >= 0 and i < len(a) else None) * n))
-        return _g
+    def multiply_I_I(a,n):
+        rez = None
+        al = len(a)
+        if (al > 0):
+            _g = []
+            _g2 = 0
+            _g1 = al
+            while (_g2 < _g1):
+                i = _g2
+                _g2 = (_g2 + 1)
+                _g.append(((a[i] if i >= 0 and i < len(a) else None) * n))
+            rez = _g
+        return rez
+
+    @staticmethod
+    def multiply_F_F(a,n):
+        rez = None
+        al = len(a)
+        if (al > 0):
+            _g = []
+            _g2 = 0
+            _g1 = al
+            while (_g2 < _g1):
+                i = _g2
+                _g2 = (_g2 + 1)
+                _g.append(((a[i] if i >= 0 and i < len(a) else None) * n))
+            rez = _g
+        return rez
 
     @staticmethod
     def multiply_I(a):
-        rez = (a[0] if 0 < len(a) else None)
-        _g1 = 1
-        _g = len(a)
-        while (_g1 < _g):
-            i = _g1
-            _g1 = (_g1 + 1)
-            rez = (rez * i)
+        rez = None
+        al = len(a)
+        if (al > 0):
+            rez = (a[0] if 0 < len(a) else None)
+            if (al > 1):
+                _g1 = 1
+                _g = al
+                while (_g1 < _g):
+                    i = _g1
+                    _g1 = (_g1 + 1)
+                    rez = (rez * (a[i] if i >= 0 and i < len(a) else None))
         return rez
 
     @staticmethod
     def multiply_F(a):
-        rez = (a[0] if 0 < len(a) else None)
-        _g1 = 1
-        _g = len(a)
-        while (_g1 < _g):
-            i = _g1
-            _g1 = (_g1 + 1)
-            rez = (rez * i)
+        rez = None
+        al = len(a)
+        if (al > 0):
+            rez = (a[0] if 0 < len(a) else None)
+            if (al > 1):
+                _g1 = 1
+                _g = al
+                while (_g1 < _g):
+                    i = _g1
+                    _g1 = (_g1 + 1)
+                    rez = (rez * (a[i] if i >= 0 and i < len(a) else None))
         return rez
 
     @staticmethod
@@ -207,272 +506,553 @@ class GeometryXD:
 
     @staticmethod
     def sum_xI(a):
-        _g = []
-        _g2 = 0
-        _g1 = len((a[0] if 0 < len(a) else None))
-        while (_g2 < _g1):
-            i = _g2
-            _g2 = (_g2 + 1)
-            _g3 = []
-            _g5 = 0
-            _g4 = len(a)
-            while (_g5 < _g4):
-                ai = _g5
-                _g5 = (_g5 + 1)
-                _g3.append(python_internal_ArrayImpl._get((a[ai] if ai >= 0 and ai < len(a) else None), i))
-            x = GeometryXD.sum_I(_g3)
-            _g.append(x)
-        return _g
+        rez = None
+        rez1 = None
+        al = len(a)
+        if (al > 1):
+            rez1 = True
+            size = len((a[0] if 0 < len(a) else None))
+            _g1 = 1
+            _g = al
+            while (_g1 < _g):
+                i = _g1
+                _g1 = (_g1 + 1)
+                if (size != len((a[i] if i >= 0 and i < len(a) else None))):
+                    rez1 = False
+                    break
+        else:
+            rez1 = True
+        if rez1:
+            _g2 = []
+            _g21 = 0
+            _g11 = len((a[0] if 0 < len(a) else None))
+            while (_g21 < _g11):
+                i1 = _g21
+                _g21 = (_g21 + 1)
+                _g3 = []
+                _g5 = 0
+                _g4 = len(a)
+                while (_g5 < _g4):
+                    ai = _g5
+                    _g5 = (_g5 + 1)
+                    _g3.append(python_internal_ArrayImpl._get((a[ai] if ai >= 0 and ai < len(a) else None), i1))
+                rez2 = None
+                al1 = len(_g3)
+                if (al1 > 0):
+                    rez2 = 0
+                    _g12 = 0
+                    _g6 = al1
+                    while (_g12 < _g6):
+                        i2 = _g12
+                        _g12 = (_g12 + 1)
+                        rez2 = (rez2 + i2)
+                _g2.append(rez2)
+            rez = _g2
+        return rez
 
     @staticmethod
     def sum_xF(a):
-        _g = []
-        _g2 = 0
-        _g1 = len((a[0] if 0 < len(a) else None))
-        while (_g2 < _g1):
-            i = _g2
-            _g2 = (_g2 + 1)
-            _g3 = []
-            _g5 = 0
-            _g4 = len(a)
-            while (_g5 < _g4):
-                ai = _g5
-                _g5 = (_g5 + 1)
-                _g3.append(python_internal_ArrayImpl._get((a[ai] if ai >= 0 and ai < len(a) else None), i))
-            x = GeometryXD.sum_F(_g3)
-            _g.append(x)
-        return _g
+        rez = None
+        rez1 = None
+        al = len(a)
+        if (al > 1):
+            rez1 = True
+            size = len((a[0] if 0 < len(a) else None))
+            _g1 = 1
+            _g = al
+            while (_g1 < _g):
+                i = _g1
+                _g1 = (_g1 + 1)
+                if (size != len((a[i] if i >= 0 and i < len(a) else None))):
+                    rez1 = False
+        else:
+            rez1 = True
+        if rez1:
+            _g2 = []
+            _g21 = 0
+            _g11 = len((a[0] if 0 < len(a) else None))
+            while (_g21 < _g11):
+                i1 = _g21
+                _g21 = (_g21 + 1)
+                _g3 = []
+                _g5 = 0
+                _g4 = len(a)
+                while (_g5 < _g4):
+                    ai = _g5
+                    _g5 = (_g5 + 1)
+                    _g3.append(python_internal_ArrayImpl._get((a[ai] if ai >= 0 and ai < len(a) else None), i1))
+                rez2 = None
+                al1 = len(_g3)
+                if (al1 > 0):
+                    rez2 = 0
+                    _g12 = 0
+                    _g6 = al1
+                    while (_g12 < _g6):
+                        i2 = _g12
+                        _g12 = (_g12 + 1)
+                        rez2 = (rez2 + i2)
+                _g2.append(rez2)
+            rez = _g2
+        return rez
 
     @staticmethod
     def diff_xI(a):
-        _g = []
-        _g2 = 0
-        _g1 = len((a[0] if 0 < len(a) else None))
-        while (_g2 < _g1):
-            i = _g2
-            _g2 = (_g2 + 1)
-            _g3 = []
-            _g5 = 0
-            _g4 = len(a)
-            while (_g5 < _g4):
-                ai = _g5
-                _g5 = (_g5 + 1)
-                _g3.append(python_internal_ArrayImpl._get((a[ai] if ai >= 0 and ai < len(a) else None), i))
-            x = GeometryXD.diff_I(_g3)
-            _g.append(x)
-        return _g
+        rez = None
+        rez1 = None
+        al = len(a)
+        if (al > 1):
+            rez1 = True
+            size = len((a[0] if 0 < len(a) else None))
+            _g1 = 1
+            _g = al
+            while (_g1 < _g):
+                i = _g1
+                _g1 = (_g1 + 1)
+                if (size != len((a[i] if i >= 0 and i < len(a) else None))):
+                    rez1 = False
+                    break
+        else:
+            rez1 = True
+        if rez1:
+            _g2 = []
+            _g21 = 0
+            _g11 = len((a[0] if 0 < len(a) else None))
+            while (_g21 < _g11):
+                i1 = _g21
+                _g21 = (_g21 + 1)
+                _g3 = []
+                _g5 = 0
+                _g4 = len(a)
+                while (_g5 < _g4):
+                    ai = _g5
+                    _g5 = (_g5 + 1)
+                    _g3.append(python_internal_ArrayImpl._get((a[ai] if ai >= 0 and ai < len(a) else None), i1))
+                x = geometryxd_GeometryXD.diff_I(_g3)
+                _g2.append(x)
+            rez = _g2
+        return rez
 
     @staticmethod
     def diff_xF(a):
-        _g = []
-        _g2 = 0
-        _g1 = len((a[0] if 0 < len(a) else None))
-        while (_g2 < _g1):
-            i = _g2
-            _g2 = (_g2 + 1)
-            _g3 = []
-            _g5 = 0
-            _g4 = len(a)
-            while (_g5 < _g4):
-                ai = _g5
-                _g5 = (_g5 + 1)
-                _g3.append(python_internal_ArrayImpl._get((a[ai] if ai >= 0 and ai < len(a) else None), i))
-            x = GeometryXD.diff_F(_g3)
-            _g.append(x)
-        return _g
+        rez = None
+        rez1 = None
+        al = len(a)
+        if (al > 1):
+            rez1 = True
+            size = len((a[0] if 0 < len(a) else None))
+            _g1 = 1
+            _g = al
+            while (_g1 < _g):
+                i = _g1
+                _g1 = (_g1 + 1)
+                if (size != len((a[i] if i >= 0 and i < len(a) else None))):
+                    rez1 = False
+        else:
+            rez1 = True
+        if rez1:
+            _g2 = []
+            _g21 = 0
+            _g11 = len((a[0] if 0 < len(a) else None))
+            while (_g21 < _g11):
+                i1 = _g21
+                _g21 = (_g21 + 1)
+                _g3 = []
+                _g5 = 0
+                _g4 = len(a)
+                while (_g5 < _g4):
+                    ai = _g5
+                    _g5 = (_g5 + 1)
+                    _g3.append(python_internal_ArrayImpl._get((a[ai] if ai >= 0 and ai < len(a) else None), i1))
+                x = geometryxd_GeometryXD.diff_F(_g3)
+                _g2.append(x)
+            rez = _g2
+        return rez
 
     @staticmethod
     def middle_xF(a):
-        _g = []
-        _g2 = 0
-        _g1 = len((a[0] if 0 < len(a) else None))
-        while (_g2 < _g1):
-            i = _g2
-            _g2 = (_g2 + 1)
-            _g3 = []
-            _g5 = 0
-            _g4 = len(a)
-            while (_g5 < _g4):
-                ai = _g5
-                _g5 = (_g5 + 1)
-                _g3.append(python_internal_ArrayImpl._get((a[ai] if ai >= 0 and ai < len(a) else None), i))
-            x = GeometryXD.middle_F(_g3)
-            _g.append(x)
-        return _g
+        rez = None
+        tmp = None
+        if (len((a[0] if 0 < len(a) else None)) > 0):
+            rez1 = None
+            al = len(a)
+            if (al > 1):
+                rez1 = True
+                size = len((a[0] if 0 < len(a) else None))
+                _g1 = 1
+                _g = al
+                while (_g1 < _g):
+                    i = _g1
+                    _g1 = (_g1 + 1)
+                    if (size != len((a[i] if i >= 0 and i < len(a) else None))):
+                        rez1 = False
+            else:
+                rez1 = True
+            tmp = rez1
+        else:
+            tmp = False
+        if tmp:
+            _g2 = []
+            _g21 = 0
+            _g11 = len((a[0] if 0 < len(a) else None))
+            while (_g21 < _g11):
+                i1 = _g21
+                _g21 = (_g21 + 1)
+                _g3 = []
+                _g5 = 0
+                _g4 = len(a)
+                while (_g5 < _g4):
+                    ai = _g5
+                    _g5 = (_g5 + 1)
+                    _g3.append(python_internal_ArrayImpl._get((a[ai] if ai >= 0 and ai < len(a) else None), i1))
+                x = geometryxd_GeometryXD.middle_F(_g3)
+                _g2.append(x)
+            rez = _g2
+        return rez
 
     @staticmethod
-    def multiply_xFperF(a,n):
-        _g = []
-        _g2 = 0
-        _g1 = len(a)
-        while (_g2 < _g1):
-            i = _g2
-            _g2 = (_g2 + 1)
-            x = GeometryXD.multiply_FperF((a[i] if i >= 0 and i < len(a) else None),n)
-            _g.append(x)
-        return _g
+    def multiply_xI_I(a,n):
+        rez = None
+        if (len(a) > 0):
+            _g = []
+            _g2 = 0
+            _g1 = len(a)
+            while (_g2 < _g1):
+                i = _g2
+                _g2 = (_g2 + 1)
+                a1 = (a[i] if i >= 0 and i < len(a) else None)
+                rez1 = None
+                al = len(a1)
+                if (al > 0):
+                    _g3 = []
+                    _g21 = 0
+                    _g11 = al
+                    while (_g21 < _g11):
+                        i1 = _g21
+                        _g21 = (_g21 + 1)
+                        _g3.append(((a1[i1] if i1 >= 0 and i1 < len(a1) else None) * n))
+                    rez1 = _g3
+                _g.append(rez1)
+            rez = _g
+        return rez
+
+    @staticmethod
+    def multiply_xF_F(a,n):
+        rez = None
+        if (len(a) > 0):
+            _g = []
+            _g2 = 0
+            _g1 = len(a)
+            while (_g2 < _g1):
+                i = _g2
+                _g2 = (_g2 + 1)
+                a1 = (a[i] if i >= 0 and i < len(a) else None)
+                rez1 = None
+                al = len(a1)
+                if (al > 0):
+                    _g3 = []
+                    _g21 = 0
+                    _g11 = al
+                    while (_g21 < _g11):
+                        i1 = _g21
+                        _g21 = (_g21 + 1)
+                        _g3.append(((a1[i1] if i1 >= 0 and i1 < len(a1) else None) * n))
+                    rez1 = _g3
+                _g.append(rez1)
+            rez = _g
+        return rez
 
     @staticmethod
     def multiply_xI(a):
-        _g = []
-        _g2 = 0
-        _g1 = len((a[0] if 0 < len(a) else None))
-        while (_g2 < _g1):
-            i = _g2
-            _g2 = (_g2 + 1)
-            _g3 = []
-            _g5 = 0
-            _g4 = len(a)
-            while (_g5 < _g4):
-                ai = _g5
-                _g5 = (_g5 + 1)
-                _g3.append(python_internal_ArrayImpl._get((a[ai] if ai >= 0 and ai < len(a) else None), i))
-            x = GeometryXD.multiply_I(_g3)
-            _g.append(x)
-        return _g
+        rez = None
+        al = len(a)
+        if (al > 1):
+            _g = []
+            _g2 = 0
+            _g1 = len((a[0] if 0 < len(a) else None))
+            while (_g2 < _g1):
+                i = _g2
+                _g2 = (_g2 + 1)
+                _g3 = []
+                _g5 = 0
+                _g4 = len(a)
+                while (_g5 < _g4):
+                    ai = _g5
+                    _g5 = (_g5 + 1)
+                    _g3.append(python_internal_ArrayImpl._get((a[ai] if ai >= 0 and ai < len(a) else None), i))
+                a1 = _g3
+                rez1 = None
+                al1 = len(a1)
+                if (al1 > 0):
+                    rez1 = (a1[0] if 0 < len(a1) else None)
+                    if (al1 > 1):
+                        _g11 = 1
+                        _g6 = al1
+                        while (_g11 < _g6):
+                            i1 = _g11
+                            _g11 = (_g11 + 1)
+                            rez1 = (rez1 * (a1[i1] if i1 >= 0 and i1 < len(a1) else None))
+                _g.append(rez1)
+            rez = _g
+        elif (al > 0):
+            rez = (a[0] if 0 < len(a) else None)
+        return rez
 
     @staticmethod
     def multiply_xF(a):
-        _g = []
-        _g2 = 0
-        _g1 = len((a[0] if 0 < len(a) else None))
-        while (_g2 < _g1):
-            i = _g2
-            _g2 = (_g2 + 1)
-            _g3 = []
-            _g5 = 0
-            _g4 = len(a)
-            while (_g5 < _g4):
-                ai = _g5
-                _g5 = (_g5 + 1)
-                _g3.append(python_internal_ArrayImpl._get((a[ai] if ai >= 0 and ai < len(a) else None), i))
-            x = GeometryXD.multiply_F(_g3)
-            _g.append(x)
-        return _g
+        rez = None
+        al = len(a)
+        if (al > 1):
+            _g = []
+            _g2 = 0
+            _g1 = len((a[0] if 0 < len(a) else None))
+            while (_g2 < _g1):
+                i = _g2
+                _g2 = (_g2 + 1)
+                _g3 = []
+                _g5 = 0
+                _g4 = len(a)
+                while (_g5 < _g4):
+                    ai = _g5
+                    _g5 = (_g5 + 1)
+                    _g3.append(python_internal_ArrayImpl._get((a[ai] if ai >= 0 and ai < len(a) else None), i))
+                a1 = _g3
+                rez1 = None
+                al1 = len(a1)
+                if (al1 > 0):
+                    rez1 = (a1[0] if 0 < len(a1) else None)
+                    if (al1 > 1):
+                        _g11 = 1
+                        _g6 = al1
+                        while (_g11 < _g6):
+                            i1 = _g11
+                            _g11 = (_g11 + 1)
+                            rez1 = (rez1 * (a1[i1] if i1 >= 0 and i1 < len(a1) else None))
+                _g.append(rez1)
+            rez = _g
+        elif (al > 0):
+            rez = (a[0] if 0 < len(a) else None)
+        return rez
 
     @staticmethod
     def multisum_xI(a):
-        return GeometryXD.sum_I(GeometryXD.multiply_xI(a))
+        rez = None
+        tmp = None
+        if ((len(a) > 1) and ((len((a[0] if 0 < len(a) else None)) > 0))):
+            rez1 = None
+            al = len(a)
+            if (al > 1):
+                rez1 = True
+                size = len((a[0] if 0 < len(a) else None))
+                _g1 = 1
+                _g = al
+                while (_g1 < _g):
+                    i = _g1
+                    _g1 = (_g1 + 1)
+                    if (size != len((a[i] if i >= 0 and i < len(a) else None))):
+                        rez1 = False
+                        break
+            else:
+                rez1 = True
+            tmp = rez1
+        else:
+            tmp = False
+        if tmp:
+            rez2 = None
+            al1 = len(geometryxd_GeometryXD.multiply_xI(a))
+            if (al1 > 0):
+                rez2 = 0
+                _g11 = 0
+                _g2 = al1
+                while (_g11 < _g2):
+                    i1 = _g11
+                    _g11 = (_g11 + 1)
+                    rez2 = (rez2 + i1)
+            rez = rez2
+        return rez
 
     @staticmethod
     def multisum_xF(a):
-        return GeometryXD.sum_F(GeometryXD.multiply_xF(a))
+        rez = None
+        tmp = None
+        if ((len(a) > 1) and ((len((a[0] if 0 < len(a) else None)) > 0))):
+            rez1 = None
+            al = len(a)
+            if (al > 1):
+                rez1 = True
+                size = len((a[0] if 0 < len(a) else None))
+                _g1 = 1
+                _g = al
+                while (_g1 < _g):
+                    i = _g1
+                    _g1 = (_g1 + 1)
+                    if (size != len((a[i] if i >= 0 and i < len(a) else None))):
+                        rez1 = False
+            else:
+                rez1 = True
+            tmp = rez1
+        else:
+            tmp = False
+        if tmp:
+            rez2 = None
+            al1 = len(geometryxd_GeometryXD.multiply_xF(a))
+            if (al1 > 0):
+                rez2 = 0
+                _g11 = 0
+                _g2 = al1
+                while (_g11 < _g2):
+                    i1 = _g11
+                    _g11 = (_g11 + 1)
+                    rez2 = (rez2 + i1)
+            rez = rez2
+        return rez
 
     @staticmethod
     def sum_previous_I(a):
-        _g = []
-        _g2 = 0
-        _g1 = len(a)
-        while (_g2 < _g1):
-            i = _g2
-            _g2 = (_g2 + 1)
-            _g.append(((a[i] if i >= 0 and i < len(a) else None) if ((i == 0)) else ((a[i] if i >= 0 and i < len(a) else None) + python_internal_ArrayImpl._get(a, (i - 1)))))
-        return _g
+        rez = None
+        al = len(a)
+        if (al > 0):
+            _g = []
+            _g2 = 0
+            _g1 = al
+            while (_g2 < _g1):
+                i = _g2
+                _g2 = (_g2 + 1)
+                _g.append(((a[i] if i >= 0 and i < len(a) else None) if ((i == 0)) else ((a[i] if i >= 0 and i < len(a) else None) + python_internal_ArrayImpl._get(a, (i - 1)))))
+            rez = _g
+        return rez
 
     @staticmethod
     def diff_previous_I(a):
-        _g = []
-        _g2 = 0
-        _g1 = len(a)
-        while (_g2 < _g1):
-            i = _g2
-            _g2 = (_g2 + 1)
-            _g.append(((a[i] if i >= 0 and i < len(a) else None) if ((i == 0)) else ((a[i] if i >= 0 and i < len(a) else None) - python_internal_ArrayImpl._get(a, (i - 1)))))
-        return _g
+        rez = None
+        al = len(a)
+        if (al > 0):
+            _g = []
+            _g2 = 0
+            _g1 = al
+            while (_g2 < _g1):
+                i = _g2
+                _g2 = (_g2 + 1)
+                _g.append(((a[i] if i >= 0 and i < len(a) else None) if ((i == 0)) else ((a[i] if i >= 0 and i < len(a) else None) - python_internal_ArrayImpl._get(a, (i - 1)))))
+            rez = _g
+        return rez
 
     @staticmethod
     def sum_before_I(a):
-        rez = []
-        x = 0
-        _g1 = 0
-        _g = len(a)
-        while (_g1 < _g):
-            i = _g1
-            _g1 = (_g1 + 1)
-            x = (x + (a[i] if i >= 0 and i < len(a) else None))
-            rez.append(x)
+        rez = None
+        al = len(a)
+        if (al > 0):
+            rez = [0]
+            _g1 = 0
+            _g = al
+            while (_g1 < _g):
+                i = _g1
+                _g1 = (_g1 + 1)
+                x = (python_internal_ArrayImpl._get(rez, (len(rez) - 1)) + (a[i] if i >= 0 and i < len(a) else None))
+                rez.append(x)
+            if (len(rez) != 0):
+                rez.pop(0)
         return rez
 
     @staticmethod
     def diff_before_I(a):
-        rez = [(a[0] if 0 < len(a) else None)]
-        _g1 = 1
-        _g = len(a)
-        while (_g1 < _g):
-            i = _g1
-            _g1 = (_g1 + 1)
-            rez.append(((a[i] if i >= 0 and i < len(a) else None) - python_internal_ArrayImpl._get(a, (i - 1))))
+        rez = None
+        al = len(a)
+        if (al > 0):
+            rez = [0]
+            _g1 = 0
+            _g = al
+            while (_g1 < _g):
+                i = _g1
+                _g1 = (_g1 + 1)
+                x = ((a[i] if i >= 0 and i < len(a) else None) - python_internal_ArrayImpl._get(rez, (len(rez) - 1)))
+                rez.append(x)
+            if (len(rez) != 0):
+                rez.pop(0)
         return rez
 
     @staticmethod
     def sum_previous_F(a):
-        _g = []
-        _g2 = 0
-        _g1 = len(a)
-        while (_g2 < _g1):
-            i = _g2
-            _g2 = (_g2 + 1)
-            _g.append(((a[i] if i >= 0 and i < len(a) else None) if ((i == 0)) else ((a[i] if i >= 0 and i < len(a) else None) + python_internal_ArrayImpl._get(a, (i - 1)))))
-        return _g
+        rez = None
+        al = len(a)
+        if (al > 0):
+            _g = []
+            _g2 = 0
+            _g1 = al
+            while (_g2 < _g1):
+                i = _g2
+                _g2 = (_g2 + 1)
+                _g.append(((a[i] if i >= 0 and i < len(a) else None) if ((i == 0)) else ((a[i] if i >= 0 and i < len(a) else None) + python_internal_ArrayImpl._get(a, (i - 1)))))
+            rez = _g
+        return rez
 
     @staticmethod
     def diff_previous_F(a):
-        _g = []
-        _g2 = 0
-        _g1 = len(a)
-        while (_g2 < _g1):
-            i = _g2
-            _g2 = (_g2 + 1)
-            _g.append(((a[i] if i >= 0 and i < len(a) else None) if ((i == 0)) else ((a[i] if i >= 0 and i < len(a) else None) - python_internal_ArrayImpl._get(a, (i - 1)))))
-        return _g
+        rez = None
+        al = len(a)
+        if (al > 0):
+            _g = []
+            _g2 = 0
+            _g1 = al
+            while (_g2 < _g1):
+                i = _g2
+                _g2 = (_g2 + 1)
+                _g.append(((a[i] if i >= 0 and i < len(a) else None) if ((i == 0)) else ((a[i] if i >= 0 and i < len(a) else None) - python_internal_ArrayImpl._get(a, (i - 1)))))
+            rez = _g
+        return rez
 
     @staticmethod
     def sum_before_F(a):
-        rez = []
-        x = 0
-        _g1 = 0
-        _g = len(a)
-        while (_g1 < _g):
-            i = _g1
-            _g1 = (_g1 + 1)
-            x = (x + (a[i] if i >= 0 and i < len(a) else None))
-            rez.append(x)
+        rez = None
+        al = len(a)
+        if (al > 0):
+            rez = [0]
+            _g1 = 0
+            _g = al
+            while (_g1 < _g):
+                i = _g1
+                _g1 = (_g1 + 1)
+                x = (python_internal_ArrayImpl._get(rez, (len(rez) - 1)) + (a[i] if i >= 0 and i < len(a) else None))
+                rez.append(x)
+            if (len(rez) != 0):
+                rez.pop(0)
         return rez
 
     @staticmethod
     def diff_before_F(a):
-        rez = [(a[0] if 0 < len(a) else None)]
-        _g1 = 1
-        _g = len(a)
-        while (_g1 < _g):
-            i = _g1
-            _g1 = (_g1 + 1)
-            rez.append(((a[i] if i >= 0 and i < len(a) else None) - python_internal_ArrayImpl._get(a, (i - 1))))
+        rez = None
+        al = len(a)
+        if (al > 0):
+            rez = [0]
+            _g1 = 0
+            _g = al
+            while (_g1 < _g):
+                i = _g1
+                _g1 = (_g1 + 1)
+                x = ((a[i] if i >= 0 and i < len(a) else None) - python_internal_ArrayImpl._get(rez, (len(rez) - 1)))
+                rez.append(x)
+            if (len(rez) != 0):
+                rez.pop(0)
         return rez
 
     @staticmethod
     def recounter_I_F(what):
         rez = []
-        _g = []
-        _g2 = 0
-        _g1 = len(what)
-        while (_g2 < _g1):
-            i = _g2
-            _g2 = (_g2 + 1)
+        _g1 = 0
+        _g = len(what)
+        while (_g1 < _g):
+            i = _g1
+            _g1 = (_g1 + 1)
             rez.append((what[i] if i >= 0 and i < len(what) else None))
-            x = len(rez)
-            _g.append(x)
-        return _g
+        return rez
 
     @staticmethod
     def recounter_F_I(what):
         rez = []
-        _g = []
-        _g2 = 0
-        _g1 = len(what)
-        while (_g2 < _g1):
-            i = _g2
-            _g2 = (_g2 + 1)
+        _g1 = 0
+        _g = len(what)
+        while (_g1 < _g):
+            i = _g1
+            _g1 = (_g1 + 1)
             x = None
             try:
                 x = int((what[i] if i >= 0 and i < len(what) else None))
@@ -481,64 +1061,54 @@ class GeometryXD:
                 e = _hx_e1
                 x = None
             rez.append(x)
-            x1 = len(rez)
-            _g.append(x1)
-        return _g
+        return rez
 
     @staticmethod
     def recounter_I_S(what):
         rez = []
-        _g = []
-        _g2 = 0
-        _g1 = len(what)
-        while (_g2 < _g1):
-            i = _g2
-            _g2 = (_g2 + 1)
+        _g1 = 0
+        _g = len(what)
+        while (_g1 < _g):
+            i = _g1
+            _g1 = (_g1 + 1)
             x = Std.string((what[i] if i >= 0 and i < len(what) else None))
-            _g.append(x)
-        rez = _g
+            rez.append(x)
         return rez
 
     @staticmethod
     def recounter_F_S(what):
         rez = []
-        _g = []
-        _g2 = 0
-        _g1 = len(what)
-        while (_g2 < _g1):
-            i = _g2
-            _g2 = (_g2 + 1)
+        _g1 = 0
+        _g = len(what)
+        while (_g1 < _g):
+            i = _g1
+            _g1 = (_g1 + 1)
             x = Std.string((what[i] if i >= 0 and i < len(what) else None))
-            _g.append(x)
-        rez = _g
+            rez.append(x)
         return rez
 
     @staticmethod
     def recounter_S_I(what):
         rez = []
-        _g = []
-        _g2 = 0
-        _g1 = len(what)
-        while (_g2 < _g1):
-            i = _g2
-            _g2 = (_g2 + 1)
+        _g1 = 0
+        _g = len(what)
+        while (_g1 < _g):
+            i = _g1
+            _g1 = (_g1 + 1)
             x = Std.parseInt((what[i] if i >= 0 and i < len(what) else None))
-            _g.append(x)
-        rez = _g
+            rez.append(x)
         return rez
 
     @staticmethod
     def recounter_S_F(what):
         rez = []
-        _g = []
-        _g2 = 0
-        _g1 = len(what)
-        while (_g2 < _g1):
-            i = _g2
-            _g2 = (_g2 + 1)
+        _g1 = 0
+        _g = len(what)
+        while (_g1 < _g):
+            i = _g1
+            _g1 = (_g1 + 1)
             x = Std.parseFloat((what[i] if i >= 0 and i < len(what) else None))
-            _g.append(x)
-        rez = _g
+            rez.append(x)
         return rez
 
     @staticmethod
@@ -576,7 +1146,14 @@ class GeometryXD:
                 _g.append((what[i] if i >= 0 and i < len(what) else None))
         rez = _g
         if (not full):
-            rez = rez[0:n]
+            _g11 = []
+            _g31 = 0
+            _g21 = n
+            while (_g31 < _g21):
+                i1 = _g31
+                _g31 = (_g31 + 1)
+                _g11.append((rez[i1] if i1 >= 0 and i1 < len(rez) else None))
+            rez = _g11
         return rez
 
     @staticmethod
@@ -614,7 +1191,14 @@ class GeometryXD:
                 _g.append((what[i] if i >= 0 and i < len(what) else None))
         rez = _g
         if (not full):
-            rez = rez[0:n]
+            _g11 = []
+            _g31 = 0
+            _g21 = n
+            while (_g31 < _g21):
+                i1 = _g31
+                _g31 = (_g31 + 1)
+                _g11.append((rez[i1] if i1 >= 0 and i1 < len(rez) else None))
+            rez = _g11
         return rez
 
     @staticmethod
@@ -652,7 +1236,14 @@ class GeometryXD:
                 _g.append((what[i] if i >= 0 and i < len(what) else None))
         rez = _g
         if (not full):
-            rez = rez[0:n]
+            _g11 = []
+            _g31 = 0
+            _g21 = n
+            while (_g31 < _g21):
+                i1 = _g31
+                _g31 = (_g31 + 1)
+                _g11.append((rez[i1] if i1 >= 0 and i1 < len(rez) else None))
+            rez = _g11
         return rez
 
     @staticmethod
@@ -660,7 +1251,21 @@ class GeometryXD:
         if (full is None):
             full = False
         rez = None
-        what = GeometryXD.recounter_F_I(what_)
+        rez1 = []
+        _g1 = 0
+        _g = len(what_)
+        while (_g1 < _g):
+            i = _g1
+            _g1 = (_g1 + 1)
+            x = None
+            try:
+                x = int((what_[i] if i >= 0 and i < len(what_) else None))
+            except Exception as _hx_e:
+                _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
+                e = _hx_e1
+                x = None
+            rez1.append(x)
+        what = rez1
         if (n == 0):
             return rez
         wl = len(what)
@@ -669,29 +1274,36 @@ class GeometryXD:
             return rez
         if (n < 0):
             what.reverse()
-            x = Reflect.field(Math,"fabs")(n)
+            x1 = Reflect.field(Math,"fabs")(n)
             try:
-                n = int(x)
+                n = int(x1)
             except Exception as _hx_e:
                 _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
-                e = _hx_e1
+                e1 = _hx_e1
                 n = None
         ind = (n if full else Math.ceil((n / wl)))
-        _g = []
-        _g2 = 0
-        _g1 = ind
-        while (_g2 < _g1):
-            _ = _g2
-            _g2 = (_g2 + 1)
+        _g2 = []
+        _g21 = 0
+        _g11 = ind
+        while (_g21 < _g11):
+            _ = _g21
+            _g21 = (_g21 + 1)
             _g4 = 0
             _g3 = wl
             while (_g4 < _g3):
-                i = _g4
+                i1 = _g4
                 _g4 = (_g4 + 1)
-                _g.append((what[i] if i >= 0 and i < len(what) else None))
-        rez = _g
+                _g2.append((what[i1] if i1 >= 0 and i1 < len(what) else None))
+        rez = _g2
         if (not full):
-            rez = rez[0:n]
+            _g12 = []
+            _g31 = 0
+            _g22 = n
+            while (_g31 < _g22):
+                i2 = _g31
+                _g31 = (_g31 + 1)
+                _g12.append((rez[i2] if i2 >= 0 and i2 < len(rez) else None))
+            rez = _g12
         return rez
 
     @staticmethod
@@ -699,7 +1311,15 @@ class GeometryXD:
         if (full is None):
             full = False
         rez = None
-        what = GeometryXD.recounter_S_I(what_)
+        rez1 = []
+        _g1 = 0
+        _g = len(what_)
+        while (_g1 < _g):
+            i = _g1
+            _g1 = (_g1 + 1)
+            x = Std.parseInt((what_[i] if i >= 0 and i < len(what_) else None))
+            rez1.append(x)
+        what = rez1
         if (n == 0):
             return rez
         wl = len(what)
@@ -708,29 +1328,36 @@ class GeometryXD:
             return rez
         if (n < 0):
             what.reverse()
-            x = Reflect.field(Math,"fabs")(n)
+            x1 = Reflect.field(Math,"fabs")(n)
             try:
-                n = int(x)
+                n = int(x1)
             except Exception as _hx_e:
                 _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
                 e = _hx_e1
                 n = None
         ind = (n if full else Math.ceil((n / wl)))
-        _g = []
-        _g2 = 0
-        _g1 = ind
-        while (_g2 < _g1):
-            _ = _g2
-            _g2 = (_g2 + 1)
+        _g2 = []
+        _g21 = 0
+        _g11 = ind
+        while (_g21 < _g11):
+            _ = _g21
+            _g21 = (_g21 + 1)
             _g4 = 0
             _g3 = wl
             while (_g4 < _g3):
-                i = _g4
+                i1 = _g4
                 _g4 = (_g4 + 1)
-                _g.append((what[i] if i >= 0 and i < len(what) else None))
-        rez = _g
+                _g2.append((what[i1] if i1 >= 0 and i1 < len(what) else None))
+        rez = _g2
         if (not full):
-            rez = rez[0:n]
+            _g12 = []
+            _g31 = 0
+            _g22 = n
+            while (_g31 < _g22):
+                i2 = _g31
+                _g31 = (_g31 + 1)
+                _g12.append((rez[i2] if i2 >= 0 and i2 < len(rez) else None))
+            rez = _g12
         return rez
 
     @staticmethod
@@ -738,7 +1365,14 @@ class GeometryXD:
         if (full is None):
             full = False
         rez = None
-        what = GeometryXD.recounter_I_F(what_)
+        rez1 = []
+        _g1 = 0
+        _g = len(what_)
+        while (_g1 < _g):
+            i = _g1
+            _g1 = (_g1 + 1)
+            rez1.append((what_[i] if i >= 0 and i < len(what_) else None))
+        what = rez1
         if (n == 0):
             return rez
         wl = len(what)
@@ -755,21 +1389,28 @@ class GeometryXD:
                 e = _hx_e1
                 n = None
         ind = (n if full else Math.ceil((n / wl)))
-        _g = []
-        _g2 = 0
-        _g1 = ind
-        while (_g2 < _g1):
-            _ = _g2
-            _g2 = (_g2 + 1)
+        _g2 = []
+        _g21 = 0
+        _g11 = ind
+        while (_g21 < _g11):
+            _ = _g21
+            _g21 = (_g21 + 1)
             _g4 = 0
             _g3 = wl
             while (_g4 < _g3):
-                i = _g4
+                i1 = _g4
                 _g4 = (_g4 + 1)
-                _g.append((what[i] if i >= 0 and i < len(what) else None))
-        rez = _g
+                _g2.append((what[i1] if i1 >= 0 and i1 < len(what) else None))
+        rez = _g2
         if (not full):
-            rez = rez[0:n]
+            _g12 = []
+            _g31 = 0
+            _g22 = n
+            while (_g31 < _g22):
+                i2 = _g31
+                _g31 = (_g31 + 1)
+                _g12.append((rez[i2] if i2 >= 0 and i2 < len(rez) else None))
+            rez = _g12
         return rez
 
     @staticmethod
@@ -777,7 +1418,15 @@ class GeometryXD:
         if (full is None):
             full = False
         rez = None
-        what = GeometryXD.recounter_S_F(what_)
+        rez1 = []
+        _g1 = 0
+        _g = len(what_)
+        while (_g1 < _g):
+            i = _g1
+            _g1 = (_g1 + 1)
+            x = Std.parseFloat((what_[i] if i >= 0 and i < len(what_) else None))
+            rez1.append(x)
+        what = rez1
         if (n == 0):
             return rez
         wl = len(what)
@@ -786,29 +1435,36 @@ class GeometryXD:
             return rez
         if (n < 0):
             what.reverse()
-            x = Reflect.field(Math,"fabs")(n)
+            x1 = Reflect.field(Math,"fabs")(n)
             try:
-                n = int(x)
+                n = int(x1)
             except Exception as _hx_e:
                 _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
                 e = _hx_e1
                 n = None
         ind = (n if full else Math.ceil((n / wl)))
-        _g = []
-        _g2 = 0
-        _g1 = ind
-        while (_g2 < _g1):
-            _ = _g2
-            _g2 = (_g2 + 1)
+        _g2 = []
+        _g21 = 0
+        _g11 = ind
+        while (_g21 < _g11):
+            _ = _g21
+            _g21 = (_g21 + 1)
             _g4 = 0
             _g3 = wl
             while (_g4 < _g3):
-                i = _g4
+                i1 = _g4
                 _g4 = (_g4 + 1)
-                _g.append((what[i] if i >= 0 and i < len(what) else None))
-        rez = _g
+                _g2.append((what[i1] if i1 >= 0 and i1 < len(what) else None))
+        rez = _g2
         if (not full):
-            rez = rez[0:n]
+            _g12 = []
+            _g31 = 0
+            _g22 = n
+            while (_g31 < _g22):
+                i2 = _g31
+                _g31 = (_g31 + 1)
+                _g12.append((rez[i2] if i2 >= 0 and i2 < len(rez) else None))
+            rez = _g12
         return rez
 
     @staticmethod
@@ -816,7 +1472,15 @@ class GeometryXD:
         if (full is None):
             full = False
         rez = None
-        what = GeometryXD.recounter_I_S(what_)
+        rez1 = []
+        _g1 = 0
+        _g = len(what_)
+        while (_g1 < _g):
+            i = _g1
+            _g1 = (_g1 + 1)
+            x = Std.string((what_[i] if i >= 0 and i < len(what_) else None))
+            rez1.append(x)
+        what = rez1
         if (n == 0):
             return rez
         wl = len(what)
@@ -825,29 +1489,36 @@ class GeometryXD:
             return rez
         if (n < 0):
             what.reverse()
-            x = Reflect.field(Math,"fabs")(n)
+            x1 = Reflect.field(Math,"fabs")(n)
             try:
-                n = int(x)
+                n = int(x1)
             except Exception as _hx_e:
                 _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
                 e = _hx_e1
                 n = None
         ind = (n if full else Math.ceil((n / wl)))
-        _g = []
-        _g2 = 0
-        _g1 = ind
-        while (_g2 < _g1):
-            _ = _g2
-            _g2 = (_g2 + 1)
+        _g2 = []
+        _g21 = 0
+        _g11 = ind
+        while (_g21 < _g11):
+            _ = _g21
+            _g21 = (_g21 + 1)
             _g4 = 0
             _g3 = wl
             while (_g4 < _g3):
-                i = _g4
+                i1 = _g4
                 _g4 = (_g4 + 1)
-                _g.append((what[i] if i >= 0 and i < len(what) else None))
-        rez = _g
+                _g2.append((what[i1] if i1 >= 0 and i1 < len(what) else None))
+        rez = _g2
         if (not full):
-            rez = rez[0:n]
+            _g12 = []
+            _g31 = 0
+            _g22 = n
+            while (_g31 < _g22):
+                i2 = _g31
+                _g31 = (_g31 + 1)
+                _g12.append((rez[i2] if i2 >= 0 and i2 < len(rez) else None))
+            rez = _g12
         return rez
 
     @staticmethod
@@ -855,7 +1526,15 @@ class GeometryXD:
         if (full is None):
             full = False
         rez = None
-        what = GeometryXD.recounter_F_S(what_)
+        rez1 = []
+        _g1 = 0
+        _g = len(what_)
+        while (_g1 < _g):
+            i = _g1
+            _g1 = (_g1 + 1)
+            x = Std.string((what_[i] if i >= 0 and i < len(what_) else None))
+            rez1.append(x)
+        what = rez1
         if (n == 0):
             return rez
         wl = len(what)
@@ -864,41 +1543,52 @@ class GeometryXD:
             return rez
         if (n < 0):
             what.reverse()
-            x = Reflect.field(Math,"fabs")(n)
+            x1 = Reflect.field(Math,"fabs")(n)
             try:
-                n = int(x)
+                n = int(x1)
             except Exception as _hx_e:
                 _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
                 e = _hx_e1
                 n = None
         ind = (n if full else Math.ceil((n / wl)))
-        _g = []
-        _g2 = 0
-        _g1 = ind
-        while (_g2 < _g1):
-            _ = _g2
-            _g2 = (_g2 + 1)
+        _g2 = []
+        _g21 = 0
+        _g11 = ind
+        while (_g21 < _g11):
+            _ = _g21
+            _g21 = (_g21 + 1)
             _g4 = 0
             _g3 = wl
             while (_g4 < _g3):
-                i = _g4
+                i1 = _g4
                 _g4 = (_g4 + 1)
-                _g.append((what[i] if i >= 0 and i < len(what) else None))
-        rez = _g
+                _g2.append((what[i1] if i1 >= 0 and i1 < len(what) else None))
+        rez = _g2
         if (not full):
-            rez = rez[0:n]
+            _g12 = []
+            _g31 = 0
+            _g22 = n
+            while (_g31 < _g22):
+                i2 = _g31
+                _g31 = (_g31 + 1)
+                _g12.append((rez[i2] if i2 >= 0 and i2 < len(rez) else None))
+            rez = _g12
         return rez
 
     @staticmethod
     def an_in_b_S(a,b):
-        rez = None
+        rez = []
+        al = len(a)
+        bl = len(b)
+        if ((al == 0) or ((bl == 0))):
+            return None
         _g1 = 0
-        _g = len(a)
+        _g = al
         while (_g1 < _g):
             ia = _g1
             _g1 = (_g1 + 1)
             _g3 = 0
-            _g2 = len(b)
+            _g2 = bl
             while (_g3 < _g2):
                 ib = _g3
                 _g3 = (_g3 + 1)
@@ -908,14 +1598,18 @@ class GeometryXD:
 
     @staticmethod
     def an_in_bn_S(a,b):
-        rez = None
+        rez = []
+        al = len(a)
+        bl = len(b)
+        if ((al == 0) or ((bl == 0))):
+            return None
         _g1 = 0
-        _g = len(a)
+        _g = al
         while (_g1 < _g):
             ia = _g1
             _g1 = (_g1 + 1)
             _g3 = 0
-            _g2 = len(b)
+            _g2 = bl
             while (_g3 < _g2):
                 ib = _g3
                 _g3 = (_g3 + 1)
@@ -930,14 +1624,18 @@ class GeometryXD:
 
     @staticmethod
     def an_in_b_I(a,b):
-        rez = None
+        rez = []
+        al = len(a)
+        bl = len(b)
+        if ((al == 0) or ((bl == 0))):
+            return None
         _g1 = 0
-        _g = len(a)
+        _g = al
         while (_g1 < _g):
             ia = _g1
             _g1 = (_g1 + 1)
             _g3 = 0
-            _g2 = len(b)
+            _g2 = bl
             while (_g3 < _g2):
                 ib = _g3
                 _g3 = (_g3 + 1)
@@ -947,14 +1645,18 @@ class GeometryXD:
 
     @staticmethod
     def an_in_bn_I(a,b):
-        rez = None
+        rez = []
+        al = len(a)
+        bl = len(b)
+        if ((al == 0) or ((bl == 0))):
+            return None
         _g1 = 0
-        _g = len(a)
+        _g = al
         while (_g1 < _g):
             ia = _g1
             _g1 = (_g1 + 1)
             _g3 = 0
-            _g2 = len(b)
+            _g2 = bl
             while (_g3 < _g2):
                 ib = _g3
                 _g3 = (_g3 + 1)
@@ -969,14 +1671,18 @@ class GeometryXD:
 
     @staticmethod
     def an_in_b_F(a,b):
-        rez = None
+        rez = []
+        al = len(a)
+        bl = len(b)
+        if ((al == 0) or ((bl == 0))):
+            return None
         _g1 = 0
-        _g = len(a)
+        _g = al
         while (_g1 < _g):
             ia = _g1
             _g1 = (_g1 + 1)
             _g3 = 0
-            _g2 = len(b)
+            _g2 = bl
             while (_g3 < _g2):
                 ib = _g3
                 _g3 = (_g3 + 1)
@@ -986,14 +1692,18 @@ class GeometryXD:
 
     @staticmethod
     def an_in_bn_F(a,b):
-        rez = None
+        rez = []
+        al = len(a)
+        bl = len(b)
+        if ((al == 0) or ((bl == 0))):
+            return None
         _g1 = 0
-        _g = len(a)
+        _g = al
         while (_g1 < _g):
             ia = _g1
             _g1 = (_g1 + 1)
             _g3 = 0
-            _g2 = len(b)
+            _g2 = bl
             while (_g3 < _g2):
                 ib = _g3
                 _g3 = (_g3 + 1)
@@ -1012,35 +1722,72 @@ class GeometryXD:
         if ((n > a_l) or ((n < 1))):
             return rez
         ind = []
+        _g = []
+        _g2 = 0
+        _g1 = a_l
+        while (_g2 < _g1):
+            i = _g2
+            _g2 = (_g2 + 1)
+            _g.append(i)
+        indring = _g
         if ring:
-            _g = []
-            _g1 = 0
-            while (_g1 < 2):
-                b = _g1
-                _g1 = (_g1 + 1)
-                _g3 = 0
-                _g2 = a_l
-                while (_g3 < _g2):
-                    i = _g3
-                    _g3 = (_g3 + 1)
-                    x = None
-                    if (b < 1):
-                        x = i
-                    elif (i < ((n - 1))):
-                        x = i
-                    else:
-                        continue
-                    _g.append(x)
-            ind = _g
+            indring.append(0)
+            _g11 = []
+            _g3 = 0
+            _g21 = None
+            try:
+                _g21 = int((((a_l + 1)) / ((n - 1))))
+            except Exception as _hx_e:
+                _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
+                e = _hx_e1
+                _g21 = None
+            _g22 = (_g21 * ((n - 1)))
+            while (_g3 < _g22):
+                i1 = _g3
+                _g3 = (_g3 + 1)
+                x = None
+                if ((HxOverrides.mod(i1, ((n - 1))) == 0) and ((((i1 + n) - 1) < ((a_l + 1))))):
+                    x = i1
+                else:
+                    continue
+                _g11.append(x)
+            ind = _g11
         else:
+            _g12 = []
+            _g31 = 0
+            _g23 = None
+            try:
+                _g23 = int((a_l / ((n - 1))))
+            except Exception as _hx_e:
+                _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
+                e1 = _hx_e1
+                _g23 = None
+            _g24 = (_g23 * ((n - 1)))
+            while (_g31 < _g24):
+                i2 = _g31
+                _g31 = (_g31 + 1)
+                x1 = None
+                if ((HxOverrides.mod(i2, ((n - 1))) == 0) and ((((i2 + n) - 1) < a_l))):
+                    x1 = i2
+                else:
+                    continue
+                _g12.append(x1)
+            ind = _g12
+        _g13 = []
+        _g32 = 0
+        _g25 = len(ind)
+        while (_g32 < _g25):
+            i3 = _g32
+            _g32 = (_g32 + 1)
             _g4 = []
-            _g21 = 0
-            _g11 = ((1 + a_l) - n)
-            while (_g21 < _g11):
-                i1 = _g21
-                _g21 = (_g21 + 1)
-                _g4.append(i1)
-            ind = _g4
+            _g6 = 0
+            _g5 = n
+            while (_g6 < _g5):
+                j = _g6
+                _g6 = (_g6 + 1)
+                _g4.append(python_internal_ArrayImpl._get(indring, ((ind[i3] if i3 >= 0 and i3 < len(ind) else None) + j)))
+            _g13.append(_g4)
+        rez = _g13
         return rez
 
     @staticmethod
@@ -1051,7 +1798,7 @@ class GeometryXD:
         a_l = len(a)
         if ((n > a_l) or ((n < 1))):
             return rez
-        ind = GeometryXD.chain_indexes(a_l,n,ring)
+        ind = geometryxd_GeometryXD.chain_indexes(a_l,n,ring)
         _g = []
         _g2 = 0
         _g1 = len(ind)
@@ -1077,7 +1824,7 @@ class GeometryXD:
         a_l = len(a)
         if ((n > a_l) or ((n < 1))):
             return rez
-        ind = GeometryXD.chain_indexes(a_l,n,ring)
+        ind = geometryxd_GeometryXD.chain_indexes(a_l,n,ring)
         _g = []
         _g2 = 0
         _g1 = len(ind)
@@ -1103,7 +1850,7 @@ class GeometryXD:
         a_l = len(a)
         if ((n > a_l) or ((n < 1))):
             return rez
-        ind = GeometryXD.chain_indexes(a_l,n,ring)
+        ind = geometryxd_GeometryXD.chain_indexes(a_l,n,ring)
         _g = []
         _g2 = 0
         _g1 = len(ind)
@@ -1198,6 +1945,38 @@ class GeometryXD:
         return rez
 
     @staticmethod
+    def sign_I(x):
+        if (x < 0):
+            return -1
+        else:
+            return 1
+
+    @staticmethod
+    def sign_F(x):
+        if (x < 0):
+            return -1
+        else:
+            return 1
+
+    @staticmethod
+    def sign3_I(x):
+        if (x < 0):
+            return -1
+        elif (x > 0):
+            return 1
+        else:
+            return 0
+
+    @staticmethod
+    def sign3_F(x):
+        if (x < 0):
+            return -1
+        elif (x > 0):
+            return 1
+        else:
+            return 0
+
+    @staticmethod
     def sin_cos_cut(x):
         if (x > 1):
             return 1
@@ -1220,7 +1999,7 @@ class GeometryXD:
             rad = False
         k = 4
         if rad:
-            angle = GeometryXD.degrees(angle)
+            angle = ((angle * 180) / Math.PI)
         x = HxOverrides.modf(angle, 360)
         if (x > 270):
             k = 4
@@ -1241,7 +2020,7 @@ class GeometryXD:
         return k
 
     @staticmethod
-    def vecXDmod(vecXD):
+    def vecXDnorm(vecXD):
         sum = 0
         _g = 0
         while (_g < len(vecXD)):
@@ -1254,47 +2033,71 @@ class GeometryXD:
             return python_lib_Math.sqrt(sum)
 
     @staticmethod
-    def vecXDfieldmod(vecXDfield):
+    def vecXDfieldnorm(vecXDfield):
         rez = None
         _g = []
         _g1 = 0
         while (_g1 < len(vecXDfield)):
             i = (vecXDfield[_g1] if _g1 >= 0 and _g1 < len(vecXDfield) else None)
             _g1 = (_g1 + 1)
-            x = GeometryXD.vecXDmod(i)
+            x = geometryxd_GeometryXD.vecXDnorm(i)
             _g.append(x)
         rez = _g
         return rez
 
     @staticmethod
-    def maxabs(vecXD):
+    def zero_vector_inside(vecXDfield):
+        rez = None
+        lv = len(vecXDfield)
+        if (lv > 0):
+            rez = False
+            _g1 = 0
+            _g = lv
+            while (_g1 < _g):
+                i = _g1
+                _g1 = (_g1 + 1)
+                if (geometryxd_GeometryXD.vecXDnorm((vecXDfield[i] if i >= 0 and i < len(vecXDfield) else None)) == 0):
+                    rez = True
+                    break
+        return rez
+
+    @staticmethod
+    def maxabs(a):
         rez = 0
         _g = 0
-        while (_g < len(vecXD)):
-            i = (vecXD[_g] if _g >= 0 and _g < len(vecXD) else None)
+        while (_g < len(a)):
+            i = (a[_g] if _g >= 0 and _g < len(a) else None)
             _g = (_g + 1)
             if (Reflect.field(Math,"fabs")(i) > Reflect.field(Math,"fabs")(rez)):
                 rez = i
         return rez
 
     @staticmethod
-    def vecXD(dot3Da,dot3Db):
+    def vecXD(dotXDa,dotXDb):
         rez = None
-        if ((not GeometryXD.vecXDsamesize(dot3Da,dot3Db)) or GeometryXD.vecXDsame(dot3Da,dot3Db)):
+        tmp = None
+        if (not ((not geometryxd_GeometryXD.vecXDsamesize(dotXDa,dotXDb)))):
+            rez1 = None
+            if (len(dotXDa) == len(dotXDb)):
+                rez1 = geometryxd_GeometryXD.same_xF([dotXDa, dotXDb])
+            tmp = rez1
+        else:
+            tmp = True
+        if tmp:
             return rez
         rez = []
         _g1 = 0
-        _g = len(dot3Da)
+        _g = len(dotXDa)
         while (_g1 < _g):
             i = _g1
             _g1 = (_g1 + 1)
-            rez.append(((dot3Db[i] if i >= 0 and i < len(dot3Db) else None) - (dot3Da[i] if i >= 0 and i < len(dot3Da) else None)))
+            rez.append(((dotXDb[i] if i >= 0 and i < len(dotXDb) else None) - (dotXDa[i] if i >= 0 and i < len(dotXDa) else None)))
         return rez
 
     @staticmethod
     def vecXDone(vecXD):
         rez = []
-        lv = GeometryXD.vecXDmod(vecXD)
+        lv = geometryxd_GeometryXD.vecXDnorm(vecXD)
         if (lv > 0):
             _g = 0
             while (_g < len(vecXD)):
@@ -1314,36 +2117,20 @@ class GeometryXD:
         while (_g1 < _g):
             i = _g1
             _g1 = (_g1 + 1)
-            x = GeometryXD.vecXD((dots[0] if 0 < len(dots) else None),(dots[i] if i >= 0 and i < len(dots) else None))
+            x = geometryxd_GeometryXD.vecXD((dots[0] if 0 < len(dots) else None),(dots[i] if i >= 0 and i < len(dots) else None))
             rez.append(x)
         return rez
 
     @staticmethod
     def vecXDsame(vecXDa,vecXDb):
+        rez = None
         if (len(vecXDa) == len(vecXDb)):
-            lv = len(vecXDa)
-            _g1 = 0
-            _g = lv
-            while (_g1 < _g):
-                i = _g1
-                _g1 = (_g1 + 1)
-                if ((vecXDa[i] if i >= 0 and i < len(vecXDa) else None) != (vecXDb[i] if i >= 0 and i < len(vecXDb) else None)):
-                    return False
-            return True
-        return False
+            rez = geometryxd_GeometryXD.same_xF([vecXDa, vecXDb])
+        return rez
 
     @staticmethod
     def vecXDfieldsame(vecXDfield):
-        if GeometryXD.vecXDfieldsamesize(vecXDfield):
-            _g1 = 1
-            _g = len(vecXDfield)
-            while (_g1 < _g):
-                i = _g1
-                _g1 = (_g1 + 1)
-                if (not GeometryXD.vecXDsame((vecXDfield[0] if 0 < len(vecXDfield) else None),(vecXDfield[i] if i >= 0 and i < len(vecXDfield) else None))):
-                    return False
-            return True
-        return False
+        return geometryxd_GeometryXD.same_xF(vecXDfield)
 
     @staticmethod
     def vecXDrandom(x = 3):
@@ -1365,7 +2152,12 @@ class GeometryXD:
             _g3 = (_g3 + 1)
             _g11.append(0)
         v1 = _g11
-        while GeometryXD.vecXDsame(v0,v1):
+        while True:
+            rez = None
+            if (len(v0) == len(v1)):
+                rez = geometryxd_GeometryXD.same_xF([v0, v1])
+            if (not rez):
+                break
             v1 = []
             _g31 = 0
             _g22 = x
@@ -1374,28 +2166,35 @@ class GeometryXD:
                 _g31 = (_g31 + 1)
                 x1 = (python_lib_Random.random() - 0.5)
                 v1.append(x1)
-        v1 = GeometryXD.vecXDone(v1)
+        v1 = geometryxd_GeometryXD.vecXDone(v1)
         return v1
 
     @staticmethod
     def vecXDsum(vecXDa,vecXDb):
-        return GeometryXD.sum_xF([vecXDa, vecXDb])
+        return geometryxd_GeometryXD.sum_xF([vecXDa, vecXDb])
 
     @staticmethod
     def vecXDfieldsum(vecXDfield):
-        return GeometryXD.sum_xF(vecXDfield)
+        return geometryxd_GeometryXD.sum_xF(vecXDfield)
 
     @staticmethod
     def vecXDdiff(vecXDa,vecXDb):
-        return GeometryXD.diff_xF([vecXDa, vecXDb])
+        return geometryxd_GeometryXD.diff_xF([vecXDa, vecXDb])
 
     @staticmethod
     def vecXDfielddiff(vecXDfield):
-        return GeometryXD.diff_xF(vecXDfield)
+        return geometryxd_GeometryXD.diff_xF(vecXDfield)
 
     @staticmethod
     def vecXDback(vecXD):
-        return GeometryXD.minus_F(vecXD)
+        _g = []
+        _g2 = 0
+        _g1 = len(vecXD)
+        while (_g2 < _g1):
+            i = _g2
+            _g2 = (_g2 + 1)
+            _g.append(-(vecXD[i] if i >= 0 and i < len(vecXD) else None))
+        return _g
 
     @staticmethod
     def vecXDfieldback(vecXDfield):
@@ -1405,7 +2204,7 @@ class GeometryXD:
         while (_g2 < _g1):
             i = _g2
             _g2 = (_g2 + 1)
-            x = GeometryXD.vecXDback((vecXDfield[i] if i >= 0 and i < len(vecXDfield) else None))
+            x = geometryxd_GeometryXD.vecXDback((vecXDfield[i] if i >= 0 and i < len(vecXDfield) else None))
             _g.append(x)
         return _g
 
@@ -1414,19 +2213,24 @@ class GeometryXD:
         rez = None
         if (len(vecXDa) != len(vecXDb)):
             return rez
-        return GeometryXD.vecXDsame(GeometryXD.vecXDone(vecXDa),GeometryXD.vecXDone(vecXDb))
+        vecXDa1 = geometryxd_GeometryXD.vecXDone(vecXDa)
+        vecXDb1 = geometryxd_GeometryXD.vecXDone(vecXDb)
+        rez1 = None
+        if (len(vecXDa1) == len(vecXDb1)):
+            rez1 = geometryxd_GeometryXD.same_xF([vecXDa1, vecXDb1])
+        return rez1
 
     @staticmethod
     def vecXDparalleled_opposite(vecXDa,vecXDb):
         rez = None
         if (len(vecXDa) != len(vecXDb)):
             return rez
-        return GeometryXD.vecXDparalleled_sameside(vecXDa,GeometryXD.vecXDback(vecXDb))
+        return geometryxd_GeometryXD.vecXDparalleled_sameside(vecXDa,geometryxd_GeometryXD.vecXDback(vecXDb))
 
     @staticmethod
     def vecXDparalleled(vecXDa,vecXDb):
-        if (not GeometryXD.vecXDparalleled_sameside(vecXDa,vecXDb)):
-            return GeometryXD.vecXDparalleled_opposite(vecXDa,vecXDb)
+        if (not geometryxd_GeometryXD.vecXDparalleled_sameside(vecXDa,vecXDb)):
+            return geometryxd_GeometryXD.vecXDparalleled_opposite(vecXDa,vecXDb)
         else:
             return True
 
@@ -1446,10 +2250,16 @@ class GeometryXD:
     @staticmethod
     def vecXDcos(vecXDa,vecXDb):
         rez = None
-        la = GeometryXD.vecXDmod(vecXDa)
-        lb = GeometryXD.vecXDmod(vecXDb)
+        la = geometryxd_GeometryXD.vecXDnorm(vecXDa)
+        lb = geometryxd_GeometryXD.vecXDnorm(vecXDb)
         if ((la > 0) and ((lb > 0))):
-            rez = GeometryXD.sin_cos_cut((GeometryXD.vecXDscalar(vecXDa,vecXDb) / ((la * lb))))
+            x = (geometryxd_GeometryXD.vecXDscalar(vecXDa,vecXDb) / ((la * lb)))
+            if (x > 1):
+                rez = 1
+            elif (x < -1):
+                rez = -1
+            else:
+                rez = x
         return rez
 
     @staticmethod
@@ -1457,13 +2267,13 @@ class GeometryXD:
         if (rad is None):
             rad = False
         rez = None
-        la = GeometryXD.vecXDmod(vecXDa)
-        lb = GeometryXD.vecXDmod(vecXDb)
+        la = geometryxd_GeometryXD.vecXDnorm(vecXDa)
+        lb = geometryxd_GeometryXD.vecXDnorm(vecXDb)
         if ((la > 0) and ((lb > 0))):
             if rad:
-                rez = Math.acos(GeometryXD.vecXDcos(vecXDa,vecXDb))
+                rez = Math.acos(geometryxd_GeometryXD.vecXDcos(vecXDa,vecXDb))
             else:
-                rez = GeometryXD.degrees(Math.acos(GeometryXD.vecXDcos(vecXDa,vecXDb)))
+                rez = ((Math.acos(geometryxd_GeometryXD.vecXDcos(vecXDa,vecXDb)) * 180) / Math.PI)
         return rez
 
     @staticmethod
@@ -1473,45 +2283,85 @@ class GeometryXD:
             a = (((vec3Da[1] if 1 < len(vec3Da) else None) * (vec3Db[2] if 2 < len(vec3Db) else None)) - (((vec3Da[2] if 2 < len(vec3Da) else None) * (vec3Db[1] if 1 < len(vec3Db) else None))))
             b = ((-(vec3Da[0] if 0 < len(vec3Da) else None) * (vec3Db[2] if 2 < len(vec3Db) else None)) + (((vec3Da[2] if 2 < len(vec3Da) else None) * (vec3Db[0] if 0 < len(vec3Db) else None))))
             c = (((vec3Da[0] if 0 < len(vec3Da) else None) * (vec3Db[1] if 1 < len(vec3Db) else None)) - (((vec3Da[1] if 1 < len(vec3Da) else None) * (vec3Db[0] if 0 < len(vec3Db) else None))))
-            return GeometryXD.vecXDone([a, b, c])
+            return geometryxd_GeometryXD.vecXDone([a, b, c])
         return rez
 
     @staticmethod
     def vec3Dfieldnormal(vec3Dfield):
         rez = None
+        tmp = None
         if (len((vec3Dfield[0] if 0 < len(vec3Dfield) else None)) == 3):
-            rez1 = (vec3Dfield[0] if 0 < len(vec3Dfield) else None)
-            _g1 = 1
-            _g = len(vec3Dfield)
-            while (_g1 < _g):
-                i = _g1
-                _g1 = (_g1 + 1)
-                rez1 = GeometryXD.vec3Dnormal(rez1,(vec3Dfield[i] if i >= 0 and i < len(vec3Dfield) else None))
+            rez1 = None
+            al = len(vec3Dfield)
+            if (al > 1):
+                rez1 = True
+                size = len((vec3Dfield[0] if 0 < len(vec3Dfield) else None))
+                _g1 = 1
+                _g = al
+                while (_g1 < _g):
+                    i = _g1
+                    _g1 = (_g1 + 1)
+                    if (size != len((vec3Dfield[i] if i >= 0 and i < len(vec3Dfield) else None))):
+                        rez1 = False
+            else:
+                rez1 = True
+            tmp = rez1
+        else:
+            tmp = False
+        if tmp:
+            rez2 = (vec3Dfield[0] if 0 < len(vec3Dfield) else None)
+            _g11 = 1
+            _g2 = len(vec3Dfield)
+            while (_g11 < _g2):
+                i1 = _g11
+                _g11 = (_g11 + 1)
+                rez2 = geometryxd_GeometryXD.vec3Dnormal(rez2,(vec3Dfield[i1] if i1 >= 0 and i1 < len(vec3Dfield) else None))
         return rez
 
     @staticmethod
     def vecXDmiddle(vecXDa,vecXDb):
-        return GeometryXD.middle_xF([vecXDa, vecXDb])
-
-    @staticmethod
-    def vecXDsamesize(vecXDa,vecXDb):
-        return (len(vecXDa) == len(vecXDb))
-
-    @staticmethod
-    def vecXDfieldsamesize(vecXDfield):
-        thesize = len((vecXDfield[0] if 0 < len(vecXDfield) else None))
-        _g1 = 1
-        _g = len(vecXDfield)
-        while (_g1 < _g):
-            i = _g1
-            _g1 = (_g1 + 1)
-            if (thesize != len((vecXDfield[i] if i >= 0 and i < len(vecXDfield) else None))):
-                return False
-        return True
+        return geometryxd_GeometryXD.middle_xF([vecXDa, vecXDb])
 
     @staticmethod
     def vecXDfieldmiddle(vecXDfield):
-        return GeometryXD.middle_xF(vecXDfield)
+        return geometryxd_GeometryXD.middle_xF(vecXDfield)
+
+    @staticmethod
+    def vecXDsamesize(vecXDa,vecXDb):
+        a = [vecXDa, vecXDb]
+        rez = None
+        al = len(a)
+        if (al > 1):
+            rez = True
+            size = len((a[0] if 0 < len(a) else None))
+            _g1 = 1
+            _g = al
+            while (_g1 < _g):
+                i = _g1
+                _g1 = (_g1 + 1)
+                if (size != len((a[i] if i >= 0 and i < len(a) else None))):
+                    rez = False
+        else:
+            rez = True
+        return rez
+
+    @staticmethod
+    def vecXDfieldsamesize(vecXDfield):
+        rez = None
+        al = len(vecXDfield)
+        if (al > 1):
+            rez = True
+            size = len((vecXDfield[0] if 0 < len(vecXDfield) else None))
+            _g1 = 1
+            _g = al
+            while (_g1 < _g):
+                i = _g1
+                _g1 = (_g1 + 1)
+                if (size != len((vecXDfield[i] if i >= 0 and i < len(vecXDfield) else None))):
+                    rez = False
+        else:
+            rez = True
+        return rez
 
     @staticmethod
     def dotXDoffset(dotXD,vecXD,t):
@@ -1520,7 +2370,7 @@ class GeometryXD:
             lv = len(vecXD)
             if (len(dotXD) == lv):
                 rez = []
-                t = (t / GeometryXD.vecXDmod(vecXD))
+                t = (t / geometryxd_GeometryXD.vecXDnorm(vecXD))
                 _g1 = 0
                 _g = lv
                 while (_g1 < _g):
@@ -1562,10 +2412,10 @@ class GeometryXD:
         rez = None
         ldot = len(dot3D)
         lplane = len(plane3D)
-        if (((GeometryXD.vecXDmod(plane3D[0:3]) == 0) or ((ldot != 3))) or ((lplane != 4))):
+        if (((geometryxd_GeometryXD.vecXDnorm(plane3D[0:3]) == 0) or ((ldot != 3))) or ((lplane != 4))):
             return rez
-        checkup = (-GeometryXD.multisum_xF([plane3D[0:3], dot3D]) + (plane3D[3] if 3 < len(plane3D) else None))
-        checkdn = GeometryXD.multisum_xF([plane3D[0:3], plane3D[0:3]])
+        checkup = (-geometryxd_GeometryXD.multisum_xF([plane3D[0:3], dot3D]) + (plane3D[3] if 3 < len(plane3D) else None))
+        checkdn = geometryxd_GeometryXD.multisum_xF([plane3D[0:3], plane3D[0:3]])
         if (checkdn == 0):
             return rez
         elif (checkup == 0):
@@ -1584,9 +2434,9 @@ class GeometryXD:
     @staticmethod
     def dot3D_to_dot2Dviewplane(dot3D,dot3Dox,dot3Doz):
         rez = None
-        t = GeometryXD.vecXDmod(dot3D)
-        cosox0t = (GeometryXD.multisum_xF([dot3Dox, dot3D]) / ((t + GeometryXD.vecXDmod(dot3Dox))))
-        cosoz0t = (GeometryXD.multisum_xF([dot3Doz, dot3D]) / ((t + GeometryXD.vecXDmod(dot3Doz))))
+        t = geometryxd_GeometryXD.vecXDnorm(dot3D)
+        cosox0t = (geometryxd_GeometryXD.multisum_xF([dot3Dox, dot3D]) / ((t + geometryxd_GeometryXD.vecXDnorm(dot3Dox))))
+        cosoz0t = (geometryxd_GeometryXD.multisum_xF([dot3Doz, dot3D]) / ((t + geometryxd_GeometryXD.vecXDnorm(dot3Doz))))
         rez = [(t * cosox0t), (t * cosoz0t)]
         return rez
 
@@ -1609,8 +2459,8 @@ class GeometryXD:
             _g3 = (_g3 + 1)
             _g11.append(((dotXDc[i1] if i1 >= 0 and i1 < len(dotXDc) else None) * (scaleXD[i1] if i1 >= 0 and i1 < len(scaleXD) else None)))
         stc = _g11
-        vec = GeometryXD.vecXD(stc,dotXDc)
-        rez = GeometryXD.dotXDoffset(sdot,vec,GeometryXD.vecXDmod(vec))
+        vec = geometryxd_GeometryXD.vecXD(stc,dotXDc)
+        rez = geometryxd_GeometryXD.dotXDoffset(sdot,vec,geometryxd_GeometryXD.vecXDnorm(vec))
         return rez
 
     @staticmethod
@@ -1618,21 +2468,21 @@ class GeometryXD:
         if (rad is None):
             rad = False
         rez = vec3D
-        if (GeometryXD.vecXDparalleled(vec3D,vec3Daxis) or ((angle == 0))):
+        if (geometryxd_GeometryXD.vecXDparalleled(vec3D,vec3Daxis) or ((angle == 0))):
             return rez
         if rad:
             angle = angle
         else:
-            angle = GeometryXD.radians(angle)
+            angle = ((angle / 180) * Math.PI)
         t = [0, 0, 0]
-        vb = GeometryXD.vec3Dnormal(vec3Daxis,vec3D)
-        vc = GeometryXD.vec3Dnormal(vb,vec3Daxis)
-        t0 = GeometryXD.dotXDoffset(t,vec3Daxis,(GeometryXD.vecXDmod(vec3D) * GeometryXD.vecXDcos(vec3Daxis,vec3D)))
+        vb = geometryxd_GeometryXD.vec3Dnormal(vec3Daxis,vec3D)
+        vc = geometryxd_GeometryXD.vec3Dnormal(vb,vec3Daxis)
+        t0 = geometryxd_GeometryXD.dotXDoffset(t,vec3Daxis,(geometryxd_GeometryXD.vecXDnorm(vec3D) * geometryxd_GeometryXD.vecXDcos(vec3Daxis,vec3D)))
         t1 = vec3D
-        v = GeometryXD.vecXD(t0,t1)
-        t1 = GeometryXD.dotXDoffset(t0,vb,(GeometryXD.vecXDmod(v) * ((Math.NaN if (((angle == Math.POSITIVE_INFINITY) or ((angle == Math.NEGATIVE_INFINITY)))) else python_lib_Math.sin(angle)))))
-        t1 = GeometryXD.dotXDoffset(t1,vc,(GeometryXD.vecXDmod(v) * ((Math.NaN if (((angle == Math.POSITIVE_INFINITY) or ((angle == Math.NEGATIVE_INFINITY)))) else python_lib_Math.cos(angle)))))
-        rez = GeometryXD.vecXD(t,t1)
+        v = geometryxd_GeometryXD.vecXD(t0,t1)
+        t1 = geometryxd_GeometryXD.dotXDoffset(t0,vb,(geometryxd_GeometryXD.vecXDnorm(v) * ((Math.NaN if (((angle == Math.POSITIVE_INFINITY) or ((angle == Math.NEGATIVE_INFINITY)))) else python_lib_Math.sin(angle)))))
+        t1 = geometryxd_GeometryXD.dotXDoffset(t1,vc,(geometryxd_GeometryXD.vecXDnorm(v) * ((Math.NaN if (((angle == Math.POSITIVE_INFINITY) or ((angle == Math.NEGATIVE_INFINITY)))) else python_lib_Math.cos(angle)))))
+        rez = geometryxd_GeometryXD.vecXD(t,t1)
         return rez
 
     @staticmethod
@@ -1640,20 +2490,117 @@ class GeometryXD:
         if (rad is None):
             rad = False
         rez = None
-        if ((((((((not GeometryXD.vecXDfieldsamesize(vec3Dfield)) or (not GeometryXD.vecXDfieldsamesize(vec3Daxes))) or ((len((vec3Dfield[0] if 0 < len(vec3Dfield) else None)) != 3))) or ((len((vec3Daxes[0] if 0 < len(vec3Daxes) else None)) != 3))) or GeometryXD.zero_inside_F(GeometryXD.vecXDfieldmod(vec3Dfield))) or GeometryXD.zero_inside_F(GeometryXD.vecXDfieldmod(vec3Daxes))) or ((len(angles) != len(vec3Dfield)))) or ((len(angles) != len(vec3Daxes)))):
+        tmp = None
+        tmp1 = None
+        tmp2 = None
+        tmp3 = None
+        tmp4 = None
+        tmp5 = None
+        tmp6 = None
+        rez1 = None
+        al = len(vec3Dfield)
+        if (al > 1):
+            rez1 = True
+            size = len((vec3Dfield[0] if 0 < len(vec3Dfield) else None))
+            _g1 = 1
+            _g = al
+            while (_g1 < _g):
+                i = _g1
+                _g1 = (_g1 + 1)
+                if (size != len((vec3Dfield[i] if i >= 0 and i < len(vec3Dfield) else None))):
+                    rez1 = False
+        else:
+            rez1 = True
+        if (not ((not rez1))):
+            rez2 = None
+            al1 = len(vec3Daxes)
+            if (al1 > 1):
+                rez2 = True
+                size1 = len((vec3Daxes[0] if 0 < len(vec3Daxes) else None))
+                _g11 = 1
+                _g2 = al1
+                while (_g11 < _g2):
+                    i1 = _g11
+                    _g11 = (_g11 + 1)
+                    if (size1 != len((vec3Daxes[i1] if i1 >= 0 and i1 < len(vec3Daxes) else None))):
+                        rez2 = False
+            else:
+                rez2 = True
+            tmp6 = (not rez2)
+        else:
+            tmp6 = True
+        if (not tmp6):
+            tmp5 = (len((vec3Dfield[0] if 0 < len(vec3Dfield) else None)) != 3)
+        else:
+            tmp5 = True
+        if (not tmp5):
+            tmp4 = (len((vec3Daxes[0] if 0 < len(vec3Daxes) else None)) != 3)
+        else:
+            tmp4 = True
+        if (not tmp4):
+            rez3 = None
+            _g3 = []
+            _g12 = 0
+            while (_g12 < len(vec3Dfield)):
+                i2 = (vec3Dfield[_g12] if _g12 >= 0 and _g12 < len(vec3Dfield) else None)
+                _g12 = (_g12 + 1)
+                x = geometryxd_GeometryXD.vecXDnorm(i2)
+                _g3.append(x)
+            rez3 = _g3
+            a = rez3
+            rez4 = False
+            _g4 = 0
+            while (_g4 < len(a)):
+                i3 = (a[_g4] if _g4 >= 0 and _g4 < len(a) else None)
+                _g4 = (_g4 + 1)
+                if (i3 == 0):
+                    rez4 = True
+            tmp3 = rez4
+        else:
+            tmp3 = True
+        if (not tmp3):
+            rez5 = None
+            _g5 = []
+            _g13 = 0
+            while (_g13 < len(vec3Daxes)):
+                i4 = (vec3Daxes[_g13] if _g13 >= 0 and _g13 < len(vec3Daxes) else None)
+                _g13 = (_g13 + 1)
+                x1 = geometryxd_GeometryXD.vecXDnorm(i4)
+                _g5.append(x1)
+            rez5 = _g5
+            a1 = rez5
+            rez6 = False
+            _g6 = 0
+            while (_g6 < len(a1)):
+                i5 = (a1[_g6] if _g6 >= 0 and _g6 < len(a1) else None)
+                _g6 = (_g6 + 1)
+                if (i5 == 0):
+                    rez6 = True
+            tmp2 = rez6
+        else:
+            tmp2 = True
+        if (not tmp2):
+            tmp1 = (len(angles) != len(vec3Dfield))
+        else:
+            tmp1 = True
+        if (not tmp1):
+            tmp = (len(angles) != len(vec3Daxes))
+        else:
+            tmp = True
+        if tmp:
             return rez
         rez = vec3Dfield
-        _g1 = 0
-        _g = len(angles)
-        while (_g1 < _g):
-            i = _g1
-            _g1 = (_g1 + 1)
-            _g3 = 0
-            _g2 = len(vec3Dfield)
-            while (_g3 < _g2):
-                j = _g3
-                _g3 = (_g3 + 1)
-                python_internal_ArrayImpl._set(rez, j, GeometryXD.vec3Drotate((rez[j] if j >= 0 and j < len(rez) else None),(vec3Daxes[i] if i >= 0 and i < len(vec3Daxes) else None),(angles[i] if i >= 0 and i < len(angles) else None),rad))
+        _g14 = 0
+        _g7 = len(angles)
+        while (_g14 < _g7):
+            i6 = _g14
+            _g14 = (_g14 + 1)
+            _g31 = 0
+            _g21 = len(vec3Dfield)
+            while (_g31 < _g21):
+                j = _g31
+                _g31 = (_g31 + 1)
+                python_internal_ArrayImpl._set(rez, j, geometryxd_GeometryXD.vec3Drotate((rez[j] if j >= 0 and j < len(rez) else None),(vec3Daxes[i6] if i6 >= 0 and i6 < len(vec3Daxes) else None),(angles[i6] if i6 >= 0 and i6 < len(angles) else None),rad))
         return rez
 
     @staticmethod
@@ -1661,68 +2608,133 @@ class GeometryXD:
         if (rad is None):
             rad = False
         rez = None
-        if (GeometryXD.vecXDmod(vec3D) == 0):
+        if (geometryxd_GeometryXD.vecXDnorm(vec3D) == 0):
             return rez
         rez = dot3D
-        if (GeometryXD.vecXDsame(dot3D,dot3Dc) or ((angle == 0))):
+        tmp = None
+        rez1 = None
+        if (len(dot3D) == len(dot3Dc)):
+            rez1 = geometryxd_GeometryXD.same_xF([dot3D, dot3Dc])
+        if (not rez1):
+            tmp = (angle == 0)
+        else:
+            tmp = True
+        if tmp:
             return rez
-        vdot = GeometryXD.vecXD(dot3Dc,dot3D)
-        d = GeometryXD.vecXDmod(vdot)
-        vdot = GeometryXD.vec3Drotate(vdot,vec3D,angle,rad)
-        rez = GeometryXD.dotXDoffset(dot3Dc,vdot,d)
+        vdot = geometryxd_GeometryXD.vecXD(dot3Dc,dot3D)
+        d = geometryxd_GeometryXD.vecXDnorm(vdot)
+        vdot = geometryxd_GeometryXD.vec3Drotate(vdot,vec3D,angle,rad)
+        rez = geometryxd_GeometryXD.dotXDoffset(dot3Dc,vdot,d)
         return rez
 
     @staticmethod
     def plane3D_dot3Dnormal(dot3D,vec3D):
         rez = None
-        if (GeometryXD.vecXDmod(vec3D) == 0):
+        if (((len(dot3D) != 3) or ((len(vec3D) != 3))) or ((geometryxd_GeometryXD.vecXDnorm(vec3D) == 0))):
             return rez
-        d = -GeometryXD.multisum_xF([vec3D, dot3D])
+        d = -geometryxd_GeometryXD.multisum_xF([vec3D, dot3D])
         rez = [(vec3D[0] if 0 < len(vec3D) else None), (vec3D[1] if 1 < len(vec3D) else None), (vec3D[2] if 2 < len(vec3D) else None), d]
         return rez
 
     @staticmethod
     def plane3D_dot_vec_vec(dot3D,vec3Da,vec3Db):
         rez = None
-        if ((GeometryXD.vecXDsame(vec3Da,vec3Db) or ((GeometryXD.vecXDmod(vec3Da) == 0))) or ((GeometryXD.vecXDmod(vec3Db) == 0))):
+        if ((((((len(dot3D) != 3) or ((len(vec3Da) != 3))) or ((len(vec3Db) != 3))) or geometryxd_GeometryXD.vecXDparalleled(vec3Da,vec3Db)) or ((geometryxd_GeometryXD.vecXDnorm(vec3Da) == 0))) or ((geometryxd_GeometryXD.vecXDnorm(vec3Db) == 0))):
             return rez
-        rez = GeometryXD.plane3D_dot3Dnormal(dot3D,GeometryXD.vec3Dnormal(vec3Da,vec3Db))
+        rez = geometryxd_GeometryXD.plane3D_dot3Dnormal(dot3D,geometryxd_GeometryXD.vec3Dnormal(vec3Da,vec3Db))
         return rez
 
     @staticmethod
     def plane3D_3dots(dot3D,dot3Da,dot3Db):
         rez = None
-        if ((((not GeometryXD.vecXDfieldsamesize([dot3D, dot3Da, dot3Db])) or GeometryXD.vecXDsame(dot3D,dot3Da)) or GeometryXD.vecXDsame(dot3D,dot3Db)) or GeometryXD.vecXDsame(dot3Da,dot3Db)):
+        tmp = None
+        tmp1 = None
+        tmp2 = None
+        tmp3 = None
+        if (len(dot3D) == 3):
+            a = [dot3D, dot3Da, dot3Db]
+            rez1 = None
+            al = len(a)
+            if (al > 1):
+                rez1 = True
+                size = len((a[0] if 0 < len(a) else None))
+                _g1 = 1
+                _g = al
+                while (_g1 < _g):
+                    i = _g1
+                    _g1 = (_g1 + 1)
+                    if (size != len((a[i] if i >= 0 and i < len(a) else None))):
+                        rez1 = False
+            else:
+                rez1 = True
+            tmp3 = (not rez1)
+        else:
+            tmp3 = True
+        if (not tmp3):
+            rez2 = None
+            if (len(dot3D) == len(dot3Da)):
+                rez2 = geometryxd_GeometryXD.same_xF([dot3D, dot3Da])
+            tmp2 = rez2
+        else:
+            tmp2 = True
+        if (not tmp2):
+            rez3 = None
+            if (len(dot3D) == len(dot3Db)):
+                rez3 = geometryxd_GeometryXD.same_xF([dot3D, dot3Db])
+            tmp1 = rez3
+        else:
+            tmp1 = True
+        if (not tmp1):
+            rez4 = None
+            if (len(dot3Da) == len(dot3Db)):
+                rez4 = geometryxd_GeometryXD.same_xF([dot3Da, dot3Db])
+            tmp = rez4
+        else:
+            tmp = True
+        if tmp:
             return rez
-        rez = GeometryXD.plane3D_dot_vec_vec(dot3D,GeometryXD.vecXD(dot3D,dot3Da),GeometryXD.vecXD(dot3D,dot3Db))
+        rez = geometryxd_GeometryXD.plane3D_dot_vec_vec(dot3D,geometryxd_GeometryXD.vecXD(dot3D,dot3Da),geometryxd_GeometryXD.vecXD(dot3D,dot3Db))
         return rez
 
     @staticmethod
     def plane3D_2dots(dot3D,dot3Da):
         rez = None
-        if ((not GeometryXD.vecXDsamesize(dot3D,dot3Da)) or GeometryXD.vecXDsame(dot3D,dot3Da)):
+        tmp = None
+        if (not ((not geometryxd_GeometryXD.vecXDsamesize(dot3D,dot3Da)))):
+            rez1 = None
+            if (len(dot3D) == len(dot3Da)):
+                rez1 = geometryxd_GeometryXD.same_xF([dot3D, dot3Da])
+            tmp = rez1
+        else:
+            tmp = True
+        if tmp:
             return rez
-        rez = GeometryXD.plane3D_dot3Dnormal(dot3D,GeometryXD.vecXD(dot3D,dot3Da))
+        rez = geometryxd_GeometryXD.plane3D_dot3Dnormal(dot3D,geometryxd_GeometryXD.vecXD(dot3D,dot3Da))
         return rez
 
     @staticmethod
     def distance_dot3D_plane3D(dot3D,plane3D):
         rez = None
-        if (GeometryXD.vecXDmod(plane3D[0:3]) == 0):
+        if (((len(dot3D) != 3) or ((len(plane3D) != 4))) or ((geometryxd_GeometryXD.vecXDnorm([(plane3D[0] if 0 < len(plane3D) else None), (plane3D[1] if 1 < len(plane3D) else None), (plane3D[2] if 2 < len(plane3D) else None)]) == 0))):
             return rez
-        v = GeometryXD.multisum_xF([plane3D[0:3], dot3D])
-        rez = (Reflect.field(Math,"fabs")((v + (plane3D[3] if 3 < len(plane3D) else None))) / GeometryXD.vecXDmod(plane3D[0:3]))
+        v = geometryxd_GeometryXD.multisum_xF([[(plane3D[0] if 0 < len(plane3D) else None), (plane3D[1] if 1 < len(plane3D) else None), (plane3D[2] if 2 < len(plane3D) else None)], dot3D])
+        rez = (Reflect.field(Math,"fabs")((v + (plane3D[3] if 3 < len(plane3D) else None))) / geometryxd_GeometryXD.vecXDnorm([(plane3D[0] if 0 < len(plane3D) else None), (plane3D[1] if 1 < len(plane3D) else None), (plane3D[2] if 2 < len(plane3D) else None)]))
         return rez
 
     @staticmethod
     def random_vec3D_in_plane3D(plane3D):
         rez = None
-        if (GeometryXD.vecXDmod(plane3D[0:3]) == 0):
+        if ((len(plane3D) != 4) or ((geometryxd_GeometryXD.vecXDnorm([(plane3D[0] if 0 < len(plane3D) else None), (plane3D[1] if 1 < len(plane3D) else None), (plane3D[2] if 2 < len(plane3D) else None)]) == 0))):
             return rez
-        t0 = GeometryXD.vecXDrandom(3)
-        t0 = GeometryXD.projection_dot3D_on_plane3D(t0,plane3D)
+        t0 = geometryxd_GeometryXD.vecXDrandom(3)
+        t0 = geometryxd_GeometryXD.projection_dot3D_on_plane3D(t0,plane3D)
         t1 = t0
-        while GeometryXD.vecXDsame(t0,t1):
+        while True:
+            rez1 = None
+            if (len(t0) == len(t1)):
+                rez1 = geometryxd_GeometryXD.same_xF([t0, t1])
+            if (not rez1):
+                break
             t1 = []
             _g = 0
             while (_g < 3):
@@ -1730,34 +2742,54 @@ class GeometryXD:
                 _g = (_g + 1)
                 x = (((t0[i] if i >= 0 and i < len(t0) else None) + python_lib_Random.random()) - 0.5)
                 t1.append(x)
-            t1 = GeometryXD.projection_dot3D_on_plane3D(t1,plane3D)
-        rez = GeometryXD.vecXD(t0,t1)
+            t1 = geometryxd_GeometryXD.projection_dot3D_on_plane3D(t1,plane3D)
+        rez = geometryxd_GeometryXD.vecXD(t0,t1)
         return rez
 
     @staticmethod
     def random_dot3D_in_plane3D(plane3D,dot3D,radius):
         rez = None
-        if ((len(plane3D) != 4) or ((GeometryXD.vecXDmod(plane3D[0:3]) == 0))):
+        if ((len(plane3D) != 4) or ((geometryxd_GeometryXD.vecXDnorm([(plane3D[0] if 0 < len(plane3D) else None), (plane3D[1] if 1 < len(plane3D) else None), (plane3D[2] if 2 < len(plane3D) else None)]) == 0))):
             return rez
-        rez = dot3D
+        rez = geometryxd_GeometryXD.projection_dot3D_on_plane3D(dot3D,plane3D)
         if (radius == 0):
             return rez
-        vec3D = GeometryXD.random_vec3D_in_plane3D(plane3D)
-        rez = GeometryXD.dotXDoffset(dot3D,vec3D,(radius * python_lib_Random.random()))
+        vec3D = geometryxd_GeometryXD.random_vec3D_in_plane3D(plane3D)
+        rez = geometryxd_GeometryXD.dotXDoffset(dot3D,vec3D,(radius * python_lib_Random.random()))
         return rez
 
     @staticmethod
-    def curve3Dbeziercubic(dot3D1,vec3D1,distance1,dot3D2,vec3D2,distance2):
+    def curve3D_4dots(dot3D1,vec3D1,distance1,dot3D2,vec3D2,distance2):
         rez = None
-        if ((not GeometryXD.vecXDfieldsamesize([dot3D1, vec3D1, dot3D2, vec3D2])) or ((len(dot3D1) != 3))):
+        tmp = None
+        a = [dot3D1, vec3D1, dot3D2, vec3D2]
+        rez1 = None
+        al = len(a)
+        if (al > 1):
+            rez1 = True
+            size = len((a[0] if 0 < len(a) else None))
+            _g1 = 1
+            _g = al
+            while (_g1 < _g):
+                i = _g1
+                _g1 = (_g1 + 1)
+                if (size != len((a[i] if i >= 0 and i < len(a) else None))):
+                    rez1 = False
+        else:
+            rez1 = True
+        if (not ((not rez1))):
+            tmp = (len(dot3D1) != 3)
+        else:
+            tmp = True
+        if tmp:
             return rez
-        r1 = GeometryXD.dotXDoffset(dot3D1,vec3D1,distance1)
-        r2 = GeometryXD.dotXDoffset(dot3D2,vec3D2,distance2)
+        r1 = geometryxd_GeometryXD.dotXDoffset(dot3D1,vec3D1,distance1)
+        r2 = geometryxd_GeometryXD.dotXDoffset(dot3D2,vec3D2,distance2)
         rez = [dot3D1, r1, r2, dot3D2]
         return rez
 
     @staticmethod
-    def curve3Dbeziercubic_3dots(dot3D0,dot3D1,dot3D2,lever1 = 0.55,lever2 = 0.55,a_s = -1):
+    def curve3D_3dots(dot3D0,dot3D1,dot3D2,lever1 = 0.55,lever2 = 0.55,a_s = -1):
         if (lever1 is None):
             lever1 = 0.55
         if (lever2 is None):
@@ -1765,86 +2797,125 @@ class GeometryXD:
         if (a_s is None):
             a_s = -1
         rez = None
-        if ((not GeometryXD.vecXDfieldsamesize([dot3D0, dot3D1, dot3D2])) or ((len(dot3D0) != 3))):
+        tmp = None
+        a = [dot3D0, dot3D1, dot3D2]
+        rez1 = None
+        al = len(a)
+        if (al > 1):
+            rez1 = True
+            size = len((a[0] if 0 < len(a) else None))
+            _g1 = 1
+            _g = al
+            while (_g1 < _g):
+                i = _g1
+                _g1 = (_g1 + 1)
+                if (size != len((a[i] if i >= 0 and i < len(a) else None))):
+                    rez1 = False
+        else:
+            rez1 = True
+        if (not ((not rez1))):
+            tmp = (len(dot3D0) != 3)
+        else:
+            tmp = True
+        if tmp:
             return rez
-        v1 = GeometryXD.vecXD(dot3D0,dot3D1)
-        v2 = GeometryXD.vecXD(dot3D0,dot3D2)
-        v12 = GeometryXD.vecXD(dot3D1,dot3D2)
-        t = GeometryXD.dotXDoffset(dot3D1,v12,(GeometryXD.vecXDmod(v12) / 2))
-        v = GeometryXD.vecXD(dot3D0,t)
+        v1 = geometryxd_GeometryXD.vecXD(dot3D0,dot3D1)
+        v2 = geometryxd_GeometryXD.vecXD(dot3D0,dot3D2)
+        v12 = geometryxd_GeometryXD.vecXD(dot3D1,dot3D2)
+        t = geometryxd_GeometryXD.dotXDoffset(dot3D1,v12,(geometryxd_GeometryXD.vecXDnorm(v12) / 2))
+        v = geometryxd_GeometryXD.vecXD(dot3D0,t)
         r1 = None
         r2 = None
         if (a_s < 0):
             if (lever1 > 0):
-                r1 = GeometryXD.dotXDoffset(dot3D1,v2,(GeometryXD.vecXDmod(v2) * lever1))
+                r1 = geometryxd_GeometryXD.dotXDoffset(dot3D1,v2,(geometryxd_GeometryXD.vecXDnorm(v2) * lever1))
             elif (lever1 < 0):
-                r1 = GeometryXD.dotXDoffset(dot3D1,v1,(GeometryXD.vecXDmod(v1) * lever1))
+                r1 = geometryxd_GeometryXD.dotXDoffset(dot3D1,v1,(geometryxd_GeometryXD.vecXDnorm(v1) * lever1))
             else:
                 r1 = dot3D1
             if (lever2 > 0):
-                r2 = GeometryXD.dotXDoffset(dot3D2,v1,(GeometryXD.vecXDmod(v1) * lever2))
+                r2 = geometryxd_GeometryXD.dotXDoffset(dot3D2,v1,(geometryxd_GeometryXD.vecXDnorm(v1) * lever2))
             elif (lever2 < 0):
-                r2 = GeometryXD.dotXDoffset(dot3D2,v2,(GeometryXD.vecXDmod(v2) * lever2))
+                r2 = geometryxd_GeometryXD.dotXDoffset(dot3D2,v2,(geometryxd_GeometryXD.vecXDnorm(v2) * lever2))
             else:
                 r2 = dot3D2
         elif (a_s > 0):
             if (lever1 > 0):
-                r1 = GeometryXD.dotXDoffset(dot3D1,v1,(GeometryXD.vecXDmod(v2) * lever1))
+                r1 = geometryxd_GeometryXD.dotXDoffset(dot3D1,v1,(geometryxd_GeometryXD.vecXDnorm(v2) * lever1))
             elif (lever1 < 0):
-                r1 = GeometryXD.dotXDoffset(dot3D1,v2,(GeometryXD.vecXDmod(v1) * lever1))
+                r1 = geometryxd_GeometryXD.dotXDoffset(dot3D1,v2,(geometryxd_GeometryXD.vecXDnorm(v1) * lever1))
             else:
                 r1 = dot3D1
             if (lever2 > 0):
-                r2 = GeometryXD.dotXDoffset(dot3D2,v2,(GeometryXD.vecXDmod(v1) * lever2))
+                r2 = geometryxd_GeometryXD.dotXDoffset(dot3D2,v2,(geometryxd_GeometryXD.vecXDnorm(v1) * lever2))
             elif (lever2 < 0):
-                r2 = GeometryXD.dotXDoffset(dot3D2,v1,(GeometryXD.vecXDmod(v2) * lever2))
+                r2 = geometryxd_GeometryXD.dotXDoffset(dot3D2,v1,(geometryxd_GeometryXD.vecXDnorm(v2) * lever2))
             else:
                 r2 = dot3D2
         else:
-            r1 = GeometryXD.dotXDoffset(dot3D1,v,(GeometryXD.vecXDmod(v) * lever1))
-            r2 = GeometryXD.dotXDoffset(dot3D2,v,(GeometryXD.vecXDmod(v) * lever2))
+            r1 = geometryxd_GeometryXD.dotXDoffset(dot3D1,v,(geometryxd_GeometryXD.vecXDnorm(v) * lever1))
+            r2 = geometryxd_GeometryXD.dotXDoffset(dot3D2,v,(geometryxd_GeometryXD.vecXDnorm(v) * lever2))
         rez = [dot3D1, r1, r2, dot3D2]
         return rez
 
     @staticmethod
-    def line3Dbeziercubic_2dots(dot3D0,dot3D1):
+    def line3D_2dots(dot3D0,dot3D1):
         rez = None
-        if ((not GeometryXD.vecXDsamesize(dot3D0,dot3D1)) or ((len(dot3D0) != 3))):
+        if ((not geometryxd_GeometryXD.vecXDsamesize(dot3D0,dot3D1)) or ((len(dot3D0) != 3))):
             return rez
-        v = GeometryXD.vecXD(dot3D0,dot3D1)
-        lv = GeometryXD.vecXDmod(v)
-        lever0 = GeometryXD.dotXDoffset(dot3D0,v,(lv / 3))
-        lever1 = GeometryXD.dotXDoffset(dot3D0,v,((lv * 2) / 3))
+        v = geometryxd_GeometryXD.vecXD(dot3D0,dot3D1)
+        lv = geometryxd_GeometryXD.vecXDnorm(v)
+        lever0 = geometryxd_GeometryXD.dotXDoffset(dot3D0,v,(lv / 3))
+        lever1 = geometryxd_GeometryXD.dotXDoffset(dot3D0,v,((lv * 2) / 3))
         rez = [dot3D0, lever0, lever1, dot3D1]
         return rez
 
     @staticmethod
-    def line3Dbeziercubic(dot3D,vec3D,distance):
+    def line3D_dot_offset(dot3D,vec3D,distance):
         rez = None
-        if ((((distance == 0) or (not GeometryXD.vecXDsamesize(dot3D,vec3D))) or ((len(dot3D) != 3))) or ((GeometryXD.vecXDmod(vec3D) == 0))):
+        if ((((distance == 0) or (not geometryxd_GeometryXD.vecXDsamesize(dot3D,vec3D))) or ((len(dot3D) != 3))) or ((geometryxd_GeometryXD.vecXDnorm(vec3D) == 0))):
             return rez
-        rez = GeometryXD.line3Dbeziercubic_2dots(dot3D,GeometryXD.dotXDoffset(dot3D,vec3D,distance))
+        rez = geometryxd_GeometryXD.line3D_2dots(dot3D,geometryxd_GeometryXD.dotXDoffset(dot3D,vec3D,distance))
         return rez
 
     @staticmethod
-    def beziercubic3D_4to12(curve):
+    def curve3D_4to12(curve):
         rez = None
-        if (((len(curve) == 4) and ((len((curve[0] if 0 < len(curve) else None)) == 3))) and GeometryXD.vecXDfieldsamesize(curve)):
-            _g = []
-            _g1 = 0
-            while (_g1 < 4):
-                i = _g1
-                _g1 = (_g1 + 1)
-                _g2 = 0
-                while (_g2 < 3):
-                    ai = _g2
-                    _g2 = (_g2 + 1)
-                    _g.append(python_internal_ArrayImpl._get((curve[i] if i >= 0 and i < len(curve) else None), ai))
-            rez = _g
+        tmp = None
+        if ((len(curve) == 4) and ((len((curve[0] if 0 < len(curve) else None)) == 3))):
+            rez1 = None
+            al = len(curve)
+            if (al > 1):
+                rez1 = True
+                size = len((curve[0] if 0 < len(curve) else None))
+                _g1 = 1
+                _g = al
+                while (_g1 < _g):
+                    i = _g1
+                    _g1 = (_g1 + 1)
+                    if (size != len((curve[i] if i >= 0 and i < len(curve) else None))):
+                        rez1 = False
+            else:
+                rez1 = True
+            tmp = rez1
+        else:
+            tmp = False
+        if tmp:
+            _g2 = []
+            _g11 = 0
+            while (_g11 < 4):
+                i1 = _g11
+                _g11 = (_g11 + 1)
+                _g21 = 0
+                while (_g21 < 3):
+                    ai = _g21
+                    _g21 = (_g21 + 1)
+                    _g2.append(python_internal_ArrayImpl._get((curve[i1] if i1 >= 0 and i1 < len(curve) else None), ai))
+            rez = _g2
         return rez
 
     @staticmethod
-    def beziercubic3D_12to4(curve):
+    def curve3D_12to4(curve):
         rez = None
         if (len(curve) == 12):
             _g = []
@@ -1867,20 +2938,39 @@ class GeometryXD:
     def beziercubic3D_derivativeparameters(curve):
         rez = None
         cl = len(curve)
-        if (((cl == 4) and ((len((curve[0] if 0 < len(curve) else None)) == 3))) and GeometryXD.vecXDfieldsamesize(curve)):
-            _g = []
-            _g1 = 0
-            while (_g1 < 3):
-                i = _g1
-                _g1 = (_g1 + 1)
-                _g2 = []
+        tmp = None
+        if ((cl == 4) and ((len((curve[0] if 0 < len(curve) else None)) == 3))):
+            rez1 = None
+            al = len(curve)
+            if (al > 1):
+                rez1 = True
+                size = len((curve[0] if 0 < len(curve) else None))
+                _g1 = 1
+                _g = al
+                while (_g1 < _g):
+                    i = _g1
+                    _g1 = (_g1 + 1)
+                    if (size != len((curve[i] if i >= 0 and i < len(curve) else None))):
+                        rez1 = False
+            else:
+                rez1 = True
+            tmp = rez1
+        else:
+            tmp = False
+        if tmp:
+            _g2 = []
+            _g11 = 0
+            while (_g11 < 3):
+                i1 = _g11
+                _g11 = (_g11 + 1)
+                _g21 = []
                 _g3 = 0
                 while (_g3 < 4):
                     p = _g3
                     _g3 = (_g3 + 1)
-                    _g2.append(python_internal_ArrayImpl._get((curve[p] if p >= 0 and p < len(curve) else None), i))
-                _g.append(_g2)
-            rez = _g
+                    _g21.append(python_internal_ArrayImpl._get((curve[p] if p >= 0 and p < len(curve) else None), i1))
+                _g2.append(_g21)
+            rez = _g2
         return rez
 
     @staticmethod
@@ -1893,76 +2983,262 @@ class GeometryXD:
     @staticmethod
     def beziercubic3D_derivative(curve,p):
         rez = None
-        if (((len(curve) == 4) and ((len((curve[0] if 0 < len(curve) else None)) == 3))) and GeometryXD.vecXDfieldsamesize(curve)):
-            _g = []
-            _g1 = 0
-            _g2 = GeometryXD.beziercubic3D_derivativeparameters(curve)
-            while (_g1 < len(_g2)):
-                i = (_g2[_g1] if _g1 >= 0 and _g1 < len(_g2) else None)
-                _g1 = (_g1 + 1)
-                x = GeometryXD.beziercubic_derivative(i,p)
-                _g.append(x)
-            rez = _g
+        tmp = None
+        if ((len(curve) == 4) and ((len((curve[0] if 0 < len(curve) else None)) == 3))):
+            rez1 = None
+            al = len(curve)
+            if (al > 1):
+                rez1 = True
+                size = len((curve[0] if 0 < len(curve) else None))
+                _g1 = 1
+                _g = al
+                while (_g1 < _g):
+                    i = _g1
+                    _g1 = (_g1 + 1)
+                    if (size != len((curve[i] if i >= 0 and i < len(curve) else None))):
+                        rez1 = False
+            else:
+                rez1 = True
+            tmp = rez1
+        else:
+            tmp = False
+        if tmp:
+            _g2 = []
+            _g11 = 0
+            rez2 = None
+            cl = len(curve)
+            rez3 = None
+            if ((cl == 4) and ((len((curve[0] if 0 < len(curve) else None)) == 3))):
+                rez4 = None
+                al1 = len(curve)
+                if (al1 > 1):
+                    rez4 = True
+                    size1 = len((curve[0] if 0 < len(curve) else None))
+                    _g12 = 1
+                    _g3 = al1
+                    while (_g12 < _g3):
+                        i1 = _g12
+                        _g12 = (_g12 + 1)
+                        if (size1 != len((curve[i1] if i1 >= 0 and i1 < len(curve) else None))):
+                            rez4 = False
+                else:
+                    rez4 = True
+                rez3 = rez4
+            else:
+                rez3 = False
+            if rez3:
+                _g4 = []
+                _g13 = 0
+                while (_g13 < 3):
+                    i2 = _g13
+                    _g13 = (_g13 + 1)
+                    _g21 = []
+                    _g31 = 0
+                    while (_g31 < 4):
+                        p1 = _g31
+                        _g31 = (_g31 + 1)
+                        _g21.append(python_internal_ArrayImpl._get((curve[p1] if p1 >= 0 and p1 < len(curve) else None), i2))
+                    _g4.append(_g21)
+                rez2 = _g4
+            _g22 = rez2
+            while (_g11 < len(_g22)):
+                i3 = (_g22[_g11] if _g11 >= 0 and _g11 < len(_g22) else None)
+                _g11 = (_g11 + 1)
+                rez5 = None
+                if (len(i3) == 4):
+                    rez5 = (((((3 * ((1 - p))) * ((1 - p))) * (((i3[1] if 1 < len(i3) else None) - (i3[0] if 0 < len(i3) else None)))) + ((((6 * ((1 - p))) * p) * (((i3[2] if 2 < len(i3) else None) - (i3[1] if 1 < len(i3) else None)))))) + ((((3 * p) * p) * (((i3[3] if 3 < len(i3) else None) - (i3[2] if 2 < len(i3) else None))))))
+                _g2.append(rez5)
+            rez = _g2
         return rez
 
     @staticmethod
     def beziercubic_support_dot_one(beziercubic_one_axis_coordinates):
-        c = beziercubic_one_axis_coordinates
         rez = None
-        if (len(c) != 4):
-            return rez
-        return ((((((-5 * (c[0] if 0 < len(c) else None)) + ((18 * (c[1] if 1 < len(c) else None)))) - ((9 * (c[2] if 2 < len(c) else None)))) + ((2 * (c[3] if 3 < len(c) else None))))) / 6)
+        c = beziercubic_one_axis_coordinates
+        if (len(c) == 4):
+            rez = ((((((-5 * (c[0] if 0 < len(c) else None)) + ((18 * (c[1] if 1 < len(c) else None)))) - ((9 * (c[2] if 2 < len(c) else None)))) + ((2 * (c[3] if 3 < len(c) else None))))) / 6)
+        return rez
 
     @staticmethod
     def beziercubic3D_support_dot_one(curve3D_4dots):
         rez = None
         c = curve3D_4dots
-        if ((len(c) != 4) or (not GeometryXD.vecXDfieldsamesize(c))):
-            return rez
-        _g = []
-        _g1 = 0
-        _g2 = GeometryXD.beziercubic3D_derivativeparameters(c)
-        while (_g1 < len(_g2)):
-            i = (_g2[_g1] if _g1 >= 0 and _g1 < len(_g2) else None)
-            _g1 = (_g1 + 1)
-            x = GeometryXD.beziercubic_support_dot_one(i)
-            _g.append(x)
-        rez = _g
+        tmp = None
+        if (len(c) == 4):
+            rez1 = None
+            al = len(c)
+            if (al > 1):
+                rez1 = True
+                size = len((c[0] if 0 < len(c) else None))
+                _g1 = 1
+                _g = al
+                while (_g1 < _g):
+                    i = _g1
+                    _g1 = (_g1 + 1)
+                    if (size != len((c[i] if i >= 0 and i < len(c) else None))):
+                        rez1 = False
+            else:
+                rez1 = True
+            tmp = rez1
+        else:
+            tmp = False
+        if tmp:
+            _g2 = []
+            _g11 = 0
+            rez2 = None
+            cl = len(c)
+            rez3 = None
+            if ((cl == 4) and ((len((c[0] if 0 < len(c) else None)) == 3))):
+                rez4 = None
+                al1 = len(c)
+                if (al1 > 1):
+                    rez4 = True
+                    size1 = len((c[0] if 0 < len(c) else None))
+                    _g12 = 1
+                    _g3 = al1
+                    while (_g12 < _g3):
+                        i1 = _g12
+                        _g12 = (_g12 + 1)
+                        if (size1 != len((c[i1] if i1 >= 0 and i1 < len(c) else None))):
+                            rez4 = False
+                else:
+                    rez4 = True
+                rez3 = rez4
+            else:
+                rez3 = False
+            if rez3:
+                _g4 = []
+                _g13 = 0
+                while (_g13 < 3):
+                    i2 = _g13
+                    _g13 = (_g13 + 1)
+                    _g21 = []
+                    _g31 = 0
+                    while (_g31 < 4):
+                        p = _g31
+                        _g31 = (_g31 + 1)
+                        _g21.append(python_internal_ArrayImpl._get((c[p] if p >= 0 and p < len(c) else None), i2))
+                    _g4.append(_g21)
+                rez2 = _g4
+            _g22 = rez2
+            while (_g11 < len(_g22)):
+                i3 = (_g22[_g11] if _g11 >= 0 and _g11 < len(_g22) else None)
+                _g11 = (_g11 + 1)
+                rez5 = None
+                c1 = i3
+                if (len(c1) == 4):
+                    rez5 = ((((((-5 * (c1[0] if 0 < len(c1) else None)) + ((18 * (c1[1] if 1 < len(c1) else None)))) - ((9 * (c1[2] if 2 < len(c1) else None)))) + ((2 * (c1[3] if 3 < len(c1) else None))))) / 6)
+                _g2.append(rez5)
+            rez = _g2
         return rez
 
     @staticmethod
     def beziercubic_support_dot_two(beziercubic_one_axis_coordinates):
-        c = beziercubic_one_axis_coordinates
         rez = None
-        if (len(c) != 4):
-            return rez
-        return ((((((2 * (c[0] if 0 < len(c) else None)) - ((9 * (c[1] if 1 < len(c) else None)))) + ((18 * (c[2] if 2 < len(c) else None)))) - ((5 * (c[3] if 3 < len(c) else None))))) / 6)
+        c = beziercubic_one_axis_coordinates
+        if (len(c) == 4):
+            rez = ((((((2 * (c[0] if 0 < len(c) else None)) - ((9 * (c[1] if 1 < len(c) else None)))) + ((18 * (c[2] if 2 < len(c) else None)))) - ((5 * (c[3] if 3 < len(c) else None))))) / 6)
+        return rez
 
     @staticmethod
     def beziercubic3D_support_dot_two(curve3D_4dots):
         rez = None
         c = curve3D_4dots
-        if ((len(c) != 4) or (not GeometryXD.vecXDfieldsamesize(c))):
-            return rez
-        _g = []
-        _g1 = 0
-        _g2 = GeometryXD.beziercubic3D_derivativeparameters(c)
-        while (_g1 < len(_g2)):
-            i = (_g2[_g1] if _g1 >= 0 and _g1 < len(_g2) else None)
-            _g1 = (_g1 + 1)
-            x = GeometryXD.beziercubic_support_dot_two(i)
-            _g.append(x)
-        rez = _g
+        tmp = None
+        if (len(c) == 4):
+            rez1 = None
+            al = len(c)
+            if (al > 1):
+                rez1 = True
+                size = len((c[0] if 0 < len(c) else None))
+                _g1 = 1
+                _g = al
+                while (_g1 < _g):
+                    i = _g1
+                    _g1 = (_g1 + 1)
+                    if (size != len((c[i] if i >= 0 and i < len(c) else None))):
+                        rez1 = False
+            else:
+                rez1 = True
+            tmp = rez1
+        else:
+            tmp = False
+        if tmp:
+            _g2 = []
+            _g11 = 0
+            rez2 = None
+            cl = len(c)
+            rez3 = None
+            if ((cl == 4) and ((len((c[0] if 0 < len(c) else None)) == 3))):
+                rez4 = None
+                al1 = len(c)
+                if (al1 > 1):
+                    rez4 = True
+                    size1 = len((c[0] if 0 < len(c) else None))
+                    _g12 = 1
+                    _g3 = al1
+                    while (_g12 < _g3):
+                        i1 = _g12
+                        _g12 = (_g12 + 1)
+                        if (size1 != len((c[i1] if i1 >= 0 and i1 < len(c) else None))):
+                            rez4 = False
+                else:
+                    rez4 = True
+                rez3 = rez4
+            else:
+                rez3 = False
+            if rez3:
+                _g4 = []
+                _g13 = 0
+                while (_g13 < 3):
+                    i2 = _g13
+                    _g13 = (_g13 + 1)
+                    _g21 = []
+                    _g31 = 0
+                    while (_g31 < 4):
+                        p = _g31
+                        _g31 = (_g31 + 1)
+                        _g21.append(python_internal_ArrayImpl._get((c[p] if p >= 0 and p < len(c) else None), i2))
+                    _g4.append(_g21)
+                rez2 = _g4
+            _g22 = rez2
+            while (_g11 < len(_g22)):
+                i3 = (_g22[_g11] if _g11 >= 0 and _g11 < len(_g22) else None)
+                _g11 = (_g11 + 1)
+                rez5 = None
+                c1 = i3
+                if (len(c1) == 4):
+                    rez5 = ((((((2 * (c1[0] if 0 < len(c1) else None)) - ((9 * (c1[1] if 1 < len(c1) else None)))) + ((18 * (c1[2] if 2 < len(c1) else None)))) - ((5 * (c1[3] if 3 < len(c1) else None))))) / 6)
+                _g2.append(rez5)
+            rez = _g2
         return rez
 
     @staticmethod
     def beziercubic3D_follow_4dots_trajectory(dots):
         rez = None
-        if ((len(dots) != 4) or (not GeometryXD.vecXDfieldsamesize(dots))):
-            return rez
-        dot_one = GeometryXD.beziercubic3D_support_dot_one(dots)
-        dot_two = GeometryXD.beziercubic3D_support_dot_two(dots)
-        rez = [(dots[0] if 0 < len(dots) else None), dot_one, dot_two, (dots[3] if 3 < len(dots) else None)]
+        tmp = None
+        if ((len(dots) == 4) and ((len((dots[0] if 0 < len(dots) else None)) == 3))):
+            rez1 = None
+            al = len(dots)
+            if (al > 1):
+                rez1 = True
+                size = len((dots[0] if 0 < len(dots) else None))
+                _g1 = 1
+                _g = al
+                while (_g1 < _g):
+                    i = _g1
+                    _g1 = (_g1 + 1)
+                    if (size != len((dots[i] if i >= 0 and i < len(dots) else None))):
+                        rez1 = False
+            else:
+                rez1 = True
+            tmp = rez1
+        else:
+            tmp = False
+        if tmp:
+            dot_one = geometryxd_GeometryXD.beziercubic3D_support_dot_one(dots)
+            dot_two = geometryxd_GeometryXD.beziercubic3D_support_dot_two(dots)
+            rez = [(dots[0] if 0 < len(dots) else None), dot_one, dot_two, (dots[3] if 3 < len(dots) else None)]
         return rez
 
     @staticmethod
@@ -1970,9 +3246,8 @@ class GeometryXD:
         rez = None
         c = beziercubic_one_axis_coordinates
         p = parameter
-        if (len(c) != 4):
-            return rez
-        rez = ((((((((1 - p)) * ((1 - p))) * ((1 - p))) * (c[0] if 0 < len(c) else None)) + (((((3 * ((1 - p))) * ((1 - p))) * p) * (c[1] if 1 < len(c) else None)))) + (((((3 * ((1 - p))) * p) * p) * (c[2] if 2 < len(c) else None)))) + ((((p * p) * p) * (c[3] if 3 < len(c) else None))))
+        if (len(c) == 4):
+            rez = ((((((((1 - p)) * ((1 - p))) * ((1 - p))) * (c[0] if 0 < len(c) else None)) + (((((3 * ((1 - p))) * ((1 - p))) * p) * (c[1] if 1 < len(c) else None)))) + (((((3 * ((1 - p))) * p) * p) * (c[2] if 2 < len(c) else None)))) + ((((p * p) * p) * (c[3] if 3 < len(c) else None))))
         return rez
 
     @staticmethod
@@ -1980,152 +3255,315 @@ class GeometryXD:
         rez = None
         c = beziercubic3D
         p = parameter
-        if (((len(c) != 4) or ((len((c[0] if 0 < len(c) else None)) != 3))) or (not GeometryXD.vecXDfieldsamesize(c))):
-            return rez
-        _g = []
-        _g1 = 0
-        _g2 = GeometryXD.beziercubic3D_derivativeparameters(c)
-        while (_g1 < len(_g2)):
-            i = (_g2[_g1] if _g1 >= 0 and _g1 < len(_g2) else None)
-            _g1 = (_g1 + 1)
-            x = GeometryXD.beziercubic_coordinate(i,p)
-            _g.append(x)
-        rez = _g
+        tmp = None
+        if ((len(c) == 4) and ((len((c[0] if 0 < len(c) else None)) == 3))):
+            rez1 = None
+            al = len(c)
+            if (al > 1):
+                rez1 = True
+                size = len((c[0] if 0 < len(c) else None))
+                _g1 = 1
+                _g = al
+                while (_g1 < _g):
+                    i = _g1
+                    _g1 = (_g1 + 1)
+                    if (size != len((c[i] if i >= 0 and i < len(c) else None))):
+                        rez1 = False
+            else:
+                rez1 = True
+            tmp = rez1
+        else:
+            tmp = False
+        if tmp:
+            _g2 = []
+            _g11 = 0
+            rez2 = None
+            cl = len(c)
+            rez3 = None
+            if ((cl == 4) and ((len((c[0] if 0 < len(c) else None)) == 3))):
+                rez4 = None
+                al1 = len(c)
+                if (al1 > 1):
+                    rez4 = True
+                    size1 = len((c[0] if 0 < len(c) else None))
+                    _g12 = 1
+                    _g3 = al1
+                    while (_g12 < _g3):
+                        i1 = _g12
+                        _g12 = (_g12 + 1)
+                        if (size1 != len((c[i1] if i1 >= 0 and i1 < len(c) else None))):
+                            rez4 = False
+                else:
+                    rez4 = True
+                rez3 = rez4
+            else:
+                rez3 = False
+            if rez3:
+                _g4 = []
+                _g13 = 0
+                while (_g13 < 3):
+                    i2 = _g13
+                    _g13 = (_g13 + 1)
+                    _g21 = []
+                    _g31 = 0
+                    while (_g31 < 4):
+                        p1 = _g31
+                        _g31 = (_g31 + 1)
+                        _g21.append(python_internal_ArrayImpl._get((c[p1] if p1 >= 0 and p1 < len(c) else None), i2))
+                    _g4.append(_g21)
+                rez2 = _g4
+            _g22 = rez2
+            while (_g11 < len(_g22)):
+                i3 = (_g22[_g11] if _g11 >= 0 and _g11 < len(_g22) else None)
+                _g11 = (_g11 + 1)
+                rez5 = None
+                c1 = i3
+                p2 = p
+                if (len(c1) == 4):
+                    rez5 = ((((((((1 - p2)) * ((1 - p2))) * ((1 - p2))) * (c1[0] if 0 < len(c1) else None)) + (((((3 * ((1 - p2))) * ((1 - p2))) * p2) * (c1[1] if 1 < len(c1) else None)))) + (((((3 * ((1 - p2))) * p2) * p2) * (c1[2] if 2 < len(c1) else None)))) + ((((p2 * p2) * p2) * (c1[3] if 3 < len(c1) else None))))
+                _g2.append(rez5)
+            rez = _g2
         return rez
 
     @staticmethod
     def curve3D_4dots_follow_beziercubic_trajectory(beziercubic3D):
         rez = None
         c = beziercubic3D
-        if ((len(c) != 4) or (not GeometryXD.vecXDfieldsamesize(c))):
-            return rez
-        python_internal_ArrayImpl._set(c, 1, GeometryXD.beziercubic3Ddot(c,0.333333333333333315))
-        python_internal_ArrayImpl._set(c, 2, GeometryXD.beziercubic3Ddot(c,0.66666666666666663))
+        tmp = None
+        if ((len(c) == 4) and ((len((c[0] if 0 < len(c) else None)) == 3))):
+            rez1 = None
+            al = len(c)
+            if (al > 1):
+                rez1 = True
+                size = len((c[0] if 0 < len(c) else None))
+                _g1 = 1
+                _g = al
+                while (_g1 < _g):
+                    i = _g1
+                    _g1 = (_g1 + 1)
+                    if (size != len((c[i] if i >= 0 and i < len(c) else None))):
+                        rez1 = False
+            else:
+                rez1 = True
+            tmp = rez1
+        else:
+            tmp = False
+        if tmp:
+            python_internal_ArrayImpl._set(c, 1, geometryxd_GeometryXD.beziercubic3Ddot(c,0.333333333333333315))
+            python_internal_ArrayImpl._set(c, 2, geometryxd_GeometryXD.beziercubic3Ddot(c,0.66666666666666663))
         return c
 
     @staticmethod
     def curve3Doffset(curve3D,vec3D,distance):
         rez = None
-        if ((((len(curve3D) != 4) or ((len((curve3D[0] if 0 < len(curve3D) else None)) != 3))) or (not GeometryXD.vecXDfieldsamesize(curve3D))) or ((len(vec3D) != 3))):
-            return rez
-        _g = []
-        _g1 = 0
-        while (_g1 < len(curve3D)):
-            i = (curve3D[_g1] if _g1 >= 0 and _g1 < len(curve3D) else None)
-            _g1 = (_g1 + 1)
-            x = GeometryXD.dotXDoffset(i,vec3D,distance)
-            _g.append(x)
-        return _g
+        tmp = None
+        tmp1 = None
+        if ((len(curve3D) == 4) and ((len((curve3D[0] if 0 < len(curve3D) else None)) == 3))):
+            rez1 = None
+            al = len(curve3D)
+            if (al > 1):
+                rez1 = True
+                size = len((curve3D[0] if 0 < len(curve3D) else None))
+                _g1 = 1
+                _g = al
+                while (_g1 < _g):
+                    i = _g1
+                    _g1 = (_g1 + 1)
+                    if (size != len((curve3D[i] if i >= 0 and i < len(curve3D) else None))):
+                        rez1 = False
+            else:
+                rez1 = True
+            tmp1 = rez1
+        else:
+            tmp1 = False
+        if tmp1:
+            tmp = (len(vec3D) == 3)
+        else:
+            tmp = False
+        if tmp:
+            _g2 = []
+            _g11 = 0
+            while (_g11 < len(curve3D)):
+                i1 = (curve3D[_g11] if _g11 >= 0 and _g11 < len(curve3D) else None)
+                _g11 = (_g11 + 1)
+                x = geometryxd_GeometryXD.dotXDoffset(i1,vec3D,distance)
+                _g2.append(x)
+            rez = _g2
+        return rez
 
     @staticmethod
     def curve3Drotate(curve3D,dot3D,vec3D,angle,rad = False):
         if (rad is None):
             rad = False
         rez = None
-        if ((((((len(curve3D) != 4) or ((len((curve3D[0] if 0 < len(curve3D) else None)) != 3))) or (not GeometryXD.vecXDfieldsamesize(curve3D))) or ((len(dot3D) != 3))) or ((len(vec3D) != 3))) or ((GeometryXD.vecXDmod(vec3D) == 0))):
-            return rez
-        if (angle == 0):
-            return curve3D
-        _g = []
-        _g1 = 0
-        while (_g1 < len(curve3D)):
-            i = (curve3D[_g1] if _g1 >= 0 and _g1 < len(curve3D) else None)
-            _g1 = (_g1 + 1)
-            x = GeometryXD.dot3Drotate(i,dot3D,vec3D,angle,rad)
-            _g.append(x)
-        return _g
+        tmp = None
+        tmp1 = None
+        tmp2 = None
+        tmp3 = None
+        if ((len(curve3D) == 4) and ((len((curve3D[0] if 0 < len(curve3D) else None)) == 3))):
+            rez1 = None
+            al = len(curve3D)
+            if (al > 1):
+                rez1 = True
+                size = len((curve3D[0] if 0 < len(curve3D) else None))
+                _g1 = 1
+                _g = al
+                while (_g1 < _g):
+                    i = _g1
+                    _g1 = (_g1 + 1)
+                    if (size != len((curve3D[i] if i >= 0 and i < len(curve3D) else None))):
+                        rez1 = False
+            else:
+                rez1 = True
+            tmp3 = rez1
+        else:
+            tmp3 = False
+        if tmp3:
+            tmp2 = (len(dot3D) == 3)
+        else:
+            tmp2 = False
+        if tmp2:
+            tmp1 = (len(vec3D) == 3)
+        else:
+            tmp1 = False
+        if tmp1:
+            tmp = (geometryxd_GeometryXD.vecXDnorm(vec3D) > 0)
+        else:
+            tmp = False
+        if tmp:
+            if (angle != 0):
+                _g2 = []
+                _g11 = 0
+                while (_g11 < len(curve3D)):
+                    i1 = (curve3D[_g11] if _g11 >= 0 and _g11 < len(curve3D) else None)
+                    _g11 = (_g11 + 1)
+                    x = geometryxd_GeometryXD.dot3Drotate(i1,dot3D,vec3D,angle,rad)
+                    _g2.append(x)
+                rez = _g2
+            else:
+                rez = curve3D
+        return rez
 
     @staticmethod
     def curve3Dscale(curve3D,scale_xyz,dot3D):
         rez = None
-        if (((((len(curve3D) != 4) or ((len((curve3D[0] if 0 < len(curve3D) else None)) != 3))) or (not GeometryXD.vecXDfieldsamesize(curve3D))) or ((len(dot3D) != 3))) or ((len(scale_xyz) != 3))):
-            return rez
-        if (GeometryXD.vecXDmod(scale_xyz) == 0):
-            _g = []
-            _g1 = 0
-            while (_g1 < 4):
-                i = _g1
-                _g1 = (_g1 + 1)
-                _g.append([0, 0, 0])
-            return _g
-        _g2 = []
-        _g11 = 0
-        while (_g11 < len(curve3D)):
-            i1 = (curve3D[_g11] if _g11 >= 0 and _g11 < len(curve3D) else None)
-            _g11 = (_g11 + 1)
-            x = GeometryXD.dotXDscale(i1,scale_xyz,dot3D)
-            _g2.append(x)
-        return _g2
+        tmp = None
+        tmp1 = None
+        tmp2 = None
+        if ((len(curve3D) == 4) and ((len((curve3D[0] if 0 < len(curve3D) else None)) == 3))):
+            rez1 = None
+            al = len(curve3D)
+            if (al > 1):
+                rez1 = True
+                size = len((curve3D[0] if 0 < len(curve3D) else None))
+                _g1 = 1
+                _g = al
+                while (_g1 < _g):
+                    i = _g1
+                    _g1 = (_g1 + 1)
+                    if (size != len((curve3D[i] if i >= 0 and i < len(curve3D) else None))):
+                        rez1 = False
+            else:
+                rez1 = True
+            tmp2 = rez1
+        else:
+            tmp2 = False
+        if tmp2:
+            tmp1 = (len(dot3D) == 3)
+        else:
+            tmp1 = False
+        if tmp1:
+            tmp = (len(scale_xyz) == 3)
+        else:
+            tmp = False
+        if tmp:
+            if (geometryxd_GeometryXD.vecXDnorm(scale_xyz) > 0):
+                _g2 = []
+                _g11 = 0
+                while (_g11 < len(curve3D)):
+                    i1 = (curve3D[_g11] if _g11 >= 0 and _g11 < len(curve3D) else None)
+                    _g11 = (_g11 + 1)
+                    x = geometryxd_GeometryXD.dotXDscale(i1,scale_xyz,dot3D)
+                    _g2.append(x)
+                rez = _g2
+            else:
+                _g3 = []
+                _g12 = 0
+                while (_g12 < 4):
+                    i2 = _g12
+                    _g12 = (_g12 + 1)
+                    _g3.append([0, 0, 0])
+                rez = _g3
+        return rez
 
     @staticmethod
     def ellipse2Dperimeter_ramanujan(semiaxis_a,semiaxis_b):
         rez = None
         a = semiaxis_a
         b = semiaxis_b
-        if ((a < 0) or ((b < 0))):
-            return rez
-        v = ((((3 * a) + b)) * ((a + ((3 * b)))))
-        l1 = (Math.PI * (((3 * ((a + b))) - ((Math.NaN if ((v < 0)) else python_lib_Math.sqrt(v))))))
-        v1 = (4 - (((((3 * ((a - b))) * ((a - b))) / ((a + b))) / ((a + b)))))
-        l2 = ((Math.PI * ((a + b))) * ((1 + ((((((3 * ((a - b))) * ((a - b))) / ((a + b))) / ((a + b))) / ((10 + ((Math.NaN if ((v1 < 0)) else python_lib_Math.sqrt(v1))))))))))
-        if python_lib_Math.isnan(l1):
-            rez = l1
-        elif python_lib_Math.isnan(l2):
-            rez = l2
-        else:
-            rez = max(l1,l2)
+        if ((a > 0) and ((b > 0))):
+            v = ((((3 * a) + b)) * ((a + ((3 * b)))))
+            l1 = (Math.PI * (((3 * ((a + b))) - ((Math.NaN if ((v < 0)) else python_lib_Math.sqrt(v))))))
+            v1 = (4 - (((((3 * ((a - b))) * ((a - b))) / ((a + b))) / ((a + b)))))
+            l2 = ((Math.PI * ((a + b))) * ((1 + ((((((3 * ((a - b))) * ((a - b))) / ((a + b))) / ((a + b))) / ((10 + ((Math.NaN if ((v1 < 0)) else python_lib_Math.sqrt(v1))))))))))
+            if python_lib_Math.isnan(l1):
+                rez = l1
+            elif python_lib_Math.isnan(l2):
+                rez = l2
+            else:
+                rez = max(l1,l2)
         return rez
 
     @staticmethod
     def tangent_centered_ellipse2Ddot(semiaxis_a,semiaxis_b,ellipse_dot2D):
-        rez = None
+        v = None
         a = semiaxis_a
         b = semiaxis_b
-        x0 = (ellipse_dot2D[0] if 0 < len(ellipse_dot2D) else None)
-        y0 = (ellipse_dot2D[1] if 1 < len(ellipse_dot2D) else None)
-        x = None
-        y = None
-        v = None
-        if (x0 != 0):
-            x = (0.9 * x0)
-            if (x0 > 0):
-                if (y0 == 0):
-                    v = [[x0, y0], [x0, 1]]
-                else:
-                    y = (((((1 - (((x * x0) / ((a * a)))))) * b) * b) / y0)
-                    if (y0 > 0):
-                        v = [[x0, y0], [x, y]]
+        if (((a > 0) and ((b > 0))) and ((len(ellipse_dot2D) == 2))):
+            x0 = (ellipse_dot2D[0] if 0 < len(ellipse_dot2D) else None)
+            y0 = (ellipse_dot2D[1] if 1 < len(ellipse_dot2D) else None)
+            x = None
+            y = None
+            if (x0 != 0):
+                x = (0.9 * x0)
+                if (x0 > 0):
+                    if (y0 == 0):
+                        v = [[x0, y0], [x0, 1]]
                     else:
-                        v = [[x, y], [x0, y0]]
-            elif (x0 < 0):
-                if (y0 == 0):
-                    v = [[x0, y0], [x0, -1]]
-                else:
-                    y = (((((1 - (((x * x0) / ((a * a)))))) * b) * b) / y0)
-                    if (y0 > 0):
-                        v = [[x, y], [x0, y0]]
+                        y = (((((1 - (((x * x0) / ((a * a)))))) * b) * b) / y0)
+                        if (y0 > 0):
+                            v = [[x0, y0], [x, y]]
+                        else:
+                            v = [[x, y], [x0, y0]]
+                elif (x0 < 0):
+                    if (y0 == 0):
+                        v = [[x0, y0], [x0, -1]]
                     else:
-                        v = [[x0, y0], [x, y]]
-        else:
-            y = (0.9 * y0)
-            if (y0 > 0):
-                if (x0 == 0):
-                    v = [[x0, y0], [-1, y0]]
-                else:
-                    x = (((((1 - (((y * y0) / ((b * b)))))) * a) * a) / x0)
-                    if (x0 > 0):
-                        v = [[x, y], [x0, y0]]
+                        y = (((((1 - (((x * x0) / ((a * a)))))) * b) * b) / y0)
+                        if (y0 > 0):
+                            v = [[x, y], [x0, y0]]
+                        else:
+                            v = [[x0, y0], [x, y]]
+            else:
+                y = (0.9 * y0)
+                if (y0 > 0):
+                    if (x0 == 0):
+                        v = [[x0, y0], [-1, y0]]
                     else:
-                        v = [[x0, y0], [x, y]]
-            elif (y0 < 0):
-                if (x0 == 0):
-                    v = [[x0, y0], [1, y0]]
-                else:
-                    x = (((((1 - (((y * y0) / ((b * b)))))) * a) * a) / x0)
-                    if (x0 < 0):
-                        v = [[x, y], [x0, y0]]
+                        x = (((((1 - (((y * y0) / ((b * b)))))) * a) * a) / x0)
+                        if (x0 > 0):
+                            v = [[x, y], [x0, y0]]
+                        else:
+                            v = [[x0, y0], [x, y]]
+                elif (y0 < 0):
+                    if (x0 == 0):
+                        v = [[x0, y0], [1, y0]]
                     else:
-                        v = [[x0, y0], [x, y]]
+                        x = (((((1 - (((y * y0) / ((b * b)))))) * a) * a) / x0)
+                        if (x0 < 0):
+                            v = [[x, y], [x0, y0]]
+                        else:
+                            v = [[x0, y0], [x, y]]
         return v
 
     @staticmethod
@@ -2133,17 +3571,16 @@ class GeometryXD:
         rez = None
         a = semiaxis_a
         b = semiaxis_b
-        if (((a < 0) or ((b < 0))) or (((a <= 0) and ((b <= 0))))):
-            return rez
-        if (a >= b):
-            v = (1 - (((b * b) / ((a * a)))))
-            if (v < 0):
-                rez = Math.NaN
+        if (((a >= 0) and ((b >= 0))) and (((a + b) > 0))):
+            if (a >= b):
+                v = (1 - (((b * b) / ((a * a)))))
+                if (v < 0):
+                    rez = Math.NaN
+                else:
+                    rez = python_lib_Math.sqrt(v)
             else:
-                rez = python_lib_Math.sqrt(v)
-        else:
-            v1 = (1 - (((a * a) / ((b * b)))))
-            rez = -((Math.NaN if ((v1 < 0)) else python_lib_Math.sqrt(v1)))
+                v1 = (1 - (((a * a) / ((b * b)))))
+                rez = -((Math.NaN if ((v1 < 0)) else python_lib_Math.sqrt(v1)))
         return rez
 
     @staticmethod
@@ -2151,7 +3588,20 @@ class GeometryXD:
         rez = None
         a = semiaxis_a
         b = semiaxis_b
-        e = GeometryXD.ellipse_e_parameter(a,b)
+        rez1 = None
+        a1 = a
+        b1 = b
+        if (((a1 >= 0) and ((b1 >= 0))) and (((a1 + b1) > 0))):
+            if (a1 >= b1):
+                v = (1 - (((b1 * b1) / ((a1 * a1)))))
+                if (v < 0):
+                    rez1 = Math.NaN
+                else:
+                    rez1 = python_lib_Math.sqrt(v)
+            else:
+                v1 = (1 - (((a1 * a1) / ((b1 * b1)))))
+                rez1 = -((Math.NaN if ((v1 < 0)) else python_lib_Math.sqrt(v1)))
+        e = rez1
         if (e is None):
             return rez
         if (a >= b):
@@ -2170,40 +3620,99 @@ class GeometryXD:
         b = semiaxis_b
         an = semiaxis_a_negative
         bn = semiaxis_b_negative
-        ea = None
-        eb = None
-        _g = GeometryXD.angle_quadrant(angle,rad)
-        _g1 = _g
-        if (_g1 == 1):
-            ea = a
-            eb = b
-        elif (_g1 == 2):
-            ea = an
-            eb = b
-        elif (_g1 == 3):
-            ea = an
-            eb = bn
-        elif (_g1 == 4):
-            ea = a
-            eb = bn
-        else:
-            pass
-        ep = GeometryXD.plane3D_dot3Dnormal(t,vn)
-        va1 = GeometryXD.projection_vec3D_on_plane3D(va,ep)
-        vb = GeometryXD.vec3Dnormal(vn,va1)
-        edot = GeometryXD.ellipse2Ddot(angle,ea,eb,rad)
-        dxy0dxy1 = GeometryXD.tangent_centered_ellipse2Ddot(ea,eb,edot)
-        te = GeometryXD.dotXDoffset(t,va1,python_internal_ArrayImpl._get((dxy0dxy1[0] if 0 < len(dxy0dxy1) else None), 0))
-        te1 = GeometryXD.dotXDoffset(te,vb,python_internal_ArrayImpl._get((dxy0dxy1[0] if 0 < len(dxy0dxy1) else None), 1))
-        tt = GeometryXD.dotXDoffset(t,va1,python_internal_ArrayImpl._get((dxy0dxy1[1] if 1 < len(dxy0dxy1) else None), 0))
-        tt1 = GeometryXD.dotXDoffset(tt,vb,python_internal_ArrayImpl._get((dxy0dxy1[1] if 1 < len(dxy0dxy1) else None), 1))
-        rez = GeometryXD.vecXD(te1,tt1)
+        if ((((((((((len(t) == 3) and ((len(vn) == 3))) and ((len(va) == 3))) and ((geometryxd_GeometryXD.vecXDnorm(vn) > 0))) and ((geometryxd_GeometryXD.vecXDnorm(va) > 0))) and (not geometryxd_GeometryXD.vecXDparalleled(vn,va))) and ((a > 0))) and ((b > 0))) and ((an > 0))) and ((bn > 0))):
+            ea = None
+            eb = None
+            _g = geometryxd_GeometryXD.angle_quadrant(angle,rad)
+            _g1 = _g
+            if (_g1 == 1):
+                ea = a
+                eb = b
+            elif (_g1 == 2):
+                ea = an
+                eb = b
+            elif (_g1 == 3):
+                ea = an
+                eb = bn
+            elif (_g1 == 4):
+                ea = a
+                eb = bn
+            else:
+                pass
+            ep = geometryxd_GeometryXD.plane3D_dot3Dnormal(t,vn)
+            va1 = geometryxd_GeometryXD.projection_vec3D_on_plane3D(va,ep)
+            vb = geometryxd_GeometryXD.vec3Dnormal(vn,va1)
+            u = angle
+            a1 = ea
+            b1 = eb
+            if (not rad):
+                a1 = ((a1 / 180) * Math.PI)
+            edot = [(a1 * ((Math.NaN if (((u == Math.POSITIVE_INFINITY) or ((u == Math.NEGATIVE_INFINITY)))) else python_lib_Math.cos(u)))), (b1 * ((Math.NaN if (((u == Math.POSITIVE_INFINITY) or ((u == Math.NEGATIVE_INFINITY)))) else python_lib_Math.sin(u))))]
+            dxy0dxy1 = geometryxd_GeometryXD.tangent_centered_ellipse2Ddot(ea,eb,edot)
+            te = geometryxd_GeometryXD.dotXDoffset(t,va1,python_internal_ArrayImpl._get((dxy0dxy1[0] if 0 < len(dxy0dxy1) else None), 0))
+            te1 = geometryxd_GeometryXD.dotXDoffset(te,vb,python_internal_ArrayImpl._get((dxy0dxy1[0] if 0 < len(dxy0dxy1) else None), 1))
+            tt = geometryxd_GeometryXD.dotXDoffset(t,va1,python_internal_ArrayImpl._get((dxy0dxy1[1] if 1 < len(dxy0dxy1) else None), 0))
+            tt1 = geometryxd_GeometryXD.dotXDoffset(tt,vb,python_internal_ArrayImpl._get((dxy0dxy1[1] if 1 < len(dxy0dxy1) else None), 1))
+            rez = geometryxd_GeometryXD.vecXD(te1,tt1)
         return rez
 
     @staticmethod
     def ellipse3D_dots(dot3D,vec3Dsemiaxes,semiaxes):
         rez = None
-        if ((((len(dot3D) != 3) or ((len(vec3Dsemiaxes) != 4))) or (not GeometryXD.vecXDfieldsamesize(vec3Dsemiaxes))) or ((len(semiaxes) != 4))):
+        tmp = None
+        tmp1 = None
+        tmp2 = None
+        tmp3 = None
+        if (not (((len(dot3D) != 3) or ((len(vec3Dsemiaxes) != 4))))):
+            rez1 = None
+            al = len(vec3Dsemiaxes)
+            if (al > 1):
+                rez1 = True
+                size = len((vec3Dsemiaxes[0] if 0 < len(vec3Dsemiaxes) else None))
+                _g1 = 1
+                _g = al
+                while (_g1 < _g):
+                    i = _g1
+                    _g1 = (_g1 + 1)
+                    if (size != len((vec3Dsemiaxes[i] if i >= 0 and i < len(vec3Dsemiaxes) else None))):
+                        rez1 = False
+            else:
+                rez1 = True
+            tmp3 = (not rez1)
+        else:
+            tmp3 = True
+        if (not tmp3):
+            tmp2 = (len(semiaxes) != 4)
+        else:
+            tmp2 = True
+        if (not tmp2):
+            rez2 = False
+            _g2 = 0
+            while (_g2 < len(semiaxes)):
+                i1 = (semiaxes[_g2] if _g2 >= 0 and _g2 < len(semiaxes) else None)
+                _g2 = (_g2 + 1)
+                if (i1 == 0):
+                    rez2 = True
+            tmp1 = rez2
+        else:
+            tmp1 = True
+        if (not tmp1):
+            rez3 = None
+            lv = len(vec3Dsemiaxes)
+            if (lv > 0):
+                rez3 = False
+                _g11 = 0
+                _g3 = lv
+                while (_g11 < _g3):
+                    i2 = _g11
+                    _g11 = (_g11 + 1)
+                    if (geometryxd_GeometryXD.vecXDnorm((vec3Dsemiaxes[i2] if i2 >= 0 and i2 < len(vec3Dsemiaxes) else None)) == 0):
+                        rez3 = True
+                        break
+            tmp = rez3
+        else:
+            tmp = True
+        if tmp:
             return rez
         t0 = dot3D
         va = (vec3Dsemiaxes[0] if 0 < len(vec3Dsemiaxes) else None)
@@ -2214,20 +3723,20 @@ class GeometryXD:
         b = (semiaxes[1] if 1 < len(semiaxes) else None)
         ad = (semiaxes[2] if 2 < len(semiaxes) else None)
         bd = (semiaxes[3] if 3 < len(semiaxes) else None)
-        v = GeometryXD.radians(45)
+        v = (0.25 * Math.PI)
         cos45 = (Math.NaN if (((v == Math.POSITIVE_INFINITY) or ((v == Math.NEGATIVE_INFINITY)))) else python_lib_Math.cos(v))
         v1 = [va, vb, vad, vbd]
         d = [(a * cos45), (b * cos45), (ad * cos45), (bd * cos45)]
         vv = [vb, vad, vbd, va]
         dd = [(b * cos45), (ad * cos45), (bd * cos45), (a * cos45)]
         rez = [t0]
-        _g = 0
-        while (_g < 4):
-            i = _g
-            _g = (_g + 1)
-            x = GeometryXD.dotXDoffset(t0,(vec3Dsemiaxes[i] if i >= 0 and i < len(vec3Dsemiaxes) else None),(semiaxes[i] if i >= 0 and i < len(semiaxes) else None))
+        _g4 = 0
+        while (_g4 < 4):
+            i3 = _g4
+            _g4 = (_g4 + 1)
+            x = geometryxd_GeometryXD.dotXDoffset(t0,(vec3Dsemiaxes[i3] if i3 >= 0 and i3 < len(vec3Dsemiaxes) else None),(semiaxes[i3] if i3 >= 0 and i3 < len(semiaxes) else None))
             rez.append(x)
-            x1 = GeometryXD.dotXDoffset(GeometryXD.dotXDoffset(t0,(v1[i] if i >= 0 and i < len(v1) else None),(d[i] if i >= 0 and i < len(d) else None)),(vv[i] if i >= 0 and i < len(vv) else None),(dd[i] if i >= 0 and i < len(dd) else None))
+            x1 = geometryxd_GeometryXD.dotXDoffset(geometryxd_GeometryXD.dotXDoffset(t0,(v1[i3] if i3 >= 0 and i3 < len(v1) else None),(d[i3] if i3 >= 0 and i3 < len(d) else None)),(vv[i3] if i3 >= 0 and i3 < len(vv) else None),(dd[i3] if i3 >= 0 and i3 < len(dd) else None))
             rez.append(x1)
         return rez
 
@@ -2239,7 +3748,7 @@ class GeometryXD:
         a = semiaxis_a_ox
         b = semiaxis_b_oy
         if (not rad):
-            a = GeometryXD.radians(a)
+            a = ((a / 180) * Math.PI)
         return [(a * ((Math.NaN if (((u == Math.POSITIVE_INFINITY) or ((u == Math.NEGATIVE_INFINITY)))) else python_lib_Math.cos(u)))), (b * ((Math.NaN if (((u == Math.POSITIVE_INFINITY) or ((u == Math.NEGATIVE_INFINITY)))) else python_lib_Math.sin(u))))]
 
     @staticmethod
@@ -2247,8 +3756,8 @@ class GeometryXD:
         if (rad is None):
             rad = False
         rez = None
-        a0 = (GeometryXD.degrees(angle0) if rad else angle0)
-        a1 = (GeometryXD.degrees(angle1) if rad else angle1)
+        a0 = (((angle0 * 180) / Math.PI) if rad else angle0)
+        a1 = (((angle1 * 180) / Math.PI) if rad else angle1)
         if (a0 > 90):
             a0 = 90
         elif (a0 < 0):
@@ -2274,8 +3783,14 @@ class GeometryXD:
         while (_g1 < len(_g2)):
             a = (_g2[_g1] if _g1 >= 0 and _g1 < len(_g2) else None)
             _g1 = (_g1 + 1)
-            x = GeometryXD.ellipse2Ddot(a,ae,be,rad)
-            _g.append(x)
+            u = a
+            a2 = ae
+            b = be
+            if (not rad):
+                a2 = ((a2 / 180) * Math.PI)
+            x = (Math.NaN if (((u == Math.POSITIVE_INFINITY) or ((u == Math.NEGATIVE_INFINITY)))) else python_lib_Math.cos(u))
+            x1 = (Math.NaN if (((u == Math.POSITIVE_INFINITY) or ((u == Math.NEGATIVE_INFINITY)))) else python_lib_Math.sin(u))
+            _g.append([(a2 * x), (b * x1)])
         rez = _g
         return rez
 
@@ -2289,16 +3804,41 @@ class GeometryXD:
         vb = vec3D_b_ox
         a = semiaxis_a_ox
         b = semiaxis_b_oy
-        dxdy = GeometryXD.curve2D_4dots_elliptic_shape_restricted_to_quarter(angle0,angle1,a,b,rad)
-        _g = []
-        _g1 = 0
-        while (_g1 < len(dxdy)):
-            i = (dxdy[_g1] if _g1 >= 0 and _g1 < len(dxdy) else None)
-            _g1 = (_g1 + 1)
-            x = GeometryXD.dotXDoffset(GeometryXD.dotXDoffset(tc,va,(i[0] if 0 < len(i) else None)),vb,(i[1] if 1 < len(i) else None))
-            _g.append(x)
-        rez = _g
-        rez = GeometryXD.beziercubic3D_follow_4dots_trajectory(rez)
+        if (((((len(tc) == 3) and ((len(va) == 3))) and ((len(vb) == 3))) and ((geometryxd_GeometryXD.vecXDnorm(va) > 0))) and ((geometryxd_GeometryXD.vecXDnorm(vb) > 0))):
+            dxdy = geometryxd_GeometryXD.curve2D_4dots_elliptic_shape_restricted_to_quarter(angle0,angle1,a,b,rad)
+            _g = []
+            _g1 = 0
+            while (_g1 < len(dxdy)):
+                i = (dxdy[_g1] if _g1 >= 0 and _g1 < len(dxdy) else None)
+                _g1 = (_g1 + 1)
+                x = geometryxd_GeometryXD.dotXDoffset(geometryxd_GeometryXD.dotXDoffset(tc,va,(i[0] if 0 < len(i) else None)),vb,(i[1] if 1 < len(i) else None))
+                _g.append(x)
+            rez = _g
+            rez1 = None
+            rez2 = None
+            if ((len(rez) == 4) and ((len((rez[0] if 0 < len(rez) else None)) == 3))):
+                rez3 = None
+                al = len(rez)
+                if (al > 1):
+                    rez3 = True
+                    size = len((rez[0] if 0 < len(rez) else None))
+                    _g11 = 1
+                    _g2 = al
+                    while (_g11 < _g2):
+                        i1 = _g11
+                        _g11 = (_g11 + 1)
+                        if (size != len((rez[i1] if i1 >= 0 and i1 < len(rez) else None))):
+                            rez3 = False
+                else:
+                    rez3 = True
+                rez2 = rez3
+            else:
+                rez2 = False
+            if rez2:
+                dot_one = geometryxd_GeometryXD.beziercubic3D_support_dot_one(rez)
+                dot_two = geometryxd_GeometryXD.beziercubic3D_support_dot_two(rez)
+                rez1 = [(rez[0] if 0 < len(rez) else None), dot_one, dot_two, (rez[3] if 3 < len(rez) else None)]
+            rez = rez1
         return rez
 
     @staticmethod
@@ -2313,23 +3853,32 @@ class GeometryXD:
         le = 0
         xy = None
         if (((cl > 0) and ((a > 0))) and ((b > 0))):
-            xy0 = GeometryXD.ellipse2Ddot(u,a,b,rad)
+            u1 = u
+            a1 = a
+            b1 = b
+            if (not rad):
+                a1 = ((a1 / 180) * Math.PI)
+            xy0 = [(a1 * ((Math.NaN if (((u1 == Math.POSITIVE_INFINITY) or ((u1 == Math.NEGATIVE_INFINITY)))) else python_lib_Math.cos(u1)))), (b1 * ((Math.NaN if (((u1 == Math.POSITIVE_INFINITY) or ((u1 == Math.NEGATIVE_INFINITY)))) else python_lib_Math.sin(u1))))]
             if rad:
-                u = GeometryXD.degrees(u)
+                u = ((u * 180) / Math.PI)
             _g = 1
             while (_g < 361):
                 ue = _g
                 _g = (_g + 1)
-                xy = GeometryXD.ellipse2Ddot((u + ue),a,b)
-                le = (le + GeometryXD.vecXDmod(GeometryXD.vecXD(xy0,xy)))
+                u2 = (u + ue)
+                a2 = a
+                b2 = b
+                a2 = ((a2 / 180) * Math.PI)
+                xy = [(a2 * ((Math.NaN if (((u2 == Math.POSITIVE_INFINITY) or ((u2 == Math.NEGATIVE_INFINITY)))) else python_lib_Math.cos(u2)))), (b2 * ((Math.NaN if (((u2 == Math.POSITIVE_INFINITY) or ((u2 == Math.NEGATIVE_INFINITY)))) else python_lib_Math.sin(u2))))]
+                le = (le + geometryxd_GeometryXD.vecXDnorm(geometryxd_GeometryXD.vecXD(xy0,xy)))
                 if (le >= cl):
                     if rad:
-                        return GeometryXD.radians(ue)
+                        return ((ue / 180) * Math.PI)
                     else:
                         return ue
                 xy0 = xy
             if rad:
-                rez = GeometryXD.radians(360)
+                rez = (2. * Math.PI)
             else:
                 rez = 360
         return rez
@@ -2337,7 +3886,63 @@ class GeometryXD:
     @staticmethod
     def polygon3D_inside_ellipse(dot3D,vec3Dsemiaxes,semiaxes,angle_proportions):
         rez = None
-        if (((((((len(dot3D) != 3) or ((len(vec3Dsemiaxes) != 4))) or (not GeometryXD.vecXDfieldsamesize(vec3Dsemiaxes))) or ((len(semiaxes) != 4))) or ((len(angle_proportions) < 1))) or GeometryXD.negative_inside_F(angle_proportions)) or ((GeometryXD.sum_F(angle_proportions) == 0))):
+        tmp = None
+        tmp1 = None
+        tmp2 = None
+        tmp3 = None
+        tmp4 = None
+        if (not (((len(dot3D) != 3) or ((len(vec3Dsemiaxes) != 4))))):
+            rez1 = None
+            al = len(vec3Dsemiaxes)
+            if (al > 1):
+                rez1 = True
+                size = len((vec3Dsemiaxes[0] if 0 < len(vec3Dsemiaxes) else None))
+                _g1 = 1
+                _g = al
+                while (_g1 < _g):
+                    i = _g1
+                    _g1 = (_g1 + 1)
+                    if (size != len((vec3Dsemiaxes[i] if i >= 0 and i < len(vec3Dsemiaxes) else None))):
+                        rez1 = False
+            else:
+                rez1 = True
+            tmp4 = (not rez1)
+        else:
+            tmp4 = True
+        if (not tmp4):
+            tmp3 = (len(semiaxes) != 4)
+        else:
+            tmp3 = True
+        if (not tmp3):
+            tmp2 = (len(angle_proportions) < 1)
+        else:
+            tmp2 = True
+        if (not tmp2):
+            rez2 = False
+            _g2 = 0
+            while (_g2 < len(angle_proportions)):
+                i1 = (angle_proportions[_g2] if _g2 >= 0 and _g2 < len(angle_proportions) else None)
+                _g2 = (_g2 + 1)
+                if (i1 < 0):
+                    rez2 = True
+            tmp1 = rez2
+        else:
+            tmp1 = True
+        if (not tmp1):
+            rez3 = None
+            al1 = len(angle_proportions)
+            if (al1 > 0):
+                rez3 = 0
+                _g11 = 0
+                _g3 = al1
+                while (_g11 < _g3):
+                    i2 = _g11
+                    _g11 = (_g11 + 1)
+                    rez3 = (rez3 + i2)
+            tmp = (rez3 == 0)
+        else:
+            tmp = True
+        if tmp:
             return rez
         t0 = dot3D
         va = (vec3Dsemiaxes[0] if 0 < len(vec3Dsemiaxes) else None)
@@ -2350,7 +3955,17 @@ class GeometryXD:
         bd = (semiaxes[3] if 3 < len(semiaxes) else None)
         doli = angle_proportions
         u = 0
-        x = (360 / GeometryXD.sum_F(doli))
+        rez4 = None
+        al2 = len(doli)
+        if (al2 > 0):
+            rez4 = 0
+            _g12 = 0
+            _g4 = al2
+            while (_g12 < _g4):
+                i3 = _g12
+                _g12 = (_g12 + 1)
+                rez4 = (rez4 + i3)
+        x = (360 / rez4)
         axis_a = None
         axis_b = None
         dlina_a = None
@@ -2360,15 +3975,15 @@ class GeometryXD:
         vv = None
         dd = None
         rez = [t0]
-        _g = 0
-        while (_g < len(doli)):
-            i = (doli[_g] if _g >= 0 and _g < len(doli) else None)
-            _g = (_g + 1)
+        _g5 = 0
+        while (_g5 < len(doli)):
+            i4 = (doli[_g5] if _g5 >= 0 and _g5 < len(doli) else None)
+            _g5 = (_g5 + 1)
             axis_a = va
             dlina_a = a
             axis_b = vb
             dlina_b = b
-            u = (u + ((i * x)))
+            u = (u + ((i4 * x)))
             if ((u > 90) and ((u <= 270))):
                 axis_a = vad
                 dlina_a = ad
@@ -2376,29 +3991,58 @@ class GeometryXD:
                 axis_b = vbd
                 dlina_b = bd
             v = axis_a
-            v1 = GeometryXD.radians(u)
+            v1 = ((u / 180) * Math.PI)
             v2 = (Math.NaN if (((v1 == Math.POSITIVE_INFINITY) or ((v1 == Math.NEGATIVE_INFINITY)))) else python_lib_Math.cos(v1))
             d = (dlina_a * Reflect.field(Math,"fabs")(v2))
             vv = axis_b
-            v3 = GeometryXD.radians(u)
+            v3 = ((u / 180) * Math.PI)
             v4 = (Math.NaN if (((v3 == Math.POSITIVE_INFINITY) or ((v3 == Math.NEGATIVE_INFINITY)))) else python_lib_Math.sin(v3))
             dd = (dlina_b * Reflect.field(Math,"fabs")(v4))
-            x1 = GeometryXD.dotXDoffset(GeometryXD.dotXDoffset(t0,v,d),vv,dd)
+            x1 = geometryxd_GeometryXD.dotXDoffset(geometryxd_GeometryXD.dotXDoffset(t0,v,d),vv,dd)
             rez.append(x1)
         return rez
 
     @staticmethod
     def polygon3D_vec3Dfield_distance(dot3D,vec3Dfield,distances):
         rez = None
-        if ((((len(dot3D) != 3) or (not GeometryXD.vecXDfieldsamesize(vec3Dfield))) or ((len(vec3Dfield) != len(distances)))) or ((len((vec3Dfield[0] if 0 < len(vec3Dfield) else None)) != 3))):
+        tmp = None
+        tmp1 = None
+        tmp2 = None
+        if (len(dot3D) == 3):
+            rez1 = None
+            al = len(vec3Dfield)
+            if (al > 1):
+                rez1 = True
+                size = len((vec3Dfield[0] if 0 < len(vec3Dfield) else None))
+                _g1 = 1
+                _g = al
+                while (_g1 < _g):
+                    i = _g1
+                    _g1 = (_g1 + 1)
+                    if (size != len((vec3Dfield[i] if i >= 0 and i < len(vec3Dfield) else None))):
+                        rez1 = False
+            else:
+                rez1 = True
+            tmp2 = (not rez1)
+        else:
+            tmp2 = True
+        if (not tmp2):
+            tmp1 = (len(vec3Dfield) != len(distances))
+        else:
+            tmp1 = True
+        if (not tmp1):
+            tmp = (len((vec3Dfield[0] if 0 < len(vec3Dfield) else None)) != 3)
+        else:
+            tmp = True
+        if tmp:
             return rez
         rez = [dot3D]
-        _g1 = 0
-        _g = len(vec3Dfield)
-        while (_g1 < _g):
-            i = _g1
-            _g1 = (_g1 + 1)
-            x = GeometryXD.dotXDoffset(dot3D,(vec3Dfield[i] if i >= 0 and i < len(vec3Dfield) else None),(distances[i] if i >= 0 and i < len(distances) else None))
+        _g11 = 0
+        _g2 = len(vec3Dfield)
+        while (_g11 < _g2):
+            i1 = _g11
+            _g11 = (_g11 + 1)
+            x = geometryxd_GeometryXD.dotXDoffset(dot3D,(vec3Dfield[i1] if i1 >= 0 and i1 < len(vec3Dfield) else None),(distances[i1] if i1 >= 0 and i1 < len(distances) else None))
             rez.append(x)
         return rez
 
@@ -2410,17 +4054,27 @@ class GeometryXD:
         va = vec3Dsemiaxis_a_direction
         ap = angle_proportions
         d = distances
-        if (((((len(t) != 3) or ((len(vn) != 3))) or ((len(va) != 3))) or ((len(ap) != len(d)))) or GeometryXD.vecXDparalleled(va,vn)):
+        if (((((len(t) != 3) or ((len(vn) != 3))) or ((len(va) != 3))) or ((len(ap) != len(d)))) or geometryxd_GeometryXD.vecXDparalleled(va,vn)):
             return rez
-        x = (360 / GeometryXD.sum_F(ap))
-        va = GeometryXD.projection_vec3D_on_plane3D(va,[(vn[0] if 0 < len(vn) else None), (vn[1] if 1 < len(vn) else None), (vn[2] if 2 < len(vn) else None), 0])
+        rez1 = None
+        al = len(ap)
+        if (al > 0):
+            rez1 = 0
+            _g1 = 0
+            _g = al
+            while (_g1 < _g):
+                i = _g1
+                _g1 = (_g1 + 1)
+                rez1 = (rez1 + i)
+        x = (360 / rez1)
+        va = geometryxd_GeometryXD.projection_vec3D_on_plane3D(va,[(vn[0] if 0 < len(vn) else None), (vn[1] if 1 < len(vn) else None), (vn[2] if 2 < len(vn) else None), 0])
         rez = [t]
-        _g1 = 0
-        _g = len(d)
-        while (_g1 < _g):
-            i = _g1
-            _g1 = (_g1 + 1)
-            x1 = GeometryXD.dotXDoffset(t,GeometryXD.vec3Drotate(va,vn,(x * (ap[i] if i >= 0 and i < len(ap) else None))),(distances[i] if i >= 0 and i < len(distances) else None))
+        _g11 = 0
+        _g2 = len(d)
+        while (_g11 < _g2):
+            i1 = _g11
+            _g11 = (_g11 + 1)
+            x1 = geometryxd_GeometryXD.dotXDoffset(t,geometryxd_GeometryXD.vec3Drotate(va,vn,(x * (ap[i1] if i1 >= 0 and i1 < len(ap) else None))),(distances[i1] if i1 >= 0 and i1 < len(distances) else None))
             rez.append(x1)
         return rez
 
@@ -2432,7 +4086,7 @@ class GeometryXD:
         while (_g2 < _g1):
             i = _g2
             _g2 = (_g2 + 1)
-            x = GeometryXD.vecXD((polygon3D[0] if 0 < len(polygon3D) else None),(polygon3D[i] if i >= 0 and i < len(polygon3D) else None))
+            x = geometryxd_GeometryXD.vecXD((polygon3D[0] if 0 < len(polygon3D) else None),(polygon3D[i] if i >= 0 and i < len(polygon3D) else None))
             _g.append(x)
         return _g
 
@@ -2448,13 +4102,13 @@ class GeometryXD:
             _g1 = (_g1 + 1)
             _g.append((plane3D[i] if i >= 0 and i < len(plane3D) else None))
         vp = _g
-        if ((GeometryXD.vecXDparalleled(vec3D,vp) or ((GeometryXD.vecXDmod(vec3D) == 0))) or ((GeometryXD.vecXDmod(vp) == 0))):
+        if ((geometryxd_GeometryXD.vecXDparalleled(vec3D,vp) or ((geometryxd_GeometryXD.vecXDnorm(vec3D) == 0))) or ((geometryxd_GeometryXD.vecXDnorm(vp) == 0))):
             return rez
         rez = vec3D
         t0 = [0, 0, 0]
-        t1 = GeometryXD.dotXDoffset(t0,vec3D,1)
-        t1 = GeometryXD.projection_dot3D_on_plane3D(t1,plane3D)
-        rez = GeometryXD.vecXD(t0,t1)
+        t1 = geometryxd_GeometryXD.dotXDoffset(t0,vec3D,1)
+        t1 = geometryxd_GeometryXD.projection_dot3D_on_plane3D(t1,plane3D)
+        rez = geometryxd_GeometryXD.vecXD(t0,t1)
         return rez
 
     @staticmethod
@@ -2466,8 +4120,8 @@ class GeometryXD:
         v2 = vec3D2
         v1l = len(v1)
         v2l = len(v2)
-        v1mod = GeometryXD.vecXDmod(v1)
-        v2mod = GeometryXD.vecXDmod(v2)
+        v1mod = geometryxd_GeometryXD.vecXDnorm(v1)
+        v2mod = geometryxd_GeometryXD.vecXDnorm(v2)
         if ((((v1l != 3) or ((v2l != 3))) or ((v1mod == 0))) or ((v2mod == 0))):
             return rez
         p = plane3D
@@ -2480,108 +4134,22 @@ class GeometryXD:
             _g1 = (_g1 + 1)
             _g.append((p[i] if i >= 0 and i < len(p) else None))
         vn = _g
-        if (GeometryXD.vecXDmod(vn) == 0):
+        if (geometryxd_GeometryXD.vecXDnorm(vn) == 0):
             return rez
         rez = 0
-        if GeometryXD.vecXDparalleled_sameside(v1,v2):
+        if geometryxd_GeometryXD.vecXDparalleled_sameside(v1,v2):
             return rez
-        pv1 = GeometryXD.projection_vec3D_on_plane3D(v1,vn)
-        pv2 = GeometryXD.projection_vec3D_on_plane3D(v2,vn)
-        pvn = (vn if (GeometryXD.vecXDparalleled(pv1,pv2)) else GeometryXD.vec3Dnormal(pv1,pv2))
-        uvnpvn = GeometryXD.vecXDangle(vn,pvn,rad)
-        uvv = GeometryXD.vecXDangle(v1,v2,rad)
-        uznak = (GeometryXD.radians(90) if rad else 90)
+        pv1 = geometryxd_GeometryXD.projection_vec3D_on_plane3D(v1,vn)
+        pv2 = geometryxd_GeometryXD.projection_vec3D_on_plane3D(v2,vn)
+        pvn = (vn if (geometryxd_GeometryXD.vecXDparalleled(pv1,pv2)) else geometryxd_GeometryXD.vec3Dnormal(pv1,pv2))
+        uvnpvn = geometryxd_GeometryXD.vecXDangle(vn,pvn,rad)
+        uvv = geometryxd_GeometryXD.vecXDangle(v1,v2,rad)
+        uznak = ((0.5 * Math.PI) if rad else 90)
         if (uvnpvn > uznak):
             rez = -uvv
         else:
             rez = uvv
         return rez
-
-
-class Reflect:
-    _hx_class_name = "Reflect"
-    __slots__ = ()
-    _hx_statics = ["field"]
-
-    @staticmethod
-    def field(o,field):
-        return python_Boot.field(o,field)
-
-
-class Std:
-    _hx_class_name = "Std"
-    __slots__ = ()
-    _hx_statics = ["string", "parseInt", "shortenPossibleNumber", "parseFloat"]
-
-    @staticmethod
-    def string(s):
-        return python_Boot.toString1(s,"")
-
-    @staticmethod
-    def parseInt(x):
-        if (x is None):
-            return None
-        try:
-            return int(x)
-        except Exception as _hx_e:
-            _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
-            e = _hx_e1
-            try:
-                prefix = HxString.substr(x,0,2).lower()
-                if (prefix == "0x"):
-                    return int(x,16)
-                raise _HxException("fail")
-            except Exception as _hx_e:
-                _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
-                e1 = _hx_e1
-                x1 = Std.parseFloat(x)
-                r = None
-                try:
-                    r = int(x1)
-                except Exception as _hx_e:
-                    _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
-                    e2 = _hx_e1
-                    r = None
-                if (r is None):
-                    r1 = Std.shortenPossibleNumber(x)
-                    if (r1 != x):
-                        return Std.parseInt(r1)
-                    else:
-                        return None
-                return r
-
-    @staticmethod
-    def shortenPossibleNumber(x):
-        r = ""
-        _g1 = 0
-        _g = len(x)
-        while (_g1 < _g):
-            i = _g1
-            _g1 = (_g1 + 1)
-            c = ("" if (((i < 0) or ((i >= len(x))))) else x[i])
-            _g2 = HxString.charCodeAt(c,0)
-            if (_g2 is None):
-                break
-            else:
-                _g21 = _g2
-                if (((((((((((_g21 == 57) or ((_g21 == 56))) or ((_g21 == 55))) or ((_g21 == 54))) or ((_g21 == 53))) or ((_g21 == 52))) or ((_g21 == 51))) or ((_g21 == 50))) or ((_g21 == 49))) or ((_g21 == 48))) or ((_g21 == 46))):
-                    r = (("null" if r is None else r) + ("null" if c is None else c))
-                else:
-                    break
-        return r
-
-    @staticmethod
-    def parseFloat(x):
-        try:
-            return float(x)
-        except Exception as _hx_e:
-            _hx_e1 = _hx_e.val if isinstance(_hx_e, _HxException) else _hx_e
-            e = _hx_e1
-            if (x is not None):
-                r1 = Std.shortenPossibleNumber(x)
-                if (r1 != x):
-                    return Std.parseFloat(r1)
-            return Math.NaN
 
 
 class python_Boot:
@@ -3303,4 +4871,4 @@ Math.PI = python_lib_Math.pi
 python_Boot.keywords = set(["and", "del", "from", "not", "with", "as", "elif", "global", "or", "yield", "assert", "else", "if", "pass", "None", "break", "except", "import", "raise", "True", "class", "exec", "in", "return", "False", "continue", "finally", "is", "try", "def", "for", "lambda", "while"])
 python_Boot.prefixLength = len("_hx_")
 
-GeometryXD.main()
+geometryxd_GeometryXD.main()

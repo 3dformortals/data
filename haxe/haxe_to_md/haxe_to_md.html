@@ -30,6 +30,7 @@
         var rez = x.split("@param")[0];
         rez = rez.split("@return")[0];
         rez = rez.split("*/")[0];
+        if (rez.slice(-1) == "*") { rez = rez.slice(0, -1); }
         rez = rez.replace("<","&lt;");
         rez = rez.replace(">","&gt;");
         rez = monospace_creator(rez);
