@@ -3,7 +3,7 @@
 var GeometryXD = $hx_exports["GeometryXD"] = function() { };
 GeometryXD.__name__ = true;
 GeometryXD.main = function() {
-	console.log("GeometryXD");
+	console.log("GeometryXD is ready for use");
 };
 GeometryXD.prototype = {
 	positive_inside_I: function(a) {
@@ -51,97 +51,339 @@ GeometryXD.prototype = {
 		return false;
 	}
 	,zero_inside_F: function(a) {
+		var rez = false;
 		var _g = 0;
 		while(_g < a.length) {
 			var i = a[_g];
 			++_g;
 			if(i == 0) {
-				return true;
+				rez = true;
 			}
 		}
-		return false;
+		return rez;
 	}
 	,negative_inside_F: function(a) {
+		var rez = false;
 		var _g = 0;
 		while(_g < a.length) {
 			var i = a[_g];
 			++_g;
 			if(i < 0) {
-				return true;
+				rez = true;
 			}
 		}
-		return false;
+		return rez;
+	}
+	,same_size_I: function(a) {
+		var rez = null;
+		var al = a.length;
+		if(al > 1) {
+			rez = true;
+			var size = a[0].length;
+			var _g1 = 1;
+			var _g = al;
+			while(_g1 < _g) {
+				var i = _g1++;
+				if(size != a[i].length) {
+					rez = false;
+					break;
+				}
+			}
+		} else {
+			rez = true;
+		}
+		return rez;
+	}
+	,same_size_F: function(a) {
+		var rez = null;
+		var al = a.length;
+		if(al > 1) {
+			rez = true;
+			var size = a[0].length;
+			var _g1 = 1;
+			var _g = al;
+			while(_g1 < _g) {
+				var i = _g1++;
+				if(size != a[i].length) {
+					rez = false;
+				}
+			}
+		} else {
+			rez = true;
+		}
+		return rez;
+	}
+	,same_xI: function(a) {
+		var rez = null;
+		var al = a.length;
+		var tmp;
+		if(al > 0) {
+			var rez1 = null;
+			var al1 = a.length;
+			if(al1 > 1) {
+				rez1 = true;
+				var size = a[0].length;
+				var _g1 = 1;
+				var _g = al1;
+				while(_g1 < _g) {
+					var i = _g1++;
+					if(size != a[i].length) {
+						rez1 = false;
+						break;
+					}
+				}
+			} else {
+				rez1 = true;
+			}
+			tmp = rez1;
+		} else {
+			tmp = false;
+		}
+		if(tmp) {
+			rez = true;
+			var lv = a[0].length;
+			var _g11 = 1;
+			var _g2 = al;
+			while(_g11 < _g2) {
+				var i1 = _g11++;
+				var _g3 = 0;
+				var _g21 = lv;
+				while(_g3 < _g21) {
+					var j = _g3++;
+					if(rez) {
+						if(a[0][j] != a[i1][j]) {
+							rez = false;
+						}
+					} else {
+						break;
+					}
+				}
+				if(!rez) {
+					break;
+				}
+			}
+		}
+		return rez;
+	}
+	,same_xF: function(a) {
+		var rez = null;
+		var al = a.length;
+		var tmp;
+		if(al > 0) {
+			var rez1 = null;
+			var al1 = a.length;
+			if(al1 > 1) {
+				rez1 = true;
+				var size = a[0].length;
+				var _g1 = 1;
+				var _g = al1;
+				while(_g1 < _g) {
+					var i = _g1++;
+					if(size != a[i].length) {
+						rez1 = false;
+					}
+				}
+			} else {
+				rez1 = true;
+			}
+			tmp = rez1;
+		} else {
+			tmp = false;
+		}
+		if(tmp) {
+			rez = true;
+			var lv = a[0].length;
+			var _g11 = 1;
+			var _g2 = al;
+			while(_g11 < _g2) {
+				var i1 = _g11++;
+				var _g3 = 0;
+				var _g21 = lv;
+				while(_g3 < _g21) {
+					var j = _g3++;
+					if(rez) {
+						if(a[0][j] != a[i1][j]) {
+							rez = false;
+						}
+					} else {
+						break;
+					}
+				}
+				if(!rez) {
+					break;
+				}
+			}
+		}
+		return rez;
 	}
 	,sum_I: function(a) {
-		var rez = 0;
-		var _g1 = 0;
-		var _g = a.length;
-		while(_g1 < _g) {
-			var i = _g1++;
-			rez += i;
+		var rez = null;
+		var al = a.length;
+		if(al > 0) {
+			rez = 0;
+			var _g1 = 0;
+			var _g = al;
+			while(_g1 < _g) {
+				var i = _g1++;
+				rez += i;
+			}
 		}
 		return rez;
 	}
 	,sum_F: function(a) {
-		var rez = 0;
-		var _g1 = 0;
-		var _g = a.length;
-		while(_g1 < _g) {
-			var i = _g1++;
-			rez += i;
+		var rez = null;
+		var al = a.length;
+		if(al > 0) {
+			rez = 0;
+			var _g1 = 0;
+			var _g = al;
+			while(_g1 < _g) {
+				var i = _g1++;
+				rez += i;
+			}
 		}
 		return rez;
 	}
 	,diff_I: function(a) {
-		var rez = a[0];
-		var _g1 = 1;
-		var _g = a.length;
-		while(_g1 < _g) {
-			var i = _g1++;
-			rez -= i;
+		var rez = null;
+		var al = a.length;
+		if(al > 0) {
+			if(al == 1) {
+				rez = a[0];
+			} else {
+				var a1 = a[0];
+				var _g = [];
+				var _g2 = 1;
+				var _g1 = al;
+				while(_g2 < _g1) {
+					var i = _g2++;
+					_g.push(i);
+				}
+				var rez1 = null;
+				var al1 = _g.length;
+				if(al1 > 0) {
+					rez1 = 0;
+					var _g11 = 0;
+					var _g3 = al1;
+					while(_g11 < _g3) {
+						var i1 = _g11++;
+						rez1 += i1;
+					}
+				}
+				rez = a1 - rez1;
+			}
 		}
 		return rez;
 	}
 	,diff_F: function(a) {
-		var rez = a[0];
-		var _g1 = 1;
-		var _g = a.length;
-		while(_g1 < _g) {
-			var i = _g1++;
-			rez -= i;
+		var rez = null;
+		var al = a.length;
+		if(al > 0) {
+			if(al == 1) {
+				rez = a[0];
+			} else {
+				var a1 = a[0];
+				var _g = [];
+				var _g2 = 1;
+				var _g1 = al;
+				while(_g2 < _g1) {
+					var i = _g2++;
+					_g.push(i);
+				}
+				var rez1 = null;
+				var al1 = _g.length;
+				if(al1 > 0) {
+					rez1 = 0;
+					var _g11 = 0;
+					var _g3 = al1;
+					while(_g11 < _g3) {
+						var i1 = _g11++;
+						rez1 += i1;
+					}
+				}
+				rez = a1 - rez1;
+			}
 		}
 		return rez;
 	}
 	,middle_F: function(a) {
-		return this.sum_F(a) / a.length;
-	}
-	,multiply_FperF: function(a,n) {
-		var _g = [];
-		var _g2 = 0;
-		var _g1 = a.length;
-		while(_g2 < _g1) {
-			var i = _g2++;
-			_g.push(a[i] * n);
+		var rez = null;
+		var al = a.length;
+		if(al > 0) {
+			var rez1 = null;
+			var al1 = a.length;
+			if(al1 > 0) {
+				rez1 = 0;
+				var _g1 = 0;
+				var _g = al1;
+				while(_g1 < _g) {
+					var i = _g1++;
+					rez1 += i;
+				}
+			}
+			rez = rez1 / al;
 		}
-		return _g;
+		return rez;
+	}
+	,multiply_I_I: function(a,n) {
+		var rez = null;
+		var al = a.length;
+		if(al > 0) {
+			var _g = [];
+			var _g2 = 0;
+			var _g1 = al;
+			while(_g2 < _g1) {
+				var i = _g2++;
+				_g.push(a[i] * n);
+			}
+			rez = _g;
+		}
+		return rez;
+	}
+	,multiply_F_F: function(a,n) {
+		var rez = null;
+		var al = a.length;
+		if(al > 0) {
+			var _g = [];
+			var _g2 = 0;
+			var _g1 = al;
+			while(_g2 < _g1) {
+				var i = _g2++;
+				_g.push(a[i] * n);
+			}
+			rez = _g;
+		}
+		return rez;
 	}
 	,multiply_I: function(a) {
-		var rez = a[0];
-		var _g1 = 1;
-		var _g = a.length;
-		while(_g1 < _g) {
-			var i = _g1++;
-			rez *= i;
+		var rez = null;
+		var al = a.length;
+		if(al > 0) {
+			rez = a[0];
+			if(al > 1) {
+				var _g1 = 1;
+				var _g = al;
+				while(_g1 < _g) {
+					var i = _g1++;
+					rez *= a[i];
+				}
+			}
 		}
 		return rez;
 	}
 	,multiply_F: function(a) {
-		var rez = a[0];
-		var _g1 = 1;
-		var _g = a.length;
-		while(_g1 < _g) {
-			var i = _g1++;
-			rez *= i;
+		var rez = null;
+		var al = a.length;
+		if(al > 0) {
+			rez = a[0];
+			if(al > 1) {
+				var _g1 = 1;
+				var _g = al;
+				while(_g1 < _g) {
+					var i = _g1++;
+					rez *= a[i];
+				}
+			}
 		}
 		return rez;
 	}
@@ -166,292 +408,609 @@ GeometryXD.prototype = {
 		return _g;
 	}
 	,sum_xI: function(a) {
-		var _g = [];
-		var _g2 = 0;
-		var _g1 = a[0].length;
-		while(_g2 < _g1) {
-			var i = _g2++;
-			var _g3 = [];
-			var _g5 = 0;
-			var _g4 = a.length;
-			while(_g5 < _g4) {
-				var ai = _g5++;
-				_g3.push(a[ai][i]);
+		var rez = null;
+		var rez1 = null;
+		var al = a.length;
+		if(al > 1) {
+			rez1 = true;
+			var size = a[0].length;
+			var _g1 = 1;
+			var _g = al;
+			while(_g1 < _g) {
+				var i = _g1++;
+				if(size != a[i].length) {
+					rez1 = false;
+					break;
+				}
 			}
-			_g.push(this.sum_I(_g3));
+		} else {
+			rez1 = true;
 		}
-		return _g;
+		if(rez1) {
+			var _g2 = [];
+			var _g21 = 0;
+			var _g11 = a[0].length;
+			while(_g21 < _g11) {
+				var i1 = _g21++;
+				var _g3 = [];
+				var _g5 = 0;
+				var _g4 = a.length;
+				while(_g5 < _g4) {
+					var ai = _g5++;
+					_g3.push(a[ai][i1]);
+				}
+				var rez2 = null;
+				var al1 = _g3.length;
+				if(al1 > 0) {
+					rez2 = 0;
+					var _g12 = 0;
+					var _g6 = al1;
+					while(_g12 < _g6) {
+						var i2 = _g12++;
+						rez2 += i2;
+					}
+				}
+				_g2.push(rez2);
+			}
+			rez = _g2;
+		}
+		return rez;
 	}
 	,sum_xF: function(a) {
-		var _g = [];
-		var _g2 = 0;
-		var _g1 = a[0].length;
-		while(_g2 < _g1) {
-			var i = _g2++;
-			var _g3 = [];
-			var _g5 = 0;
-			var _g4 = a.length;
-			while(_g5 < _g4) {
-				var ai = _g5++;
-				_g3.push(a[ai][i]);
+		var rez = null;
+		var rez1 = null;
+		var al = a.length;
+		if(al > 1) {
+			rez1 = true;
+			var size = a[0].length;
+			var _g1 = 1;
+			var _g = al;
+			while(_g1 < _g) {
+				var i = _g1++;
+				if(size != a[i].length) {
+					rez1 = false;
+				}
 			}
-			_g.push(this.sum_F(_g3));
+		} else {
+			rez1 = true;
 		}
-		return _g;
+		if(rez1) {
+			var _g2 = [];
+			var _g21 = 0;
+			var _g11 = a[0].length;
+			while(_g21 < _g11) {
+				var i1 = _g21++;
+				var _g3 = [];
+				var _g5 = 0;
+				var _g4 = a.length;
+				while(_g5 < _g4) {
+					var ai = _g5++;
+					_g3.push(a[ai][i1]);
+				}
+				var rez2 = null;
+				var al1 = _g3.length;
+				if(al1 > 0) {
+					rez2 = 0;
+					var _g12 = 0;
+					var _g6 = al1;
+					while(_g12 < _g6) {
+						var i2 = _g12++;
+						rez2 += i2;
+					}
+				}
+				_g2.push(rez2);
+			}
+			rez = _g2;
+		}
+		return rez;
 	}
 	,diff_xI: function(a) {
-		var _g = [];
-		var _g2 = 0;
-		var _g1 = a[0].length;
-		while(_g2 < _g1) {
-			var i = _g2++;
-			var _g3 = [];
-			var _g5 = 0;
-			var _g4 = a.length;
-			while(_g5 < _g4) {
-				var ai = _g5++;
-				_g3.push(a[ai][i]);
+		var rez = null;
+		var rez1 = null;
+		var al = a.length;
+		if(al > 1) {
+			rez1 = true;
+			var size = a[0].length;
+			var _g1 = 1;
+			var _g = al;
+			while(_g1 < _g) {
+				var i = _g1++;
+				if(size != a[i].length) {
+					rez1 = false;
+					break;
+				}
 			}
-			_g.push(this.diff_I(_g3));
+		} else {
+			rez1 = true;
 		}
-		return _g;
+		if(rez1) {
+			var _g2 = [];
+			var _g21 = 0;
+			var _g11 = a[0].length;
+			while(_g21 < _g11) {
+				var i1 = _g21++;
+				var _g3 = [];
+				var _g5 = 0;
+				var _g4 = a.length;
+				while(_g5 < _g4) {
+					var ai = _g5++;
+					_g3.push(a[ai][i1]);
+				}
+				_g2.push(this.diff_I(_g3));
+			}
+			rez = _g2;
+		}
+		return rez;
 	}
 	,diff_xF: function(a) {
-		var _g = [];
-		var _g2 = 0;
-		var _g1 = a[0].length;
-		while(_g2 < _g1) {
-			var i = _g2++;
-			var _g3 = [];
-			var _g5 = 0;
-			var _g4 = a.length;
-			while(_g5 < _g4) {
-				var ai = _g5++;
-				_g3.push(a[ai][i]);
+		var rez = null;
+		var rez1 = null;
+		var al = a.length;
+		if(al > 1) {
+			rez1 = true;
+			var size = a[0].length;
+			var _g1 = 1;
+			var _g = al;
+			while(_g1 < _g) {
+				var i = _g1++;
+				if(size != a[i].length) {
+					rez1 = false;
+				}
 			}
-			_g.push(this.diff_F(_g3));
+		} else {
+			rez1 = true;
 		}
-		return _g;
+		if(rez1) {
+			var _g2 = [];
+			var _g21 = 0;
+			var _g11 = a[0].length;
+			while(_g21 < _g11) {
+				var i1 = _g21++;
+				var _g3 = [];
+				var _g5 = 0;
+				var _g4 = a.length;
+				while(_g5 < _g4) {
+					var ai = _g5++;
+					_g3.push(a[ai][i1]);
+				}
+				_g2.push(this.diff_F(_g3));
+			}
+			rez = _g2;
+		}
+		return rez;
 	}
 	,middle_xF: function(a) {
-		var _g = [];
-		var _g2 = 0;
-		var _g1 = a[0].length;
-		while(_g2 < _g1) {
-			var i = _g2++;
-			var _g3 = [];
-			var _g5 = 0;
-			var _g4 = a.length;
-			while(_g5 < _g4) {
-				var ai = _g5++;
-				_g3.push(a[ai][i]);
+		var rez = null;
+		var tmp;
+		if(a[0].length > 0) {
+			var rez1 = null;
+			var al = a.length;
+			if(al > 1) {
+				rez1 = true;
+				var size = a[0].length;
+				var _g1 = 1;
+				var _g = al;
+				while(_g1 < _g) {
+					var i = _g1++;
+					if(size != a[i].length) {
+						rez1 = false;
+					}
+				}
+			} else {
+				rez1 = true;
 			}
-			_g.push(this.middle_F(_g3));
+			tmp = rez1;
+		} else {
+			tmp = false;
 		}
-		return _g;
+		if(tmp) {
+			var _g2 = [];
+			var _g21 = 0;
+			var _g11 = a[0].length;
+			while(_g21 < _g11) {
+				var i1 = _g21++;
+				var _g3 = [];
+				var _g5 = 0;
+				var _g4 = a.length;
+				while(_g5 < _g4) {
+					var ai = _g5++;
+					_g3.push(a[ai][i1]);
+				}
+				_g2.push(this.middle_F(_g3));
+			}
+			rez = _g2;
+		}
+		return rez;
 	}
-	,multiply_xFperF: function(a,n) {
-		var _g = [];
-		var _g2 = 0;
-		var _g1 = a.length;
-		while(_g2 < _g1) {
-			var i = _g2++;
-			_g.push(this.multiply_FperF(a[i],n));
+	,multiply_xI_I: function(a,n) {
+		var rez = null;
+		if(a.length > 0) {
+			var _g = [];
+			var _g2 = 0;
+			var _g1 = a.length;
+			while(_g2 < _g1) {
+				var i = _g2++;
+				var a1 = a[i];
+				var rez1 = null;
+				var al = a1.length;
+				if(al > 0) {
+					var _g3 = [];
+					var _g21 = 0;
+					var _g11 = al;
+					while(_g21 < _g11) {
+						var i1 = _g21++;
+						_g3.push(a1[i1] * n);
+					}
+					rez1 = _g3;
+				}
+				_g.push(rez1);
+			}
+			rez = _g;
 		}
-		return _g;
+		return rez;
+	}
+	,multiply_xF_F: function(a,n) {
+		var rez = null;
+		if(a.length > 0) {
+			var _g = [];
+			var _g2 = 0;
+			var _g1 = a.length;
+			while(_g2 < _g1) {
+				var i = _g2++;
+				var a1 = a[i];
+				var rez1 = null;
+				var al = a1.length;
+				if(al > 0) {
+					var _g3 = [];
+					var _g21 = 0;
+					var _g11 = al;
+					while(_g21 < _g11) {
+						var i1 = _g21++;
+						_g3.push(a1[i1] * n);
+					}
+					rez1 = _g3;
+				}
+				_g.push(rez1);
+			}
+			rez = _g;
+		}
+		return rez;
 	}
 	,multiply_xI: function(a) {
-		var _g = [];
-		var _g2 = 0;
-		var _g1 = a[0].length;
-		while(_g2 < _g1) {
-			var i = _g2++;
-			var _g3 = [];
-			var _g5 = 0;
-			var _g4 = a.length;
-			while(_g5 < _g4) {
-				var ai = _g5++;
-				_g3.push(a[ai][i]);
+		var rez = null;
+		var al = a.length;
+		if(al > 1) {
+			var _g = [];
+			var _g2 = 0;
+			var _g1 = a[0].length;
+			while(_g2 < _g1) {
+				var i = _g2++;
+				var _g3 = [];
+				var _g5 = 0;
+				var _g4 = a.length;
+				while(_g5 < _g4) {
+					var ai = _g5++;
+					_g3.push(a[ai][i]);
+				}
+				var a1 = _g3;
+				var rez1 = null;
+				var al1 = a1.length;
+				if(al1 > 0) {
+					rez1 = a1[0];
+					if(al1 > 1) {
+						var _g11 = 1;
+						var _g6 = al1;
+						while(_g11 < _g6) {
+							var i1 = _g11++;
+							rez1 *= a1[i1];
+						}
+					}
+				}
+				_g.push(rez1);
 			}
-			_g.push(this.multiply_I(_g3));
+			rez = _g;
+		} else if(al > 0) {
+			rez = a[0];
 		}
-		return _g;
+		return rez;
 	}
 	,multiply_xF: function(a) {
-		var _g = [];
-		var _g2 = 0;
-		var _g1 = a[0].length;
-		while(_g2 < _g1) {
-			var i = _g2++;
-			var _g3 = [];
-			var _g5 = 0;
-			var _g4 = a.length;
-			while(_g5 < _g4) {
-				var ai = _g5++;
-				_g3.push(a[ai][i]);
+		var rez = null;
+		var al = a.length;
+		if(al > 1) {
+			var _g = [];
+			var _g2 = 0;
+			var _g1 = a[0].length;
+			while(_g2 < _g1) {
+				var i = _g2++;
+				var _g3 = [];
+				var _g5 = 0;
+				var _g4 = a.length;
+				while(_g5 < _g4) {
+					var ai = _g5++;
+					_g3.push(a[ai][i]);
+				}
+				var a1 = _g3;
+				var rez1 = null;
+				var al1 = a1.length;
+				if(al1 > 0) {
+					rez1 = a1[0];
+					if(al1 > 1) {
+						var _g11 = 1;
+						var _g6 = al1;
+						while(_g11 < _g6) {
+							var i1 = _g11++;
+							rez1 *= a1[i1];
+						}
+					}
+				}
+				_g.push(rez1);
 			}
-			_g.push(this.multiply_F(_g3));
+			rez = _g;
+		} else if(al > 0) {
+			rez = a[0];
 		}
-		return _g;
+		return rez;
 	}
 	,multisum_xI: function(a) {
-		return this.sum_I(this.multiply_xI(a));
+		var rez = null;
+		var tmp;
+		if(a.length > 1 && a[0].length > 0) {
+			var rez1 = null;
+			var al = a.length;
+			if(al > 1) {
+				rez1 = true;
+				var size = a[0].length;
+				var _g1 = 1;
+				var _g = al;
+				while(_g1 < _g) {
+					var i = _g1++;
+					if(size != a[i].length) {
+						rez1 = false;
+						break;
+					}
+				}
+			} else {
+				rez1 = true;
+			}
+			tmp = rez1;
+		} else {
+			tmp = false;
+		}
+		if(tmp) {
+			var rez2 = null;
+			var al1 = this.multiply_xI(a).length;
+			if(al1 > 0) {
+				rez2 = 0;
+				var _g11 = 0;
+				var _g2 = al1;
+				while(_g11 < _g2) {
+					var i1 = _g11++;
+					rez2 += i1;
+				}
+			}
+			rez = rez2;
+		}
+		return rez;
 	}
 	,multisum_xF: function(a) {
-		return this.sum_F(this.multiply_xF(a));
+		var rez = null;
+		var tmp;
+		if(a.length > 1 && a[0].length > 0) {
+			var rez1 = null;
+			var al = a.length;
+			if(al > 1) {
+				rez1 = true;
+				var size = a[0].length;
+				var _g1 = 1;
+				var _g = al;
+				while(_g1 < _g) {
+					var i = _g1++;
+					if(size != a[i].length) {
+						rez1 = false;
+					}
+				}
+			} else {
+				rez1 = true;
+			}
+			tmp = rez1;
+		} else {
+			tmp = false;
+		}
+		if(tmp) {
+			var rez2 = null;
+			var al1 = this.multiply_xF(a).length;
+			if(al1 > 0) {
+				rez2 = 0;
+				var _g11 = 0;
+				var _g2 = al1;
+				while(_g11 < _g2) {
+					var i1 = _g11++;
+					rez2 += i1;
+				}
+			}
+			rez = rez2;
+		}
+		return rez;
 	}
 	,sum_previous_I: function(a) {
-		var _g = [];
-		var _g2 = 0;
-		var _g1 = a.length;
-		while(_g2 < _g1) {
-			var i = _g2++;
-			_g.push(i == 0 ? a[i] : a[i] + a[i - 1]);
+		var rez = null;
+		var al = a.length;
+		if(al > 0) {
+			var _g = [];
+			var _g2 = 0;
+			var _g1 = al;
+			while(_g2 < _g1) {
+				var i = _g2++;
+				_g.push(i == 0 ? a[i] : a[i] + a[i - 1]);
+			}
+			rez = _g;
 		}
-		return _g;
+		return rez;
 	}
 	,diff_previous_I: function(a) {
-		var _g = [];
-		var _g2 = 0;
-		var _g1 = a.length;
-		while(_g2 < _g1) {
-			var i = _g2++;
-			_g.push(i == 0 ? a[i] : a[i] - a[i - 1]);
+		var rez = null;
+		var al = a.length;
+		if(al > 0) {
+			var _g = [];
+			var _g2 = 0;
+			var _g1 = al;
+			while(_g2 < _g1) {
+				var i = _g2++;
+				_g.push(i == 0 ? a[i] : a[i] - a[i - 1]);
+			}
+			rez = _g;
 		}
-		return _g;
+		return rez;
 	}
 	,sum_before_I: function(a) {
-		var rez = [];
-		var x = 0;
-		var _g1 = 0;
-		var _g = a.length;
-		while(_g1 < _g) {
-			var i = _g1++;
-			x += a[i];
-			rez.push(x);
+		var rez = null;
+		var al = a.length;
+		if(al > 0) {
+			rez = [0];
+			var _g1 = 0;
+			var _g = al;
+			while(_g1 < _g) {
+				var i = _g1++;
+				rez.push(rez[rez.length - 1] + a[i]);
+			}
+			rez.shift();
 		}
 		return rez;
 	}
 	,diff_before_I: function(a) {
-		var rez = [a[0]];
-		var _g1 = 1;
-		var _g = a.length;
-		while(_g1 < _g) {
-			var i = _g1++;
-			rez.push(a[i] - a[i - 1]);
+		var rez = null;
+		var al = a.length;
+		if(al > 0) {
+			rez = [0];
+			var _g1 = 0;
+			var _g = al;
+			while(_g1 < _g) {
+				var i = _g1++;
+				rez.push(a[i] - rez[rez.length - 1]);
+			}
+			rez.shift();
 		}
 		return rez;
 	}
 	,sum_previous_F: function(a) {
-		var _g = [];
-		var _g2 = 0;
-		var _g1 = a.length;
-		while(_g2 < _g1) {
-			var i = _g2++;
-			_g.push(i == 0 ? a[i] : a[i] + a[i - 1]);
+		var rez = null;
+		var al = a.length;
+		if(al > 0) {
+			var _g = [];
+			var _g2 = 0;
+			var _g1 = al;
+			while(_g2 < _g1) {
+				var i = _g2++;
+				_g.push(i == 0 ? a[i] : a[i] + a[i - 1]);
+			}
+			rez = _g;
 		}
-		return _g;
+		return rez;
 	}
 	,diff_previous_F: function(a) {
-		var _g = [];
-		var _g2 = 0;
-		var _g1 = a.length;
-		while(_g2 < _g1) {
-			var i = _g2++;
-			_g.push(i == 0 ? a[i] : a[i] - a[i - 1]);
+		var rez = null;
+		var al = a.length;
+		if(al > 0) {
+			var _g = [];
+			var _g2 = 0;
+			var _g1 = al;
+			while(_g2 < _g1) {
+				var i = _g2++;
+				_g.push(i == 0 ? a[i] : a[i] - a[i - 1]);
+			}
+			rez = _g;
 		}
-		return _g;
+		return rez;
 	}
 	,sum_before_F: function(a) {
-		var rez = [];
-		var x = 0;
-		var _g1 = 0;
-		var _g = a.length;
-		while(_g1 < _g) {
-			var i = _g1++;
-			x += a[i];
-			rez.push(x);
+		var rez = null;
+		var al = a.length;
+		if(al > 0) {
+			rez = [0];
+			var _g1 = 0;
+			var _g = al;
+			while(_g1 < _g) {
+				var i = _g1++;
+				rez.push(rez[rez.length - 1] + a[i]);
+			}
+			rez.shift();
 		}
 		return rez;
 	}
 	,diff_before_F: function(a) {
-		var rez = [a[0]];
-		var _g1 = 1;
-		var _g = a.length;
-		while(_g1 < _g) {
-			var i = _g1++;
-			rez.push(a[i] - a[i - 1]);
+		var rez = null;
+		var al = a.length;
+		if(al > 0) {
+			rez = [0];
+			var _g1 = 0;
+			var _g = al;
+			while(_g1 < _g) {
+				var i = _g1++;
+				rez.push(a[i] - rez[rez.length - 1]);
+			}
+			rez.shift();
 		}
 		return rez;
 	}
 	,recounter_I_F: function(what) {
 		var rez = [];
-		var _g = [];
-		var _g2 = 0;
-		var _g1 = what.length;
-		while(_g2 < _g1) {
-			var i = _g2++;
-			_g.push(rez.push(what[i]));
+		var _g1 = 0;
+		var _g = what.length;
+		while(_g1 < _g) {
+			var i = _g1++;
+			rez.push(what[i]);
 		}
-		return _g;
+		return rez;
 	}
 	,recounter_F_I: function(what) {
 		var rez = [];
-		var _g = [];
-		var _g2 = 0;
-		var _g1 = what.length;
-		while(_g2 < _g1) {
-			var i = _g2++;
-			_g.push(rez.push(what[i] | 0));
+		var _g1 = 0;
+		var _g = what.length;
+		while(_g1 < _g) {
+			var i = _g1++;
+			rez.push(what[i] | 0);
 		}
-		return _g;
+		return rez;
 	}
 	,recounter_I_S: function(what) {
 		var rez = [];
-		var _g = [];
-		var _g2 = 0;
-		var _g1 = what.length;
-		while(_g2 < _g1) {
-			var i = _g2++;
-			_g.push(Std.string(what[i]));
+		var _g1 = 0;
+		var _g = what.length;
+		while(_g1 < _g) {
+			var i = _g1++;
+			rez.push(Std.string(what[i]));
 		}
-		rez = _g;
 		return rez;
 	}
 	,recounter_F_S: function(what) {
 		var rez = [];
-		var _g = [];
-		var _g2 = 0;
-		var _g1 = what.length;
-		while(_g2 < _g1) {
-			var i = _g2++;
-			_g.push(Std.string(what[i]));
+		var _g1 = 0;
+		var _g = what.length;
+		while(_g1 < _g) {
+			var i = _g1++;
+			rez.push(Std.string(what[i]));
 		}
-		rez = _g;
 		return rez;
 	}
 	,recounter_S_I: function(what) {
 		var rez = [];
-		var _g = [];
-		var _g2 = 0;
-		var _g1 = what.length;
-		while(_g2 < _g1) {
-			var i = _g2++;
-			_g.push(Std.parseInt(what[i]));
+		var _g1 = 0;
+		var _g = what.length;
+		while(_g1 < _g) {
+			var i = _g1++;
+			rez.push(Std.parseInt(what[i]));
 		}
-		rez = _g;
 		return rez;
 	}
 	,recounter_S_F: function(what) {
 		var rez = [];
-		var _g = [];
-		var _g2 = 0;
-		var _g1 = what.length;
-		while(_g2 < _g1) {
-			var i = _g2++;
-			_g.push(parseFloat(what[i]));
+		var _g1 = 0;
+		var _g = what.length;
+		while(_g1 < _g) {
+			var i = _g1++;
+			rez.push(parseFloat(what[i]));
 		}
-		rez = _g;
 		return rez;
 	}
 	,repeater_F_F: function(n,what,full) {
@@ -486,7 +1045,14 @@ GeometryXD.prototype = {
 		}
 		rez = _g;
 		if(!full) {
-			rez = rez.slice(0,n);
+			var _g11 = [];
+			var _g31 = 0;
+			var _g21 = n;
+			while(_g31 < _g21) {
+				var i1 = _g31++;
+				_g11.push(rez[i1]);
+			}
+			rez = _g11;
 		}
 		return rez;
 	}
@@ -522,7 +1088,14 @@ GeometryXD.prototype = {
 		}
 		rez = _g;
 		if(!full) {
-			rez = rez.slice(0,n);
+			var _g11 = [];
+			var _g31 = 0;
+			var _g21 = n;
+			while(_g31 < _g21) {
+				var i1 = _g31++;
+				_g11.push(rez[i1]);
+			}
+			rez = _g11;
 		}
 		return rez;
 	}
@@ -558,7 +1131,14 @@ GeometryXD.prototype = {
 		}
 		rez = _g;
 		if(!full) {
-			rez = rez.slice(0,n);
+			var _g11 = [];
+			var _g31 = 0;
+			var _g21 = n;
+			while(_g31 < _g21) {
+				var i1 = _g31++;
+				_g11.push(rez[i1]);
+			}
+			rez = _g11;
 		}
 		return rez;
 	}
@@ -567,7 +1147,14 @@ GeometryXD.prototype = {
 			full = false;
 		}
 		var rez = null;
-		var what = this.recounter_F_I(what_);
+		var rez1 = [];
+		var _g1 = 0;
+		var _g = what_.length;
+		while(_g1 < _g) {
+			var i = _g1++;
+			rez1.push(what_[i] | 0);
+		}
+		var what = rez1;
 		if(n == 0) {
 			return rez;
 		}
@@ -581,21 +1168,28 @@ GeometryXD.prototype = {
 			n = Math.abs(n) | 0;
 		}
 		var ind = full ? n : Math.ceil(n / wl);
-		var _g = [];
-		var _g2 = 0;
-		var _g1 = ind;
-		while(_g2 < _g1) {
-			var _ = _g2++;
+		var _g2 = [];
+		var _g21 = 0;
+		var _g11 = ind;
+		while(_g21 < _g11) {
+			var _ = _g21++;
 			var _g4 = 0;
 			var _g3 = wl;
 			while(_g4 < _g3) {
-				var i = _g4++;
-				_g.push(what[i]);
+				var i1 = _g4++;
+				_g2.push(what[i1]);
 			}
 		}
-		rez = _g;
+		rez = _g2;
 		if(!full) {
-			rez = rez.slice(0,n);
+			var _g12 = [];
+			var _g31 = 0;
+			var _g22 = n;
+			while(_g31 < _g22) {
+				var i2 = _g31++;
+				_g12.push(rez[i2]);
+			}
+			rez = _g12;
 		}
 		return rez;
 	}
@@ -604,7 +1198,14 @@ GeometryXD.prototype = {
 			full = false;
 		}
 		var rez = null;
-		var what = this.recounter_S_I(what_);
+		var rez1 = [];
+		var _g1 = 0;
+		var _g = what_.length;
+		while(_g1 < _g) {
+			var i = _g1++;
+			rez1.push(Std.parseInt(what_[i]));
+		}
+		var what = rez1;
 		if(n == 0) {
 			return rez;
 		}
@@ -618,21 +1219,28 @@ GeometryXD.prototype = {
 			n = Math.abs(n) | 0;
 		}
 		var ind = full ? n : Math.ceil(n / wl);
-		var _g = [];
-		var _g2 = 0;
-		var _g1 = ind;
-		while(_g2 < _g1) {
-			var _ = _g2++;
+		var _g2 = [];
+		var _g21 = 0;
+		var _g11 = ind;
+		while(_g21 < _g11) {
+			var _ = _g21++;
 			var _g4 = 0;
 			var _g3 = wl;
 			while(_g4 < _g3) {
-				var i = _g4++;
-				_g.push(what[i]);
+				var i1 = _g4++;
+				_g2.push(what[i1]);
 			}
 		}
-		rez = _g;
+		rez = _g2;
 		if(!full) {
-			rez = rez.slice(0,n);
+			var _g12 = [];
+			var _g31 = 0;
+			var _g22 = n;
+			while(_g31 < _g22) {
+				var i2 = _g31++;
+				_g12.push(rez[i2]);
+			}
+			rez = _g12;
 		}
 		return rez;
 	}
@@ -641,7 +1249,14 @@ GeometryXD.prototype = {
 			full = false;
 		}
 		var rez = null;
-		var what = this.recounter_I_F(what_);
+		var rez1 = [];
+		var _g1 = 0;
+		var _g = what_.length;
+		while(_g1 < _g) {
+			var i = _g1++;
+			rez1.push(what_[i]);
+		}
+		var what = rez1;
 		if(n == 0) {
 			return rez;
 		}
@@ -655,21 +1270,28 @@ GeometryXD.prototype = {
 			n = Math.abs(n) | 0;
 		}
 		var ind = full ? n : Math.ceil(n / wl);
-		var _g = [];
-		var _g2 = 0;
-		var _g1 = ind;
-		while(_g2 < _g1) {
-			var _ = _g2++;
+		var _g2 = [];
+		var _g21 = 0;
+		var _g11 = ind;
+		while(_g21 < _g11) {
+			var _ = _g21++;
 			var _g4 = 0;
 			var _g3 = wl;
 			while(_g4 < _g3) {
-				var i = _g4++;
-				_g.push(what[i]);
+				var i1 = _g4++;
+				_g2.push(what[i1]);
 			}
 		}
-		rez = _g;
+		rez = _g2;
 		if(!full) {
-			rez = rez.slice(0,n);
+			var _g12 = [];
+			var _g31 = 0;
+			var _g22 = n;
+			while(_g31 < _g22) {
+				var i2 = _g31++;
+				_g12.push(rez[i2]);
+			}
+			rez = _g12;
 		}
 		return rez;
 	}
@@ -678,7 +1300,14 @@ GeometryXD.prototype = {
 			full = false;
 		}
 		var rez = null;
-		var what = this.recounter_S_F(what_);
+		var rez1 = [];
+		var _g1 = 0;
+		var _g = what_.length;
+		while(_g1 < _g) {
+			var i = _g1++;
+			rez1.push(parseFloat(what_[i]));
+		}
+		var what = rez1;
 		if(n == 0) {
 			return rez;
 		}
@@ -692,21 +1321,28 @@ GeometryXD.prototype = {
 			n = Math.abs(n) | 0;
 		}
 		var ind = full ? n : Math.ceil(n / wl);
-		var _g = [];
-		var _g2 = 0;
-		var _g1 = ind;
-		while(_g2 < _g1) {
-			var _ = _g2++;
+		var _g2 = [];
+		var _g21 = 0;
+		var _g11 = ind;
+		while(_g21 < _g11) {
+			var _ = _g21++;
 			var _g4 = 0;
 			var _g3 = wl;
 			while(_g4 < _g3) {
-				var i = _g4++;
-				_g.push(what[i]);
+				var i1 = _g4++;
+				_g2.push(what[i1]);
 			}
 		}
-		rez = _g;
+		rez = _g2;
 		if(!full) {
-			rez = rez.slice(0,n);
+			var _g12 = [];
+			var _g31 = 0;
+			var _g22 = n;
+			while(_g31 < _g22) {
+				var i2 = _g31++;
+				_g12.push(rez[i2]);
+			}
+			rez = _g12;
 		}
 		return rez;
 	}
@@ -715,7 +1351,14 @@ GeometryXD.prototype = {
 			full = false;
 		}
 		var rez = null;
-		var what = this.recounter_I_S(what_);
+		var rez1 = [];
+		var _g1 = 0;
+		var _g = what_.length;
+		while(_g1 < _g) {
+			var i = _g1++;
+			rez1.push(Std.string(what_[i]));
+		}
+		var what = rez1;
 		if(n == 0) {
 			return rez;
 		}
@@ -729,21 +1372,28 @@ GeometryXD.prototype = {
 			n = Math.abs(n) | 0;
 		}
 		var ind = full ? n : Math.ceil(n / wl);
-		var _g = [];
-		var _g2 = 0;
-		var _g1 = ind;
-		while(_g2 < _g1) {
-			var _ = _g2++;
+		var _g2 = [];
+		var _g21 = 0;
+		var _g11 = ind;
+		while(_g21 < _g11) {
+			var _ = _g21++;
 			var _g4 = 0;
 			var _g3 = wl;
 			while(_g4 < _g3) {
-				var i = _g4++;
-				_g.push(what[i]);
+				var i1 = _g4++;
+				_g2.push(what[i1]);
 			}
 		}
-		rez = _g;
+		rez = _g2;
 		if(!full) {
-			rez = rez.slice(0,n);
+			var _g12 = [];
+			var _g31 = 0;
+			var _g22 = n;
+			while(_g31 < _g22) {
+				var i2 = _g31++;
+				_g12.push(rez[i2]);
+			}
+			rez = _g12;
 		}
 		return rez;
 	}
@@ -752,7 +1402,14 @@ GeometryXD.prototype = {
 			full = false;
 		}
 		var rez = null;
-		var what = this.recounter_F_S(what_);
+		var rez1 = [];
+		var _g1 = 0;
+		var _g = what_.length;
+		while(_g1 < _g) {
+			var i = _g1++;
+			rez1.push(Std.string(what_[i]));
+		}
+		var what = rez1;
 		if(n == 0) {
 			return rez;
 		}
@@ -766,32 +1423,44 @@ GeometryXD.prototype = {
 			n = Math.abs(n) | 0;
 		}
 		var ind = full ? n : Math.ceil(n / wl);
-		var _g = [];
-		var _g2 = 0;
-		var _g1 = ind;
-		while(_g2 < _g1) {
-			var _ = _g2++;
+		var _g2 = [];
+		var _g21 = 0;
+		var _g11 = ind;
+		while(_g21 < _g11) {
+			var _ = _g21++;
 			var _g4 = 0;
 			var _g3 = wl;
 			while(_g4 < _g3) {
-				var i = _g4++;
-				_g.push(what[i]);
+				var i1 = _g4++;
+				_g2.push(what[i1]);
 			}
 		}
-		rez = _g;
+		rez = _g2;
 		if(!full) {
-			rez = rez.slice(0,n);
+			var _g12 = [];
+			var _g31 = 0;
+			var _g22 = n;
+			while(_g31 < _g22) {
+				var i2 = _g31++;
+				_g12.push(rez[i2]);
+			}
+			rez = _g12;
 		}
 		return rez;
 	}
 	,an_in_b_S: function(a,b) {
-		var rez = null;
+		var rez = [];
+		var al = a.length;
+		var bl = b.length;
+		if(al == 0 || bl == 0) {
+			return null;
+		}
 		var _g1 = 0;
-		var _g = a.length;
+		var _g = al;
 		while(_g1 < _g) {
 			var ia = _g1++;
 			var _g3 = 0;
-			var _g2 = b.length;
+			var _g2 = bl;
 			while(_g3 < _g2) {
 				var ib = _g3++;
 				if(a[ia] == b[ib]) {
@@ -802,13 +1471,18 @@ GeometryXD.prototype = {
 		return rez;
 	}
 	,an_in_bn_S: function(a,b) {
-		var rez = null;
+		var rez = [];
+		var al = a.length;
+		var bl = b.length;
+		if(al == 0 || bl == 0) {
+			return null;
+		}
 		var _g1 = 0;
-		var _g = a.length;
+		var _g = al;
 		while(_g1 < _g) {
 			var ia = _g1++;
 			var _g3 = 0;
-			var _g2 = b.length;
+			var _g2 = bl;
 			while(_g3 < _g2) {
 				var ib = _g3++;
 				var _g5 = 0;
@@ -824,13 +1498,18 @@ GeometryXD.prototype = {
 		return rez;
 	}
 	,an_in_b_I: function(a,b) {
-		var rez = null;
+		var rez = [];
+		var al = a.length;
+		var bl = b.length;
+		if(al == 0 || bl == 0) {
+			return null;
+		}
 		var _g1 = 0;
-		var _g = a.length;
+		var _g = al;
 		while(_g1 < _g) {
 			var ia = _g1++;
 			var _g3 = 0;
-			var _g2 = b.length;
+			var _g2 = bl;
 			while(_g3 < _g2) {
 				var ib = _g3++;
 				if(a[ia] == b[ib]) {
@@ -841,13 +1520,18 @@ GeometryXD.prototype = {
 		return rez;
 	}
 	,an_in_bn_I: function(a,b) {
-		var rez = null;
+		var rez = [];
+		var al = a.length;
+		var bl = b.length;
+		if(al == 0 || bl == 0) {
+			return null;
+		}
 		var _g1 = 0;
-		var _g = a.length;
+		var _g = al;
 		while(_g1 < _g) {
 			var ia = _g1++;
 			var _g3 = 0;
-			var _g2 = b.length;
+			var _g2 = bl;
 			while(_g3 < _g2) {
 				var ib = _g3++;
 				var _g5 = 0;
@@ -863,13 +1547,18 @@ GeometryXD.prototype = {
 		return rez;
 	}
 	,an_in_b_F: function(a,b) {
-		var rez = null;
+		var rez = [];
+		var al = a.length;
+		var bl = b.length;
+		if(al == 0 || bl == 0) {
+			return null;
+		}
 		var _g1 = 0;
-		var _g = a.length;
+		var _g = al;
 		while(_g1 < _g) {
 			var ia = _g1++;
 			var _g3 = 0;
-			var _g2 = b.length;
+			var _g2 = bl;
 			while(_g3 < _g2) {
 				var ib = _g3++;
 				if(a[ia] == b[ib]) {
@@ -880,13 +1569,18 @@ GeometryXD.prototype = {
 		return rez;
 	}
 	,an_in_bn_F: function(a,b) {
-		var rez = null;
+		var rez = [];
+		var al = a.length;
+		var bl = b.length;
+		if(al == 0 || bl == 0) {
+			return null;
+		}
 		var _g1 = 0;
-		var _g = a.length;
+		var _g = al;
 		while(_g1 < _g) {
 			var ia = _g1++;
 			var _g3 = 0;
-			var _g2 = b.length;
+			var _g2 = bl;
 			while(_g3 < _g2) {
 				var ib = _g3++;
 				var _g5 = 0;
@@ -907,37 +1601,61 @@ GeometryXD.prototype = {
 			return rez;
 		}
 		var ind = [];
-		if(ring) {
-			var _g = [];
-			var _g1 = 0;
-			while(_g1 < 2) {
-				var b = _g1++;
-				var _g3 = 0;
-				var _g2 = a_l;
-				while(_g3 < _g2) {
-					var i = _g3++;
-					var ind1;
-					if(b < 1) {
-						ind1 = i;
-					} else if(i < n - 1) {
-						ind1 = i;
-					} else {
-						continue;
-					}
-					_g.push(ind1);
-				}
-			}
-			ind = _g;
-		} else {
-			var _g4 = [];
-			var _g21 = 0;
-			var _g11 = 1 + a_l - n;
-			while(_g21 < _g11) {
-				var i1 = _g21++;
-				_g4.push(i1);
-			}
-			ind = _g4;
+		var _g = [];
+		var _g2 = 0;
+		var _g1 = a_l;
+		while(_g2 < _g1) {
+			var i = _g2++;
+			_g.push(i);
 		}
+		var indring = _g;
+		if(ring) {
+			indring.push(0);
+			var _g11 = [];
+			var _g3 = 0;
+			var _g21 = ((a_l + 1) / (n - 1) | 0) * (n - 1);
+			while(_g3 < _g21) {
+				var i1 = _g3++;
+				var ind1;
+				if(i1 % (n - 1) == 0 && i1 + n - 1 < a_l + 1) {
+					ind1 = i1;
+				} else {
+					continue;
+				}
+				_g11.push(ind1);
+			}
+			ind = _g11;
+		} else {
+			var _g12 = [];
+			var _g31 = 0;
+			var _g22 = (a_l / (n - 1) | 0) * (n - 1);
+			while(_g31 < _g22) {
+				var i2 = _g31++;
+				var ind2;
+				if(i2 % (n - 1) == 0 && i2 + n - 1 < a_l) {
+					ind2 = i2;
+				} else {
+					continue;
+				}
+				_g12.push(ind2);
+			}
+			ind = _g12;
+		}
+		var _g13 = [];
+		var _g32 = 0;
+		var _g23 = ind.length;
+		while(_g32 < _g23) {
+			var i3 = _g32++;
+			var _g4 = [];
+			var _g6 = 0;
+			var _g5 = n;
+			while(_g6 < _g5) {
+				var j = _g6++;
+				_g4.push(indring[ind[i3] + j]);
+			}
+			_g13.push(_g4);
+		}
+		rez = _g13;
 		return rez;
 	}
 	,chain_S: function(a,n,ring) {
@@ -1101,6 +1819,38 @@ GeometryXD.prototype = {
 		}
 		return rez;
 	}
+	,sign_I: function(x) {
+		if(x < 0) {
+			return -1;
+		} else {
+			return 1;
+		}
+	}
+	,sign_F: function(x) {
+		if(x < 0) {
+			return -1;
+		} else {
+			return 1;
+		}
+	}
+	,sign3_I: function(x) {
+		if(x < 0) {
+			return -1;
+		} else if(x > 0) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+	,sign3_F: function(x) {
+		if(x < 0) {
+			return -1;
+		} else if(x > 0) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
 	,sin_cos_cut: function(x) {
 		if(x > 1) {
 			return 1;
@@ -1122,7 +1872,7 @@ GeometryXD.prototype = {
 		}
 		var k = 4;
 		if(rad) {
-			angle = this.degrees(angle);
+			angle = angle * 180 / Math.PI;
 		}
 		var x = angle % 360;
 		if(x > 270) {
@@ -1144,7 +1894,7 @@ GeometryXD.prototype = {
 		}
 		return k;
 	}
-	,vecXDmod: function(vecXD) {
+	,vecXDnorm: function(vecXD) {
 		var sum = 0;
 		var _g = 0;
 		while(_g < vecXD.length) {
@@ -1154,23 +1904,40 @@ GeometryXD.prototype = {
 		}
 		return Math.sqrt(sum);
 	}
-	,vecXDfieldmod: function(vecXDfield) {
+	,vecXDfieldnorm: function(vecXDfield) {
 		var rez = null;
 		var _g = [];
 		var _g1 = 0;
 		while(_g1 < vecXDfield.length) {
 			var i = vecXDfield[_g1];
 			++_g1;
-			_g.push(this.vecXDmod(i));
+			_g.push(this.vecXDnorm(i));
 		}
 		rez = _g;
 		return rez;
 	}
-	,maxabs: function(vecXD) {
+	,zero_vector_inside: function(vecXDfield) {
+		var rez = null;
+		var lv = vecXDfield.length;
+		if(lv > 0) {
+			rez = false;
+			var _g1 = 0;
+			var _g = lv;
+			while(_g1 < _g) {
+				var i = _g1++;
+				if(this.vecXDnorm(vecXDfield[i]) == 0) {
+					rez = true;
+					break;
+				}
+			}
+		}
+		return rez;
+	}
+	,maxabs: function(a) {
 		var rez = 0;
 		var _g = 0;
-		while(_g < vecXD.length) {
-			var i = vecXD[_g];
+		while(_g < a.length) {
+			var i = a[_g];
 			++_g;
 			if(Math.abs(i) > Math.abs(rez)) {
 				rez = i;
@@ -1178,23 +1945,33 @@ GeometryXD.prototype = {
 		}
 		return rez;
 	}
-	,vecXD: function(dot3Da,dot3Db) {
+	,vecXD: function(dotXDa,dotXDb) {
 		var rez = null;
-		if(!this.vecXDsamesize(dot3Da,dot3Db) || this.vecXDsame(dot3Da,dot3Db)) {
+		var tmp;
+		if(!(!this.vecXDsamesize(dotXDa,dotXDb))) {
+			var rez1 = null;
+			if(dotXDa.length == dotXDb.length) {
+				rez1 = this.same_xF([dotXDa,dotXDb]);
+			}
+			tmp = rez1;
+		} else {
+			tmp = true;
+		}
+		if(tmp) {
 			return rez;
 		}
 		rez = [];
 		var _g1 = 0;
-		var _g = dot3Da.length;
+		var _g = dotXDa.length;
 		while(_g1 < _g) {
 			var i = _g1++;
-			rez.push(dot3Db[i] - dot3Da[i]);
+			rez.push(dotXDb[i] - dotXDa[i]);
 		}
 		return rez;
 	}
 	,vecXDone: function(vecXD) {
 		var rez = [];
-		var lv = this.vecXDmod(vecXD);
+		var lv = this.vecXDnorm(vecXD);
 		if(lv > 0) {
 			var _g = 0;
 			while(_g < vecXD.length) {
@@ -1219,33 +1996,14 @@ GeometryXD.prototype = {
 		return rez;
 	}
 	,vecXDsame: function(vecXDa,vecXDb) {
+		var rez = null;
 		if(vecXDa.length == vecXDb.length) {
-			var lv = vecXDa.length;
-			var _g1 = 0;
-			var _g = lv;
-			while(_g1 < _g) {
-				var i = _g1++;
-				if(vecXDa[i] != vecXDb[i]) {
-					return false;
-				}
-			}
-			return true;
+			rez = this.same_xF([vecXDa,vecXDb]);
 		}
-		return false;
+		return rez;
 	}
 	,vecXDfieldsame: function(vecXDfield) {
-		if(this.vecXDfieldsamesize(vecXDfield)) {
-			var _g1 = 1;
-			var _g = vecXDfield.length;
-			while(_g1 < _g) {
-				var i = _g1++;
-				if(!this.vecXDsame(vecXDfield[0],vecXDfield[i])) {
-					return false;
-				}
-			}
-			return true;
-		}
-		return false;
+		return this.same_xF(vecXDfield);
 	}
 	,vecXDrandom: function(x) {
 		if(x == null) {
@@ -1267,7 +2025,14 @@ GeometryXD.prototype = {
 			_g11.push(0);
 		}
 		var v1 = _g11;
-		while(this.vecXDsame(v0,v1)) {
+		while(true) {
+			var rez = null;
+			if(v0.length == v1.length) {
+				rez = this.same_xF([v0,v1]);
+			}
+			if(!rez) {
+				break;
+			}
 			v1 = [];
 			var _g31 = 0;
 			var _g22 = x;
@@ -1292,7 +2057,14 @@ GeometryXD.prototype = {
 		return this.diff_xF(vecXDfield);
 	}
 	,vecXDback: function(vecXD) {
-		return this.minus_F(vecXD);
+		var _g = [];
+		var _g2 = 0;
+		var _g1 = vecXD.length;
+		while(_g2 < _g1) {
+			var i = _g2++;
+			_g.push(-vecXD[i]);
+		}
+		return _g;
 	}
 	,vecXDfieldback: function(vecXDfield) {
 		var _g = [];
@@ -1309,7 +2081,13 @@ GeometryXD.prototype = {
 		if(vecXDa.length != vecXDb.length) {
 			return rez;
 		}
-		return this.vecXDsame(this.vecXDone(vecXDa),this.vecXDone(vecXDb));
+		var vecXDa1 = this.vecXDone(vecXDa);
+		var vecXDb1 = this.vecXDone(vecXDb);
+		var rez1 = null;
+		if(vecXDa1.length == vecXDb1.length) {
+			rez1 = this.same_xF([vecXDa1,vecXDb1]);
+		}
+		return rez1;
 	}
 	,vecXDparalleled_opposite: function(vecXDa,vecXDb) {
 		var rez = null;
@@ -1340,10 +2118,17 @@ GeometryXD.prototype = {
 	}
 	,vecXDcos: function(vecXDa,vecXDb) {
 		var rez = null;
-		var la = this.vecXDmod(vecXDa);
-		var lb = this.vecXDmod(vecXDb);
+		var la = this.vecXDnorm(vecXDa);
+		var lb = this.vecXDnorm(vecXDb);
 		if(la > 0 && lb > 0) {
-			rez = this.sin_cos_cut(this.vecXDscalar(vecXDa,vecXDb) / (la * lb));
+			var x = this.vecXDscalar(vecXDa,vecXDb) / (la * lb);
+			if(x > 1) {
+				rez = 1;
+			} else if(x < -1) {
+				rez = -1;
+			} else {
+				rez = x;
+			}
 		}
 		return rez;
 	}
@@ -1352,13 +2137,13 @@ GeometryXD.prototype = {
 			rad = false;
 		}
 		var rez = null;
-		var la = this.vecXDmod(vecXDa);
-		var lb = this.vecXDmod(vecXDb);
+		var la = this.vecXDnorm(vecXDa);
+		var lb = this.vecXDnorm(vecXDb);
 		if(la > 0 && lb > 0) {
 			if(rad) {
 				rez = Math.acos(this.vecXDcos(vecXDa,vecXDb));
 			} else {
-				rez = this.degrees(Math.acos(this.vecXDcos(vecXDa,vecXDb)));
+				rez = Math.acos(this.vecXDcos(vecXDa,vecXDb)) * 180 / Math.PI;
 			}
 		}
 		return rez;
@@ -1375,13 +2160,35 @@ GeometryXD.prototype = {
 	}
 	,vec3Dfieldnormal: function(vec3Dfield) {
 		var rez = null;
+		var tmp;
 		if(vec3Dfield[0].length == 3) {
-			var rez1 = vec3Dfield[0];
-			var _g1 = 1;
-			var _g = vec3Dfield.length;
-			while(_g1 < _g) {
-				var i = _g1++;
-				rez1 = this.vec3Dnormal(rez1,vec3Dfield[i]);
+			var rez1 = null;
+			var al = vec3Dfield.length;
+			if(al > 1) {
+				rez1 = true;
+				var size = vec3Dfield[0].length;
+				var _g1 = 1;
+				var _g = al;
+				while(_g1 < _g) {
+					var i = _g1++;
+					if(size != vec3Dfield[i].length) {
+						rez1 = false;
+					}
+				}
+			} else {
+				rez1 = true;
+			}
+			tmp = rez1;
+		} else {
+			tmp = false;
+		}
+		if(tmp) {
+			var rez2 = vec3Dfield[0];
+			var _g11 = 1;
+			var _g2 = vec3Dfield.length;
+			while(_g11 < _g2) {
+				var i1 = _g11++;
+				rez2 = this.vec3Dnormal(rez2,vec3Dfield[i1]);
 			}
 		}
 		return rez;
@@ -1389,23 +2196,47 @@ GeometryXD.prototype = {
 	,vecXDmiddle: function(vecXDa,vecXDb) {
 		return this.middle_xF([vecXDa,vecXDb]);
 	}
-	,vecXDsamesize: function(vecXDa,vecXDb) {
-		return vecXDa.length == vecXDb.length;
-	}
-	,vecXDfieldsamesize: function(vecXDfield) {
-		var thesize = vecXDfield[0].length;
-		var _g1 = 1;
-		var _g = vecXDfield.length;
-		while(_g1 < _g) {
-			var i = _g1++;
-			if(thesize != vecXDfield[i].length) {
-				return false;
-			}
-		}
-		return true;
-	}
 	,vecXDfieldmiddle: function(vecXDfield) {
 		return this.middle_xF(vecXDfield);
+	}
+	,vecXDsamesize: function(vecXDa,vecXDb) {
+		var a = [vecXDa,vecXDb];
+		var rez = null;
+		var al = a.length;
+		if(al > 1) {
+			rez = true;
+			var size = a[0].length;
+			var _g1 = 1;
+			var _g = al;
+			while(_g1 < _g) {
+				var i = _g1++;
+				if(size != a[i].length) {
+					rez = false;
+				}
+			}
+		} else {
+			rez = true;
+		}
+		return rez;
+	}
+	,vecXDfieldsamesize: function(vecXDfield) {
+		var rez = null;
+		var al = vecXDfield.length;
+		if(al > 1) {
+			rez = true;
+			var size = vecXDfield[0].length;
+			var _g1 = 1;
+			var _g = al;
+			while(_g1 < _g) {
+				var i = _g1++;
+				if(size != vecXDfield[i].length) {
+					rez = false;
+				}
+			}
+		} else {
+			rez = true;
+		}
+		return rez;
 	}
 	,dotXDoffset: function(dotXD,vecXD,t) {
 		var rez = null;
@@ -1413,7 +2244,7 @@ GeometryXD.prototype = {
 			var lv = vecXD.length;
 			if(dotXD.length == lv) {
 				rez = [];
-				t /= this.vecXDmod(vecXD);
+				t /= this.vecXDnorm(vecXD);
 				var _g1 = 0;
 				var _g = lv;
 				while(_g1 < _g) {
@@ -1458,7 +2289,7 @@ GeometryXD.prototype = {
 		var rez = null;
 		var ldot = dot3D.length;
 		var lplane = plane3D.length;
-		if(this.vecXDmod(plane3D.slice(0,3)) == 0 || ldot != 3 || lplane != 4) {
+		if(this.vecXDnorm(plane3D.slice(0,3)) == 0 || ldot != 3 || lplane != 4) {
 			return rez;
 		}
 		var checkup = -this.multisum_xF([plane3D.slice(0,3),dot3D]) + plane3D[3];
@@ -1481,9 +2312,9 @@ GeometryXD.prototype = {
 	}
 	,dot3D_to_dot2Dviewplane: function(dot3D,dot3Dox,dot3Doz) {
 		var rez = null;
-		var t = this.vecXDmod(dot3D);
-		var cosox0t = this.multisum_xF([dot3Dox,dot3D]) / (t + this.vecXDmod(dot3Dox));
-		var cosoz0t = this.multisum_xF([dot3Doz,dot3D]) / (t + this.vecXDmod(dot3Doz));
+		var t = this.vecXDnorm(dot3D);
+		var cosox0t = this.multisum_xF([dot3Dox,dot3D]) / (t + this.vecXDnorm(dot3Dox));
+		var cosoz0t = this.multisum_xF([dot3Doz,dot3D]) / (t + this.vecXDnorm(dot3Doz));
 		rez = [t * cosox0t,t * cosoz0t];
 		return rez;
 	}
@@ -1506,7 +2337,7 @@ GeometryXD.prototype = {
 		}
 		var stc = _g11;
 		var vec = this.vecXD(stc,dotXDc);
-		rez = this.dotXDoffset(sdot,vec,this.vecXDmod(vec));
+		rez = this.dotXDoffset(sdot,vec,this.vecXDnorm(vec));
 		return rez;
 	}
 	,vec3Drotate: function(vec3D,vec3Daxis,angle,rad) {
@@ -1520,16 +2351,16 @@ GeometryXD.prototype = {
 		if(rad) {
 			angle = angle;
 		} else {
-			angle = this.radians(angle);
+			angle = angle / 180 * Math.PI;
 		}
 		var t = [0,0,0];
 		var vb = this.vec3Dnormal(vec3Daxis,vec3D);
 		var vc = this.vec3Dnormal(vb,vec3Daxis);
-		var t0 = this.dotXDoffset(t,vec3Daxis,this.vecXDmod(vec3D) * this.vecXDcos(vec3Daxis,vec3D));
+		var t0 = this.dotXDoffset(t,vec3Daxis,this.vecXDnorm(vec3D) * this.vecXDcos(vec3Daxis,vec3D));
 		var t1 = vec3D;
 		var v = this.vecXD(t0,t1);
-		t1 = this.dotXDoffset(t0,vb,this.vecXDmod(v) * Math.sin(angle));
-		t1 = this.dotXDoffset(t1,vc,this.vecXDmod(v) * Math.cos(angle));
+		t1 = this.dotXDoffset(t0,vb,this.vecXDnorm(v) * Math.sin(angle));
+		t1 = this.dotXDoffset(t1,vc,this.vecXDnorm(v) * Math.cos(angle));
 		rez = this.vecXD(t,t1);
 		return rez;
 	}
@@ -1538,19 +2369,131 @@ GeometryXD.prototype = {
 			rad = false;
 		}
 		var rez = null;
-		if(!this.vecXDfieldsamesize(vec3Dfield) || !this.vecXDfieldsamesize(vec3Daxes) || vec3Dfield[0].length != 3 || vec3Daxes[0].length != 3 || this.zero_inside_F(this.vecXDfieldmod(vec3Dfield)) || this.zero_inside_F(this.vecXDfieldmod(vec3Daxes)) || angles.length != vec3Dfield.length || angles.length != vec3Daxes.length) {
+		var tmp;
+		var tmp1;
+		var tmp2;
+		var tmp3;
+		var tmp4;
+		var tmp5;
+		var tmp6;
+		var rez1 = null;
+		var al = vec3Dfield.length;
+		if(al > 1) {
+			rez1 = true;
+			var size = vec3Dfield[0].length;
+			var _g1 = 1;
+			var _g = al;
+			while(_g1 < _g) {
+				var i = _g1++;
+				if(size != vec3Dfield[i].length) {
+					rez1 = false;
+				}
+			}
+		} else {
+			rez1 = true;
+		}
+		if(!(!rez1)) {
+			var rez2 = null;
+			var al1 = vec3Daxes.length;
+			if(al1 > 1) {
+				rez2 = true;
+				var size1 = vec3Daxes[0].length;
+				var _g11 = 1;
+				var _g2 = al1;
+				while(_g11 < _g2) {
+					var i1 = _g11++;
+					if(size1 != vec3Daxes[i1].length) {
+						rez2 = false;
+					}
+				}
+			} else {
+				rez2 = true;
+			}
+			tmp6 = !rez2;
+		} else {
+			tmp6 = true;
+		}
+		if(!tmp6) {
+			tmp5 = vec3Dfield[0].length != 3;
+		} else {
+			tmp5 = true;
+		}
+		if(!tmp5) {
+			tmp4 = vec3Daxes[0].length != 3;
+		} else {
+			tmp4 = true;
+		}
+		if(!tmp4) {
+			var rez3 = null;
+			var _g3 = [];
+			var _g12 = 0;
+			while(_g12 < vec3Dfield.length) {
+				var i2 = vec3Dfield[_g12];
+				++_g12;
+				_g3.push(this.vecXDnorm(i2));
+			}
+			rez3 = _g3;
+			var a = rez3;
+			var rez4 = false;
+			var _g4 = 0;
+			while(_g4 < a.length) {
+				var i3 = a[_g4];
+				++_g4;
+				if(i3 == 0) {
+					rez4 = true;
+				}
+			}
+			tmp3 = rez4;
+		} else {
+			tmp3 = true;
+		}
+		if(!tmp3) {
+			var rez5 = null;
+			var _g5 = [];
+			var _g13 = 0;
+			while(_g13 < vec3Daxes.length) {
+				var i4 = vec3Daxes[_g13];
+				++_g13;
+				_g5.push(this.vecXDnorm(i4));
+			}
+			rez5 = _g5;
+			var a1 = rez5;
+			var rez6 = false;
+			var _g6 = 0;
+			while(_g6 < a1.length) {
+				var i5 = a1[_g6];
+				++_g6;
+				if(i5 == 0) {
+					rez6 = true;
+				}
+			}
+			tmp2 = rez6;
+		} else {
+			tmp2 = true;
+		}
+		if(!tmp2) {
+			tmp1 = angles.length != vec3Dfield.length;
+		} else {
+			tmp1 = true;
+		}
+		if(!tmp1) {
+			tmp = angles.length != vec3Daxes.length;
+		} else {
+			tmp = true;
+		}
+		if(tmp) {
 			return rez;
 		}
 		rez = vec3Dfield;
-		var _g1 = 0;
-		var _g = angles.length;
-		while(_g1 < _g) {
-			var i = _g1++;
-			var _g3 = 0;
-			var _g2 = vec3Dfield.length;
-			while(_g3 < _g2) {
-				var j = _g3++;
-				rez[j] = this.vec3Drotate(rez[j],vec3Daxes[i],angles[i],rad);
+		var _g14 = 0;
+		var _g7 = angles.length;
+		while(_g14 < _g7) {
+			var i6 = _g14++;
+			var _g31 = 0;
+			var _g21 = vec3Dfield.length;
+			while(_g31 < _g21) {
+				var j = _g31++;
+				rez[j] = this.vec3Drotate(rez[j],vec3Daxes[i6],angles[i6],rad);
 			}
 		}
 		return rez;
@@ -1560,22 +2503,32 @@ GeometryXD.prototype = {
 			rad = false;
 		}
 		var rez = null;
-		if(this.vecXDmod(vec3D) == 0) {
+		if(this.vecXDnorm(vec3D) == 0) {
 			return rez;
 		}
 		rez = dot3D;
-		if(this.vecXDsame(dot3D,dot3Dc) || angle == 0) {
+		var tmp;
+		var rez1 = null;
+		if(dot3D.length == dot3Dc.length) {
+			rez1 = this.same_xF([dot3D,dot3Dc]);
+		}
+		if(!rez1) {
+			tmp = angle == 0;
+		} else {
+			tmp = true;
+		}
+		if(tmp) {
 			return rez;
 		}
 		var vdot = this.vecXD(dot3Dc,dot3D);
-		var d = this.vecXDmod(vdot);
+		var d = this.vecXDnorm(vdot);
 		vdot = this.vec3Drotate(vdot,vec3D,angle,rad);
 		rez = this.dotXDoffset(dot3Dc,vdot,d);
 		return rez;
 	}
 	,plane3D_dot3Dnormal: function(dot3D,vec3D) {
 		var rez = null;
-		if(this.vecXDmod(vec3D) == 0) {
+		if(dot3D.length != 3 || vec3D.length != 3 || this.vecXDnorm(vec3D) == 0) {
 			return rez;
 		}
 		var d = -this.multisum_xF([vec3D,dot3D]);
@@ -1584,7 +2537,7 @@ GeometryXD.prototype = {
 	}
 	,plane3D_dot_vec_vec: function(dot3D,vec3Da,vec3Db) {
 		var rez = null;
-		if(this.vecXDsame(vec3Da,vec3Db) || this.vecXDmod(vec3Da) == 0 || this.vecXDmod(vec3Db) == 0) {
+		if(dot3D.length != 3 || vec3Da.length != 3 || vec3Db.length != 3 || this.vecXDparalleled(vec3Da,vec3Db) || this.vecXDnorm(vec3Da) == 0 || this.vecXDnorm(vec3Db) == 0) {
 			return rez;
 		}
 		rez = this.plane3D_dot3Dnormal(dot3D,this.vec3Dnormal(vec3Da,vec3Db));
@@ -1592,7 +2545,60 @@ GeometryXD.prototype = {
 	}
 	,plane3D_3dots: function(dot3D,dot3Da,dot3Db) {
 		var rez = null;
-		if(!this.vecXDfieldsamesize([dot3D,dot3Da,dot3Db]) || this.vecXDsame(dot3D,dot3Da) || this.vecXDsame(dot3D,dot3Db) || this.vecXDsame(dot3Da,dot3Db)) {
+		var tmp;
+		var tmp1;
+		var tmp2;
+		var tmp3;
+		if(dot3D.length == 3) {
+			var a = [dot3D,dot3Da,dot3Db];
+			var rez1 = null;
+			var al = a.length;
+			if(al > 1) {
+				rez1 = true;
+				var size = a[0].length;
+				var _g1 = 1;
+				var _g = al;
+				while(_g1 < _g) {
+					var i = _g1++;
+					if(size != a[i].length) {
+						rez1 = false;
+					}
+				}
+			} else {
+				rez1 = true;
+			}
+			tmp3 = !rez1;
+		} else {
+			tmp3 = true;
+		}
+		if(!tmp3) {
+			var rez2 = null;
+			if(dot3D.length == dot3Da.length) {
+				rez2 = this.same_xF([dot3D,dot3Da]);
+			}
+			tmp2 = rez2;
+		} else {
+			tmp2 = true;
+		}
+		if(!tmp2) {
+			var rez3 = null;
+			if(dot3D.length == dot3Db.length) {
+				rez3 = this.same_xF([dot3D,dot3Db]);
+			}
+			tmp1 = rez3;
+		} else {
+			tmp1 = true;
+		}
+		if(!tmp1) {
+			var rez4 = null;
+			if(dot3Da.length == dot3Db.length) {
+				rez4 = this.same_xF([dot3Da,dot3Db]);
+			}
+			tmp = rez4;
+		} else {
+			tmp = true;
+		}
+		if(tmp) {
 			return rez;
 		}
 		rez = this.plane3D_dot_vec_vec(dot3D,this.vecXD(dot3D,dot3Da),this.vecXD(dot3D,dot3Db));
@@ -1600,7 +2606,17 @@ GeometryXD.prototype = {
 	}
 	,plane3D_2dots: function(dot3D,dot3Da) {
 		var rez = null;
-		if(!this.vecXDsamesize(dot3D,dot3Da) || this.vecXDsame(dot3D,dot3Da)) {
+		var tmp;
+		if(!(!this.vecXDsamesize(dot3D,dot3Da))) {
+			var rez1 = null;
+			if(dot3D.length == dot3Da.length) {
+				rez1 = this.same_xF([dot3D,dot3Da]);
+			}
+			tmp = rez1;
+		} else {
+			tmp = true;
+		}
+		if(tmp) {
 			return rez;
 		}
 		rez = this.plane3D_dot3Dnormal(dot3D,this.vecXD(dot3D,dot3Da));
@@ -1608,21 +2624,28 @@ GeometryXD.prototype = {
 	}
 	,distance_dot3D_plane3D: function(dot3D,plane3D) {
 		var rez = null;
-		if(this.vecXDmod(plane3D.slice(0,3)) == 0) {
+		if(dot3D.length != 3 || plane3D.length != 4 || this.vecXDnorm([plane3D[0],plane3D[1],plane3D[2]]) == 0) {
 			return rez;
 		}
-		rez = Math.abs(this.multisum_xF([plane3D.slice(0,3),dot3D]) + plane3D[3]) / this.vecXDmod(plane3D.slice(0,3));
+		rez = Math.abs(this.multisum_xF([[plane3D[0],plane3D[1],plane3D[2]],dot3D]) + plane3D[3]) / this.vecXDnorm([plane3D[0],plane3D[1],plane3D[2]]);
 		return rez;
 	}
 	,random_vec3D_in_plane3D: function(plane3D) {
 		var rez = null;
-		if(this.vecXDmod(plane3D.slice(0,3)) == 0) {
+		if(plane3D.length != 4 || this.vecXDnorm([plane3D[0],plane3D[1],plane3D[2]]) == 0) {
 			return rez;
 		}
 		var t0 = this.vecXDrandom(3);
 		t0 = this.projection_dot3D_on_plane3D(t0,plane3D);
 		var t1 = t0;
-		while(this.vecXDsame(t0,t1)) {
+		while(true) {
+			var rez1 = null;
+			if(t0.length == t1.length) {
+				rez1 = this.same_xF([t0,t1]);
+			}
+			if(!rez1) {
+				break;
+			}
 			t1 = [];
 			var _g = 0;
 			while(_g < 3) {
@@ -1636,10 +2659,10 @@ GeometryXD.prototype = {
 	}
 	,random_dot3D_in_plane3D: function(plane3D,dot3D,radius) {
 		var rez = null;
-		if(plane3D.length != 4 || this.vecXDmod(plane3D.slice(0,3)) == 0) {
+		if(plane3D.length != 4 || this.vecXDnorm([plane3D[0],plane3D[1],plane3D[2]]) == 0) {
 			return rez;
 		}
-		rez = dot3D;
+		rez = this.projection_dot3D_on_plane3D(dot3D,plane3D);
 		if(radius == 0) {
 			return rez;
 		}
@@ -1647,9 +2670,32 @@ GeometryXD.prototype = {
 		rez = this.dotXDoffset(dot3D,vec3D,radius * Math.random());
 		return rez;
 	}
-	,curve3Dbeziercubic: function(dot3D1,vec3D1,distance1,dot3D2,vec3D2,distance2) {
+	,curve3D_4dots: function(dot3D1,vec3D1,distance1,dot3D2,vec3D2,distance2) {
 		var rez = null;
-		if(!this.vecXDfieldsamesize([dot3D1,vec3D1,dot3D2,vec3D2]) || dot3D1.length != 3) {
+		var tmp;
+		var a = [dot3D1,vec3D1,dot3D2,vec3D2];
+		var rez1 = null;
+		var al = a.length;
+		if(al > 1) {
+			rez1 = true;
+			var size = a[0].length;
+			var _g1 = 1;
+			var _g = al;
+			while(_g1 < _g) {
+				var i = _g1++;
+				if(size != a[i].length) {
+					rez1 = false;
+				}
+			}
+		} else {
+			rez1 = true;
+		}
+		if(!(!rez1)) {
+			tmp = dot3D1.length != 3;
+		} else {
+			tmp = true;
+		}
+		if(tmp) {
 			return rez;
 		}
 		var r1 = this.dotXDoffset(dot3D1,vec3D1,distance1);
@@ -1657,7 +2703,7 @@ GeometryXD.prototype = {
 		rez = [dot3D1,r1,r2,dot3D2];
 		return rez;
 	}
-	,curve3Dbeziercubic_3dots: function(dot3D0,dot3D1,dot3D2,lever1,lever2,a_s) {
+	,curve3D_3dots: function(dot3D0,dot3D1,dot3D2,lever1,lever2,a_s) {
 		if(a_s == null) {
 			a_s = -1;
 		}
@@ -1668,91 +2714,136 @@ GeometryXD.prototype = {
 			lever1 = 0.55;
 		}
 		var rez = null;
-		if(!this.vecXDfieldsamesize([dot3D0,dot3D1,dot3D2]) || dot3D0.length != 3) {
+		var tmp;
+		var a = [dot3D0,dot3D1,dot3D2];
+		var rez1 = null;
+		var al = a.length;
+		if(al > 1) {
+			rez1 = true;
+			var size = a[0].length;
+			var _g1 = 1;
+			var _g = al;
+			while(_g1 < _g) {
+				var i = _g1++;
+				if(size != a[i].length) {
+					rez1 = false;
+				}
+			}
+		} else {
+			rez1 = true;
+		}
+		if(!(!rez1)) {
+			tmp = dot3D0.length != 3;
+		} else {
+			tmp = true;
+		}
+		if(tmp) {
 			return rez;
 		}
 		var v1 = this.vecXD(dot3D0,dot3D1);
 		var v2 = this.vecXD(dot3D0,dot3D2);
 		var v12 = this.vecXD(dot3D1,dot3D2);
-		var t = this.dotXDoffset(dot3D1,v12,this.vecXDmod(v12) / 2);
+		var t = this.dotXDoffset(dot3D1,v12,this.vecXDnorm(v12) / 2);
 		var v = this.vecXD(dot3D0,t);
 		var r1 = null;
 		var r2 = null;
 		if(a_s < 0) {
 			if(lever1 > 0) {
-				r1 = this.dotXDoffset(dot3D1,v2,this.vecXDmod(v2) * lever1);
+				r1 = this.dotXDoffset(dot3D1,v2,this.vecXDnorm(v2) * lever1);
 			} else if(lever1 < 0) {
-				r1 = this.dotXDoffset(dot3D1,v1,this.vecXDmod(v1) * lever1);
+				r1 = this.dotXDoffset(dot3D1,v1,this.vecXDnorm(v1) * lever1);
 			} else {
 				r1 = dot3D1;
 			}
 			if(lever2 > 0) {
-				r2 = this.dotXDoffset(dot3D2,v1,this.vecXDmod(v1) * lever2);
+				r2 = this.dotXDoffset(dot3D2,v1,this.vecXDnorm(v1) * lever2);
 			} else if(lever2 < 0) {
-				r2 = this.dotXDoffset(dot3D2,v2,this.vecXDmod(v2) * lever2);
+				r2 = this.dotXDoffset(dot3D2,v2,this.vecXDnorm(v2) * lever2);
 			} else {
 				r2 = dot3D2;
 			}
 		} else if(a_s > 0) {
 			if(lever1 > 0) {
-				r1 = this.dotXDoffset(dot3D1,v1,this.vecXDmod(v2) * lever1);
+				r1 = this.dotXDoffset(dot3D1,v1,this.vecXDnorm(v2) * lever1);
 			} else if(lever1 < 0) {
-				r1 = this.dotXDoffset(dot3D1,v2,this.vecXDmod(v1) * lever1);
+				r1 = this.dotXDoffset(dot3D1,v2,this.vecXDnorm(v1) * lever1);
 			} else {
 				r1 = dot3D1;
 			}
 			if(lever2 > 0) {
-				r2 = this.dotXDoffset(dot3D2,v2,this.vecXDmod(v1) * lever2);
+				r2 = this.dotXDoffset(dot3D2,v2,this.vecXDnorm(v1) * lever2);
 			} else if(lever2 < 0) {
-				r2 = this.dotXDoffset(dot3D2,v1,this.vecXDmod(v2) * lever2);
+				r2 = this.dotXDoffset(dot3D2,v1,this.vecXDnorm(v2) * lever2);
 			} else {
 				r2 = dot3D2;
 			}
 		} else {
-			r1 = this.dotXDoffset(dot3D1,v,this.vecXDmod(v) * lever1);
-			r2 = this.dotXDoffset(dot3D2,v,this.vecXDmod(v) * lever2);
+			r1 = this.dotXDoffset(dot3D1,v,this.vecXDnorm(v) * lever1);
+			r2 = this.dotXDoffset(dot3D2,v,this.vecXDnorm(v) * lever2);
 		}
 		rez = [dot3D1,r1,r2,dot3D2];
 		return rez;
 	}
-	,line3Dbeziercubic_2dots: function(dot3D0,dot3D1) {
+	,line3D_2dots: function(dot3D0,dot3D1) {
 		var rez = null;
 		if(!this.vecXDsamesize(dot3D0,dot3D1) || dot3D0.length != 3) {
 			return rez;
 		}
 		var v = this.vecXD(dot3D0,dot3D1);
-		var lv = this.vecXDmod(v);
+		var lv = this.vecXDnorm(v);
 		var lever0 = this.dotXDoffset(dot3D0,v,lv / 3);
 		var lever1 = this.dotXDoffset(dot3D0,v,lv * 2 / 3);
 		rez = [dot3D0,lever0,lever1,dot3D1];
 		return rez;
 	}
-	,line3Dbeziercubic: function(dot3D,vec3D,distance) {
+	,line3D_dot_offset: function(dot3D,vec3D,distance) {
 		var rez = null;
-		if(distance == 0 || !this.vecXDsamesize(dot3D,vec3D) || dot3D.length != 3 || this.vecXDmod(vec3D) == 0) {
+		if(distance == 0 || !this.vecXDsamesize(dot3D,vec3D) || dot3D.length != 3 || this.vecXDnorm(vec3D) == 0) {
 			return rez;
 		}
-		rez = this.line3Dbeziercubic_2dots(dot3D,this.dotXDoffset(dot3D,vec3D,distance));
+		rez = this.line3D_2dots(dot3D,this.dotXDoffset(dot3D,vec3D,distance));
 		return rez;
 	}
-	,beziercubic3D_4to12: function(curve) {
+	,curve3D_4to12: function(curve) {
 		var rez = null;
-		if(curve.length == 4 && curve[0].length == 3 && this.vecXDfieldsamesize(curve)) {
-			var _g = [];
-			var _g1 = 0;
-			while(_g1 < 4) {
-				var i = _g1++;
-				var _g2 = 0;
-				while(_g2 < 3) {
-					var ai = _g2++;
-					_g.push(curve[i][ai]);
+		var tmp;
+		if(curve.length == 4 && curve[0].length == 3) {
+			var rez1 = null;
+			var al = curve.length;
+			if(al > 1) {
+				rez1 = true;
+				var size = curve[0].length;
+				var _g1 = 1;
+				var _g = al;
+				while(_g1 < _g) {
+					var i = _g1++;
+					if(size != curve[i].length) {
+						rez1 = false;
+					}
+				}
+			} else {
+				rez1 = true;
+			}
+			tmp = rez1;
+		} else {
+			tmp = false;
+		}
+		if(tmp) {
+			var _g2 = [];
+			var _g11 = 0;
+			while(_g11 < 4) {
+				var i1 = _g11++;
+				var _g21 = 0;
+				while(_g21 < 3) {
+					var ai = _g21++;
+					_g2.push(curve[i1][ai]);
 				}
 			}
-			rez = _g;
+			rez = _g2;
 		}
 		return rez;
 	}
-	,beziercubic3D_12to4: function(curve) {
+	,curve3D_12to4: function(curve) {
 		var rez = null;
 		if(curve.length == 12) {
 			var _g = [];
@@ -1776,20 +2867,42 @@ GeometryXD.prototype = {
 	,beziercubic3D_derivativeparameters: function(curve) {
 		var rez = null;
 		var cl = curve.length;
-		if(cl == 4 && curve[0].length == 3 && this.vecXDfieldsamesize(curve)) {
-			var _g = [];
-			var _g1 = 0;
-			while(_g1 < 3) {
-				var i = _g1++;
-				var _g2 = [];
+		var tmp;
+		if(cl == 4 && curve[0].length == 3) {
+			var rez1 = null;
+			var al = curve.length;
+			if(al > 1) {
+				rez1 = true;
+				var size = curve[0].length;
+				var _g1 = 1;
+				var _g = al;
+				while(_g1 < _g) {
+					var i = _g1++;
+					if(size != curve[i].length) {
+						rez1 = false;
+					}
+				}
+			} else {
+				rez1 = true;
+			}
+			tmp = rez1;
+		} else {
+			tmp = false;
+		}
+		if(tmp) {
+			var _g2 = [];
+			var _g11 = 0;
+			while(_g11 < 3) {
+				var i1 = _g11++;
+				var _g21 = [];
 				var _g3 = 0;
 				while(_g3 < 4) {
 					var p = _g3++;
-					_g2.push(curve[p][i]);
+					_g21.push(curve[p][i1]);
 				}
-				_g.push(_g2);
+				_g2.push(_g21);
 			}
-			rez = _g;
+			rez = _g2;
 		}
 		return rez;
 	}
@@ -1802,242 +2915,648 @@ GeometryXD.prototype = {
 	}
 	,beziercubic3D_derivative: function(curve,p) {
 		var rez = null;
-		if(curve.length == 4 && curve[0].length == 3 && this.vecXDfieldsamesize(curve)) {
-			var _g = [];
-			var _g1 = 0;
-			var _g2 = this.beziercubic3D_derivativeparameters(curve);
-			while(_g1 < _g2.length) {
-				var i = _g2[_g1];
-				++_g1;
-				_g.push(this.beziercubic_derivative(i,p));
+		var tmp;
+		if(curve.length == 4 && curve[0].length == 3) {
+			var rez1 = null;
+			var al = curve.length;
+			if(al > 1) {
+				rez1 = true;
+				var size = curve[0].length;
+				var _g1 = 1;
+				var _g = al;
+				while(_g1 < _g) {
+					var i = _g1++;
+					if(size != curve[i].length) {
+						rez1 = false;
+					}
+				}
+			} else {
+				rez1 = true;
 			}
-			rez = _g;
+			tmp = rez1;
+		} else {
+			tmp = false;
+		}
+		if(tmp) {
+			var _g2 = [];
+			var _g11 = 0;
+			var rez2 = null;
+			var cl = curve.length;
+			var rez3;
+			if(cl == 4 && curve[0].length == 3) {
+				var rez4 = null;
+				var al1 = curve.length;
+				if(al1 > 1) {
+					rez4 = true;
+					var size1 = curve[0].length;
+					var _g12 = 1;
+					var _g3 = al1;
+					while(_g12 < _g3) {
+						var i1 = _g12++;
+						if(size1 != curve[i1].length) {
+							rez4 = false;
+						}
+					}
+				} else {
+					rez4 = true;
+				}
+				rez3 = rez4;
+			} else {
+				rez3 = false;
+			}
+			if(rez3) {
+				var _g4 = [];
+				var _g13 = 0;
+				while(_g13 < 3) {
+					var i2 = _g13++;
+					var _g21 = [];
+					var _g31 = 0;
+					while(_g31 < 4) {
+						var p1 = _g31++;
+						_g21.push(curve[p1][i2]);
+					}
+					_g4.push(_g21);
+				}
+				rez2 = _g4;
+			}
+			var _g22 = rez2;
+			while(_g11 < _g22.length) {
+				var i3 = _g22[_g11];
+				++_g11;
+				var rez5 = null;
+				if(i3.length == 4) {
+					rez5 = 3 * (1 - p) * (1 - p) * (i3[1] - i3[0]) + 6 * (1 - p) * p * (i3[2] - i3[1]) + 3 * p * p * (i3[3] - i3[2]);
+				}
+				_g2.push(rez5);
+			}
+			rez = _g2;
 		}
 		return rez;
 	}
 	,beziercubic_support_dot_one: function(beziercubic_one_axis_coordinates) {
-		var c = beziercubic_one_axis_coordinates;
 		var rez = null;
-		if(c.length != 4) {
-			return rez;
+		var c = beziercubic_one_axis_coordinates;
+		if(c.length == 4) {
+			rez = (-5 * c[0] + 18 * c[1] - 9 * c[2] + 2 * c[3]) / 6;
 		}
-		return (-5 * c[0] + 18 * c[1] - 9 * c[2] + 2 * c[3]) / 6;
+		return rez;
 	}
 	,beziercubic3D_support_dot_one: function(curve3D_4dots) {
 		var rez = null;
 		var c = curve3D_4dots;
-		if(c.length != 4 || !this.vecXDfieldsamesize(c)) {
-			return rez;
+		var tmp;
+		if(c.length == 4) {
+			var rez1 = null;
+			var al = c.length;
+			if(al > 1) {
+				rez1 = true;
+				var size = c[0].length;
+				var _g1 = 1;
+				var _g = al;
+				while(_g1 < _g) {
+					var i = _g1++;
+					if(size != c[i].length) {
+						rez1 = false;
+					}
+				}
+			} else {
+				rez1 = true;
+			}
+			tmp = rez1;
+		} else {
+			tmp = false;
 		}
-		var _g = [];
-		var _g1 = 0;
-		var _g2 = this.beziercubic3D_derivativeparameters(c);
-		while(_g1 < _g2.length) {
-			var i = _g2[_g1];
-			++_g1;
-			_g.push(this.beziercubic_support_dot_one(i));
+		if(tmp) {
+			var _g2 = [];
+			var _g11 = 0;
+			var rez2 = null;
+			var cl = c.length;
+			var rez3;
+			if(cl == 4 && c[0].length == 3) {
+				var rez4 = null;
+				var al1 = c.length;
+				if(al1 > 1) {
+					rez4 = true;
+					var size1 = c[0].length;
+					var _g12 = 1;
+					var _g3 = al1;
+					while(_g12 < _g3) {
+						var i1 = _g12++;
+						if(size1 != c[i1].length) {
+							rez4 = false;
+						}
+					}
+				} else {
+					rez4 = true;
+				}
+				rez3 = rez4;
+			} else {
+				rez3 = false;
+			}
+			if(rez3) {
+				var _g4 = [];
+				var _g13 = 0;
+				while(_g13 < 3) {
+					var i2 = _g13++;
+					var _g21 = [];
+					var _g31 = 0;
+					while(_g31 < 4) {
+						var p = _g31++;
+						_g21.push(c[p][i2]);
+					}
+					_g4.push(_g21);
+				}
+				rez2 = _g4;
+			}
+			var _g22 = rez2;
+			while(_g11 < _g22.length) {
+				var i3 = _g22[_g11];
+				++_g11;
+				var rez5 = null;
+				var c1 = i3;
+				if(c1.length == 4) {
+					rez5 = (-5 * c1[0] + 18 * c1[1] - 9 * c1[2] + 2 * c1[3]) / 6;
+				}
+				_g2.push(rez5);
+			}
+			rez = _g2;
 		}
-		rez = _g;
 		return rez;
 	}
 	,beziercubic_support_dot_two: function(beziercubic_one_axis_coordinates) {
-		var c = beziercubic_one_axis_coordinates;
 		var rez = null;
-		if(c.length != 4) {
-			return rez;
+		var c = beziercubic_one_axis_coordinates;
+		if(c.length == 4) {
+			rez = (2 * c[0] - 9 * c[1] + 18 * c[2] - 5 * c[3]) / 6;
 		}
-		return (2 * c[0] - 9 * c[1] + 18 * c[2] - 5 * c[3]) / 6;
+		return rez;
 	}
 	,beziercubic3D_support_dot_two: function(curve3D_4dots) {
 		var rez = null;
 		var c = curve3D_4dots;
-		if(c.length != 4 || !this.vecXDfieldsamesize(c)) {
-			return rez;
+		var tmp;
+		if(c.length == 4) {
+			var rez1 = null;
+			var al = c.length;
+			if(al > 1) {
+				rez1 = true;
+				var size = c[0].length;
+				var _g1 = 1;
+				var _g = al;
+				while(_g1 < _g) {
+					var i = _g1++;
+					if(size != c[i].length) {
+						rez1 = false;
+					}
+				}
+			} else {
+				rez1 = true;
+			}
+			tmp = rez1;
+		} else {
+			tmp = false;
 		}
-		var _g = [];
-		var _g1 = 0;
-		var _g2 = this.beziercubic3D_derivativeparameters(c);
-		while(_g1 < _g2.length) {
-			var i = _g2[_g1];
-			++_g1;
-			_g.push(this.beziercubic_support_dot_two(i));
+		if(tmp) {
+			var _g2 = [];
+			var _g11 = 0;
+			var rez2 = null;
+			var cl = c.length;
+			var rez3;
+			if(cl == 4 && c[0].length == 3) {
+				var rez4 = null;
+				var al1 = c.length;
+				if(al1 > 1) {
+					rez4 = true;
+					var size1 = c[0].length;
+					var _g12 = 1;
+					var _g3 = al1;
+					while(_g12 < _g3) {
+						var i1 = _g12++;
+						if(size1 != c[i1].length) {
+							rez4 = false;
+						}
+					}
+				} else {
+					rez4 = true;
+				}
+				rez3 = rez4;
+			} else {
+				rez3 = false;
+			}
+			if(rez3) {
+				var _g4 = [];
+				var _g13 = 0;
+				while(_g13 < 3) {
+					var i2 = _g13++;
+					var _g21 = [];
+					var _g31 = 0;
+					while(_g31 < 4) {
+						var p = _g31++;
+						_g21.push(c[p][i2]);
+					}
+					_g4.push(_g21);
+				}
+				rez2 = _g4;
+			}
+			var _g22 = rez2;
+			while(_g11 < _g22.length) {
+				var i3 = _g22[_g11];
+				++_g11;
+				var rez5 = null;
+				var c1 = i3;
+				if(c1.length == 4) {
+					rez5 = (2 * c1[0] - 9 * c1[1] + 18 * c1[2] - 5 * c1[3]) / 6;
+				}
+				_g2.push(rez5);
+			}
+			rez = _g2;
 		}
-		rez = _g;
 		return rez;
 	}
 	,beziercubic3D_follow_4dots_trajectory: function(dots) {
 		var rez = null;
-		if(dots.length != 4 || !this.vecXDfieldsamesize(dots)) {
-			return rez;
+		var tmp;
+		if(dots.length == 4 && dots[0].length == 3) {
+			var rez1 = null;
+			var al = dots.length;
+			if(al > 1) {
+				rez1 = true;
+				var size = dots[0].length;
+				var _g1 = 1;
+				var _g = al;
+				while(_g1 < _g) {
+					var i = _g1++;
+					if(size != dots[i].length) {
+						rez1 = false;
+					}
+				}
+			} else {
+				rez1 = true;
+			}
+			tmp = rez1;
+		} else {
+			tmp = false;
 		}
-		var dot_one = this.beziercubic3D_support_dot_one(dots);
-		var dot_two = this.beziercubic3D_support_dot_two(dots);
-		rez = [dots[0],dot_one,dot_two,dots[3]];
+		if(tmp) {
+			var dot_one = this.beziercubic3D_support_dot_one(dots);
+			var dot_two = this.beziercubic3D_support_dot_two(dots);
+			rez = [dots[0],dot_one,dot_two,dots[3]];
+		}
 		return rez;
 	}
 	,beziercubic_coordinate: function(beziercubic_one_axis_coordinates,parameter) {
 		var rez = null;
 		var c = beziercubic_one_axis_coordinates;
 		var p = parameter;
-		if(c.length != 4) {
-			return rez;
+		if(c.length == 4) {
+			rez = (1 - p) * (1 - p) * (1 - p) * c[0] + 3 * (1 - p) * (1 - p) * p * c[1] + 3 * (1 - p) * p * p * c[2] + p * p * p * c[3];
 		}
-		rez = (1 - p) * (1 - p) * (1 - p) * c[0] + 3 * (1 - p) * (1 - p) * p * c[1] + 3 * (1 - p) * p * p * c[2] + p * p * p * c[3];
 		return rez;
 	}
 	,beziercubic3Ddot: function(beziercubic3D,parameter) {
 		var rez = null;
 		var c = beziercubic3D;
 		var p = parameter;
-		if(c.length != 4 || c[0].length != 3 || !this.vecXDfieldsamesize(c)) {
-			return rez;
+		var tmp;
+		if(c.length == 4 && c[0].length == 3) {
+			var rez1 = null;
+			var al = c.length;
+			if(al > 1) {
+				rez1 = true;
+				var size = c[0].length;
+				var _g1 = 1;
+				var _g = al;
+				while(_g1 < _g) {
+					var i = _g1++;
+					if(size != c[i].length) {
+						rez1 = false;
+					}
+				}
+			} else {
+				rez1 = true;
+			}
+			tmp = rez1;
+		} else {
+			tmp = false;
 		}
-		var _g = [];
-		var _g1 = 0;
-		var _g2 = this.beziercubic3D_derivativeparameters(c);
-		while(_g1 < _g2.length) {
-			var i = _g2[_g1];
-			++_g1;
-			_g.push(this.beziercubic_coordinate(i,p));
+		if(tmp) {
+			var _g2 = [];
+			var _g11 = 0;
+			var rez2 = null;
+			var cl = c.length;
+			var rez3;
+			if(cl == 4 && c[0].length == 3) {
+				var rez4 = null;
+				var al1 = c.length;
+				if(al1 > 1) {
+					rez4 = true;
+					var size1 = c[0].length;
+					var _g12 = 1;
+					var _g3 = al1;
+					while(_g12 < _g3) {
+						var i1 = _g12++;
+						if(size1 != c[i1].length) {
+							rez4 = false;
+						}
+					}
+				} else {
+					rez4 = true;
+				}
+				rez3 = rez4;
+			} else {
+				rez3 = false;
+			}
+			if(rez3) {
+				var _g4 = [];
+				var _g13 = 0;
+				while(_g13 < 3) {
+					var i2 = _g13++;
+					var _g21 = [];
+					var _g31 = 0;
+					while(_g31 < 4) {
+						var p1 = _g31++;
+						_g21.push(c[p1][i2]);
+					}
+					_g4.push(_g21);
+				}
+				rez2 = _g4;
+			}
+			var _g22 = rez2;
+			while(_g11 < _g22.length) {
+				var i3 = _g22[_g11];
+				++_g11;
+				var rez5 = null;
+				var c1 = i3;
+				var p2 = p;
+				if(c1.length == 4) {
+					rez5 = (1 - p2) * (1 - p2) * (1 - p2) * c1[0] + 3 * (1 - p2) * (1 - p2) * p2 * c1[1] + 3 * (1 - p2) * p2 * p2 * c1[2] + p2 * p2 * p2 * c1[3];
+				}
+				_g2.push(rez5);
+			}
+			rez = _g2;
 		}
-		rez = _g;
 		return rez;
 	}
 	,curve3D_4dots_follow_beziercubic_trajectory: function(beziercubic3D) {
 		var rez = null;
 		var c = beziercubic3D;
-		if(c.length != 4 || !this.vecXDfieldsamesize(c)) {
-			return rez;
+		var tmp;
+		if(c.length == 4 && c[0].length == 3) {
+			var rez1 = null;
+			var al = c.length;
+			if(al > 1) {
+				rez1 = true;
+				var size = c[0].length;
+				var _g1 = 1;
+				var _g = al;
+				while(_g1 < _g) {
+					var i = _g1++;
+					if(size != c[i].length) {
+						rez1 = false;
+					}
+				}
+			} else {
+				rez1 = true;
+			}
+			tmp = rez1;
+		} else {
+			tmp = false;
 		}
-		c[1] = this.beziercubic3Ddot(c,0.333333333333333315);
-		c[2] = this.beziercubic3Ddot(c,0.66666666666666663);
+		if(tmp) {
+			c[1] = this.beziercubic3Ddot(c,0.333333333333333315);
+			c[2] = this.beziercubic3Ddot(c,0.66666666666666663);
+		}
 		return c;
 	}
 	,curve3Doffset: function(curve3D,vec3D,distance) {
 		var rez = null;
-		if(curve3D.length != 4 || curve3D[0].length != 3 || !this.vecXDfieldsamesize(curve3D) || vec3D.length != 3) {
-			return rez;
+		var tmp;
+		var tmp1;
+		if(curve3D.length == 4 && curve3D[0].length == 3) {
+			var rez1 = null;
+			var al = curve3D.length;
+			if(al > 1) {
+				rez1 = true;
+				var size = curve3D[0].length;
+				var _g1 = 1;
+				var _g = al;
+				while(_g1 < _g) {
+					var i = _g1++;
+					if(size != curve3D[i].length) {
+						rez1 = false;
+					}
+				}
+			} else {
+				rez1 = true;
+			}
+			tmp1 = rez1;
+		} else {
+			tmp1 = false;
 		}
-		var _g = [];
-		var _g1 = 0;
-		while(_g1 < curve3D.length) {
-			var i = curve3D[_g1];
-			++_g1;
-			_g.push(this.dotXDoffset(i,vec3D,distance));
+		if(tmp1) {
+			tmp = vec3D.length == 3;
+		} else {
+			tmp = false;
 		}
-		return _g;
+		if(tmp) {
+			var _g2 = [];
+			var _g11 = 0;
+			while(_g11 < curve3D.length) {
+				var i1 = curve3D[_g11];
+				++_g11;
+				_g2.push(this.dotXDoffset(i1,vec3D,distance));
+			}
+			rez = _g2;
+		}
+		return rez;
 	}
 	,curve3Drotate: function(curve3D,dot3D,vec3D,angle,rad) {
 		if(rad == null) {
 			rad = false;
 		}
 		var rez = null;
-		if(curve3D.length != 4 || curve3D[0].length != 3 || !this.vecXDfieldsamesize(curve3D) || dot3D.length != 3 || vec3D.length != 3 || this.vecXDmod(vec3D) == 0) {
-			return rez;
+		var tmp;
+		var tmp1;
+		var tmp2;
+		var tmp3;
+		if(curve3D.length == 4 && curve3D[0].length == 3) {
+			var rez1 = null;
+			var al = curve3D.length;
+			if(al > 1) {
+				rez1 = true;
+				var size = curve3D[0].length;
+				var _g1 = 1;
+				var _g = al;
+				while(_g1 < _g) {
+					var i = _g1++;
+					if(size != curve3D[i].length) {
+						rez1 = false;
+					}
+				}
+			} else {
+				rez1 = true;
+			}
+			tmp3 = rez1;
+		} else {
+			tmp3 = false;
 		}
-		if(angle == 0) {
-			return curve3D;
+		if(tmp3) {
+			tmp2 = dot3D.length == 3;
+		} else {
+			tmp2 = false;
 		}
-		var _g = [];
-		var _g1 = 0;
-		while(_g1 < curve3D.length) {
-			var i = curve3D[_g1];
-			++_g1;
-			_g.push(this.dot3Drotate(i,dot3D,vec3D,angle,rad));
+		if(tmp2) {
+			tmp1 = vec3D.length == 3;
+		} else {
+			tmp1 = false;
 		}
-		return _g;
+		if(tmp1) {
+			tmp = this.vecXDnorm(vec3D) > 0;
+		} else {
+			tmp = false;
+		}
+		if(tmp) {
+			if(angle != 0) {
+				var _g2 = [];
+				var _g11 = 0;
+				while(_g11 < curve3D.length) {
+					var i1 = curve3D[_g11];
+					++_g11;
+					_g2.push(this.dot3Drotate(i1,dot3D,vec3D,angle,rad));
+				}
+				rez = _g2;
+			} else {
+				rez = curve3D;
+			}
+		}
+		return rez;
 	}
 	,curve3Dscale: function(curve3D,scale_xyz,dot3D) {
 		var rez = null;
-		if(curve3D.length != 4 || curve3D[0].length != 3 || !this.vecXDfieldsamesize(curve3D) || dot3D.length != 3 || scale_xyz.length != 3) {
-			return rez;
-		}
-		if(this.vecXDmod(scale_xyz) == 0) {
-			var _g = [];
-			var _g1 = 0;
-			while(_g1 < 4) {
-				var i = _g1++;
-				_g.push([0,0,0]);
+		var tmp;
+		var tmp1;
+		var tmp2;
+		if(curve3D.length == 4 && curve3D[0].length == 3) {
+			var rez1 = null;
+			var al = curve3D.length;
+			if(al > 1) {
+				rez1 = true;
+				var size = curve3D[0].length;
+				var _g1 = 1;
+				var _g = al;
+				while(_g1 < _g) {
+					var i = _g1++;
+					if(size != curve3D[i].length) {
+						rez1 = false;
+					}
+				}
+			} else {
+				rez1 = true;
 			}
-			return _g;
+			tmp2 = rez1;
+		} else {
+			tmp2 = false;
 		}
-		var _g2 = [];
-		var _g11 = 0;
-		while(_g11 < curve3D.length) {
-			var i1 = curve3D[_g11];
-			++_g11;
-			_g2.push(this.dotXDscale(i1,scale_xyz,dot3D));
+		if(tmp2) {
+			tmp1 = dot3D.length == 3;
+		} else {
+			tmp1 = false;
 		}
-		return _g2;
+		if(tmp1) {
+			tmp = scale_xyz.length == 3;
+		} else {
+			tmp = false;
+		}
+		if(tmp) {
+			if(this.vecXDnorm(scale_xyz) > 0) {
+				var _g2 = [];
+				var _g11 = 0;
+				while(_g11 < curve3D.length) {
+					var i1 = curve3D[_g11];
+					++_g11;
+					_g2.push(this.dotXDscale(i1,scale_xyz,dot3D));
+				}
+				rez = _g2;
+			} else {
+				var _g3 = [];
+				var _g12 = 0;
+				while(_g12 < 4) {
+					var i2 = _g12++;
+					_g3.push([0,0,0]);
+				}
+				rez = _g3;
+			}
+		}
+		return rez;
 	}
 	,ellipse2Dperimeter_ramanujan: function(semiaxis_a,semiaxis_b) {
 		var rez = null;
 		var a = semiaxis_a;
 		var b = semiaxis_b;
-		if(a < 0 || b < 0) {
-			return rez;
+		if(a > 0 && b > 0) {
+			var l1 = Math.PI * (3 * (a + b) - Math.sqrt((3 * a + b) * (a + 3 * b)));
+			var l2 = Math.PI * (a + b) * (1 + 3 * (a - b) * (a - b) / (a + b) / (a + b) / (10 + Math.sqrt(4 - 3 * (a - b) * (a - b) / (a + b) / (a + b))));
+			rez = Math.max(l1,l2);
 		}
-		var l1 = Math.PI * (3 * (a + b) - Math.sqrt((3 * a + b) * (a + 3 * b)));
-		var l2 = Math.PI * (a + b) * (1 + 3 * (a - b) * (a - b) / (a + b) / (a + b) / (10 + Math.sqrt(4 - 3 * (a - b) * (a - b) / (a + b) / (a + b))));
-		rez = Math.max(l1,l2);
 		return rez;
 	}
 	,tangent_centered_ellipse2Ddot: function(semiaxis_a,semiaxis_b,ellipse_dot2D) {
-		var rez = null;
+		var v = null;
 		var a = semiaxis_a;
 		var b = semiaxis_b;
-		var x0 = ellipse_dot2D[0];
-		var y0 = ellipse_dot2D[1];
-		var x;
-		var y;
-		var v = null;
-		if(x0 != 0) {
-			x = 0.9 * x0;
-			if(x0 > 0) {
-				if(y0 == 0) {
-					v = [[x0,y0],[x0,1]];
-				} else {
-					y = (1 - x * x0 / (a * a)) * b * b / y0;
-					if(y0 > 0) {
-						v = [[x0,y0],[x,y]];
+		if(a > 0 && b > 0 && ellipse_dot2D.length == 2) {
+			var x0 = ellipse_dot2D[0];
+			var y0 = ellipse_dot2D[1];
+			var x;
+			var y;
+			if(x0 != 0) {
+				x = 0.9 * x0;
+				if(x0 > 0) {
+					if(y0 == 0) {
+						v = [[x0,y0],[x0,1]];
 					} else {
-						v = [[x,y],[x0,y0]];
+						y = (1 - x * x0 / (a * a)) * b * b / y0;
+						if(y0 > 0) {
+							v = [[x0,y0],[x,y]];
+						} else {
+							v = [[x,y],[x0,y0]];
+						}
+					}
+				} else if(x0 < 0) {
+					if(y0 == 0) {
+						v = [[x0,y0],[x0,-1]];
+					} else {
+						y = (1 - x * x0 / (a * a)) * b * b / y0;
+						if(y0 > 0) {
+							v = [[x,y],[x0,y0]];
+						} else {
+							v = [[x0,y0],[x,y]];
+						}
 					}
 				}
-			} else if(x0 < 0) {
-				if(y0 == 0) {
-					v = [[x0,y0],[x0,-1]];
-				} else {
-					y = (1 - x * x0 / (a * a)) * b * b / y0;
-					if(y0 > 0) {
-						v = [[x,y],[x0,y0]];
+			} else {
+				y = 0.9 * y0;
+				if(y0 > 0) {
+					if(x0 == 0) {
+						v = [[x0,y0],[-1,y0]];
 					} else {
-						v = [[x0,y0],[x,y]];
+						x = (1 - y * y0 / (b * b)) * a * a / x0;
+						if(x0 > 0) {
+							v = [[x,y],[x0,y0]];
+						} else {
+							v = [[x0,y0],[x,y]];
+						}
 					}
-				}
-			}
-		} else {
-			y = 0.9 * y0;
-			if(y0 > 0) {
-				if(x0 == 0) {
-					v = [[x0,y0],[-1,y0]];
-				} else {
-					x = (1 - y * y0 / (b * b)) * a * a / x0;
-					if(x0 > 0) {
-						v = [[x,y],[x0,y0]];
+				} else if(y0 < 0) {
+					if(x0 == 0) {
+						v = [[x0,y0],[1,y0]];
 					} else {
-						v = [[x0,y0],[x,y]];
-					}
-				}
-			} else if(y0 < 0) {
-				if(x0 == 0) {
-					v = [[x0,y0],[1,y0]];
-				} else {
-					x = (1 - y * y0 / (b * b)) * a * a / x0;
-					if(x0 < 0) {
-						v = [[x,y],[x0,y0]];
-					} else {
-						v = [[x0,y0],[x,y]];
+						x = (1 - y * y0 / (b * b)) * a * a / x0;
+						if(x0 < 0) {
+							v = [[x,y],[x0,y0]];
+						} else {
+							v = [[x0,y0],[x,y]];
+						}
 					}
 				}
 			}
@@ -2048,13 +3567,12 @@ GeometryXD.prototype = {
 		var rez = null;
 		var a = semiaxis_a;
 		var b = semiaxis_b;
-		if(a < 0 || b < 0 || a <= 0 && b <= 0) {
-			return rez;
-		}
-		if(a >= b) {
-			rez = Math.sqrt(1 - b * b / (a * a));
-		} else {
-			rez = -Math.sqrt(1 - a * a / (b * b));
+		if(a >= 0 && b >= 0 && a + b > 0) {
+			if(a >= b) {
+				rez = Math.sqrt(1 - b * b / (a * a));
+			} else {
+				rez = -Math.sqrt(1 - a * a / (b * b));
+			}
 		}
 		return rez;
 	}
@@ -2062,7 +3580,17 @@ GeometryXD.prototype = {
 		var rez = null;
 		var a = semiaxis_a;
 		var b = semiaxis_b;
-		var e = this.ellipse_e_parameter(a,b);
+		var rez1 = null;
+		var a1 = a;
+		var b1 = b;
+		if(a1 >= 0 && b1 >= 0 && a1 + b1 > 0) {
+			if(a1 >= b1) {
+				rez1 = Math.sqrt(1 - b1 * b1 / (a1 * a1));
+			} else {
+				rez1 = -Math.sqrt(1 - a1 * a1 / (b1 * b1));
+			}
+		}
+		var e = rez1;
 		if(e == null) {
 			return rez;
 		}
@@ -2082,42 +3610,113 @@ GeometryXD.prototype = {
 		var b = semiaxis_b;
 		var an = semiaxis_a_negative;
 		var bn = semiaxis_b_negative;
-		var ea = null;
-		var eb = null;
-		var _g = this.angle_quadrant(angle,rad);
-		switch(_g) {
-		case 1:
-			ea = a;
-			eb = b;
-			break;
-		case 2:
-			ea = an;
-			eb = b;
-			break;
-		case 3:
-			ea = an;
-			eb = bn;
-			break;
-		case 4:
-			ea = a;
-			eb = bn;
-			break;
+		if(t.length == 3 && vn.length == 3 && va.length == 3 && this.vecXDnorm(vn) > 0 && this.vecXDnorm(va) > 0 && !this.vecXDparalleled(vn,va) && a > 0 && b > 0 && an > 0 && bn > 0) {
+			var ea = null;
+			var eb = null;
+			var _g = this.angle_quadrant(angle,rad);
+			switch(_g) {
+			case 1:
+				ea = a;
+				eb = b;
+				break;
+			case 2:
+				ea = an;
+				eb = b;
+				break;
+			case 3:
+				ea = an;
+				eb = bn;
+				break;
+			case 4:
+				ea = a;
+				eb = bn;
+				break;
+			}
+			var ep = this.plane3D_dot3Dnormal(t,vn);
+			var va1 = this.projection_vec3D_on_plane3D(va,ep);
+			var vb = this.vec3Dnormal(vn,va1);
+			var u = angle;
+			var a1 = ea;
+			var b1 = eb;
+			if(!rad) {
+				a1 = a1 / 180 * Math.PI;
+			}
+			var edot = [a1 * Math.cos(u),b1 * Math.sin(u)];
+			var dxy0dxy1 = this.tangent_centered_ellipse2Ddot(ea,eb,edot);
+			var te = this.dotXDoffset(t,va1,dxy0dxy1[0][0]);
+			var te1 = this.dotXDoffset(te,vb,dxy0dxy1[0][1]);
+			var tt = this.dotXDoffset(t,va1,dxy0dxy1[1][0]);
+			var tt1 = this.dotXDoffset(tt,vb,dxy0dxy1[1][1]);
+			rez = this.vecXD(te1,tt1);
 		}
-		var ep = this.plane3D_dot3Dnormal(t,vn);
-		var va1 = this.projection_vec3D_on_plane3D(va,ep);
-		var vb = this.vec3Dnormal(vn,va1);
-		var edot = this.ellipse2Ddot(angle,ea,eb,rad);
-		var dxy0dxy1 = this.tangent_centered_ellipse2Ddot(ea,eb,edot);
-		var te = this.dotXDoffset(t,va1,dxy0dxy1[0][0]);
-		var te1 = this.dotXDoffset(te,vb,dxy0dxy1[0][1]);
-		var tt = this.dotXDoffset(t,va1,dxy0dxy1[1][0]);
-		var tt1 = this.dotXDoffset(tt,vb,dxy0dxy1[1][1]);
-		rez = this.vecXD(te1,tt1);
 		return rez;
 	}
 	,ellipse3D_dots: function(dot3D,vec3Dsemiaxes,semiaxes) {
 		var rez = null;
-		if(dot3D.length != 3 || vec3Dsemiaxes.length != 4 || !this.vecXDfieldsamesize(vec3Dsemiaxes) || semiaxes.length != 4) {
+		var tmp;
+		var tmp1;
+		var tmp2;
+		var tmp3;
+		if(!(dot3D.length != 3 || vec3Dsemiaxes.length != 4)) {
+			var rez1 = null;
+			var al = vec3Dsemiaxes.length;
+			if(al > 1) {
+				rez1 = true;
+				var size = vec3Dsemiaxes[0].length;
+				var _g1 = 1;
+				var _g = al;
+				while(_g1 < _g) {
+					var i = _g1++;
+					if(size != vec3Dsemiaxes[i].length) {
+						rez1 = false;
+					}
+				}
+			} else {
+				rez1 = true;
+			}
+			tmp3 = !rez1;
+		} else {
+			tmp3 = true;
+		}
+		if(!tmp3) {
+			tmp2 = semiaxes.length != 4;
+		} else {
+			tmp2 = true;
+		}
+		if(!tmp2) {
+			var rez2 = false;
+			var _g2 = 0;
+			while(_g2 < semiaxes.length) {
+				var i1 = semiaxes[_g2];
+				++_g2;
+				if(i1 == 0) {
+					rez2 = true;
+				}
+			}
+			tmp1 = rez2;
+		} else {
+			tmp1 = true;
+		}
+		if(!tmp1) {
+			var rez3 = null;
+			var lv = vec3Dsemiaxes.length;
+			if(lv > 0) {
+				rez3 = false;
+				var _g11 = 0;
+				var _g3 = lv;
+				while(_g11 < _g3) {
+					var i2 = _g11++;
+					if(this.vecXDnorm(vec3Dsemiaxes[i2]) == 0) {
+						rez3 = true;
+						break;
+					}
+				}
+			}
+			tmp = rez3;
+		} else {
+			tmp = true;
+		}
+		if(tmp) {
 			return rez;
 		}
 		var t0 = dot3D;
@@ -2129,17 +3728,17 @@ GeometryXD.prototype = {
 		var b = semiaxes[1];
 		var ad = semiaxes[2];
 		var bd = semiaxes[3];
-		var cos45 = Math.cos(this.radians(45));
+		var cos45 = Math.cos(0.25 * Math.PI);
 		var v = [va,vb,vad,vbd];
 		var d = [a * cos45,b * cos45,ad * cos45,bd * cos45];
 		var vv = [vb,vad,vbd,va];
 		var dd = [b * cos45,ad * cos45,bd * cos45,a * cos45];
 		rez = [t0];
-		var _g = 0;
-		while(_g < 4) {
-			var i = _g++;
-			rez.push(this.dotXDoffset(t0,vec3Dsemiaxes[i],semiaxes[i]));
-			rez.push(this.dotXDoffset(this.dotXDoffset(t0,v[i],d[i]),vv[i],dd[i]));
+		var _g4 = 0;
+		while(_g4 < 4) {
+			var i3 = _g4++;
+			rez.push(this.dotXDoffset(t0,vec3Dsemiaxes[i3],semiaxes[i3]));
+			rez.push(this.dotXDoffset(this.dotXDoffset(t0,v[i3],d[i3]),vv[i3],dd[i3]));
 		}
 		return rez;
 	}
@@ -2151,7 +3750,7 @@ GeometryXD.prototype = {
 		var a = semiaxis_a_ox;
 		var b = semiaxis_b_oy;
 		if(!rad) {
-			a = this.radians(a);
+			a = a / 180 * Math.PI;
 		}
 		return [a * Math.cos(u),b * Math.sin(u)];
 	}
@@ -2160,8 +3759,8 @@ GeometryXD.prototype = {
 			rad = false;
 		}
 		var rez = null;
-		var a0 = rad ? this.degrees(angle0) : angle0;
-		var a1 = rad ? this.degrees(angle1) : angle1;
+		var a0 = rad ? angle0 * 180 / Math.PI : angle0;
+		var a1 = rad ? angle1 * 180 / Math.PI : angle1;
 		if(a0 > 90) {
 			a0 = 90;
 		} else if(a0 < 0) {
@@ -2190,7 +3789,13 @@ GeometryXD.prototype = {
 		while(_g1 < _g2.length) {
 			var a = _g2[_g1];
 			++_g1;
-			_g.push(this.ellipse2Ddot(a,ae,be,rad));
+			var u = a;
+			var a2 = ae;
+			var b = be;
+			if(!rad) {
+				a2 = a2 / 180 * Math.PI;
+			}
+			_g.push([a2 * Math.cos(u),b * Math.sin(u)]);
 		}
 		rez = _g;
 		return rez;
@@ -2205,16 +3810,46 @@ GeometryXD.prototype = {
 		var vb = vec3D_b_ox;
 		var a = semiaxis_a_ox;
 		var b = semiaxis_b_oy;
-		var dxdy = this.curve2D_4dots_elliptic_shape_restricted_to_quarter(angle0,angle1,a,b,rad);
-		var _g = [];
-		var _g1 = 0;
-		while(_g1 < dxdy.length) {
-			var i = dxdy[_g1];
-			++_g1;
-			_g.push(this.dotXDoffset(this.dotXDoffset(tc,va,i[0]),vb,i[1]));
+		if(tc.length == 3 && va.length == 3 && vb.length == 3 && this.vecXDnorm(va) > 0 && this.vecXDnorm(vb) > 0) {
+			var dxdy = this.curve2D_4dots_elliptic_shape_restricted_to_quarter(angle0,angle1,a,b,rad);
+			var _g = [];
+			var _g1 = 0;
+			while(_g1 < dxdy.length) {
+				var i = dxdy[_g1];
+				++_g1;
+				_g.push(this.dotXDoffset(this.dotXDoffset(tc,va,i[0]),vb,i[1]));
+			}
+			rez = _g;
+			var rez1 = null;
+			var rez2;
+			if(rez.length == 4 && rez[0].length == 3) {
+				var rez3 = null;
+				var al = rez.length;
+				if(al > 1) {
+					rez3 = true;
+					var size = rez[0].length;
+					var _g11 = 1;
+					var _g2 = al;
+					while(_g11 < _g2) {
+						var i1 = _g11++;
+						if(size != rez[i1].length) {
+							rez3 = false;
+						}
+					}
+				} else {
+					rez3 = true;
+				}
+				rez2 = rez3;
+			} else {
+				rez2 = false;
+			}
+			if(rez2) {
+				var dot_one = this.beziercubic3D_support_dot_one(rez);
+				var dot_two = this.beziercubic3D_support_dot_two(rez);
+				rez1 = [rez[0],dot_one,dot_two,rez[3]];
+			}
+			rez = rez1;
 		}
-		rez = _g;
-		rez = this.beziercubic3D_follow_4dots_trajectory(rez);
 		return rez;
 	}
 	,angle_required_to_place_curve_on_ellipse: function(curve_length,semiaxis_a_ox,semiaxis_b_oy,angle0,rad) {
@@ -2229,18 +3864,28 @@ GeometryXD.prototype = {
 		var le = 0;
 		var xy = null;
 		if(cl > 0 && a > 0 && b > 0) {
-			var xy0 = this.ellipse2Ddot(u,a,b,rad);
+			var u1 = u;
+			var a1 = a;
+			var b1 = b;
+			if(!rad) {
+				a1 = a1 / 180 * Math.PI;
+			}
+			var xy0 = [a1 * Math.cos(u1),b1 * Math.sin(u1)];
 			if(rad) {
-				u = this.degrees(u);
+				u = u * 180 / Math.PI;
 			}
 			var _g = 1;
 			while(_g < 361) {
 				var ue = _g++;
-				xy = this.ellipse2Ddot(u + ue,a,b);
-				le += this.vecXDmod(this.vecXD(xy0,xy));
+				var u2 = u + ue;
+				var a2 = a;
+				var b2 = b;
+				a2 = a2 / 180 * Math.PI;
+				xy = [a2 * Math.cos(u2),b2 * Math.sin(u2)];
+				le += this.vecXDnorm(this.vecXD(xy0,xy));
 				if(le >= cl) {
 					if(rad) {
-						return this.radians(ue);
+						return ue / 180 * Math.PI;
 					} else {
 						return ue;
 					}
@@ -2248,7 +3893,7 @@ GeometryXD.prototype = {
 				xy0 = xy;
 			}
 			if(rad) {
-				rez = this.radians(360);
+				rez = 2. * Math.PI;
 			} else {
 				rez = 360;
 			}
@@ -2257,7 +3902,73 @@ GeometryXD.prototype = {
 	}
 	,polygon3D_inside_ellipse: function(dot3D,vec3Dsemiaxes,semiaxes,angle_proportions) {
 		var rez = null;
-		if(dot3D.length != 3 || vec3Dsemiaxes.length != 4 || !this.vecXDfieldsamesize(vec3Dsemiaxes) || semiaxes.length != 4 || angle_proportions.length < 1 || this.negative_inside_F(angle_proportions) || this.sum_F(angle_proportions) == 0) {
+		var tmp;
+		var tmp1;
+		var tmp2;
+		var tmp3;
+		var tmp4;
+		if(!(dot3D.length != 3 || vec3Dsemiaxes.length != 4)) {
+			var rez1 = null;
+			var al = vec3Dsemiaxes.length;
+			if(al > 1) {
+				rez1 = true;
+				var size = vec3Dsemiaxes[0].length;
+				var _g1 = 1;
+				var _g = al;
+				while(_g1 < _g) {
+					var i = _g1++;
+					if(size != vec3Dsemiaxes[i].length) {
+						rez1 = false;
+					}
+				}
+			} else {
+				rez1 = true;
+			}
+			tmp4 = !rez1;
+		} else {
+			tmp4 = true;
+		}
+		if(!tmp4) {
+			tmp3 = semiaxes.length != 4;
+		} else {
+			tmp3 = true;
+		}
+		if(!tmp3) {
+			tmp2 = angle_proportions.length < 1;
+		} else {
+			tmp2 = true;
+		}
+		if(!tmp2) {
+			var rez2 = false;
+			var _g2 = 0;
+			while(_g2 < angle_proportions.length) {
+				var i1 = angle_proportions[_g2];
+				++_g2;
+				if(i1 < 0) {
+					rez2 = true;
+				}
+			}
+			tmp1 = rez2;
+		} else {
+			tmp1 = true;
+		}
+		if(!tmp1) {
+			var rez3 = null;
+			var al1 = angle_proportions.length;
+			if(al1 > 0) {
+				rez3 = 0;
+				var _g11 = 0;
+				var _g3 = al1;
+				while(_g11 < _g3) {
+					var i2 = _g11++;
+					rez3 += i2;
+				}
+			}
+			tmp = rez3 == 0;
+		} else {
+			tmp = true;
+		}
+		if(tmp) {
 			return rez;
 		}
 		var t0 = dot3D;
@@ -2271,7 +3982,18 @@ GeometryXD.prototype = {
 		var bd = semiaxes[3];
 		var doli = angle_proportions;
 		var u = 0;
-		var x = 360 / this.sum_F(doli);
+		var rez4 = null;
+		var al2 = doli.length;
+		if(al2 > 0) {
+			rez4 = 0;
+			var _g12 = 0;
+			var _g4 = al2;
+			while(_g12 < _g4) {
+				var i3 = _g12++;
+				rez4 += i3;
+			}
+		}
+		var x = 360 / rez4;
 		var axis_a;
 		var axis_b;
 		var dlina_a;
@@ -2281,15 +4003,15 @@ GeometryXD.prototype = {
 		var vv;
 		var dd;
 		rez = [t0];
-		var _g = 0;
-		while(_g < doli.length) {
-			var i = doli[_g];
-			++_g;
+		var _g5 = 0;
+		while(_g5 < doli.length) {
+			var i4 = doli[_g5];
+			++_g5;
 			axis_a = va;
 			dlina_a = a;
 			axis_b = vb;
 			dlina_b = b;
-			u += i * x;
+			u += i4 * x;
 			if(u > 90 && u <= 270) {
 				axis_a = vad;
 				dlina_a = ad;
@@ -2299,24 +4021,58 @@ GeometryXD.prototype = {
 				dlina_b = bd;
 			}
 			v = axis_a;
-			d = dlina_a * Math.abs(Math.cos(this.radians(u)));
+			d = dlina_a * Math.abs(Math.cos(u / 180 * Math.PI));
 			vv = axis_b;
-			dd = dlina_b * Math.abs(Math.sin(this.radians(u)));
+			dd = dlina_b * Math.abs(Math.sin(u / 180 * Math.PI));
 			rez.push(this.dotXDoffset(this.dotXDoffset(t0,v,d),vv,dd));
 		}
 		return rez;
 	}
 	,polygon3D_vec3Dfield_distance: function(dot3D,vec3Dfield,distances) {
 		var rez = null;
-		if(dot3D.length != 3 || !this.vecXDfieldsamesize(vec3Dfield) || vec3Dfield.length != distances.length || vec3Dfield[0].length != 3) {
+		var tmp;
+		var tmp1;
+		var tmp2;
+		if(dot3D.length == 3) {
+			var rez1 = null;
+			var al = vec3Dfield.length;
+			if(al > 1) {
+				rez1 = true;
+				var size = vec3Dfield[0].length;
+				var _g1 = 1;
+				var _g = al;
+				while(_g1 < _g) {
+					var i = _g1++;
+					if(size != vec3Dfield[i].length) {
+						rez1 = false;
+					}
+				}
+			} else {
+				rez1 = true;
+			}
+			tmp2 = !rez1;
+		} else {
+			tmp2 = true;
+		}
+		if(!tmp2) {
+			tmp1 = vec3Dfield.length != distances.length;
+		} else {
+			tmp1 = true;
+		}
+		if(!tmp1) {
+			tmp = vec3Dfield[0].length != 3;
+		} else {
+			tmp = true;
+		}
+		if(tmp) {
 			return rez;
 		}
 		rez = [dot3D];
-		var _g1 = 0;
-		var _g = vec3Dfield.length;
-		while(_g1 < _g) {
-			var i = _g1++;
-			rez.push(this.dotXDoffset(dot3D,vec3Dfield[i],distances[i]));
+		var _g11 = 0;
+		var _g2 = vec3Dfield.length;
+		while(_g11 < _g2) {
+			var i1 = _g11++;
+			rez.push(this.dotXDoffset(dot3D,vec3Dfield[i1],distances[i1]));
 		}
 		return rez;
 	}
@@ -2330,14 +4086,25 @@ GeometryXD.prototype = {
 		if(t.length != 3 || vn.length != 3 || va.length != 3 || ap.length != d.length || this.vecXDparalleled(va,vn)) {
 			return rez;
 		}
-		var x = 360 / this.sum_F(ap);
+		var rez1 = null;
+		var al = ap.length;
+		if(al > 0) {
+			rez1 = 0;
+			var _g1 = 0;
+			var _g = al;
+			while(_g1 < _g) {
+				var i = _g1++;
+				rez1 += i;
+			}
+		}
+		var x = 360 / rez1;
 		va = this.projection_vec3D_on_plane3D(va,[vn[0],vn[1],vn[2],0]);
 		rez = [t];
-		var _g1 = 0;
-		var _g = d.length;
-		while(_g1 < _g) {
-			var i = _g1++;
-			rez.push(this.dotXDoffset(t,this.vec3Drotate(va,vn,x * ap[i]),distances[i]));
+		var _g11 = 0;
+		var _g2 = d.length;
+		while(_g11 < _g2) {
+			var i1 = _g11++;
+			rez.push(this.dotXDoffset(t,this.vec3Drotate(va,vn,x * ap[i1]),distances[i1]));
 		}
 		return rez;
 	}
@@ -2363,7 +4130,7 @@ GeometryXD.prototype = {
 			_g.push(plane3D[i]);
 		}
 		var vp = _g;
-		if(this.vecXDparalleled(vec3D,vp) || this.vecXDmod(vec3D) == 0 || this.vecXDmod(vp) == 0) {
+		if(this.vecXDparalleled(vec3D,vp) || this.vecXDnorm(vec3D) == 0 || this.vecXDnorm(vp) == 0) {
 			return rez;
 		}
 		rez = vec3D;
@@ -2382,8 +4149,8 @@ GeometryXD.prototype = {
 		var v2 = vec3D2;
 		var v1l = v1.length;
 		var v2l = v2.length;
-		var v1mod = this.vecXDmod(v1);
-		var v2mod = this.vecXDmod(v2);
+		var v1mod = this.vecXDnorm(v1);
+		var v2mod = this.vecXDnorm(v2);
 		if(v1l != 3 || v2l != 3 || v1mod == 0 || v2mod == 0) {
 			return rez;
 		}
@@ -2398,7 +4165,7 @@ GeometryXD.prototype = {
 			_g.push(p[i]);
 		}
 		var vn = _g;
-		if(this.vecXDmod(vn) == 0) {
+		if(this.vecXDnorm(vn) == 0) {
 			return rez;
 		}
 		rez = 0;
@@ -2410,7 +4177,7 @@ GeometryXD.prototype = {
 		var pvn = this.vecXDparalleled(pv1,pv2) ? vn : this.vec3Dnormal(pv1,pv2);
 		var uvnpvn = this.vecXDangle(vn,pvn,rad);
 		var uvv = this.vecXDangle(v1,v2,rad);
-		var uznak = rad ? this.radians(90) : 90;
+		var uznak = rad ? 0.5 * Math.PI : 90;
 		if(uvnpvn > uznak) {
 			rez = -uvv;
 		} else {

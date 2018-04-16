@@ -34,10 +34,10 @@ function ring_trajectory(dot,vn,va,r){
 	var a3 = [];
 	var a4 = [];
 	
-	var ac1 = geo.curve3Dbeziercubic_3dots(dot,ta,tb);
-	var ac2 = geo.curve3Dbeziercubic_3dots(dot,tb,tad);
-	var ac3 = geo.curve3Dbeziercubic_3dots(dot,tad,tbd);
-	var ac4 = geo.curve3Dbeziercubic_3dots(dot,tbd,ta);
+	var ac1 = geo.curve3D_3dots(dot,ta,tb);
+	var ac2 = geo.curve3D_3dots(dot,tb,tad);
+	var ac3 = geo.curve3D_3dots(dot,tad,tbd);
+	var ac4 = geo.curve3D_3dots(dot,tbd,ta);
 	
 	//curves for threejs
 	for (i=0;i<4;i++){
