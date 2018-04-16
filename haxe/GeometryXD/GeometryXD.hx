@@ -7,9 +7,9 @@ package;
 **/
 class GeometryXD{
     /**
-      trace `GeometryXD` message in time of initialisation
+      trace `GeometryXD is ready for use` message in time of initialisation
     **/
-    public static function main(){trace("GeometryXD");}
+    public static function main(){trace("GeometryXD is ready for use");}
     /**
       return true if incoming Int Array have at least one positive element
       @param a - incoming array
