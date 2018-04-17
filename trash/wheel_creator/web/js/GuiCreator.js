@@ -119,6 +119,10 @@ function size_gui_creator(){
     table.appendChild(size_gui_tbody());
     var box = document.getElementById("tab_c1");
     box.appendChild(table);
+    //add sheme svg
+    var img = document.createElement('img');
+    img.src = "img/size200260.svg";
+    box.appendChild(img);
 }
 
 function td_cbox(cboxid, checked = false, title = ""){

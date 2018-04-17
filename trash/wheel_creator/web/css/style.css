@@ -98,7 +98,7 @@ input {vertical-align: middle;}
 	/* padding: 20px 25px; */
 	position: relative;
 	z-index: 2;
-	height: 400px;}
+	height: 537px;}
 .tabs_cont > div {
 	position: absolute;
 	left: -9999px;
@@ -115,7 +115,7 @@ input {vertical-align: middle;}
 	position: static;
 	left: 0;
 	opacity: 1;}
-table.data{ background:yellow;}
+/* table.data{ background:yellow;} */
 /* table.data td input{width:55px !important;height:35 px !important;background:lightgreen !important;left:0;} */
 
 
