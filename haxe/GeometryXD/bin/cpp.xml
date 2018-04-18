@@ -1,0 +1,3214 @@
+<haxe>
+	<class path="Array" params="T" file="/usr/share/haxe/std/Array.hx" extern="1">
+		<length public="1" set="null">
+			<x path="Int"/>
+			<haxe_doc>The length of `this` Array.</haxe_doc>
+		</length>
+		<concat public="1" set="method">
+			<f a="a">
+				<c path="Array"><c path="Array.T"/></c>
+				<c path="Array"><c path="Array.T"/></c>
+			</f>
+			<haxe_doc>Returns a new Array by appending the elements of `a` to the elements of
+		`this` Array.
+
+		This operation does not modify `this` Array.
+
+		If `a` is the empty Array `[]`, a copy of `this` Array is returned.
+
+		The length of the returned Array is equal to the sum of `this.length`
+		and `a.length`.
+
+		If `a` is `null`, the result is unspecified.</haxe_doc>
+		</concat>
+		<join public="1" set="method">
+			<f a="sep">
+				<c path="String"/>
+				<c path="String"/>
+			</f>
+			<haxe_doc>Returns a string representation of `this` Array, with `sep` separating
+		each element.
+
+		The result of this operation is equal to `Std.string(this[0]) + sep +
+		Std.string(this[1]) + sep + ... + sep + Std.string(this[this.length-1])`
+
+		If `this` is the empty Array `[]`, the result is the empty String `""`.
+		If `this` has exactly one element, the result is equal to a call to
+		`Std.string(this[0])`.
+
+		If `sep` is null, the result is unspecified.</haxe_doc>
+		</join>
+		<pop public="1" set="method">
+			<f a=""><t path="Null"><c path="Array.T"/></t></f>
+			<haxe_doc>Removes the last element of `this` Array and returns it.
+
+		This operation modifies `this` Array in place.
+
+		If `this` has at least one element, `this.length` will decrease by 1.
+
+		If `this` is the empty Array `[]`, null is returned and the length
+		remains 0.</haxe_doc>
+		</pop>
+		<push public="1" set="method">
+			<f a="x">
+				<c path="Array.T"/>
+				<x path="Int"/>
+			</f>
+			<haxe_doc>Adds the element `x` at the end of `this` Array and returns the new
+		length of `this` Array.
+
+		This operation modifies `this` Array in place.
+
+		`this.length` increases by 1.</haxe_doc>
+		</push>
+		<reverse public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc><![CDATA[Reverse the order of elements of `this` Array.
+
+		This operation modifies `this` Array in place.
+
+		If `this.length < 2`, `this` remains unchanged.]]></haxe_doc>
+		</reverse>
+		<shift public="1" set="method">
+			<f a=""><t path="Null"><c path="Array.T"/></t></f>
+			<haxe_doc>Removes the first element of `this` Array and returns it.
+
+		This operation modifies `this` Array in place.
+
+		If `this` has at least one element, `this`.length and the index of each
+		remaining element is decreased by 1.
+
+		If `this` is the empty Array `[]`, `null` is returned and the length
+		remains 0.</haxe_doc>
+		</shift>
+		<slice public="1" set="method">
+			<f a="pos:?end">
+				<x path="Int"/>
+				<x path="Int"/>
+				<c path="Array"><c path="Array.T"/></c>
+			</f>
+			<haxe_doc>Creates a shallow copy of the range of `this` Array, starting at and
+		including `pos`, up to but not including `end`.
+
+		This operation does not modify `this` Array.
+
+		The elements are not copied and retain their identity.
+
+		If `end` is omitted or exceeds `this.length`, it defaults to the end of
+		`this` Array.
+
+		If `pos` or `end` are negative, their offsets are calculated from the
+		end of `this` Array by `this.length + pos` and `this.length + end`
+		respectively. If this yields a negative value, 0 is used instead.
+
+		If `pos` exceeds `this.length` or if `end` is less than or equals
+		`pos`, the result is `[]`.</haxe_doc>
+		</slice>
+		<sort public="1" set="method">
+			<f a="f">
+				<f a=":">
+					<c path="Array.T"/>
+					<c path="Array.T"/>
+					<x path="Int"/>
+				</f>
+				<x path="Void"/>
+			</f>
+			<haxe_doc><![CDATA[Sorts `this` Array according to the comparison function `f`, where
+		`f(x,y)` returns 0 if x == y, a positive Int if x > y and a
+		negative Int if x < y.
+
+		This operation modifies `this` Array in place.
+
+		The sort operation is not guaranteed to be stable, which means that the
+		order of equal elements may not be retained. For a stable Array sorting
+		algorithm, `haxe.ds.ArraySort.sort()` can be used instead.
+
+		If `f` is null, the result is unspecified.]]></haxe_doc>
+		</sort>
+		<splice public="1" set="method">
+			<f a="pos:len">
+				<x path="Int"/>
+				<x path="Int"/>
+				<c path="Array"><c path="Array.T"/></c>
+			</f>
+			<haxe_doc><![CDATA[Removes `len` elements from `this` Array, starting at and including
+		`pos`, an returns them.
+
+		This operation modifies `this` Array in place.
+
+		If `len` is < 0 or `pos` exceeds `this`.length, an empty Array [] is 
+		returned and `this` Array is unchanged.
+
+		If `pos` is negative, its value is calculated from the end	of `this`
+		Array by `this.length + pos`. If this yields a negative value, 0 is
+		used instead.
+
+		If the sum of the resulting values for `len` and `pos` exceed
+		`this.length`, this operation will affect the elements from `pos` to the
+		end of `this` Array.
+
+		The length of the returned Array is equal to the new length of `this`
+		Array subtracted from the original length of `this` Array. In other
+		words, each element of the original `this` Array either remains in
+		`this` Array or becomes an element of the returned Array.]]></haxe_doc>
+		</splice>
+		<toString public="1" set="method">
+			<f a=""><c path="String"/></f>
+			<haxe_doc>Returns a string representation of `this` Array.
+
+		The result will include the individual elements' String representations
+		separated by comma. The enclosing [ ] may be missing on some platforms,
+		use `Std.string()` to get a String representation that is consistent
+		across platforms.</haxe_doc>
+		</toString>
+		<unshift public="1" set="method">
+			<f a="x">
+				<c path="Array.T"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>Adds the element `x` at the start of `this` Array.
+
+		This operation modifies `this` Array in place.
+
+		`this.length` and the index of each Array element increases by 1.</haxe_doc>
+		</unshift>
+		<insert public="1" set="method">
+			<f a="pos:x">
+				<x path="Int"/>
+				<c path="Array.T"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>Inserts the element `x` at the position `pos`.
+
+		This operation modifies `this` Array in place.
+
+		The offset is calculated like so:
+
+		- If `pos` exceeds `this.length`, the offset is `this.length`.
+		- If `pos` is negative, the offset is calculated from the end of `this`
+		  Array, i.e. `this.length + pos`. If this yields a negative value, the
+		  offset is 0.
+		- Otherwise, the offset is `pos`.
+
+		If the resulting offset does not exceed `this.length`, all elements from
+		and including that offset to the end of `this` Array are moved one index
+		ahead.</haxe_doc>
+		</insert>
+		<remove public="1" set="method">
+			<f a="x">
+				<c path="Array.T"/>
+				<x path="Bool"/>
+			</f>
+			<haxe_doc>Removes the first occurrence of `x` in `this` Array.
+
+		This operation modifies `this` Array in place.
+
+		If `x` is found by checking standard equality, it is removed from `this`
+		Array and all following elements are reindexed accordingly. The function
+		then returns true.
+
+		If `x` is not found, `this` Array is not changed and the function
+		returns false.</haxe_doc>
+		</remove>
+		<indexOf public="1" set="method">
+			<f a="x:?fromIndex">
+				<c path="Array.T"/>
+				<x path="Int"/>
+				<x path="Int"/>
+			</f>
+			<haxe_doc>Returns position of the first occurrence of `x` in `this` Array, searching front to back.
+
+		If `x` is found by checking standard equality, the function returns its index.
+
+		If `x` is not found, the function returns -1.
+
+		If `fromIndex` is specified, it will be used as the starting index to search from,
+		otherwise search starts with zero index. If it is negative, it will be taken as the
+		offset from the end of `this` Array to compute the starting index. If given or computed
+		starting index is less than 0, the whole array will be searched, if it is greater than
+		or equal to the length of `this` Array, the function returns -1.</haxe_doc>
+		</indexOf>
+		<lastIndexOf public="1" set="method">
+			<f a="x:?fromIndex">
+				<c path="Array.T"/>
+				<x path="Int"/>
+				<x path="Int"/>
+			</f>
+			<haxe_doc>Returns position of the last occurrence of `x` in `this` Array, searching back to front.
+
+		If `x` is found by checking standard equality, the function returns its index.
+
+		If `x` is not found, the function returns -1.
+
+		If `fromIndex` is specified, it will be used as the starting index to search from,
+		otherwise search starts with the last element index. If it is negative, it will be
+		taken as the offset from the end of `this` Array to compute the starting index. If
+		given or computed starting index is greater than or equal to the length of `this` Array,
+		the whole array will be searched, if it is less than 0, the function returns -1.</haxe_doc>
+		</lastIndexOf>
+		<copy public="1" set="method">
+			<f a=""><c path="Array"><c path="Array.T"/></c></f>
+			<haxe_doc>Returns a shallow copy of `this` Array.
+
+		The elements are not copied and retain their identity, so
+		`a[i] == a.copy()[i]` is true for any valid `i`. However,
+		`a == a.copy()` is always false.</haxe_doc>
+		</copy>
+		<iterator public="1" set="method">
+			<f a=""><t path="Iterator"><c path="Array.T"/></t></f>
+			<haxe_doc>Returns an iterator of the Array values.</haxe_doc>
+		</iterator>
+		<map public="1" params="S" set="method">
+			<f a="f">
+				<f a="">
+					<c path="Array.T"/>
+					<c path="map.S"/>
+				</f>
+				<c path="Array"><c path="map.S"/></c>
+			</f>
+			<haxe_doc>Creates a new Array by applying function `f` to all elements of `this`.
+
+		The order of elements is preserved.
+
+		If `f` is null, the result is unspecified.</haxe_doc>
+		</map>
+		<filter public="1" set="method">
+			<f a="f">
+				<f a="">
+					<c path="Array.T"/>
+					<x path="Bool"/>
+				</f>
+				<c path="Array"><c path="Array.T"/></c>
+			</f>
+			<haxe_doc>Returns an Array containing those elements of `this` for which `f`
+		returned true.
+
+		The individual elements are not duplicated and retain their identity.
+
+		If `f` is null, the result is unspecified.</haxe_doc>
+		</filter>
+		<new public="1" set="method">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>Creates a new Array.</haxe_doc>
+		</new>
+		<haxe_doc>An Array is a storage for values. You can access it using indexes or
+	with its API.
+
+	@see https://haxe.org/manual/std-Array.html
+	@see https://haxe.org/manual/lf-array-comprehension.html</haxe_doc>
+	</class>
+	<abstract path="Class" params="T" file="/usr/share/haxe/std/Class.hx">
+		<this><x path="Class"><c path="Class.T"/></x></this>
+		<haxe_doc>An abstract type that represents a Class.
+
+	See `Type` for the Haxe Reflection API.
+
+	@see https://haxe.org/manual/types-class-instance.html</haxe_doc>
+		<meta>
+			<m n=":coreType"/>
+			<m n=":runtimeValue"/>
+		</meta>
+	</abstract>
+	<abstract path="Enum" params="T" file="/usr/share/haxe/std/Enum.hx">
+		<this><x path="Enum"><c path="Enum.T"/></x></this>
+		<haxe_doc>An abstract type that represents an Enum type.
+
+	The corresponding enum instance type is `EnumValue`.
+
+	See `Type` for the Haxe Reflection API.
+
+	@see https://haxe.org/manual/types-enum-instance.html</haxe_doc>
+		<meta>
+			<m n=":coreType"/>
+			<m n=":runtimeValue"/>
+		</meta>
+	</abstract>
+	<abstract path="EnumValue" params="" file="/usr/share/haxe/std/EnumValue.hx">
+		<this><x path="EnumValue"/></this>
+		<haxe_doc>An abstract type that represents any enum value.
+	See `Type` for the Haxe Reflection API.
+
+	@see https://haxe.org/manual/types-enum-instance.html</haxe_doc>
+		<meta><m n=":coreType"/></meta>
+	</abstract>
+	<class path="Math" params="" file="/usr/share/haxe/std/Math.hx" extern="1">
+		<PI public="1" set="null" static="1">
+			<x path="Float"/>
+			<haxe_doc>Represents the ratio of the circumference of a circle to its diameter,
+		specified by the constant, π. `PI` is approximately 3.141592653589793.</haxe_doc>
+		</PI>
+		<NEGATIVE_INFINITY public="1" set="null" static="1">
+			<x path="Float"/>
+			<haxe_doc>A special `Float` constant which denotes negative infinity.
+
+		For example, this is the result of -1.0 / 0.0.
+
+		Operations with `NEGATIVE_INFINITY` as an operand may result in
+		`NEGATIVE_INFINITY`, `POSITIVE_INFINITY` or `NaN`.
+
+		If this constant is converted to an `Int`, e.g. through `Std.int()`, the
+		result is unspecified.</haxe_doc>
+		</NEGATIVE_INFINITY>
+		<POSITIVE_INFINITY public="1" set="null" static="1">
+			<x path="Float"/>
+			<haxe_doc>A special `Float` constant which denotes positive infinity.
+
+		For example, this is the result of 1.0 / 0.0.
+
+		Operations with `POSITIVE_INFINITY` as an operand may result in
+		`NEGATIVE_INFINITY`, `POSITIVE_INFINITY` or `NaN`.
+
+		If this constant is converted to an `Int`, e.g. through `Std.int()`, the
+		result is unspecified.</haxe_doc>
+		</POSITIVE_INFINITY>
+		<NaN public="1" set="null" static="1">
+			<x path="Float"/>
+			<haxe_doc><![CDATA[A special `Float` constant which denotes an invalid number.
+
+		NaN stands for "Not a Number". It occurs when a mathematically incorrect
+		operation is executed, such as taking the square root of a negative
+		number: Math.sqrt(-1).
+
+		All further operations with `NaN` as an operand will result in `NaN`.
+
+		If this constant is converted to an `Int`, e.g. through `Std.int()`, the
+		result is unspecified.
+
+		In order to test if a value is `NaN`, you should use `Math.isNaN()` function.
+
+		@php In PHP versions prior to 5.3.1 VC 9 there may be unexpected
+		results when performing arithmetic operations with `NaN` on Windows,
+		see <https://bugs.php.net/bug.php?id=42143>]]></haxe_doc>
+		</NaN>
+		<abs public="1" set="method" static="1">
+			<f a="v">
+				<x path="Float"/>
+				<x path="Float"/>
+			</f>
+			<haxe_doc>Returns the absolute value of `v`.
+
+		If `v` is positive or 0, the result is unchanged. Otherwise the result
+		is -`v`.
+
+		If `v` is `NEGATIVE_INFINITY` or `POSITIVE_INFINITY`, the result is
+		`POSITIVE_INFINITY`.
+
+		If `v` is `NaN`, the result is `NaN`.</haxe_doc>
+		</abs>
+		<min public="1" set="method" static="1">
+			<f a="a:b">
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Float"/>
+			</f>
+			<haxe_doc>Returns the smaller of values `a` and `b`.
+
+		If `a` or `b` are `NaN`, the result is `NaN`.
+		If `a` or `b` are `NEGATIVE_INFINITY`, the result is `NEGATIVE_INFINITY`.
+		If `a` and `b` are `POSITIVE_INFINITY`, the result is `POSITIVE_INFINITY`.</haxe_doc>
+		</min>
+		<max public="1" set="method" static="1">
+			<f a="a:b">
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Float"/>
+			</f>
+			<haxe_doc>Returns the greater of values `a` and `b`.
+
+		If `a` or `b` are `NaN`, the result is `NaN`.
+		If `a` or `b` are `POSITIVE_INFINITY`, the result is `POSITIVE_INFINITY`.
+		If `a` and `b` are `NEGATIVE_INFINITY`, the result is `NEGATIVE_INFINITY`.</haxe_doc>
+		</max>
+		<sin public="1" set="method" static="1">
+			<f a="v">
+				<x path="Float"/>
+				<x path="Float"/>
+			</f>
+			<haxe_doc>Returns the trigonometric sine of the specified angle `v`, in radians.
+
+		If `v` is `NaN` or infinite, the result is `NaN`.</haxe_doc>
+		</sin>
+		<cos public="1" set="method" static="1">
+			<f a="v">
+				<x path="Float"/>
+				<x path="Float"/>
+			</f>
+			<haxe_doc>Returns the trigonometric cosine of the specified angle `v`, in radians.
+
+		If `v` is `NaN` or infinite, the result is `NaN`.</haxe_doc>
+		</cos>
+		<tan public="1" set="method" static="1">
+			<f a="v">
+				<x path="Float"/>
+				<x path="Float"/>
+			</f>
+			<haxe_doc>Returns the trigonometric tangent of the specified angle `v`, in radians.
+
+		If `v` is `NaN` or infinite, the result is `NaN`.</haxe_doc>
+		</tan>
+		<asin public="1" set="method" static="1">
+			<f a="v">
+				<x path="Float"/>
+				<x path="Float"/>
+			</f>
+			<haxe_doc>Returns the trigonometric arc of the specified angle `v`, in radians.
+
+		If `v` is `NaN` or infinite, the result is `NaN`.</haxe_doc>
+		</asin>
+		<acos public="1" set="method" static="1">
+			<f a="v">
+				<x path="Float"/>
+				<x path="Float"/>
+			</f>
+			<haxe_doc>Returns the trigonometric arc cosine of the specified angle `v`,
+		in radians.
+
+		If `v` is `NaN` or infinite, the result is `NaN`.</haxe_doc>
+		</acos>
+		<atan public="1" set="method" static="1">
+			<f a="v">
+				<x path="Float"/>
+				<x path="Float"/>
+			</f>
+			<haxe_doc>Returns the trigonometric arc tangent of the specified angle `v`,
+		in radians.
+
+		If `v` is `NaN` or infinite, the result is `NaN`.</haxe_doc>
+		</atan>
+		<atan2 public="1" set="method" static="1">
+			<f a="y:x">
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Float"/>
+			</f>
+			<haxe_doc>Returns the trigonometric arc tangent whose tangent is the quotient of
+		two specified numbers, in radians.
+
+		If parameter `x` or `y`  is `NaN`, `NEGATIVE_INFINITY` or `POSITIVE_INFINITY`,
+		the result is `NaN`.</haxe_doc>
+		</atan2>
+		<exp public="1" set="method" static="1">
+			<f a="v">
+				<x path="Float"/>
+				<x path="Float"/>
+			</f>
+			<haxe_doc>Returns Euler's number, raised to the power of `v`.
+
+		exp(1.0) is approximately 2.718281828459.
+
+		If `v` is `POSITIVE_INFINITY`, the result is `POSITIVE_INFINITY`.
+		If `v` is `NEGATIVE_INFINITY`, the result is `0.0`.
+		If `v` is `NaN`, the result is `NaN`.</haxe_doc>
+		</exp>
+		<log public="1" set="method" static="1">
+			<f a="v">
+				<x path="Float"/>
+				<x path="Float"/>
+			</f>
+			<haxe_doc>Returns the natural logarithm of `v`.
+
+		This is the mathematical inverse operation of exp,
+		i.e. `log(exp(v)) == v` always holds.
+
+		If `v` is negative (including `NEGATIVE_INFINITY`) or `NaN`, the result
+		is `NaN`.
+		If `v` is `POSITIVE_INFINITY`, the result is `POSITIVE_INFINITY`.
+		If `v` is `0.0`, the result is `NEGATIVE_INFINITY`.</haxe_doc>
+		</log>
+		<pow public="1" set="method" static="1">
+			<f a="v:exp">
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Float"/>
+			</f>
+			<haxe_doc>Returns a specified base `v` raised to the specified power `exp`.</haxe_doc>
+		</pow>
+		<sqrt public="1" set="method" static="1">
+			<f a="v">
+				<x path="Float"/>
+				<x path="Float"/>
+			</f>
+			<haxe_doc>Returns the square root of `v`.
+
+		If `v` is negative (including `NEGATIVE_INFINITY`) or `NaN`, the result
+		is `NaN`.
+		If `v` is `POSITIVE_INFINITY`, the result is `POSITIVE_INFINITY`.
+		If `v` is `0.0`, the result is `0.0`.</haxe_doc>
+		</sqrt>
+		<round public="1" set="method" static="1">
+			<f a="v">
+				<x path="Float"/>
+				<x path="Int"/>
+			</f>
+			<haxe_doc>Rounds `v` to the nearest integer value.
+
+		Ties are rounded up, so that `0.5` becomes `1` and `-0.5` becomes `0`.
+
+		If `v` is outside of the signed `Int32` range, or is `NaN`, `NEGATIVE_INFINITY`
+		or `POSITIVE_INFINITY`, the result is unspecified.</haxe_doc>
+		</round>
+		<floor public="1" set="method" static="1">
+			<f a="v">
+				<x path="Float"/>
+				<x path="Int"/>
+			</f>
+			<haxe_doc>Returns the largest integer value that is not greater than `v`.
+
+		If `v` is outside of the signed `Int32` range, or is `NaN`, `NEGATIVE_INFINITY`
+		or `POSITIVE_INFINITY`, the result is unspecified.</haxe_doc>
+		</floor>
+		<ceil public="1" set="method" static="1">
+			<f a="v">
+				<x path="Float"/>
+				<x path="Int"/>
+			</f>
+			<haxe_doc>Returns the smallest integer value that is not less than `v`.
+
+		If `v` is outside of the signed `Int32` range, or is `NaN`, `NEGATIVE_INFINITY`
+		or `POSITIVE_INFINITY`, the result is unspecified.</haxe_doc>
+		</ceil>
+		<random public="1" set="method" static="1">
+			<f a=""><x path="Float"/></f>
+			<haxe_doc>Returns a pseudo-random number which is greater than or equal to 0.0,
+		and less than 1.0.</haxe_doc>
+		</random>
+		<ffloor public="1" get="inline" set="null" line="267" static="1"><f a="v">
+	<x path="Float"/>
+	<x path="Float"/>
+</f></ffloor>
+		<fceil public="1" get="inline" set="null" line="271" static="1"><f a="v">
+	<x path="Float"/>
+	<x path="Float"/>
+</f></fceil>
+		<fround public="1" get="inline" set="null" line="275" static="1"><f a="v">
+	<x path="Float"/>
+	<x path="Float"/>
+</f></fround>
+		<isFinite public="1" set="method" static="1">
+			<f a="f">
+				<x path="Float"/>
+				<x path="Bool"/>
+			</f>
+			<haxe_doc>Tells if `f` is a finite number.
+
+		If `f` is `POSITIVE_INFINITY`, `NEGATIVE_INFINITY` or `NaN`, the result
+		is `false`, otherwise the result is `true`.</haxe_doc>
+		</isFinite>
+		<isNaN public="1" set="method" static="1">
+			<f a="f">
+				<x path="Float"/>
+				<x path="Bool"/>
+			</f>
+			<haxe_doc>Tells if `f` is not a valid number.
+
+		If `f` is `NaN`, the result is `true`, otherwise the result is `false`.
+		In particular, both `POSITIVE_INFINITY` and `NEGATIVE_INFINITY` are
+		not considered `NaN`.</haxe_doc>
+		</isNaN>
+		<haxe_doc>This class defines mathematical functions and constants.
+
+	@see https://haxe.org/manual/std-math.html</haxe_doc>
+		<meta><m n=":directlyUsed"/></meta>
+	</class>
+	<class path="Std" params="" file="/usr/share/haxe/std/Std.hx" extern="1">
+		<is public="1" set="method" static="1">
+			<f a="v:t">
+				<d/>
+				<d/>
+				<x path="Bool"/>
+			</f>
+			<haxe_doc>Tells if a value `v` is of the type `t`. Returns `false` if `v` or `t` are null.</haxe_doc>
+		</is>
+		<instance public="1" params="T:S" set="method" static="1">
+			<f a="value:c">
+				<c path="instance.T"/>
+				<x path="Class"><c path="instance.S"/></x>
+				<c path="instance.S"/>
+			</f>
+			<haxe_doc>Checks if object `value` is an instance of class `c`.
+
+		Compiles only if the class specified by `c` can be assigned to the type
+		of `value`.
+
+		This method checks if a downcast is possible. That is, if the runtime
+		type of `value` is assignable to the class specified by `c`, `value` is
+		returned. Otherwise null is returned.
+
+		This method is not guaranteed to work with interfaces or core types such
+		as `String`, `Array` and `Date`.
+
+		If `value` is null, the result is null. If `c` is null, the result is
+		unspecified.</haxe_doc>
+		</instance>
+		<string public="1" set="method" static="1">
+			<f a="s">
+				<d/>
+				<c path="String"/>
+			</f>
+			<haxe_doc>Converts any value to a String.
+
+		If `s` is of `String`, `Int`, `Float` or `Bool`, its value is returned.
+
+		If `s` is an instance of a class and that class or one of its parent classes has
+		a `toString` method, that method is called. If no such method is present, the result
+		is unspecified.
+
+		If `s` is an enum constructor without argument, the constructor's name is returned. If
+		arguments exists, the constructor's name followed by the String representations of
+		the arguments is returned.
+
+		If `s` is a structure, the field names along with their values are returned. The field order
+		and the operator separating field names and values are unspecified.
+
+		If s is null, "null" is returned.</haxe_doc>
+		</string>
+		<int public="1" set="method" static="1">
+			<f a="x">
+				<x path="Float"/>
+				<x path="Int"/>
+			</f>
+			<haxe_doc>Converts a `Float` to an `Int`, rounded towards 0.
+
+		If `x` is outside of the signed Int32 range, or is `NaN`, `NEGATIVE_INFINITY` or `POSITIVE_INFINITY`, the result is unspecified.</haxe_doc>
+		</int>
+		<parseInt public="1" set="method" static="1">
+			<f a="x">
+				<c path="String"/>
+				<t path="Null"><x path="Int"/></t>
+			</f>
+			<haxe_doc>Converts a `String` to an `Int`.
+
+		Leading whitespaces are ignored.
+
+		If `x` starts with 0x or 0X, hexadecimal notation is recognized where the following digits may
+		contain 0-9 and A-F.
+
+		Otherwise `x` is read as decimal number with 0-9 being allowed characters. `x` may also start with
+		a - to denote a negative value.
+
+		In decimal mode, parsing continues until an invalid character is detected, in which case the
+		result up to that point is returned. For hexadecimal notation, the effect of invalid characters
+		is unspecified.
+
+		Leading 0s that are not part of the 0x/0X hexadecimal notation are ignored, which means octal
+		notation is not supported.
+
+		If the input cannot be recognized, the result is `null`.</haxe_doc>
+		</parseInt>
+		<parseFloat public="1" set="method" static="1">
+			<f a="x">
+				<c path="String"/>
+				<x path="Float"/>
+			</f>
+			<haxe_doc>Converts a `String` to a `Float`.
+
+		The parsing rules for `parseInt` apply here as well, with the exception of invalid input
+		resulting in a `NaN` value instead of null.
+
+		Additionally, decimal notation may contain a single `.` to denote the start of the fractions.</haxe_doc>
+		</parseFloat>
+		<random public="1" set="method" static="1">
+			<f a="x">
+				<x path="Int"/>
+				<x path="Int"/>
+			</f>
+			<haxe_doc><![CDATA[Return a random integer between 0 included and `x` excluded.
+
+		If `x <= 1`, the result is always 0.]]></haxe_doc>
+		</random>
+		<haxe_doc>The Std class provides standard methods for manipulating basic types.</haxe_doc>
+		<meta><m n=":directlyUsed"/></meta>
+	</class>
+	<abstract path="Void" params="" file="/usr/share/haxe/std/StdTypes.hx" module="StdTypes">
+		<this><x path="Void"/></this>
+		<haxe_doc>The standard `Void` type. Only `null` values can be of the type `Void`.
+
+	@see https://haxe.org/manual/types-void.html</haxe_doc>
+		<meta><m n=":coreType"/></meta>
+	</abstract>
+	<abstract path="Float" params="" file="/usr/share/haxe/std/StdTypes.hx" module="StdTypes">
+		<this><x path="Float"/></this>
+		<haxe_doc><![CDATA[The standard `Float` type, this is a double-precision IEEE 64bit float.
+
+	On static targets, `null` cannot be assigned to Float. If this is necessary,
+	`Null<Float>` can be used instead.
+
+	`Std.int` converts a `Float` to an `Int`, rounded towards 0.
+	`Std.parseFloat` converts a `String` to a `Float`.
+
+	@see https://haxe.org/manual/types-basic-types.html
+	@see https://haxe.org/manual/types-nullability.html]]></haxe_doc>
+		<meta>
+			<m n=":coreType"/>
+			<m n=":notNull"/>
+			<m n=":runtimeValue"/>
+		</meta>
+	</abstract>
+	<abstract path="Int" params="" file="/usr/share/haxe/std/StdTypes.hx" module="StdTypes">
+		<this><x path="Int"/></this>
+		<to><icast><x path="Float"/></icast></to>
+		<haxe_doc><![CDATA[The standard `Int` type. Its precision depends on the platform.
+
+	On static targets, `null` cannot be assigned to `Int`. If this is necessary,
+	`Null<Int>` can be used instead.
+
+	`Std.int` converts a `Float` to an `Int`, rounded towards 0.
+	`Std.parseInt` converts a `String` to an `Int`.
+
+	@see https://haxe.org/manual/types-basic-types.html
+	@see https://haxe.org/manual/std-math-integer-math.html
+	@see https://haxe.org/manual/types-nullability.html]]></haxe_doc>
+		<meta>
+			<m n=":coreType"/>
+			<m n=":notNull"/>
+			<m n=":runtimeValue"/>
+		</meta>
+	</abstract>
+	<typedef path="Null" params="T" file="/usr/share/haxe/std/StdTypes.hx" module="StdTypes">
+		<c path="Null.T"/>
+		<haxe_doc>`Null` can be useful in two cases. In order to document some methods
+	that accept or can return a `null` value, or for the Flash compiler and AS3
+	generator to distinguish between base values that can be `null` and others that
+	can't.
+
+	@see https://haxe.org/manual/types-nullability.html</haxe_doc>
+	</typedef>
+	<abstract path="Bool" params="" file="/usr/share/haxe/std/StdTypes.hx" module="StdTypes">
+		<this><x path="Bool"/></this>
+		<haxe_doc><![CDATA[The standard Boolean type, which can either be `true` or `false`.
+
+	On static targets, `null` cannot be assigned to `Bool`. If this is necessary,
+	`Null<Bool>` can be used instead.
+
+	@see https://haxe.org/manual/types-bool.html
+	@see https://haxe.org/manual/types-nullability.html]]></haxe_doc>
+		<meta>
+			<m n=":coreType"/>
+			<m n=":notNull"/>
+			<m n=":runtimeValue"/>
+		</meta>
+	</abstract>
+	<abstract path="Dynamic" params="T" file="/usr/share/haxe/std/StdTypes.hx" module="StdTypes">
+		<this><x path="Dynamic"><c path="Dynamic.T"/></x></this>
+		<haxe_doc>`Dynamic` is a special type which is compatible with all other types.
+
+	Use of `Dynamic` should be minimized as it prevents several compiler
+	checks and optimizations. See `Any` type for a safer alternative for
+	representing values of any type.
+
+	@see https://haxe.org/manual/types-dynamic.html</haxe_doc>
+		<meta>
+			<m n=":coreType"/>
+			<m n=":runtimeValue"/>
+		</meta>
+	</abstract>
+	<typedef path="Iterator" params="T" file="/usr/share/haxe/std/StdTypes.hx" module="StdTypes">
+		<a>
+			<next set="method">
+				<f a=""><c path="Iterator.T"/></f>
+				<haxe_doc>Returns the current item of the `Iterator` and advances to the next one.
+
+		This method is not required to check `hasNext()` first. A call to this
+		method while `hasNext()` is `false` yields unspecified behavior.
+
+		On the other hand, iterators should not require a call to `hasNext()`
+		before the first call to `next()` if an element is available.</haxe_doc>
+			</next>
+			<hasNext set="method">
+				<f a=""><x path="Bool"/></f>
+				<haxe_doc>Returns `false` if the iteration is complete, `true` otherwise.
+
+		Usually iteration is considered to be complete if all elements of the
+		underlying data structure were handled through calls to `next()`. However,
+		in custom iterators any logic may be used to determine the completion
+		state.</haxe_doc>
+			</hasNext>
+		</a>
+		<haxe_doc>An `Iterator` is a structure that permits iteration over elements of type `T`.
+
+	Any class with matching `hasNext()` and `next()` fields is considered an `Iterator`
+	and can then be used e.g. in `for`-loops. This makes it easy to implement
+	custom iterators.
+
+	@see https://haxe.org/manual/lf-iterators.html</haxe_doc>
+	</typedef>
+	<typedef path="Iterable" params="T" file="/usr/share/haxe/std/StdTypes.hx" module="StdTypes">
+		<a><iterator set="method"><f a=""><t path="Iterator"><c path="Iterable.T"/></t></f></iterator></a>
+		<haxe_doc>An `Iterable` is a data structure which has an `iterator()` method.
+	See `Lambda` for generic functions on iterable structures.
+
+	@see https://haxe.org/manual/lf-iterators.html</haxe_doc>
+	</typedef>
+	<class path="ArrayAccess" params="T" file="/usr/share/haxe/std/StdTypes.hx" module="StdTypes" extern="1" interface="1"><haxe_doc>`ArrayAccess` is used to indicate a class that can be accessed using brackets.
+	The type parameter represents the type of the elements stored.
+
+	This interface should be used for externs only. Haxe does not support custom
+	array access on classes. However, array access can be implemented for
+	abstract types.
+
+	@see https://haxe.org/manual/types-abstract-array-access.html</haxe_doc></class>
+	<class path="String" params="" file="/usr/share/haxe/std/String.hx" extern="1">
+		<fromCharCode public="1" set="method" static="1">
+			<f a="code">
+				<x path="Int"/>
+				<c path="String"/>
+			</f>
+			<haxe_doc>Returns the String corresponding to the character code `code`.
+
+		If `code` is negative or has another invalid value, the result is
+		unspecified.</haxe_doc>
+		</fromCharCode>
+		<length public="1" set="null">
+			<x path="Int"/>
+			<haxe_doc>The number of characters in `this` String.</haxe_doc>
+		</length>
+		<toUpperCase public="1" set="method">
+			<f a=""><c path="String"/></f>
+			<haxe_doc>Returns a String where all characters of `this` String are upper case.
+
+		Affects the characters `a-z`. Other characters remain unchanged.</haxe_doc>
+		</toUpperCase>
+		<toLowerCase public="1" set="method">
+			<f a=""><c path="String"/></f>
+			<haxe_doc>Returns a String where all characters of `this` String are lower case.
+
+		Affects the characters `A-Z`. Other characters remain unchanged.</haxe_doc>
+		</toLowerCase>
+		<charAt public="1" set="method">
+			<f a="index">
+				<x path="Int"/>
+				<c path="String"/>
+			</f>
+			<haxe_doc>Returns the character at position `index` of `this` String.
+
+		If `index` is negative or exceeds `this.length`, the empty String `""`
+		is returned.</haxe_doc>
+		</charAt>
+		<charCodeAt public="1" set="method">
+			<f a="index">
+				<x path="Int"/>
+				<t path="Null"><x path="Int"/></t>
+			</f>
+			<haxe_doc>Returns the character code at position `index` of `this` String.
+
+		If `index` is negative or exceeds `this.length`, `null` is returned.
+
+		To obtain the character code of a single character, `"x".code` can be
+		used instead to inline the character code at compile time. Note that
+		this only works on String literals of length 1.</haxe_doc>
+		</charCodeAt>
+		<indexOf public="1" set="method">
+			<f a="str:?startIndex">
+				<c path="String"/>
+				<x path="Int"/>
+				<x path="Int"/>
+			</f>
+			<haxe_doc>Returns the position of the leftmost occurrence of `str` within `this`
+		String.
+
+		If `startIndex` is given, the search is performed within the substring
+		of `this` String starting from `startIndex`. Otherwise the search is
+		performed within `this` String. In either case, the returned position
+		is relative to the beginning of `this` String.
+
+		If `str` cannot be found, -1 is returned.</haxe_doc>
+		</indexOf>
+		<lastIndexOf public="1" set="method">
+			<f a="str:?startIndex">
+				<c path="String"/>
+				<x path="Int"/>
+				<x path="Int"/>
+			</f>
+			<haxe_doc>Returns the position of the rightmost occurrence of `str` within `this`
+		String.
+
+		If `startIndex` is given, the search is performed within the substring
+		of `this` String from 0 to `startIndex`. Otherwise the search is
+		performed within `this` String. In either case, the returned position
+		is relative to the beginning of `this` String.
+
+		If `str` cannot be found, -1 is returned.</haxe_doc>
+		</lastIndexOf>
+		<split public="1" set="method">
+			<f a="delimiter">
+				<c path="String"/>
+				<c path="Array"><c path="String"/></c>
+			</f>
+			<haxe_doc>Splits `this` String at each occurrence of `delimiter`.
+
+		If `this` String is the empty String `""`, the result is not consistent
+		across targets and may either be `[]` (on Js, Cpp) or `[""]`.
+
+		If `delimiter` is the empty String `""`, `this` String is split into an
+		Array of `this.length` elements, where the elements correspond to the
+		characters of `this` String.
+
+		If `delimiter` is not found within `this` String, the result is an Array
+		with one element, which equals `this` String.
+
+		If `delimiter` is null, the result is unspecified.
+
+		Otherwise, `this` String is split into parts at each occurrence of
+		`delimiter`. If `this` String starts (or ends) with `delimiter`, the
+		result `Array` contains a leading (or trailing) empty String `""` element.
+		Two subsequent delimiters also result in an empty String `""` element.</haxe_doc>
+		</split>
+		<substr public="1" set="method">
+			<f a="pos:?len">
+				<x path="Int"/>
+				<x path="Int"/>
+				<c path="String"/>
+			</f>
+			<haxe_doc>Returns `len` characters of `this` String, starting at position `pos`.
+
+		If `len` is omitted, all characters from position `pos` to the end of
+		`this` String are included.
+
+		If `pos` is negative, its value is calculated from the end of `this`
+		String by `this.length + pos`. If this yields a negative value, 0 is
+		used instead.
+
+		If the calculated position + `len` exceeds `this.length`, the characters
+		from that position to the end of `this` String are returned.
+
+		If `len` is negative, the result is unspecified.</haxe_doc>
+		</substr>
+		<substring public="1" set="method">
+			<f a="startIndex:?endIndex">
+				<x path="Int"/>
+				<x path="Int"/>
+				<c path="String"/>
+			</f>
+			<haxe_doc>Returns the part of `this` String from `startIndex` to but not including `endIndex`.
+
+		If `startIndex` or `endIndex` are negative, 0 is used instead.
+
+		If `startIndex` exceeds `endIndex`, they are swapped.
+
+		If the (possibly swapped) `endIndex` is omitted or exceeds
+		`this.length`, `this.length` is used instead.
+
+		If the (possibly swapped) `startIndex` exceeds `this.length`, the empty
+		String `""` is returned.</haxe_doc>
+		</substring>
+		<toString public="1" set="method">
+			<f a=""><c path="String"/></f>
+			<haxe_doc>Returns the String itself.</haxe_doc>
+		</toString>
+		<new public="1" set="method">
+			<f a="string">
+				<c path="String"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>Creates a copy from a given String.</haxe_doc>
+		</new>
+		<haxe_doc>The basic String class.
+
+	A Haxe String is immutable, it is not possible to modify individual
+	characters. No method of this class changes the state of `this` String.
+
+	Strings can be constructed using the String literal syntax `"string value"`.
+
+	String can be concatenated by using the `+` operator. If an operand is not a
+	String, it is passed through `Std.string()` first.
+	
+	@see https://haxe.org/manual/std-String.html</haxe_doc>
+	</class>
+	<class path="Type" params="" file="/usr/share/haxe/std/Type.hx" extern="1">
+		<getClass public="1" params="T" set="method" static="1">
+			<f a="o">
+				<c path="getClass.T"/>
+				<x path="Class"><c path="getClass.T"/></x>
+			</f>
+			<haxe_doc>Returns the class of `o`, if `o` is a class instance.
+
+		If `o` is null or of a different type, null is returned.
+
+		In general, type parameter information cannot be obtained at runtime.</haxe_doc>
+		</getClass>
+		<getEnum public="1" set="method" static="1">
+			<f a="o">
+				<x path="EnumValue"/>
+				<x path="Enum"><d/></x>
+			</f>
+			<haxe_doc><![CDATA[Returns the enum of enum instance `o`.
+
+		An enum instance is the result of using an enum constructor. Given an
+		`enum Color { Red; }`, `getEnum(Red)` returns `Enum<Color>`.
+
+		If `o` is null, null is returned.
+
+		In general, type parameter information cannot be obtained at runtime.]]></haxe_doc>
+		</getEnum>
+		<getSuperClass public="1" set="method" static="1">
+			<f a="c">
+				<x path="Class"><d/></x>
+				<x path="Class"><d/></x>
+			</f>
+			<haxe_doc>Returns the super-class of class `c`.
+
+		If `c` has no super class, null is returned.
+
+		If `c` is null, the result is unspecified.
+
+		In general, type parameter information cannot be obtained at runtime.</haxe_doc>
+		</getSuperClass>
+		<getClassName public="1" set="method" static="1">
+			<f a="c">
+				<x path="Class"><d/></x>
+				<c path="String"/>
+			</f>
+			<haxe_doc>Returns the name of class `c`, including its path.
+
+		If `c` is inside a package, the package structure is returned dot-
+		separated, with another dot separating the class name:
+		`pack1.pack2.(...).packN.ClassName`
+		If `c` is a sub-type of a Haxe module, that module is not part of the
+		package structure.
+
+		If `c` has no package, the class name is returned.
+
+		If `c` is null, the result is unspecified.
+
+		The class name does not include any type parameters.</haxe_doc>
+		</getClassName>
+		<getEnumName public="1" set="method" static="1">
+			<f a="e">
+				<x path="Enum"><d/></x>
+				<c path="String"/>
+			</f>
+			<haxe_doc>Returns the name of enum `e`, including its path.
+
+		If `e` is inside a package, the package structure is returned dot-
+		separated, with another dot separating the enum name:
+		`pack1.pack2.(...).packN.EnumName`
+		If `e` is a sub-type of a Haxe module, that module is not part of the
+		package structure.
+
+		If `e` has no package, the enum name is returned.
+
+		If `e` is null, the result is unspecified.
+
+		The enum name does not include any type parameters.</haxe_doc>
+		</getEnumName>
+		<resolveClass public="1" set="method" static="1">
+			<f a="name">
+				<c path="String"/>
+				<x path="Class"><d/></x>
+			</f>
+			<haxe_doc>Resolves a class by name.
+
+		If `name` is the path of an existing class, that class is returned.
+
+		Otherwise null is returned.
+
+		If `name` is null or the path to a different type, the result is
+		unspecified.
+
+		The class name must not include any type parameters.</haxe_doc>
+		</resolveClass>
+		<resolveEnum public="1" set="method" static="1">
+			<f a="name">
+				<c path="String"/>
+				<x path="Enum"><d/></x>
+			</f>
+			<haxe_doc>Resolves an enum by name.
+
+		If `name` is the path of an existing enum, that enum is returned.
+
+		Otherwise null is returned.
+
+		If `name` is null the result is unspecified.
+
+		If `name` is the path to a different type, null is returned.
+
+		The enum name must not include any type parameters.</haxe_doc>
+		</resolveEnum>
+		<createInstance public="1" params="T" set="method" static="1">
+			<f a="cl:args">
+				<x path="Class"><c path="createInstance.T"/></x>
+				<c path="Array"><d/></c>
+				<c path="createInstance.T"/>
+			</f>
+			<haxe_doc>Creates an instance of class `cl`, using `args` as arguments to the
+		class constructor.
+
+		This function guarantees that the class constructor is called.
+
+		Default values of constructors arguments are not guaranteed to be
+		taken into account.
+
+		If `cl` or `args` are null, or if the number of elements in `args` does
+		not match the expected number of constructor arguments, or if any
+		argument has an invalid type,  or if `cl` has no own constructor, the
+		result is unspecified.
+
+		In particular, default values of constructor arguments are not
+		guaranteed to be taken into account.</haxe_doc>
+		</createInstance>
+		<createEmptyInstance public="1" params="T" set="method" static="1">
+			<f a="cl">
+				<x path="Class"><c path="createEmptyInstance.T"/></x>
+				<c path="createEmptyInstance.T"/>
+			</f>
+			<haxe_doc>Creates an instance of class `cl`.
+
+		This function guarantees that the class constructor is not called.
+
+		If `cl` is null, the result is unspecified.</haxe_doc>
+		</createEmptyInstance>
+		<createEnum public="1" params="T" set="method" static="1">
+			<f a="e:constr:?params">
+				<x path="Enum"><c path="createEnum.T"/></x>
+				<c path="String"/>
+				<c path="Array"><d/></c>
+				<c path="createEnum.T"/>
+			</f>
+			<haxe_doc>Creates an instance of enum `e` by calling its constructor `constr` with
+		arguments `params`.
+
+		If `e` or `constr` is null, or if enum `e` has no constructor named
+		`constr`, or if the number of elements in `params` does not match the
+		expected number of constructor arguments, or if any argument has an
+		invalid type, the result is unspecified.</haxe_doc>
+		</createEnum>
+		<createEnumIndex public="1" params="T" set="method" static="1">
+			<f a="e:index:?params">
+				<x path="Enum"><c path="createEnumIndex.T"/></x>
+				<x path="Int"/>
+				<c path="Array"><d/></c>
+				<c path="createEnumIndex.T"/>
+			</f>
+			<haxe_doc>Creates an instance of enum `e` by calling its constructor number
+		`index` with arguments `params`.
+
+		The constructor indices are preserved from Haxe syntax, so the first
+		declared is index 0, the next index 1 etc.
+
+		If `e` or `constr` is null, or if enum `e` has no constructor named
+		`constr`, or if the number of elements in `params` does not match the
+		expected number of constructor arguments, or if any argument has an
+		invalid type, the result is unspecified.</haxe_doc>
+		</createEnumIndex>
+		<getInstanceFields public="1" set="method" static="1">
+			<f a="c">
+				<x path="Class"><d/></x>
+				<c path="Array"><c path="String"/></c>
+			</f>
+			<haxe_doc>Returns a list of the instance fields of class `c`.
+
+		This only includes fields which are known at compile-time. In
+		particular, using getInstanceFields(getClass(obj)) will not include
+		any fields which were added to obj at runtime.
+
+		The order of the fields in the returned Array is unspecified.
+
+		If `c` is null, the result is unspecified.
+
+		(As3) This method only returns instance fields that are public.</haxe_doc>
+		</getInstanceFields>
+		<getClassFields public="1" set="method" static="1">
+			<f a="c">
+				<x path="Class"><d/></x>
+				<c path="Array"><c path="String"/></c>
+			</f>
+			<haxe_doc>Returns a list of static fields of class `c`.
+
+		This does not include static fields of parent classes.
+
+		The order of the fields in the returned Array is unspecified.
+
+		If `c` is null, the result is unspecified.
+
+		(As3) This method only returns class fields that are public.</haxe_doc>
+		</getClassFields>
+		<getEnumConstructs public="1" set="method" static="1">
+			<f a="e">
+				<x path="Enum"><d/></x>
+				<c path="Array"><c path="String"/></c>
+			</f>
+			<haxe_doc>Returns a list of the names of all constructors of enum `e`.
+
+		The order of the constructor names in the returned Array is preserved
+		from the original syntax.
+
+		If `c` is null, the result is unspecified.</haxe_doc>
+		</getEnumConstructs>
+		<typeof public="1" set="method" static="1">
+			<f a="v">
+				<d/>
+				<e path="ValueType"/>
+			</f>
+			<haxe_doc>Returns the runtime type of value `v`.
+
+		The result corresponds to the type `v` has at runtime, which may vary
+		per platform. Assumptions regarding this should be minimized to avoid
+		surprises.</haxe_doc>
+		</typeof>
+		<enumEq public="1" params="T" set="method" static="1">
+			<f a="a:b">
+				<c path="enumEq.T"/>
+				<c path="enumEq.T"/>
+				<x path="Bool"/>
+			</f>
+			<haxe_doc>Recursively compares two enum instances `a` and `b` by value.
+
+		Unlike `a == b`, this function performs a deep equality check on the
+		arguments of the constructors, if exists.
+
+		If `a` or `b` are null, the result is unspecified.</haxe_doc>
+		</enumEq>
+		<enumConstructor public="1" set="method" static="1">
+			<f a="e">
+				<x path="EnumValue"/>
+				<c path="String"/>
+			</f>
+			<haxe_doc>Returns the constructor name of enum instance `e`.
+
+		The result String does not contain any constructor arguments.
+
+		If `e` is null, the result is unspecified.</haxe_doc>
+		</enumConstructor>
+		<enumParameters public="1" set="method" static="1">
+			<f a="e">
+				<x path="EnumValue"/>
+				<c path="Array"><d/></c>
+			</f>
+			<haxe_doc>Returns a list of the constructor arguments of enum instance `e`.
+
+		If `e` has no arguments, the result is [].
+
+		Otherwise the result are the values that were used as arguments to `e`,
+		in the order of their declaration.
+
+		If `e` is null, the result is unspecified.</haxe_doc>
+		</enumParameters>
+		<enumIndex public="1" set="method" static="1">
+			<f a="e">
+				<x path="EnumValue"/>
+				<x path="Int"/>
+			</f>
+			<haxe_doc>Returns the index of enum instance `e`.
+
+		This corresponds to the original syntactic position of `e`. The index of
+		the first declared constructor is 0, the next one is 1 etc.
+
+		If `e` is null, the result is unspecified.</haxe_doc>
+		</enumIndex>
+		<allEnums public="1" params="T" set="method" static="1">
+			<f a="e">
+				<x path="Enum"><c path="allEnums.T"/></x>
+				<c path="Array"><c path="allEnums.T"/></c>
+			</f>
+			<haxe_doc>Returns a list of all constructors of enum `e` that require no
+		arguments.
+
+		This may return the empty Array `[]` if all constructors of `e` require
+		arguments.
+
+		Otherwise an instance of `e` constructed through each of its non-
+		argument constructors is returned, in the order of the constructor
+		declaration.
+
+		If `e` is null, the result is unspecified.</haxe_doc>
+		</allEnums>
+		<haxe_doc>The Haxe Reflection API allows retrieval of type information at runtime.
+
+	This class complements the more lightweight Reflect class, with a focus on
+	class and enum instances.
+
+	@see https://haxe.org/manual/types.html
+	@see https://haxe.org/manual/std-reflection.html</haxe_doc>
+	</class>
+	<class path="geometryxd.GeometryXD" params="" file="./geometryxd/GeometryXD.hx">
+		<main public="1" set="method" line="12" static="1">
+			<f a=""><x path="Void"/></f>
+			<haxe_doc>trace `GeometryXD is ready for use` message in time of initialisation</haxe_doc>
+		</main>
+		<positive_inside_I public="1" get="inline" set="null" line="17" static="1">
+			<f a="a">
+				<c path="Array"><x path="Int"/></c>
+				<x path="Bool"/>
+			</f>
+			<haxe_doc>return true if incoming Int Array have at least one positive element
+      @param a - incoming array</haxe_doc>
+		</positive_inside_I>
+		<zero_inside_I public="1" get="inline" set="null" line="25" static="1">
+			<f a="a">
+				<c path="Array"><x path="Int"/></c>
+				<x path="Bool"/>
+			</f>
+			<haxe_doc>return true if incoming Int Array have at least one zero element
+      @param a - incoming array</haxe_doc>
+		</zero_inside_I>
+		<negative_inside_I public="1" get="inline" set="null" line="33" static="1">
+			<f a="a">
+				<c path="Array"><x path="Int"/></c>
+				<x path="Bool"/>
+			</f>
+			<haxe_doc>return true if incoming Int Array have at least one negative element
+      @param a - incoming array</haxe_doc>
+		</negative_inside_I>
+		<positive_inside_F public="1" get="inline" set="null" line="41" static="1">
+			<f a="a">
+				<c path="Array"><x path="Float"/></c>
+				<x path="Bool"/>
+			</f>
+			<haxe_doc>return true if incoming Float Array have at least one positive element
+      @param a - incoming array</haxe_doc>
+		</positive_inside_F>
+		<zero_inside_F public="1" get="inline" set="null" line="49" static="1">
+			<f a="a">
+				<c path="Array"><x path="Float"/></c>
+				<x path="Bool"/>
+			</f>
+			<haxe_doc>return true if incoming Float Array have at least one zero element
+      @param a - incoming array</haxe_doc>
+		</zero_inside_F>
+		<negative_inside_F public="1" get="inline" set="null" line="58" static="1">
+			<f a="a">
+				<c path="Array"><x path="Float"/></c>
+				<x path="Bool"/>
+			</f>
+			<haxe_doc>return true if incoming Float Array have at least one negative element
+      @param a - incoming array</haxe_doc>
+		</negative_inside_F>
+		<same_size_I public="1" get="inline" set="null" line="67" static="1">
+			<f a="a">
+				<c path="Array"><c path="Array"><x path="Int"/></c></c>
+				<t path="Null"><x path="Bool"/></t>
+			</f>
+			<haxe_doc>return true if Int Arrays have same size
+      @param a - incoming arrays</haxe_doc>
+		</same_size_I>
+		<same_size_F public="1" get="inline" set="null" line="83" static="1">
+			<f a="a">
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+				<t path="Null"><x path="Bool"/></t>
+			</f>
+			<haxe_doc>return true if Float Arrays have same size
+      @param a - incoming arrays</haxe_doc>
+		</same_size_F>
+		<same_xI public="1" set="method" line="100" static="1">
+			<f a="a">
+				<c path="Array"><c path="Array"><x path="Int"/></c></c>
+				<t path="Null"><x path="Bool"/></t>
+			</f>
+			<haxe_doc>compare Int Arrays. Returns true if all arrays have equal data
+     @param a - incoming array field</haxe_doc>
+		</same_xI>
+		<same_xF public="1" set="method" line="118" static="1">
+			<f a="a">
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+				<t path="Null"><x path="Bool"/></t>
+			</f>
+			<haxe_doc>compare Float Arrays. Returns true if all arrays have equal data
+     @param a - incoming array field</haxe_doc>
+		</same_xF>
+		<sum_I public="1" get="inline" set="null" line="137" static="1">
+			<f a="a">
+				<c path="Array"><x path="Int"/></c>
+				<t path="Null"><x path="Int"/></t>
+			</f>
+			<haxe_doc>return sum of Int Array elements
+      @param a - incoming array</haxe_doc>
+		</sum_I>
+		<sum_F public="1" get="inline" set="null" line="147" static="1">
+			<f a="a">
+				<c path="Array"><x path="Float"/></c>
+				<t path="Null"><x path="Float"/></t>
+			</f>
+			<haxe_doc>return sum of Float Array elements
+      @param a - incoming array</haxe_doc>
+		</sum_F>
+		<diff_I public="1" set="method" line="157" static="1">
+			<f a="a">
+				<c path="Array"><x path="Int"/></c>
+				<t path="Null"><x path="Int"/></t>
+			</f>
+			<haxe_doc>return diff between first and others Int Array elements
+      @param a - incoming array</haxe_doc>
+		</diff_I>
+		<diff_F public="1" set="method" line="169" static="1">
+			<f a="a">
+				<c path="Array"><x path="Float"/></c>
+				<t path="Null"><x path="Float"/></t>
+			</f>
+			<haxe_doc>return diff between first and others Float Array elements
+      @param a - incoming array</haxe_doc>
+		</diff_F>
+		<middle_F public="1" set="method" line="181" static="1">
+			<f a="a">
+				<c path="Array"><x path="Float"/></c>
+				<t path="Null"><x path="Float"/></t>
+			</f>
+			<haxe_doc>return middle value of Float Array
+      @param a - incoming array</haxe_doc>
+		</middle_F>
+		<multiply_I_I public="1" get="inline" set="null" line="192" static="1">
+			<f a="a:n">
+				<c path="Array"><x path="Int"/></c>
+				<x path="Int"/>
+				<c path="Array"><x path="Int"/></c>
+			</f>
+			<haxe_doc>multiplies each element of an Int Array by Int
+      @param a - incoming array
+      @param n - multiplier of each element</haxe_doc>
+		</multiply_I_I>
+		<multiply_F_F public="1" get="inline" set="null" line="203" static="1">
+			<f a="a:n">
+				<c path="Array"><x path="Float"/></c>
+				<x path="Float"/>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>multiplies each element of an Float Array by Float
+      @param a - incoming array
+      @param n - multiplier of each element</haxe_doc>
+		</multiply_F_F>
+		<multiply_I public="1" get="inline" set="null" line="213" static="1">
+			<f a="a">
+				<c path="Array"><x path="Int"/></c>
+				<t path="Null"><x path="Int"/></t>
+			</f>
+			<haxe_doc>multiplies all elements of an Int Array. [1, 2, 3] return 1 * 2 * 3
+      @param a - incoming array</haxe_doc>
+		</multiply_I>
+		<multiply_F public="1" get="inline" set="null" line="225" static="1">
+			<f a="a">
+				<c path="Array"><x path="Float"/></c>
+				<t path="Null"><x path="Float"/></t>
+			</f>
+			<haxe_doc>multiplies all elements of an Float Array. [1.1, 2.0, 3.0] return 1.1 * 2.0 * 3.0
+      @param a - incoming array</haxe_doc>
+		</multiply_F>
+		<minus_I public="1" get="inline" set="null" line="237" static="1">
+			<f a="a">
+				<c path="Array"><x path="Int"/></c>
+				<c path="Array"><x path="Int"/></c>
+			</f>
+			<haxe_doc>multiplies each element of the Int Array by -1
+      @param a - incoming array</haxe_doc>
+		</minus_I>
+		<minus_F public="1" get="inline" set="null" line="244" static="1">
+			<f a="a">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>multiplies each element of the Float Array by -1
+      @param a - incoming array</haxe_doc>
+		</minus_F>
+		<sum_xI public="1" set="method" line="252" static="1">
+			<f a="a">
+				<c path="Array"><c path="Array"><x path="Int"/></c></c>
+				<c path="Array"><x path="Int"/></c>
+			</f>
+			<haxe_doc>return Int Array which is Int Arrays sum. [[1, 2, 3], [-3, -2, -1]] return [-2, 0, 2]
+      @param a - incoming arrays</haxe_doc>
+		</sum_xI>
+		<sum_xF public="1" set="method" line="261" static="1">
+			<f a="a">
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>return Float Array which is Float Arrays sum. [[1.1, 2, 3], [-3, -2, -1]] return [-1.9, 0, 2]
+      @param a - incoming arrays</haxe_doc>
+		</sum_xF>
+		<diff_xI public="1" set="method" line="270" static="1">
+			<f a="a">
+				<c path="Array"><c path="Array"><x path="Int"/></c></c>
+				<c path="Array"><x path="Int"/></c>
+			</f>
+			<haxe_doc>return Int Array which is result of diff between first Int Array and others. [[1, 2, 3], [-3, -2, -1]] return [4, 4, 4]
+      @param a - incoming arrays</haxe_doc>
+		</diff_xI>
+		<diff_xF public="1" set="method" line="279" static="1">
+			<f a="a">
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>return Float Array which is result of diff between first Float Array and others. [[1.1, 2, 3], [-3, -2, -1]] return [4.1, 4, 4]
+      @param a - incoming arrays</haxe_doc>
+		</diff_xF>
+		<middle_xF public="1" set="method" line="288" static="1">
+			<f a="a">
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>return Float Array with middle values from arrays. [[1.1, 2, 3], [-3, -2, -1]] return [(1.1 - 3) / 2, (2 - 2) / 2, (3 - 1) / 2]
+      @param a - incoming arrays</haxe_doc>
+		</middle_xF>
+		<multiply_xI_I public="1" set="method" line="298" static="1">
+			<f a="a:n">
+				<c path="Array"><c path="Array"><x path="Int"/></c></c>
+				<x path="Int"/>
+				<c path="Array"><c path="Array"><x path="Int"/></c></c>
+			</f>
+			<haxe_doc>return Int arrays which is result of multiplying each element by Int
+      @param a - incoming arrays
+      @param n - multiplier</haxe_doc>
+		</multiply_xI_I>
+		<multiply_xF_F public="1" set="method" line="308" static="1">
+			<f a="a:n">
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+				<x path="Float"/>
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+			</f>
+			<haxe_doc>return Float arrays which is result of multiplying each element by Float
+      @param a - incoming arrays
+      @param n - multiplier</haxe_doc>
+		</multiply_xF_F>
+		<multiply_xI public="1" set="method" line="317" static="1">
+			<f a="a">
+				<c path="Array"><c path="Array"><x path="Int"/></c></c>
+				<c path="Array"><x path="Int"/></c>
+			</f>
+			<haxe_doc>return Int Array which is result of multiplying arrays. [[1, 2], [3, 4]] return [1 * 3, 2 * 4]
+      @param a - incoming arrays</haxe_doc>
+		</multiply_xI>
+		<multiply_xF public="1" set="method" line="330" static="1">
+			<f a="a">
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>return Float Array which is result of multiplying arrays. [[3.1, 2], [3, 4]] return [3.1 * 3, 2 * 4]
+      @param a - incoming arrays</haxe_doc>
+		</multiply_xF>
+		<multisum_xI public="1" set="method" line="343" static="1">
+			<f a="a">
+				<c path="Array"><c path="Array"><x path="Int"/></c></c>
+				<t path="Null"><x path="Int"/></t>
+			</f>
+			<haxe_doc>Int Arrays bonus function. Short form of sum_I(multiply_xI(a)). [[a, b], [c, d]] return a * c + b * d
+      @param a - incoming arrays</haxe_doc>
+		</multisum_xI>
+		<multisum_xF public="1" set="method" line="358" static="1">
+			<f a="a">
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+				<t path="Null"><x path="Float"/></t>
+			</f>
+			<haxe_doc>Float Arrays bonus function. Short form of sum_F(multiply_xF(a)). [[a, b], [c, d]] return a * c + b * d
+      @param a - incoming arrays</haxe_doc>
+		</multisum_xF>
+		<sum_previous_I public="1" get="inline" set="null" line="373" static="1">
+			<f a="a">
+				<c path="Array"><x path="Int"/></c>
+				<c path="Array"><x path="Int"/></c>
+			</f>
+			<haxe_doc>return Int Array which is result of sum with previous element. [1, 2, 3] return [1, 3, 5]
+      @param a - incoming array</haxe_doc>
+		</sum_previous_I>
+		<diff_previous_I public="1" get="inline" set="null" line="383" static="1">
+			<f a="a">
+				<c path="Array"><x path="Int"/></c>
+				<c path="Array"><x path="Int"/></c>
+			</f>
+			<haxe_doc>return Int Array which is result of diff with previous element. [1, 2, 3] return [1, 1, 1]
+      @param a - incoming array</haxe_doc>
+		</diff_previous_I>
+		<sum_before_I public="1" get="inline" set="null" line="393" static="1">
+			<f a="a">
+				<c path="Array"><x path="Int"/></c>
+				<c path="Array"><x path="Int"/></c>
+			</f>
+			<haxe_doc>return Int Array which is result of sum each element with before elements sum. [1, 2, 3] return [1, 3, 6]
+      @param a - incoming array</haxe_doc>
+		</sum_before_I>
+		<diff_before_I public="1" get="inline" set="null" line="407" static="1">
+			<f a="a">
+				<c path="Array"><x path="Int"/></c>
+				<c path="Array"><x path="Int"/></c>
+			</f>
+			<haxe_doc>return Int Array which is result of diff each element with before elements diff. [1, 2, 3] return [1, 1, 2]
+      @param a - incoming array</haxe_doc>
+		</diff_before_I>
+		<sum_previous_F public="1" get="inline" set="null" line="421" static="1">
+			<f a="a">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>return Float Array which is result of sum with previous element. [1.1, 2, 3] return [1.1, 3.1, 5]
+      @param a - incoming array</haxe_doc>
+		</sum_previous_F>
+		<diff_previous_F public="1" get="inline" set="null" line="431" static="1">
+			<f a="a">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>return Float Array which is result of diff with previous element. [1.1, 2, 3] return [1.1, 0.9, 1]
+      @param a - incoming array</haxe_doc>
+		</diff_previous_F>
+		<sum_before_F public="1" get="inline" set="null" line="441" static="1">
+			<f a="a">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>return Float Array which is result of sum each element with before elements sum. [1.1, 2, 3] return [1.1, 3.1, 6.1]
+      @param a - incoming array</haxe_doc>
+		</sum_before_F>
+		<diff_before_F public="1" get="inline" set="null" line="455" static="1">
+			<f a="a">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>return Float Array which is result of diff each element with before elements diff. [1.1, 2, 3] return [1.1, 0.9, 2.1]
+      @param a - incoming array</haxe_doc>
+		</diff_before_F>
+		<recounter_I_F public="1" get="inline" set="null" line="470" static="1">
+			<f a="what">
+				<c path="Array"><x path="Int"/></c>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>recount Int Array to Float Array
+     @param what - incoming array</haxe_doc>
+		</recounter_I_F>
+		<recounter_F_I public="1" get="inline" set="null" line="479" static="1">
+			<f a="what">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Int"/></c>
+			</f>
+			<haxe_doc>recount Float Array to Int Array
+     @param what - incoming array</haxe_doc>
+		</recounter_F_I>
+		<recounter_I_S public="1" get="inline" set="null" line="488" static="1">
+			<f a="what">
+				<c path="Array"><x path="Int"/></c>
+				<c path="Array"><c path="String"/></c>
+			</f>
+			<haxe_doc>recount Int Array to String Array
+     @param what - incoming array</haxe_doc>
+		</recounter_I_S>
+		<recounter_F_S public="1" get="inline" set="null" line="497" static="1">
+			<f a="what">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><c path="String"/></c>
+			</f>
+			<haxe_doc>recount Float Array to String Array
+     @param what - incoming array</haxe_doc>
+		</recounter_F_S>
+		<recounter_S_I public="1" get="inline" set="null" line="506" static="1">
+			<f a="what">
+				<c path="Array"><c path="String"/></c>
+				<c path="Array"><x path="Int"/></c>
+			</f>
+			<haxe_doc>recount String Array to Int Array
+     @param what - incoming array</haxe_doc>
+		</recounter_S_I>
+		<recounter_S_F public="1" get="inline" set="null" line="515" static="1">
+			<f a="what">
+				<c path="Array"><c path="String"/></c>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>recount String Array to Float Array
+     @param what - incoming array</haxe_doc>
+		</recounter_S_F>
+		<repeater_F_F public="1" get="inline" set="null" line="527" static="1">
+			<f a="n:what:?full" v="::false">
+				<x path="Int"/>
+				<c path="Array"><x path="Float"/></c>
+				<x path="Bool"/>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<meta><m n=":value"><e>{ full : false }</e></m></meta>
+			<haxe_doc>repeat Float Array to specified length
+     @param n - result array length
+     @param what - incoming array
+     @param full - if true then result array will be not cutted to result array length parameter</haxe_doc>
+		</repeater_F_F>
+		<repeater_I_I public="1" get="inline" set="null" line="545" static="1">
+			<f a="n:what:?full" v="::false">
+				<x path="Int"/>
+				<c path="Array"><x path="Int"/></c>
+				<x path="Bool"/>
+				<c path="Array"><x path="Int"/></c>
+			</f>
+			<meta><m n=":value"><e>{ full : false }</e></m></meta>
+			<haxe_doc>repeat Int Array to specified length
+     @param n - result array length
+     @param what - incoming array
+     @param full - if true then result array will be not cutted to result array length parameter</haxe_doc>
+		</repeater_I_I>
+		<repeater_S_S public="1" get="inline" set="null" line="563" static="1">
+			<f a="n:what:?full" v="::false">
+				<x path="Int"/>
+				<c path="Array"><c path="String"/></c>
+				<x path="Bool"/>
+				<c path="Array"><c path="String"/></c>
+			</f>
+			<meta><m n=":value"><e>{ full : false }</e></m></meta>
+			<haxe_doc>repeat String Array to specified length
+     @param n - result array length
+     @param what - incoming array
+     @param full - if true then result array will be not cutted to result array length parameter</haxe_doc>
+		</repeater_S_S>
+		<repeater_F_I public="1" set="method" line="581" static="1">
+			<f a="n:what_:?full" v="::false">
+				<x path="Int"/>
+				<c path="Array"><x path="Float"/></c>
+				<x path="Bool"/>
+				<c path="Array"><x path="Int"/></c>
+			</f>
+			<meta><m n=":value"><e>{ full : false }</e></m></meta>
+			<haxe_doc>repeat Float Array to specified length Int Array
+     @param n - result array length
+     @param what - incoming array
+     @param full - if true then result array will be not cutted to result array length parameter</haxe_doc>
+		</repeater_F_I>
+		<repeater_S_I public="1" set="method" line="600" static="1">
+			<f a="n:what_:?full" v="::false">
+				<x path="Int"/>
+				<c path="Array"><c path="String"/></c>
+				<x path="Bool"/>
+				<c path="Array"><x path="Int"/></c>
+			</f>
+			<meta><m n=":value"><e>{ full : false }</e></m></meta>
+			<haxe_doc>repeat String Array to specified length Int Array
+     @param n - result array length
+     @param what - incoming array
+     @param full - if true then result array will be not cutted to result array length parameter</haxe_doc>
+		</repeater_S_I>
+		<repeater_I_F public="1" set="method" line="619" static="1">
+			<f a="n:what_:?full" v="::false">
+				<x path="Int"/>
+				<c path="Array"><x path="Int"/></c>
+				<x path="Bool"/>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<meta><m n=":value"><e>{ full : false }</e></m></meta>
+			<haxe_doc>repeat Int Array to specified length Float Array
+     @param n - result array length
+     @param what - incoming array
+     @param full - if true then result array will be not cutted to result array length parameter</haxe_doc>
+		</repeater_I_F>
+		<repeater_S_F public="1" set="method" line="638" static="1">
+			<f a="n:what_:?full" v="::false">
+				<x path="Int"/>
+				<c path="Array"><c path="String"/></c>
+				<x path="Bool"/>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<meta><m n=":value"><e>{ full : false }</e></m></meta>
+			<haxe_doc>repeat String Array to specified length Float Array
+     @param n - result array length
+     @param what - incoming array
+     @param full - if true then result array will be not cutted to result array length parameter</haxe_doc>
+		</repeater_S_F>
+		<repeater_I_S public="1" set="method" line="657" static="1">
+			<f a="n:what_:?full" v="::false">
+				<x path="Int"/>
+				<c path="Array"><x path="Int"/></c>
+				<x path="Bool"/>
+				<c path="Array"><c path="String"/></c>
+			</f>
+			<meta><m n=":value"><e>{ full : false }</e></m></meta>
+			<haxe_doc>repeat Int Array to specified length String Array
+     @param n - result array length
+     @param what - incoming array
+     @param full - if true then result array will be not cutted to result array length parameter</haxe_doc>
+		</repeater_I_S>
+		<repeater_F_S public="1" set="method" line="676" static="1">
+			<f a="n:what_:?full" v="::false">
+				<x path="Int"/>
+				<c path="Array"><x path="Float"/></c>
+				<x path="Bool"/>
+				<c path="Array"><c path="String"/></c>
+			</f>
+			<meta><m n=":value"><e>{ full : false }</e></m></meta>
+			<haxe_doc>repeat Float Array to specified length String Array
+     @param n - result array length
+     @param what - incoming array
+     @param full - if true then result array will be not cutted to result array length parameter</haxe_doc>
+		</repeater_F_S>
+		<an_in_b_S public="1" get="inline" set="null" line="696" static="1">
+			<f a="a:b">
+				<c path="Array"><c path="String"/></c>
+				<c path="Array"><c path="String"/></c>
+				<c path="Array"><c path="Array"><x path="Int"/></c></c>
+			</f>
+			<haxe_doc>return array of arrays with pair indexes which is indexes equivalent elements of a and b arrays.
+     a=["1", "2"] b=["1", "2", "1"] return [[0, 0], [0, 2], [1, 1]]
+     @param a - array what find
+     @param b - array where find</haxe_doc>
+		</an_in_b_S>
+		<an_in_bn_S public="1" get="inline" set="null" line="713" static="1">
+			<f a="a:b">
+				<c path="Array"><c path="String"/></c>
+				<c path="Array"><c path="Array"><c path="String"/></c></c>
+				<c path="Array"><c path="Array"><x path="Int"/></c></c>
+			</f>
+			<haxe_doc>return array of arrays with pair indexes which is indexes equivalent elements of a and b arrays.
+     a=["1", "2"] b=[["1", "2", "1"],["0", "2"]] return [[0, 0, 0], [0, 0, 2], [1, 0, 1], [1, 1, 1]]. where indexes [1, 0, 1] = [1(a), 0(b), 1(b[0])]
+     @param a - array what find
+     @param b - array where find</haxe_doc>
+		</an_in_bn_S>
+		<an_in_b_I public="1" get="inline" set="null" line="732" static="1">
+			<f a="a:b">
+				<c path="Array"><x path="Int"/></c>
+				<c path="Array"><x path="Int"/></c>
+				<c path="Array"><c path="Array"><x path="Int"/></c></c>
+			</f>
+			<haxe_doc>return array of arrays with pair indexes which is indexes equivalent elements of a and b arrays.
+     a=[1, 2] b=[1, 2, 1] return [[0, 0], [0, 2], [1, 1]]
+     @param a - array what find
+     @param b - array where find</haxe_doc>
+		</an_in_b_I>
+		<an_in_bn_I public="1" get="inline" set="null" line="749" static="1">
+			<f a="a:b">
+				<c path="Array"><x path="Int"/></c>
+				<c path="Array"><c path="Array"><x path="Int"/></c></c>
+				<c path="Array"><c path="Array"><x path="Int"/></c></c>
+			</f>
+			<haxe_doc>return array of arrays with pair indexes which is indexes equivalent elements of a and b arrays.
+     a=[1, 2] b=[[1, 2, 1],[0, 2]] return [[0, 0, 0], [0, 0, 2], [1, 0, 1], [1, 1, 1]]. where indexes [1, 0, 1] = [1(a), 0(b), 1(b[0])]
+     @param a - array what find
+     @param b - array where find</haxe_doc>
+		</an_in_bn_I>
+		<an_in_b_F public="1" get="inline" set="null" line="768" static="1">
+			<f a="a:b">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><c path="Array"><x path="Int"/></c></c>
+			</f>
+			<haxe_doc>return array of arrays with pair indexes which is indexes equivalent elements of a and b arrays.
+     a=[1.0, 2.0] b=[1.0, 2.0, 1.0] return [[0, 0], [0, 2], [1, 1]]
+     @param a - array what find
+     @param b - array where find</haxe_doc>
+		</an_in_b_F>
+		<an_in_bn_F public="1" get="inline" set="null" line="785" static="1">
+			<f a="a:b">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+				<c path="Array"><c path="Array"><x path="Int"/></c></c>
+			</f>
+			<haxe_doc>return array of arrays with pair indexes which is indexes equivalent elements of a and b arrays.
+     a=[1.0, 2.0] b=[[1.0, 2.0, 1.0],[0, 2.0]] return [[0, 0, 0], [0, 0, 2], [1, 0, 1], [1, 1, 1]]. where indexes [1, 0, 1] = [1(a), 0(b), 1(b[0])]
+     @param a - array what find
+     @param b - array where find</haxe_doc>
+		</an_in_bn_F>
+		<chain_indexes public="1" set="method" line="808" static="1">
+			<f a="a_l:n:ring">
+				<x path="Int"/>
+				<x path="Int"/>
+				<x path="Bool"/>
+				<c path="Array"><c path="Array"><x path="Int"/></c></c>
+			</f>
+			<haxe_doc>chain bonus function. split range to sequences specified length n with same border values.
+     f(6, 3, false) return [[0, 1, 2], [2, 3, 4]]. But f(6, 3, true) return [[0, 1, 2], [2, 3, 4], [4, 5, 0]].
+     Can be used to split dotsXDfield (array of 3D dots) to array of separated 4dots curves trajectories which have same border dots.
+     Just split array of dots length a_l to n = 4. Then recount to beziercurves or create multidot curve use each last three dots.
+     @param a_l - range of indexes (length of array which will be used later as splitted)
+     @param n - length of each sequence (chain link)
+     @param ring - if true then 0 will be added at the end of range of indexes, for the case of strict coincidence</haxe_doc>
+		</chain_indexes>
+		<chain_S public="1" get="inline" set="null" line="827" static="1">
+			<f a="a:n:?ring" v="::false">
+				<c path="Array"><c path="String"/></c>
+				<x path="Int"/>
+				<x path="Bool"/>
+				<c path="Array"><c path="Array"><c path="String"/></c></c>
+			</f>
+			<meta><m n=":value"><e>{ ring : false }</e></m></meta>
+			<haxe_doc>create chain from String Array. Sequences with same border values
+     @param a - incoming array
+     @param n - chain link length
+     @param ring - if true then first incoming element will be added at the end of range, for the case of strict coincidence</haxe_doc>
+		</chain_S>
+		<chain_I public="1" get="inline" set="null" line="841" static="1">
+			<f a="a:n:?ring" v="::false">
+				<c path="Array"><x path="Int"/></c>
+				<x path="Int"/>
+				<x path="Bool"/>
+				<c path="Array"><c path="Array"><x path="Int"/></c></c>
+			</f>
+			<meta><m n=":value"><e>{ ring : false }</e></m></meta>
+			<haxe_doc>create chain from Int Array. Sequences with same border values
+     @param a - incoming array
+     @param n - chain link length
+     @param ring - if true then first incoming element will be added at the end of range, for the case of strict coincidence</haxe_doc>
+		</chain_I>
+		<chain_F public="1" get="inline" set="null" line="855" static="1">
+			<f a="a:n:?ring" v="::false">
+				<c path="Array"><x path="Float"/></c>
+				<x path="Int"/>
+				<x path="Bool"/>
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+			</f>
+			<meta><m n=":value"><e>{ ring : false }</e></m></meta>
+			<haxe_doc>create chain from Float Array. Sequences with same border values
+     @param a - incoming array
+     @param n - chain link length
+     @param ring - if true then first incoming element will be added at the end of range, for the case of strict coincidence</haxe_doc>
+		</chain_F>
+		<steps_internal public="1" get="inline" set="null" line="871" static="1">
+			<f a="xmin:xmax:n:?borders" v=":::false">
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Int"/>
+				<x path="Bool"/>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<meta><m n=":value"><e>{ borders : false }</e></m></meta>
+			<haxe_doc>split interval to equal steps
+     @param xmin - minimum border
+     @param xmax - maximum border
+     @param n - steps number
+     @param borders - if true then add borders into result</haxe_doc>
+		</steps_internal>
+		<steps_external public="1" set="method" line="891" static="1">
+			<f a="smin:smax:n:direction">
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Int"/>
+				<x path="Int"/>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc><![CDATA[repeat step multiple times.
+     f(1, 5, 3, -1) return [-11, -7, -3, 1, 5]
+     f(1, 5, 3, 0) return [-11, -7, -3, 1, 5, 9, 13, 17]
+     f(1, 5, 3, 1) return [1, 5, 9, 13, 17]
+     @param smin - step minimum border
+     @param smax - step maximum border
+     @param n - repeat number
+     @param direction - if < 0 then from negative to minimum border direction. if > 0 then from maximum border to positive direction. if == 0 then both]]></haxe_doc>
+		</steps_external>
+		<sign_I public="1" get="inline" set="null" line="910" static="1">
+			<f a="x">
+				<x path="Int"/>
+				<x path="Int"/>
+			</f>
+			<haxe_doc><![CDATA[return sign of Int. if x < 0 return -1, else return 1.
+     @param x - number, sign of which should be calculated]]></haxe_doc>
+		</sign_I>
+		<sign_F public="1" get="inline" set="null" line="915" static="1">
+			<f a="x">
+				<x path="Float"/>
+				<x path="Int"/>
+			</f>
+			<haxe_doc><![CDATA[return sign of Float. if x < 0 return -1, else return 1.
+     @param x - number, sign of which should be calculated]]></haxe_doc>
+		</sign_F>
+		<sign3_I public="1" get="inline" set="null" line="920" static="1">
+			<f a="x">
+				<x path="Int"/>
+				<x path="Int"/>
+			</f>
+			<haxe_doc><![CDATA[return sign of Int or 0. if x < 0 return -1, if x > 0 return 1, if x == 0 return 0.
+     @param x - number, sign of which should be calculated]]></haxe_doc>
+		</sign3_I>
+		<sign3_F public="1" get="inline" set="null" line="925" static="1">
+			<f a="x">
+				<x path="Float"/>
+				<x path="Int"/>
+			</f>
+			<haxe_doc><![CDATA[return sign of Float or 0. if x < 0 return -1, if x > 0 return 1, if x == 0 return 0.
+     @param x - number, sign of which should be calculated]]></haxe_doc>
+		</sign3_F>
+		<sin_cos_cut public="1" get="inline" set="null" line="933" static="1">
+			<f a="x">
+				<x path="Float"/>
+				<x path="Float"/>
+			</f>
+			<haxe_doc>sin cos bonus function. Normalise sin cos, counted use vectors to -1...1 include boders.
+     Need because sometimes (detected on python3 in the past) result of calculating sin cos
+     uses vectors can be more then 1, or less then -1.
+     For example 1.00000000001 etc. Just tiny correction, just for case.
+     @param x - incoming sin cos value for check</haxe_doc>
+		</sin_cos_cut>
+		<degrees public="1" get="inline" set="null" line="938" static="1">
+			<f a="angle">
+				<x path="Float"/>
+				<x path="Float"/>
+			</f>
+			<haxe_doc>convert radians angle to degrees angle value
+     @param angle - radians angle for recounting</haxe_doc>
+		</degrees>
+		<radians public="1" get="inline" set="null" line="943" static="1">
+			<f a="angle">
+				<x path="Float"/>
+				<x path="Float"/>
+			</f>
+			<haxe_doc>convert degrees angle to radians angle value
+     @param angle - degrees angle for recounting</haxe_doc>
+		</radians>
+		<angle_quadrant public="1" set="method" line="954" static="1">
+			<f a="angle:?rad" v=":false">
+				<x path="Float"/>
+				<x path="Bool"/>
+				<x path="Int"/>
+			</f>
+			<meta><m n=":value"><e>{ rad : false }</e></m></meta>
+			<haxe_doc><![CDATA[return the quadrant of any angle. 0 angle return 4 quadrant.
+     For example use degrees:
+     ... 0 < angle <= 90 return 1 quadrant 
+     ... 90 < angle <= 180 return 2 quadrant 
+     ... 180 < angle <= 270 return 3 quadrant 
+     ... 270 < angle <= 360 return 4 quadrant 
+     @param angle - angle for quadrant calculating
+     @param rad - if true then radians angle, default false (degrees angle)]]></haxe_doc>
+		</angle_quadrant>
+		<vecXDnorm public="1" set="method" line="974" static="1">
+			<f a="vecXD">
+				<c path="Array"><x path="Float"/></c>
+				<x path="Float"/>
+			</f>
+			<haxe_doc>return vector length (other names "norm" or "magnitude").
+     For [2,3] return Math.sqrt((2 * 2) + (3 * 3))
+     @param vecXD - incoming vector</haxe_doc>
+		</vecXDnorm>
+		<vecXDfieldnorm public="1" get="inline" set="null" line="983" static="1">
+			<f a="vecXDfield">
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>return array of lengths of vectors
+     @param vecXDfield - incoming vectors array(vector field)</haxe_doc>
+		</vecXDfieldnorm>
+		<zero_vector_inside public="1" get="inline" set="null" line="988" static="1"><f a="vecXDfield">
+	<c path="Array"><c path="Array"><x path="Float"/></c></c>
+	<t path="Null"><x path="Bool"/></t>
+</f></zero_vector_inside>
+		<maxabs public="1" set="method" line="1001" static="1">
+			<f a="a">
+				<c path="Array"><x path="Float"/></c>
+				<x path="Float"/>
+			</f>
+			<haxe_doc>return Float Array element with maximum absolute value with sign.
+     Each element compared as abs(element). [1, 2, -4] return -4.
+     @param a - incoming array</haxe_doc>
+		</maxabs>
+		<vecXD public="1" set="method" line="1011" static="1">
+			<f a="dotXDa:dotXDb">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>return vector builded uses two dots
+     @param dotXDa - start dot
+     @param dotXDb - end dot</haxe_doc>
+		</vecXD>
+		<vecXDone public="1" set="method" line="1025" static="1">
+			<f a="vecXD">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>recount vector to length equal 1
+     @param vecXD - incoming vector</haxe_doc>
+		</vecXDone>
+		<vecXDfield public="1" set="method" line="1038" static="1">
+			<f a="dots">
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+			</f>
+			<haxe_doc>return vector field from first dot to each other
+     @param dots - dots field for vector field. dots[0] used as first dot</haxe_doc>
+		</vecXDfield>
+		<vecXDsame public="1" get="inline" set="null" line="1048" static="1">
+			<f a="vecXDa:vecXDb">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<t path="Null"><x path="Bool"/></t>
+			</f>
+			<haxe_doc>compare vectors. Returns true if vectors have equal data
+     @param vecXDa - incoming vector
+     @param vecXDb - incoming vector</haxe_doc>
+		</vecXDsame>
+		<vecXDfieldsame public="1" get="inline" set="null" line="1058" static="1">
+			<f a="vecXDfield">
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+				<t path="Null"><x path="Bool"/></t>
+			</f>
+			<haxe_doc>compare vectors from vector field. Returns true if all vectors have same data
+     @param vecXDfield - vector field(array of vectors)</haxe_doc>
+		</vecXDfieldsame>
+		<vecXDrandom public="1" set="method" line="1063" static="1">
+			<f a="?x" v="3">
+				<x path="Int"/>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<meta><m n=":value"><e>{ x : 3 }</e></m></meta>
+			<haxe_doc><![CDATA[return random vector with length equal 1
+     @param x - number of vector dimension. For example x = 3 -> 3D vector, x = 4 -> 4D vector]]></haxe_doc>
+		</vecXDrandom>
+		<vecXDsum public="1" set="method" line="1077" static="1">
+			<f a="vecXDa:vecXDb">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>return vector, which is sum of two vectors
+     @param vecXDa - vector
+     @param vecXDb - vector</haxe_doc>
+		</vecXDsum>
+		<vecXDfieldsum public="1" set="method" line="1084" static="1">
+			<f a="vecXDfield">
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>return vector, which is sum of vector field
+     @param vecXDfield - vector field (array of vectors)</haxe_doc>
+		</vecXDfieldsum>
+		<vecXDdiff public="1" set="method" line="1092" static="1">
+			<f a="vecXDa:vecXDb">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>return vector, which is diff of vectors. vecXDa - vecXDb
+     @param vecXDa - vector
+     @param vecXDb - vector</haxe_doc>
+		</vecXDdiff>
+		<vecXDfielddiff public="1" set="method" line="1099" static="1">
+			<f a="vecXDfield">
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>return vector, which is diff of vector field. v0-v1...-vn
+     @param vecXDfield - vector field(array of vectors)</haxe_doc>
+		</vecXDfielddiff>
+		<vecXDback public="1" set="method" line="1106" static="1">
+			<f a="vecXD">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>return opposite vector. [1, 2, -4] return [-1, -2, 4]
+     @param vecXD - vector</haxe_doc>
+		</vecXDback>
+		<vecXDfieldback public="1" set="method" line="1113" static="1">
+			<f a="vecXDfield">
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+			</f>
+			<haxe_doc>return opposite vector field. [[1, 2], [3, -4]] return [[-1, -2], [-3, 4]]
+     @param vecXDfield - vector field(array of vectors)</haxe_doc>
+		</vecXDfieldback>
+		<vecXDparalleled_sameside public="1" set="method" line="1122" static="1">
+			<f a="vecXDa:vecXDb">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<t path="Null"><x path="Bool"/></t>
+			</f>
+			<haxe_doc>return true if vectors paralleled and have same direction
+     @param vecXDa - vector
+     @param vecXDb - vector</haxe_doc>
+		</vecXDparalleled_sameside>
+		<vecXDparalleled_opposite public="1" set="method" line="1132" static="1">
+			<f a="vecXDa:vecXDb">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<t path="Null"><x path="Bool"/></t>
+			</f>
+			<haxe_doc>return true if vectors paralleled and have opposite direction
+     @param vecXDa - vector
+     @param vecXDb - vector</haxe_doc>
+		</vecXDparalleled_opposite>
+		<vecXDparalleled public="1" set="method" line="1142" static="1">
+			<f a="vecXDa:vecXDb">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<x path="Bool"/>
+			</f>
+			<haxe_doc>return true if vectors paralleled
+     @param vecXDa - vector
+     @param vecXDb - vector</haxe_doc>
+		</vecXDparalleled>
+		<vecXDscalar public="1" set="method" line="1151" static="1">
+			<f a="vecXDa:vecXDb">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<t path="Null"><x path="Float"/></t>
+			</f>
+			<haxe_doc>return scalar product of vectors
+     @param vecXDa - vector
+     @param vecXDb - vector</haxe_doc>
+		</vecXDscalar>
+		<vecXDcos public="1" set="method" line="1163" static="1">
+			<f a="vecXDa:vecXDb">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<t path="Null"><x path="Float"/></t>
+			</f>
+			<haxe_doc>return cos between vectors
+     @param vecXDa - vector
+     @param vecXDb - vector</haxe_doc>
+		</vecXDcos>
+		<vecXDangle public="1" set="method" line="1177" static="1">
+			<f a="vecXDa:vecXDb:?rad" v="::false">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<x path="Bool"/>
+				<t path="Null"><x path="Float"/></t>
+			</f>
+			<meta><m n=":value"><e>{ rad : false }</e></m></meta>
+			<haxe_doc>return angle between vectors
+     @param vecXDa - vector
+     @param vecXDb - vector
+     @param rad - if true then return radians angle, default false(degrees angle)</haxe_doc>
+		</vecXDangle>
+		<vec3Dnormal public="1" set="method" line="1192" static="1">
+			<f a="vec3Da:vec3Db">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>return vector 3D, which is result of cross product of vectors (normal vector of plane based on two vectors). 
+     Result vector placed so if you will see from end of result vector, then the rotating direction will be 
+     CCW from vec3Da to vec3Db
+     @param vec3Da - vector
+     @param vec3Db - vector</haxe_doc>
+		</vec3Dnormal>
+		<vec3Dfieldnormal public="1" set="method" line="1206" static="1">
+			<f a="vec3Dfield">
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>return vector 3D, which is result of step by step cross product for each next vector 3D 
+     from vector field with previous cross product result vector 3D
+     @param vec3Dfield - vector field 3D(array of vectors 3D)</haxe_doc>
+		</vec3Dfieldnormal>
+		<vecXDmiddle public="1" set="method" line="1221" static="1">
+			<f a="vecXDa:vecXDb">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>return vector with middle value. Just call middle_xF([vecXDa, vecXDb])
+     @param vecXDa - vector
+     @param vecXDb - vector</haxe_doc>
+		</vecXDmiddle>
+		<vecXDfieldmiddle public="1" set="method" line="1228" static="1">
+			<f a="vecXDfield">
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>return vector with middle value. Just call middle_xF(vecXDfield)
+     @param vecXDfield - vector field(array of vectors)</haxe_doc>
+		</vecXDfieldmiddle>
+		<vecXDsamesize public="1" set="method" line="1236" static="1">
+			<f a="vecXDa:vecXDb">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<t path="Null"><x path="Bool"/></t>
+			</f>
+			<haxe_doc>return true if vectors have same size. Bonus function. Just call same_size_F([vecXDa, vecXDb])
+     @param vecXDa - vector
+     @param vecXDb - vector</haxe_doc>
+		</vecXDsamesize>
+		<vecXDfieldsamesize public="1" set="method" line="1243" static="1">
+			<f a="vecXDfield">
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+				<t path="Null"><x path="Bool"/></t>
+			</f>
+			<haxe_doc>return true if vector from vector field have same size. Bonus function. Just call same_size_F(vecXDfield)
+     @param vecXDfield - vector field(array of vectors)</haxe_doc>
+		</vecXDfieldsamesize>
+		<dotXDoffset public="1" set="method" line="1253" static="1">
+			<f a="dotXD:vecXD:t">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<x path="Float"/>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>return dot, which result of offset dotXD along vecXD to t
+     @param dotXD - dot
+     @param vecXD - vector
+     @param t - distance</haxe_doc>
+		</dotXDoffset>
+		<dot3Dline3D_x_plane3D public="1" set="method" line="1274" static="1">
+			<f a="dot3D0:vec3D0:vec3Dplane:?dplane" v=":::0">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<x path="Float"/>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<meta><m n=":value"><e>{ dplane : 0 }</e></m></meta>
+			<haxe_doc>return dot 3D, which is intersection dot for line3D(dot3D0, vec3D0) and plane3D(vec3Dplane, dplane)
+     @param dot3D0 - dot 3D start for line
+     @param vec3D0 - vector 3D of line direction
+     @param vec3Dplane - vector 3D, which is plane 3D normal vector
+     @param dplane - displacement of plane 3D from [0,0,0]. default 0 ([0,0,0] dot belongs to the plane)</haxe_doc>
+		</dot3Dline3D_x_plane3D>
+		<projection_dot3D_on_plane3D public="1" set="method" line="1306" static="1">
+			<f a="dot3D:plane3D">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>return dot 3D, which is projection of dot3D to plane3D
+     @param dot3D - dot 3D, which is [x, y, z]
+     @param plane3D - plane 3D, which is [a, b, c, d]. 
+     Where (a, b, c) - normal vector of plane 3D. (d) - distance from (0, 0, 0). 
+     if d = 0, then the plane passes through the center of coordinates</haxe_doc>
+		</projection_dot3D_on_plane3D>
+		<dot3D_to_dot2Dviewplane public="1" set="method" line="1335" static="1">
+			<f a="dot3D:dot3Dox:dot3Doz">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>return dot 2D (x, z) from dot3D projected on view plane, which determined by two vectors. 
+     This vectors is veiw plane horisontal axis vector from (0, 0, 0) to dot3Dox, 
+     and view plane vertical axis vector from (0, 0, 0) to dot3Doz
+     @param dot3D - dot 3D
+     @param dot3Dox - dot 3D
+     @param dot3Doz - dot 3D</haxe_doc>
+		</dot3D_to_dot2Dviewplane>
+		<dotXDscale public="1" set="method" line="1363" static="1">
+			<f a="dotXD:scaleXD:dotXDc">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>returns dot with scaled values relative to the scaling center
+     @param dotXD - dot . For 3D case [x, y, z]
+     @param scaleXD - scales array . For 3D case [sx, sy, sz]
+     @param dotXDc - scaling center dot . For 3D case [xc, yc, zc]</haxe_doc>
+		</dotXDscale>
+		<vec3Drotate public="1" set="method" line="1378" static="1">
+			<f a="vec3D:vec3Daxis:angle:?rad" v=":::false">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<x path="Float"/>
+				<x path="Bool"/>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<meta><m n=":value"><e>{ rad : false }</e></m></meta>
+			<haxe_doc>returns vector 3D, rotated around axis vector to angle
+     @param vec3D - vector 3D
+     @param vec3Daxis - axis of rotation . vector 3D
+     @param angle - angle of rotation
+     @param rad - it true then radians angle, default false (degrees angle)</haxe_doc>
+		</vec3Drotate>
+		<vec3Dfield_rotate_around_vec3Daxes public="1" set="method" line="1403" static="1">
+			<f a="vec3Dfield:vec3Daxes:angles:?rad" v=":::false">
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+				<c path="Array"><x path="Float"/></c>
+				<x path="Bool"/>
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+			</f>
+			<meta><m n=":value"><e>{ rad : false }</e></m></meta>
+			<haxe_doc>returns vector 3D field, each vector of which rotated to own angle, around own axis
+     @param vec3Dfield - vector 3D field(array of vectors)
+     @param vec3Daxes - axes 3D field(array of vectors)
+     @param angles - angles of rotating for each vector
+     @param rad - if true then radians angles, default false (degrees angles)</haxe_doc>
+		</vec3Dfield_rotate_around_vec3Daxes>
+		<dot3Drotate public="1" set="method" line="1435" static="1">
+			<f a="dot3D:dot3Dc:vec3D:angle:?rad" v="::::false">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<x path="Float"/>
+				<x path="Bool"/>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<meta><m n=":value"><e>{ rad : false }</e></m></meta>
+			<haxe_doc>returns dot 3D, rotated to angle, around center of rotation determined by dot and axis of rotation
+     @param dot3D - dot 3D
+     @param dot3Dc - rotation center dot 3D
+     @param vec3D - rotation axis vector 3D
+     @param angle - rotation angle
+     @param rad - if true then radians angle, default false (degrees angle)</haxe_doc>
+		</dot3Drotate>
+		<plane3D_dot3Dnormal public="1" set="method" line="1455" static="1">
+			<f a="dot3D:vec3D">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>returns plane 3D (a, b, c, d) determined by dot 3D and vector 3D.
+     Where (a, b, c) is plane 3D normal vector, and (d) is displacement plane from (0, 0, 0)
+     @param dot3D - dot 3D
+     @param vec3D - plane 3D normal vector 3D</haxe_doc>
+		</plane3D_dot3Dnormal>
+		<plane3D_dot_vec_vec public="1" set="method" line="1471" static="1">
+			<f a="dot3D:vec3Da:vec3Db">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>returns plane 3D (a, b, c, d), determined by dot and two not paralleled vectors. 
+     Where (a, b, c) is plane 3D normal vector, and (d) is displacement plane from (0, 0, 0)
+     @param dot3D - dot 3D
+     @param vec3Da - vector 3D
+     @param vec3Db - vector 3D</haxe_doc>
+		</plane3D_dot_vec_vec>
+		<plane3D_3dots public="1" set="method" line="1491" static="1">
+			<f a="dot3D:dot3Da:dot3Db">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>returns plane 3D (a, b, c, d), determined by three not equal dots. 
+     Where (a, b, c) is plane 3D normal vector, and (d) is displacement plane from (0, 0, 0)
+     @param dot3D - dot 3D
+     @param dot3Da - dot 3D
+     @param dot3Db - dot 3D</haxe_doc>
+		</plane3D_3dots>
+		<plane3D_2dots public="1" set="method" line="1513" static="1">
+			<f a="dot3D:dot3Da">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>returns plane 3D (a, b, c, d), determined by two not equal dots. 
+     Where (a, b, c) is plane 3D normal vector, and (d) is displacement plane from (0, 0, 0)
+     @param dot3D - dot 3D
+     @param dot3Da - dot 3D</haxe_doc>
+		</plane3D_2dots>
+		<distance_dot3D_plane3D public="1" set="method" line="1528" static="1">
+			<f a="dot3D:plane3D">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<t path="Null"><x path="Float"/></t>
+			</f>
+			<haxe_doc>returns distance from dot 3D to plane 3D
+     @param dot3D - dot 3D (x, y, z)
+     @param plane3D - plane 3D (a, b, c, d). 
+     Where (a, b, c) is plane 3D normal vector, and (d) is displacement plane from (0, 0, 0)</haxe_doc>
+		</distance_dot3D_plane3D>
+		<random_vec3D_in_plane3D public="1" set="method" line="1545" static="1">
+			<f a="plane3D">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>returns a random vector 3D paralleled to the plane 3D(lies on plane 3D)
+     @param plane3D - plane 3D (a, b, c, d). 
+     Where (a, b, c) is plane 3D normal vector, and (d) is displacement plane from (0, 0, 0)</haxe_doc>
+		</random_vec3D_in_plane3D>
+		<random_dot3D_in_plane3D public="1" set="method" line="1569" static="1">
+			<f a="plane3D:dot3D:radius">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<x path="Float"/>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>returns random dot 3D belongs on plane 3D
+     @param plane3D - plane 3D (a, b, c, d). 
+     Where (a, b, c) is plane 3D normal vector, and (d) is displacement plane from (0, 0, 0)
+     @param dot3D - dot 3D . Determine start position for round area on plane 3D for calculating result. 
+     If dot not in plane , then will be uesd projection this dot on plane
+     @param radius - radius of round area on plane 3D. Result will be calculated inside area</haxe_doc>
+		</random_dot3D_in_plane3D>
+		<curve3D_4dots public="1" set="method" line="1594" static="1">
+			<f a="dot3D1:vec3D1:distance1:dot3D2:vec3D2:distance2">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<x path="Float"/>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<x path="Float"/>
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+			</f>
+			<haxe_doc>returns curve 3D ((x, y, z), (x, y, z), (x, y, z), (x, y, z)) 
+     with internal dots, calculated use offset from border dots along levers to distances. 
+     The resul curve 3D have 4 dots 3D, two border dots incoming, and two internal dots calculated. 
+     Result will [dot3D1, dot3D1offset, dot3D2offset, dot3D2]
+     @param dot3D1 - dot 3D (x, y, z) start curve incoming dot
+     @param vec3D1 - vector 3D (a, b, c) for offset start internal dot
+     @param distance1 - distance for offset start internal dot along offset vector
+     @param dot3D2 - dot 3D (x, y, z) end curve incoming dot
+     @param vec3D2 - vector 3D (a, b, c) for offset end internal dot
+     @param distance2 - distance for offset end internal dot along offset vector</haxe_doc>
+		</curve3D_4dots>
+		<curve3D_3dots public="1" set="method" line="1622" static="1">
+			<f a="dot3D0:dot3D1:dot3D2:?lever1:?lever2:?a_s" v=":::0.55:0.55:-1">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Int"/>
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+			</f>
+			<meta><m n=":value"><e>{ a_s : -1, lever2 : 0.55, lever1 : 0.55 }</e></m></meta>
+			<haxe_doc><![CDATA[returns curve 3D ((x, y, z), (x, y, z), (x, y, z), (x, y, z)). 
+     Shape of result curve will be close to arc (1/4 ellipse). 
+     Allowed few variants of result curve modification(distortion).
+     Default lever1 and lever2 values equal 0.55.
+     The 0.55 value in case of bezier cubic 3D curve will create shape close to ellipse arc.
+     @param dot3D0 - center of ellipse trajectory dot 3D (x, y, z)
+     @param dot3D1 - first arc dot 3D (x, y, z)
+     @param dot3D2 - last arc dot 3D (x, y, z)
+     @param lever1 - length of offset the first support dot along lever1 vector (depended of a_s)
+     @param lever2 - length of offset the last support dot along lever2 vector (depended of a_s)
+     @param a_s - arc style. Determine of arc calculation way. 
+     if a_s > 0 then lever1 vector will be directed from dot3D0 to dot3D1. lever2 vector from dot3D0 to dot3D2 
+     if a_s < 0 then lever1 vector will be directed from dot3D0 to dot3D2. lever2 vector from dot3D0 to dot3D1 
+     if a_s = 0 then lever1 vector will be paralleled lever2 vector and both will be directed 
+     from dot3D0 to dot between dot3D1 and dot3D2 center dot]]></haxe_doc>
+		</curve3D_3dots>
+		<line3D_2dots public="1" set="method" line="1663" static="1">
+			<f a="dot3D0:dot3D1">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+			</f>
+			<haxe_doc>returns line 3D ((x, y, z), (x, y, z), (x, y, z), (x, y, z)). 
+     Which is (dot3D0, 1/3 offset, 2/3 offset, dot3D1). 
+     Comfort for use as bezier cubic curve 3D as straight line
+     @param dot3D0 - start line dot 3D
+     @param dot3D1 - end line dot 3D</haxe_doc>
+		</line3D_2dots>
+		<line3D_dot_offset public="1" set="method" line="1683" static="1">
+			<f a="dot3D:vec3D:distance">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<x path="Float"/>
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+			</f>
+			<haxe_doc>returns line 3D ((x, y, z), (x, y, z), (x, y, z), (x, y, z)). 
+     Just call line3D_2dots with precalculated second dot 3D
+     @param dot3D - start line dot 3D
+     @param vec3D - offset start line dot vector 3D
+     @param distance - offset distance for end line dot</haxe_doc>
+		</line3D_dot_offset>
+		<curve3D_4to12 public="1" get="inline" set="null" line="1699" static="1">
+			<f a="curve">
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>returns curve 3D as 12 coordinates, recounted from 4 dots 3D. 
+     [[x, y, z], [x, y, z], [x, y, z], [x, y, z]] return [x1, y1, z1, x2, y2, z2, x3, y3, z3, x4, y4, z4]
+     @param curve - curve 3D ((x, y, z), (x, y, z), (x, y, z), (x, y, z))</haxe_doc>
+		</curve3D_4to12>
+		<curve3D_12to4 public="1" get="inline" set="null" line="1714" static="1">
+			<f a="curve">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+			</f>
+			<haxe_doc>returns curve 3D as 4 dots 3D, recounted from 12 coordinates. 
+     [x1, y1, z1, x2, y2, z2, x3, y3, z3, x4, y4, z4] return [[x, y, z], [x, y, z], [x, y, z], [x, y, z]]
+     @param curve - curve 3D data (x1, y1, z1, x2, y2, z2, x3, y3, z3, x4, y4, z4)</haxe_doc>
+		</curve3D_12to4>
+		<beziercubic3D_derivativeparameters public="1" get="inline" set="null" line="1725" static="1">
+			<f a="curve">
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+			</f>
+			<haxe_doc>beziercubic3D_derivative bonus function. returns parameters for derivative calculation. 
+     [[x1, y1, z1], [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]] return [[x1,x2,x3,x4],[y1,y2,y3,y4],[z1,z2,z3,z4]]
+     @param curve - bezier cubic curve 3D ((x1, y1, z1), (x2, y2, z2), (x3, y3, z3), (x4, y4, z4))</haxe_doc>
+		</beziercubic3D_derivativeparameters>
+		<beziercubic_derivative public="1" get="inline" set="null" line="1737" static="1">
+			<f a="bcp:p">
+				<c path="Array"><x path="Float"/></c>
+				<x path="Float"/>
+				<t path="Null"><x path="Float"/></t>
+			</f>
+			<haxe_doc>return bezier cubic curve derivative for each dimension. Usual case `x` or `y` or `z`
+     @param bcp - bezier curve derivative parameters, precalculated uses `beziercubic3D_derivativeparameters(...)`
+     @param p - bezier cubic curve parameter. Standart values equal range 0...1 include borders</haxe_doc>
+		</beziercubic_derivative>
+		<beziercubic3D_derivative public="1" set="method" line="1750" static="1">
+			<f a="curve:p">
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+				<x path="Float"/>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>returns bezier cubic curve 3D derivative
+     @param curve - bezier cubic curve 3D ((x, y, z), (x, y, z), (x, y, z), (x, y, z))
+     @param p - bezier cubic curve parameter. Standart values equal range 0...1 include borders</haxe_doc>
+		</beziercubic3D_derivative>
+		<beziercubic_support_dot_one public="1" get="inline" set="null" line="1765" static="1">
+			<f a="beziercubic_one_axis_coordinates">
+				<c path="Array"><x path="Float"/></c>
+				<t path="Null"><x path="Float"/></t>
+			</f>
+			<haxe_doc>returns cubic bezier curve support dot one(first lever) paramater for each coordinate. Usual case `x` or `y` or `z`
+     @param beziercubic_one_axis_coordinates - [c1,c2,c3,c4]. Where c is cubic bezier curve dots values for one of `x` or `y` or `z`</haxe_doc>
+		</beziercubic_support_dot_one>
+		<beziercubic3D_support_dot_one public="1" set="method" line="1775" static="1">
+			<f a="curve3D_4dots">
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>returns dot 3D, which is bezier cubic curve 3D support dot one(first lever)
+     @param curve3D_4dots - curve 3D trajectory, which is [[x1, y1, z1], [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]]</haxe_doc>
+		</beziercubic3D_support_dot_one>
+		<beziercubic_support_dot_two public="1" get="inline" set="null" line="1785" static="1">
+			<f a="beziercubic_one_axis_coordinates">
+				<c path="Array"><x path="Float"/></c>
+				<t path="Null"><x path="Float"/></t>
+			</f>
+			<haxe_doc>returns cubic bezier curve support dot two(second lever) paramater for each coordinate. Usual case `x` or `y` or `z`
+     @param beziercubic_one_axis_coordinates - [c1,c2,c3,c4]. Where c is cubic bezier curve dots values for one of `x` or `y` or `z`</haxe_doc>
+		</beziercubic_support_dot_two>
+		<beziercubic3D_support_dot_two public="1" set="method" line="1795" static="1">
+			<f a="curve3D_4dots">
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>returns dot 3D, which is bezier cubic curve 3D support dot two(second lever)
+     @param curve3D_4dots - curve 3D trajectory, which is [[x1, y1, z1], [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]]</haxe_doc>
+		</beziercubic3D_support_dot_two>
+		<beziercubic3D_follow_4dots_trajectory public="1" get="inline" set="null" line="1805" static="1">
+			<f a="dots">
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+			</f>
+			<haxe_doc>returns bezier cubic curve 3D, calculated from 4dots 3D(curve 3D trajectory)
+     @param dots - curve 3D trajectory. Must be of the form [[x1, y1, z1], [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]]</haxe_doc>
+		</beziercubic3D_follow_4dots_trajectory>
+		<beziercubic_coordinate public="1" get="inline" set="null" line="1819" static="1">
+			<f a="beziercubic_one_axis_coordinates:parameter">
+				<c path="Array"><x path="Float"/></c>
+				<x path="Float"/>
+				<t path="Null"><x path="Float"/></t>
+			</f>
+			<haxe_doc>returns bezier cubic coordinate for each one axis. Usual case `x` or `y` or `z`
+     @param beziercubic_one_axis_coordinates - Must be of the form (c1, c2, c3, c4). 
+     For case [[x1, y1, z1], [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]] curve and x axis must be [x1, x2, x3, x4]
+     @param parameter - parameter of bezier curve equation. Usual case range 0...1 include borders</haxe_doc>
+		</beziercubic_coordinate>
+		<beziercubic3Ddot public="1" set="method" line="1836" static="1">
+			<f a="beziercubic3D:parameter">
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+				<x path="Float"/>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>returns dot 3D, belongs on bezier cubic curve 3D
+     @param beziercubic3D - curve 3D, which must be of the form [[x1, y1, z1], [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]]. 
+     Which is [dot3Dstart, lever3Dstart, lever3Dend, dot3Dend]
+     @param parameter - parameter of bezier curve equation. Usual case range 0...1 include borders</haxe_doc>
+		</beziercubic3Ddot>
+		<curve3D_4dots_follow_beziercubic_trajectory public="1" get="inline" set="null" line="1849" static="1">
+			<f a="beziercubic3D">
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+			</f>
+			<haxe_doc>returns curve 3D, which is 4 dots 3D bezier cubic curve, recounted to 4 dots 3D curve. 
+     Two internal dots belongs on bezier cubic curve trajectory, with parameter 1/3 and 2/3
+     @param beziercubic3D - curve 3D, which must be of the form [[x1, y1, z1], [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]]</haxe_doc>
+		</curve3D_4dots_follow_beziercubic_trajectory>
+		<curve3Doffset public="1" get="inline" set="null" line="1867" static="1">
+			<f a="curve3D:vec3D:distance">
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+				<c path="Array"><x path="Float"/></c>
+				<x path="Float"/>
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+			</f>
+			<haxe_doc>returns curve 3D, offsetted along vector 3D to specified distance
+     @param curve3D - curve 3D, which must be of the form [[x1, y1, z1], [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]]
+     @param vec3D - vector 3D (a, b, c)
+     @param distance - displacement distance</haxe_doc>
+		</curve3Doffset>
+		<curve3Drotate public="1" get="inline" set="null" line="1890" static="1">
+			<f a="curve3D:dot3D:vec3D:angle:?rad" v="::::false">
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<x path="Float"/>
+				<x path="Bool"/>
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+			</f>
+			<meta><m n=":value"><e>{ rad : false }</e></m></meta>
+			<haxe_doc>returns curve 3D, rotated around axis(determined by dot 3D and vector 3D) to specified angle
+     @param curve3D - curve 3D, which must be of the form [[x1, y1, z1], [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]]
+     @param dot3D - dot 3D. Used for rotation axis
+     @param vec3D - vector 3D. Used for rotation axis
+     @param angle - rotation angle
+     @param rad - if true then radians angle, default false (degrees angle)</haxe_doc>
+		</curve3Drotate>
+		<curve3Dscale public="1" get="inline" set="null" line="1916" static="1">
+			<f a="curve3D:scale_xyz:dot3D">
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+			</f>
+			<haxe_doc>returns curve 3D, scaled relative base dot 3D, uses own scale for each axis
+     @param curve3D - curve 3D, which must be of the form [[x1, y1, z1], [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]]
+     @param scale_xyz - scale for each axis. Must be of the form [sx, sy, sz]
+     @param dot3D - scaling center(base) dot 3D</haxe_doc>
+		</curve3Dscale>
+		<ellipse2Dperimeter_ramanujan public="1" get="inline" set="null" line="1941" static="1">
+			<f a="semiaxis_a:semiaxis_b">
+				<x path="Float"/>
+				<x path="Float"/>
+				<t path="Null"><x path="Float"/></t>
+			</f>
+			<haxe_doc>returns ellipse perimeter, calculated use ramanujan method.
+     Result will be max from perimeters, calculated by two ramanujan methods, with negative errors
+     @param semiaxis_a - ellipse a semiaxes. Usual paralleled x axis
+     @param semiaxis_b - ellipse b semiaxes. Usual paralleled y axis</haxe_doc>
+		</ellipse2Dperimeter_ramanujan>
+		<tangent_centered_ellipse2Ddot public="1" set="method" line="1973" static="1">
+			<f a="semiaxis_a:semiaxis_b:ellipse_dot2D">
+				<x path="Float"/>
+				<x path="Float"/>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+			</f>
+			<haxe_doc>returns vector 2D, which is tangent of centered ellipse 2D
+     @param semiaxis_a - ellipse a semiaxes. Usual paralleled x axis
+     @param semiaxis_b - ellipse b semiaxes. Usual paralleled y axis
+     @param ellipse_dot2D - dot 2D belongs to the ellipse perimeter</haxe_doc>
+		</tangent_centered_ellipse2Ddot>
+		<ellipse_e_parameter public="1" get="inline" set="null" line="2030" static="1">
+			<f a="semiaxis_a:semiaxis_b">
+				<x path="Float"/>
+				<x path="Float"/>
+				<t path="Null"><x path="Float"/></t>
+			</f>
+			<haxe_doc>returns ellipse e parameter (ellipse eccentricity)
+     @param semiaxis_a - ellipse a semiaxes. Usual paralleled x axis
+     @param semiaxis_b - ellipse b semiaxes. Usual paralleled y axis</haxe_doc>
+		</ellipse_e_parameter>
+		<ellipse_c_parameter public="1" set="method" line="2046" static="1">
+			<f a="semiaxis_a:semiaxis_b">
+				<x path="Float"/>
+				<x path="Float"/>
+				<t path="Null"><x path="Float"/></t>
+			</f>
+			<haxe_doc>returns ellipse c parameter (elipse foci) ... фокальное расстояние (полурасстояние между фокусами)
+     @param semiaxis_a - ellipse a semiaxes. Usual paralleled x axis
+     @param semiaxis_b - ellipse b semiaxes. Usual paralleled y axis</haxe_doc>
+		</ellipse_c_parameter>
+		<tangent_vec3D_in_plane_of_ellipse2D_placed_in_3Dspace public="1" set="method" line="2075" static="1">
+			<f a="dot3D:vec3Dnormal_ellipse_plane:vec3Dsemiaxis_a_direction:semiaxis_a:semiaxis_b:semiaxis_a_negative:semiaxis_b_negative:angle:rad">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Bool"/>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>returns vector 3D, which is tangent of ellipse, belongs to the plane 3D
+     @param dot3D - ellipse center dot 3D (x, y, z)
+     @param vec3Dnormal_ellipse_plane - ellipse plane 3D normal vector (a, b, c)
+     @param vec3Dsemiaxis_a_direction - ellipse semiaxis direction vector 3D (a, b, c). 
+     Will be projected on plane, no need strictly vector in plane. enought not paralleled with 
+     ellipse plane normal vector
+     @param semiaxis_a - ellipse semiaxis a length
+     @param semiaxis_b - ellipse semiaxis b length
+     @param semiaxis_a_negative - ellipse opposite semiaxis a length. 
+     Directed to negative side from projection of vec3Dsemiaxis_a_direction vector
+     @param semiaxis_b_negative - ellipse opposite semiaxis b length. Same but for other semiaxis vector
+     @param angle - angle for calculating dot 3D, belongs to the ellipse. 
+     Calculating will be directed from positive semiaxis a to positive semiaxis b, for positive angle
+     @param rad - if true then radians angle, default false(degrees angle)</haxe_doc>
+		</tangent_vec3D_in_plane_of_ellipse2D_placed_in_3Dspace>
+		<ellipse3D_dots public="1" set="method" line="2128" static="1">
+			<f a="dot3D:vec3Dsemiaxes:semiaxes">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+			</f>
+			<haxe_doc>returns 9 dots 3D, ellipse center dot and 8 ellipse perimeter dots
+     @param dot3D - ellipse center dot 3D
+     @param vec3Dsemiaxes - array of semiaxes vectors 3D. Include 4 semiaxes vectors 3D.
+     Must be of the form [[a1, b1, c1], [a2, b2, c2], [a3, b3, c3], [a4, b4, c4]]. 
+     Which is [a, b, an, bn], where an and bn is negative semiaxes direction vectors 
+     @param semiaxes - array of semiaxes lengths. Must be of the form [a, b, an, bn]</haxe_doc>
+		</ellipse3D_dots>
+		<ellipse2Ddot public="1" get="inline" set="null" line="2166" static="1">
+			<f a="angle:semiaxis_a_ox:semiaxis_b_oy:?rad" v=":::false">
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Bool"/>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<meta><m n=":value"><e>{ rad : false }</e></m></meta>
+			<haxe_doc>returns dot 2D, which belongs to ellipse perimeter
+     @param angle - angle of ellipse from semiaxis a to semiaxis b direction, for positive angle
+     @param semiaxis_a_ox - semiaxis a length
+     @param semiaxis_b_oy - semiaxis b length
+     @param rad - if true then radians angle, default false(degrees angle)</haxe_doc>
+		</ellipse2Ddot>
+		<curve2D_4dots_elliptic_shape_restricted_to_quarter public="1" set="method" line="2181" static="1">
+			<f a="angle0:angle1:semiaxis_a_ox:semiaxis_b_oy:?rad" v="::::false">
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Bool"/>
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+			</f>
+			<meta><m n=":value"><e>{ rad : false }</e></m></meta>
+			<haxe_doc>returns curve 2D, which have ellipse shape restricted to quarter
+     @param angle0 - start angle from semiaxis a to semiaxis b direction
+     @param angle1 - angle from semiaxis a to semiaxis b direction started from end of `angle0`
+     @param semiaxis_a_ox - length of semiaxis a (ox)
+     @param semiaxis_b_oy - length of semiaxis b (oy)
+     @param rad - if true then radians angle, default false(degrees angle)</haxe_doc>
+		</curve2D_4dots_elliptic_shape_restricted_to_quarter>
+		<beziercubic3D_elliptic_shape_restricted_to_quarter public="1" set="method" line="2212" static="1">
+			<f a="dot3Dc:vec3D_a_ox:vec3D_b_ox:semiaxis_a_ox:semiaxis_b_oy:angle0:angle1:?rad" v=":::::::false">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Bool"/>
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+			</f>
+			<meta><m n=":value"><e>{ rad : false }</e></m></meta>
+			<haxe_doc>returns bezier curve 3D, which have ellipse shape restricted to quarter. 
+     Result will have form [[x1, y1, z1], [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]]
+     @param dot3Dc - center ellipse dot 3D
+     @param vec3D_a_ox - semiaxis a direction vector 3D
+     @param vec3D_b_ox - semiaxis b direction vector 3D
+     @param semiaxis_a_ox - semiaxis a length
+     @param semiaxis_b_oy - semiaxis b length
+     @param angle0 - start angle from semiaxis a to semiaxis b direction
+     @param angle1 - angle from semiaxis a to semiaxis b direction started from end of `angle0`
+     @param rad - if true then radians angle, default false(degrees angle)</haxe_doc>
+		</beziercubic3D_elliptic_shape_restricted_to_quarter>
+		<angle_required_to_place_curve_on_ellipse public="1" set="method" line="2250" static="1">
+			<f a="curve_length:semiaxis_a_ox:semiaxis_b_oy:angle0:?rad" v="::::false">
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Float"/>
+				<x path="Bool"/>
+				<t path="Null"><x path="Float"/></t>
+			</f>
+			<meta><m n=":value"><e>{ rad : false }</e></m></meta>
+			<haxe_doc>returns angle required to place curve on ellipse. 
+     Max returned value is 360 degrees, or radians same value angle
+     @param curve_length - length of curve for placing on ellipse
+     @param semiaxis_a_ox - semiaxis a length
+     @param semiaxis_b_oy - semiaxis b length
+     @param angle0 - start angle from semiaxis a to semiaxis b direction. 
+     Curve placing started from end of `angle0`
+     @param rad - if true then radians angle, default false(degrees angle)</haxe_doc>
+		</angle_required_to_place_curve_on_ellipse>
+		<polygon3D_inside_ellipse public="1" set="method" line="2286" static="1">
+			<f a="dot3D:vec3Dsemiaxes:semiaxes:angle_proportions">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+			</f>
+			<haxe_doc>returns polygon 3D dots array, which is poligon center dot and array of polygon perimeter dots. 
+     Result will have form [`dot3D`, dot3D(1), ... ,dot3D(`angle_proportion.length`)]
+     @param dot3D - polygon center dot 3D
+     @param vec3Dsemiaxes - base ellipse 4 semiaxes vectors, for creating polygon inside ellipse. 
+     Must be of the form [[a1, b1, c1], [a2, b2, c2], [a3, b3, c3], [a4, b4, c4]]. 
+     Which is [a, b, an, bn], where an and bn is negative semiaxes direction vectors 
+     @param semiaxes - array of displacement values of polygon vetexes from center dot in ellipse plane
+     @param angle_proportions - proportions array for splitting 360 degrees angle(without units, not matter). 
+     `[90, 90, 90, 90]` returns result same as `[1, 1, 1, 1]`, in both cases will be created quadrangle inside ellipse</haxe_doc>
+		</polygon3D_inside_ellipse>
+		<polygon3D_vec3Dfield_distance public="1" set="method" line="2342" static="1">
+			<f a="dot3D:vec3Dfield:distances">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+			</f>
+			<haxe_doc>polygon on vectors and displacements. Can be not belongs to one plane 3D.
+     returns polygon 3D dots array, which is poligon center dot and array of polygon perimeter dots. 
+     Result will have form [`dot3D`, dot3D(1), ... ,dot3D(`distances.length`)]
+     @param dot3D - polygon center dot 3D
+     @param vec3Dfield - polygon vertexes vector field(array of vectors 3D). 
+     Each Vertex will be offsetted along own vector
+     @param distances - polygon vertexes radial distances array(offset length)</haxe_doc>
+		</polygon3D_vec3Dfield_distance>
+		<polygon3D_in_plane public="1" set="method" line="2372" static="1">
+			<f a="dot3D:vec3Dplane_normal:vec3Dsemiaxis_a_direction:angle_proportions:distances">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+			</f>
+			<haxe_doc>polygon belongs to plane 3D.
+     returns polygon 3D dots array, which is poligon center dot and array of polygon perimeter dots. 
+     Result will have form [`dot3D`, dot3D(1), ... ,dot3D(`angle_proportion.length`)]. 
+     @param dot3D - polygon center dot 3D
+     @param vec3Dplane_normal - polygon plane normal vector 3D
+     @param vec3Dsemiaxis_a_direction - semiaxis a, will be used as start vector of first vertex. 
+     Every next vertex will be calculated uses `vec3Dsemiaxis_a_direction` vector rotation 
+     (CCW direction, if look from end of `vec3Dplane_normal` vector) to specified angle and offset to specified distance
+     @param angle_proportions - proportions array for splitting 360 degrees angle(without units, not matter). 
+     `[90, 90, 90, 90]` returns result same as `[1, 1, 1, 1]`, in both cases will be created quadrangle belongs to plane
+     @param distances - polygon vertexes radial distances array(offset length)</haxe_doc>
+		</polygon3D_in_plane>
+		<polygon3D_to_vec3Dfield public="1" set="method" line="2405" static="1">
+			<f a="polygon3D">
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+				<c path="Array"><c path="Array"><x path="Float"/></c></c>
+			</f>
+			<haxe_doc>returns vector field, which is vectors 3D, calculated from polygon center dot to each vertex. 
+     Result will have form [[a, b, c], ... , [a, b, c]], depend of incoming data length
+     @param polygon3D - must be of the form 
+     [ polygon center dot 3D, polygon vertex first dot 3D , ... ,polygon vertex last dot 3D ]</haxe_doc>
+		</polygon3D_to_vec3Dfield>
+		<projection_vec3D_on_plane3D public="1" set="method" line="2415" static="1">
+			<f a="vec3D:plane3D">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+			</f>
+			<haxe_doc>returns vector 3D, which is `vec3D` vector projection on `plane3D` plane
+     @param vec3D - vector 3D (a, b, c)
+     @param plane3D - plane 3D (a, b, c, d), where (a, b, c) normal vector of plane, and (d) displacement from (0, 0, 0)</haxe_doc>
+		</projection_vec3D_on_plane3D>
+		<angle_vec3Dvec3D_projection_on_plane3D public="1" set="method" line="2440" static="1">
+			<f a="vec3D1:vec3D2:plane3D:?rad" v=":::false">
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<c path="Array"><x path="Float"/></c>
+				<x path="Bool"/>
+				<t path="Null"><x path="Float"/></t>
+			</f>
+			<meta><m n=":value"><e>{ rad : false }</e></m></meta>
+			<haxe_doc>returns angle, which is projection of angle between `vec3D1` and `vec3D2` vectors to `plane3D`
+     @param vec3D1 - vector 3D (a, b, c)
+     @param vec3D2 - vector 3D (a, b, c)
+     @param plane3D - plane 3D (a, b, c, d), where (a, b, c) normal vector of plane, and (d) displacement from (0, 0, 0)
+     @param rad - if true then radians angle, default false(degrees angle)</haxe_doc>
+		</angle_vec3Dvec3D_projection_on_plane3D>
+		<haxe_doc>GeometryXD - multidimensional geometry manipulations. Primarily targeted for 3D objects (points, vectors, curves). Not pro level library.</haxe_doc>
+		<meta><m n=":directlyUsed"/></meta>
+	</class>
+	<class path="haxe.EnumTools" params="" file="/usr/share/haxe/std/haxe/EnumTools.hx" extern="1">
+		<getName public="1" params="T" get="inline" set="null" line="50" static="1">
+			<f a="e">
+				<x path="Enum"><c path="getName.T"/></x>
+				<c path="String"/>
+			</f>
+			<haxe_doc>Returns the name of enum `e`, including its path.
+
+		If `e` is inside a package, the package structure is returned dot-
+		separated, with another dot separating the enum name:
+			pack1.pack2.(...).packN.EnumName
+		If `e` is a sub-type of a Haxe module, that module is not part of the
+		package structure.
+
+		If `e` has no package, the enum name is returned.
+
+		If `e` is `null`, the result is unspecified.
+
+		The enum name does not include any type parameters.</haxe_doc>
+		</getName>
+		<createByName public="1" params="T" get="inline" set="null" line="63" static="1">
+			<f a="e:constr:?params">
+				<x path="Enum"><c path="createByName.T"/></x>
+				<c path="String"/>
+				<c path="Array"><d/></c>
+				<c path="createByName.T"/>
+			</f>
+			<haxe_doc>Creates an instance of enum `e` by calling its constructor `constr` with
+		arguments `params`.
+
+		If `e` or `constr` is `null`, or if enum `e` has no constructor named
+		`constr`, or if the number of elements in `params` does not match the
+		expected number of constructor arguments, or if any argument has an
+		invalid type, the result is unspecified.</haxe_doc>
+		</createByName>
+		<createByIndex public="1" params="T" get="inline" set="null" line="79" static="1">
+			<f a="e:index:?params">
+				<x path="Enum"><c path="createByIndex.T"/></x>
+				<x path="Int"/>
+				<c path="Array"><d/></c>
+				<c path="createByIndex.T"/>
+			</f>
+			<haxe_doc>Creates an instance of enum `e` by calling its constructor number
+		`index` with arguments `params`.
+
+		The constructor indices are preserved from Haxe syntax, so the first
+		declared is index 0, the next index 1 etc.
+
+		If `e` or `index` is `null`, or if enum `e` has no constructor
+		corresponding to index `index`, or if the number of elements in `params`
+		does not match the expected number of constructor arguments, or if any
+		argument has an invalid type, the result is unspecified.</haxe_doc>
+		</createByIndex>
+		<createAll public="1" params="T" get="inline" set="null" line="96" static="1">
+			<f a="e">
+				<x path="Enum"><c path="createAll.T"/></x>
+				<c path="Array"><c path="createAll.T"/></c>
+			</f>
+			<haxe_doc>Returns a list of all constructors of enum `e` that require no
+		arguments.
+
+		This may return the empty Array `[]` if all constructors of `e` require
+		arguments.
+
+		Otherwise an instance of `e` constructed through each of its non-
+		argument constructors is returned, in the order of the constructor
+		declaration.
+
+		If `e` is `null`, the result is unspecified.</haxe_doc>
+		</createAll>
+		<getConstructors public="1" params="T" get="inline" set="null" line="108" static="1">
+			<f a="e">
+				<x path="Enum"><c path="getConstructors.T"/></x>
+				<c path="Array"><c path="String"/></c>
+			</f>
+			<haxe_doc>Returns a list of the names of all constructors of enum `e`.
+
+		The order of the constructor names in the returned Array is preserved
+		from the original syntax.
+
+		If `c` is `null`, the result is unspecified.</haxe_doc>
+		</getConstructors>
+		<haxe_doc>This class provides advanced methods on enums. It is ideally used with
+	`using EnumTools` and then acts as an 
+  [extension](https://haxe.org/manual/lf-static-extension.html) to the 
+  `enum` types.
+
+	If the first argument to any of the methods is null, the result is
+	unspecified.</haxe_doc>
+	</class>
+	<class path="haxe.EnumValueTools" params="" file="/usr/share/haxe/std/haxe/EnumTools.hx" module="haxe.EnumTools" extern="1">
+		<equals public="1" params="T" get="inline" set="null" line="132" static="1">
+			<f a="a:b">
+				<c path="equals.T"/>
+				<c path="equals.T"/>
+				<x path="Bool"/>
+			</f>
+			<haxe_doc>Recursively compares two enum instances `a` and `b` by value.
+
+		Unlike `a == b`, this function performs a deep equality check on the
+		arguments of the constructors (if there are any).
+
+		If `a` or `b` are `null`, the result is unspecified.</haxe_doc>
+		</equals>
+		<getName public="1" get="inline" set="null" line="143" static="1">
+			<f a="e">
+				<x path="EnumValue"/>
+				<c path="String"/>
+			</f>
+			<haxe_doc>Returns the constructor name of enum instance `e`.
+
+		The result String does not contain any constructor arguments.
+
+		If `e` is `null`, the result is unspecified.</haxe_doc>
+		</getName>
+		<getParameters public="1" get="inline" set="null" line="157" static="1">
+			<f a="e">
+				<x path="EnumValue"/>
+				<c path="Array"><d/></c>
+			</f>
+			<haxe_doc>Returns a list of the constructor arguments of enum instance `e`.
+
+		If `e` has no arguments, the result is `[]`.
+
+		Otherwise the result are the values that were used as arguments to `e`,
+		in the order of their declaration.
+
+		If `e` is `null`, the result is unspecified.</haxe_doc>
+		</getParameters>
+		<getIndex public="1" get="inline" set="null" line="169" static="1">
+			<f a="e">
+				<x path="EnumValue"/>
+				<x path="Int"/>
+			</f>
+			<haxe_doc>Returns the index of enum instance `e`.
+
+		This corresponds to the original syntactic position of `e`. The index of
+		the first declared constructor is 0, the next one is 1 etc.
+
+		If `e` is `null`, the result is unspecified.</haxe_doc>
+		</getIndex>
+		<match public="1" set="method" static="1">
+			<f a="e:pattern">
+				<x path="EnumValue"/>
+				<d/>
+				<x path="Bool"/>
+			</f>
+			<haxe_doc>Matches enum instance `e` against pattern `pattern`, returning `true` if
+		matching succeeded and `false` otherwise.
+
+		Example usage:
+
+		```haxe
+		if (e.match(pattern)) {
+			// codeIfTrue
+		} else {
+			// codeIfFalse
+		}
+		```
+
+		This is equivalent to the following code:
+
+		```haxe
+		switch (e) {
+			case pattern:
+				// codeIfTrue
+			case _:
+				// codeIfFalse
+		}
+		```
+
+		This method is implemented in the compiler. This definition exists only
+		for documentation.</haxe_doc>
+		</match>
+		<haxe_doc>This class provides advanced methods on enum values. It is ideally used with
+	`using EnumValueTools` and then acts as an 
+  [extension](https://haxe.org/manual/lf-static-extension.html) to the 
+  `EnumValue` types.
+
+	If the first argument to any of the methods is null, the result is
+	unspecified.</haxe_doc>
+	</class>
+	<class path="haxe.Log" params="" file="/usr/share/haxe/std/haxe/Log.hx">
+		<trace public="1" set="dynamic" line="47" static="1">
+			<f a="v:?infos">
+				<d/>
+				<t path="haxe.PosInfos"/>
+				<x path="Void"/>
+			</f>
+			<haxe_doc>Outputs `v` in a platform-dependent way.
+
+		The second parameter `infos` is injected by the compiler and contains
+		information about the position where the `trace()` call was made.
+
+		This method can be rebound to a custom function:
+			var oldTrace = haxe.Log.trace; // store old function
+			haxe.Log.trace = function(v, ?infos) {
+			  // handle trace
+			}
+			...
+			haxe.Log.trace = oldTrace;
+
+		If it is bound to null, subsequent calls to `trace()` will cause an
+		exception.</haxe_doc>
+		</trace>
+		<haxe_doc>Log primarily provides the `trace()` method, which is invoked upon a call to
+	`trace()` in Haxe code.</haxe_doc>
+		<meta>
+			<m n=":keep"/>
+			<m n=":directlyUsed"/>
+		</meta>
+	</class>
+	<typedef path="haxe.PosInfos" params="" file="/usr/share/haxe/std/haxe/PosInfos.hx">
+		<a>
+			<methodName><c path="String"/></methodName>
+			<lineNumber><x path="Int"/></lineNumber>
+			<fileName><c path="String"/></fileName>
+			<customParams>
+				<t path="Null"><c path="Array"><d/></c></t>
+				<meta><m n=":optional"/></meta>
+			</customParams>
+			<className><c path="String"/></className>
+		</a>
+		<haxe_doc>PosInfos is a magic type which can be used to generate position information
+	into the output for debugging use.
+
+	If a function has a final optional argument of this type, i.e.
+	(..., ?pos:haxe.PosInfos), each call to that function which does not assign
+	a value to that argument has its position added as call argument.
+
+	This can be used to track positions of calls in e.g. a unit testing
+	framework.</haxe_doc>
+	</typedef>
+</haxe>

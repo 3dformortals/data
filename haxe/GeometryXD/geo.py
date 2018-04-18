@@ -329,7 +329,7 @@ class geometryxd_GeometryXD:
             while (_g1 < _g):
                 i = _g1
                 _g1 = (_g1 + 1)
-                rez = (rez + i)
+                rez = (rez + (a[i] if i >= 0 and i < len(a) else None))
         return rez
 
     @staticmethod
@@ -343,7 +343,7 @@ class geometryxd_GeometryXD:
             while (_g1 < _g):
                 i = _g1
                 _g1 = (_g1 + 1)
-                rez = (rez + i)
+                rez = (rez + (a[i] if i >= 0 and i < len(a) else None))
         return rez
 
     @staticmethod
@@ -361,9 +361,10 @@ class geometryxd_GeometryXD:
                 while (_g2 < _g1):
                     i = _g2
                     _g2 = (_g2 + 1)
-                    _g.append(i)
+                    _g.append((a[i] if i >= 0 and i < len(a) else None))
+                a2 = _g
                 rez1 = None
-                al1 = len(_g)
+                al1 = len(a2)
                 if (al1 > 0):
                     rez1 = 0
                     _g11 = 0
@@ -371,7 +372,7 @@ class geometryxd_GeometryXD:
                     while (_g11 < _g3):
                         i1 = _g11
                         _g11 = (_g11 + 1)
-                        rez1 = (rez1 + i1)
+                        rez1 = (rez1 + (a2[i1] if i1 >= 0 and i1 < len(a2) else None))
                 rez = (a1 - rez1)
         return rez
 
@@ -390,9 +391,10 @@ class geometryxd_GeometryXD:
                 while (_g2 < _g1):
                     i = _g2
                     _g2 = (_g2 + 1)
-                    _g.append(i)
+                    _g.append((a[i] if i >= 0 and i < len(a) else None))
+                a2 = _g
                 rez1 = None
-                al1 = len(_g)
+                al1 = len(a2)
                 if (al1 > 0):
                     rez1 = 0
                     _g11 = 0
@@ -400,7 +402,7 @@ class geometryxd_GeometryXD:
                     while (_g11 < _g3):
                         i1 = _g11
                         _g11 = (_g11 + 1)
-                        rez1 = (rez1 + i1)
+                        rez1 = (rez1 + (a2[i1] if i1 >= 0 and i1 < len(a2) else None))
                 rez = (a1 - rez1)
         return rez
 
@@ -418,7 +420,7 @@ class geometryxd_GeometryXD:
                 while (_g1 < _g):
                     i = _g1
                     _g1 = (_g1 + 1)
-                    rez1 = (rez1 + i)
+                    rez1 = (rez1 + (a[i] if i >= 0 and i < len(a) else None))
             rez = (rez1 / al)
         return rez
 
@@ -536,8 +538,9 @@ class geometryxd_GeometryXD:
                     ai = _g5
                     _g5 = (_g5 + 1)
                     _g3.append(python_internal_ArrayImpl._get((a[ai] if ai >= 0 and ai < len(a) else None), i1))
+                a1 = _g3
                 rez2 = None
-                al1 = len(_g3)
+                al1 = len(a1)
                 if (al1 > 0):
                     rez2 = 0
                     _g12 = 0
@@ -545,7 +548,7 @@ class geometryxd_GeometryXD:
                     while (_g12 < _g6):
                         i2 = _g12
                         _g12 = (_g12 + 1)
-                        rez2 = (rez2 + i2)
+                        rez2 = (rez2 + (a1[i2] if i2 >= 0 and i2 < len(a1) else None))
                 _g2.append(rez2)
             rez = _g2
         return rez
@@ -581,8 +584,9 @@ class geometryxd_GeometryXD:
                     ai = _g5
                     _g5 = (_g5 + 1)
                     _g3.append(python_internal_ArrayImpl._get((a[ai] if ai >= 0 and ai < len(a) else None), i1))
+                a1 = _g3
                 rez2 = None
-                al1 = len(_g3)
+                al1 = len(a1)
                 if (al1 > 0):
                     rez2 = 0
                     _g12 = 0
@@ -590,7 +594,7 @@ class geometryxd_GeometryXD:
                     while (_g12 < _g6):
                         i2 = _g12
                         _g12 = (_g12 + 1)
-                        rez2 = (rez2 + i2)
+                        rez2 = (rez2 + (a1[i2] if i2 >= 0 and i2 < len(a1) else None))
                 _g2.append(rez2)
             rez = _g2
         return rez
@@ -857,8 +861,9 @@ class geometryxd_GeometryXD:
         else:
             tmp = False
         if tmp:
+            a1 = geometryxd_GeometryXD.multiply_xI(a)
             rez2 = None
-            al1 = len(geometryxd_GeometryXD.multiply_xI(a))
+            al1 = len(a1)
             if (al1 > 0):
                 rez2 = 0
                 _g11 = 0
@@ -866,7 +871,7 @@ class geometryxd_GeometryXD:
                 while (_g11 < _g2):
                     i1 = _g11
                     _g11 = (_g11 + 1)
-                    rez2 = (rez2 + i1)
+                    rez2 = (rez2 + (a1[i1] if i1 >= 0 and i1 < len(a1) else None))
             rez = rez2
         return rez
 
@@ -893,8 +898,9 @@ class geometryxd_GeometryXD:
         else:
             tmp = False
         if tmp:
+            a1 = geometryxd_GeometryXD.multiply_xF(a)
             rez2 = None
-            al1 = len(geometryxd_GeometryXD.multiply_xF(a))
+            al1 = len(a1)
             if (al1 > 0):
                 rez2 = 0
                 _g11 = 0
@@ -902,7 +908,7 @@ class geometryxd_GeometryXD:
                 while (_g11 < _g2):
                     i1 = _g11
                     _g11 = (_g11 + 1)
-                    rez2 = (rez2 + i1)
+                    rez2 = (rez2 + (a1[i1] if i1 >= 0 and i1 < len(a1) else None))
             rez = rez2
         return rez
 
@@ -3938,7 +3944,7 @@ class geometryxd_GeometryXD:
                 while (_g11 < _g3):
                     i2 = _g11
                     _g11 = (_g11 + 1)
-                    rez3 = (rez3 + i2)
+                    rez3 = (rez3 + (angle_proportions[i2] if i2 >= 0 and i2 < len(angle_proportions) else None))
             tmp = (rez3 == 0)
         else:
             tmp = True
@@ -3964,7 +3970,7 @@ class geometryxd_GeometryXD:
             while (_g12 < _g4):
                 i3 = _g12
                 _g12 = (_g12 + 1)
-                rez4 = (rez4 + i3)
+                rez4 = (rez4 + (doli[i3] if i3 >= 0 and i3 < len(doli) else None))
         x = (360 / rez4)
         axis_a = None
         axis_b = None
@@ -4065,7 +4071,7 @@ class geometryxd_GeometryXD:
             while (_g1 < _g):
                 i = _g1
                 _g1 = (_g1 + 1)
-                rez1 = (rez1 + i)
+                rez1 = (rez1 + (ap[i] if i >= 0 and i < len(ap) else None))
         x = (360 / rez1)
         va = geometryxd_GeometryXD.projection_vec3D_on_plane3D(va,[(vn[0] if 0 < len(vn) else None), (vn[1] if 1 < len(vn) else None), (vn[2] if 2 < len(vn) else None), 0])
         rez = [t]

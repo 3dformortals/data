@@ -131,27 +131,27 @@ class GeometryXD{
     }
     
     /**
-      return sum of Int Array elements
+      returns sum of Int Array elements. [1,2,3] -> 6. tested
       @param a - incoming array
      **/
     public static inline function sum_I(a:Array<Int>):Null<Int>{
         var rez:Null<Int> = null;
         var al:Int = a.length;
-        if (al > 0){ rez = 0; for (i in 0...al){ rez += i; } }
+        if (al > 0){ rez = 0; for (i in 0...al){ rez += a[i]; } }
         return rez;
     }
     /**
-      return sum of Float Array elements
+      returns sum of Float Array elements. [1.1,2,3] -> 6.1. tested
       @param a - incoming array
      **/
     public static inline function sum_F(a:Array<Float>):Null<Float>{
         var rez:Null<Float> = null;
         var al:Int = a.length;
-        if (al > 0){ rez = 0; for (i in 0...al){ rez += i; } }
+        if (al > 0){ rez = 0; for (i in 0...al){ rez += a[i]; } }
         return rez;
     }
     /**
-      return diff between first and others Int Array elements
+      returns diff between first and others Int Array elements. [1,2,3] -> -4. tested
       @param a - incoming array
      **/
     public static function diff_I(a:Array<Int>):Null<Int>{
@@ -159,11 +159,11 @@ class GeometryXD{
         var al:Int = a.length;
         if (al > 0){
             if (al == 1){ rez = a[0]; }
-            else{ rez = a[0] - sum_I([for (i in 1...al) i]); }
+            else{ rez = a[0] - sum_I([for (i in 1...al) a[i]]); }
         }return rez;
     }
     /**
-      return diff between first and others Float Array elements
+      returns diff between first and others Float Array elements. [1.1,2,3] -> -3.9. tested
       @param a - incoming array
      **/
     public static function diff_F(a:Array<Float>):Null<Float>{
@@ -171,11 +171,11 @@ class GeometryXD{
         var al:Int = a.length;
         if (al > 0){
             if (al == 1){ rez = a[0]; }
-            else{ rez = a[0] - sum_F([for (i in 1...al) i]); }
+            else{ rez = a[0] - sum_F([for (i in 1...al) a[i]]); }
         }return rez;
     }
     /**
-      return middle value of Float Array
+      returns middle value of Float Array
       @param a - incoming array
      **/
     public static function middle_F(a:Array<Float>):Null<Float>{

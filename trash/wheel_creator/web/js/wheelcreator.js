@@ -1,4 +1,4 @@
-var maxsize = 1000; // radius max size for wheel , that scaling other sizes to camera field;
+var maxsize = 200; // radius max size for wheel , that scaling other sizes to camera field;
 
 var geo = new GeometryXD();
 
@@ -258,7 +258,7 @@ function init() {
 	var geometry = new THREE.ExtrudeGeometry( shape, extrudeSettings );
 	var material2 = new THREE.MeshLambertMaterial( { color: 0x0000ff, wireframe: false } );
 	mesh = new THREE.Mesh( geometry, material2 );
-	scene.add( mesh );//blue extrude
+	// scene.add( mesh );//blue extrude
 	//
 	
 }
@@ -293,7 +293,8 @@ function metal_shape_for_extrusion(h,w,c=[0,0,0]){
 	var bsp=new THREE.Shape();
 	var x=c[0];
 	var y=c[1];
-	bsp.moveTo( x + w[5] / 2, y + h[8] );//h87
+	var startx = x+w[5]/2; var starty = y+h[8];
+	bsp.moveTo( startx,starty );//h87
 	
 	r1x = x + w[5]/2; r1y = y+h[8]; r2x = r1x; r2y = r1y+geo.sum_F([h[7],h[6]]); t2x = r1x; t2y = r2y;
 	bsp.bezierCurveTo( r1x, r1y, r2x, r2y, t2x, t2y );//h87h65
@@ -326,10 +327,10 @@ function metal_shape_for_extrusion(h,w,c=[0,0,0]){
 	r1x = t2x ; r1y = t2y-s[3] ; r2x = x-w[5]/2 ; r2y = t2y-h[5]+s[4] ; t2x = r2x ; t2y = r2y-s[4] ;
 	bsp.bezierCurveTo( r1x, r1y, r2x, r2y, t2x, t2y );//h45h56m
 	
-	r1x = t2x ; r1y = t2y ; r2x = r1x ; r2y = r1y-sum_F([h[6],h[7]]) ; t2x = r2x ; t2y = r2y ;
+	r1x = t2x ; r1y = t2y ; r2x = r1x ; r2y = r1y-geo.sum_F([h[6],h[7]]) ; t2x = r2x ; t2y = r2y ;
 	bsp.bezierCurveTo( r1x, r1y, r2x, r2y, t2x, t2y );//h56h78m
 	
-	r1x = t2x ; r1y = t2y ; r2x = r1x+w[5] ; r2y = r1y ; t2x = r2x ; t2y = r2y ;
+	r1x = t2x ; r1y = t2y ; r2x = startx ; r2y = starty ; t2x = r2x ; t2y = r2y ;
 	bsp.bezierCurveTo( r1x, r1y, r2x, r2y, t2x, t2y );//w5close
 	
 	return bsp;
@@ -340,8 +341,22 @@ function metal_maker(h, w, hull=false,extrude=100){
 	var oy = [0,1,0];
 	var c = [0,0,0];
 	var bsp = metal_shape_for_extrusion(h,w,c);//bezier cubic spline for extrusion
+	var dot = [w[5]/2,0,0]; var vn = [1,0,0]; var va = [0,1,0]; r = h[8];
+	var cp = ring_trajectory(dot, vn, va, r);
 	
-	
+	var randomSpline = cp;
+	//
+	extrudeSettings = {
+		steps: 30,//200
+		bevelEnabled: false,
+		// amount: 50,//not work
+		extrudePath: randomSpline
+	};
+	var geometry = new THREE.ExtrudeGeometry( bsp, extrudeSettings );
+	var material2 = new THREE.MeshLambertMaterial( { color: 0xff00ff, wireframe: true } );
+	// scene.remove(mesh);
+	var mesh = new THREE.Mesh( geometry, material2 );
+	return mesh;
 }
 
 function wheel_creator(){
@@ -350,11 +365,11 @@ function wheel_creator(){
 	h=d[0];w=d[1];b=d[2];s=d[3];g=d[4];
 	var angle = 0;
 	var metal = metal_maker(h,w);
-	metal.rotation.x = angle;
+	// metal.rotation.x = angle;
+	scene.add(metal);
+	console.log(metal);
 	
-	console.log(s);
-	
-	alert(g);
+	// alert(g);
 	
 }
 

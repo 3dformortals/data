@@ -225,7 +225,7 @@ GeometryXD.prototype = {
 			var _g = al;
 			while(_g1 < _g) {
 				var i = _g1++;
-				rez += i;
+				rez += a[i];
 			}
 		}
 		return rez;
@@ -239,7 +239,7 @@ GeometryXD.prototype = {
 			var _g = al;
 			while(_g1 < _g) {
 				var i = _g1++;
-				rez += i;
+				rez += a[i];
 			}
 		}
 		return rez;
@@ -257,17 +257,18 @@ GeometryXD.prototype = {
 				var _g1 = al;
 				while(_g2 < _g1) {
 					var i = _g2++;
-					_g.push(i);
+					_g.push(a[i]);
 				}
+				var a2 = _g;
 				var rez1 = null;
-				var al1 = _g.length;
+				var al1 = a2.length;
 				if(al1 > 0) {
 					rez1 = 0;
 					var _g11 = 0;
 					var _g3 = al1;
 					while(_g11 < _g3) {
 						var i1 = _g11++;
-						rez1 += i1;
+						rez1 += a2[i1];
 					}
 				}
 				rez = a1 - rez1;
@@ -288,17 +289,18 @@ GeometryXD.prototype = {
 				var _g1 = al;
 				while(_g2 < _g1) {
 					var i = _g2++;
-					_g.push(i);
+					_g.push(a[i]);
 				}
+				var a2 = _g;
 				var rez1 = null;
-				var al1 = _g.length;
+				var al1 = a2.length;
 				if(al1 > 0) {
 					rez1 = 0;
 					var _g11 = 0;
 					var _g3 = al1;
 					while(_g11 < _g3) {
 						var i1 = _g11++;
-						rez1 += i1;
+						rez1 += a2[i1];
 					}
 				}
 				rez = a1 - rez1;
@@ -318,7 +320,7 @@ GeometryXD.prototype = {
 				var _g = al1;
 				while(_g1 < _g) {
 					var i = _g1++;
-					rez1 += i;
+					rez1 += a[i];
 				}
 			}
 			rez = rez1 / al;
@@ -439,15 +441,16 @@ GeometryXD.prototype = {
 					var ai = _g5++;
 					_g3.push(a[ai][i1]);
 				}
+				var a1 = _g3;
 				var rez2 = null;
-				var al1 = _g3.length;
+				var al1 = a1.length;
 				if(al1 > 0) {
 					rez2 = 0;
 					var _g12 = 0;
 					var _g6 = al1;
 					while(_g12 < _g6) {
 						var i2 = _g12++;
-						rez2 += i2;
+						rez2 += a1[i2];
 					}
 				}
 				_g2.push(rez2);
@@ -487,15 +490,16 @@ GeometryXD.prototype = {
 					var ai = _g5++;
 					_g3.push(a[ai][i1]);
 				}
+				var a1 = _g3;
 				var rez2 = null;
-				var al1 = _g3.length;
+				var al1 = a1.length;
 				if(al1 > 0) {
 					rez2 = 0;
 					var _g12 = 0;
 					var _g6 = al1;
 					while(_g12 < _g6) {
 						var i2 = _g12++;
-						rez2 += i2;
+						rez2 += a1[i2];
 					}
 				}
 				_g2.push(rez2);
@@ -778,15 +782,16 @@ GeometryXD.prototype = {
 			tmp = false;
 		}
 		if(tmp) {
+			var a1 = this.multiply_xI(a);
 			var rez2 = null;
-			var al1 = this.multiply_xI(a).length;
+			var al1 = a1.length;
 			if(al1 > 0) {
 				rez2 = 0;
 				var _g11 = 0;
 				var _g2 = al1;
 				while(_g11 < _g2) {
 					var i1 = _g11++;
-					rez2 += i1;
+					rez2 += a1[i1];
 				}
 			}
 			rez = rez2;
@@ -818,15 +823,16 @@ GeometryXD.prototype = {
 			tmp = false;
 		}
 		if(tmp) {
+			var a1 = this.multiply_xF(a);
 			var rez2 = null;
-			var al1 = this.multiply_xF(a).length;
+			var al1 = a1.length;
 			if(al1 > 0) {
 				rez2 = 0;
 				var _g11 = 0;
 				var _g2 = al1;
 				while(_g11 < _g2) {
 					var i1 = _g11++;
-					rez2 += i1;
+					rez2 += a1[i1];
 				}
 			}
 			rez = rez2;
@@ -3961,7 +3967,7 @@ GeometryXD.prototype = {
 				var _g3 = al1;
 				while(_g11 < _g3) {
 					var i2 = _g11++;
-					rez3 += i2;
+					rez3 += angle_proportions[i2];
 				}
 			}
 			tmp = rez3 == 0;
@@ -3990,7 +3996,7 @@ GeometryXD.prototype = {
 			var _g4 = al2;
 			while(_g12 < _g4) {
 				var i3 = _g12++;
-				rez4 += i3;
+				rez4 += doli[i3];
 			}
 		}
 		var x = 360 / rez4;
@@ -4094,7 +4100,7 @@ GeometryXD.prototype = {
 			var _g = al;
 			while(_g1 < _g) {
 				var i = _g1++;
-				rez1 += i;
+				rez1 += ap[i];
 			}
 		}
 		var x = 360 / rez1;
