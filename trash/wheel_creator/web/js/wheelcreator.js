@@ -287,7 +287,7 @@ function change_camera_test(a,b,c){
 	controls.target = new THREE.Vector3();
 }
 /**return complex bezier cubic curve 2D as shape for metal extrusion */
-function metal_shape_for_extrusion(h,w,c=[0,0,0]){
+function fullsavemetal_shape_for_extrusion(h,w,c=[0,0,0]){
 	//bsp - bezier (cubic 2D) spline
 	var r1x = 0; var r1y = 0; var r2x = 0; var r2y = 0; var t2x = 0; var t2y = 0;
 	var bsp=new THREE.Shape();
@@ -296,7 +296,7 @@ function metal_shape_for_extrusion(h,w,c=[0,0,0]){
 	var startx = x+w[5]/2; var starty = y+h[8];
 	bsp.moveTo( startx,starty );//h87
 	
-	r1x = x + w[5]/2; r1y = y+h[8]; r2x = r1x; r2y = r1y+geo.sum_F([h[7],h[6]]); t2x = r1x; t2y = r2y;
+	r1x = startx; r1y = starty; r2x = r1x; r2y = r1y+geo.sum_F([h[7],h[6]]); t2x = r1x; t2y = r2y;
 	bsp.bezierCurveTo( r1x, r1y, r2x, r2y, t2x, t2y );//h87h65
 	
 	
@@ -335,15 +335,81 @@ function metal_shape_for_extrusion(h,w,c=[0,0,0]){
 	
 	return bsp;
 }
+
+function metal_shape_for_extrusion(h,w,c=[0,0,0]){
+	//bsp - bezier (cubic 2D) spline
+	var r1x = 0; var r1y = 0; var r2x = 0; var r2y = 0; var t2x = 0; var t2y = 0;
+	var bsp=new THREE.Shape();
+	var x=c[0];
+	var y=c[1];
+	// var startx = x+w[5]/2; var starty = y+h[8];
+	var startx = x-w[5]/2; var starty = y+h[8];
+	bsp.moveTo( startx,starty );//h87
+	
+	t2x = startx+w[5] ; t2y = starty ;
+	bsp.lineTo(t2x, t2y );//w5close
+	
+	r1x = t2x; r1y = t2y; r2x = r1x; r2y = r1y+geo.sum_F([h[7],h[6]]); t2x = r2x; t2y = r2y;
+	bsp.lineTo(t2x,t2y);
+	// bsp.bezierCurveTo( r1x, r1y, r2x, r2y, t2x, t2y );//h87h65
+	
+	//bezier
+	r1x = t2x ; r1y = r2y+s[4] ; r2x = x+w[3]/2+w[4] ; r2y = r2y+h[5]-s[3] ; t2x = r2x ; t2y = r2y+s[3] ;
+	// bsp.bezierCurveTo( r1x, r1y, r2x, r2y, t2x, t2y );//h65h54
+	bsp.lineTo(t2x, t2y );//h65h54
+	
+	r1x = t2x ; r1y = t2y ; r2x = r1x ; r2y = r1y+h[4] ; t2x = r1x ; t2y = r2y ;
+	// bsp.bezierCurveTo( r1x, r1y, r2x, r2y, t2x, t2y );//h54h43
+	bsp.lineTo( t2x, t2y );//h54h43
+	
+	r1x = t2x ; r1y = t2y ; r2x = r1x-w[4] ; r2y = r1y ; t2x = r2x ; t2y = r2y ;
+	// bsp.bezierCurveTo( r1x, r1y, r2x, r2y, t2x, t2y );//w4
+	bsp.lineTo(t2x, t2y );//w4
+	
+	r1x = t2x ; r1y = t2y ; r2x = r1x ; r2y = r1y-h[4] ; t2x = r2x ; t2y = r2y ;
+	// bsp.bezierCurveTo( r1x, r1y, r2x, r2y, t2x, t2y );//h4
+	bsp.lineTo(t2x, t2y );//h4
+	
+	r1x = t2x ; r1y = t2y ; r2x = r1x-w[3] ; r2y = r1y ; t2x = r2x ; t2y = r2y ;
+	// bsp.bezierCurveTo( r1x, r1y, r2x, r2y, t2x, t2y );//w3
+	bsp.lineTo(t2x, t2y );//w3
+	//left, mirrored, contur
+	r1x = t2x ; r1y = t2y ; r2x = r1x ; r2y = r1y+h[4] ; t2x = r2x ; t2y = r2y ;
+	// bsp.bezierCurveTo( r1x, r1y, r2x, r2y, t2x, t2y );//h4m
+	bsp.lineTo(t2x, t2y );//h4m
+	
+	r1x = t2x ; r1y = t2y ; r2x = r1x-w[4] ; r2y = r1y ; t2x = r2x ; t2y = r2y ;
+	// bsp.bezierCurveTo( r1x, r1y, r2x, r2y, t2x, t2y );//w4m
+	bsp.lineTo(t2x, t2y );//w4m
+	
+	r1x = t2x ; r1y = t2y ; r2x = r1x ; r2y = r1y-h[4] ; t2x = r1x ; t2y = r2y ;
+	bsp.bezierCurveTo( r1x, r1y, r2x, r2y, t2x, t2y );//h34h45m
+	bsp.lineTo(t2x, t2y );//h34h45m
+	
+	
+	//bezier
+	r1x = t2x ; r1y = t2y-s[3] ; r2x = x-w[5]/2 ; r2y = t2y-h[5]+s[4] ; t2x = r2x ; t2y = r2y-s[4] ;
+	// bsp.bezierCurveTo( r1x, r1y, r2x, r2y, t2x, t2y );//h45h56m
+	bsp.lineTo(t2x, t2y );//h45h56m
+	
+	r1x = t2x ; r1y = t2y ; r2x = r1x ; r2y = r1y-geo.sum_F([h[6],h[7]]) ; t2x = r2x ; t2y = r2y ;
+	// bsp.bezierCurveTo( r1x, r1y, r2x, r2y, t2x, t2y );//h56h78m
+	bsp.lineTo(startx, starty );//h56h78m
+	
+	
+	
+	return bsp;
+}
 function metal_maker(h, w, hull=false,extrude=100){
 	//metal base of wheel
 	var ox = [1,0,0];
 	var oy = [0,1,0];
 	var c = [0,0,0];
 	var bsp = metal_shape_for_extrusion(h,w,c);//bezier cubic spline for extrusion
-	var dot = [w[5]/2,0,0]; var vn = [1,0,0]; var va = [0,1,0]; r = h[8];
+	var dot = [w[5]/2,0,0]; var vn = [1,0,0]; var va = [0,-1,0]; r = h[8];
 	var cp = ring_trajectory(dot, vn, va, r);
-	
+	// cp.computeFrenetFrames(segments=20,closed=true);
+	// bsp.computeFrenetFrames(segments=20,closed=true);
 	var randomSpline = cp;
 	//
 	extrudeSettings = {
@@ -353,7 +419,8 @@ function metal_maker(h, w, hull=false,extrude=100){
 		extrudePath: randomSpline
 	};
 	var geometry = new THREE.ExtrudeGeometry( bsp, extrudeSettings );
-	var material2 = new THREE.MeshLambertMaterial( { color: 0xff00ff, wireframe: true } );
+	// var material2 = new THREE.MeshLambertMaterial( { color: 0xff00ff, wireframe: false } );
+	var material2 = new THREE.MeshPhysicalMaterial( { color: 0xff00ff, wireframe: false } );
 	// scene.remove(mesh);
 	var mesh = new THREE.Mesh( geometry, material2 );
 	return mesh;
