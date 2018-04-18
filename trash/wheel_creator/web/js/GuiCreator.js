@@ -197,7 +197,7 @@ function look_gui_tbody(){
     
     var tr5 = document.createElement('tr');
     tr5.appendChild(td_cbox("cbox_s1",true)); tr5.appendChild(td_color("c1","#808080"));
-    tr5.appendChild(td_input("s5","repeat by width")); tr5.appendChild(td_text("s5")); //repeat input
+    tr5.appendChild(td_input("s5","grips repeat by width")); tr5.appendChild(td_text("s5")); //repeat input
     
     var tr6 = document.createElement('tr');
     tr6.appendChild(td_cbox("cbox_s2",true)); tr6.appendChild(td_color("c2","#808080"));
@@ -224,6 +224,9 @@ function look_gui_creator(){
     table.appendChild(look_gui_tbody());
     var box = document.getElementById("tab_c2");
     box.appendChild(table);
+    var img = document.createElement('img');
+    img.src = "img/look200260.svg";
+    box.appendChild(img);
 }
 
 function td_cbox_text_colspan(cboxid, text, checked = false, colspan = 1, align = "left"){
@@ -357,8 +360,8 @@ function start_data_writer(){
         "length_track"
     ];
     var values = [
-        0,0,0,0,0,0,0,0,0,
-        0,0,0,0,0,0,0,0,0,
+        100,100,500,100,100,100,100,100,200,
+        500,600,550,100,550,50,50,6,0,
         100,100,100,100,4,32,50,0,
         1,
         1,

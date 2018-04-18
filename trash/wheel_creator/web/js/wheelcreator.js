@@ -267,6 +267,7 @@ function animate() {
 	controls.update();
 	renderer.render( scene, camera );
 }
+//test buttons
 function remove_mesh(){
 	scene.remove(mesh);
 }
@@ -286,52 +287,68 @@ function change_camera_test(a,b,c){
 	controls.target = new THREE.Vector3();
 }
 
-function inputs_reader(ids,rez = []){
-	for (i=0;i<ids.length;i++){
-		rez.push(parseFloat(document.getElementById(ids[i]).value));
-	}return rez;
-}
-function hsize_reader(prefix=[]){
-	var inputs = ["h1","h2","h3","h4","h5","h6","h7","h8","h9"];
-	var invals = inputs_reader(inputs,prefix);
-	return invals;
-}
-function wsize_reader(prefix=[]){
-	var inputs = ["w1","w2","w3","w4","w5"];
-	var invals = inputs_reader(inputs,prefix);
-	return invals;
-}
-function bsize_reader(prefix=[]){
-	var inputs = ["b1","b2","b3","b4"];
-	var invals = inputs_reader(inputs,prefix);
-	return invals;
-}
-function ssize_reader(prefix=[]){
-	var inputs = ["s1","s2","s3","s4","s5","s6","s7","s8"];
-	var invals = inputs_reader(inputs,prefix);
-	return invals;
-}
-function grip_reader(){
-	var rez="";
-	if (document.getElementById("g1").checked){rez = document.getElementById("g1").value;}
-	else if (document.getElementById("g2").checked){rez = document.getElementById("g2").value;}
-	else if (document.getElementById("g3").checked){rez = document.getElementById("g3").value;}
-	else if (document.getElementById("g4").checked){rez = document.getElementById("g4").value;}
-	return rez;
-}
-function hfull(h){
+function metal_maker(h, w, hull=false,extrude=100){
+	//metal base of wheel
+	var ox = [1,0,0];
+	var oy = [0,1,0];
+	var c = [0,0,0];
+	var r1x = 0; var r1y = 0; var r2x = 0; var r2y = 0; var t2x = 0; var t2y = 0;
+	var bsp=new THREE.Shape();
+	var x=c[0];
+	var y=c[1];
+	bsp.moveTo( x + w[5] / 2, y + h[8] );//h87
+	
+	r1x = x + w[5]/2; r1y = y+h[8]; r2x = r1x; r2y = y+geo.sum_F([h[8],h[7],h[6]]); t2x = r1x; t2y = r2y;
+	bsp.bezierCurveTo( r1x, r1y, r2x, r2y, t2x, t2y );//h87h65
+	
+	
+	r1x = t2x ; r1y = r2y+s[4] ; r2x = r2x+w[4] ; r2y = r2y+h[5]-s[3] ; t2x = r2x ; t2y = r2y+s[3] ;
+	bsp.bezierCurveTo( r1x, r1y, r2x, r2y, t2x, t2y );//h65h54
+	
+	r1x = t2x ; r1y = t2y ; r2x = r1x ; r2y = r1y+h[4] ; t2x = r1x ; t2y = r2y ;
+	bsp.bezierCurveTo( r1x, r1y, r2x, r2y, t2x, t2y );//h54h43
+	
+	r1x = t2x ; r1y = t2y ; r2x = r1x-w[4] ; r2y = r1y ; t2x = r2x ; t2y = r2y ;
+	bsp.bezierCurveTo( r1x, r1y, r2x, r2y, t2x, t2y );//w4
+	
+	r1x = t2x ; r1y = t2y ; r2x = r1x ; r2y = r1y-h[4] ; t2x = r2x ; t2y = r2y ;
+	bsp.bezierCurveTo( r1x, r1y, r2x, r2y, t2x, t2y );//h4
+	
+	r1x = t2x ; r1y = t2y ; r2x = r1x-w[3] ; r2y = r1y ; t2x = r2x ; t2y = r2y ;
+	bsp.bezierCurveTo( r1x, r1y, r2x, r2y, t2x, t2y );//w3
+	//left, mirrored, contur
+	r1x = t2x ; r1y = t2y ; r2x = r1x ; r2y = r1y+h[4] ; t2x = r2x ; t2y = r2y ;
+	bsp.bezierCurveTo( r1x, r1y, r2x, r2y, t2x, t2y );//h4m
+	
+	r1x = t2x ; r1y = t2y ; r2x = r1x-w[4] ; r2y = r1y ; t2x = r2x ; t2y = r2y ;
+	bsp.bezierCurveTo( r1x, r1y, r2x, r2y, t2x, t2y );//w4m
+	
+	r1x = t2x ; r1y = t2y ; r2x = r1x ; r2y = r1y-h[4] ; t2x = r1x ; t2y = r2y ;
+	bsp.bezierCurveTo( r1x, r1y, r2x, r2y, t2x, t2y );//h34h45m
+	
+	r1x = x+ ; r1y = y+ ; r2x = x+ ; r2y = y+ ; t2x = x+ ; t2y = y+ ;
+	bsp.bezierCurveTo( r1x, r1y, r2x, r2y, t2x, t2y );//h45h56m
+	
+	r1x = x+ ; r1y = y+ ; r2x = x+ ; r2y = y+ ; t2x = x+ ; t2y = y+ ;
+	bsp.bezierCurveTo( r1x, r1y, r2x, r2y, t2x, t2y );
+	
+	bsp.bezierCurveTo(  );
+	bsp.bezierCurveTo( x+25, y+0, x+25, y+25, x+0, y+25 );
 	
 }
-function scale_counter(h,w){
-	var scale = Math.max([hfull(h),wfull(w)]);
-}
+
 function wheel_creator(){
-	var h = hsize_reader(["undefined"]);
-	var w = wsize_reader(["undefined"]);
-	var b = bsize_reader(["undefined"]);
-	var s = ssize_reader(["undefined"]);
-	var g = grip_reader();
+	
+	d=gui_reader(); //GuiReader.js
+	h=d[0];w=d[1];b=d[2];s=d[3];g=d[4];
+	var angle = 0;
+	var metal = metal_maker(h,w);
+	metal.rotation.x = angle;
+	
+	console.log(s);
+	
 	alert(g);
+	
 }
 
 
