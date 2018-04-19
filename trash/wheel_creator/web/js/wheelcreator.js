@@ -16,6 +16,7 @@ var extrudeSettings;
 var mesh;
 var mesh1;
 var mesh2;
+var mesh3;
 init();
 animate();
 
@@ -154,7 +155,7 @@ function curveshape_maker(c){
 }
 function mesh_maker(tc,r=100,full=false){
 	var c = new THREE.Vector3(tc[0],tc[1],tc[2]);
-	// var cp = circle_extrude_way_maker(c,r);
+	var cp = circle_extrude_way_maker(c,r);
 	var dot = [0,0,0];
 	var vn = [1,0,0];
 	var va = [0,1,0];
@@ -340,61 +341,33 @@ function metal_shape_for_extrusion(h,w,c=[0,0,0]){
 	//bsp - bezier (cubic 2D) spline
 	var r1x = 0; var r1y = 0; var r2x = 0; var r2y = 0; var t2x = 0; var t2y = 0;
 	var bsp=new THREE.Shape();
-	var x=c[0];
-	var y=c[1];
-	// var startx = x+w[5]/2; var starty = y+h[8];
-	var startx = x-w[5]/2; var starty = y+h[8];
-	bsp.moveTo( startx,starty );//h87
+	var x=c[0]+2;
+	var y=c[1]+2;
+	var sx = x+w[5]+2; var sy = y+h[8]+2;
+	bsp.moveTo( Math.floor(sx),Math.floor(sy) );//
 	
-	t2x = startx+w[5] ; t2y = starty ;
-	bsp.lineTo(t2x, t2y );//w5close
+	//just triangle shape clockwise
+	bsp.lineTo(Math.floor(sx-w[5]) , Math.floor(sy) );//w5cw to left
+	bsp.lineTo(x,Math.floor(y+geo.sum_F([h[8],h[7],h[6]])));//to up
+	bsp.lineTo(Math.floor(sx) , Math.floor(sy));//to down
 	
-	r1x = t2x; r1y = t2y; r2x = r1x; r2y = r1y+geo.sum_F([h[7],h[6]]); t2x = r2x; t2y = r2y;
-	bsp.lineTo(t2x,t2y);
-	// bsp.bezierCurveTo( r1x, r1y, r2x, r2y, t2x, t2y );//h87h65
+	//full contour
+	// bsp.lineTo(sx-w[5] , sy );//w5cw
+	// bsp.lineTo(x-w[5]/2,y+geo.sum_F([h[8],h[7],h[6]]));//h87h65
+	// bsp.lineTo(x-w[3]/2-w[4],y+geo.sum_F([h[8],h[7],h[6],h[5]]));//h65h54 bezier need
+	// bsp.lineTo(x-w[3]/2-w[4],y+geo.sum_F([h[8],h[7],h[6],h[5],h[4]]));//h54h43
+	// bsp.lineTo(x-w[3]/2 , y+geo.sum_F([h[8],h[7],h[6],h[5],h[4]]));//w4
+	// bsp.lineTo(x-w[3]/2 , y+geo.sum_F([h[8],h[7],h[6],h[5]]));//h4 down
+	// bsp.lineTo(x+w[3]/2 , y+geo.sum_F([h[8],h[7],h[6],h[5]]));//w3
+	// bsp.lineTo(x+w[3]/2 , y+geo.sum_F([h[8],h[7],h[6],h[5],h[4]]));//h4 up right side
+	// bsp.lineTo(x+w[3]/2+w[4] , y+geo.sum_F([h[8],h[7],h[6],h[5],h[4]]));//w4
+	// bsp.lineTo(x+w[3]/2+w[4] , y+geo.sum_F([h[8],h[7],h[6],h[5]]));//h34h45
+	// bsp.lineTo(x+w[5]/2 , y+geo.sum_F([h[8],h[7],h[6]]));//h45h56 bezier need
+	// bsp.lineTo(sx , sy);//h56h78
+	// bsp.lineTo(x , y);//
 	
 	//bezier
-	r1x = t2x ; r1y = r2y+s[4] ; r2x = x+w[3]/2+w[4] ; r2y = r2y+h[5]-s[3] ; t2x = r2x ; t2y = r2y+s[3] ;
 	// bsp.bezierCurveTo( r1x, r1y, r2x, r2y, t2x, t2y );//h65h54
-	bsp.lineTo(t2x, t2y );//h65h54
-	
-	r1x = t2x ; r1y = t2y ; r2x = r1x ; r2y = r1y+h[4] ; t2x = r1x ; t2y = r2y ;
-	// bsp.bezierCurveTo( r1x, r1y, r2x, r2y, t2x, t2y );//h54h43
-	bsp.lineTo( t2x, t2y );//h54h43
-	
-	r1x = t2x ; r1y = t2y ; r2x = r1x-w[4] ; r2y = r1y ; t2x = r2x ; t2y = r2y ;
-	// bsp.bezierCurveTo( r1x, r1y, r2x, r2y, t2x, t2y );//w4
-	bsp.lineTo(t2x, t2y );//w4
-	
-	r1x = t2x ; r1y = t2y ; r2x = r1x ; r2y = r1y-h[4] ; t2x = r2x ; t2y = r2y ;
-	// bsp.bezierCurveTo( r1x, r1y, r2x, r2y, t2x, t2y );//h4
-	bsp.lineTo(t2x, t2y );//h4
-	
-	r1x = t2x ; r1y = t2y ; r2x = r1x-w[3] ; r2y = r1y ; t2x = r2x ; t2y = r2y ;
-	// bsp.bezierCurveTo( r1x, r1y, r2x, r2y, t2x, t2y );//w3
-	bsp.lineTo(t2x, t2y );//w3
-	//left, mirrored, contur
-	r1x = t2x ; r1y = t2y ; r2x = r1x ; r2y = r1y+h[4] ; t2x = r2x ; t2y = r2y ;
-	// bsp.bezierCurveTo( r1x, r1y, r2x, r2y, t2x, t2y );//h4m
-	bsp.lineTo(t2x, t2y );//h4m
-	
-	r1x = t2x ; r1y = t2y ; r2x = r1x-w[4] ; r2y = r1y ; t2x = r2x ; t2y = r2y ;
-	// bsp.bezierCurveTo( r1x, r1y, r2x, r2y, t2x, t2y );//w4m
-	bsp.lineTo(t2x, t2y );//w4m
-	
-	r1x = t2x ; r1y = t2y ; r2x = r1x ; r2y = r1y-h[4] ; t2x = r1x ; t2y = r2y ;
-	bsp.bezierCurveTo( r1x, r1y, r2x, r2y, t2x, t2y );//h34h45m
-	bsp.lineTo(t2x, t2y );//h34h45m
-	
-	
-	//bezier
-	r1x = t2x ; r1y = t2y-s[3] ; r2x = x-w[5]/2 ; r2y = t2y-h[5]+s[4] ; t2x = r2x ; t2y = r2y-s[4] ;
-	// bsp.bezierCurveTo( r1x, r1y, r2x, r2y, t2x, t2y );//h45h56m
-	bsp.lineTo(t2x, t2y );//h45h56m
-	
-	r1x = t2x ; r1y = t2y ; r2x = r1x ; r2y = r1y-geo.sum_F([h[6],h[7]]) ; t2x = r2x ; t2y = r2y ;
-	// bsp.bezierCurveTo( r1x, r1y, r2x, r2y, t2x, t2y );//h56h78m
-	bsp.lineTo(startx, starty );//h56h78m
 	
 	
 	
@@ -406,24 +379,29 @@ function metal_maker(h, w, hull=false,extrude=100){
 	var oy = [0,1,0];
 	var c = [0,0,0];
 	var bsp = metal_shape_for_extrusion(h,w,c);//bezier cubic spline for extrusion
-	var dot = [w[5]/2,0,0]; var vn = [1,0,0]; var va = [0,-1,0]; r = h[8];
+	//var bsp = curveshape_maker([0,0]);//looks like work done :|
+	var dot = [w[5],0,0]; var vn = [1,0,0]; var va = [0,-1,0]; r = Math.floor(h[8]);
+	alert(r);
 	var cp = ring_trajectory(dot, vn, va, r);
+	// var cp = circle_extrude_way_maker(new THREE.Vector3(),r);
+	
 	// cp.computeFrenetFrames(segments=20,closed=true);
 	// bsp.computeFrenetFrames(segments=20,closed=true);
 	var randomSpline = cp;
 	//
 	extrudeSettings = {
-		steps: 30,//200
+		steps: 200,//200
+		amount: 12,//not work
 		bevelEnabled: false,
-		// amount: 50,//not work
 		extrudePath: randomSpline
 	};
 	var geometry = new THREE.ExtrudeGeometry( bsp, extrudeSettings );
 	// var material2 = new THREE.MeshLambertMaterial( { color: 0xff00ff, wireframe: false } );
 	var material2 = new THREE.MeshPhysicalMaterial( { color: 0xff00ff, wireframe: false } );
 	// scene.remove(mesh);
-	var mesh = new THREE.Mesh( geometry, material2 );
-	return mesh;
+	mesh3 = new THREE.Mesh( geometry, material2 );
+	scene.add(mesh3);
+	return mesh3;
 }
 
 function wheel_creator(){
