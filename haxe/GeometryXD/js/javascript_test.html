@@ -1,7 +1,58 @@
 <html><head>
     <script src="geo.js"></script>
-    <script>
-        var geo = new GeometryXD();
-        alert(geo.vecXDback([3,2,1]));
-    </script>
-</head></html>
+    <style type="text/css">
+    table{border-collapse: collapse;}
+    td,th{padding: 3px;
+    border: 1px solid black;}
+    </style>
+</head><body>
+    <table style="border:1px solid black;">
+<script>
+    function p(name="noname",head=false){
+        if(!head){
+            var n= name.split("(")[1];
+            document.write("<tr><td>f("+n+"</td><td>"+eval(name)+"</td></tr>");
+        
+        }else{
+            document.write("<tr><td colspan='2'>"+name+ "</td></tr>");
+        }
+    }
+    var geo = new GeometryXD();
+    p("GeometryXD functions test. geo.f(...)","test value","testing result");
+    
+    p("maxabs([Float Array])",true);
+    p("geo.maxabs([1.1, 2, -4])");
+    p("geo.maxabs([1.1, 2, 3])");
+    
+    p("positive_inside_I([Int Array])", true);
+    p("geo.positive_inside_I([-1, -2, -3, 4])");
+    p("geo.positive_inside_I([-1, -2, -3, 0])");
+    
+    p("zero_inside_I([Int Array])", true);
+    p("geo.zero_inside_I([-1, -2, -3, 0])");
+    p("geo.zero_inside_I([-1, -2, -3, 1])");
+    
+    p("negative_inside_I([Int Array])", true);
+    p("geo.negative_inside_I([-1, 2, 3])");
+    p("geo.negative_inside_I([0, 2, 3])");
+    
+    p("positive_inside_F([Float Array])", true);
+    p("geo.positive_inside_F([0.1, -2, -3])");
+    p("geo.positive_inside_F([-1.1, 0, -3])");
+    
+    p("zero_inside_F([Float Array])",true);
+    p("geo.zero_inside_F([-1.1, 0, -3])");
+    p("geo.zero_inside_F([-1.1, 1, -3])");
+    
+    p("negative_inside_F([Float Array])",true);
+    p("geo.negative_inside_F([-1.1, 0, 3])");
+    p("geo.negative_inside_F([1.1, 0, 3])");
+    
+    p("same_size_I([[Int Array],[Int Array]])",true) //bug
+    p("geo.same_size_I([1,2],[3,4])");
+    p("geo.same_size_I([0,1,2],[3,4])");
+    // p("geo.()",geo.(),);
+    // alert(geo.vecXDback([3,2,1]));
+</script>
+</table>
+</body></html>

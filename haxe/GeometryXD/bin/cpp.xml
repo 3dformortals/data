@@ -1410,39 +1410,39 @@
 				<c path="Array"><x path="Int"/></c>
 				<t path="Null"><x path="Int"/></t>
 			</f>
-			<haxe_doc>return sum of Int Array elements
-      @param a - incoming array</haxe_doc>
+			<haxe_doc><![CDATA[returns sum of Int Array elements. [1,2,3] -> 6. tested
+      @param a - incoming array]]></haxe_doc>
 		</sum_I>
 		<sum_F public="1" get="inline" set="null" line="147" static="1">
 			<f a="a">
 				<c path="Array"><x path="Float"/></c>
 				<t path="Null"><x path="Float"/></t>
 			</f>
-			<haxe_doc>return sum of Float Array elements
-      @param a - incoming array</haxe_doc>
+			<haxe_doc><![CDATA[returns sum of Float Array elements. [1.1,2,3] -> 6.1. tested
+      @param a - incoming array]]></haxe_doc>
 		</sum_F>
 		<diff_I public="1" set="method" line="157" static="1">
 			<f a="a">
 				<c path="Array"><x path="Int"/></c>
 				<t path="Null"><x path="Int"/></t>
 			</f>
-			<haxe_doc>return diff between first and others Int Array elements
-      @param a - incoming array</haxe_doc>
+			<haxe_doc><![CDATA[returns diff between first and others Int Array elements. [1,2,3] -> -4. tested
+      @param a - incoming array]]></haxe_doc>
 		</diff_I>
 		<diff_F public="1" set="method" line="169" static="1">
 			<f a="a">
 				<c path="Array"><x path="Float"/></c>
 				<t path="Null"><x path="Float"/></t>
 			</f>
-			<haxe_doc>return diff between first and others Float Array elements
-      @param a - incoming array</haxe_doc>
+			<haxe_doc><![CDATA[returns diff between first and others Float Array elements. [1.1,2,3] -> -3.9. tested
+      @param a - incoming array]]></haxe_doc>
 		</diff_F>
 		<middle_F public="1" set="method" line="181" static="1">
 			<f a="a">
 				<c path="Array"><x path="Float"/></c>
 				<t path="Null"><x path="Float"/></t>
 			</f>
-			<haxe_doc>return middle value of Float Array
+			<haxe_doc>returns middle value of Float Array
       @param a - incoming array</haxe_doc>
 		</middle_F>
 		<multiply_I_I public="1" get="inline" set="null" line="192" static="1">
