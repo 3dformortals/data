@@ -683,76 +683,113 @@ GeometryXD.prototype = {
 	,multiply_xI: function(a) {
 		var rez = null;
 		var al = a.length;
-		if(al > 1) {
-			var _g = [];
-			var _g2 = 0;
-			var _g1 = a[0].length;
-			while(_g2 < _g1) {
-				var i = _g2++;
-				var _g3 = [];
-				var _g5 = 0;
-				var _g4 = a.length;
-				while(_g5 < _g4) {
-					var ai = _g5++;
-					_g3.push(a[ai][i]);
+		var rez1 = null;
+		var al1 = a.length;
+		if(al1 > 1) {
+			rez1 = true;
+			var size = a[0].length;
+			var _g1 = 1;
+			var _g = al1;
+			while(_g1 < _g) {
+				var i = _g1++;
+				if(size != a[i].length) {
+					rez1 = false;
+					break;
 				}
-				var a1 = _g3;
-				var rez1 = null;
-				var al1 = a1.length;
-				if(al1 > 0) {
-					rez1 = a1[0];
-					if(al1 > 1) {
-						var _g11 = 1;
-						var _g6 = al1;
-						while(_g11 < _g6) {
-							var i1 = _g11++;
-							rez1 *= a1[i1];
+			}
+		} else {
+			rez1 = true;
+		}
+		if(rez1) {
+			if(al > 1) {
+				var _g2 = [];
+				var _g21 = 0;
+				var _g11 = a[0].length;
+				while(_g21 < _g11) {
+					var i1 = _g21++;
+					var _g3 = [];
+					var _g5 = 0;
+					var _g4 = a.length;
+					while(_g5 < _g4) {
+						var ai = _g5++;
+						_g3.push(a[ai][i1]);
+					}
+					var a1 = _g3;
+					var rez2 = null;
+					var al2 = a1.length;
+					if(al2 > 0) {
+						rez2 = a1[0];
+						if(al2 > 1) {
+							var _g12 = 1;
+							var _g6 = al2;
+							while(_g12 < _g6) {
+								var i2 = _g12++;
+								rez2 *= a1[i2];
+							}
 						}
 					}
+					_g2.push(rez2);
 				}
-				_g.push(rez1);
+				rez = _g2;
+			} else if(al > 0) {
+				rez = a[0];
 			}
-			rez = _g;
-		} else if(al > 0) {
-			rez = a[0];
 		}
 		return rez;
 	}
 	,multiply_xF: function(a) {
 		var rez = null;
 		var al = a.length;
-		if(al > 1) {
-			var _g = [];
-			var _g2 = 0;
-			var _g1 = a[0].length;
-			while(_g2 < _g1) {
-				var i = _g2++;
-				var _g3 = [];
-				var _g5 = 0;
-				var _g4 = a.length;
-				while(_g5 < _g4) {
-					var ai = _g5++;
-					_g3.push(a[ai][i]);
+		var rez1 = null;
+		var al1 = a.length;
+		if(al1 > 1) {
+			rez1 = true;
+			var size = a[0].length;
+			var _g1 = 1;
+			var _g = al1;
+			while(_g1 < _g) {
+				var i = _g1++;
+				if(size != a[i].length) {
+					rez1 = false;
 				}
-				var a1 = _g3;
-				var rez1 = null;
-				var al1 = a1.length;
-				if(al1 > 0) {
-					rez1 = a1[0];
-					if(al1 > 1) {
-						var _g11 = 1;
-						var _g6 = al1;
-						while(_g11 < _g6) {
-							var i1 = _g11++;
-							rez1 *= a1[i1];
+			}
+		} else {
+			rez1 = true;
+		}
+		if(rez1) {
+			if(al > 1) {
+				var _g2 = [];
+				var _g21 = 0;
+				var _g11 = a[0].length;
+				while(_g21 < _g11) {
+					var i1 = _g21++;
+					var _g3 = [];
+					var _g5 = 0;
+					var _g4 = a.length;
+					while(_g5 < _g4) {
+						var ai = _g5++;
+						_g3.push(a[ai][i1]);
+					}
+					var a1 = _g3;
+					var rez2 = null;
+					var al2 = a1.length;
+					if(al2 > 0) {
+						rez2 = a1[0];
+						if(al2 > 1) {
+							var _g12 = 1;
+							var _g6 = al2;
+							while(_g12 < _g6) {
+								var i2 = _g12++;
+								rez2 *= a1[i2];
+							}
 						}
 					}
+					_g2.push(rez2);
 				}
-				_g.push(rez1);
+				rez = _g2;
+			} else if(al > 0) {
+				rez = a[0];
 			}
-			rez = _g;
-		} else if(al > 0) {
-			rez = a[0];
 		}
 		return rez;
 	}

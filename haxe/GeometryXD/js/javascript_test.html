@@ -84,6 +84,74 @@
     p("geo.middle_F([1, 2, 3])");
     p("geo.middle_F([-5, -5, -6, -8])");
     
+    p("multiply_I_I([Int Array], Int) : Int Array", true);
+    p("geo.multiply_I_I([1, 2, 3], 3)");
+    p("geo.multiply_I_I([-5, -5, -6, -8], -1)");
+    
+    p("multiply_F_F([Float Array], Float) : Float Array", true);
+    p("geo.multiply_F_F([1.8, 2, 3], 1.2)");
+    p("geo.multiply_F_F([-6, -8], -1.4)");
+    
+    p("multiply_I([Int Array]) : Int", true);
+    p("geo.multiply_I([1, 2, 3])");
+    p("geo.multiply_I([-5, -6, -8])");
+    
+    p("multiply_F([Float Array]) : Float", true);
+    p("geo.multiply_F([1.8, 2, 3])");
+    p("geo.multiply_F([-1.2, -6, -8])");
+    
+    p("minus_I([Int Array]) : Int Array", true);
+    p("geo.minus_I([1, 2, 3])");
+    p("geo.minus_I([-5, -6, -8])");
+    
+    p("minus_F([Float Array]) : Float Array", true);
+    p("geo.minus_F([1.8, 2, 3])");
+    p("geo.minus_F([-1.2, -6, -8])");
+    
+    p("sum_xI([Array Int Array]) : Int Array", true);
+    p("geo.sum_xI([[1, 2, 3], [3, 2, 1]])");
+    p("geo.sum_xI([[-5, -6, -8], [1, 2]])");
+    
+    p("sum_xF([Array Float Array]) : Float Array", true);
+    p("geo.sum_xF([[1.8, 2, 3], [1, 2, 3]])");
+    p("geo.sum_xF([[-1.2, -6, -8], [1, 2]])");
+    
+    p("diff_xI([Array Int Array]) : Int Array", true);
+    p("geo.diff_xI([[1, 2, 3], [3, 2, 1]])");
+    p("geo.diff_xI([[-5, -6, -8], [1, 2]])");
+    
+    p("diff_xF([Array Float Array]) : Float Array", true);
+    p("geo.diff_xF([[1.8, 2, 3], [1, 2, 3]])");
+    p("geo.diff_xF([[-1.2, -6, -8], [1, 2]])");
+    
+    p("middle_xF([Array Float Array]) : Float Array", true);
+    p("geo.middle_xF([[1.8, 2, 3], [1, 2, 3]])");
+    p("geo.middle_xF([[-1.2, -6, -8], [1, 2]])");
+    
+    p("multiply_xI_I([Array Int Array], Int) : Array Int Array", true);
+    p("geo.multiply_xI_I([[1, 2, 3], [3, 2, 1]], 2)");
+    p("geo.multiply_xI_I([[-1, -6, -8], [1, 2]], 2)");
+    
+    p("multiply_xF_F([Array Float Array], Float) : Array Float Array", true);
+    p("geo.multiply_xF_F([[1.1, 2, 3], [3, 2, 1]], 2)");
+    p("geo.multiply_xF_F([[-1.1, -6, -8], [1, 2]], 2)");
+    
+    p("multiply_xI([Array Int Array]) : Int Array", true);
+    p("geo.multiply_xI([[1, 2, 3], [3, 2, 1]])");
+    p("geo.multiply_xI([[-1, -6, -8], [1, 2]])");
+    
+    p("multiply_xF([Array Float Array]) : Float Array", true);
+    p("geo.multiply_xF([[1.1, 2, 3], [3, 2, 1]])");
+    p("geo.multiply_xF([[-1.1, -6, -8], [1, 2]])");
+    
+    p("multisum_xI([Array Int Array]) : Int", true);
+    p("geo.multisum_xI([[1, 2, 3], [3, 2, 1]])");
+    p("geo.multisum_xI([[-1, -6, -8], [1, 2]])");
+    
+    p("multisum_xF([Array Float Array]) : Float", true);
+    p("geo.multisum_xF([[-1.1, -2, -3], [3, 2, 1]])");
+    p("geo.multisum_xF([[-1.1, -6, -8], [1, 2]])");
+    
     
     // p("geo.()",geo.(),);
     // alert(geo.vecXDback([3,2,1]));

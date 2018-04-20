@@ -317,10 +317,12 @@ class GeometryXD{
     public function multiply_xI(a:Array<Array<Int>>):Array<Int>{
         var rez:Array<Int> = null;
         var al:Int = a.length;
-        if (al > 1){
-            rez = [for (i in 0...a[0].length) multiply_I([for (ai in 0...a.length) a[ai][i] ]) ];
-        }else if (al > 0){
-            rez = a[0];
+        if(same_size_I(a)){
+            if (al > 1){
+                rez = [for (i in 0...a[0].length) multiply_I([for (ai in 0...a.length) a[ai][i] ]) ];
+            }else if (al > 0){
+                rez = a[0];
+            }
         }return rez;
     }
     /**
@@ -330,10 +332,12 @@ class GeometryXD{
     public function multiply_xF(a:Array<Array<Float>>):Array<Float>{
         var rez:Array<Float> = null;
         var al:Int = a.length;
-        if (al > 1){
-            rez = [for (i in 0...a[0].length) multiply_F([for (ai in 0...a.length) a[ai][i] ]) ];
-        }else if (al > 0){
-            rez = a[0];
+        if(same_size_F(a)){
+            if (al > 1){
+                rez = [for (i in 0...a[0].length) multiply_F([for (ai in 0...a.length) a[ai][i] ]) ];
+            }else if (al > 0){
+                rez = a[0];
+            }
         }return rez;
     }
     /**
