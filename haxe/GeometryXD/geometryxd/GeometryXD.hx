@@ -1015,8 +1015,7 @@ class GeometryXD{
     public static function vecXD(dotXDa:Array<Float>, dotXDb:Array<Float>):Array<Float>{
         var rez:Array<Float> = null;
         if (
-            !vecXDsamesize(dotXDa, dotXDb) ||
-            vecXDsame(dotXDa, dotXDb)
+            !vecXDsamesize(dotXDa, dotXDb)
             ){ return rez; }
         rez = [];
         for (i in 0...dotXDa.length){ rez.push(dotXDb[i] - dotXDa[i]); }

@@ -1990,17 +1990,7 @@ GeometryXD.prototype = {
 	}
 	,vecXD: function(dotXDa,dotXDb) {
 		var rez = null;
-		var tmp;
-		if(!(!this.vecXDsamesize(dotXDa,dotXDb))) {
-			var rez1 = null;
-			if(dotXDa.length == dotXDb.length) {
-				rez1 = this.same_xF([dotXDa,dotXDb]);
-			}
-			tmp = rez1;
-		} else {
-			tmp = true;
-		}
-		if(tmp) {
+		if(!this.vecXDsamesize(dotXDa,dotXDb)) {
 			return rez;
 		}
 		rez = [];
