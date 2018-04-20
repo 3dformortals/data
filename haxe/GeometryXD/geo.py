@@ -769,72 +769,103 @@ class geometryxd_GeometryXD:
     def multiply_xI(a):
         rez = None
         al = len(a)
-        if (al > 1):
-            _g = []
-            _g2 = 0
-            _g1 = len((a[0] if 0 < len(a) else None))
-            while (_g2 < _g1):
-                i = _g2
-                _g2 = (_g2 + 1)
-                _g3 = []
-                _g5 = 0
-                _g4 = len(a)
-                while (_g5 < _g4):
-                    ai = _g5
-                    _g5 = (_g5 + 1)
-                    _g3.append(python_internal_ArrayImpl._get((a[ai] if ai >= 0 and ai < len(a) else None), i))
-                a1 = _g3
-                rez1 = None
-                al1 = len(a1)
-                if (al1 > 0):
-                    rez1 = (a1[0] if 0 < len(a1) else None)
-                    if (al1 > 1):
-                        _g11 = 1
-                        _g6 = al1
-                        while (_g11 < _g6):
-                            i1 = _g11
-                            _g11 = (_g11 + 1)
-                            rez1 = (rez1 * (a1[i1] if i1 >= 0 and i1 < len(a1) else None))
-                _g.append(rez1)
-            rez = _g
-        elif (al > 0):
-            rez = (a[0] if 0 < len(a) else None)
+        rez1 = None
+        al1 = len(a)
+        if (al1 > 1):
+            rez1 = True
+            size = len((a[0] if 0 < len(a) else None))
+            _g1 = 1
+            _g = al1
+            while (_g1 < _g):
+                i = _g1
+                _g1 = (_g1 + 1)
+                if (size != len((a[i] if i >= 0 and i < len(a) else None))):
+                    rez1 = False
+                    break
+        else:
+            rez1 = True
+        if rez1:
+            if (al > 1):
+                _g2 = []
+                _g21 = 0
+                _g11 = len((a[0] if 0 < len(a) else None))
+                while (_g21 < _g11):
+                    i1 = _g21
+                    _g21 = (_g21 + 1)
+                    _g3 = []
+                    _g5 = 0
+                    _g4 = len(a)
+                    while (_g5 < _g4):
+                        ai = _g5
+                        _g5 = (_g5 + 1)
+                        _g3.append(python_internal_ArrayImpl._get((a[ai] if ai >= 0 and ai < len(a) else None), i1))
+                    a1 = _g3
+                    rez2 = None
+                    al2 = len(a1)
+                    if (al2 > 0):
+                        rez2 = (a1[0] if 0 < len(a1) else None)
+                        if (al2 > 1):
+                            _g12 = 1
+                            _g6 = al2
+                            while (_g12 < _g6):
+                                i2 = _g12
+                                _g12 = (_g12 + 1)
+                                rez2 = (rez2 * (a1[i2] if i2 >= 0 and i2 < len(a1) else None))
+                    _g2.append(rez2)
+                rez = _g2
+            elif (al > 0):
+                rez = (a[0] if 0 < len(a) else None)
         return rez
 
     @staticmethod
     def multiply_xF(a):
         rez = None
         al = len(a)
-        if (al > 1):
-            _g = []
-            _g2 = 0
-            _g1 = len((a[0] if 0 < len(a) else None))
-            while (_g2 < _g1):
-                i = _g2
-                _g2 = (_g2 + 1)
-                _g3 = []
-                _g5 = 0
-                _g4 = len(a)
-                while (_g5 < _g4):
-                    ai = _g5
-                    _g5 = (_g5 + 1)
-                    _g3.append(python_internal_ArrayImpl._get((a[ai] if ai >= 0 and ai < len(a) else None), i))
-                a1 = _g3
-                rez1 = None
-                al1 = len(a1)
-                if (al1 > 0):
-                    rez1 = (a1[0] if 0 < len(a1) else None)
-                    if (al1 > 1):
-                        _g11 = 1
-                        _g6 = al1
-                        while (_g11 < _g6):
-                            i1 = _g11
-                            _g11 = (_g11 + 1)
-                            rez1 = (rez1 * (a1[i1] if i1 >= 0 and i1 < len(a1) else None))
-                _g.append(rez1)
-            rez = _g
-        elif (al > 0):
-            rez = (a[0] if 0 < len(a) else None)
+        rez1 = None
+        al1 = len(a)
+        if (al1 > 1):
+            rez1 = True
+            size = len((a[0] if 0 < len(a) else None))
+            _g1 = 1
+            _g = al1
+            while (_g1 < _g):
+                i = _g1
+                _g1 = (_g1 + 1)
+                if (size != len((a[i] if i >= 0 and i < len(a) else None))):
+                    rez1 = False
+        else:
+            rez1 = True
+        if rez1:
+            if (al > 1):
+                _g2 = []
+                _g21 = 0
+                _g11 = len((a[0] if 0 < len(a) else None))
+                while (_g21 < _g11):
+                    i1 = _g21
+                    _g21 = (_g21 + 1)
+                    _g3 = []
+                    _g5 = 0
+                    _g4 = len(a)
+                    while (_g5 < _g4):
+                        ai = _g5
+                        _g5 = (_g5 + 1)
+                        _g3.append(python_internal_ArrayImpl._get((a[ai] if ai >= 0 and ai < len(a) else None), i1))
+                    a1 = _g3
+                    rez2 = None
+                    al2 = len(a1)
+                    if (al2 > 0):
+                        rez2 = (a1[0] if 0 < len(a1) else None)
+                        if (al2 > 1):
+                            _g12 = 1
+                            _g6 = al2
+                            while (_g12 < _g6):
+                                i2 = _g12
+                                _g12 = (_g12 + 1)
+                                rez2 = (rez2 * (a1[i2] if i2 >= 0 and i2 < len(a1) else None))
+                    _g2.append(rez2)
+                rez = _g2
+            elif (al > 0):
+                rez = (a[0] if 0 < len(a) else None)
         return rez
 
     @staticmethod
@@ -2081,15 +2112,7 @@ class geometryxd_GeometryXD:
     @staticmethod
     def vecXD(dotXDa,dotXDb):
         rez = None
-        tmp = None
-        if (not ((not geometryxd_GeometryXD.vecXDsamesize(dotXDa,dotXDb)))):
-            rez1 = None
-            if (len(dotXDa) == len(dotXDb)):
-                rez1 = geometryxd_GeometryXD.same_xF([dotXDa, dotXDb])
-            tmp = rez1
-        else:
-            tmp = True
-        if tmp:
+        if (not geometryxd_GeometryXD.vecXDsamesize(dotXDa,dotXDb)):
             return rez
         rez = []
         _g1 = 0
