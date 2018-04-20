@@ -206,12 +206,12 @@ function init() {
 	// scene.background = new THREE.Color( 0x222222 );
 	scene.background = new THREE.Color( 0x888888 );
 	// camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 1000 );
-	camera = new THREE.PerspectiveCamera( 45, 1, 1, 1000 );
+	camera = new THREE.PerspectiveCamera( 45, 1, 1, 1500 );
 	camera.position.set( 0, 0, 500 );
 	// camera.aspect = 1;
 	controls = new THREE.TrackballControls( camera, renderer.domElement );
 	controls.minDistance = 200;
-	controls.maxDistance = 500;
+	controls.maxDistance = 1500;
 	scene.add( new THREE.AmbientLight( 0x888888 ) );
 	var light = new THREE.PointLight( 0xffffff );
 	light.position.copy( camera.position );
