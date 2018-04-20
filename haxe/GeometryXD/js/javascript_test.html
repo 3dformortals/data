@@ -11,7 +11,7 @@
     function p(name="noname",head=false){
         if(!head){
             var n= name.split("(")[1];
-            document.write("<tr><td>f("+n+"</td><td>"+eval(name)+"</td></tr>");
+            document.write("<tr><td>f("+n+"</td><td>"+JSON.stringify(eval(name))+"</td></tr>");
         
         }else{
             document.write("<tr><td colspan='2'>"+name+ "</td></tr>");
@@ -151,6 +151,160 @@
     p("multisum_xF([Array Float Array]) : Float", true);
     p("geo.multisum_xF([[-1.1, -2, -3], [3, 2, 1]])");
     p("geo.multisum_xF([[-1.1, -6, -8], [1, 2]])");
+    
+    p("sum_previous_I([Int Array]) : Int Array", true);
+    p("geo.sum_previous_I([1, 2, 3])");
+    p("geo.sum_previous_I([-1, -6, -8])");
+    
+    p("diff_previous_I([Int Array]) : Int Array", true);
+    p("geo.diff_previous_I([1, 2, 3])");
+    p("geo.diff_previous_I([-1, -6, -8])");
+    
+    p("sum_before_I([Int Array]) : Int Array", true);
+    p("geo.sum_before_I([1, 2, 3])");
+    p("geo.sum_before_I([-1, -6, -8])");
+    
+    p("diff_before_I([Int Array]) : Int Array", true);
+    p("geo.diff_before_I([1, 2, 3])");
+    p("geo.diff_before_I([-1, -6, -8])");
+    
+    
+    p("sum_previous_F([Float Array]) : Float Array", true);
+    p("geo.sum_previous_F([1.1, 2, 3])");
+    p("geo.sum_previous_F([-1.1, -6, -8])");
+    
+    p("diff_previous_F([Float Array]) : Float Array", true);
+    p("geo.diff_previous_F([1.1, 2, 3])");
+    p("geo.diff_previous_F([-1.1, -6, -8])");
+    
+    p("sum_before_F([Float Array]) : Float Array", true);
+    p("geo.sum_before_F([1.1, 2, 3])");
+    p("geo.sum_before_F([-1.1, -6, -8])");
+    
+    p("diff_before_F([Float Array]) : Float Array", true);
+    p("geo.diff_before_F([1.1, 2, 3])");
+    p("geo.diff_before_F([-1.1, -6, -8])");
+    
+    p("recounter_I_F([Int Array]) : Float Array", true);
+    p("geo.recounter_I_F([1, 2, 3])");
+    p("geo.recounter_I_F([-1, -6, -8])");
+    
+    p("recounter_F_I([Int Array]) : Float Array", true);
+    p("geo.recounter_F_I([0.5, 2, 3])");
+    p("geo.recounter_F_I([0.9, 2, 3])");
+    p("geo.recounter_F_I([1.9, 2, 3])");
+    p("geo.recounter_F_I([-0.5, -6, -8])");
+    p("geo.recounter_F_I([-0.9, -6, -8])");
+    
+    p("recounter_I_S([Int Array]) : String Array", true);
+    p("geo.recounter_I_S([1, 2, 3])");
+    p("geo.recounter_I_S([-1, -6, -8])");
+    
+    p("recounter_F_S([Float Array]) : String Array", true);
+    p("geo.recounter_F_S([1.2, 2, 3])");
+    p("geo.recounter_F_S([-1 / 4, -6, -8])");
+    
+    p("recounter_S_I([String Array]) : Int Array", true);
+    p("geo.recounter_S_I(['1.2', '2', '3'])");
+    p("geo.recounter_S_I(['-1 / 4', '-6', '-8'])");
+    p("geo.recounter_S_I(['-0.25', '-6', '-8'])");
+    
+    p("recounter_S_F([String Array]) : Float Array", true);
+    p("geo.recounter_S_F(['1.2', '2', '3'])");
+    p("geo.recounter_S_F(['-1 / 4', '-6', '-8'])");
+    p("geo.recounter_S_F(['-0.25', '-6', '-8'])");
+    
+    p("repeater_F_F(Int, [Float Array], Bool) : Float Array", true);
+    p("geo.repeater_F_F(5, [1.2, 2, 3])");
+    p("geo.repeater_F_F(6, [-1 / 4, -6, -8])");
+    p("geo.repeater_F_F(2, [-0.25, -6, -8])");
+    p("geo.repeater_F_F(5, [1.2, 2, 3], true)");
+    p("geo.repeater_F_F(6, [-1 / 4, -6, -8], true)");
+    p("geo.repeater_F_F(2, [-0.25, -6, -8], true)");
+    p("geo.repeater_F_F(-2, [-0.25, -6, -8], true)");
+    
+    p("repeater_I_I(Int, [Int Array], Bool) : Int Array", true);
+    p("geo.repeater_I_I(5, [12, 2, 3])");
+    p("geo.repeater_I_I(2, [25, -6, -8])");
+    p("geo.repeater_I_I(5, [12, 2, 3], true)");
+    p("geo.repeater_I_I(2, [25, -6, -8], true)");
+    p("geo.repeater_I_I(-2, [25, -6, -8], true)");
+    
+    p("repeater_S_S(Int, [String Array], Bool) : String Array", true);
+    p("geo.repeater_S_S(5, ['12', '2', '3'])");
+    p("geo.repeater_S_S(2, ['25', '-6', '-8'])");
+    p("geo.repeater_S_S(5, ['12', '2', '3'], true)");
+    p("geo.repeater_S_S(2, ['25', '-6', '-8'], true)");
+    p("geo.repeater_S_S(-2, ['25', '-6', '-8'], true)");
+    
+    p("repeater_F_I(Int, [Float Array], Bool) : Int Array", true);
+    p("geo.repeater_F_I(5, [1.2, 2, 3])");
+    p("geo.repeater_F_I(6, [-1 / 4, -6, -8])");
+    p("geo.repeater_F_I(2, [-0.25, -6, -8])");
+    p("geo.repeater_F_I(5, [1.2, 2, 3], true)");
+    p("geo.repeater_F_I(6, [-1 / 4, -6, -8], true)");
+    p("geo.repeater_F_I(2, [-0.25, -6, -8], true)");
+    p("geo.repeater_F_I(-2, [-0.25, -6, -8], true)");
+    
+    p("repeater_S_I(Int, [String Array], Bool) : Int Array", true);
+    p("geo.repeater_S_I(5, ['12.1', '0.2', '3'])");
+    p("geo.repeater_S_I(2, ['-0.5', '-0.9', '-1'])");
+    p("geo.repeater_S_I(5, ['12 / 5', '0.2', '3'], true)");
+    p("geo.repeater_S_I(2, ['-0.5', '-0.9', '-1'], true)");
+    p("geo.repeater_S_I(-2, ['-0.5', '-0.9', '-1'], true)");
+    
+    p("repeater_I_F(Int, [Int Array], Bool) : Float Array", true);
+    p("geo.repeater_I_F(5, [12, 2, 3])");
+    p("geo.repeater_I_F(2, [25, -6, -8])");
+    p("geo.repeater_I_F(5, [12, 2, 3], true)");
+    p("geo.repeater_I_F(2, [25, -6, -8], true)");
+    p("geo.repeater_I_F(-2, [25, -6, -8], true)");
+    
+    p("repeater_S_F(Int, [String Array], Bool) : Float Array", true);
+    p("geo.repeater_S_F(5, ['12.1', '0.2', '3'])");
+    p("geo.repeater_S_F(2, ['-0.5', '-0.9', '-1'])");
+    p("geo.repeater_S_F(5, ['12 / 5', '0.2', '3'], true)");
+    p("geo.repeater_S_F(2, ['-0.5', '-0.9', '-1'], true)");
+    p("geo.repeater_S_F(-2, ['-0.5', '-0.9', '-1'], true)");
+    
+    p("repeater_I_S(Int, [Int Array], Bool) : String Array", true);
+    p("geo.repeater_I_S(5, [12, 2, 3])");
+    p("geo.repeater_I_S(2, [25, -6, -8])");
+    p("geo.repeater_I_S(5, [12, 2, 3], true)");
+    p("geo.repeater_I_S(2, [25, -6, -8], true)");
+    p("geo.repeater_I_S(-2, [25, -6, -8], true)");
+    
+    p("repeater_F_S(Int, [Float Array], Bool) : String Array", true);
+    p("geo.repeater_F_S(5, [12.1, 2, 3])");
+    p("geo.repeater_F_S(2, [25/2, -6, -8])");
+    p("geo.repeater_F_S(5, [12.1, 2, 3], true)");
+    p("geo.repeater_F_S(2, [25/2, -6, -8], true)");
+    p("geo.repeater_F_S(-2, [25/2, -6, -8], true)");
+    
+    p("an_in_b_S([String Array], [String Array]) : Array Int Array", true);
+    p("geo.an_in_b_S(['1', '2', '3'], ['2', '3', '4'])");
+    p("geo.an_in_b_S(['1', '2'], ['2', '3', '4'])");
+    
+    p("an_in_bn_S([String Array], [Array String Array]) : Array Int Array", true);
+    p("geo.an_in_bn_S(['1', '2'], [['3', '4'], ['2', '2']])");
+    p("geo.an_in_bn_S(['1', '2', '3'], [['3', '4'], ['2', '2']])");
+    
+    p("an_in_b_I([Int Array], [Int Array]) : Array Int Array", true);
+    p("geo.an_in_b_I([1, 2, 3], [2, 3, 4])");
+    p("geo.an_in_b_I([1, 2], [2, 3, 4])");
+    
+    p("an_in_bn_I([Int Array], [Array Int Array]) : Array Int Array", true);
+    p("geo.an_in_bn_I([1, 2], [[3, 4], [2, 2]])");
+    p("geo.an_in_bn_I([1, 2, 3], [[3, 4], [2, 2]])");
+    
+    p("an_in_b_F([Float Array], [Float Array]) : Array Int Array", true);
+    p("geo.an_in_b_F([1, 2, 3.3], [2, 3.3, 4])");
+    p("geo.an_in_b_F([1, 2.2], [2.2, 3, 4])");
+    
+    p("an_in_bn_F([Float Array], [Array Float Array]) : Array Int Array", true);
+    p("geo.an_in_bn_F([1, 2.2], [[3, 4], [2.2, 2]])");
+    p("geo.an_in_bn_F([1, 2.2, 3], [[3, 4], [2, 2.2]])");
+    
     
     
     // p("geo.()",geo.(),);
