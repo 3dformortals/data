@@ -1209,7 +1209,7 @@ class GeometryXD{
     public function vec3Dfieldnormal(vec3Dfield:Array<Array<Float>>):Array<Float>{
         var rez:Array<Float> = null;
         if (vec3Dfield[0].length == 3 && same_size_F(vec3Dfield)){
-            var rez:Array<Float> = vec3Dfield[0];
+            rez = vec3Dfield[0];
             for (i in 1...vec3Dfield.length){
                 rez = vec3Dnormal(rez,vec3Dfield[i]);
             }

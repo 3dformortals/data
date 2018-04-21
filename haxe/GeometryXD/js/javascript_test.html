@@ -536,6 +536,41 @@
     p("geo.vecXDfieldback([[1, -2]])");
     p("geo.vecXDfieldback([[3]])");
     
+    p("vecXDparalleled_sameside([Float Array], [Float Array]) : Bool", true);
+    p("geo.vecXDparalleled_sameside([1.1, 2, 3], [2.2, 4, 6])");
+    p("geo.vecXDparalleled_sameside([1.1, 2, 3], [-1.1, -2, -3])");
+    
+    p("vecXDparalleled_opposite([Float Array], [Float Array]) : Bool", true);
+    p("geo.vecXDparalleled_opposite([1.1, 2, 3], [2.2, 4, 6])");
+    p("geo.vecXDparalleled_opposite([1.1, 2, 3], [-1.1, -2, -3])");
+    
+    p("vecXDparalleled([Float Array], [Float Array]) : Bool", true);
+    p("geo.vecXDparalleled([1.1, 2, 3], [2.2, 4, 6])");
+    p("geo.vecXDparalleled([1.1, 2, 3], [-1.1, -2, -3])");
+    
+    p("vecXDscalar([Float Array], [Float Array]) : Float", true);
+    p("geo.vecXDscalar([1, 2, 3], [2, 4, 6])");
+    p("geo.vecXDscalar([1, 2, 3], [-1, -2, -3])");
+    
+    p("vecXDcos([Float Array], [Float Array]) : Float", true);
+    p("geo.vecXDcos([1, 2, 3], [2, 4, 6])");
+    p("geo.vecXDcos([1, 2, 3], [-1, -2, -3])");
+    
+    p("vecXDangle([Float Array], [Float Array], Bool) : Float", true);
+    p("geo.vecXDangle([1, 2, 3], [2, 4, 6])");
+    p("geo.vecXDangle([1, 2, 3], [-1, -2, -3])");
+    p("geo.vecXDangle([1, 2, 3], [2, 4, 6], true)");
+    p("geo.vecXDangle([1, 2, 3], [-1, -2, -3], true)");
+    
+    p("vec3Dnormal([Float Array], [Float Array]) : Float Array", true);
+    p("geo.vec3Dnormal([1, 0, 0], [0, 1, 0])");
+    p("geo.vec3Dnormal([2, 0, 0], [0, 2, 0])");
+    
+    p("vec3Dfieldnormal([Array Float Array]) : Float Array", true);
+    p("geo.vec3Dfieldnormal([[1, 0, 0], [0, 1, 0], [0, 1, 0]])");
+    p("geo.vec3Dfieldnormal([[1, 0, 0], [0, 1, 0], [0, 1, 0]])");
+    p("geo.vec3Dfieldnormal([[2, 0, 0], [0, 2, 0], [0, 2, 0]])");
+    
     
     
     
