@@ -2380,12 +2380,65 @@ GeometryXD.prototype = {
 		}
 		return rez;
 	}
-	,dot3D_to_dot2Dviewplane: function(dot3D,dot3Dox,dot3Doz) {
+	,dot3D_to_dot2Dviewplane: function(dot3D,dot3Dviewplanecenter,vec3Dviewplane,vec3Dviewplane_ox) {
 		var rez = null;
-		var t = this.vecXDnorm(dot3D);
-		var cosox0t = this.multisum_xF([dot3Dox,dot3D]) / (t + this.vecXDnorm(dot3Dox));
-		var cosoz0t = this.multisum_xF([dot3Doz,dot3D]) / (t + this.vecXDnorm(dot3Doz));
-		rez = [t * cosox0t,t * cosoz0t];
+		var dot = dot3D;
+		var dotc = dot3Dviewplanecenter;
+		var vp = vec3Dviewplane;
+		var vox = vec3Dviewplane_ox;
+		var tmp;
+		var tmp1;
+		var tmp2;
+		var tmp3;
+		if(dot.length == 3) {
+			var a = [dot,dotc,vp,vox];
+			var rez1 = null;
+			var al = a.length;
+			if(al > 1) {
+				rez1 = true;
+				var size = a[0].length;
+				var _g1 = 1;
+				var _g = al;
+				while(_g1 < _g) {
+					var i = _g1++;
+					if(size != a[i].length) {
+						rez1 = false;
+					}
+				}
+			} else {
+				rez1 = true;
+			}
+			tmp3 = !rez1;
+		} else {
+			tmp3 = true;
+		}
+		if(!tmp3) {
+			tmp2 = this.vecXDnorm(vp) == 0;
+		} else {
+			tmp2 = true;
+		}
+		if(!tmp2) {
+			tmp1 = this.vecXDnorm(vox) == 0;
+		} else {
+			tmp1 = true;
+		}
+		if(!tmp1) {
+			tmp = this.vecXDparalleled(vp,vox);
+		} else {
+			tmp = true;
+		}
+		if(tmp) {
+			return rez;
+		}
+		var p = this.plane3D_dot3Dnormal(dotc,vp);
+		var ox = this.projection_vec3D_on_plane3D(vox,p);
+		var oy = this.vec3Dnormal(vp,ox);
+		dot = this.projection_dot3D_on_plane3D(dot,p);
+		var vdot = this.vecXD(dotc,dot);
+		var norm = this.vecXDnorm(vdot);
+		var cosox = this.vecXDcos(ox,vdot);
+		var cosoy = this.vecXDcos(oy,vdot);
+		rez = [norm * cosox,norm * cosoy];
 		return rez;
 	}
 	,dotXDscale: function(dotXD,scaleXD,dotXDc) {

@@ -2496,12 +2496,58 @@ class geometryxd_GeometryXD:
         return rez
 
     @staticmethod
-    def dot3D_to_dot2Dviewplane(dot3D,dot3Dox,dot3Doz):
+    def dot3D_to_dot2Dviewplane(dot3D,dot3Dviewplanecenter,vec3Dviewplane,vec3Dviewplane_ox):
         rez = None
-        t = geometryxd_GeometryXD.vecXDnorm(dot3D)
-        cosox0t = (geometryxd_GeometryXD.multisum_xF([dot3Dox, dot3D]) / ((t + geometryxd_GeometryXD.vecXDnorm(dot3Dox))))
-        cosoz0t = (geometryxd_GeometryXD.multisum_xF([dot3Doz, dot3D]) / ((t + geometryxd_GeometryXD.vecXDnorm(dot3Doz))))
-        rez = [(t * cosox0t), (t * cosoz0t)]
+        dot = dot3D
+        dotc = dot3Dviewplanecenter
+        vp = vec3Dviewplane
+        vox = vec3Dviewplane_ox
+        tmp = None
+        tmp1 = None
+        tmp2 = None
+        tmp3 = None
+        if (len(dot) == 3):
+            a = [dot, dotc, vp, vox]
+            rez1 = None
+            al = len(a)
+            if (al > 1):
+                rez1 = True
+                size = len((a[0] if 0 < len(a) else None))
+                _g1 = 1
+                _g = al
+                while (_g1 < _g):
+                    i = _g1
+                    _g1 = (_g1 + 1)
+                    if (size != len((a[i] if i >= 0 and i < len(a) else None))):
+                        rez1 = False
+            else:
+                rez1 = True
+            tmp3 = (not rez1)
+        else:
+            tmp3 = True
+        if (not tmp3):
+            tmp2 = (geometryxd_GeometryXD.vecXDnorm(vp) == 0)
+        else:
+            tmp2 = True
+        if (not tmp2):
+            tmp1 = (geometryxd_GeometryXD.vecXDnorm(vox) == 0)
+        else:
+            tmp1 = True
+        if (not tmp1):
+            tmp = geometryxd_GeometryXD.vecXDparalleled(vp,vox)
+        else:
+            tmp = True
+        if tmp:
+            return rez
+        p = geometryxd_GeometryXD.plane3D_dot3Dnormal(dotc,vp)
+        ox = geometryxd_GeometryXD.projection_vec3D_on_plane3D(vox,p)
+        oy = geometryxd_GeometryXD.vec3Dnormal(vp,ox)
+        dot = geometryxd_GeometryXD.projection_dot3D_on_plane3D(dot,p)
+        vdot = geometryxd_GeometryXD.vecXD(dotc,dot)
+        norm = geometryxd_GeometryXD.vecXDnorm(vdot)
+        cosox = geometryxd_GeometryXD.vecXDcos(ox,vdot)
+        cosoy = geometryxd_GeometryXD.vecXDcos(oy,vdot)
+        rez = [(norm * cosox), (norm * cosoy)]
         return rez
 
     @staticmethod

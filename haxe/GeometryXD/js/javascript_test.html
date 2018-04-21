@@ -606,10 +606,15 @@
     p("geo.dot3Dline3D_x_plane3D([0, 0, 0], [1, 1, 1], [1, 1, 1], 1)");
     p("geo.dot3Dline3D_x_plane3D([0, 0, 0], [1, 1, 1], [1, 1, 1], -1)");
     
-    p("projection_dot3D_on_plane3D(dot3D [Float Array], plane3D [Float Array]) : Float Array", true);// looks like bug
+    p("projection_dot3D_on_plane3D(dot3D [Float Array], plane3D [Float Array]) : Float Array", true);
     p("geo.projection_dot3D_on_plane3D([0, 0, 0], [1, 1, 1, 0])");
     p("geo.projection_dot3D_on_plane3D([0, 0, 0], [1, 1, 1, 1])");
     p("geo.projection_dot3D_on_plane3D([0, 0, 0], [1, 1, 1, -1])");
+    
+    p("dot3D_to_dot2Dviewplane(dot3D [Float Array], dot3Dc [Float Array], vec3Dp [Float Array], vec3Dox [Float Array]) : Float Array", true);//look like bug
+    p("geo.dot3D_to_dot2Dviewplane([10, 10, 0], [0, 0, 0], [0, 0, 1], [1, 0, 0])");
+    p("geo.dot3D_to_dot2Dviewplane([0, 0, 0], [10, 10, 0], [0, 0, 1], [1, 0, 0])");
+    p("geo.dot3D_to_dot2Dviewplane([10, 10, 0], [0, 0, 0], [1, 1, 1], [1, 0, 0])");
     
     
     
