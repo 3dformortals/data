@@ -2338,13 +2338,13 @@ class geometryxd_GeometryXD:
         else:
             tmp = False
         if tmp:
-            rez2 = (vec3Dfield[0] if 0 < len(vec3Dfield) else None)
+            rez = (vec3Dfield[0] if 0 < len(vec3Dfield) else None)
             _g11 = 1
             _g2 = len(vec3Dfield)
             while (_g11 < _g2):
                 i1 = _g11
                 _g11 = (_g11 + 1)
-                rez2 = geometryxd_GeometryXD.vec3Dnormal(rez2,(vec3Dfield[i1] if i1 >= 0 and i1 < len(vec3Dfield) else None))
+                rez = geometryxd_GeometryXD.vec3Dnormal(rez,(vec3Dfield[i1] if i1 >= 0 and i1 < len(vec3Dfield) else None))
         return rez
 
     @staticmethod

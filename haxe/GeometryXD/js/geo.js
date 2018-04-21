@@ -2216,12 +2216,12 @@ GeometryXD.prototype = {
 			tmp = false;
 		}
 		if(tmp) {
-			var rez2 = vec3Dfield[0];
+			rez = vec3Dfield[0];
 			var _g11 = 1;
 			var _g2 = vec3Dfield.length;
 			while(_g11 < _g2) {
 				var i1 = _g11++;
-				rez2 = this.vec3Dnormal(rez2,vec3Dfield[i1]);
+				rez = this.vec3Dnormal(rez,vec3Dfield[i1]);
 			}
 		}
 		return rez;
