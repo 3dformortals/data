@@ -597,8 +597,10 @@
     p("geo.dotXDoffset([1, 1, 1], [1, 1, 1], 1)");
     
     p("dot3Dline3D_x_plane3D(dot3D0 [Float Array], vec3D0 [Float Array], vec3Dplane [Float Array], dplane Float) : Float Array", true);
+    p("geo.dot3Dline3D_x_plane3D([1, 1, 1], [1, 1, 1], [1, 1, 1], 0)");
     p("geo.dot3Dline3D_x_plane3D([1, 1, 1], [1, 1, 1], [1, 1, 1], 1)");
-    p("geo.dot3Dline3D_x_plane3D([2, 2, 2], [1, 1, 1], [1, 1, 1], 1)");
+    p("geo.dot3Dline3D_x_plane3D([1, 1, 1], [1, 1, 1], [3, 2, 1], 1)");
+    p("geo.dot3Dline3D_x_plane3D([1, 1, 1], [3, 2, 1], [1, 1, 1], 1)");
     p("geo.dot3Dline3D_x_plane3D([3, 2, 1], [1, 1, 1], [1, 1, 1], 1)");
     p("geo.dot3Dline3D_x_plane3D([0, 0, 0], [1, 1, 1], [1, 1, 1], 0)");
     p("geo.dot3Dline3D_x_plane3D([0, 0, 0], [1, 1, 1], [1, 1, 1], 1)");

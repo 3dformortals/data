@@ -1311,11 +1311,10 @@ class GeometryXD{
         var ldot:Int = dot3D.length;
         var lplane:Int = plane3D.length;
         if (
-            vecXDnorm(plane3D.slice(0,3)) == 0 ||
+            vecXDnorm([for (i in 0...3) plane3D[i]]) == 0 ||
             ldot != 3 ||
             lplane != 4
             ){ return rez; }
-    
         var checkup:Float = - (multisum_xF([[for (i in 0...3) plane3D[i]], dot3D]) + plane3D[3]);
         var checkdn:Float = multisum_xF([[for (i in 0...3) plane3D[i]], [for (i in 0...3) plane3D[i]]]);
         if (checkdn == 0){return rez;}

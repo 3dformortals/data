@@ -2322,43 +2322,61 @@ GeometryXD.prototype = {
 		var rez = null;
 		var ldot = dot3D.length;
 		var lplane = plane3D.length;
-		if(this.vecXDnorm(plane3D.slice(0,3)) == 0 || ldot != 3 || lplane != 4) {
-			return rez;
-		}
+		var tmp;
+		var tmp1;
 		var _g = [];
 		var _g1 = 0;
 		while(_g1 < 3) {
 			var i = _g1++;
 			_g.push(plane3D[i]);
 		}
-		var checkup = -(this.multisum_xF([_g,dot3D]) + plane3D[3]);
+		if(this.vecXDnorm(_g) != 0) {
+			tmp1 = ldot != 3;
+		} else {
+			tmp1 = true;
+		}
+		if(!tmp1) {
+			tmp = lplane != 4;
+		} else {
+			tmp = true;
+		}
+		if(tmp) {
+			return rez;
+		}
 		var _g11 = [];
 		var _g2 = 0;
 		while(_g2 < 3) {
 			var i1 = _g2++;
 			_g11.push(plane3D[i1]);
 		}
-		var checkdn = _g11;
+		var checkup = -(this.multisum_xF([_g11,dot3D]) + plane3D[3]);
 		var _g21 = [];
 		var _g3 = 0;
 		while(_g3 < 3) {
 			var i2 = _g3++;
 			_g21.push(plane3D[i2]);
 		}
-		var checkdn1 = this.multisum_xF([checkdn,_g21]);
+		var checkdn = _g21;
+		var _g31 = [];
+		var _g4 = 0;
+		while(_g4 < 3) {
+			var i3 = _g4++;
+			_g31.push(plane3D[i3]);
+		}
+		var checkdn1 = this.multisum_xF([checkdn,_g31]);
 		if(checkdn1 == 0) {
 			return rez;
 		} else if(checkup == 0) {
 			return dot3D;
 		} else {
 			var t = checkup / checkdn1;
-			var _g31 = [];
-			var _g4 = 0;
-			while(_g4 < 3) {
-				var i3 = _g4++;
-				_g31.push(dot3D[i3] + plane3D[i3] * t);
+			var _g41 = [];
+			var _g5 = 0;
+			while(_g5 < 3) {
+				var i4 = _g5++;
+				_g41.push(dot3D[i4] + plane3D[i4] * t);
 			}
-			rez = _g31;
+			rez = _g41;
 		}
 		return rez;
 	}
