@@ -1316,8 +1316,8 @@ class GeometryXD{
             lplane != 4
             ){ return rez; }
     
-        var checkup:Float = - multisum_xF([plane3D.slice(0,3), dot3D]) + plane3D[3];
-        var checkdn:Float = multisum_xF([plane3D.slice(0,3), plane3D.slice(0,3)]);
+        var checkup:Float = - (multisum_xF([[for (i in 0...3) plane3D[i]], dot3D]) + plane3D[3]);
+        var checkdn:Float = multisum_xF([[for (i in 0...3) plane3D[i]], [for (i in 0...3) plane3D[i]]]);
         if (checkdn == 0){return rez;}
         else if (checkup == 0){return dot3D;}
         else {

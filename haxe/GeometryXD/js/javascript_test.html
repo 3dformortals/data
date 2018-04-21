@@ -11,7 +11,7 @@
     function p(name="noname",head=false){
         if(!head){
             var n= name.split("(")[1];
-            document.write("<tr><td>f("+n+"</td><td>"+JSON.stringify(eval(name))+"</td></tr>");
+            document.write("<tr><td>f("+n+"</td><td>"+JSON.stringify(eval(name)).split(",").join(", ")+"</td></tr>");
         
         }else{
             document.write("<tr><td colspan='2'>"+name+ "</td></tr>");
@@ -568,8 +568,46 @@
     
     p("vec3Dfieldnormal([Array Float Array]) : Float Array", true);
     p("geo.vec3Dfieldnormal([[1, 0, 0], [0, 1, 0], [0, 1, 0]])");
-    p("geo.vec3Dfieldnormal([[1, 0, 0], [0, 1, 0], [0, 1, 0]])");
+    p("geo.vec3Dfieldnormal([[1, 0, 0], [0, 1, 0], [0, 0, 1]])");
+    p("geo.vec3Dfieldnormal([[1, 0, 0], [0, 1, 0], [0, 0, -1]])");
     p("geo.vec3Dfieldnormal([[2, 0, 0], [0, 2, 0], [0, 2, 0]])");
+    p("geo.vec3Dfieldnormal([[2, 0, 0], [0, 2, 0], [0, 0, 2]])");
+    p("geo.vec3Dfieldnormal([[2, 0, 0], [0, 2, 0], [0, 0, -2]])");
+    
+    p("vecXDmiddle([Float Array], [Float Array]) : Float Array", true);
+    p("geo.vecXDmiddle([1, 0, 0], [0, 1, 0])");
+    p("geo.vecXDmiddle([1, 2, 3], [3, 2, 1])");
+    p("geo.vecXDmiddle([1, 2, 3], [3, 2])");
+    
+    p("vecXDfieldmiddle([Array Float Array]) : Float Array", true);
+    p("geo.vecXDfieldmiddle([[1, 0, 0], [0, 1, 0], [0, 0, 1]])");
+    p("geo.vecXDfieldmiddle([[1, 2, 3], [3, 2, 1], [-3, -2, -1]])");
+    p("geo.vecXDfieldmiddle([[1, 2, 3], [3, 2, 1], [-2, -1]])");
+    
+    p("vecXDsamesize([Float Array], [Float Array]) : Float Array", true);
+    p("geo.vecXDsamesize([1, 2, 3], [3, 2, 1])");
+    p("geo.vecXDsamesize([1, 2, 3], [3, 2])");
+    
+    p("vecXDfieldsamesize([Array Float Array]) : Float Array", true);
+    p("geo.vecXDfieldsamesize([[1, 2, 3], [3, 2, 1], [-3, -2, -1]])");
+    p("geo.vecXDfieldsamesize([[1, 2, 3], [3, 2, 1], [-2, -1]])");
+    
+    p("dotXDoffset(dotXD [Float Array], vecXD [Float Array], t Float) : Float Array", true);
+    p("geo.dotXDoffset([0, 0, 0], [1, 1, 1], 1)");
+    p("geo.dotXDoffset([1, 1, 1], [1, 1, 1], 1)");
+    
+    p("dot3Dline3D_x_plane3D(dot3D0 [Float Array], vec3D0 [Float Array], vec3Dplane [Float Array], dplane Float) : Float Array", true);
+    p("geo.dot3Dline3D_x_plane3D([1, 1, 1], [1, 1, 1], [1, 1, 1], 1)");
+    p("geo.dot3Dline3D_x_plane3D([2, 2, 2], [1, 1, 1], [1, 1, 1], 1)");
+    p("geo.dot3Dline3D_x_plane3D([3, 2, 1], [1, 1, 1], [1, 1, 1], 1)");
+    p("geo.dot3Dline3D_x_plane3D([0, 0, 0], [1, 1, 1], [1, 1, 1], 0)");
+    p("geo.dot3Dline3D_x_plane3D([0, 0, 0], [1, 1, 1], [1, 1, 1], 1)");
+    p("geo.dot3Dline3D_x_plane3D([0, 0, 0], [1, 1, 1], [1, 1, 1], -1)");
+    
+    p("projection_dot3D_on_plane3D(dot3D [Float Array], plane3D [Float Array]) : Float Array", true);// looks like bug
+    p("geo.projection_dot3D_on_plane3D([0, 0, 0], [1, 1, 1, 0])");
+    p("geo.projection_dot3D_on_plane3D([0, 0, 0], [1, 1, 1, 1])");
+    p("geo.projection_dot3D_on_plane3D([0, 0, 0], [1, 1, 1, -1])");
     
     
     

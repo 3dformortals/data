@@ -2443,21 +2443,40 @@ class geometryxd_GeometryXD:
         lplane = len(plane3D)
         if (((geometryxd_GeometryXD.vecXDnorm(plane3D[0:3]) == 0) or ((ldot != 3))) or ((lplane != 4))):
             return rez
-        checkup = (-geometryxd_GeometryXD.multisum_xF([plane3D[0:3], dot3D]) + (plane3D[3] if 3 < len(plane3D) else None))
-        checkdn = geometryxd_GeometryXD.multisum_xF([plane3D[0:3], plane3D[0:3]])
-        if (checkdn == 0):
+        _g = []
+        _g1 = 0
+        while (_g1 < 3):
+            i = _g1
+            _g1 = (_g1 + 1)
+            _g.append((plane3D[i] if i >= 0 and i < len(plane3D) else None))
+        checkup = -((geometryxd_GeometryXD.multisum_xF([_g, dot3D]) + (plane3D[3] if 3 < len(plane3D) else None)))
+        _g11 = []
+        _g2 = 0
+        while (_g2 < 3):
+            i1 = _g2
+            _g2 = (_g2 + 1)
+            _g11.append((plane3D[i1] if i1 >= 0 and i1 < len(plane3D) else None))
+        checkdn = _g11
+        _g21 = []
+        _g3 = 0
+        while (_g3 < 3):
+            i2 = _g3
+            _g3 = (_g3 + 1)
+            _g21.append((plane3D[i2] if i2 >= 0 and i2 < len(plane3D) else None))
+        checkdn1 = geometryxd_GeometryXD.multisum_xF([checkdn, _g21])
+        if (checkdn1 == 0):
             return rez
         elif (checkup == 0):
             return dot3D
         else:
-            t = (checkup / checkdn)
-            _g = []
-            _g1 = 0
-            while (_g1 < 3):
-                i = _g1
-                _g1 = (_g1 + 1)
-                _g.append(((dot3D[i] if i >= 0 and i < len(dot3D) else None) + (((plane3D[i] if i >= 0 and i < len(plane3D) else None) * t))))
-            rez = _g
+            t = (checkup / checkdn1)
+            _g31 = []
+            _g4 = 0
+            while (_g4 < 3):
+                i3 = _g4
+                _g4 = (_g4 + 1)
+                _g31.append(((dot3D[i3] if i3 >= 0 and i3 < len(dot3D) else None) + (((plane3D[i3] if i3 >= 0 and i3 < len(plane3D) else None) * t))))
+            rez = _g31
         return rez
 
     @staticmethod
