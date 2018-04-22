@@ -3,7 +3,15 @@
 **/
 @:expose
 /**
-  GeometryXD - multidimensional geometry manipulations. Primarily targeted for 3D objects (points, vectors, curves). Not pro level library.
+  GeometryXD - multidimensional geometry manipulations. Primarily targeted for 3D objects (points, vectors, curves).  
+  Additional methods allow manipulate with arrays.  
+  Convert arrays. Int <-> Float <-> String <-> Int Arrays.  
+  Sum arrays. Parallel sum of arrays elements.  
+  Diff arrays. Parallel diff of arrays elements from first array elements.  
+  Multiplying arrays. Parallel multiplication of arrays elements.  
+  Sum array elements.  
+  Calculate max abs value from Float Array.  
+  Not pro level library.  
 **/
 class GeometryXD{
     /**
@@ -189,7 +197,10 @@ class GeometryXD{
       @param a - incoming array
       @param n - multiplier of each element
      **/
-    public inline function multiply_I_I(a:Array<Int>, n:Int):Array<Int>{
+    public inline function multiply_I_I(
+        a:Array<Int>,
+        n:Int
+        ):Array<Int>{
         var rez:Array<Int> = null;
         var al:Int = a.length;
         if (al > 0){ rez = [for (i in 0...al) a[i] * n]; }
@@ -200,7 +211,10 @@ class GeometryXD{
       @param a - incoming array
       @param n - multiplier of each element
      **/
-    public inline function multiply_F_F(a:Array<Float>, n:Float):Array<Float>{
+    public inline function multiply_F_F(
+        a:Array<Float>,
+        n:Float
+        ):Array<Float>{
         var rez:Array<Float> = null;
         var al:Int = a.length;
         if (al > 0){ rez = [for (i in 0...al) a[i] * n]; }
@@ -295,7 +309,10 @@ class GeometryXD{
       @param a - incoming arrays
       @param n - multiplier
      **/
-    public function multiply_xI_I(a:Array<Array<Int>>, n:Int):Array<Array<Int>>{
+    public function multiply_xI_I(
+        a:Array<Array<Int>>,
+        n:Int
+        ):Array<Array<Int>>{
         var rez:Array<Array<Int>> = null;
         if ( a.length > 0 ){ rez = [for (i in 0...a.length) multiply_I_I(a[i], n) ]; }
         return rez;
@@ -305,7 +322,10 @@ class GeometryXD{
       @param a - incoming arrays
       @param n - multiplier
      **/
-    public function multiply_xF_F(a:Array<Array<Float>>, n:Float):Array<Array<Float>>{
+    public function multiply_xF_F(
+        a:Array<Array<Float>>,
+        n:Float
+        ):Array<Array<Float>>{
         var rez:Array<Array<Float>> = null;
         if ( a.length > 0 ){ rez = [for (i in 0...a.length) multiply_F_F(a[i], n) ]; }
         return rez;
@@ -332,7 +352,7 @@ class GeometryXD{
     public function multiply_xF(a:Array<Array<Float>>):Array<Float>{
         var rez:Array<Float> = null;
         var al:Int = a.length;
-        if(same_size_F(a)){
+        if (same_size_F(a)){
             if (al > 1){
                 rez = [for (i in 0...a[0].length) multiply_F([for (ai in 0...a.length) a[ai][i] ]) ];
             }else if (al > 0){
@@ -528,7 +548,11 @@ class GeometryXD{
      @param what - incoming array
      @param full - if true then result array will be not cutted to result array length parameter
     **/
-    public inline function repeater_F_F(n:Int, what:Array<Float>, full:Bool = false):Array<Float>{
+    public inline function repeater_F_F(
+        n:Int,
+        what:Array<Float>,
+        full:Bool = false
+        ):Array<Float>{
         var rez:Array<Float> = null;
         if (n == 0){ return rez; }
         var wl:Int = what.length;
@@ -546,7 +570,11 @@ class GeometryXD{
      @param what - incoming array
      @param full - if true then result array will be not cutted to result array length parameter
     **/
-    public inline function repeater_I_I(n:Int, what:Array<Int>, full:Bool = false):Array<Int>{
+    public inline function repeater_I_I(
+        n:Int,
+        what:Array<Int>,
+        full:Bool = false
+        ):Array<Int>{
         var rez:Array<Int> = null;
         if (n == 0){ return rez; }
         var wl:Int = what.length;
@@ -564,7 +592,11 @@ class GeometryXD{
      @param what - incoming array
      @param full - if true then result array will be not cutted to result array length parameter
     **/
-    public inline function repeater_S_S(n:Int, what:Array<String>, full:Bool = false):Array<String>{
+    public inline function repeater_S_S(
+        n:Int,
+        what:Array<String>,
+        full:Bool = false
+        ):Array<String>{
         var rez:Array<String> = null;
         if (n == 0){ return rez; }
         var wl:Int = what.length;
@@ -582,7 +614,11 @@ class GeometryXD{
      @param what - incoming array
      @param full - if true then result array will be not cutted to result array length parameter
     **/
-    public function repeater_F_I(n:Int, what_:Array<Float>, full:Bool = false):Array<Int>{
+    public function repeater_F_I(
+        n:Int,
+        what_:Array<Float>,
+        full:Bool = false
+        ):Array<Int>{
         var rez:Array<Int> = null;
         var what:Array<Int> = recounter_F_I(what_);
         if (n == 0){ return rez; }
@@ -601,7 +637,11 @@ class GeometryXD{
      @param what - incoming array
      @param full - if true then result array will be not cutted to result array length parameter
     **/
-    public function repeater_S_I(n:Int, what_:Array<String>, full:Bool = false):Array<Int>{
+    public function repeater_S_I(
+        n:Int,
+        what_:Array<String>,
+        full:Bool = false
+        ):Array<Int>{
         var rez:Array<Int> = null;
         var what:Array<Int> = recounter_S_I(what_);
         if (n == 0){ return rez; }
@@ -620,7 +660,11 @@ class GeometryXD{
      @param what - incoming array
      @param full - if true then result array will be not cutted to result array length parameter
     **/
-    public function repeater_I_F(n:Int, what_:Array<Int>, full:Bool = false):Array<Float>{
+    public function repeater_I_F(
+        n:Int,
+        what_:Array<Int>,
+        full:Bool = false
+        ):Array<Float>{
         var rez:Array<Float> = null;
         var what:Array<Float> = recounter_I_F(what_);
         if (n == 0){ return rez; }
@@ -639,7 +683,11 @@ class GeometryXD{
      @param what - incoming array
      @param full - if true then result array will be not cutted to result array length parameter
     **/
-    public function repeater_S_F(n:Int, what_:Array<String>, full:Bool = false):Array<Float>{
+    public function repeater_S_F(
+        n:Int,
+        what_:Array<String>,
+        full:Bool = false
+        ):Array<Float>{
         var rez:Array<Float> = null;
         var what:Array<Float> = recounter_S_F(what_);
         if (n == 0){ return rez; }
@@ -658,7 +706,11 @@ class GeometryXD{
      @param what - incoming array
      @param full - if true then result array will be not cutted to result array length parameter
     **/
-    public function repeater_I_S(n:Int, what_:Array<Int>, full:Bool = false):Array<String>{
+    public function repeater_I_S(
+        n:Int,
+        what_:Array<Int>,
+        full:Bool = false
+        ):Array<String>{
         var rez:Array<String> = null;
         var what:Array<String> = recounter_I_S(what_);
         if (n == 0){ return rez; }
@@ -677,7 +729,11 @@ class GeometryXD{
      @param what - incoming array
      @param full - if true then result array will be not cutted to result array length parameter
     **/
-    public function repeater_F_S(n:Int, what_:Array<Float>, full:Bool = false):Array<String>{
+    public function repeater_F_S(
+        n:Int,
+        what_:Array<Float>,
+        full:Bool = false
+        ):Array<String>{
         var rez:Array<String> = null;
         var what:Array<String> = recounter_F_S(what_);
         if (n == 0){ return rez; }
@@ -697,7 +753,10 @@ class GeometryXD{
      @param a - array what find
      @param b - array where find
     **/
-    public inline function an_in_b_S(a:Array<String>, b:Array<String>):Array<Array<Int>>{
+    public inline function an_in_b_S(
+        a:Array<String>,
+        b:Array<String>
+        ):Array<Array<Int>>{
         var rez:Array<Array<Int>> = [];
         var al:Int = a.length;
         var bl:Int = b.length;
@@ -714,7 +773,10 @@ class GeometryXD{
      @param a - array what find
      @param b - array where find
     **/
-    public inline function an_in_bn_S(a:Array<String>, b:Array<Array<String>>):Array<Array<Int>>{
+    public inline function an_in_bn_S(
+        a:Array<String>,
+        b:Array<Array<String>>
+        ):Array<Array<Int>>{
         var rez:Array<Array<Int>> = [];
         var al:Int = a.length;
         var bl:Int = b.length;
@@ -733,7 +795,10 @@ class GeometryXD{
      @param a - array what find
      @param b - array where find
     **/
-    public inline function an_in_b_I(a:Array<Int>, b:Array<Int>):Array<Array<Int>>{
+    public inline function an_in_b_I(
+        a:Array<Int>,
+        b:Array<Int>
+        ):Array<Array<Int>>{
         var rez:Array<Array<Int>> = [];
         var al:Int = a.length;
         var bl:Int = b.length;
@@ -750,7 +815,10 @@ class GeometryXD{
      @param a - array what find
      @param b - array where find
     **/
-    public inline function an_in_bn_I(a:Array<Int>, b:Array<Array<Int>>):Array<Array<Int>>{
+    public inline function an_in_bn_I(
+        a:Array<Int>,
+        b:Array<Array<Int>>
+        ):Array<Array<Int>>{
         var rez:Array<Array<Int>> = [];
         var al:Int = a.length;
         var bl:Int = b.length;
@@ -769,7 +837,10 @@ class GeometryXD{
      @param a - array what find
      @param b - array where find
     **/
-    public inline function an_in_b_F(a:Array<Float>, b:Array<Float>):Array<Array<Int>>{
+    public inline function an_in_b_F(
+        a:Array<Float>,
+        b:Array<Float>
+        ):Array<Array<Int>>{
         var rez:Array<Array<Int>> = [];
         var al:Int = a.length;
         var bl:Int = b.length;
@@ -786,7 +857,10 @@ class GeometryXD{
      @param a - array what find
      @param b - array where find
     **/
-    public inline function an_in_bn_F(a:Array<Float>, b:Array<Array<Float>>):Array<Array<Int>>{
+    public inline function an_in_bn_F(
+        a:Array<Float>,
+        b:Array<Array<Float>>
+        ):Array<Array<Int>>{
         var rez:Array<Array<Int>> = [];
         var al:Int = a.length;
         var bl:Int = b.length;
@@ -809,7 +883,11 @@ class GeometryXD{
      @param n - length of each sequence (chain link)
      @param ring - if true then 0 will be added at the end of range of indexes, for the case of strict coincidence
     **/
-    public function chain_indexes(a_l:Int, n:Int, ring:Bool):Array<Array<Int>>{
+    public function chain_indexes(
+        a_l:Int,
+        n:Int,
+        ring:Bool
+        ):Array<Array<Int>>{
         var rez:Array<Array<Int>> = null;
         if (n > a_l || n < 1){ return rez; }
         var ind:Array<Int> = [];
@@ -828,7 +906,11 @@ class GeometryXD{
      @param n - chain link length
      @param ring - if true then first incoming element will be added at the end of range, for the case of strict coincidence
     **/
-    public inline function chain_S(a:Array<String> ,n:Int ,ring:Bool = false):Array<Array<String>>{
+    public inline function chain_S(
+        a:Array<String>,
+        n:Int,
+        ring:Bool = false
+        ):Array<Array<String>>{
         var rez:Array<Array<String>> = null;
         var a_l:Int = a.length;
         if (n > a_l || n < 1){ return rez; }
@@ -842,7 +924,11 @@ class GeometryXD{
      @param n - chain link length
      @param ring - if true then first incoming element will be added at the end of range, for the case of strict coincidence
     **/
-    public inline function chain_I(a:Array<Int> ,n:Int ,ring:Bool = false):Array<Array<Int>>{
+    public inline function chain_I(
+        a:Array<Int>,
+        n:Int,
+        ring:Bool = false
+        ):Array<Array<Int>>{
         var rez:Array<Array<Int>> = null;
         var a_l:Int = a.length;
         if (n > a_l || n < 1){ return rez; }
@@ -856,7 +942,11 @@ class GeometryXD{
      @param n - chain link length
      @param ring - if true then first incoming element will be added at the end of range, for the case of strict coincidence
     **/
-    public inline function chain_F(a:Array<Float> ,n:Int ,ring:Bool = false):Array<Array<Float>>{
+    public inline function chain_F(
+        a:Array<Float>,
+        n:Int,
+        ring:Bool = false
+        ):Array<Array<Float>>{
         var rez:Array<Array<Float>> = null;
         var a_l:Int = a.length;
         if (n > a_l || n < 1){ return rez; }
@@ -872,7 +962,12 @@ class GeometryXD{
      @param n - steps number
      @param borders - if true then add borders into result
     **/
-    public inline function steps_internal(xmin:Float, xmax:Float, n:Int, borders:Bool = false):Array<Float>{
+    public inline function steps_internal(
+        xmin:Float,
+        xmax:Float,
+        n:Int,
+        borders:Bool = false
+        ):Array<Float>{
         var rez:Array<Float> = null;
         if (n < 1){ return rez; }
         var st:Float = (xmax - xmin) / (n + 1);
@@ -892,7 +987,12 @@ class GeometryXD{
      @param n - repeat number
      @param direction - if < 0 then from negative to minimum border direction. if > 0 then from maximum border to positive direction. if == 0 then both
     **/
-    public function steps_external(smin:Float, smax:Float, n:Int, direction:Int):Array<Float>{
+    public function steps_external(
+        smin:Float,
+        smax:Float,
+        n:Int,
+        direction:Int
+        ):Array<Float>{
         var rez:Array<Float> = null;
         if (n < 1 || direction < -1 || direction > 1){ return rez; }
         var st:Float = smax - smin;
@@ -1012,7 +1112,10 @@ class GeometryXD{
      @param dotXDa - start dot
      @param dotXDb - end dot
     **/
-    public function vecXD(dotXDa:Array<Float>, dotXDb:Array<Float>):Array<Float>{
+    public function vecXD(
+        dotXDa:Array<Float>,
+        dotXDb:Array<Float>
+        ):Array<Float>{
         var rez:Array<Float> = null;
         if (
             !vecXDsamesize(dotXDa, dotXDb)
@@ -1048,7 +1151,10 @@ class GeometryXD{
      @param vecXDa - incoming vector
      @param vecXDb - incoming vector
     **/
-    public inline function vecXDsame(vecXDa:Array<Float>,vecXDb:Array<Float>):Null<Bool>{
+    public inline function vecXDsame(
+        vecXDa:Array<Float>,
+        vecXDb:Array<Float>
+        ):Null<Bool>{
         var rez:Null<Bool> = null;
         if (vecXDa.length == vecXDb.length){
             rez = same_xF([vecXDa, vecXDb]);
@@ -1077,7 +1183,10 @@ class GeometryXD{
      @param vecXDa - vector
      @param vecXDb - vector
     **/
-    public function vecXDsum(vecXDa:Array<Float>, vecXDb:Array<Float>):Array<Float>{
+    public function vecXDsum(
+        vecXDa:Array<Float>,
+        vecXDb:Array<Float>
+        ):Array<Float>{
         return sum_xF([vecXDa, vecXDb]);
     }
     /**
@@ -1092,7 +1201,10 @@ class GeometryXD{
      @param vecXDa - vector
      @param vecXDb - vector
     **/
-    public function vecXDdiff(vecXDa:Array<Float>, vecXDb:Array<Float>):Array<Float>{
+    public function vecXDdiff(
+        vecXDa:Array<Float>,
+        vecXDb:Array<Float>
+        ):Array<Float>{
         return diff_xF([vecXDa, vecXDb]);
     }
     /**
@@ -1122,7 +1234,10 @@ class GeometryXD{
      @param vecXDa - vector
      @param vecXDb - vector
     **/
-    public function vecXDparalleled_sameside(vecXDa:Array<Float>, vecXDb:Array<Float>):Null<Bool>{
+    public function vecXDparalleled_sameside(
+        vecXDa:Array<Float>,
+        vecXDb:Array<Float>
+        ):Null<Bool>{
         var rez:Null<Bool> = null;
         if (vecXDa.length != vecXDb.length){ return rez; }
         return vecXDsame(vecXDone(vecXDa), vecXDone(vecXDb));
@@ -1132,7 +1247,10 @@ class GeometryXD{
      @param vecXDa - vector
      @param vecXDb - vector
     **/
-    public function vecXDparalleled_opposite(vecXDa:Array<Float>, vecXDb:Array<Float>):Null<Bool>{
+    public function vecXDparalleled_opposite(
+        vecXDa:Array<Float>,
+        vecXDb:Array<Float>
+        ):Null<Bool>{
         var rez:Null<Bool> = null;
         if (vecXDa.length != vecXDb.length){ return rez; }
         return vecXDparalleled_sameside(vecXDa,vecXDback(vecXDb));
@@ -1142,7 +1260,10 @@ class GeometryXD{
      @param vecXDa - vector
      @param vecXDb - vector
     **/
-    public function vecXDparalleled(vecXDa:Array<Float>, vecXDb:Array<Float>):Bool{
+    public function vecXDparalleled(
+        vecXDa:Array<Float>,
+        vecXDb:Array<Float>
+        ):Bool{
         return vecXDparalleled_sameside(vecXDa, vecXDb) || vecXDparalleled_opposite(vecXDa, vecXDb);
     }
     
@@ -1151,7 +1272,10 @@ class GeometryXD{
      @param vecXDa - vector
      @param vecXDb - vector
     **/
-    public function vecXDscalar(vecXDa:Array<Float>, vecXDb:Array<Float>):Null<Float>{
+    public function vecXDscalar(
+        vecXDa:Array<Float>,
+        vecXDb:Array<Float>
+        ):Null<Float>{
         var rez:Null<Float> = null;
         if (vecXDa.length == vecXDb.length){
             rez = 0;
@@ -1163,7 +1287,10 @@ class GeometryXD{
      @param vecXDa - vector
      @param vecXDb - vector
     **/
-    public function vecXDcos(vecXDa:Array<Float>, vecXDb:Array<Float>):Null<Float>{
+    public function vecXDcos(
+        vecXDa:Array<Float>,
+        vecXDb:Array<Float>
+        ):Null<Float>{
         var rez:Null<Float> = null;
         var la:Float = vecXDnorm(vecXDa);
         var lb:Float = vecXDnorm(vecXDb);
@@ -1177,7 +1304,11 @@ class GeometryXD{
      @param vecXDb - vector
      @param rad - if true then return radians angle, default false(degrees angle)
     **/
-    public function vecXDangle(vecXDa:Array<Float>, vecXDb:Array<Float>, rad:Bool = false):Null<Float>{
+    public function vecXDangle(
+        vecXDa:Array<Float>,
+        vecXDb:Array<Float>,
+        rad:Bool = false
+        ):Null<Float>{
         var rez:Null<Float> = null;
         var la:Float = vecXDnorm(vecXDa);
         var lb:Float = vecXDnorm(vecXDb);
@@ -1192,7 +1323,10 @@ class GeometryXD{
      @param vec3Da - vector
      @param vec3Db - vector
     **/
-    public function vec3Dnormal(vec3Da:Array<Float>, vec3Db:Array<Float>):Array<Float>{
+    public function vec3Dnormal(
+        vec3Da:Array<Float>,
+        vec3Db:Array<Float>
+        ):Array<Float>{
         var rez:Array<Float> = null;
         if (vec3Da.length == 3 && vec3Db.length == 3){
             var a:Float = vec3Da[1] * vec3Db[2] - vec3Da[2] * vec3Db[1];
@@ -1221,7 +1355,10 @@ class GeometryXD{
      @param vecXDa - vector
      @param vecXDb - vector
     **/
-    public function vecXDmiddle(vecXDa:Array<Float>, vecXDb:Array<Float>):Array<Float>{
+    public function vecXDmiddle(
+        vecXDa:Array<Float>,
+        vecXDb:Array<Float>
+        ):Array<Float>{
         return middle_xF([vecXDa, vecXDb]);
     }
     /**
@@ -1236,7 +1373,10 @@ class GeometryXD{
      @param vecXDa - vector
      @param vecXDb - vector
     **/
-    public function vecXDsamesize(vecXDa:Array<Float>, vecXDb:Array<Float>):Null<Bool>{
+    public function vecXDsamesize(
+        vecXDa:Array<Float>,
+        vecXDb:Array<Float>
+        ):Null<Bool>{
         return same_size_F([vecXDa, vecXDb]);
     }
     /**
@@ -1253,7 +1393,11 @@ class GeometryXD{
      @param vecXD - vector
      @param t - distance
     **/
-    public function dotXDoffset(dotXD:Array<Float>, vecXD:Array<Float>, t:Float):Array<Float>{
+    public function dotXDoffset(
+        dotXD:Array<Float>,
+        vecXD:Array<Float>,
+        t:Float
+        ):Array<Float>{
         var rez:Array<Float> = null;
         if (t != 0){
             var lv:Int = vecXD.length;
@@ -1274,7 +1418,12 @@ class GeometryXD{
      @param vec3Dplane - vector 3D, which is plane 3D normal vector
      @param dplane - displacement of plane 3D from [0,0,0]. default 0 ([0,0,0] dot belongs to the plane)
     **/
-    public function dot3Dline3D_x_plane3D(dot3D0:Array<Float>, vec3D0:Array<Float>, vec3Dplane:Array<Float>, dplane:Float = 0):Array<Float>{
+    public function dot3Dline3D_x_plane3D(
+        dot3D0:Array<Float>,
+        vec3D0:Array<Float>,
+        vec3Dplane:Array<Float>,
+        dplane:Float = 0
+        ):Array<Float>{
         var rez:Array<Float> = null;
         var ldot:Int = dot3D0.length;
         var lvec:Int = vec3D0.length;
@@ -1306,7 +1455,10 @@ class GeometryXD{
      Where (a, b, c) - normal vector of plane 3D. (d) - distance from (0, 0, 0). 
      if d = 0, then the plane passes through the center of coordinates
     **/
-    public function projection_dot3D_on_plane3D(dot3D:Array<Float>, plane3D:Array<Float>):Array<Float>{
+    public function projection_dot3D_on_plane3D(
+        dot3D:Array<Float>,
+        plane3D:Array<Float>
+        ):Array<Float>{
         var rez:Array<Float> = null;
         var ldot:Int = dot3D.length;
         var lplane:Int = plane3D.length;
@@ -1372,7 +1524,11 @@ class GeometryXD{
      @param scaleXD - scales array . For 3D case [sx, sy, sz]
      @param dotXDc - scaling center dot . For 3D case [xc, yc, zc]
     **/
-    public function dotXDscale(dotXD:Array<Float>, scaleXD:Array<Float>, dotXDc:Array<Float>):Array<Float>{
+    public function dotXDscale(
+        dotXD:Array<Float>,
+        scaleXD:Array<Float>,
+        dotXDc:Array<Float>
+        ):Array<Float>{
         var rez:Array<Float> = null;
         var sdot:Array<Float> = [for(i in 0...dotXD.length) dotXD[i] * scaleXD[i]];
         var stc:Array<Float> = [for(i in 0...dotXD.length) dotXDc[i] * scaleXD[i]];
@@ -1387,7 +1543,12 @@ class GeometryXD{
      @param angle - angle of rotation
      @param rad - it true then radians angle, default false (degrees angle)
     **/
-    public function vec3Drotate(vec3D:Array<Float>, vec3Daxis:Array<Float>, angle:Float, rad:Bool = false):Array<Float>{
+    public function vec3Drotate(
+        vec3D:Array<Float>,
+        vec3Daxis:Array<Float>,
+        angle:Float,
+        rad:Bool = false
+        ):Array<Float>{
         var rez:Array<Float> = vec3D;
         if (
             vecXDparalleled(vec3D, vec3Daxis) ||
@@ -1444,7 +1605,13 @@ class GeometryXD{
      @param angle - rotation angle
      @param rad - if true then radians angle, default false (degrees angle)
     **/
-    public function dot3Drotate(dot3D:Array<Float>, dot3Dc:Array<Float>, vec3D:Array<Float>, angle:Float, rad:Bool = false):Array<Float>{
+    public function dot3Drotate(
+        dot3D:Array<Float>,
+        dot3Dc:Array<Float>,
+        vec3D:Array<Float>,
+        angle:Float,
+        rad:Bool = false
+        ):Array<Float>{
         var rez:Array<Float> = null;
         if (vecXDnorm(vec3D) == 0){ return rez; }
         rez = dot3D;
@@ -1464,7 +1631,10 @@ class GeometryXD{
      @param dot3D - dot 3D
      @param vec3D - plane 3D normal vector 3D
     **/
-    public function plane3D_dot3Dnormal(dot3D:Array<Float>, vec3D:Array<Float>):Array<Float>{
+    public function plane3D_dot3Dnormal(
+        dot3D:Array<Float>,
+        vec3D:Array<Float>
+        ):Array<Float>{
         var rez:Array<Float> = null;
         if (dot3D.length != 3 ||
             vec3D.length != 3 ||
@@ -1480,7 +1650,11 @@ class GeometryXD{
      @param vec3Da - vector 3D
      @param vec3Db - vector 3D
     **/
-    public function plane3D_dot_vec_vec(dot3D:Array<Float>, vec3Da:Array<Float>, vec3Db:Array<Float>):Array<Float>{
+    public function plane3D_dot_vec_vec(
+        dot3D:Array<Float>,
+        vec3Da:Array<Float>,
+        vec3Db:Array<Float>
+        ):Array<Float>{
         var rez:Array<Float> = null;
         if (
             dot3D.length != 3 ||
@@ -1500,7 +1674,11 @@ class GeometryXD{
      @param dot3Da - dot 3D
      @param dot3Db - dot 3D
     **/
-    public function plane3D_3dots(dot3D:Array<Float>, dot3Da:Array<Float>, dot3Db:Array<Float>):Array<Float>{
+    public function plane3D_3dots(
+        dot3D:Array<Float>,
+        dot3Da:Array<Float>,
+        dot3Db:Array<Float>
+        ):Array<Float>{
         var rez:Array<Float> = null;
         if (
             dot3D.length != 3 ||
@@ -1522,7 +1700,10 @@ class GeometryXD{
      @param dot3D - dot 3D
      @param dot3Da - dot 3D
     **/
-    public function plane3D_2dots(dot3D:Array<Float>, dot3Da:Array<Float>):Array<Float>{
+    public function plane3D_2dots(
+        dot3D:Array<Float>,
+        dot3Da:Array<Float>
+        ):Array<Float>{
         var rez:Array<Float> = null;
         if (
             !vecXDsamesize(dot3D, dot3Da) ||
@@ -1537,7 +1718,10 @@ class GeometryXD{
      @param plane3D - plane 3D (a, b, c, d). 
      Where (a, b, c) is plane 3D normal vector, and (d) is displacement plane from (0, 0, 0)
     **/
-    public function distance_dot3D_plane3D(dot3D:Array<Float>, plane3D:Array<Float>):Null<Float>{
+    public function distance_dot3D_plane3D(
+        dot3D:Array<Float>,
+        plane3D:Array<Float>
+        ):Null<Float>{
         var rez:Null<Float> = null;
         if (
             dot3D.length != 3 ||
@@ -1578,7 +1762,11 @@ class GeometryXD{
      If dot not in plane , then will be uesd projection this dot on plane
      @param radius - radius of round area on plane 3D. Result will be calculated inside area
     **/
-    public function random_dot3D_in_plane3D(plane3D:Array<Float>, dot3D:Array<Float>, radius:Float):Array<Float>{
+    public function random_dot3D_in_plane3D(
+        plane3D:Array<Float>,
+        dot3D:Array<Float>,
+        radius:Float
+        ):Array<Float>{
         var rez:Array<Float> = null;
         if (
             plane3D.length != 4 ||
@@ -1603,7 +1791,14 @@ class GeometryXD{
      @param vec3D2 - vector 3D (a, b, c) for offset end internal dot
      @param distance2 - distance for offset end internal dot along offset vector
     **/
-    public function curve3D_4dots(dot3D1:Array<Float>, vec3D1:Array<Float>, distance1:Float, dot3D2:Array<Float>, vec3D2:Array<Float>, distance2:Float):Array<Array<Float>>{
+    public function curve3D_4dots(
+        dot3D1:Array<Float>,
+        vec3D1:Array<Float>,
+        distance1:Float,
+        dot3D2:Array<Float>,
+        vec3D2:Array<Float>,
+        distance2:Float
+        ):Array<Array<Float>>{
         var rez:Array<Array<Float>> = null;
         if (
             !same_size_F([dot3D1, vec3D1, dot3D2, vec3D2]) ||
@@ -1631,7 +1826,14 @@ class GeometryXD{
      if a_s = 0 then lever1 vector will be paralleled lever2 vector and both will be directed 
      from dot3D0 to dot between dot3D1 and dot3D2 center dot
     **/
-    public function curve3D_3dots(dot3D0:Array<Float>, dot3D1:Array<Float>, dot3D2:Array<Float>, lever1:Float = 0.55, lever2:Float = 0.55, a_s:Int = -1):Array<Array<Float>>{
+    public function curve3D_3dots(
+        dot3D0:Array<Float>,
+        dot3D1:Array<Float>,
+        dot3D2:Array<Float>,
+        lever1:Float = 0.55,
+        lever2:Float = 0.55,
+        a_s:Int = -1
+        ):Array<Array<Float>>{
         var rez:Array<Array<Float>> = null;
         if (
             !same_size_F([dot3D0, dot3D1, dot3D2]) ||
@@ -1672,7 +1874,10 @@ class GeometryXD{
      @param dot3D0 - start line dot 3D
      @param dot3D1 - end line dot 3D
     **/
-    public function line3D_2dots(dot3D0:Array<Float>, dot3D1:Array<Float>):Array<Array<Float>>{
+    public function line3D_2dots(
+        dot3D0:Array<Float>,
+        dot3D1:Array<Float>
+        ):Array<Array<Float>>{
         var rez:Array<Array<Float>> = null;
         if (
             !vecXDsamesize(dot3D0, dot3D1) ||
@@ -1692,7 +1897,11 @@ class GeometryXD{
      @param vec3D - offset start line dot vector 3D
      @param distance - offset distance for end line dot
     **/
-    public function line3D_dot_offset(dot3D:Array<Float>, vec3D:Array<Float>, distance:Float):Array<Array<Float>>{
+    public function line3D_dot_offset(
+        dot3D:Array<Float>,
+        vec3D:Array<Float>,
+        distance:Float
+        ):Array<Array<Float>>{
         var rez:Array<Array<Float>> = null;
         if(
             distance == 0 ||
@@ -1746,7 +1955,10 @@ class GeometryXD{
      @param bcp - bezier curve derivative parameters, precalculated uses `beziercubic3D_derivativeparameters(...)`
      @param p - bezier cubic curve parameter. Standart values equal range 0...1 include borders
     **/
-    public inline function beziercubic_derivative(bcp:Array<Float>, p:Float):Null<Float>{
+    public inline function beziercubic_derivative(
+        bcp:Array<Float>,
+        p:Float
+        ):Null<Float>{
         var rez:Null<Float> = null;
         if (bcp.length == 4){
             rez = 3 * (1 - p) * (1 - p) * (bcp[1] - bcp[0]) +
@@ -1759,7 +1971,10 @@ class GeometryXD{
      @param curve - bezier cubic curve 3D ((x, y, z), (x, y, z), (x, y, z), (x, y, z))
      @param p - bezier cubic curve parameter. Standart values equal range 0...1 include borders
     **/
-    public function beziercubic3D_derivative(curve:Array<Array<Float>>, p:Float):Array<Float>{
+    public function beziercubic3D_derivative(
+        curve:Array<Array<Float>>,
+        p:Float
+        ):Array<Float>{
         var rez:Array<Float> = null;
         if (
             curve.length == 4 &&
@@ -1772,7 +1987,7 @@ class GeometryXD{
     
     /**
      returns cubic bezier curve support dot one(first lever) paramater for each coordinate. Usual case `x` or `y` or `z`
-     @param beziercubic_one_axis_coordinates - [c1,c2,c3,c4]. Where c is cubic bezier curve dots values for one of `x` or `y` or `z`
+     @param beziercubic_one_axis_coordinates - [c1,c2,c3,c4]. Where c is cubic bezier curve trajectory dots values for one of `x` or `y` or `z`
     **/
     public inline function beziercubic_support_dot_one(beziercubic_one_axis_coordinates:Array<Float>):Null<Float>{
         var rez:Null<Float> = null;
@@ -1792,7 +2007,7 @@ class GeometryXD{
     }
     /**
      returns cubic bezier curve support dot two(second lever) paramater for each coordinate. Usual case `x` or `y` or `z`
-     @param beziercubic_one_axis_coordinates - [c1,c2,c3,c4]. Where c is cubic bezier curve dots values for one of `x` or `y` or `z`
+     @param beziercubic_one_axis_coordinates - [c1,c2,c3,c4]. Where c is cubic bezier curve trajectory dots values for one of `x` or `y` or `z`
     **/
     public inline function beziercubic_support_dot_two(beziercubic_one_axis_coordinates:Array<Float>):Null<Float>{
         var rez:Null<Float> = null;
@@ -1828,7 +2043,10 @@ class GeometryXD{
      For case [[x1, y1, z1], [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]] curve and x axis must be [x1, x2, x3, x4]
      @param parameter - parameter of bezier curve equation. Usual case range 0...1 include borders
     **/
-    public inline function beziercubic_coordinate(beziercubic_one_axis_coordinates:Array<Float>, parameter:Float):Null<Float>{
+    public inline function beziercubic_coordinate(
+        beziercubic_one_axis_coordinates:Array<Float>,
+        parameter:Float
+        ):Null<Float>{
         var rez:Null<Float> = null;
         var c:Array<Float> = beziercubic_one_axis_coordinates;
         var p:Float = parameter;
@@ -1845,7 +2063,10 @@ class GeometryXD{
      Which is [dot3Dstart, lever3Dstart, lever3Dend, dot3Dend]
      @param parameter - parameter of bezier curve equation. Usual case range 0...1 include borders
     **/
-    public function beziercubic3Ddot(beziercubic3D:Array<Array<Float>>, parameter:Float):Array<Float>{
+    public function beziercubic3Ddot(
+        beziercubic3D:Array<Array<Float>>,
+        parameter:Float
+        ):Array<Float>{
         var rez:Array<Float> = null;
         var c:Array<Array<Float>> = beziercubic3D;
         var p:Float = parameter;
@@ -2137,7 +2358,11 @@ class GeometryXD{
      Which is [a, b, an, bn], where an and bn is negative semiaxes direction vectors 
      @param semiaxes - array of semiaxes lengths. Must be of the form [a, b, an, bn]
     **/
-    public function ellipse3D_dots(dot3D:Array<Float>, vec3Dsemiaxes:Array<Array<Float>>, semiaxes:Array<Float>):Array<Array<Float>>{
+    public function ellipse3D_dots(
+        dot3D:Array<Float>,
+        vec3Dsemiaxes:Array<Array<Float>>,
+        semiaxes:Array<Float>
+        ):Array<Array<Float>>{
         var rez:Array<Array<Float>> = null;
         if(
             dot3D.length != 3 ||
@@ -2175,11 +2400,16 @@ class GeometryXD{
      @param semiaxis_b_oy - semiaxis b length
      @param rad - if true then radians angle, default false(degrees angle)
     **/
-    public inline function ellipse2Ddot(angle:Float, semiaxis_a_ox:Float, semiaxis_b_oy:Float, rad:Bool = false):Array<Float>{
+    public inline function ellipse2Ddot(
+        angle:Float,
+        semiaxis_a_ox:Float,
+        semiaxis_b_oy:Float,
+        rad:Bool = false
+        ):Array<Float>{
         var u:Float = angle;
         var a:Float = semiaxis_a_ox;
         var b:Float = semiaxis_b_oy;
-        if (!rad){ a = radians(a); }
+        if (!rad){ u = radians(u); }
         return [a * Math.cos(u), b * Math.sin(u)];
     }
     /**
@@ -2206,7 +2436,7 @@ class GeometryXD{
         var du:Float = a1 - a0;
         var ae:Float = semiaxis_a_ox;
         var be:Float = semiaxis_b_oy;
-        rez = [for (a in [a0, a0 + du / 3, a0 + du * 2 / 3, a0 + du]) ellipse2Ddot(a, ae, be, rad)];
+        rez = [for (a in [a0, a0 + du / 3, a0 + du * 2 / 3, a0 + du]) ellipse2Ddot(a, ae, be, false)];
         return rez;
     }
     /**
@@ -2224,7 +2454,7 @@ class GeometryXD{
     public function beziercubic3D_elliptic_shape_restricted_to_quarter(
         dot3Dc:Array<Float>,
         vec3D_a_ox:Array<Float>,
-        vec3D_b_ox:Array<Float>,
+        vec3D_b_oy:Array<Float>,
         semiaxis_a_ox:Float,
         semiaxis_b_oy:Float,
         angle0:Float,
@@ -2234,7 +2464,7 @@ class GeometryXD{
         var rez:Array<Array<Float>> = null;
         var tc:Array<Float> = dot3Dc;
         var va:Array<Float> = vec3D_a_ox;
-        var vb:Array<Float> = vec3D_b_ox;
+        var vb:Array<Float> = vec3D_b_oy;
         var a:Float = semiaxis_a_ox;
         var b:Float = semiaxis_b_oy;
         if (
@@ -2351,7 +2581,7 @@ class GeometryXD{
      Each Vertex will be offsetted along own vector
      @param distances - polygon vertexes radial distances array(offset length)
     **/
-    public function polygon3D_vec3Dfield_distance(
+    public function polygon3D_vec3Dfield_distances(
         dot3D:Array<Float>,
         vec3Dfield:Array<Array<Float>>,
         distances:Array<Float>
@@ -2399,13 +2629,17 @@ class GeometryXD{
             vn.length != 3 ||
             va.length != 3 ||
             ap.length != d.length ||
+            vecXDnorm(va) == 0 ||
+            vecXDnorm(vn) == 0 ||
             vecXDparalleled(va, vn)
         ){ return rez; }
         var x:Float = 360 / sum_F(ap);
+        var u:Float = 0;
         va = projection_vec3D_on_plane3D(va, [vn[0], vn[1], vn[2], 0]);
         rez = [t];
         for (i in 0...d.length){
-            rez.push( dotXDoffset( t, vec3Drotate(va, vn, x * ap[i]), distances[i] ) );
+            u += x * ap[i];
+            rez.push( dotXDoffset( t, vec3Drotate(va, vn, u), distances[i] ) );
         }return rez;
     }
     /**
@@ -2424,7 +2658,10 @@ class GeometryXD{
      @param vec3D - vector 3D (a, b, c)
      @param plane3D - plane 3D (a, b, c, d), where (a, b, c) normal vector of plane, and (d) displacement from (0, 0, 0)
     **/
-    public function projection_vec3D_on_plane3D(vec3D:Array<Float>, plane3D:Array<Float>):Array<Float>{
+    public function projection_vec3D_on_plane3D(
+        vec3D:Array<Float>,
+        plane3D:Array<Float>
+        ):Array<Float>{
         var rez:Array<Float> = null;
         if (vec3D.length != 3 || plane3D.length != 4){
             return rez;
@@ -2435,10 +2672,10 @@ class GeometryXD{
             vecXDnorm(vec3D) == 0 ||
             vecXDnorm(vp) == 0
             ){ return rez; }
-        rez = vec3D;
         var t0:Array<Float> = [0,0,0];
         var t1:Array<Float> = dotXDoffset(t0, vec3D, 1);
-        t1 = projection_dot3D_on_plane3D(t1, plane3D);
+        var p:Array<Float> = plane3D_dot3Dnormal(t0, vp);
+        t1 = projection_dot3D_on_plane3D(t1, p);
         rez = vecXD(t0, t1);
         return rez;
     }
@@ -2449,7 +2686,12 @@ class GeometryXD{
      @param plane3D - plane 3D (a, b, c, d), where (a, b, c) normal vector of plane, and (d) displacement from (0, 0, 0)
      @param rad - if true then radians angle, default false(degrees angle)
     **/
-    public function angle_vec3Dvec3D_projection_on_plane3D(vec3D1:Array<Float>, vec3D2:Array<Float>, plane3D:Array<Float>, rad:Bool = false):Null<Float>{
+    public function angle_vec3Dvec3D_projection_on_plane3D(
+        vec3D1:Array<Float>,
+        vec3D2:Array<Float>,
+        plane3D:Array<Float>,
+        rad:Bool = false
+        ):Null<Float>{
         var rez:Null<Float> = null;
         var v1:Array<Float> = vec3D1;
         var v2:Array<Float> = vec3D2;
@@ -2459,16 +2701,15 @@ class GeometryXD{
         var v2mod:Float = vecXDnorm(v2);
         if ( v1l != 3 || v2l != 3 || v1mod == 0 || v2mod == 0){ return rez; }
         var p:Array<Float> = plane3D;
-        if (p.length < 3){ return rez; }
+        if (p.length != 4){ return rez; }
         var vn:Array<Float> = [for (i in 0...3) p[i]];
         if ( vecXDnorm(vn) == 0 ){ return rez; }
-        rez = 0;
-        if (vecXDparalleled_sameside(v1, v2)){ return rez;}
-        var pv1:Array<Float> = projection_vec3D_on_plane3D(v1, vn);
-        var pv2:Array<Float> = projection_vec3D_on_plane3D(v2, vn);
+        if (vecXDparalleled_sameside(v1, v2)){ return 0;}
+        var pv1:Array<Float> = projection_vec3D_on_plane3D(v1, p);
+        var pv2:Array<Float> = projection_vec3D_on_plane3D(v2, p);
+        var uvv:Float = vecXDangle(pv1, pv2, rad);
         var pvn:Array<Float> = (vecXDparalleled(pv1, pv2)) ? vn : vec3Dnormal(pv1, pv2);
         var uvnpvn:Float = vecXDangle(vn, pvn, rad);
-        var uvv:Float = vecXDangle(v1, v2, rad);
         var uznak:Float = (rad) ? radians(90) : 90;
         rez = (uvnpvn > uznak) ? -uvv : uvv;
         return rez;

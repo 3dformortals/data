@@ -407,7 +407,7 @@
     p("geo.radians(-180 / Math.PI)");
     p("geo.radians(-180)");
     
-    p("angle_quadrant(Float, Bool) : Int", true);
+    p("angle_quadrant(angle Float, rad Bool) : Int", true);
     p("geo.angle_quadrant(0)");
     p("geo.angle_quadrant(45)");
     p("geo.angle_quadrant(90)");
@@ -556,7 +556,7 @@
     p("geo.vecXDcos([1, 2, 3], [2, 4, 6])");
     p("geo.vecXDcos([1, 2, 3], [-1, -2, -3])");
     
-    p("vecXDangle([Float Array], [Float Array], Bool) : Float", true);
+    p("vecXDangle(vecXD [Float Array], vecXD [Float Array], rad Bool) : Float", true);
     p("geo.vecXDangle([1, 2, 3], [2, 4, 6])");
     p("geo.vecXDangle([1, 2, 3], [-1, -2, -3])");
     p("geo.vecXDangle([1, 2, 3], [2, 4, 6], true)");
@@ -607,16 +607,255 @@
     p("geo.dot3Dline3D_x_plane3D([0, 0, 0], [1, 1, 1], [1, 1, 1], -1)");
     
     p("projection_dot3D_on_plane3D(dot3D [Float Array], plane3D [Float Array]) : Float Array", true);
+    p("geo.projection_dot3D_on_plane3D([1, 1, 1], [0, 0, 1, 0])");
     p("geo.projection_dot3D_on_plane3D([0, 0, 0], [1, 1, 1, 0])");
     p("geo.projection_dot3D_on_plane3D([0, 0, 0], [1, 1, 1, 1])");
     p("geo.projection_dot3D_on_plane3D([0, 0, 0], [1, 1, 1, -1])");
     
-    p("dot3D_to_dot2Dviewplane(dot3D [Float Array], dot3Dc [Float Array], vec3Dp [Float Array], vec3Dox [Float Array]) : Float Array", true);//look like bug
+    p("dot3D_to_dot2Dviewplane(dot3D [Float Array], dot3Dc [Float Array], vec3Dp [Float Array], vec3Dox [Float Array]) : Float Array", true);
     p("geo.dot3D_to_dot2Dviewplane([10, 10, 0], [0, 0, 0], [0, 0, 1], [1, 0, 0])");
     p("geo.dot3D_to_dot2Dviewplane([0, 0, 0], [10, 10, 0], [0, 0, 1], [1, 0, 0])");
     p("geo.dot3D_to_dot2Dviewplane([10, 10, 0], [0, 0, 0], [1, 1, 1], [1, 0, 0])");
     
+    p("dotXDscale(dotXD [Float Array], scaleXD [Float Array], dotXDc [Float Array]) : Float Array", true);
+    p("geo.dotXDscale([10, 10, 8], [0, 0, 0], [0, 0, 0])");
+    p("geo.dotXDscale([10, 10, 8], [1, 1, 1], [0, 0, 0])");
+    p("geo.dotXDscale([10, 10, 8], [5, 5, 4], [0, 0, 0])");
+    p("geo.dotXDscale([10, 10, 8], [0.2, 0.2, 0.25], [0, 0, 0])");
+    p("geo.dotXDscale([10, 10, 8], [0.2, 0.2, 0.25], [10, 10, 8])");
     
+    p("vec3Drotate(vec3D [Float Array], vec3Daxis [Float Array], angle Float, rad Bool) : Float Array", true);
+    p("geo.vec3Drotate([1, 1, 1], [0, 0, 1], 90)");
+    p("geo.vec3Drotate([1, 1, 1], [0, 0, 1], Math.PI / 2, true)");
+    
+    p("vec3Dfield_rotate_around_vec3Daxes(vec3Dfield [Array Float Array], vec3Daxes [Array Float Array], angles [Float Array], rad Bool) : Float Array", true);
+    p("geo.vec3Dfield_rotate_around_vec3Daxes([[1, 1, 1], [1, 2, 1], [1, 2, 3]], [[1, 0, 0], [0, 1, 0], [0, 0, 1]], [90, 90, 90])");
+    p("geo.vec3Dfield_rotate_around_vec3Daxes([[1, 1, 1], [1, 2, 1], [1, 2, 3]], [[1, 0, 0], [0, 1, 0], [0, 0, 1]], [Math.PI / 2, Math.PI / 2, Math.PI / 2], true)");
+    
+    p("dot3Drotate(dot3D [Float Array], dot3Dc [Float Array], vec3D [Float Array], angle [Array Float], rad Bool) : Float Array", true);
+    p("geo.dot3Drotate([1, 1, 1], [0, 0, 0], [1, 0, 0], 90)");
+    p("geo.dot3Drotate([1, 1, 1], [0, 0, 0], [1, 0, 0], Math.PI / 2, true)");
+    
+    p("plane3D_dot3Dnormal(dot3D [Float Array], vec3D [Float Array]) : Float Array", true);
+    p("geo.plane3D_dot3Dnormal([1, 1, 1], [1, 1, 1])");
+    p("geo.plane3D_dot3Dnormal([0, 0, 0], [1, 1, 1])");
+    p("geo.plane3D_dot3Dnormal([1, 1, 1], [0, 0, 0])");
+    
+    p("plane3D_dot_vec_vec(dot3D [Float Array], vec3Da [Float Array], vec3Db [Float Array]) : Float Array", true);
+    p("geo.plane3D_dot_vec_vec([1, 1, 1], [1, 1, 1], [1, 2, 3])");
+    p("geo.plane3D_dot_vec_vec([1, 1, 2], [1, 1, 1], [1, 2, 3])");
+    p("geo.plane3D_dot_vec_vec([1, 1, 2], [0, 0, 0], [1, 2, 3])");
+    p("geo.plane3D_dot_vec_vec([1, 1, 2], [1, 2, 3], [1, 2, 3])");
+    p("geo.plane3D_dot_vec_vec([1, 1, 2], [-1, -2, -3], [1, 2, 3])");
+    
+    p("plane3D_3dots(dot3D [Float Array], dot3Da [Float Array], dot3Db [Float Array]) : Float Array", true);
+    p("geo.plane3D_3dots([1, 1, 1], [2, 2, 2], [3, 4, 5])");
+    p("geo.plane3D_3dots([1, 1, 1], [2, 8, 10], [3, 4, 5])");
+    p("geo.plane3D_3dots([1, 1, 1], [1, 1, 1], [3, 4, 5])");
+    p("geo.plane3D_3dots([1, 1, 1], [2, 2, 2], [1, 1, 1])");
+    
+    p("plane3D_2dots(dot3D [Float Array], dot3Da [Float Array]) : Float Array", true);
+    p("geo.plane3D_2dots([1, 1, 1], [2, 2, 2])");
+    p("geo.plane3D_2dots([-1, -1, -1], [-2, -2, -2])");
+    p("geo.plane3D_2dots([-2, -2, -2], [-1, -1, -1])");
+    p("geo.plane3D_2dots([1, 1, 1], [1, 1, 1])");
+    
+    p("distance_dot3D_plane3D(dot3D [Float Array], plane3D [Float Array]) : Float Array", true);
+    p("geo.distance_dot3D_plane3D([1, 1, 1], [1, 1, 1, 0])");
+    p("geo.distance_dot3D_plane3D([1, 1, 1], [1, 1, 1, 1])");
+    p("geo.distance_dot3D_plane3D([1, 1, 1], [1, 1, 1, -1])");
+    
+    p("random_vec3D_in_plane3D(plane3D [Float Array]) : Float Array", true);
+    p("geo.random_vec3D_in_plane3D([1, 1, 1, 0])");
+    p("geo.random_vec3D_in_plane3D([1, 1, 1, 0])");
+    p("geo.random_vec3D_in_plane3D([1, 1, 1, 1])");
+    p("geo.random_vec3D_in_plane3D([1, 1, 1, 1])");
+    
+    p("random_dot3D_in_plane3D(plane3D [Float Array], dot3D [Float Array], radius Float) : Float Array", true);
+    p("geo.random_dot3D_in_plane3D([1, 1, 1, 0], [0,0,0], 10)");
+    p("geo.random_dot3D_in_plane3D([1, 1, 1, 0], [0,0,0], 10)");
+    p("geo.random_dot3D_in_plane3D([1, 1, 1, 0], [0,0,0], -10)");
+    p("geo.random_dot3D_in_plane3D([1, 1, 1, 0], [0,0,0], -100)");
+    p("geo.random_dot3D_in_plane3D([0, 0, 0, 0], [0,0,0], 10)");
+    p("geo.random_dot3D_in_plane3D([0, 0, 0, 1], [0,0,0], 10)");
+    
+    p("curve3D_4dots(dot3D1 [Float Array], vec3D1 [Float Array], distance1 Float, dot3D2 [Float Array], vec3D2 [Float Array], distance2 Float) : Array Float Array", true);
+    p("geo.curve3D_4dots([0, 0, 0], [0, 1, 0], 10, [10, 0, 0], [0, 1, 0], 10)");
+    p("geo.curve3D_4dots([0, 0, 0], [0, 1, 0], 10, [10, 0, 0], [0, 1, 0], -10)");
+    
+    p("curve3D_3dots(dot3D0 [Float Array], dot3D1 [Float Array], dot3D2 [Float Array], lever1 Float, lever2 Float, a_s Int) : Array Float Array", true);
+    p("geo.curve3D_3dots([0, 0, 0], [0, 10, 0], [10, 0, 0], 0.55, 0.55, 1)");
+    p("geo.curve3D_3dots([0, 0, 0], [0, 10, 0], [10, 0, 0], 0.55, 0.55, 0)");
+    p("geo.curve3D_3dots([0, 0, 0], [0, 10, 0], [10, 0, 0], 0.55, 0.55, -1)");
+    
+    p("line3D_2dots(dot3D0 [Float Array], dot3D1 [Float Array]) : Array Float Array", true);
+    p("geo.line3D_2dots([0, 0, 0], [0, 10, 0])");
+    
+    p("line3D_dot_offset(dot3D [Float Array], vec3D [Float Array], distance Float) : Array Float Array", true);
+    p("geo.line3D_dot_offset([0, 0, 0], [0, 1, 0], 10)");
+    p("geo.line3D_dot_offset([0, 0, 0], [0, 1, 0], -10)");
+    
+    p("curve3D_4to12(curve [Array Float Array]) : Float Array", true);
+    p("geo.curve3D_4to12([[0, 0, 0], [0, 1, 0], [1, 1, 0], [1, 0, 0]])");
+    
+    p("curve3D_12to4(curve [Float Array]) : Array Float Array", true);
+    p("geo.curve3D_12to4([0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0])");
+    
+    p("beziercubic3D_derivativeparameters(curve [Array Float Array]) : Array Float Array", true);
+    p("geo.beziercubic3D_derivativeparameters([[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]])");
+    p("geo.beziercubic3D_derivativeparameters([[0, 0, 0], [0, 1, 0], [1, 1, 0], [1, 0, 0]])");
+    
+    p("beziercubic_derivative(bcp [Float Array], p Float) : Float", true);
+    p("geo.beziercubic_derivative([0, 0, 1, 1], 0.5)");
+    p("geo.beziercubic_derivative([0, 1, 1, 0], 0.5)");
+    p("geo.beziercubic_derivative([0, 0, 0, 0], 0.5)");
+    
+    p("beziercubic3D_derivative(curve [Array Float Array], p Float) : Float Array", true);
+    p("geo.beziercubic3D_derivative([[0, 0, 0], [0, 1, 0], [1, 1, 0], [1, 0, 0]], 0.5)");
+    
+    p("beziercubic_support_dot_one(curve [Array Float Array]) : Float", true);
+    p("geo.beziercubic_support_dot_one([0, 0, 1, 1])");
+    p("geo.beziercubic_support_dot_one([0, 1, 1, 0])");
+    p("geo.beziercubic_support_dot_one([0, 0, 0, 0])");
+    
+    p("beziercubic3D_support_dot_one(curve3D_4dots [Array Float Array]) : Float Array", true);
+    p("geo.beziercubic3D_support_dot_one([[0, 0, 0], [0, 1, 0], [1, 1, 0], [1, 0, 0]])");
+    
+    p("beziercubic_support_dot_two(curve [Array Float Array]) : Float", true);
+    p("geo.beziercubic_support_dot_two([0, 0, 1, 1])");
+    p("geo.beziercubic_support_dot_two([0, 1, 1, 0])");
+    p("geo.beziercubic_support_dot_two([0, 0, 0, 0])");
+    
+    p("beziercubic3D_support_dot_two(curve3D_4dots [Array Float Array]) : Array Float", true);
+    p("geo.beziercubic3D_support_dot_two([[0, 0, 0], [0, 1, 0], [1, 1, 0], [1, 0, 0]])");
+    
+    p("beziercubic3D_follow_4dots_trajectory(dots [Array Float Array]) : Array Float Array", true);
+    p("geo.beziercubic3D_follow_4dots_trajectory([[0, 0, 0], [0, 1, 0], [1, 1, 0], [1, 0, 0]])");
+    
+    p("beziercubic_coordinate(beziercubic_one_axis_coordinates [Float Array], p Float) : Float", true);
+    p("geo.beziercubic_coordinate([0, 0, 1, 1], 0.5)");
+    p("geo.beziercubic_coordinate([0, 1, 1, 0], 0.5)");
+    p("geo.beziercubic_coordinate([0, 0, 0, 0], 0.5)");
+    
+    p("beziercubic3Ddot(beziercubic3D [Array Float Array], p Float) : Float Array", true);
+    p("geo.beziercubic3Ddot([[0, 0, 0], [0, 1, 0], [1, 1, 0], [1, 0, 0]], 0.5)");
+    
+    p("curve3D_4dots_follow_beziercubic_trajectory(beziercubic3D [Array Float Array]) : Array Float Array", true);
+    p("geo.curve3D_4dots_follow_beziercubic_trajectory([[0, 0, 0], [0, 1, 0], [1, 1, 0], [1, 0, 0]])");
+    
+    p("curve3Doffset(curve3D [Array Float Array], vec3D [Float Array], distance Float) : Array Float Array", true);
+    p("geo.curve3Doffset([[0, 0, 0], [0, 1, 0], [1, 1, 0], [1, 0, 0]], [0, 1, 0], 10)");
+    p("geo.curve3Doffset([[0, 0, 0], [0, 1, 0], [1, 1, 0], [1, 0, 0]], [0, -1, 0], 10)");
+    p("geo.curve3Doffset([[0, 0, 0], [0, 1, 0], [1, 1, 0], [1, 0, 0]], [0, 1, 0], -10)");
+    p("geo.curve3Doffset([[0, 0, 0], [0, 1, 0], [1, 1, 0], [1, 0, 0]], [0, -1, 0], -10)");
+    
+    p("curve3Drotate(curve3D [Array Float Array], dot3D [Float Array], vec3D [Float Array], angle Float, rad Bool) : Array Float Array", true);
+    p("geo.curve3Drotate([[0, 0, 0], [0, 1, 0], [1, 1, 0], [1, 0, 0]], [0, 0, 0], [0, 1, 0], 90)");
+    p("geo.curve3Drotate([[0, 0, 0], [0, 1, 0], [1, 1, 0], [1, 0, 0]], [0, 0, 0], [0, -1, 0], 90)");
+    p("geo.curve3Drotate([[0, 0, 0], [0, 1, 0], [1, 1, 0], [1, 0, 0]], [0, 0, 0], [0, 1, 0], -90)");
+    p("geo.curve3Drotate([[0, 0, 0], [0, 1, 0], [1, 1, 0], [1, 0, 0]], [0, 0, 0], [0, -1, 0], -90)");
+    
+    p("geo.curve3Drotate([[0, 0, 0], [0, 1, 0], [1, 1, 0], [1, 0, 0]], [0, 0, 0], [0, 1, 0], Math.PI / 2, true)");
+    p("geo.curve3Drotate([[0, 0, 0], [0, 1, 0], [1, 1, 0], [1, 0, 0]], [0, 0, 0], [0, -1, 0], Math.PI / 2, true)");
+    p("geo.curve3Drotate([[0, 0, 0], [0, 1, 0], [1, 1, 0], [1, 0, 0]], [0, 0, 0], [0, 1, 0], -Math.PI / 2, true)");
+    p("geo.curve3Drotate([[0, 0, 0], [0, 1, 0], [1, 1, 0], [1, 0, 0]], [0, 0, 0], [0, -1, 0], -Math.PI / 2, true)");
+    
+    p("curve3Dscale(curve3D [Array Float Array], scale_xyz [Float Array], dot3D [Float Array]) : Array Float Array", true);
+    p("geo.curve3Dscale([[0, 0, 0], [0, 1, 0], [1, 1, 0], [1, 0, 0]], [0.5, 0.5, 0.5], [0, 0, 0])");
+    p("geo.curve3Dscale([[0, 0, 0], [0, 1, 0], [1, 1, 0], [1, 0, 0]], [0.5, 0.5, 0.5], [10, 10, 10])");
+    p("geo.curve3Dscale([[0, 0, 0], [0, 1, 0], [1, 1, 0], [1, 0, 0]], [-0.5, -0.5, -0.5], [10, 10, 10])");
+    p("geo.curve3Dscale([[0, 0, 0], [0, 1, 0], [1, 1, 0], [1, 0, 0]], [1.5, 1.5, 1.5], [0, 0, 0])");
+    p("geo.curve3Dscale([[0, 0, 0], [0, 1, 0], [1, 1, 0], [1, 0, 0]], [1.5, 1.5, 1.5], [10, 10, 10])");
+    
+    p("ellipse2Dperimeter_ramanujan(a Float, b Float) : Float", true);
+    p("geo.ellipse2Dperimeter_ramanujan(1, 1)");
+    p("geo.ellipse2Dperimeter_ramanujan(3, 2)");
+    p("geo.ellipse2Dperimeter_ramanujan(Math.PI, 2)");
+    
+    p("tangent_centered_ellipse2Ddot(a Float, b Float, ellipse_dot2D [Float Array]) : Array Float Array", true);
+    p("geo.tangent_centered_ellipse2Ddot(1, 1, [1, 0])");
+    p("geo.tangent_centered_ellipse2Ddot(2, 3, [1, 0])");
+    
+    p("ellipse_e_parameter(a Float, b Float) : Float", true);
+    p("geo.ellipse_e_parameter(1, 1)");
+    p("geo.ellipse_e_parameter(3, 2)");
+    p("geo.ellipse_e_parameter(2, 3)");
+    
+    p("ellipse_c_parameter(a Float, b Float) : Float", true);
+    p("geo.ellipse_c_parameter(1, 1)");
+    p("geo.ellipse_c_parameter(3, 2)");
+    p("geo.ellipse_c_parameter(2, 3)");
+    
+    p("tangent_vec3D_in_plane_of_ellipse2D_placed_in_3Dspace(dot3D [Float Array], vec3Dnormal_ellipse_plane [Float Array], vec3Dsemiaxis_a_direction [Float Array], semiaxis_a Float, semiaxis_b Float, semiaxis_a_negative Float, semiaxis_b_negative Float, angle Float, rad Bool) : Float", true);
+    p("geo.tangent_vec3D_in_plane_of_ellipse2D_placed_in_3Dspace([0, 0, 0], [0, 0, 1], [1, 0, 0], 1, 1, 1, 1, 45)");
+    p("geo.tangent_vec3D_in_plane_of_ellipse2D_placed_in_3Dspace([0, 0, 0], [0, 0, 1], [1, 0, 0], 1, 1, 1, 1, Math.PI / 4, true)");
+    
+    p("ellipse3D_dots(dot3D [Float Array], vec3Dsemiaxes [Array Float Array], semiaxes [Float Array]) : Array Float Array", true);
+    p("geo.ellipse3D_dots([0, 0, 0], [[1, 0, 0], [0, -1, 0], [-1, 0, 0], [0, -1, 0]], [1, 1, 1, 1])");
+    
+    p("ellipse2Ddot(angle Float, semiaxis_a_ox Float, semiaxis_b_oy Float, rad Bool) : Array Float Array", true);
+    p("geo.ellipse2Ddot(45, 1, 1)");
+    p("geo.ellipse2Ddot(Math.PI / 4, 1, 1, true)");
+    
+    p("curve2D_4dots_elliptic_shape_restricted_to_quarter(angle0 Float, angle1 Float, semiaxis_a_ox Float, semiaxis_b_oy Float, rad Bool) : Array Float Array", true);
+    p("geo.curve2D_4dots_elliptic_shape_restricted_to_quarter(0, 45, 1, 1)");
+    p("geo.curve2D_4dots_elliptic_shape_restricted_to_quarter(45, 90, 1, 1)");
+    p("geo.curve2D_4dots_elliptic_shape_restricted_to_quarter(0, Math.PI / 4, 1, 1, true)");
+    p("geo.curve2D_4dots_elliptic_shape_restricted_to_quarter(Math.PI / 4, Math.PI / 2, 1, 1, true)");
+    
+    p("beziercubic3D_elliptic_shape_restricted_to_quarter(dot3Dc [Float Array], vec3D_a_ox [Float Array], vec3D_b_oy [Float Array], semiaxis_a_ox Float, semiaxis_b_oy Float, angle0 Float, angle1 Float, rad Bool) : Array Float Array", true);
+    p("geo.beziercubic3D_elliptic_shape_restricted_to_quarter([0, 0, 0], [1, 0, 0], [0, 1, 0], 1, 1, 0, 45)");
+    p("geo.beziercubic3D_elliptic_shape_restricted_to_quarter([0, 0, 0], [1, 0, 0], [0, 1, 0], 1, 1, 45, 90)");
+    p("geo.beziercubic3D_elliptic_shape_restricted_to_quarter([0, 0, 0], [1, 0, 0], [0, 1, 0], 1, 1, 0, Math.PI / 4, true)");
+    p("geo.beziercubic3D_elliptic_shape_restricted_to_quarter([0, 0, 0], [1, 0, 0], [0, 1, 0], 1, 1, Math.PI / 4, Math.PI / 2, true)");
+    
+    p("angle_required_to_place_curve_on_ellipse(curve_length Float, semiaxis_a_ox Float, semiaxis_b_oy Float, angle0 Float, rad Bool) : Float", true);
+    p("geo.angle_required_to_place_curve_on_ellipse(1, 1, 1, 0)");
+    p("geo.angle_required_to_place_curve_on_ellipse(1, 1, 1, 45)");
+    p("geo.angle_required_to_place_curve_on_ellipse(1, 2, 3, 0)");
+    p("geo.angle_required_to_place_curve_on_ellipse(1, 2, 3, 45)");
+    p("geo.angle_required_to_place_curve_on_ellipse(1, 1, 1, 0, true)");
+    p("geo.angle_required_to_place_curve_on_ellipse(1, 1, 1, Math.PI / 4, true)");
+    p("geo.angle_required_to_place_curve_on_ellipse(1, 2, 3, 0, true)");
+    p("geo.angle_required_to_place_curve_on_ellipse(1, 2, 3, Math.PI / 4, true)");
+    
+    p("polygon3D_inside_ellipse(dot3D [Float Array], vec3Dsemiaxes [Array Float Array], semiaxes [Float Array], angle_proportions [Float Array]) : Array Float Array", true);
+    p("geo.polygon3D_inside_ellipse([0, 0, 0], [[1, 0, 0], [0, 1, 0], [-1, 0, 0], [0, -1, 0]], [1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1])");
+    
+    p("polygon3D_vec3Dfield_distances(dot3D [Float Array], vec3Dfield [Array Float Array], distances [Float Array]) : Array Float Array", true);
+    p("geo.polygon3D_vec3Dfield_distances([0, 0, 0], [[1, 0, 0], [0, 1, 0], [-1, 0, 0], [0, -1, 0]], [1, 1, 1, 1])");
+    p("geo.polygon3D_vec3Dfield_distances([1, 2, 3], [[1, 0, 0], [0, 1, 0], [-1, 0, 0], [0, -1, 0]], [1, 1, 1, 1])");
+    
+    p("polygon3D_in_plane(dot3D [Float Array], vec3Dplane_normal [Float Array], vec3Dsemiaxis_a_direction [Float Array] angle_proportions [Float Array], distances [Float Array]) : Array Float Array", true);
+    p("geo.polygon3D_in_plane([0, 0, 0], [0, 0, 1], [1, 0, 0], [90, 90, 90, 90], [1, 1, 1, 1])");
+    p("geo.polygon3D_in_plane([10, 10, 10], [0, 0, 1], [1, 0, 0], [90, 90, 90, 90], [1, 1, 1, 1])");
+    
+    p("polygon3D_to_vec3Dfield(polygon3D [Array Float Array]) : Array Float Array", true);
+    p("geo.polygon3D_to_vec3Dfield([[10, 10, 10], [10, 11, 10], [9, 10, 10], [10, 9, 10], [11, 10, 10]])");
+    
+    p("projection_vec3D_on_plane3D(vec3D [Float Array], plane3D [Float Array]) : Float Array", true);
+    p("geo.projection_vec3D_on_plane3D([1, 1, 1], [0, 0, 1, 0])");
+    p("geo.projection_vec3D_on_plane3D([1, 1, 1], [-1, -1, 1, 0])");
+    p("geo.projection_vec3D_on_plane3D([1, 1, 1], [1, 1, 1, 0])");
+    p("geo.projection_vec3D_on_plane3D([1, 1, 1], [-1, -1, -1, 0])");
+    p("geo.projection_vec3D_on_plane3D([1, 1, 1], [-1, -1, -1, 1])");
+    p("geo.projection_vec3D_on_plane3D([1, 1, 1], [-1, -1, -1, -1])");
+    
+    p("angle_vec3Dvec3D_projection_on_plane3D(vec3D1 [Float Array], vec3D2 [Float Array], plane3D [Float Array], rad Bool) : Float", true);
+    p("geo.angle_vec3Dvec3D_projection_on_plane3D([1, 1, 0], [1, 1, 0], [0, 0, 1, 0])");
+    p("geo.angle_vec3Dvec3D_projection_on_plane3D([-1, 1, 0], [1, 1, 0], [0, 0, 1, 0])");
+    p("geo.angle_vec3Dvec3D_projection_on_plane3D([1, 1, 0], [-1, 1, 0], [0, 0, 1, 0])");
+    p("geo.angle_vec3Dvec3D_projection_on_plane3D([1, 1, 0], [-1, 1, 0], [0, 1, 1, 0])");
+    p("geo.angle_vec3Dvec3D_projection_on_plane3D([1, 1, 0], [-1, 1, 0], [0, 1, 0, 0])");
+    p("geo.angle_vec3Dvec3D_projection_on_plane3D([1, 1, 0], [-1, 1, 0], [0, -1, 0, 0])");
+    
+    p("geo.angle_vec3Dvec3D_projection_on_plane3D([1, 1, 1], [-1, -1, -1], [0, 0, 1, 0])");
+    p("geo.angle_vec3Dvec3D_projection_on_plane3D([1, 1, 1], [-1, -1, -1], [1, -1, 1, 0])");
+    p("geo.angle_vec3Dvec3D_projection_on_plane3D([1, 1, 1], [-1, -1, -1], [0, 0, 1, 0], true)");
+    p("geo.angle_vec3Dvec3D_projection_on_plane3D([1, 1, 1], [-1, -1, -1], [1, -1, 1, 0], true)");
+    p("geo.angle_vec3Dvec3D_projection_on_plane3D([-1, -1, -1], [1, 1, 1], [1, -1, 1, 0], true)");
+    p("geo.angle_vec3Dvec3D_projection_on_plane3D([-1, -1, 0], [1, 1, 1], [1, -1, 1, 0], true)");
+    p("geo.angle_vec3Dvec3D_projection_on_plane3D([1, 1, 0], [-1, -1, 1], [1, -1, 1, 0], true)");
     
     
     // p("geo.()",geo.(),);

@@ -3762,7 +3762,7 @@ GeometryXD.prototype = {
 			var a1 = ea;
 			var b1 = eb;
 			if(!rad) {
-				a1 = a1 / 180 * Math.PI;
+				u = u / 180 * Math.PI;
 			}
 			var edot = [a1 * Math.cos(u),b1 * Math.sin(u)];
 			var dxy0dxy1 = this.tangent_centered_ellipse2Ddot(ea,eb,edot);
@@ -3873,7 +3873,7 @@ GeometryXD.prototype = {
 		var a = semiaxis_a_ox;
 		var b = semiaxis_b_oy;
 		if(!rad) {
-			a = a / 180 * Math.PI;
+			u = u / 180 * Math.PI;
 		}
 		return [a * Math.cos(u),b * Math.sin(u)];
 	}
@@ -3915,22 +3915,20 @@ GeometryXD.prototype = {
 			var u = a;
 			var a2 = ae;
 			var b = be;
-			if(!rad) {
-				a2 = a2 / 180 * Math.PI;
-			}
+			u = u / 180 * Math.PI;
 			_g.push([a2 * Math.cos(u),b * Math.sin(u)]);
 		}
 		rez = _g;
 		return rez;
 	}
-	,beziercubic3D_elliptic_shape_restricted_to_quarter: function(dot3Dc,vec3D_a_ox,vec3D_b_ox,semiaxis_a_ox,semiaxis_b_oy,angle0,angle1,rad) {
+	,beziercubic3D_elliptic_shape_restricted_to_quarter: function(dot3Dc,vec3D_a_ox,vec3D_b_oy,semiaxis_a_ox,semiaxis_b_oy,angle0,angle1,rad) {
 		if(rad == null) {
 			rad = false;
 		}
 		var rez = null;
 		var tc = dot3Dc;
 		var va = vec3D_a_ox;
-		var vb = vec3D_b_ox;
+		var vb = vec3D_b_oy;
 		var a = semiaxis_a_ox;
 		var b = semiaxis_b_oy;
 		if(tc.length == 3 && va.length == 3 && vb.length == 3 && this.vecXDnorm(va) > 0 && this.vecXDnorm(vb) > 0) {
@@ -3991,7 +3989,7 @@ GeometryXD.prototype = {
 			var a1 = a;
 			var b1 = b;
 			if(!rad) {
-				a1 = a1 / 180 * Math.PI;
+				u1 = u1 / 180 * Math.PI;
 			}
 			var xy0 = [a1 * Math.cos(u1),b1 * Math.sin(u1)];
 			if(rad) {
@@ -4003,7 +4001,7 @@ GeometryXD.prototype = {
 				var u2 = u + ue;
 				var a2 = a;
 				var b2 = b;
-				a2 = a2 / 180 * Math.PI;
+				u2 = u2 / 180 * Math.PI;
 				xy = [a2 * Math.cos(u2),b2 * Math.sin(u2)];
 				le += this.vecXDnorm(this.vecXD(xy0,xy));
 				if(le >= cl) {
@@ -4151,7 +4149,7 @@ GeometryXD.prototype = {
 		}
 		return rez;
 	}
-	,polygon3D_vec3Dfield_distance: function(dot3D,vec3Dfield,distances) {
+	,polygon3D_vec3Dfield_distances: function(dot3D,vec3Dfield,distances) {
 		var rez = null;
 		var tmp;
 		var tmp1;
@@ -4206,7 +4204,7 @@ GeometryXD.prototype = {
 		var va = vec3Dsemiaxis_a_direction;
 		var ap = angle_proportions;
 		var d = distances;
-		if(t.length != 3 || vn.length != 3 || va.length != 3 || ap.length != d.length || this.vecXDparalleled(va,vn)) {
+		if(t.length != 3 || vn.length != 3 || va.length != 3 || ap.length != d.length || this.vecXDnorm(va) == 0 || this.vecXDnorm(vn) == 0 || this.vecXDparalleled(va,vn)) {
 			return rez;
 		}
 		var rez1 = null;
@@ -4221,13 +4219,15 @@ GeometryXD.prototype = {
 			}
 		}
 		var x = 360 / rez1;
+		var u = 0;
 		va = this.projection_vec3D_on_plane3D(va,[vn[0],vn[1],vn[2],0]);
 		rez = [t];
 		var _g11 = 0;
 		var _g2 = d.length;
 		while(_g11 < _g2) {
 			var i1 = _g11++;
-			rez.push(this.dotXDoffset(t,this.vec3Drotate(va,vn,x * ap[i1]),distances[i1]));
+			u += x * ap[i1];
+			rez.push(this.dotXDoffset(t,this.vec3Drotate(va,vn,u),distances[i1]));
 		}
 		return rez;
 	}
@@ -4256,10 +4256,10 @@ GeometryXD.prototype = {
 		if(this.vecXDparalleled(vec3D,vp) || this.vecXDnorm(vec3D) == 0 || this.vecXDnorm(vp) == 0) {
 			return rez;
 		}
-		rez = vec3D;
 		var t0 = [0,0,0];
 		var t1 = this.dotXDoffset(t0,vec3D,1);
-		t1 = this.projection_dot3D_on_plane3D(t1,plane3D);
+		var p = this.plane3D_dot3Dnormal(t0,vp);
+		t1 = this.projection_dot3D_on_plane3D(t1,p);
 		rez = this.vecXD(t0,t1);
 		return rez;
 	}
@@ -4278,7 +4278,7 @@ GeometryXD.prototype = {
 			return rez;
 		}
 		var p = plane3D;
-		if(p.length < 3) {
+		if(p.length != 4) {
 			return rez;
 		}
 		var _g = [];
@@ -4291,15 +4291,14 @@ GeometryXD.prototype = {
 		if(this.vecXDnorm(vn) == 0) {
 			return rez;
 		}
-		rez = 0;
 		if(this.vecXDparalleled_sameside(v1,v2)) {
-			return rez;
+			return 0;
 		}
-		var pv1 = this.projection_vec3D_on_plane3D(v1,vn);
-		var pv2 = this.projection_vec3D_on_plane3D(v2,vn);
+		var pv1 = this.projection_vec3D_on_plane3D(v1,p);
+		var pv2 = this.projection_vec3D_on_plane3D(v2,p);
+		var uvv = this.vecXDangle(pv1,pv2,rad);
 		var pvn = this.vecXDparalleled(pv1,pv2) ? vn : this.vec3Dnormal(pv1,pv2);
 		var uvnpvn = this.vecXDangle(vn,pvn,rad);
-		var uvv = this.vecXDangle(v1,v2,rad);
 		var uznak = rad ? 0.5 * Math.PI : 90;
 		if(uvnpvn > uznak) {
 			rez = -uvv;
