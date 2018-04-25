@@ -683,76 +683,113 @@ GeometryXD.prototype = {
 	,multiply_xI: function(a) {
 		var rez = null;
 		var al = a.length;
-		if(al > 1) {
-			var _g = [];
-			var _g2 = 0;
-			var _g1 = a[0].length;
-			while(_g2 < _g1) {
-				var i = _g2++;
-				var _g3 = [];
-				var _g5 = 0;
-				var _g4 = a.length;
-				while(_g5 < _g4) {
-					var ai = _g5++;
-					_g3.push(a[ai][i]);
+		var rez1 = null;
+		var al1 = a.length;
+		if(al1 > 1) {
+			rez1 = true;
+			var size = a[0].length;
+			var _g1 = 1;
+			var _g = al1;
+			while(_g1 < _g) {
+				var i = _g1++;
+				if(size != a[i].length) {
+					rez1 = false;
+					break;
 				}
-				var a1 = _g3;
-				var rez1 = null;
-				var al1 = a1.length;
-				if(al1 > 0) {
-					rez1 = a1[0];
-					if(al1 > 1) {
-						var _g11 = 1;
-						var _g6 = al1;
-						while(_g11 < _g6) {
-							var i1 = _g11++;
-							rez1 *= a1[i1];
+			}
+		} else {
+			rez1 = true;
+		}
+		if(rez1) {
+			if(al > 1) {
+				var _g2 = [];
+				var _g21 = 0;
+				var _g11 = a[0].length;
+				while(_g21 < _g11) {
+					var i1 = _g21++;
+					var _g3 = [];
+					var _g5 = 0;
+					var _g4 = a.length;
+					while(_g5 < _g4) {
+						var ai = _g5++;
+						_g3.push(a[ai][i1]);
+					}
+					var a1 = _g3;
+					var rez2 = null;
+					var al2 = a1.length;
+					if(al2 > 0) {
+						rez2 = a1[0];
+						if(al2 > 1) {
+							var _g12 = 1;
+							var _g6 = al2;
+							while(_g12 < _g6) {
+								var i2 = _g12++;
+								rez2 *= a1[i2];
+							}
 						}
 					}
+					_g2.push(rez2);
 				}
-				_g.push(rez1);
+				rez = _g2;
+			} else if(al > 0) {
+				rez = a[0];
 			}
-			rez = _g;
-		} else if(al > 0) {
-			rez = a[0];
 		}
 		return rez;
 	}
 	,multiply_xF: function(a) {
 		var rez = null;
 		var al = a.length;
-		if(al > 1) {
-			var _g = [];
-			var _g2 = 0;
-			var _g1 = a[0].length;
-			while(_g2 < _g1) {
-				var i = _g2++;
-				var _g3 = [];
-				var _g5 = 0;
-				var _g4 = a.length;
-				while(_g5 < _g4) {
-					var ai = _g5++;
-					_g3.push(a[ai][i]);
+		var rez1 = null;
+		var al1 = a.length;
+		if(al1 > 1) {
+			rez1 = true;
+			var size = a[0].length;
+			var _g1 = 1;
+			var _g = al1;
+			while(_g1 < _g) {
+				var i = _g1++;
+				if(size != a[i].length) {
+					rez1 = false;
 				}
-				var a1 = _g3;
-				var rez1 = null;
-				var al1 = a1.length;
-				if(al1 > 0) {
-					rez1 = a1[0];
-					if(al1 > 1) {
-						var _g11 = 1;
-						var _g6 = al1;
-						while(_g11 < _g6) {
-							var i1 = _g11++;
-							rez1 *= a1[i1];
+			}
+		} else {
+			rez1 = true;
+		}
+		if(rez1) {
+			if(al > 1) {
+				var _g2 = [];
+				var _g21 = 0;
+				var _g11 = a[0].length;
+				while(_g21 < _g11) {
+					var i1 = _g21++;
+					var _g3 = [];
+					var _g5 = 0;
+					var _g4 = a.length;
+					while(_g5 < _g4) {
+						var ai = _g5++;
+						_g3.push(a[ai][i1]);
+					}
+					var a1 = _g3;
+					var rez2 = null;
+					var al2 = a1.length;
+					if(al2 > 0) {
+						rez2 = a1[0];
+						if(al2 > 1) {
+							var _g12 = 1;
+							var _g6 = al2;
+							while(_g12 < _g6) {
+								var i2 = _g12++;
+								rez2 *= a1[i2];
+							}
 						}
 					}
+					_g2.push(rez2);
 				}
-				_g.push(rez1);
+				rez = _g2;
+			} else if(al > 0) {
+				rez = a[0];
 			}
-			rez = _g;
-		} else if(al > 0) {
-			rez = a[0];
 		}
 		return rez;
 	}
@@ -1953,17 +1990,7 @@ GeometryXD.prototype = {
 	}
 	,vecXD: function(dotXDa,dotXDb) {
 		var rez = null;
-		var tmp;
-		if(!(!this.vecXDsamesize(dotXDa,dotXDb))) {
-			var rez1 = null;
-			if(dotXDa.length == dotXDb.length) {
-				rez1 = this.same_xF([dotXDa,dotXDb]);
-			}
-			tmp = rez1;
-		} else {
-			tmp = true;
-		}
-		if(tmp) {
+		if(!this.vecXDsamesize(dotXDa,dotXDb)) {
 			return rez;
 		}
 		rez = [];
@@ -2189,12 +2216,12 @@ GeometryXD.prototype = {
 			tmp = false;
 		}
 		if(tmp) {
-			var rez2 = vec3Dfield[0];
+			rez = vec3Dfield[0];
 			var _g11 = 1;
 			var _g2 = vec3Dfield.length;
 			while(_g11 < _g2) {
 				var i1 = _g11++;
-				rez2 = this.vec3Dnormal(rez2,vec3Dfield[i1]);
+				rez = this.vec3Dnormal(rez,vec3Dfield[i1]);
 			}
 		}
 		return rez;
@@ -2295,33 +2322,123 @@ GeometryXD.prototype = {
 		var rez = null;
 		var ldot = dot3D.length;
 		var lplane = plane3D.length;
-		if(this.vecXDnorm(plane3D.slice(0,3)) == 0 || ldot != 3 || lplane != 4) {
+		var tmp;
+		var tmp1;
+		var _g = [];
+		var _g1 = 0;
+		while(_g1 < 3) {
+			var i = _g1++;
+			_g.push(plane3D[i]);
+		}
+		if(this.vecXDnorm(_g) != 0) {
+			tmp1 = ldot != 3;
+		} else {
+			tmp1 = true;
+		}
+		if(!tmp1) {
+			tmp = lplane != 4;
+		} else {
+			tmp = true;
+		}
+		if(tmp) {
 			return rez;
 		}
-		var checkup = -this.multisum_xF([plane3D.slice(0,3),dot3D]) + plane3D[3];
-		var checkdn = this.multisum_xF([plane3D.slice(0,3),plane3D.slice(0,3)]);
-		if(checkdn == 0) {
+		var _g11 = [];
+		var _g2 = 0;
+		while(_g2 < 3) {
+			var i1 = _g2++;
+			_g11.push(plane3D[i1]);
+		}
+		var checkup = -(this.multisum_xF([_g11,dot3D]) + plane3D[3]);
+		var _g21 = [];
+		var _g3 = 0;
+		while(_g3 < 3) {
+			var i2 = _g3++;
+			_g21.push(plane3D[i2]);
+		}
+		var checkdn = _g21;
+		var _g31 = [];
+		var _g4 = 0;
+		while(_g4 < 3) {
+			var i3 = _g4++;
+			_g31.push(plane3D[i3]);
+		}
+		var checkdn1 = this.multisum_xF([checkdn,_g31]);
+		if(checkdn1 == 0) {
 			return rez;
 		} else if(checkup == 0) {
 			return dot3D;
 		} else {
-			var t = checkup / checkdn;
-			var _g = [];
-			var _g1 = 0;
-			while(_g1 < 3) {
-				var i = _g1++;
-				_g.push(dot3D[i] + plane3D[i] * t);
+			var t = checkup / checkdn1;
+			var _g41 = [];
+			var _g5 = 0;
+			while(_g5 < 3) {
+				var i4 = _g5++;
+				_g41.push(dot3D[i4] + plane3D[i4] * t);
 			}
-			rez = _g;
+			rez = _g41;
 		}
 		return rez;
 	}
-	,dot3D_to_dot2Dviewplane: function(dot3D,dot3Dox,dot3Doz) {
+	,dot3D_to_dot2Dviewplane: function(dot3D,dot3Dviewplanecenter,vec3Dviewplane,vec3Dviewplane_ox) {
 		var rez = null;
-		var t = this.vecXDnorm(dot3D);
-		var cosox0t = this.multisum_xF([dot3Dox,dot3D]) / (t + this.vecXDnorm(dot3Dox));
-		var cosoz0t = this.multisum_xF([dot3Doz,dot3D]) / (t + this.vecXDnorm(dot3Doz));
-		rez = [t * cosox0t,t * cosoz0t];
+		var dot = dot3D;
+		var dotc = dot3Dviewplanecenter;
+		var vp = vec3Dviewplane;
+		var vox = vec3Dviewplane_ox;
+		var tmp;
+		var tmp1;
+		var tmp2;
+		var tmp3;
+		if(dot.length == 3) {
+			var a = [dot,dotc,vp,vox];
+			var rez1 = null;
+			var al = a.length;
+			if(al > 1) {
+				rez1 = true;
+				var size = a[0].length;
+				var _g1 = 1;
+				var _g = al;
+				while(_g1 < _g) {
+					var i = _g1++;
+					if(size != a[i].length) {
+						rez1 = false;
+					}
+				}
+			} else {
+				rez1 = true;
+			}
+			tmp3 = !rez1;
+		} else {
+			tmp3 = true;
+		}
+		if(!tmp3) {
+			tmp2 = this.vecXDnorm(vp) == 0;
+		} else {
+			tmp2 = true;
+		}
+		if(!tmp2) {
+			tmp1 = this.vecXDnorm(vox) == 0;
+		} else {
+			tmp1 = true;
+		}
+		if(!tmp1) {
+			tmp = this.vecXDparalleled(vp,vox);
+		} else {
+			tmp = true;
+		}
+		if(tmp) {
+			return rez;
+		}
+		var p = this.plane3D_dot3Dnormal(dotc,vp);
+		var ox = this.projection_vec3D_on_plane3D(vox,p);
+		var oy = this.vec3Dnormal(vp,ox);
+		dot = this.projection_dot3D_on_plane3D(dot,p);
+		var vdot = this.vecXD(dotc,dot);
+		var norm = this.vecXDnorm(vdot);
+		var cosox = this.vecXDcos(ox,vdot);
+		var cosoy = this.vecXDcos(oy,vdot);
+		rez = [norm * cosox,norm * cosoy];
 		return rez;
 	}
 	,dotXDscale: function(dotXD,scaleXD,dotXDc) {
@@ -3645,7 +3762,7 @@ GeometryXD.prototype = {
 			var a1 = ea;
 			var b1 = eb;
 			if(!rad) {
-				a1 = a1 / 180 * Math.PI;
+				u = u / 180 * Math.PI;
 			}
 			var edot = [a1 * Math.cos(u),b1 * Math.sin(u)];
 			var dxy0dxy1 = this.tangent_centered_ellipse2Ddot(ea,eb,edot);
@@ -3756,7 +3873,7 @@ GeometryXD.prototype = {
 		var a = semiaxis_a_ox;
 		var b = semiaxis_b_oy;
 		if(!rad) {
-			a = a / 180 * Math.PI;
+			u = u / 180 * Math.PI;
 		}
 		return [a * Math.cos(u),b * Math.sin(u)];
 	}
@@ -3798,22 +3915,20 @@ GeometryXD.prototype = {
 			var u = a;
 			var a2 = ae;
 			var b = be;
-			if(!rad) {
-				a2 = a2 / 180 * Math.PI;
-			}
+			u = u / 180 * Math.PI;
 			_g.push([a2 * Math.cos(u),b * Math.sin(u)]);
 		}
 		rez = _g;
 		return rez;
 	}
-	,beziercubic3D_elliptic_shape_restricted_to_quarter: function(dot3Dc,vec3D_a_ox,vec3D_b_ox,semiaxis_a_ox,semiaxis_b_oy,angle0,angle1,rad) {
+	,beziercubic3D_elliptic_shape_restricted_to_quarter: function(dot3Dc,vec3D_a_ox,vec3D_b_oy,semiaxis_a_ox,semiaxis_b_oy,angle0,angle1,rad) {
 		if(rad == null) {
 			rad = false;
 		}
 		var rez = null;
 		var tc = dot3Dc;
 		var va = vec3D_a_ox;
-		var vb = vec3D_b_ox;
+		var vb = vec3D_b_oy;
 		var a = semiaxis_a_ox;
 		var b = semiaxis_b_oy;
 		if(tc.length == 3 && va.length == 3 && vb.length == 3 && this.vecXDnorm(va) > 0 && this.vecXDnorm(vb) > 0) {
@@ -3874,7 +3989,7 @@ GeometryXD.prototype = {
 			var a1 = a;
 			var b1 = b;
 			if(!rad) {
-				a1 = a1 / 180 * Math.PI;
+				u1 = u1 / 180 * Math.PI;
 			}
 			var xy0 = [a1 * Math.cos(u1),b1 * Math.sin(u1)];
 			if(rad) {
@@ -3886,7 +4001,7 @@ GeometryXD.prototype = {
 				var u2 = u + ue;
 				var a2 = a;
 				var b2 = b;
-				a2 = a2 / 180 * Math.PI;
+				u2 = u2 / 180 * Math.PI;
 				xy = [a2 * Math.cos(u2),b2 * Math.sin(u2)];
 				le += this.vecXDnorm(this.vecXD(xy0,xy));
 				if(le >= cl) {
@@ -4034,7 +4149,7 @@ GeometryXD.prototype = {
 		}
 		return rez;
 	}
-	,polygon3D_vec3Dfield_distance: function(dot3D,vec3Dfield,distances) {
+	,polygon3D_vec3Dfield_distances: function(dot3D,vec3Dfield,distances) {
 		var rez = null;
 		var tmp;
 		var tmp1;
@@ -4089,7 +4204,7 @@ GeometryXD.prototype = {
 		var va = vec3Dsemiaxis_a_direction;
 		var ap = angle_proportions;
 		var d = distances;
-		if(t.length != 3 || vn.length != 3 || va.length != 3 || ap.length != d.length || this.vecXDparalleled(va,vn)) {
+		if(t.length != 3 || vn.length != 3 || va.length != 3 || ap.length != d.length || this.vecXDnorm(va) == 0 || this.vecXDnorm(vn) == 0 || this.vecXDparalleled(va,vn)) {
 			return rez;
 		}
 		var rez1 = null;
@@ -4104,13 +4219,15 @@ GeometryXD.prototype = {
 			}
 		}
 		var x = 360 / rez1;
+		var u = 0;
 		va = this.projection_vec3D_on_plane3D(va,[vn[0],vn[1],vn[2],0]);
 		rez = [t];
 		var _g11 = 0;
 		var _g2 = d.length;
 		while(_g11 < _g2) {
 			var i1 = _g11++;
-			rez.push(this.dotXDoffset(t,this.vec3Drotate(va,vn,x * ap[i1]),distances[i1]));
+			u += x * ap[i1];
+			rez.push(this.dotXDoffset(t,this.vec3Drotate(va,vn,u),distances[i1]));
 		}
 		return rez;
 	}
@@ -4139,10 +4256,10 @@ GeometryXD.prototype = {
 		if(this.vecXDparalleled(vec3D,vp) || this.vecXDnorm(vec3D) == 0 || this.vecXDnorm(vp) == 0) {
 			return rez;
 		}
-		rez = vec3D;
 		var t0 = [0,0,0];
 		var t1 = this.dotXDoffset(t0,vec3D,1);
-		t1 = this.projection_dot3D_on_plane3D(t1,plane3D);
+		var p = this.plane3D_dot3Dnormal(t0,vp);
+		t1 = this.projection_dot3D_on_plane3D(t1,p);
 		rez = this.vecXD(t0,t1);
 		return rez;
 	}
@@ -4161,7 +4278,7 @@ GeometryXD.prototype = {
 			return rez;
 		}
 		var p = plane3D;
-		if(p.length < 3) {
+		if(p.length != 4) {
 			return rez;
 		}
 		var _g = [];
@@ -4174,15 +4291,14 @@ GeometryXD.prototype = {
 		if(this.vecXDnorm(vn) == 0) {
 			return rez;
 		}
-		rez = 0;
 		if(this.vecXDparalleled_sameside(v1,v2)) {
-			return rez;
+			return 0;
 		}
-		var pv1 = this.projection_vec3D_on_plane3D(v1,vn);
-		var pv2 = this.projection_vec3D_on_plane3D(v2,vn);
+		var pv1 = this.projection_vec3D_on_plane3D(v1,p);
+		var pv2 = this.projection_vec3D_on_plane3D(v2,p);
+		var uvv = this.vecXDangle(pv1,pv2,rad);
 		var pvn = this.vecXDparalleled(pv1,pv2) ? vn : this.vec3Dnormal(pv1,pv2);
 		var uvnpvn = this.vecXDangle(vn,pvn,rad);
-		var uvv = this.vecXDangle(v1,v2,rad);
 		var uznak = rad ? 0.5 * Math.PI : 90;
 		if(uvnpvn > uznak) {
 			rez = -uvv;
