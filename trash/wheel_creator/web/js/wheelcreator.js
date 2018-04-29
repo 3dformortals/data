@@ -181,6 +181,14 @@ function metal_maker(h, w, hull=false,extrude=100){
 	var myPath = ring_trajectory(dot, vn, va, r);
 	var myShape = metal_shape_for_extrusion(h,w,c);//bezier cubic spline for extrusion
 	var extruded = BABYLON.MeshBuilder.ExtrudeShape("ext", {shape: myShape, path: myPath}, scene);
+	
+	var mat = new BABYLON.StandardMaterial("mat1", scene);
+	mat.alpha = 1.0;
+	mat.diffuseColor = new BABYLON.Color3(0.5, 0.5, 1.0);
+	mat.backFaceCulling = false;
+	//mat.wireframe = true;
+	extruded.material = mat;
+	
 	console.log("endcode");
 	return extruded;
 }
