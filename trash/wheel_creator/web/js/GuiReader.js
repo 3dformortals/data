@@ -18,12 +18,21 @@ function bsize_reader(prefix=[]){
 	var invals = inputs_reader(inputs,prefix);
 	return invals;
 }
+function s8_reader(){
+	var s8 = document.getElementById("s8").value;
+	s8 = geo.recounter_S_F(s8.split(" "));
+	var rez=[];
+	for (i=0;i<s8.length;i++){ if (s8[i]){ rez.push(s8[i]); } }
+	if (rez.length == 0){ rez = [0];}
+	return rez;
+}
 function ssize_reader(prefix=[],h){
-	var inputs = ["s1","s2","s3","s4","s5","s6","s7","s8"];
+	var inputs = ["s1","s2","s3","s4","s5","s6","s7"];
 	var invals = inputs_reader(inputs,prefix);
 	invals[2] *= h[3] / 100;
 	invals[3] *= h[5] / 100;
 	invals[4] *= h[5] / 100;
+	invals.push(s8_reader());
 	return invals;
 }
 function grip_reader(){

@@ -5,7 +5,7 @@ var geo = new GeometryXD();
 // alert(geo.vecXD([1,2,3],[4,5,6]));
 var fresh = true;
 var metal;
-var bolts;
+var bolts=[];
 var tire;
 var grips;
 var canvas = document.getElementById("renderCanvas");
@@ -553,10 +553,10 @@ function wheel_creator(){
 	clearall();
 	d=gui_reader(); //GuiReader.js
 	h=d[0];w=d[1];b=d[2];s=d[3];g=d[4];
-	alert(s.length);
 	var angle = 0;
 	metal = metal_maker(h,w,s);
 	tire = tire_maker(h,w,s);
+	bolts = bolts_maker(h,w,s,b);
 	console.log("metal part");
 	// console.log(metal);
 }
@@ -566,6 +566,7 @@ function clearall(){
 	else{
 		metal.dispose(false,true);
 		tire.dispose(false,true);
+		for(i=0;i<bolts.length;i++){bolts[i].dispose(false,true);}bolts=[];
 	}
 }
 //------------------------------
