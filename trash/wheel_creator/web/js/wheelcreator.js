@@ -17,7 +17,7 @@ var createScene = function () {
 
 	// Create the scene space
 	scene = new BABYLON.Scene(engine);
-
+	scene.clearColor = new BABYLON.Color3(1, 1, 1);
 	// Add a camera to the scene and attach it to the canvas
 	var camera = new BABYLON.ArcRotateCamera("Camera", 0, 0, 2, BABYLON.Vector3.Zero(), scene);
 	camera.setPosition(new BABYLON.Vector3(-400, -400, -400));
@@ -548,6 +548,7 @@ function tire_maker(h,w,s,hull=false){
 }
 
 
+
 function wheel_creator(){
 	clearall();
 	d=gui_reader(); //GuiReader.js
@@ -564,7 +565,7 @@ function clearall(){
 	if (fresh) { fresh = false; }
 	else{
 		metal.dispose(false,true);
-		
+		tire.dispose(false,true);
 	}
 }
 //------------------------------
