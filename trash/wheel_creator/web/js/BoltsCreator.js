@@ -4,12 +4,11 @@ function bolt5_shape(){}
 function bolt4_shape(){}
 function bolt3_shape(){}
 function bolt2_shape(){}
-function bolt1_shape(dot,u,vn,va,b1,b2,bw,br){
-    //looks like bw br no need
+function bolt1_shape(u,vn,va,b2){
     var t1,r1,r2,t2;
     va = geo.vec3Drotate(va,vn,u);
-    var vb = geo.vec3Drotate(va,vn,90);
-    var t0 = geo.dotXDoffset(dot,vb,b2 / 3);
+    var vb = geo.vec3Dnormal(vn,va);
+    var t0 = geo.dotXDoffset([0,0,0],vb,b2 / 3);
     t0 = geo.dotXDoffset(t0,va,b2);//left up corner of rectangle
     
     tend = geo.dotXDoffset(t0,va,-b2 * 2);
@@ -29,22 +28,16 @@ function bolt1_shape(dot,u,vn,va,b1,b2,bw,br){
     bez = bez.continue(bez_maker([t1,r1,r2,t2]));
     
     var myshape = bez;
-	console.log("bolt1 myshape");
-	console.log(myshape);
-	console.log("bolt1 myshape getPoints = ");
-	console.log(myshape.getPoints());
-	var myshapemesh = BABYLON.Mesh.CreateLines("metalshape", myshape.getPoints(), scene); 
+	var myshapemesh = BABYLON.Mesh.CreateLines("boltshape", myshape.getPoints(), scene); 
 	myshapemesh.color = new BABYLON.Color3(1, 1, 1);
 	return myshape.getPoints();
 }
 
-function bolt_shape(dot, u,vn,tc, h,w,s,b ){
+function bolt_shape(u,vn,va, h,w,s,b ){
     var bolt = b[4];
-    var vc = geo.vecXD(tc,dot);
-    var bw = w[5]/2;
     var br = geo.sum_F([h[8], h[7]]);
     var shape;
-    if(bolt == 1){ shape = bolt1_shape(dot,u,vn,vc,b[1],b[2],bw,br); }
+    if(bolt == 1){ shape = bolt1_shape(u,vn,va,b[2]); }
     else if(bolt == 2){ shape = bolt2_shape(dot,u,vn,va,b[1],b[2],bw,br); }
     else if(bolt == 3){ shape = bolt3_shape(dot,u,vn,va,b[1],b[2],bw,br); }
     else if(bolt == 4){ shape = bolt4_shape(dot,u,vn,va,b[1],b[2],bw,br); }
@@ -53,22 +46,35 @@ function bolt_shape(dot, u,vn,tc, h,w,s,b ){
     else if(bolt == 7){ shape = bolt7_shape(dot,u,vn,va,b[1],b[2],bw,br); }
     return shape;
 }
-function bolt_shapes_for_extrusion(bsdots,bolt_angles,c,vn,va, h,w,s,b){
-    // probrosit bsdots and c deeper
+function bolt_shapes_for_extrusion(bolt_angles, h,w,s,b){
+    var vn = [0,0,1];
+    var va = [0,1,0];
     var rez;
     var negativepolygon = bolt_angles.length / 2;
     var bw = w[5] / 2;
     if(b[4] > 0){
         rez=[];
         for (i=0;i<negativepolygon * 2;i++){
-            var tc;
-            if (i<negativepolygon){tc = geo.dotXDoffset(c,vn,bw);}else{tc = geo.dotXDoffset(c,vn,-bw);}
-            rez.push(bolt_shape(bsdots[i], bolt_angles[i],vn,tc, h,w,s,b ));
+            rez.push(bolt_shape(bolt_angles[i],vn,va, h,w,s,b ));
         }
     }return rez;
 }
 
-function bolt16_path(){}
+function bolt1_path(dot,va,vb,b2){
+    dot = geo.dotXDoffset(dot,vb,b2 / 3);//move left along vb
+    dot = geo.dotXDoffset(dot,va,b2);//move up along va
+    return dot;
+}
+function bolt16_path(bolt,neg,dot,u,tc,vn,b1,b2){
+    if(neg){ u = -u;}
+    console.log("--------PATH INCOMING DATA----------");
+    
+    var t1 = vec_maker(dot); var r1 = t1; var r2 = vec_maker(geo.dotXDoffset(dot,vn,b1)); var t2 = r2;
+    var mypath = bez_maker([t1,r1,r2,t2]);
+	var mypathmesh = BABYLON.Mesh.CreateLines("boltpath", mypath.getPoints(), scene); 
+	mypathmesh.color = new BABYLON.Color3(1, 1, 1);
+	return mypath.getPoints();
+}
 function bolt7_path(dot,u,tc,vn, b1,b2,bw,br){}
 function bolt0_path(dot,u,tc,vn, b2){
     var vc = geo.vecXD(tc,dot);//vec c dot
@@ -76,14 +82,19 @@ function bolt0_path(dot,u,tc,vn, b2){
     var path = geo.dotXDoffset(dot,vc,b2 * 2 / 3);//move to 2/3 r bolt along rotated vec
     return path; //this case 0 ... will be just ellipsoid, without extrusion
 }
-function bolt_path(dot,u,tc,vn,va, h,w,s,b){
+function bolt_path(neg,dot,u,c,vn,va, h,w,s,b){
+    var br = geo.sum_F([h[8], h[7]]);
+    
     var bolt = b[4];
     var bw = w[5]/2;
-    var br = geo.sum_F([h[8], h[7]]);
+    if(neg){vn = geo.vecXDback(vn);}
+    var tc;
+    tc = geo.dotXDoffset(c,vn,bw);
+    
     var path;
     if (bolt == 0){ path = bolt0_path(dot,u,tc,vn, b[2]); }
     else if (bolt == 7){ path = bolt7_path(dot,u,tc,vn, b[1],b[2],bw,br); }
-    else{ path = bolt16_path(dot,vn,va,b[1],bw,br); }
+    else{ path = bolt16_path(bolt,neg,dot,u,tc,vn,b[1],b[2]); }
     return path;
 }
 function bolt_paths_for_extrusion(bsdots,bolt_angles,c,vn,va, h,w,s,b){
@@ -91,9 +102,9 @@ function bolt_paths_for_extrusion(bsdots,bolt_angles,c,vn,va, h,w,s,b){
     var negativepolygon = bolt_angles.length / 2;
     var bw = w[5] / 2;
     for (i=0;i<negativepolygon * 2;i++){
-        var tc;
-        if (i<negativepolygon){tc = geo.dotXDoffset(c,vn,bw);}else{tc = geo.dotXDoffset(c,vn,-bw);}
-        rez.push(bolt_path(bsdots[i],bolt_angles[i],tc,vn,va, h,w,s,b));
+        var neg; //negative bolts direction (second side)
+        if(i<negativepolygon){neg = false;}else{neg = true;}
+        rez.push(bolt_path(neg,bsdots[i],bolt_angles[i],c,vn,va, h,w,s,b));
     }return rez;
 }
 
@@ -112,30 +123,16 @@ function bolt0_maker(dot,b,hull=false){
 	console.log("endcode bolt0");
 	return bolt0;
 }
-function bolt_maker(dot,vn,h,w,s,b,hull=false){
-	var ox = [1,0,0];
-	var oy = [0,1,0];
-	var c = [0,0,0];
-	var dot = [0,0,0]; var vn = [1,0,0]; var va = [0,1,0]; r = h[8];
-	var myPath = ring_trajectory(dot, vn, va, r);
-	var myShape = metal_shape_for_extrusion(h,w,s,c);//bezier cubic spline for extrusion
-	var extrudeSettings={
-		shape: myShape,
-		path: myPath,
-		// cap: 3, 
-		// sideOrientation:BABYLON.Mesh.DOUBLESIDE,
-		
-	};
+function bolt16_maker(myPath,myShape,hull=false){
 	var customExtrudeSettings={
 		shape: myShape,
-		path: myPath,
+        path: myPath,
+        cap:3,
 		// ribbonClosePath: true,
-		ribbonCloseArray: true
+		// ribbonCloseArray: true
 		
 	};
-	// var extruded = BABYLON.MeshBuilder.ExtrudeShape("ext", extrudeSettings, scene);
-	var extruded = BABYLON.MeshBuilder.ExtrudeShapeCustom("ext", customExtrudeSettings, scene);
-	// var extruded = BABYLON.MeshBuilder.ExtrudeShape("ext", {shape: myShape, path: myPath}, scene);
+	var extruded = BABYLON.MeshBuilder.ExtrudeShapeCustom("bolt", customExtrudeSettings, scene);
 	
 	var mat = new BABYLON.StandardMaterial("mat1", scene);
 	mat.alpha = 1.0;
@@ -144,7 +141,8 @@ function bolt_maker(dot,vn,h,w,s,b,hull=false){
 	// mat.wireframe = true;
 	extruded.material = mat;
 	
-	console.log("endcode");
+    console.log("bolt position");
+    console.log(extruded.position);
 	return extruded;
 }
 function bolt_angles_counter(b3, s8){
@@ -152,8 +150,11 @@ function bolt_angles_counter(b3, s8){
     if(b3>0){
         rez = geo.repeater_F_F(b3,s8);
         rez = geo.repeater_F_F(2,rez,true); //mirror bolts
-        console.log("boltangles-----------");
-        console.log(rez);
+        var ba=[];//baseangle
+        var step = 360/b3;
+        for (i=0;i<b3;i++){ ba.push(step*i); }
+        for (i=0;i<b3;i++){ ba.push(-step*i); }
+        rez = geo.sum_xF([rez,ba]);
     }return rez;
 }
 function bolts_sheme_dots_counter(c,vn,va,n,r,d){
@@ -189,8 +190,11 @@ function bolts_maker(h,w,s,b,hull=false){
             bolts_center_radius,
             bolts_width_distance
         );
-        bolt_shapes = bolt_shapes_for_extrusion(bsdots,bolt_angles,c,vn,va, h,w,s,b);
+        bolt_shapes = bolt_shapes_for_extrusion(bolt_angles, h,w,s,b);
         bolt_paths = bolt_paths_for_extrusion(bsdots,bolt_angles,c,vn,va, h,w,s,b);
+        console.log("-----------------WTF--------------");
+        console.log(JSON.stringify(bolt_shapes));
+        console.log(JSON.stringify(bolt_paths));
     }
     if (!bolt_shapes){
         for (i=0;i<bolt_paths.length;i++){
@@ -198,6 +202,8 @@ function bolts_maker(h,w,s,b,hull=false){
             
         }
     }else{
-        
+        for (i=0;i<bolt_paths.length;i++){
+            bolts.push(bolt16_maker(bolt_paths[i],bolt_shapes[i]));
+        }
     }return bolts;
 }

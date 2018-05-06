@@ -64,7 +64,7 @@ var createScene = function () {
         zChar.position = new BABYLON.Vector3(0, 0.05 * size, 0.9 * size);
     };
 
-    showAxis(200);
+    showAxis(400);
 
 	// Add and manipulate meshes in the scene
 	// var sphere = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter:1}, scene);
