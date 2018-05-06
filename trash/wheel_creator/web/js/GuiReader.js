@@ -22,7 +22,7 @@ function s8_reader(){
 	var s8 = document.getElementById("s8").value;
 	s8 = geo.recounter_S_F(s8.split(" "));
 	var rez=[];
-	for (i=0;i<s8.length;i++){ if (s8[i]){ rez.push(s8[i]); } }
+	for (i=0;i<s8.length;i++){ if (s8[i] || s8[i]==0){ rez.push(s8[i]); } }
 	if (rez.length == 0){ rez = [0];}
 	return rez;
 }

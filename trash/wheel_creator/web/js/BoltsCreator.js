@@ -4,37 +4,72 @@ function bolt5_shape(){}
 function bolt4_shape(){}
 function bolt3_shape(){}
 function bolt2_shape(){}
-function bolt1_shape(){}
-function bolt0_shape(){
-    //just need halfsphere
+function bolt1_shape(dot,u,vn,va,b1,b2,bw,br){
+    //looks like bw br no need
+    var t1,r1,r2,t2;
+    va = geo.vec3Drotate(va,vn,u);
+    var vb = geo.vec3Drotate(va,vn,90);
+    var t0 = geo.dotXDoffset(dot,vb,b2 / 3);
+    t0 = geo.dotXDoffset(t0,va,b2);//left up corner of rectangle
+    
+    tend = geo.dotXDoffset(t0,va,-b2 * 2);
+    t1 = vec_maker(t0); r1 = t1; r2 = vec_maker(tend); t2 = r2;
+    var bez = bez_maker([t1,r1,r2,t2]);
+    
+    tend = geo.dotXDoffset(tend,vb,-b2 * 2 / 3);
+    t1 = t2; r1 = t1; r2 = vec_maker(tend); t2 = r2;
+    bez = bez.continue(bez_maker([t1,r1,r2,t2]));
+    
+    tend = geo.dotXDoffset(tend,va,b2 * 2);
+    t1 = t2; r1 = t1; r2 = vec_maker(tend); t2 = r2;
+    bez = bez.continue(bez_maker([t1,r1,r2,t2]));
+    
+    tend = t0;
+    t1 = t2; r1 = t1; r2 = vec_maker(tend); t2 = r2;
+    bez = bez.continue(bez_maker([t1,r1,r2,t2]));
+    
+    var myshape = bez;
+	console.log("bolt1 myshape");
+	console.log(myshape);
+	console.log("bolt1 myshape getPoints = ");
+	console.log(myshape.getPoints());
+	var myshapemesh = BABYLON.Mesh.CreateLines("metalshape", myshape.getPoints(), scene); 
+	myshapemesh.color = new BABYLON.Color3(1, 1, 1);
+	return myshape.getPoints();
 }
-function bolt_shape( u,vn,va, h,w,s,b ){
+
+function bolt_shape(dot, u,vn,tc, h,w,s,b ){
     var bolt = b[4];
+    var vc = geo.vecXD(tc,dot);
     var bw = w[5]/2;
     var br = geo.sum_F([h[8], h[7]]);
     var shape;
-    if(bolt == 1){ shape = bolt1_shape(u,vn,va,b[1],b[2],bw,br); }
-    else if(bolt == 2){ shape = bolt2_shape(u,vn,va,b[1],b[2],bw,br); }
-    else if(bolt == 3){ shape = bolt3_shape(u,vn,va,b[1],b[2],bw,br); }
-    else if(bolt == 4){ shape = bolt4_shape(u,vn,va,b[1],b[2],bw,br); }
-    else if(bolt == 5){ shape = bolt5_shape(u,vn,va,b[1],b[2],bw,br); }
-    else if(bolt == 6){ shape = bolt6_shape(u,vn,va,b[1],b[2],bw,br); }
-    else if(bolt == 7){ shape = bolt7_shape(u,vn,va,b[1],b[2],bw,br); }
+    if(bolt == 1){ shape = bolt1_shape(dot,u,vn,vc,b[1],b[2],bw,br); }
+    else if(bolt == 2){ shape = bolt2_shape(dot,u,vn,va,b[1],b[2],bw,br); }
+    else if(bolt == 3){ shape = bolt3_shape(dot,u,vn,va,b[1],b[2],bw,br); }
+    else if(bolt == 4){ shape = bolt4_shape(dot,u,vn,va,b[1],b[2],bw,br); }
+    else if(bolt == 5){ shape = bolt5_shape(dot,u,vn,va,b[1],b[2],bw,br); }
+    else if(bolt == 6){ shape = bolt6_shape(dot,u,vn,va,b[1],b[2],bw,br); }
+    else if(bolt == 7){ shape = bolt7_shape(dot,u,vn,va,b[1],b[2],bw,br); }
     return shape;
 }
 function bolt_shapes_for_extrusion(bsdots,bolt_angles,c,vn,va, h,w,s,b){
     // probrosit bsdots and c deeper
     var rez;
+    var negativepolygon = bolt_angles.length / 2;
+    var bw = w[5] / 2;
     if(b[4] > 0){
         rez=[];
-        for (i=0;i<bolt_angles.length;i++){
-            rez.push(bolt_shape( bolt_angles[i],vn,va, h,w,s,b ));
+        for (i=0;i<negativepolygon * 2;i++){
+            var tc;
+            if (i<negativepolygon){tc = geo.dotXDoffset(c,vn,bw);}else{tc = geo.dotXDoffset(c,vn,-bw);}
+            rez.push(bolt_shape(bsdots[i], bolt_angles[i],vn,tc, h,w,s,b ));
         }
     }return rez;
 }
 
 function bolt16_path(){}
-function bolt7_path(){}
+function bolt7_path(dot,u,tc,vn, b1,b2,bw,br){}
 function bolt0_path(dot,u,tc,vn, b2){
     var vc = geo.vecXD(tc,dot);//vec c dot
     vc = geo.vec3Drotate(vc,vn,u);//rotated bolt vec
@@ -47,7 +82,7 @@ function bolt_path(dot,u,tc,vn,va, h,w,s,b){
     var br = geo.sum_F([h[8], h[7]]);
     var path;
     if (bolt == 0){ path = bolt0_path(dot,u,tc,vn, b[2]); }
-    else if (bolt == 7){ path = bolt7_path(dot,u,vn,va, b[1],b[2],bw,br); }
+    else if (bolt == 7){ path = bolt7_path(dot,u,tc,vn, b[1],b[2],bw,br); }
     else{ path = bolt16_path(dot,vn,va,b[1],bw,br); }
     return path;
 }
@@ -56,6 +91,7 @@ function bolt_paths_for_extrusion(bsdots,bolt_angles,c,vn,va, h,w,s,b){
     var negativepolygon = bolt_angles.length / 2;
     var bw = w[5] / 2;
     for (i=0;i<negativepolygon * 2;i++){
+        var tc;
         if (i<negativepolygon){tc = geo.dotXDoffset(c,vn,bw);}else{tc = geo.dotXDoffset(c,vn,-bw);}
         rez.push(bolt_path(bsdots[i],bolt_angles[i],tc,vn,va, h,w,s,b));
     }return rez;
@@ -116,6 +152,8 @@ function bolt_angles_counter(b3, s8){
     if(b3>0){
         rez = geo.repeater_F_F(b3,s8);
         rez = geo.repeater_F_F(2,rez,true); //mirror bolts
+        console.log("boltangles-----------");
+        console.log(rez);
     }return rez;
 }
 function bolts_sheme_dots_counter(c,vn,va,n,r,d){
@@ -124,25 +162,13 @@ function bolts_sheme_dots_counter(c,vn,va,n,r,d){
     var nvb = geo.vecXDback(vb);
     var vx = [va,vb,nva,nvb];
     var dot = geo.dotXDoffset(c,vn,d);
-    console.log("dotpositive");
-    console.log(dot);
     var doli = geo.repeater_F_F(n / 2,[1]);
-    console.log("-------------doli-----------");
-    console.log(doli);
     var polygon = geo.polygon3D_inside_ellipse(dot,vx,[r,r,r,r],doli);
     polygon.shift();
-    console.log("first polygon");
-    console.log(polygon);
     dot = geo.dotXDoffset(c,vn,-d);
-    console.log("dotnegative");
-    console.log(dot);
     var npolygon = geo.polygon3D_inside_ellipse(dot,vx,[r,r,r,r],doli);
     npolygon.shift();
-    console.log("second polygon");
-    console.log(npolygon);
     for (i=0;i<npolygon.length;i++){ polygon.push(npolygon[i]); }
-    console.log("----------------polygon---------------");
-    console.log(polygon);
     return polygon;
 }
 function bolts_maker(h,w,s,b,hull=false){
