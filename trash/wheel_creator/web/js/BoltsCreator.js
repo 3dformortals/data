@@ -1,5 +1,55 @@
 
 function bolt_maker(dot,u){}
+function bolt2_maker(neg,dot,u,b){
+    var meshSettings={
+        height:b[1] * 2,
+        diameter:b[2] * 2,
+        tesselation:24
+    };
+    var bolt2 = BABYLON.MeshBuilder.CreateCylinder("bolt", meshSettings, scene);
+    bolt2.position = vec_maker(dot);
+    bolt2.rotate(new BABYLON.Vector3(0,0,1),geo.radians(90),BABYLON.Space.LOCAL);
+    //cross section for substract
+    var cross1Settings={
+        width:b[2] * 2 / 3,
+        height:b[1] * 2,
+        depth:b[2] * 2
+    }
+    var cross1 = BABYLON.MeshBuilder.CreateBox("cross1bolt", cross1Settings, scene);
+    var cross2 = BABYLON.MeshBuilder.CreateBox("cross2bolt", cross1Settings, scene);
+    cross2.rotate(new BABYLON.Vector3(0,1,0),geo.radians(90),BABYLON.Space.WORLD);
+    var vn = [dot[0],0,0];
+    var d = Math.max( b[1] + (b[1] - b[2] * 2 / 3), b[1] *1.5 );
+    var crossdot = geo.dotXDoffset(dot,vn,d);
+    cross1.position = vec_maker(crossdot);
+    cross2.position = vec_maker(crossdot);
+    cross1.rotateAround(vec_maker(crossdot),new BABYLON.Vector3(0,0,1),geo.radians(90));
+    cross2.rotateAround(vec_maker(crossdot),new BABYLON.Vector3(0,0,1),geo.radians(90));
+    cross1.rotateAround(vec_maker(crossdot),new BABYLON.Vector3(1,0,0),geo.radians(u));
+    cross2.rotateAround(vec_maker(crossdot),new BABYLON.Vector3(1,0,0),geo.radians(u));
+    var mat = new BABYLON.StandardMaterial("mat1", scene);
+	mat.alpha = 1.0;
+	mat.diffuseColor = new BABYLON.Color3(0.9, 0.5, 0.5);
+	mat.backFaceCulling = false;
+	// mat.wireframe = true;
+    
+    // bolt2.material = mat;
+    
+    var aCSG = BABYLON.CSG.FromMesh(bolt2);
+    var bCSG = BABYLON.CSG.FromMesh(cross1);
+    var cCSG = BABYLON.CSG.FromMesh(cross2);
+    var subCSG = aCSG.subtract(bCSG);
+    var subCSG = subCSG.subtract(cCSG);
+    var newMesh = subCSG.toMesh("csg", mat, scene);
+    bolt2.dispose(false,true);
+    cross1.dispose(false,true);
+    cross2.dispose(false,true);
+    
+    
+	
+	console.log("endcode bolt2");
+	return newMesh;
+}
 function bolt1_maker(neg,dot,u,b){
     var meshSettings={
         height:b[2] * 2,
@@ -121,7 +171,7 @@ function bolts_maker(h,w,s,b,hull=false){
             var neg = ((i<bal/2) ? false : true); //negative bolts
             if (bt == 0){ bolts.push(bolt0_maker(dot,b)); }//ellipsoid + excetric
             else if(bt == 1){ bolts.push(bolt1_maker(neg,dot,u,b)) } //box
-            else if(bt == 2){ bolts.push(bolt_maker(dot,u)) } //cross
+            else if(bt == 2){ bolts.push(bolt2_maker(neg,dot,u,b)) } //cross
             else if(bt == 3){ bolts.push(bolt_maker(dot,u)) } //nohole
             else if(bt == 7){ bolts.push(bolt_maker(dot,u)) } //excentric
             else{ bolts.push(bolt_maker(dot,u)) } //polygons
