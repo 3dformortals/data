@@ -1,20 +1,34 @@
 
 function bolt_maker(dot,u){}
+function bolt1_maker(neg,dot,u,b){
+    var meshSettings={
+        height:b[2] * 2,
+        width:b[1] * 2,
+        depth:b[2] *2 / 3
+    };
+    var bolt1 = BABYLON.MeshBuilder.CreateBox("bolt", meshSettings, scene);
+    bolt1.position = vec_maker(dot);
+    var v = new BABYLON.Vector3(1,0,0);
+    bolt1.rotate(v,geo.radians(u),BABYLON.Space.LOCAL);
+    var mat = new BABYLON.StandardMaterial("mat1", scene);
+	mat.alpha = 1.0;
+	mat.diffuseColor = new BABYLON.Color3(0.9, 0.5, 0.5);
+	mat.backFaceCulling = false;
+	// mat.wireframe = true;
+	bolt1.material = mat;
+	
+	console.log("endcode bolt1");
+	return bolt1;
+}
 
 function bolts_center_offset(bsdots,bolt_angles,c,vn,va, b2){
     rez = [];
     var negativepolygon = bsdots.length / 2;
     var bw = w[5]/2;
-    var vnx;
     for (i=0;i<negativepolygon * 2;i++){
-        if(i<negativepolygon){vnx = vn;}else{vnx = geo.vecXDback(vn);}
-        var tc = geo.dotXDoffset(c,vnx,bw);
-        console.log("-------TC----------",tc);
-        console.log(bsdots[i]);
-        // var vc = geo.vecXD(tc,bsdots[i]);//vec c dot
+        var tc = geo.dotXDoffset(c,vn,bw);
         var vc = va;
-        console.log(bolt_angles[i]);
-        vc = geo.vec3Drotate(vc,vnx,bolt_angles[i]);//rotated bolt vec
+        vc = geo.vec3Drotate(vc,vn,bolt_angles[i]);//rotated bolt vec
         rez.push(geo.dotXDoffset(bsdots[i],vc,b2 * 2 / 3));//move to 2/3 r bolt along rotated vec
     }return rez;
 }
@@ -63,7 +77,7 @@ function bolt_angles_counter(b3, s8){
         var ba=[];//baseangle
         var step = 360/b3;
         for (i=0;i<b3;i++){ ba.push(step*i); }
-        for (i=0;i<b3;i++){ ba.push(-step*i); }
+        for (i=0;i<b3;i++){ ba.push(step*i); }
         rez = geo.sum_xF([rez,ba]);
     }return rez;
 }
@@ -99,14 +113,14 @@ function bolts_maker(h,w,s,b,hull=false){
             bolts_center_radius,
             bolts_width_distance
         );
-        console.log("--------------bsdots----------------",bsdots);
         if(bt == 0 || bt == 7){ bsdots = bolts_center_offset(bsdots,bolt_angles,c,vn,va, b[2]); }
-        console.log("--------------bsdots----------------",bsdots);
-        for (var i=0;i<bolt_angles.length;i++){
+        var bal = bolt_angles.length;
+        for (var i=0;i<bal;i++){
             var dot = bsdots[i];
             var u = bolt_angles[i];
+            var neg = ((i<bal/2) ? false : true); //negative bolts
             if (bt == 0){ bolts.push(bolt0_maker(dot,b)); }//ellipsoid + excetric
-            else if(bt == 1){ bolts.push(bolt_maker(dot,u)) } //box
+            else if(bt == 1){ bolts.push(bolt1_maker(neg,dot,u,b)) } //box
             else if(bt == 2){ bolts.push(bolt_maker(dot,u)) } //cross
             else if(bt == 3){ bolts.push(bolt_maker(dot,u)) } //nohole
             else if(bt == 7){ bolts.push(bolt_maker(dot,u)) } //excentric
