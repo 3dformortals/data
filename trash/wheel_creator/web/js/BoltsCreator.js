@@ -1,10 +1,86 @@
 
-function bolt_maker(dot,u){}
+function bolt7_maker(dot,u){}
+function bolt_maker(neg,dot,u,b){
+    var meshSettings={
+        height:b[1] * 2,
+        diameter:b[2] * 2,
+        tessellation:b[4]
+    };
+    var bolt4 = BABYLON.MeshBuilder.CreateCylinder("bolt", meshSettings, scene);
+    bolt4.position = vec_maker(dot);
+    bolt4.rotate(new BABYLON.Vector3(0,0,1),geo.radians(90),BABYLON.Space.LOCAL);
+    bolt4.rotateAround(vec_maker(dot),new BABYLON.Vector3(1,0,0),geo.radians(u));
+    //hole section for substract
+    var holeSettings={
+        height:b[1] * 2,
+        diameter:b[2] * 2 * 2 / 3,
+        tessellation:b[4]
+    }
+    var hole = BABYLON.MeshBuilder.CreateCylinder("holebolt", holeSettings, scene);
+    var vn = [dot[0],0,0];
+    var d = Math.max( b[1] + (b[1] - b[2] * 2 / 3), b[1] *1.5 );
+    var holedot = geo.dotXDoffset(dot,vn,d);
+    hole.position = vec_maker(holedot);
+    hole.rotateAround(vec_maker(holedot),new BABYLON.Vector3(0,0,1),geo.radians(90));
+    hole.rotateAround(vec_maker(holedot),new BABYLON.Vector3(1,0,0),geo.radians(u));
+    var mat = new BABYLON.StandardMaterial("mat1", scene);
+	mat.alpha = 1.0;
+	mat.diffuseColor = new BABYLON.Color3(0.9, 0.5, 0.5);
+	mat.backFaceCulling = false;
+	// mat.wireframe = true;
+    
+    // bolt4.material = mat;
+    
+    var aCSG = BABYLON.CSG.FromMesh(bolt4);
+    var bCSG = BABYLON.CSG.FromMesh(hole);
+    var subCSG = aCSG.subtract(bCSG);
+    var newMesh = subCSG.toMesh("csg", mat, scene);
+    bolt4.dispose(false,true);
+    hole.dispose(false,true);
+    
+    
+	
+	console.log("endcode bolt4");
+	return newMesh;
+}
+function bolt3_maker(neg,dot,u,b){
+    if(neg){
+        var db=b[2] * 2;
+        var dt=0;
+        var vx=[-1,0,0];
+    }else{
+        var dt=b[2] * 2;
+        var db=0;
+        var vx = [1,0,0];
+    }
+    var meshSettings={
+        height:b[1],
+        diameterBottom:db,
+        diameterTop:dt,
+        tessellation:3
+    };
+    var bolt3 = BABYLON.MeshBuilder.CreateCylinder("bolt3", meshSettings, scene);
+    bolt3.position = vec_maker(geo.dotXDoffset(dot,vx,b[1] / 2));
+    bolt3.rotate(new BABYLON.Vector3(0,0,1),geo.radians(90),BABYLON.Space.LOCAL);
+    bolt3.rotateAround(vec_maker(dot),new BABYLON.Vector3(1,0,0),geo.radians(u),BABYLON.Space.LOCAL);
+    
+    var mat = new BABYLON.StandardMaterial("mat1", scene);
+	mat.alpha = 1.0;
+	mat.diffuseColor = new BABYLON.Color3(0.9, 0.5, 0.5);
+	mat.backFaceCulling = false;
+	// mat.wireframe = true;
+    
+    bolt3.material = mat;
+    
+    
+	console.log("endcode bolt3");
+	return bolt3;
+}
 function bolt2_maker(neg,dot,u,b){
     var meshSettings={
         height:b[1] * 2,
         diameter:b[2] * 2,
-        tesselation:24
+        tessellation:24
     };
     var bolt2 = BABYLON.MeshBuilder.CreateCylinder("bolt", meshSettings, scene);
     bolt2.position = vec_maker(dot);
@@ -172,9 +248,9 @@ function bolts_maker(h,w,s,b,hull=false){
             if (bt == 0){ bolts.push(bolt0_maker(dot,b)); }//ellipsoid + excetric
             else if(bt == 1){ bolts.push(bolt1_maker(neg,dot,u,b)) } //box
             else if(bt == 2){ bolts.push(bolt2_maker(neg,dot,u,b)) } //cross
-            else if(bt == 3){ bolts.push(bolt_maker(dot,u)) } //nohole
+            else if(bt == 3){ bolts.push(bolt3_maker(neg,dot,u,b)) } //nohole
             else if(bt == 7){ bolts.push(bolt_maker(dot,u)) } //excentric
-            else{ bolts.push(bolt_maker(dot,u)) } //polygons
+            else{ bolts.push(bolt_maker(neg,dot,u,b)) } //polygons
             
         }
     }
