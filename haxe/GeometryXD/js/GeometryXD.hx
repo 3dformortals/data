@@ -969,7 +969,7 @@ class GeometryXD{
         borders:Bool = false
         ):Array<Float>{
         var rez:Array<Float> = null;
-        if (n < 1){ return rez; }
+        if (n < 0){ return rez; }
         var st:Float = (xmax - xmin) / (n + 1);
         if (borders){
             rez = [for (i in 0...n + 2) (i > 0 && i < n + 1) ? xmin + st * i : (i == 0) ? xmin : xmax ];

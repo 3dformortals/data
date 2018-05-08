@@ -1787,7 +1787,7 @@ GeometryXD.prototype = {
 			borders = false;
 		}
 		var rez = null;
-		if(n < 1) {
+		if(n < 0) {
 			return rez;
 		}
 		var st = (xmax - xmin) / (n + 1);

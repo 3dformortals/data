@@ -1910,7 +1910,7 @@ class geometryxd_GeometryXD:
         if (borders is None):
             borders = False
         rez = None
-        if (n < 1):
+        if (n < 0):
             return rez
         st = (((xmax - xmin)) / ((n + 1)))
         if borders:
