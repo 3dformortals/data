@@ -1,9 +1,4 @@
-function bolt7_shape(){}
-function bolt6_shape(){}
-function bolt5_shape(){}
-function bolt4_shape(){}
-function bolt3_shape(){}
-function bolt2_shape(){}
+
 function bolt1_shape(u,vn,va,b2){
     var t1,r1,r2,t2;
     va = geo.vec3Drotate(va,vn,u);
@@ -38,12 +33,7 @@ function bolt_shape(u,vn,va, h,w,s,b ){
     var br = geo.sum_F([h[8], h[7]]);
     var shape;
     if(bolt == 1){ shape = bolt1_shape(u,vn,va,b[2]); }
-    else if(bolt == 2){ shape = bolt2_shape(dot,u,vn,va,b[1],b[2],bw,br); }
-    else if(bolt == 3){ shape = bolt3_shape(dot,u,vn,va,b[1],b[2],bw,br); }
-    else if(bolt == 4){ shape = bolt4_shape(dot,u,vn,va,b[1],b[2],bw,br); }
-    else if(bolt == 5){ shape = bolt5_shape(dot,u,vn,va,b[1],b[2],bw,br); }
-    else if(bolt == 6){ shape = bolt6_shape(dot,u,vn,va,b[1],b[2],bw,br); }
-    else if(bolt == 7){ shape = bolt7_shape(dot,u,vn,va,b[1],b[2],bw,br); }
+    
     return shape;
 }
 function bolt_shapes_for_extrusion(bolt_angles, h,w,s,b){
@@ -65,17 +55,8 @@ function bolt1_path(dot,va,vb,b2){
     dot = geo.dotXDoffset(dot,va,b2);//move up along va
     return dot;
 }
-function bolt16_path(bolt,neg,dot,u,tc,vn,b1,b2){
-    if(neg){ u = -u;}
-    console.log("--------PATH INCOMING DATA----------");
-    
-    var t1 = vec_maker(dot); var r1 = t1; var r2 = vec_maker(geo.dotXDoffset(dot,vn,b1)); var t2 = r2;
-    var mypath = bez_maker([t1,r1,r2,t2]);
-	var mypathmesh = BABYLON.Mesh.CreateLines("boltpath", mypath.getPoints(), scene); 
-	mypathmesh.color = new BABYLON.Color3(1, 1, 1);
-	return mypath.getPoints();
-}
-function bolt7_path(dot,u,tc,vn, b1,b2,bw,br){}
+
+
 function bolt0_path(dot,u,tc,vn, b2){
     var vc = geo.vecXD(tc,dot);//vec c dot
     vc = geo.vec3Drotate(vc,vn,u);//rotated bolt vec
@@ -123,28 +104,7 @@ function bolt0_maker(dot,b,hull=false){
 	console.log("endcode bolt0");
 	return bolt0;
 }
-function bolt16_maker(myPath,myShape,hull=false){
-	var customExtrudeSettings={
-		shape: myShape,
-        path: myPath,
-        cap:3,
-		// ribbonClosePath: true,
-		// ribbonCloseArray: true
-		
-	};
-	var extruded = BABYLON.MeshBuilder.ExtrudeShapeCustom("bolt", customExtrudeSettings, scene);
-	
-	var mat = new BABYLON.StandardMaterial("mat1", scene);
-	mat.alpha = 1.0;
-	mat.diffuseColor = new BABYLON.Color3(0.5, 0.5, 0.5);
-	mat.backFaceCulling = false;
-	// mat.wireframe = true;
-	extruded.material = mat;
-	
-    console.log("bolt position");
-    console.log(extruded.position);
-	return extruded;
-}
+
 function bolt_angles_counter(b3, s8){
     var rez;
     if(b3>0){

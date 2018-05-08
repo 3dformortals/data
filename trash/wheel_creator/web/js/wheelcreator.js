@@ -7,7 +7,7 @@ var fresh = true;
 var metal;
 var bolts=[];
 var tire;
-var grips;
+var grips=[];
 var canvas = document.getElementById("renderCanvas");
 canvas.width = 400;
 canvas.height = 400;
@@ -557,6 +557,7 @@ function wheel_creator(){
 	metal = metal_maker(h,w,s);
 	tire = tire_maker(h,w,s);
 	bolts = bolts_maker(h,w,s,b);
+	grips = grips_maker(h,w,s,g);
 	console.log("metal part");
 	// console.log(metal);
 }
@@ -567,6 +568,7 @@ function clearall(){
 		metal.dispose(false,true);
 		tire.dispose(false,true);
 		for(i=0;i<bolts.length;i++){bolts[i].dispose(false,true);}bolts=[];
+		for(i=0;i<grips.length;i++){grips[i].dispose(false,true);}grips=[];
 	}
 }
 //------------------------------
