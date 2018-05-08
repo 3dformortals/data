@@ -1,5 +1,47 @@
 
-function bolt7_maker(dot,u){}
+function bolt7_maker(neg,dot,u,b){
+    var meshSettings={
+        height:b[1] * 2,
+        diameter:b[2] * 2,
+        tessellation:24
+    };
+    var bolt7 = BABYLON.MeshBuilder.CreateCylinder("bolt", meshSettings, scene);
+    bolt7.position = vec_maker(dot);
+    bolt7.rotate(new BABYLON.Vector3(0,0,1),geo.radians(90),BABYLON.Space.LOCAL);
+    // bolt7.rotateAround(vec_maker(dot),new BABYLON.Vector3(1,0,0),geo.radians(u));
+    //hole section for substract
+    var holeSettings={
+        height:b[1] * 2,
+        diameter:b[2] * 2 * 2 / 3,
+        tessellation:24
+    }
+    var hole = BABYLON.MeshBuilder.CreateCylinder("holebolt", holeSettings, scene);
+    var vn = [dot[0],0,0];
+    var d = Math.max( b[1] + (b[1] - b[2] * 2 / 3), b[1] *1.5 );
+    var holedot = geo.dotXDoffset(dot,vn,d);
+    hole.position = vec_maker(holedot);
+    hole.rotateAround(vec_maker(holedot),new BABYLON.Vector3(0,0,1),geo.radians(90));
+    // hole.rotateAround(vec_maker(holedot),new BABYLON.Vector3(1,0,0),geo.radians(u));
+    var mat = new BABYLON.StandardMaterial("mat1", scene);
+	mat.alpha = 1.0;
+	mat.diffuseColor = new BABYLON.Color3(0.9, 0.5, 0.5);
+	mat.backFaceCulling = false;
+	// mat.wireframe = true;
+    
+    // bolt7.material = mat;
+    
+    var aCSG = BABYLON.CSG.FromMesh(bolt7);
+    var bCSG = BABYLON.CSG.FromMesh(hole);
+    var subCSG = aCSG.subtract(bCSG);
+    var newMesh = subCSG.toMesh("csg", mat, scene);
+    bolt7.dispose(false,true);
+    hole.dispose(false,true);
+    
+    
+	
+	console.log("endcode bolt7");
+	return newMesh;
+}
 function bolt_maker(neg,dot,u,b){
     var meshSettings={
         height:b[1] * 2,
@@ -249,7 +291,7 @@ function bolts_maker(h,w,s,b,hull=false){
             else if(bt == 1){ bolts.push(bolt1_maker(neg,dot,u,b)) } //box
             else if(bt == 2){ bolts.push(bolt2_maker(neg,dot,u,b)) } //cross
             else if(bt == 3){ bolts.push(bolt3_maker(neg,dot,u,b)) } //nohole
-            else if(bt == 7){ bolts.push(bolt_maker(dot,u)) } //excentric
+            else if(bt == 7){ bolts.push(bolt7_maker(neg,dot,u,b)) } //excentric
             else{ bolts.push(bolt_maker(neg,dot,u,b)) } //polygons
             
         }
