@@ -511,7 +511,7 @@ function metal_maker(h, w, s, hull=false,extrude=100){
 	mat.alpha = 1.0;
 	mat.diffuseColor = new BABYLON.Color3(0.5, 0.5, 0.5);
 	mat.backFaceCulling = false;
-	// mat.wireframe = true;
+	mat.wireframe = true;
 	extruded.material = mat;
 	
 	console.log("endcode");
