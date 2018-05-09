@@ -87,12 +87,14 @@ function grips_shape_counter(gt,r,gw,nw,ga,c,vn,va,s7){
     else if (gt == "g4"){rez = gs4();}
     return rez;
 }
-function grip_maker(dot,u,gp,gs,c,vn){
+function grip_maker(dot,u,gp,gs,c,vn,ns,gh){
+    var scaling = function(i, distance) { return 1; };
+    if (ns){ scaling = function(i, distance) { return distance / gh; }; }
     var gripSettings={
 		shape: gs,
 		path: gp,
 		cap: 3, 
-		// sideOrientation:BABYLON.Mesh.DOUBLESIDE,
+		scaleFunction: scaling
 		
 	};
     var extruded = BABYLON.MeshBuilder.ExtrudeShapeCustom("grip"+u.toString(), gripSettings, scene);
@@ -116,10 +118,15 @@ function grips_maker(h,w,s,g,hull=false){
     var va = [0, 1, 0]; // vertical direction vector for 2D shape of grip
     var vz = [0, 0, 1]; // vector for extrude grip shape
     var grips_type = g; // "g1"..."g4"
-    // var grips_height = geo.sum_F([h[3] / 2, h[2], h[1]]);
+    var grips_height = geo.sum_F([h[3] / 2, h[2], h[1]]);
     var grips_width = w[1];
     var grips_center_radius = geo.sum_F([h[8],h[7],h[6],h[5],h[4],h[3],h[2],h[1]]);
     var grips_width_number = s[5];//how much per width
+    var need_scale = false; //scale for g1 g4 and reverse for g2 g3
+    if(grips_width_number < 0){
+        grips_width_number = -grips_width_number;
+        need_scale = true;
+    }
     var grips_around_number = s[6];//how much around
     var grip_angles = grip_angles_counter(s[6]);// may be need minus case for back direction etc
     //need extrude back to -oz per h2 + h1 + h3 / 2
@@ -135,7 +142,6 @@ function grips_maker(h,w,s,g,hull=false){
     var grips_shape;
     var grips_path;
     //code done not tested
-    console.log("------- before grips path --------");
     grips_path = grips_path_counter(c,vz,h);
     grips_shape = grips_shape_counter(
         grips_type,
@@ -145,18 +151,16 @@ function grips_maker(h,w,s,g,hull=false){
         grips_around_number,
         c,vn,va,s[7]
     );
-    console.log("------- after grips path --------");
-    console.log("grips path = ",grips_path);
-    console.log(grips_type);
-    console.log("grips shape = ",grips_shape);
     var gal = grip_angles.length;
     for (var i = 0;i < gal;i++){
         var dots = cdots[i];
         var u = grip_angles[i];
         var gp = grips_path;
         var gs = grips_shape;
+        var ns = need_scale;
+        var gh = grips_height;
         for (var j = 0;j<dots.length;j++){
-            grips.push(grip_maker(dots[j],u,gp,gs,c,vn));
+            grips.push(grip_maker(dots[j],u,gp,gs,c,vn,ns,gh));
         }
     }
     
