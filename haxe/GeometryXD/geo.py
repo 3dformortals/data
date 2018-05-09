@@ -4063,7 +4063,6 @@ class geometryxd_GeometryXD:
         ad = (semiaxes[2] if 2 < len(semiaxes) else None)
         bd = (semiaxes[3] if 3 < len(semiaxes) else None)
         doli = angle_proportions
-        u = 0
         rez4 = None
         al2 = len(doli)
         if (al2 > 0):
@@ -4084,6 +4083,7 @@ class geometryxd_GeometryXD:
         vv = None
         dd = None
         rez = [t0]
+        u = 0
         _g5 = 0
         while (_g5 < len(doli)):
             i4 = (doli[_g5] if _g5 >= 0 and _g5 < len(doli) else None)
@@ -4092,7 +4092,6 @@ class geometryxd_GeometryXD:
             dlina_a = a
             axis_b = vb
             dlina_b = b
-            u = (u + ((i4 * x)))
             if ((u > 90) and ((u <= 270))):
                 axis_a = vad
                 dlina_a = ad
@@ -4109,6 +4108,7 @@ class geometryxd_GeometryXD:
             dd = (dlina_b * Reflect.field(Math,"fabs")(v4))
             x1 = geometryxd_GeometryXD.dotXDoffset(geometryxd_GeometryXD.dotXDoffset(t0,v,d),vv,dd)
             rez.append(x1)
+            u = (u + ((i4 * x)))
         return rez
 
     @staticmethod
@@ -4176,17 +4176,17 @@ class geometryxd_GeometryXD:
                 _g1 = (_g1 + 1)
                 rez1 = (rez1 + (ap[i] if i >= 0 and i < len(ap) else None))
         x = (360 / rez1)
-        u = 0
         va = geometryxd_GeometryXD.projection_vec3D_on_plane3D(va,[(vn[0] if 0 < len(vn) else None), (vn[1] if 1 < len(vn) else None), (vn[2] if 2 < len(vn) else None), 0])
         rez = [t]
+        u = 0
         _g11 = 0
         _g2 = len(d)
         while (_g11 < _g2):
             i1 = _g11
             _g11 = (_g11 + 1)
-            u = (u + ((x * (ap[i1] if i1 >= 0 and i1 < len(ap) else None))))
             x1 = geometryxd_GeometryXD.dotXDoffset(t,geometryxd_GeometryXD.vec3Drotate(va,vn,u),(distances[i1] if i1 >= 0 and i1 < len(distances) else None))
             rez.append(x1)
+            u = (u + ((x * (ap[i1] if i1 >= 0 and i1 < len(ap) else None))))
         return rez
 
     @staticmethod

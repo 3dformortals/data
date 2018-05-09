@@ -2551,7 +2551,6 @@ class GeometryXD{
         var ad:Float = semiaxes[2];
         var bd:Float = semiaxes[3];
         var doli:Array<Float> = angle_proportions;
-        var u:Float = 0;
         var x:Float = 360 / sum_F(doli);
         var axis_a:Array<Float>;
         var axis_b:Array<Float>;
@@ -2562,14 +2561,15 @@ class GeometryXD{
         var vv:Array<Float>;
         var dd:Float;
         rez = [t0];
+        var u:Float = 0;
         for (i in doli){
             axis_a = va; dlina_a = a; axis_b = vb; dlina_b = b;
-            u += i * x;
             if (u > 90 && u <= 270){ axis_a = vad; dlina_a = ad; }
             if (u > 180){ axis_b = vbd; dlina_b = bd;}
             v = axis_a; d = dlina_a * Math.abs(Math.cos(radians(u)));
             vv = axis_b; dd = dlina_b * Math.abs(Math.sin(radians(u)));
             rez.push(dotXDoffset(dotXDoffset(t0, v, d), vv, dd));
+            u += i * x;
         }return rez;
     }
     /**
@@ -2634,12 +2634,12 @@ class GeometryXD{
             vecXDparalleled(va, vn)
         ){ return rez; }
         var x:Float = 360 / sum_F(ap);
-        var u:Float = 0;
         va = projection_vec3D_on_plane3D(va, [vn[0], vn[1], vn[2], 0]);
         rez = [t];
+        var u:Float = 0;
         for (i in 0...d.length){
-            u += x * ap[i];
             rez.push( dotXDoffset( t, vec3Drotate(va, vn, u), distances[i] ) );
+            u += x * ap[i];
         }return rez;
     }
     /**

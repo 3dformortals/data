@@ -4102,7 +4102,6 @@ GeometryXD.prototype = {
 		var ad = semiaxes[2];
 		var bd = semiaxes[3];
 		var doli = angle_proportions;
-		var u = 0;
 		var rez4 = null;
 		var al2 = doli.length;
 		if(al2 > 0) {
@@ -4124,6 +4123,7 @@ GeometryXD.prototype = {
 		var vv;
 		var dd;
 		rez = [t0];
+		var u = 0;
 		var _g5 = 0;
 		while(_g5 < doli.length) {
 			var i4 = doli[_g5];
@@ -4132,7 +4132,6 @@ GeometryXD.prototype = {
 			dlina_a = a;
 			axis_b = vb;
 			dlina_b = b;
-			u += i4 * x;
 			if(u > 90 && u <= 270) {
 				axis_a = vad;
 				dlina_a = ad;
@@ -4146,6 +4145,7 @@ GeometryXD.prototype = {
 			vv = axis_b;
 			dd = dlina_b * Math.abs(Math.sin(u / 180 * Math.PI));
 			rez.push(this.dotXDoffset(this.dotXDoffset(t0,v,d),vv,dd));
+			u += i4 * x;
 		}
 		return rez;
 	}
