@@ -4,6 +4,13 @@ function grip_angles_counter(s6){
     for (var i = 0;i < s6;i++){ rez.push(i*step); }
     return rez;
 }
+function one_gw_counter(gt,gw,gwn,ghhole){
+    var rez;
+    if (gt == "|||" || gt == "ooo"){ rez = (gw - ghhole) / gwn; }
+    else{ rez = gw / gwn; }
+    console.log("one_gw_counter = ",rez,"gt = ",gt,"gw = ",gw,"gwn = ",gwn,"ghhole = ",ghhole);
+    return rez;
+}
 function column_internal(dc,nc,distance){
     distance -= dc;
     var xmax = distance / 2;
@@ -14,7 +21,7 @@ function column_internal(dc,nc,distance){
     else{ rez = geo.steps_internal(xmin,xmax,n,true); }
     return rez;
 }
-function grips_center_dots_counter( c,vn,vz, r, nw, na, gw ){
+function grips_center_dots_counter( c,vn,vz, r, nw, na, gw, one_gw ){
     var va = vz;
     var vb = geo.vec3Dnormal(vn,va);
     var van = geo.vecXDback(va);
@@ -26,7 +33,8 @@ function grips_center_dots_counter( c,vn,vz, r, nw, na, gw ){
     var polygon = geo.polygon3D_inside_ellipse(c,vaxes,[r,r,r,r],doli);
     console.log(polygon);
     polygon.shift();//contour without center dot
-    var one_gw = gw / (2 * nw - 1);//one_grip_width
+    // var one_gw = gw / (2 * nw - 1);//one_grip_width
+    
     var offsets = column_internal(one_gw,nw,gw);//side offsets(along vn)
     var rez = [];
     for (var ip = 0;ip < polygon.length;ip++){
@@ -102,11 +110,11 @@ function gs4(c,gw,gh,vx,vy){
  * @param {Number} gw grip width
  * @param {Number} ga grips around number
  */
-function grips_shape_counter(gt,r,gw,nw,ga,c,vn,va,s7){
+function grips_shape_counter(gt,c,vn,va,one_gw,one_gh,one_ghhole){
     var rez;
     console.log(gt);
-    var one_gw = gw / (2 * nw - 1);
-    var one_gh = Math.PI * 2 * r * s7 / 100 / ga;
+    // var one_gw = gw / (2 * nw - 1);
+    // var one_gh = Math.PI * 2 * r * s7 / 100 / ga;
     if (gt == "|||"){rez = gs1(c,one_gw,one_gh,vn,va);}
     else if (gt == "g2"){rez = gs2();}
     else if (gt == "g3"){rez = gs3();}
@@ -115,7 +123,11 @@ function grips_shape_counter(gt,r,gw,nw,ga,c,vn,va,s7){
 }
 function grip_maker(dot,u,gp,gs,c,vn,ns,gh){
     var scaling = function(i, distance) { return 1; };
-    if (ns){ scaling = function(i, distance) { return distance / gh; }; }
+    if (ns){
+        scaling = function(i, distance) {
+            if (distance < gh){ return distance / gh; }else{ return 1; }
+        };
+    }
     var gripSettings={
 		shape: gs,
 		path: gp,
@@ -156,12 +168,21 @@ function grips_maker(h,w,s,g,hull=false){
     var grips_around_number = s[6];//how much around
     var grip_angles = grip_angles_counter(s[6]);// may be need minus case for back direction etc
     //need extrude back to -oz per h2 + h1 + h3 / 2
+    var one_gh = Math.PI * 2 * grips_center_radius * s[7] / 100 / grips_around_number; // around grip height
+    var one_ghhole = Math.PI * 2 * grips_center_radius / grips_around_number - one_gh; // around grip hole
+    var one_gw = one_gw_counter(
+        grips_type,
+        grips_width,
+        grips_width_number,
+        one_ghhole
+    )
     var cdots = grips_center_dots_counter(
         c,vn,vz,
         grips_center_radius,
         grips_width_number,
         grips_around_number,
-        grips_width
+        grips_width,
+        one_gw
     );
     console.log("cdots = ",cdots);
     console.log("angles = ",grip_angles);
@@ -171,11 +192,8 @@ function grips_maker(h,w,s,g,hull=false){
     grips_path = grips_path_counter(c,vz,h);
     grips_shape = grips_shape_counter(
         grips_type,
-        grips_center_radius,
-        grips_width,
-        grips_width_number,
-        grips_around_number,
-        c,vn,va,s[7]
+        c,vn,va,
+        one_gw,one_gh,one_ghhole
     );
     var gal = grip_angles.length;
     for (var i = 0;i < gal;i++){
@@ -184,7 +202,7 @@ function grips_maker(h,w,s,g,hull=false){
         var gp = grips_path;
         var gs = grips_shape;
         var ns = need_scale;
-        var gh = grips_height;
+        var gh = h[1];
         for (var j = 0;j<dots.length;j++){
             grips.push(grip_maker(dots[j],u,gp,gs,c,vn,ns,gh));
         }
