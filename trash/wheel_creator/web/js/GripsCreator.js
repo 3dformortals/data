@@ -73,40 +73,25 @@ function gs1(c,gw,gh,vx,vy){
 function gs4(c,gw,gh,vx,vy){
     console.log("------GS4 start----------");
     var eaxes = [vx,vy,geo.vecXDback(vx),geo.vecXDback(vy)];
-    var eaxesdist = [];
+    var eaxesdist = [gw / 2, gh / 2,gw / 2, gh / 2];
     var edots = geo.ellipse3D_dots(c,eaxes,eaxesdist);
     edots = [edots[1],edots[3],edots[5],edots[7]];
+    console.log("edots = ",edots);
     var dotspair = geo.chain_F(edots,2,true); //pair of dots for arc maker
+    console.log("dotspair = ",dotspair);
+    
     var bez;
-    for (i in 0...dotspair.length){
-        var arc = geo.curve3D_dots()
+    for (var i = 0 ; i < dotspair.length ; i++){
+        var cur = geo.curve3D_3dots(c,dotspair[i][0],dotspair[i][1]);
+        var vecs = [];
+        for (var j = 0 ; j < cur.length ; j++ ){ vecs.push(vec_maker(cur[j])); }
+        if (i == 0){ bez = bez_maker(vecs); }else{ bez = bez.continue(bez_maker(vecs)); }
     }
-    
-    var tcx = 0; var tcy = 0;
-    
-    var t0x; var t0y; var t1x; var t1y; var t2x; var t2y; var t1; var t2;
-    t0x = 0 + gw / 2; t0y = 0 + gh / 2;
-    //left
-    t1x = t0x; t1y = t0y; t2x = t1x-gw; t2y = t1y;
-    t1 = vec_maker([t1x,t1y,0]); t2 = vec_maker([t2x,t2y,0]);
-    var bez = bez_maker([t1,t1,t2,t2]);
-    //down
-    t1x = t2x; t1y = t2y; t2x = t1x; t2y = t1y-gh;
-    t1 = vec_maker([t1x,t1y,0]); t2 = vec_maker([t2x,t2y,0]);
-    var bez = bez.continue(bez_maker([t1,t1,t2,t2]));
-    //right
-    t1x = t2x; t1y = t2y; t2x = t1x+gw; t2y = t1y;
-    t1 = vec_maker([t1x,t1y,0]); t2 = vec_maker([t2x,t2y,0]);
-    var bez = bez.continue(bez_maker([t1,t1,t2,t2]));
-    //up
-    t1x = t2x; t1y = t2y; t2x = t0x; t2y = t0y;
-    t1 = vec_maker([t1x,t1y,0]); t2 = vec_maker([t2x,t2y,0]);
-    var bez = bez.continue(bez_maker([t1,t1,t2,t2]));
     
     var bezmesh = BABYLON.Mesh.CreateLines("metalshape", bez.getPoints(), scene); 
 	bezmesh.color = new BABYLON.Color3(1, 0, 0);
     
-    console.log("------------bez GS1----------");
+    console.log("------------bez GS4----------");
     console.log(bez);
     return bez.getPoints();
 }
