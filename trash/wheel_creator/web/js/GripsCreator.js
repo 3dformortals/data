@@ -70,6 +70,46 @@ function gs1(c,gw,gh,vx,vy){
     console.log(bez);
     return bez.getPoints();
 }
+function gs4(c,gw,gh,vx,vy){
+    console.log("------GS4 start----------");
+    var eaxes = [vx,vy,geo.vecXDback(vx),geo.vecXDback(vy)];
+    var eaxesdist = [];
+    var edots = geo.ellipse3D_dots(c,eaxes,eaxesdist);
+    edots = [edots[1],edots[3],edots[5],edots[7]];
+    var dotspair = geo.chain_F(edots,2,true); //pair of dots for arc maker
+    var bez;
+    for (i in 0...dotspair.length){
+        var arc = geo.curve3D_dots()
+    }
+    
+    var tcx = 0; var tcy = 0;
+    
+    var t0x; var t0y; var t1x; var t1y; var t2x; var t2y; var t1; var t2;
+    t0x = 0 + gw / 2; t0y = 0 + gh / 2;
+    //left
+    t1x = t0x; t1y = t0y; t2x = t1x-gw; t2y = t1y;
+    t1 = vec_maker([t1x,t1y,0]); t2 = vec_maker([t2x,t2y,0]);
+    var bez = bez_maker([t1,t1,t2,t2]);
+    //down
+    t1x = t2x; t1y = t2y; t2x = t1x; t2y = t1y-gh;
+    t1 = vec_maker([t1x,t1y,0]); t2 = vec_maker([t2x,t2y,0]);
+    var bez = bez.continue(bez_maker([t1,t1,t2,t2]));
+    //right
+    t1x = t2x; t1y = t2y; t2x = t1x+gw; t2y = t1y;
+    t1 = vec_maker([t1x,t1y,0]); t2 = vec_maker([t2x,t2y,0]);
+    var bez = bez.continue(bez_maker([t1,t1,t2,t2]));
+    //up
+    t1x = t2x; t1y = t2y; t2x = t0x; t2y = t0y;
+    t1 = vec_maker([t1x,t1y,0]); t2 = vec_maker([t2x,t2y,0]);
+    var bez = bez.continue(bez_maker([t1,t1,t2,t2]));
+    
+    var bezmesh = BABYLON.Mesh.CreateLines("metalshape", bez.getPoints(), scene); 
+	bezmesh.color = new BABYLON.Color3(1, 0, 0);
+    
+    console.log("------------bez GS1----------");
+    console.log(bez);
+    return bez.getPoints();
+}
 /**
  * calculate the grip shape for extrusion
  * @param {String} gt grip type
@@ -79,12 +119,13 @@ function gs1(c,gw,gh,vx,vy){
  */
 function grips_shape_counter(gt,r,gw,nw,ga,c,vn,va,s7){
     var rez;
+    console.log(gt);
     var one_gw = gw / (2 * nw - 1);
     var one_gh = Math.PI * 2 * r * s7 / 100 / ga;
     if (gt == "|||"){rez = gs1(c,one_gw,one_gh,vn,va);}
     else if (gt == "g2"){rez = gs2();}
     else if (gt == "g3"){rez = gs3();}
-    else if (gt == "g4"){rez = gs4();}
+    else if (gt == "ooo"){rez = gs4(c,one_gw,one_gh,vn,va);}
     return rez;
 }
 function grip_maker(dot,u,gp,gs,c,vn,ns,gh){
