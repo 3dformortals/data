@@ -45,8 +45,8 @@ function grips_center_dots_counter( c,vn,vz, r, nw, na, gw, one_gw ){
     }return rez; //list of center dots lists for each polygon vertex
 }
 function grips_path_counter(c,vz,h){
-    var t0 = vec_maker(c);
-    var t1 = vec_maker(geo.dotXDoffset(c,vz,-geo.sum_F([h[1],h[2],h[3] / 2])));
+    var t0 = vec_maker(geo.dotXDoffset(c,vz,geo.sum_F([h[1],h[2],h[3] / 2]) / 2));
+    var t1 = vec_maker(geo.dotXDoffset(c,vz,-geo.sum_F([h[1],h[2],h[3] / 2]) / 2));
     var rez = bez_maker([t0,t0,t1,t1]);
     return rez.getPoints();
 }
@@ -75,6 +75,33 @@ function gs1(c,gw,gh,vx,vy){
 	bezmesh.color = new BABYLON.Color3(1, 0, 0);
     
     console.log("------------bez GS1----------");
+    console.log(bez);
+    return bez.getPoints();
+}
+function gs2(c,one_gw,one_gh,one_ghhole,vn,va){
+    console.log("GS2 start");
+    var dx = one_gw / 2;
+    var dy_min = (one_gh + one_ghhole) / 2 - one_gh;
+    var dy_max = (one_gh + one_ghhole) / 2;
+    
+    var t1 = [dx,dy_min,0];
+    var t2 = [dx,dy_max,0];
+    var t3 = [-dx,-dy_min,0];
+    var t4 = [-dx,-dy_max,0];
+    
+    var dotspair = geo.chain_F([t1,t2,t3,t4],2,true);
+    console.log("GS2 dotspair = ",dotspair);
+    var bez;
+    for (var i = 0 ; i < dotspair.length ; i++){
+        var v1 = vec_maker(dotspair[i][0]);
+        var v2 = vec_maker(dotspair[i][1]);
+        var vecs = [v1,v1,v2,v2];
+        if (i == 0){ bez = bez_maker(vecs); }else{ bez = bez.continue(bez_maker(vecs)); }
+    }
+    var bezmesh = BABYLON.Mesh.CreateLines("gs2shape", bez.getPoints(), scene); 
+	bezmesh.color = new BABYLON.Color3(1, 0, 0);
+    
+    console.log("------------bez GS2----------");
     console.log(bez);
     return bez.getPoints();
 }
@@ -113,20 +140,20 @@ function gs4(c,gw,gh,vx,vy){
 function grips_shape_counter(gt,c,vn,va,one_gw,one_gh,one_ghhole){
     var rez;
     console.log(gt);
-    // var one_gw = gw / (2 * nw - 1);
-    // var one_gh = Math.PI * 2 * r * s7 / 100 / ga;
     if (gt == "|||"){rez = gs1(c,one_gw,one_gh,vn,va);}
-    else if (gt == "g2"){rez = gs2();}
+    else if (gt == ">>>"){rez = gs2(c,one_gw,one_gh,one_ghhole,vn,va);}
     else if (gt == "g3"){rez = gs3();}
     else if (gt == "ooo"){rez = gs4(c,one_gw,one_gh,vn,va);}
     return rez;
 }
-function grip_maker(dot,u,gp,gs,c,vn,ns,gh){
+function grip_maker(dot,u,gp,gs,c,vn,ns,gh,gt,ind){
     var scaling = function(i, distance) { return 1; };
-    if (ns){
-        scaling = function(i, distance) {
-            if (distance < gh){ return distance / gh; }else{ return 1; }
-        };
+    if (gt == "|||" || gt == "ooo"){
+        if (ns){
+            scaling = function(i, distance) {
+                if (distance < gh){ return distance / gh; }else{ return 1; }
+            };
+        }
     }
     var gripSettings={
 		shape: gs,
@@ -136,6 +163,11 @@ function grip_maker(dot,u,gp,gs,c,vn,ns,gh){
 		
 	};
     var extruded = BABYLON.MeshBuilder.ExtrudeShapeCustom("grip"+u.toString(), gripSettings, scene);
+    
+    if (gt == ">>>" || gt == ")))"){
+        if(ind & 1){ extruded.rotateAround(vec_maker(c),vec_maker(vn),geo.radians(180)); }
+        if(ns){ extruded.rotateAround(vec_maker(c),vec_maker(vn),geo.radians(180)); }
+    }
     extruded.rotateAround(vec_maker(c),vec_maker(vn),geo.radians(u));
     extruded.position = vec_maker(dot);
     // console.log(dot);
@@ -158,7 +190,8 @@ function grips_maker(h,w,s,g,hull=false){
     var grips_type = g; // "g1"..."g4"
     var grips_height = geo.sum_F([h[3] / 2, h[2], h[1]]);
     var grips_width = w[1];
-    var grips_center_radius = geo.sum_F([h[8],h[7],h[6],h[5],h[4],h[3],h[2],h[1]]);
+    var grips_max_radius = geo.sum_F([h[8],h[7],h[6],h[5],h[4],h[3],h[2],h[1]]);
+    var grips_center_radius = geo.sum_F([h[8],h[7],h[6],h[5],h[4],h[3],h[2],h[1]]) - geo.sum_F([h[1],h[2],h[3] / 2]) / 2;
     var grips_width_number = s[5];//how much per width
     var need_scale = false; //scale for g1 g4 and reverse for g2 g3
     if(grips_width_number < 0){
@@ -168,8 +201,8 @@ function grips_maker(h,w,s,g,hull=false){
     var grips_around_number = s[6];//how much around
     var grip_angles = grip_angles_counter(s[6]);// may be need minus case for back direction etc
     //need extrude back to -oz per h2 + h1 + h3 / 2
-    var one_gh = Math.PI * 2 * grips_center_radius * s[7] / 100 / grips_around_number; // around grip height
-    var one_ghhole = Math.PI * 2 * grips_center_radius / grips_around_number - one_gh; // around grip hole
+    var one_gh = Math.PI * 2 * grips_max_radius * s[7] / 100 / grips_around_number; // around grip height
+    var one_ghhole = Math.PI * 2 * grips_max_radius / grips_around_number - one_gh; // around grip hole
     var one_gw = one_gw_counter(
         grips_type,
         grips_width,
@@ -203,8 +236,9 @@ function grips_maker(h,w,s,g,hull=false){
         var gs = grips_shape;
         var ns = need_scale;
         var gh = h[1];
+        var gt = grips_type;
         for (var j = 0;j<dots.length;j++){
-            grips.push(grip_maker(dots[j],u,gp,gs,c,vn,ns,gh));
+            grips.push(grip_maker(dots[j],u,gp,gs,c,vn,ns,gh,gt,j));
         }
     }
     
