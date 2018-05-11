@@ -105,6 +105,40 @@ function gs2(c,one_gw,one_gh,one_ghhole,vn,va){
     console.log(bez);
     return bez.getPoints();
 }
+function gs3(c,one_gw,one_gh,one_ghhole,vn,va){
+    console.log("GS3 start");
+    var dx = one_gw / 2;
+    var dy_min = (one_gh + one_ghhole) / 2 - one_gh;
+    var dy_max = (one_gh + one_ghhole) / 2;
+    
+    var t1 = vec_maker([dx,dy_min,0]);
+    var t2 = vec_maker([dx,dy_max,0]);
+    var r2 = vec_maker([-dx / 2,dy_max,0]);
+    var r3 = vec_maker([0,-dy_min,0]);
+    var t3 = vec_maker([-dx,-dy_min,0]);
+    var t4 = vec_maker([-dx,-dy_max,0]);
+    var r4 = vec_maker([dx / 2,-dy_max,0]);
+    var r1 = vec_maker([0,dy_min,0]);
+    
+    var dotsbox = [
+        [t1,t1,t2,t2],
+        [t2,r2,r3,t3],
+        [t3,t3,t4,t4],
+        [t4,r4,r1,t1]
+    ];
+    
+    console.log("GS3 dotsbox = ",dotsbox);
+    var bez;
+    for (var i = 0 ; i < dotsbox.length ; i++){
+        if (i == 0){ bez = bez_maker(dotsbox[i]); }else{ bez = bez.continue(bez_maker(dotsbox[i])); }
+    }
+    var bezmesh = BABYLON.Mesh.CreateLines("gs3shape", bez.getPoints(), scene); 
+	bezmesh.color = new BABYLON.Color3(1, 0, 0);
+    
+    console.log("------------bez GS3----------");
+    console.log(bez);
+    return bez.getPoints();
+}
 function gs4(c,gw,gh,vx,vy){
     console.log("------GS4 start----------");
     var eaxes = [vx,vy,geo.vecXDback(vx),geo.vecXDback(vy)];
@@ -142,7 +176,7 @@ function grips_shape_counter(gt,c,vn,va,one_gw,one_gh,one_ghhole){
     console.log(gt);
     if (gt == "|||"){rez = gs1(c,one_gw,one_gh,vn,va);}
     else if (gt == ">>>"){rez = gs2(c,one_gw,one_gh,one_ghhole,vn,va);}
-    else if (gt == "g3"){rez = gs3();}
+    else if (gt == ")))"){rez = gs3(c,one_gw,one_gh,one_ghhole,vn,va);}
     else if (gt == "ooo"){rez = gs4(c,one_gw,one_gh,vn,va);}
     return rez;
 }
@@ -165,8 +199,8 @@ function grip_maker(dot,u,gp,gs,c,vn,ns,gh,gt,ind){
     var extruded = BABYLON.MeshBuilder.ExtrudeShapeCustom("grip"+u.toString(), gripSettings, scene);
     
     if (gt == ">>>" || gt == ")))"){
-        if(ind & 1){ extruded.rotateAround(vec_maker(c),vec_maker(vn),geo.radians(180)); }
-        if(ns){ extruded.rotateAround(vec_maker(c),vec_maker(vn),geo.radians(180)); }
+        if(ind & 1 && !ns){ extruded.rotateAround(vec_maker(c),vec_maker(vn),geo.radians(180)); }
+        else if(ns && !(ind & 1)){ extruded.rotateAround(vec_maker(c),vec_maker(vn),geo.radians(180)); }
     }
     extruded.rotateAround(vec_maker(c),vec_maker(vn),geo.radians(u));
     extruded.position = vec_maker(dot);
