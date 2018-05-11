@@ -1,7 +1,7 @@
 function grip_angles_counter(s6){
     rez = [];
     var step = 360/s6;
-    for (var i = 0;i < s6;i++){ rez.push(i*step+90); }
+    for (var i = 0;i < s6;i++){ rez.push(i*step); }
     return rez;
 }
 function one_gw_counter(gt,gw,gwn,ghhole){
@@ -244,7 +244,7 @@ function grips_maker(h,w,s,g,hull=false){
         one_ghhole
     )
     var cdots = grips_center_dots_counter(
-        c,vn,geo.vecXDback(va),
+        c,vn,vz,
         grips_center_radius,
         grips_width_number,
         grips_around_number,
