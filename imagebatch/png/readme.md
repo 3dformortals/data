@@ -15,11 +15,11 @@ png batch edit / пакетное редактирование png.
 ##pngshredder
 - разрезает каждый png файл в папке на несколько слоев. Каждый слой содержит уникальные фрагменты. Число слоев и размер фрагмента можно изменять.
 
-![original](pic/shredder_0.png?raw=true "before")  
-![edited](pic/shredder_1.png?raw=true "2 4 (1)")
-![edited](pic/shredder_2.png?raw=true "2 4 (2)")  
-![edited](pic/shredder_3.png?raw=true "2 16 (1)")
-![edited](pic/shredder_4.png?raw=true "2 16 (2)")
+![original](pic/pngshredder_0.png?raw=true "before")  
+![edited](pic/pngshredder_1.png?raw=true "2 4 (1)")
+![edited](pic/pngshredder_2.png?raw=true "2 4 (2)")  
+![edited](pic/pngshredder_3.png?raw=true "2 16 (1)")
+![edited](pic/pngshredder_4.png?raw=true "2 16 (2)")
 
 --------------------------------------------------
 
