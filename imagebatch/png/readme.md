@@ -12,7 +12,7 @@ png batch edit / пакетное редактирование png.
 
 --------------------------------------------------
 
-##pngshredder
+## pngshredder
 - разрезает каждый png файл в папке на несколько слоев. Каждый слой содержит уникальные фрагменты. Число слоев и размер фрагмента можно изменять.
 
 ![original](pic/pngshredder_0.png?raw=true "before")  
@@ -23,7 +23,7 @@ png batch edit / пакетное редактирование png.
 
 --------------------------------------------------
 
-##pngbatchAborderblurplusfull##
+## pngbatchAborderblurplusfull  
 - добавляет вокруг пикселей , у которых альфа больше 0, контуры с равномерно изменяющейся прозрачностью, заполняет весь холст. Быстрее для обычных изображений (фото без фона) . Медленее для изображений малой насыщености (1 пиксель в середине холста) .
 
 ![original](pic/testoriginal.png?raw=true "before")
@@ -32,7 +32,7 @@ png batch edit / пакетное редактирование png.
 
 --------------------------------------------------
 
-##pngbatchAborderblurplusfullslowcontour##
+## pngbatchAborderblurplusfullslowcontour  
 - добавляет вокруг пикселей , у которых альфа больше 0, контуры с равномерно изменяющейся прозрачностью, заполняет весь холст. Медленее для обычных изображений (фото без фона) . Быстрее для изображений малой насыщености (1 пиксель в середине холста) .
 
 ![original](pic/testoriginal.png?raw=true "before")
@@ -41,7 +41,7 @@ png batch edit / пакетное редактирование png.
 
 --------------------------------------------------
 
-##pngbatchA0tocolor##
+## pngbatchA0tocolor  
 - все пиксели с альфой равной 0, получают заданый цвет
 
 ![original](pic/testoriginal.png?raw=true "before")
@@ -49,7 +49,7 @@ png batch edit / пакетное редактирование png.
 
 --------------------------------------------------
 
-##pngbatchA0pixelplus##
+## pngbatchA0pixelplus  
 - все пиксели с альфой равной 0, касающиеся пикселя с альфой больше 0, получают заданый цвет
 
 ![original](pic/testoriginal.png?raw=true "before")
@@ -58,7 +58,7 @@ png batch edit / пакетное редактирование png.
 
 --------------------------------------------------
 
-##pngbatchA255##
+## pngbatchA255  
 - все пиксели получают альфу 255
 
 ![original](pic/testoriginal.png?raw=true "before")
@@ -66,7 +66,7 @@ png batch edit / пакетное редактирование png.
 
 --------------------------------------------------
 
-##pngbatchAto255##
+## pngbatchAto255  
 - все пиксели с альфой больше 0, получают альфу 255
 
 ![original](pic/testoriginal.png?raw=true "before")
@@ -74,7 +74,7 @@ png batch edit / пакетное редактирование png.
 
 --------------------------------------------------
 
-##pngbatchAtocolor##
+## pngbatchAtocolor  
 - все пиксели с альфой больше 0, получают заданый цвет
 - если на входе четыре параметра - обычный режим
 - если на входе три параметра, то альфу не трогает
@@ -86,7 +86,7 @@ png batch edit / пакетное редактирование png.
 
 --------------------------------------------------
 
-##pngbatchAborderblurpluscanvas##
+## pngbatchAborderblurpluscanvas  
 - добавляет вокруг пикселей , у которых альфа больше 0, контуры с равномерно изменяющейся прозрачностью и расширяет рисунок на ширину рамки (ширина контура умноженая на число контуров)
 
 ![original](pic/testoriginal.png?raw=true "before")
@@ -95,7 +95,7 @@ png batch edit / пакетное редактирование png.
 
 --------------------------------------------------
 
-##pngbatchAborderblurplus##
+## pngbatchAborderblurplus  
 - добавляет вокруг пикселей , у которых альфа больше 0, контуры с равномерно изменяющейся прозрачностью
 
 ![original](pic/testoriginal.png?raw=true "before")
@@ -104,7 +104,7 @@ png batch edit / пакетное редактирование png.
 
 --------------------------------------------------
 
-##pngbatchAborderblur##
+## pngbatchAborderblur  
 - превращает пиксели , у которых альфа больше 0, в контуры с равномерно изменяющейся прозрачностью
 
 ![original](pic/testoriginal.png?raw=true "before")
@@ -127,42 +127,42 @@ Tested under the pillow 3.4.2, python 3.4.4 win7x64
 
 --------------------------------------------------
 
-##pngshredder
+## pngshredder
 - cuts each png file into a folder into several layers. Each layer contains unique fragments. The number of layers and the size of the fragment can be changed.
 
 --------------------------------------------------
 
-## PngbatchAborderblurplusfull ##
+##  PngbatchAborderblurplusfull   
 - Adds surrounding pixels that have alpha greater than 0, the contours with uniformly changing the transparency, fills the entire canvas. Faster for ordinary images (picture without background). Slower for low saturation of the image (1 pixel in the middle of the canvas).
 
 --------------------------------------------------
 
-## PngbatchAborderblurplusfullslowcontour ##
+##  PngbatchAborderblurplusfullslowcontour   
 - Adds surrounding pixels that have alpha greater than 0, the contours with uniformly changing the transparency, fills the entire canvas. Slow for conventional images (picture without background). Faster for low saturation of the image (1 pixel in the middle of the canvas).
 
 --------------------------------------------------
 
-## PngbatchA0tocolor ##
+##  PngbatchA0tocolor   
 - All pixels with alpha set to 0, the color gets the job
 
 --------------------------------------------------
 
-##pngbatchA0pixelplus##
+## pngbatchA0pixelplus  
 - all pixels with an alpha equal to 0, contact with pixel with an alpha greater than 0, will have the input color
 
 --------------------------------------------------
  
-##pngbatchA255##
+## pngbatchA255  
 - all pixels will alpha 255
 
 --------------------------------------------------
 
-##pngbatchAto255##
+## pngbatchAto255  
 - all pixels with an alpha greater than 0, getting alpha 255
 
 --------------------------------------------------
 
-##pngbatchAtocolor##
+## pngbatchAtocolor  
 - all pixels with an alpha greater than 0, will have the input color
 - If a four-parameter input - normal
 - if three parameters are input, the alpha will not changed
@@ -171,17 +171,17 @@ Tested under the pillow 3.4.2, python 3.4.4 win7x64
 
 --------------------------------------------------
 
-##pngbatchAborderblurpluscanvas##
+## pngbatchAborderblurpluscanvas  
 - adds around pixels that have alpha greater than 0, the contours with uniformly changing the transparency and expands the picture to the width of the frame (the width of the contour multiplied by the number of contours)
 
 --------------------------------------------------
 
-##pngbatchAborderblurplus##
+## pngbatchAborderblurplus  
 - adds around pixels that have alpha greater than 0, the contours with uniformly changing the transparency
 
 --------------------------------------------------
 
-##pngbatchAborderblur##
+## pngbatchAborderblur  
 - turns the pixels whose alpha is greater than 0, in the contours with uniformly changing the transparency
 
 --------------------------------------------------
