@@ -127,6 +127,11 @@ Tested under the pillow 3.4.2, python 3.4.4 win7x64
 
 --------------------------------------------------
 
+##pngshredder
+- cuts each png file into a folder into several layers. Each layer contains unique fragments. The number of layers and the size of the fragment can be changed.
+
+--------------------------------------------------
+
 ## PngbatchAborderblurplusfull ##
 - Adds surrounding pixels that have alpha greater than 0, the contours with uniformly changing the transparency, fills the entire canvas. Faster for ordinary images (picture without background). Slower for low saturation of the image (1 pixel in the middle of the canvas).
 
