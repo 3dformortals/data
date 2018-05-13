@@ -77,6 +77,10 @@ try:
 				for j in range(imgh):
 					if not pix_in_keep(i,j,keep):
 						img.putpixel( (i,j), (0,0,0,0) )
+				presentdone = int(i/fullsteps*100)
+				if (presentdone > olddone):
+					print(str(presentdone)+"%",end="",flush=True)
+					olddone = presentdone
 		print("recount complete")
 		print(datetime.datetime.now().time())
 		for i in range(len(imgs)):
