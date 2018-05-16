@@ -108,7 +108,7 @@ function bolt3_maker(neg,dot,u,b){
     
     var mat = new BABYLON.StandardMaterial("mat1", scene);
 	mat.alpha = 1.0;
-	mat.diffuseColor = new BABYLON.Color3(0.9, 0.5, 0.5);
+	mat.diffuseColor = new BABYLON.Color3(0.4, 0.4, 0.4);
 	mat.backFaceCulling = false;
 	// mat.wireframe = true;
     
@@ -207,7 +207,7 @@ function bolt0_maker(dot,b,hull=false){
     bolt0.position = vec_maker(dot);
     var mat = new BABYLON.StandardMaterial("mat1", scene);
 	mat.alpha = 1.0;
-	mat.diffuseColor = new BABYLON.Color3(0.9, 0.5, 0.5);
+	mat.diffuseColor = new BABYLON.Color3(0.4, 0.4, 0.4);
 	mat.backFaceCulling = false;
 	// mat.wireframe = true;
 	bolt0.material = mat;

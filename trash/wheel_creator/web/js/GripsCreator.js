@@ -208,7 +208,7 @@ function grip_maker(dot,u,gp,gs,c,vn,ns,gh,gt,ind){
 	
 	var mat = new BABYLON.StandardMaterial("mat1", scene);
 	mat.alpha = 1.0;
-	mat.diffuseColor = new BABYLON.Color3(0.5, 0.5, 0.5);
+	mat.diffuseColor = new BABYLON.Color3(0.8, 0.8, 0.2);
 	mat.backFaceCulling = false;
 	// mat.wireframe = true;
 	extruded.material = mat;

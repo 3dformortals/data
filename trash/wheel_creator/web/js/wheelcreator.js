@@ -9,8 +9,8 @@ var bolts=[];
 var tire;
 var grips=[];
 var canvas = document.getElementById("renderCanvas");
-canvas.width = 400;
-canvas.height = 400;
+canvas.width = 600;
+canvas.height = 600;
 var engine = new BABYLON.Engine(canvas, true);
 var scene;
 var camera;
@@ -325,8 +325,8 @@ function metal_shape_for_extrusion(h,w,s,c=[0,0,0]){
 	console.log("myshape closed");
 	console.log("myshape getPoints = ");
 	console.log(myshape.getPoints());
-	var myshapemesh = BABYLON.Mesh.CreateLines("metalshape", myshape.getPoints(), scene); 
-	myshapemesh.color = new BABYLON.Color3(1, 1, 1);
+	// var myshapemesh = BABYLON.Mesh.CreateLines("metalshape", myshape.getPoints(), scene); 
+	// myshapemesh.color = new BABYLON.Color3(1, 1, 1);
 	return myshape.getPoints();
 }
 function tire_shape_for_extrusion(h,w,s,c=[0,0,0]){
@@ -476,8 +476,8 @@ function tire_shape_for_extrusion(h,w,s,c=[0,0,0]){
 	console.log("myshape closed");
 	console.log("myshape getPoints = ");
 	console.log(myshape.getPoints());
-	var myshapemesh = BABYLON.Mesh.CreateLines("metalshape", myshape.getPoints(), scene); 
-	myshapemesh.color = new BABYLON.Color3(1, 1, 1);
+	// var myshapemesh = BABYLON.Mesh.CreateLines("metalshape", myshape.getPoints(), scene); 
+	// myshapemesh.color = new BABYLON.Color3(1, 1, 1);
 	return myshape.getPoints();
 }
 //----------------end geometry section
@@ -512,7 +512,7 @@ function metal_maker(h, w, s, hull=false,extrude=100){
 	mat.alpha = 1.0;
 	mat.diffuseColor = new BABYLON.Color3(0.5, 0.5, 0.5);
 	mat.backFaceCulling = false;
-	mat.wireframe = true;
+	// mat.wireframe = true;
 	extruded.material = mat;
 	
 	console.log("endcode");
@@ -541,7 +541,7 @@ function tire_maker(h,w,s,hull=false){
 	mat.alpha = 1.0;
 	mat.diffuseColor = new BABYLON.Color3(0.2, 0.2, 0.2);
 	mat.backFaceCulling = false;
-	mat.wireframe = true;
+	// mat.wireframe = true;
 	extruded.material = mat;
 	
 	console.log("endcode");
