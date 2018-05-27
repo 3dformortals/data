@@ -562,7 +562,8 @@ function wheel_creator(){
 	console.log("--------tire export trying--------");
 	// console.log(BABYLON.OBJExport.OBJ([tire]));
 	// alert(BABYLON.OBJExport.OBJ([metal]));
-	download(BABYLON.OBJExport.OBJ([metal]),"mesh.obj","text/plain");
+	var exportobjects = [metal,tire].concat(bolts.concat(grips));
+	download(BABYLON.OBJExport.OBJ(exportobjects,true,"wheelmaterials",false),"scene.obj","text/plain");
 }
 
 function clearall(){
