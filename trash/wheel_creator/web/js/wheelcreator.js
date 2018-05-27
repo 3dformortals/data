@@ -559,8 +559,10 @@ function wheel_creator(){
 	tire = tire_maker(h,w,s);
 	bolts = bolts_maker(h,w,s,b);
 	grips = grips_maker(h,w,s,g);
-	console.log("metal part");
-	// console.log(metal);
+	console.log("--------tire export trying--------");
+	// console.log(BABYLON.OBJExport.OBJ([tire]));
+	// alert(BABYLON.OBJExport.OBJ([metal]));
+	download(BABYLON.OBJExport.OBJ([metal]),"mesh.obj","text/plain");
 }
 
 function clearall(){
@@ -573,7 +575,14 @@ function clearall(){
 	}
 }
 //------------------------------
-	
+
+function download(text, name, type) {
+	var a = document.getElementById("a");
+	var file = new Blob([text], {type: type});
+	a.href = URL.createObjectURL(file);
+	a.download = name;
+  }
+
 function change_camera_test(al,be,ra){
 	camera.alpha = al;
 	camera.beta = be;
