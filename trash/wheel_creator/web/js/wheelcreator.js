@@ -548,7 +548,14 @@ function tire_maker(h,w,s,hull=false){
 	return extruded;
 }
 
-
+function prepare_objects_for_export(objs){
+	var rez = []
+	for (i=0;i<objs.length;i++){
+		var fullmesh = objs[i].bakeCurrentTransformIntoVertices();
+		var mesh = fullmesh.clone("mesh"+i.toString());
+		rez.push(mesh);
+	}return rez;
+}
 
 function wheel_creator(){
 	clearall();
@@ -563,7 +570,9 @@ function wheel_creator(){
 	// console.log(BABYLON.OBJExport.OBJ([tire]));
 	// alert(BABYLON.OBJExport.OBJ([metal]));
 	var exportobjects = [metal,tire].concat(bolts.concat(grips));
-	download(BABYLON.OBJExport.OBJ(exportobjects,true,"wheelmaterials",false),"scene.obj","text/plain");
+	exportobjects = prepare_objects_for_export(exportobjects);
+	download(BABYLON.OBJExport.OBJ(exportobjects),"scene.obj","text/plain");
+	// download(BABYLON.OBJExport.OBJ(exportobjects,true,"wheelmaterials",false),"scene.obj","text/plain");
 }
 
 function clearall(){
