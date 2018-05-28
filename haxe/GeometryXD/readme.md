@@ -57,7 +57,6 @@ opening javascript_test.html in browser show you `-3,-2,-1` alert window
 
 ---
 
-
 ---
 ```haxe  
   
@@ -1679,5 +1678,8 @@ class GeometryXD
    ):Null<Float>
 ```    
   
-  returns angle, which is projection of angle between `vec3D1` and `vec3D2` vectors to `plane3D`  
+  returns angle, which is projection of angle between `vec3D1` and `vec3D2` vectors to `plane3D`.  
+  Result angle, calculated from projection of `vec3D1` to projection of `vec3D2` around plane normal  
+  in ccw direction, and can be negative. In this case the positive angle in ccw direction between  
+  projections of vectors can be represented as `360 + result(which is negative)`.  
   
