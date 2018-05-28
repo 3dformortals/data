@@ -2680,7 +2680,10 @@ class GeometryXD{
         return rez;
     }
     /**
-     returns angle, which is projection of angle between `vec3D1` and `vec3D2` vectors to `plane3D`
+     returns angle, which is projection of angle between `vec3D1` and `vec3D2` vectors to `plane3D`.  
+     Result angle, calculated from projection of `vec3D1` to projection of `vec3D2` around plane normal  
+     in ccw direction, and can be negative. In this case the positive angle in ccw direction between  
+     projections of vectors can be represented as `360 + result(which is negative)`.
      @param vec3D1 - vector 3D (a, b, c)
      @param vec3D2 - vector 3D (a, b, c)
      @param plane3D - plane 3D (a, b, c, d), where (a, b, c) normal vector of plane, and (d) displacement from (0, 0, 0)
