@@ -57,1287 +57,1627 @@ opening javascript_test.html in browser show you `-3,-2,-1` alert window
 
 ---
 
----
-```haxe  
- package geometryxd
-```    
- Copyright (c) 2018 llll
 
 ---
 ```haxe  
- class GeometryXD
+  
+package geometryxd
 ```    
- GeometryXD - multidimensional geometry manipulations. Primarily targeted for 3D objects (points, vectors, curves). 
- Additional methods allow manipulate with arrays. 
- Convert arrays. Int &lt;-&gt; Float <-> String <-> Int Arrays. 
- Sum arrays. Parallel sum of arrays elements. 
- Diff arrays. Parallel diff of arrays elements from first array elements. 
- Multiplying arrays. Parallel multiplication of arrays elements. 
- Sum array elements. 
- Calculate max abs value from Float Array. 
- Not pro level library. 
+  
+ Copyright (c) 2018 llll  
 
 ---
 ```haxe  
- public static function main()
+  
+class GeometryXD
 ```    
- trace `GeometryXD is ready for use` message in time of initialisation
- 
+  
+  GeometryXD - multidimensional geometry manipulations. Primarily targeted for 3D objects (points, vectors, curves).  
+  Additional methods allow manipulate with arrays.  
+  Convert arrays. Int &lt;-&gt; Float &lt;-&gt; String &lt;-&gt; Int Arrays.  
+  Sum arrays. Parallel sum of arrays elements.  
+  Diff arrays. Parallel diff of arrays elements from first array elements.  
+  Multiplying arrays. Parallel multiplication of arrays elements.  
+  Sum array elements.  
+  Calculate max abs value from Float Array.  
+  Not pro level library.  
+
 ---
 ```haxe  
- public static inline function positive_inside_I(a:Array<Int>):Bool
+  
+  public static function main()
 ```    
- return true if incoming Int Array have at least one positive element
- 
+  
+  trace `GeometryXD is ready for use` message in time of initialisation  
+  
 ---
 ```haxe  
- public static inline function zero_inside_I(a:Array<Int>):Bool
+  
+  public static inline function positive_inside_I(a:Array<Int>):Bool
 ```    
- return true if incoming Int Array have at least one zero element
- 
+  
+  return true if incoming Int Array have at least one positive element  
+  
 ---
 ```haxe  
- public static inline function negative_inside_I(a:Array<Int>):Bool
+  
+  public static inline function zero_inside_I(a:Array<Int>):Bool
 ```    
- return true if incoming Int Array have at least one negative element
- 
+  
+  return true if incoming Int Array have at least one zero element  
+  
 ---
 ```haxe  
- public static inline function positive_inside_F(a:Array<Float>):Bool
+  
+  public static inline function negative_inside_I(a:Array<Int>):Bool
 ```    
- return true if incoming Float Array have at least one positive element
- 
+  
+  return true if incoming Int Array have at least one negative element  
+  
 ---
 ```haxe  
- public static inline function zero_inside_F(a:Array<Float>):Bool
+  
+  public static inline function positive_inside_F(a:Array<Float>):Bool
 ```    
- return true if incoming Float Array have at least one zero element
- 
+  
+  return true if incoming Float Array have at least one positive element  
+  
 ---
 ```haxe  
- public static inline function negative_inside_F(a:Array<Float>):Bool
+  
+  public static inline function zero_inside_F(a:Array<Float>):Bool
 ```    
- return true if incoming Float Array have at least one negative element
- 
+  
+  return true if incoming Float Array have at least one zero element  
+  
 ---
 ```haxe  
- public static inline function same_size_I(a:Array<Array<Int>>):Null<Bool>
+  
+  public static inline function negative_inside_F(a:Array<Float>):Bool
 ```    
- return true if Int Arrays have same size
- 
+  
+  return true if incoming Float Array have at least one negative element  
+  
 ---
 ```haxe  
- public static inline function same_size_F(a:Array<Array<Float>>):Null<Bool>
+  
+  public static inline function same_size_I(a:Array<Array<Int>>):Null<Bool>
 ```    
- return true if Float Arrays have same size
- 
+  
+  return true if Int Arrays have same size  
+  
 ---
 ```haxe  
- public static function same_xI(a:Array<Array<Int>>):Null<Bool>
+  
+  public static inline function same_size_F(a:Array<Array<Float>>):Null<Bool>
 ```    
- compare Int Arrays. Returns true if all arrays have equal data
- 
+  
+  return true if Float Arrays have same size  
+  
 ---
 ```haxe  
- public static function same_xF(a:Array<Array<Float>>):Null<Bool>
+  
+  public static function same_xI(a:Array<Array<Int>>):Null<Bool>
 ```    
- compare Float Arrays. Returns true if all arrays have equal data
- 
+  
+  compare Int Arrays. Returns true if all arrays have equal data  
+  
 ---
 ```haxe  
- public static inline function sum_I(a:Array<Int>):Null<Int>
+  
+  public static function same_xF(a:Array<Array<Float>>):Null<Bool>
 ```    
- returns sum of Int Array elements. [1,2,3] -&gt; 6. tested
- 
+  
+  compare Float Arrays. Returns true if all arrays have equal data  
+  
 ---
 ```haxe  
- public static inline function sum_F(a:Array<Float>):Null<Float>
+  
+  public static inline function sum_I(a:Array<Int>):Null<Int>
 ```    
- returns sum of Float Array elements. [1.1,2,3] -&gt; 6.1. tested
- 
+  
+  returns sum of Int Array elements. [1,2,3] -&gt; 6. tested  
+  
 ---
 ```haxe  
- public static function diff_I(a:Array<Int>):Null<Int>
+  
+  public static inline function sum_F(a:Array<Float>):Null<Float>
 ```    
- returns diff between first and others Int Array elements. [1,2,3] -&gt; -4. tested
- 
+  
+  returns sum of Float Array elements. [1.1,2,3] -&gt; 6.1. tested  
+  
 ---
 ```haxe  
- public static function diff_F(a:Array<Float>):Null<Float>
+  
+  public static function diff_I(a:Array<Int>):Null<Int>
 ```    
- returns diff between first and others Float Array elements. [1.1,2,3] -&gt; -3.9. tested
- 
+  
+  returns diff between first and others Int Array elements. [1,2,3] -&gt; -4. tested  
+  
 ---
 ```haxe  
- public static function middle_F(a:Array<Float>):Null<Float>
+  
+  public static function diff_F(a:Array<Float>):Null<Float>
 ```    
- returns middle value of Float Array
- 
+  
+  returns diff between first and others Float Array elements. [1.1,2,3] -&gt; -3.9. tested  
+  
 ---
 ```haxe  
- public static inline function multiply_I_I(
- a:Array<Int>,
- n:Int
- ):Array<Int>
+  
+  public static function middle_F(a:Array<Float>):Null<Float>
 ```    
- multiplies each element of an Int Array by Int
- 
+  
+  returns middle value of Float Array  
+  
 ---
 ```haxe  
- public static inline function multiply_F_F(
- a:Array<Float>,
- n:Float
- ):Array<Float>
+  
+  public static inline function multiply_I_I(  
+   a:Array<Int>,  
+   n:Int  
+   ):Array<Int>
 ```    
- multiplies each element of an Float Array by Float
- 
+  
+  multiplies each element of an Int Array by Int  
+  
 ---
 ```haxe  
- public static inline function multiply_I(a:Array<Int>):Null<Int>
+  
+  public static inline function multiply_F_F(  
+   a:Array<Float>,  
+   n:Float  
+   ):Array<Float>
 ```    
- multiplies all elements of an Int Array. [1, 2, 3] return 1 * 2 * 3
- 
+  
+  multiplies each element of an Float Array by Float  
+  
 ---
 ```haxe  
- public static inline function multiply_F(a:Array<Float>):Null<Float>
+  
+  public static inline function multiply_I(a:Array<Int>):Null<Int>
 ```    
- multiplies all elements of an Float Array. [1.1, 2.0, 3.0] return 1.1 * 2.0 * 3.0
- 
+  
+  multiplies all elements of an Int Array. [1, 2, 3] return 1 * 2 * 3  
+  
 ---
 ```haxe  
- public static inline function minus_I(a:Array<Int>):Array<Int>
+  
+  public static inline function multiply_F(a:Array<Float>):Null<Float>
 ```    
- multiplies each element of the Int Array by -1
- 
+  
+  multiplies all elements of an Float Array. [1.1, 2.0, 3.0] return 1.1 * 2.0 * 3.0  
+  
 ---
 ```haxe  
- public static inline function minus_F(a:Array<Float>):Array<Float>
+  
+  public static inline function minus_I(a:Array<Int>):Array<Int>
 ```    
- multiplies each element of the Float Array by -1
- 
+  
+  multiplies each element of the Int Array by -1  
+  
 ---
 ```haxe  
- public static function sum_xI(a:Array<Array<Int>>):Array<Int>
+  
+  public static inline function minus_F(a:Array<Float>):Array<Float>
 ```    
- return Int Array which is Int Arrays sum. [[1, 2, 3], [-3, -2, -1]] return [-2, 0, 2]
- 
+  
+  multiplies each element of the Float Array by -1  
+  
 ---
 ```haxe  
- public static function sum_xF(a:Array<Array<Float>>):Array<Float>
+  
+  public static function sum_xI(a:Array<Array<Int>>):Array<Int>
 ```    
- return Float Array which is Float Arrays sum. [[1.1, 2, 3], [-3, -2, -1]] return [-1.9, 0, 2]
- 
+  
+  return Int Array which is Int Arrays sum. [[1, 2, 3], [-3, -2, -1]] return [-2, 0, 2]  
+  
 ---
 ```haxe  
- public static function diff_xI(a:Array<Array<Int>>):Array<Int>
+  
+  public static function sum_xF(a:Array<Array<Float>>):Array<Float>
 ```    
- return Int Array which is result of diff between first Int Array and others. [[1, 2, 3], [-3, -2, -1]] return [4, 4, 4]
- 
+  
+  return Float Array which is Float Arrays sum. [[1.1, 2, 3], [-3, -2, -1]] return [-1.9, 0, 2]  
+  
 ---
 ```haxe  
- public static function diff_xF(a:Array<Array<Float>>):Array<Float>
+  
+  public static function diff_xI(a:Array<Array<Int>>):Array<Int>
 ```    
- return Float Array which is result of diff between first Float Array and others. [[1.1, 2, 3], [-3, -2, -1]] return [4.1, 4, 4]
- 
+  
+  return Int Array which is result of diff between first Int Array and others. [[1, 2, 3], [-3, -2, -1]] return [4, 4, 4]  
+  
 ---
 ```haxe  
- public static function middle_xF(a:Array<Array<Float>>):Array<Float>
+  
+  public static function diff_xF(a:Array<Array<Float>>):Array<Float>
 ```    
- return Float Array with middle values from arrays. [[1.1, 2, 3], [-3, -2, -1]] return [(1.1 - 3) / 2, (2 - 2) / 2, (3 - 1) / 2]
- 
+  
+  return Float Array which is result of diff between first Float Array and others. [[1.1, 2, 3], [-3, -2, -1]] return [4.1, 4, 4]  
+  
 ---
 ```haxe  
- public static function multiply_xI_I(
- a:Array<Array<Int>>,
- n:Int
- ):Array<Array<Int>>
+  
+  public static function middle_xF(a:Array<Array<Float>>):Array<Float>
 ```    
- return Int arrays which is result of multiplying each element by Int
- 
+  
+  return Float Array with middle values from arrays. [[1.1, 2, 3], [-3, -2, -1]] return [(1.1 - 3) / 2, (2 - 2) / 2, (3 - 1) / 2]  
+  
 ---
 ```haxe  
- public static function multiply_xF_F(
- a:Array<Array<Float>>,
- n:Float
- ):Array<Array<Float>>
+  
+  public static function multiply_xI_I(  
+   a:Array<Array<Int>>,  
+   n:Int  
+   ):Array<Array<Int>>
 ```    
- return Float arrays which is result of multiplying each element by Float
- 
+  
+  return Int arrays which is result of multiplying each element by Int  
+  
 ---
 ```haxe  
- public static function multiply_xI(a:Array<Array<Int>>):Array<Int>
+  
+  public static function multiply_xF_F(  
+   a:Array<Array<Float>>,  
+   n:Float  
+   ):Array<Array<Float>>
 ```    
- return Int Array which is result of multiplying arrays. [[1, 2], [3, 4]] return [1 * 3, 2 * 4]
- 
+  
+  return Float arrays which is result of multiplying each element by Float  
+  
 ---
 ```haxe  
- public static function multiply_xF(a:Array<Array<Float>>):Array<Float>
+  
+  public static function multiply_xI(a:Array<Array<Int>>):Array<Int>
 ```    
- return Float Array which is result of multiplying arrays. [[3.1, 2], [3, 4]] return [3.1 * 3, 2 * 4]
- 
+  
+  return Int Array which is result of multiplying arrays. [[1, 2], [3, 4]] return [1 * 3, 2 * 4]  
+  
 ---
 ```haxe  
- public static function multisum_xI(a:Array<Array<Int>>):Null<Int>
+  
+  public static function multiply_xF(a:Array<Array<Float>>):Array<Float>
 ```    
- Int Arrays bonus function. Short form of sum_I(multiply_xI(a)). [[a, b], [c, d]] return a * c + b * d
- 
+  
+  return Float Array which is result of multiplying arrays. [[3.1, 2], [3, 4]] return [3.1 * 3, 2 * 4]  
+  
 ---
 ```haxe  
- public static function multisum_xF(a:Array<Array<Float>>):Null<Float>
+  
+  public static function multisum_xI(a:Array<Array<Int>>):Null<Int>
 ```    
- Float Arrays bonus function. Short form of sum_F(multiply_xF(a)). [[a, b], [c, d]] return a * c + b * d
- 
+  
+  Int Arrays bonus function. Short form of sum_I(multiply_xI(a)). [[a, b], [c, d]] return a * c + b * d  
+  
 ---
 ```haxe  
- public static inline function sum_previous_I(a:Array<Int>):Array<Int>
+  
+  public static function multisum_xF(a:Array<Array<Float>>):Null<Float>
 ```    
- return Int Array which is result of sum with previous element. [1, 2, 3] return [1, 3, 5]
- 
+  
+  Float Arrays bonus function. Short form of sum_F(multiply_xF(a)). [[a, b], [c, d]] return a * c + b * d  
+  
 ---
 ```haxe  
- public static inline function diff_previous_I(a:Array<Int>):Array<Int>
+  
+  public static inline function sum_previous_I(a:Array<Int>):Array<Int>
 ```    
- return Int Array which is result of diff with previous element. [1, 2, 3] return [1, 1, 1]
- 
+  
+  return Int Array which is result of sum with previous element. [1, 2, 3] return [1, 3, 5]  
+  
 ---
 ```haxe  
- public static inline function sum_before_I(a:Array<Int>):Array<Int>
+  
+  public static inline function diff_previous_I(a:Array<Int>):Array<Int>
 ```    
- return Int Array which is result of sum each element with before elements sum. [1, 2, 3] return [1, 3, 6]
- 
+  
+  return Int Array which is result of diff with previous element. [1, 2, 3] return [1, 1, 1]  
+  
 ---
 ```haxe  
- public static inline function diff_before_I(a:Array<Int>):Array<Int>
+  
+  public static inline function sum_before_I(a:Array<Int>):Array<Int>
 ```    
- return Int Array which is result of diff each element with before elements diff. [1, 2, 3] return [1, 1, 2]
- 
+  
+  return Int Array which is result of sum each element with before elements sum. [1, 2, 3] return [1, 3, 6]  
+  
 ---
 ```haxe  
- public static inline function sum_previous_F(a:Array<Float>):Array<Float>
+  
+  public static inline function diff_before_I(a:Array<Int>):Array<Int>
 ```    
- return Float Array which is result of sum with previous element. [1.1, 2, 3] return [1.1, 3.1, 5]
- 
+  
+  return Int Array which is result of diff each element with before elements diff. [1, 2, 3] return [1, 1, 2]  
+  
 ---
 ```haxe  
- public static inline function diff_previous_F(a:Array<Float>):Array<Float>
+  
+  public static inline function sum_previous_F(a:Array<Float>):Array<Float>
 ```    
- return Float Array which is result of diff with previous element. [1.1, 2, 3] return [1.1, 0.9, 1]
- 
+  
+  return Float Array which is result of sum with previous element. [1.1, 2, 3] return [1.1, 3.1, 5]  
+  
 ---
 ```haxe  
- public static inline function sum_before_F(a:Array<Float>):Array<Float>
+  
+  public static inline function diff_previous_F(a:Array<Float>):Array<Float>
 ```    
- return Float Array which is result of sum each element with before elements sum. [1.1, 2, 3] return [1.1, 3.1, 6.1]
- 
+  
+  return Float Array which is result of diff with previous element. [1.1, 2, 3] return [1.1, 0.9, 1]  
+  
 ---
 ```haxe  
- public static inline function diff_before_F(a:Array<Float>):Array<Float>
+  
+  public static inline function sum_before_F(a:Array<Float>):Array<Float>
 ```    
- return Float Array which is result of diff each element with before elements diff. [1.1, 2, 3] return [1.1, 0.9, 2.1]
- 
+  
+  return Float Array which is result of sum each element with before elements sum. [1.1, 2, 3] return [1.1, 3.1, 6.1]  
+  
 ---
 ```haxe  
- public static inline function recounter_I_F(what:Array<Int>):Array<Float>
+  
+  public static inline function diff_before_F(a:Array<Float>):Array<Float>
 ```    
- recount Int Array to Float Array
- 
+  
+  return Float Array which is result of diff each element with before elements diff. [1.1, 2, 3] return [1.1, 0.9, 2.1]  
+  
 ---
 ```haxe  
- public static inline function recounter_F_I(what:Array<Float>):Array<Int>
+  
+  public static inline function recounter_I_F(what:Array<Int>):Array<Float>
 ```    
- recount Float Array to Int Array
- 
+  
+  recount Int Array to Float Array  
+  
 ---
 ```haxe  
- public static inline function recounter_I_S(what:Array<Int>):Array<String>
+  
+  public static inline function recounter_F_I(what:Array<Float>):Array<Int>
 ```    
- recount Int Array to String Array
- 
+  
+  recount Float Array to Int Array  
+  
 ---
 ```haxe  
- public static inline function recounter_F_S(what:Array<Float>):Array<String>
+  
+  public static inline function recounter_I_S(what:Array<Int>):Array<String>
 ```    
- recount Float Array to String Array
- 
+  
+  recount Int Array to String Array  
+  
 ---
 ```haxe  
- public static inline function recounter_S_I(what:Array<String>):Array<Int>
+  
+  public static inline function recounter_F_S(what:Array<Float>):Array<String>
 ```    
- recount String Array to Int Array
- 
+  
+  recount Float Array to String Array  
+  
 ---
 ```haxe  
- public static inline function recounter_S_F(what:Array<String>):Array<Float>
+  
+  public static inline function recounter_S_I(what:Array<String>):Array<Int>
 ```    
- recount String Array to Float Array
- 
+  
+  recount String Array to Int Array  
+  
 ---
 ```haxe  
- public static inline function repeater_F_F(
- n:Int,
- what:Array<Float>,
- full:Bool 
+  
+  public static inline function recounter_S_F(what:Array<String>):Array<Float>
 ```    
- repeat Float Array to specified length
- 
+  
+  recount String Array to Float Array  
+  
 ---
 ```haxe  
- public static inline function repeater_I_I(
- n:Int,
- what:Array<Int>,
- full:Bool 
+  
+  public static inline function repeater_F_F(  
+   n:Int,  
+   what:Array<Float>,  
+   full:Bool = false  
+   ):Array<Float>
 ```    
- repeat Int Array to specified length
- 
+  
+  repeat Float Array to specified length  
+  
 ---
 ```haxe  
- public static inline function repeater_S_S(
- n:Int,
- what:Array<String>,
- full:Bool 
+  
+  public static inline function repeater_I_I(  
+   n:Int,  
+   what:Array<Int>,  
+   full:Bool = false  
+   ):Array<Int>
 ```    
- repeat String Array to specified length
- 
+  
+  repeat Int Array to specified length  
+  
 ---
 ```haxe  
- public static function repeater_F_I(
- n:Int,
- what_:Array<Float>,
- full:Bool 
+  
+  public static inline function repeater_S_S(  
+   n:Int,  
+   what:Array<String>,  
+   full:Bool = false  
+   ):Array<String>
 ```    
- repeat Float Array to specified length Int Array
- 
+  
+  repeat String Array to specified length  
+  
 ---
 ```haxe  
- public static function repeater_S_I(
- n:Int,
- what_:Array<String>,
- full:Bool 
+  
+  public static function repeater_F_I(  
+   n:Int,  
+   what_:Array<Float>,  
+   full:Bool = false  
+   ):Array<Int>
 ```    
- repeat String Array to specified length Int Array
- 
+  
+  repeat Float Array to specified length Int Array  
+  
 ---
 ```haxe  
- public static function repeater_I_F(
- n:Int,
- what_:Array<Int>,
- full:Bool 
+  
+  public static function repeater_S_I(  
+   n:Int,  
+   what_:Array<String>,  
+   full:Bool = false  
+   ):Array<Int>
 ```    
- repeat Int Array to specified length Float Array
- 
+  
+  repeat String Array to specified length Int Array  
+  
 ---
 ```haxe  
- public static function repeater_S_F(
- n:Int,
- what_:Array<String>,
- full:Bool 
+  
+  public static function repeater_I_F(  
+   n:Int,  
+   what_:Array<Int>,  
+   full:Bool = false  
+   ):Array<Float>
 ```    
- repeat String Array to specified length Float Array
- 
+  
+  repeat Int Array to specified length Float Array  
+  
 ---
 ```haxe  
- public static function repeater_I_S(
- n:Int,
- what_:Array<Int>,
- full:Bool 
+  
+  public static function repeater_S_F(  
+   n:Int,  
+   what_:Array<String>,  
+   full:Bool = false  
+   ):Array<Float>
 ```    
- repeat Int Array to specified length String Array
- 
+  
+  repeat String Array to specified length Float Array  
+  
 ---
 ```haxe  
- public static function repeater_F_S(
- n:Int,
- what_:Array<Float>,
- full:Bool 
+  
+  public static function repeater_I_S(  
+   n:Int,  
+   what_:Array<Int>,  
+   full:Bool = false  
+   ):Array<String>
 ```    
- repeat Float Array to specified length String Array
- 
+  
+  repeat Int Array to specified length String Array  
+  
 ---
 ```haxe  
- public static inline function an_in_b_S(
- a:Array<String>,
- b:Array<String>
- ):Array<Array<Int>>
+  
+  public static function repeater_F_S(  
+   n:Int,  
+   what_:Array<Float>,  
+   full:Bool = false  
+   ):Array<String>
 ```    
- return array of arrays with pair indexes which is indexes equivalent elements of a and b arrays.
- a=["1", "2"] b=["1", "2", "1"] return [[0, 0], [0, 2], [1, 1]]
- 
+  
+  repeat Float Array to specified length String Array  
+  
 ---
 ```haxe  
- public static inline function an_in_bn_S(
- a:Array<String>,
- b:Array<Array<String>>
- ):Array<Array<Int>>
+  
+  public static inline function an_in_b_S(  
+   a:Array<String>,  
+   b:Array<String>  
+   ):Array<Array<Int>>
 ```    
- return array of arrays with pair indexes which is indexes equivalent elements of a and b arrays.
- a=["1", "2"] b=[["1", "2", "1"],["0", "2"]] return [[0, 0, 0], [0, 0, 2], [1, 0, 1], [1, 1, 1]]. where indexes [1, 0, 1] = [1(a), 0(b), 1(b[0])]
- 
+  
+  return array of arrays with pair indexes which is indexes equivalent elements of a and b arrays.  
+  a=["1", "2"] b=["1", "2", "1"] return [[0, 0], [0, 2], [1, 1]]  
+  
 ---
 ```haxe  
- public static inline function an_in_b_I(
- a:Array<Int>,
- b:Array<Int>
- ):Array<Array<Int>>
+  
+  public static inline function an_in_bn_S(  
+   a:Array<String>,  
+   b:Array<Array<String>>  
+   ):Array<Array<Int>>
 ```    
- return array of arrays with pair indexes which is indexes equivalent elements of a and b arrays.
- a=[1, 2] b=[1, 2, 1] return [[0, 0], [0, 2], [1, 1]]
- 
+  
+  return array of arrays with pair indexes which is indexes equivalent elements of a and b arrays.  
+  a=["1", "2"] b=[["1", "2", "1"],["0", "2"]] return [[0, 0, 0], [0, 0, 2], [1, 0, 1], [1, 1, 1]]. where indexes [1, 0, 1] = [1(a), 0(b), 1(b[0])]  
+  
 ---
 ```haxe  
- public static inline function an_in_bn_I(
- a:Array<Int>,
- b:Array<Array<Int>>
- ):Array<Array<Int>>
+  
+  public static inline function an_in_b_I(  
+   a:Array<Int>,  
+   b:Array<Int>  
+   ):Array<Array<Int>>
 ```    
- return array of arrays with pair indexes which is indexes equivalent elements of a and b arrays.
- a=[1, 2] b=[[1, 2, 1],[0, 2]] return [[0, 0, 0], [0, 0, 2], [1, 0, 1], [1, 1, 1]]. where indexes [1, 0, 1] = [1(a), 0(b), 1(b[0])]
- 
+  
+  return array of arrays with pair indexes which is indexes equivalent elements of a and b arrays.  
+  a=[1, 2] b=[1, 2, 1] return [[0, 0], [0, 2], [1, 1]]  
+  
 ---
 ```haxe  
- public static inline function an_in_b_F(
- a:Array<Float>,
- b:Array<Float>
- ):Array<Array<Int>>
+  
+  public static inline function an_in_bn_I(  
+   a:Array<Int>,  
+   b:Array<Array<Int>>  
+   ):Array<Array<Int>>
 ```    
- return array of arrays with pair indexes which is indexes equivalent elements of a and b arrays.
- a=[1.0, 2.0] b=[1.0, 2.0, 1.0] return [[0, 0], [0, 2], [1, 1]]
- 
+  
+  return array of arrays with pair indexes which is indexes equivalent elements of a and b arrays.  
+  a=[1, 2] b=[[1, 2, 1],[0, 2]] return [[0, 0, 0], [0, 0, 2], [1, 0, 1], [1, 1, 1]]. where indexes [1, 0, 1] = [1(a), 0(b), 1(b[0])]  
+  
 ---
 ```haxe  
- public static inline function an_in_bn_F(
- a:Array<Float>,
- b:Array<Array<Float>>
- ):Array<Array<Int>>
+  
+  public static inline function an_in_b_F(  
+   a:Array<Float>,  
+   b:Array<Float>  
+   ):Array<Array<Int>>
 ```    
- return array of arrays with pair indexes which is indexes equivalent elements of a and b arrays.
- a=[1.0, 2.0] b=[[1.0, 2.0, 1.0],[0, 2.0]] return [[0, 0, 0], [0, 0, 2], [1, 0, 1], [1, 1, 1]]. where indexes [1, 0, 1] = [1(a), 0(b), 1(b[0])]
- 
+  
+  return array of arrays with pair indexes which is indexes equivalent elements of a and b arrays.  
+  a=[1.0, 2.0] b=[1.0, 2.0, 1.0] return [[0, 0], [0, 2], [1, 1]]  
+  
 ---
 ```haxe  
- public static function chain_indexes(
- a_l:Int,
- n:Int,
- ring:Bool
- ):Array<Array<Int>>
+  
+  public static inline function an_in_bn_F(  
+   a:Array<Float>,  
+   b:Array<Array<Float>>  
+   ):Array<Array<Int>>
 ```    
- chain bonus function. split range to sequences specified length n with same border values.
- f(6, 3, false) return [[0, 1, 2], [2, 3, 4]]. But f(6, 3, true) return [[0, 1, 2], [2, 3, 4], [4, 5, 0]].
- Can be used to split dotsXDfield (array of 3D dots) to array of separated 4dots curves trajectories which have same border dots.
- Just split array of dots length a_l to n = 4. Then recount to beziercurves or create multidot curve use each last three dots.
- 
+  
+  return array of arrays with pair indexes which is indexes equivalent elements of a and b arrays.  
+  a=[1.0, 2.0] b=[[1.0, 2.0, 1.0],[0, 2.0]] return [[0, 0, 0], [0, 0, 2], [1, 0, 1], [1, 1, 1]]. where indexes [1, 0, 1] = [1(a), 0(b), 1(b[0])]  
+  
 ---
 ```haxe  
- public static inline function chain_S(
- a:Array<String>,
- n:Int,
- ring:Bool 
+  
+  public static function chain_indexes(  
+   a_l:Int,  
+   n:Int,  
+   ring:Bool  
+   ):Array<Array<Int>>
 ```    
- create chain from String Array. Sequences with same border values
- 
+  
+  chain bonus function. split range to sequences specified length n with same border values.  
+  f(6, 3, false) return [[0, 1, 2], [2, 3, 4]]. But f(6, 3, true) return [[0, 1, 2], [2, 3, 4], [4, 5, 0]].  
+  Can be used to split dotsXDfield (array of 3D dots) to array of separated 4dots curves trajectories which have same border dots.  
+  Just split array of dots length a_l to n = 4. Then recount to beziercurves or create multidot curve use each last three dots.  
+  
 ---
 ```haxe  
- public static inline function chain_I(
- a:Array<Int>,
- n:Int,
- ring:Bool 
+  
+  public static inline function chain_S(  
+   a:Array<String>,  
+   n:Int,  
+   ring:Bool = false  
+   ):Array<Array<String>>
 ```    
- create chain from Int Array. Sequences with same border values
- 
+  
+  create chain from String Array. Sequences with same border values  
+  
 ---
 ```haxe  
- public static inline function chain_F(
- a:Array<Float>,
- n:Int,
- ring:Bool 
+  
+  public static inline function chain_I(  
+   a:Array<Int>,  
+   n:Int,  
+   ring:Bool = false  
+   ):Array<Array<Int>>
 ```    
- create chain from Float Array. Sequences with same border values
- 
+  
+  create chain from Int Array. Sequences with same border values  
+  
 ---
 ```haxe  
- public static inline function steps_internal(
- xmin:Float,
- xmax:Float,
- n:Int,
- borders:Bool 
+  
+  public static inline function chain_F(  
+   a:Array<Float>,  
+   n:Int,  
+   ring:Bool = false  
+   ):Array<Array<Float>>
 ```    
- split interval to equal steps
- 
+  
+  create chain from Float Array. Sequences with same border values  
+  
 ---
 ```haxe  
- public static function steps_external(
- smin:Float,
- smax:Float,
- n:Int,
- direction:Int
- ):Array<Float>
+  
+  public static inline function steps_internal(  
+   xmin:Float,  
+   xmax:Float,  
+   n:Int,  
+   borders:Bool = false  
+   ):Array<Float>
 ```    
- repeat step multiple times.
- f(1, 5, 3, -1) return [-11, -7, -3, 1, 5]
- f(1, 5, 3, 0) return [-11, -7, -3, 1, 5, 9, 13, 17]
- f(1, 5, 3, 1) return [1, 5, 9, 13, 17]
- 
+  
+  split interval to equal steps  
+  
 ---
 ```haxe  
- public static inline function sign_I(x:Int):Int
+  
+  public static function steps_external(  
+   smin:Float,  
+   smax:Float,  
+   n:Int,  
+   direction:Int  
+   ):Array<Float>
 ```    
- return sign of Int. if x &lt; 0 return -1, else return 1.
- 
+  
+  repeat step multiple times.  
+  f(1, 5, 3, -1) return [-11, -7, -3, 1, 5]  
+  f(1, 5, 3, 0) return [-11, -7, -3, 1, 5, 9, 13, 17]  
+  f(1, 5, 3, 1) return [1, 5, 9, 13, 17]  
+  
 ---
 ```haxe  
- public static inline function sign_F(x:Float):Int
+  
+  public static inline function sign_I(x:Int):Int
 ```    
- return sign of Float. if x &lt; 0 return -1, else return 1.
- 
+  
+  return sign of Int. if x &lt; 0 return -1, else return 1.  
+  
 ---
 ```haxe  
- public static inline function sign3_I(x:Int):Int
+  
+  public static inline function sign_F(x:Float):Int
 ```    
- return sign of Int or 0. if x &lt; 0 return -1, if x &gt; 0 return 1, if x == 0 return 0.
- 
+  
+  return sign of Float. if x &lt; 0 return -1, else return 1.  
+  
 ---
 ```haxe  
- public static inline function sign3_F(x:Float):Int
+  
+  public static inline function sign3_I(x:Int):Int
 ```    
- return sign of Float or 0. if x &lt; 0 return -1, if x &gt; 0 return 1, if x == 0 return 0.
- 
+  
+  return sign of Int or 0. if x &lt; 0 return -1, if x &gt; 0 return 1, if x == 0 return 0.  
+  
 ---
 ```haxe  
- public static inline function sin_cos_cut(x:Float):Float 
+  
+  public static inline function sign3_F(x:Float):Int
 ```    
- sin cos bonus function. Normalise sin cos, counted use vectors to -1...1 include boders.
- Need because sometimes (detected on python3 in the past) result of calculating sin cos
- uses vectors can be more then 1, or less then -1.
- For example 1.00000000001 etc. Just tiny correction, just for case.
- 
+  
+  return sign of Float or 0. if x &lt; 0 return -1, if x &gt; 0 return 1, if x == 0 return 0.  
+  
 ---
 ```haxe  
- public static inline function degrees(angle:Float):Float 
+  
+  public static inline function sin_cos_cut(x:Float):Float 
 ```    
- convert radians angle to degrees angle value
- 
+  
+  sin cos bonus function. Normalise sin cos, counted use vectors to -1...1 include boders.  
+  Need because sometimes (detected on python3 in the past) result of calculating sin cos  
+  uses vectors can be more then 1, or less then -1.  
+  For example 1.00000000001 etc. Just tiny correction, just for case.  
+  
 ---
 ```haxe  
- public static inline function radians(angle:Float):Float 
+  
+  public static inline function degrees(angle:Float):Float 
 ```    
- convert degrees angle to radians angle value
- 
+  
+  convert radians angle to degrees angle value  
+  
 ---
 ```haxe  
- public static function angle_quadrant(angle:Float, rad:Bool 
+  
+  public static inline function radians(angle:Float):Float 
 ```    
- return the quadrant of any angle. 0 angle return 4 quadrant.
- For example use degrees:
- ... 0 &lt; angle <= 90 return 1 quadrant 
- ... 90 < angle <= 180 return 2 quadrant 
- ... 180 < angle <= 270 return 3 quadrant 
- ... 270 < angle <= 360 return 4 quadrant 
- 
+  
+  convert degrees angle to radians angle value  
+  
 ---
 ```haxe  
- public static function vecXDnorm(vecXD:Array<Float>):Float
+  
+  public static function angle_quadrant(angle:Float, rad:Bool = false):Int 
 ```    
- return vector length (other names "norm" or "magnitude").
- For [2,3] return Math.sqrt((2 * 2) + (3 * 3))
- 
+  
+  return the quadrant of any angle. 0 angle return 4 quadrant.  
+  For example use degrees:  
+  ... 0 &lt; angle &lt;= 90 return 1 quadrant  
+  ... 90 &lt; angle &lt;= 180 return 2 quadrant  
+  ... 180 &lt; angle &lt;= 270 return 3 quadrant  
+  ... 270 &lt; angle &lt;= 360 return 4 quadrant  
+  
 ---
 ```haxe  
- public static inline function vecXDfieldnorm(vecXDfield:Array<Array<Float>>):Array<Float>
+  
+  public static function vecXDnorm(vecXD:Array<Float>):Float
 ```    
- return array of lengths of vectors
- 
+  
+  return vector length (other names "norm" or "magnitude").  
+  For [2,3] return Math.sqrt((2 * 2) + (3 * 3))  
+  
 ---
 ```haxe  
- public static function maxabs(a:Array<Float>):Float
+  
+  public static inline function vecXDfieldnorm(vecXDfield:Array<Array<Float>>):Array<Float>
 ```    
- return Float Array element with maximum absolute value with sign.
- Each element compared as abs(element). [1, 2, -4] return -4.
- 
+  
+  return array of lengths of vectors  
+  
 ---
 ```haxe  
- public static function vecXD(
- dotXDa:Array<Float>,
- dotXDb:Array<Float>
- ):Array<Float>
+  
+  public static function maxabs(a:Array<Float>):Float
 ```    
- return vector builded uses two dots
- 
+  
+  return Float Array element with maximum absolute value with sign.  
+  Each element compared as abs(element). [1, 2, -4] return -4.  
+  
 ---
 ```haxe  
- public static function vecXDone(vecXD:Array<Float>):Array<Float>
+  
+  public static function vecXD(  
+   dotXDa:Array<Float>,  
+   dotXDb:Array<Float>  
+   ):Array<Float>
 ```    
- recount vector to length equal 1
- 
+  
+  return vector builded uses two dots  
+  
 ---
 ```haxe  
- public static function vecXDfield(dots:Array<Array<Float>>):Array<Array<Float>>
+  
+  public static function vecXDone(vecXD:Array<Float>):Array<Float>
 ```    
- return vector field from first dot to each other
- 
+  
+  recount vector to length equal 1  
+  
 ---
 ```haxe  
- public static inline function vecXDsame(
- vecXDa:Array<Float>,
- vecXDb:Array<Float>
- ):Null<Bool>
+  
+  public static function vecXDfield(dots:Array<Array<Float>>):Array<Array<Float>>
 ```    
- compare vectors. Returns true if vectors have equal data
- 
+  
+  return vector field from first dot to each other  
+  
 ---
 ```haxe  
- public static inline function vecXDfieldsame(vecXDfield:Array<Array<Float>>):Null<Bool>
+  
+  public static inline function vecXDsame(  
+   vecXDa:Array<Float>,  
+   vecXDb:Array<Float>  
+   ):Null<Bool>
 ```    
- compare vectors from vector field. Returns true if all vectors have same data
- 
+  
+  compare vectors. Returns true if vectors have equal data  
+  
 ---
 ```haxe  
- public static function vecXDrandom(x:Int 
+  
+  public static inline function vecXDfieldsame(vecXDfield:Array<Array<Float>>):Null<Bool>
 ```    
- return random vector with length equal 1
- 
+  
+  compare vectors from vector field. Returns true if all vectors have same data  
+  
 ---
 ```haxe  
- public static function vecXDsum(
- vecXDa:Array<Float>,
- vecXDb:Array<Float>
- ):Array<Float>
+  
+  public static function vecXDrandom(x:Int = 3):Array<Float>
 ```    
- return vector, which is sum of two vectors
- 
+  
+  return random vector with length equal 1  
+  
 ---
 ```haxe  
- public static function vecXDfieldsum(vecXDfield:Array<Array<Float>>):Array<Float>
+  
+  public static function vecXDsum(  
+   vecXDa:Array<Float>,  
+   vecXDb:Array<Float>  
+   ):Array<Float>
 ```    
- return vector, which is sum of vector field
- 
+  
+  return vector, which is sum of two vectors  
+  
 ---
 ```haxe  
- public static function vecXDdiff(
- vecXDa:Array<Float>,
- vecXDb:Array<Float>
- ):Array<Float>
+  
+  public static function vecXDfieldsum(vecXDfield:Array<Array<Float>>):Array<Float>
 ```    
- return vector, which is diff of vectors. vecXDa - vecXDb
- 
+  
+  return vector, which is sum of vector field  
+  
 ---
 ```haxe  
- public static function vecXDfielddiff(vecXDfield:Array<Array<Float>>):Array<Float>
+  
+  public static function vecXDdiff(  
+   vecXDa:Array<Float>,  
+   vecXDb:Array<Float>  
+   ):Array<Float>
 ```    
- return vector, which is diff of vector field. v0-v1...-vn
- 
+  
+  return vector, which is diff of vectors. vecXDa - vecXDb  
+  
 ---
 ```haxe  
- public static function vecXDback(vecXD:Array<Float>):Array<Float>
+  
+  public static function vecXDfielddiff(vecXDfield:Array<Array<Float>>):Array<Float>
 ```    
- return opposite vector. [1, 2, -4] return [-1, -2, 4]
- 
+  
+  return vector, which is diff of vector field. v0-v1...-vn  
+  
 ---
 ```haxe  
- public static function vecXDfieldback(vecXDfield:Array<Array<Float>>):Array<Array<Float>>
+  
+  public static function vecXDback(vecXD:Array<Float>):Array<Float>
 ```    
- return opposite vector field. [[1, 2], [3, -4]] return [[-1, -2], [-3, 4]]
- 
+  
+  return opposite vector. [1, 2, -4] return [-1, -2, 4]  
+  
 ---
 ```haxe  
- public static function vecXDparalleled_sameside(
- vecXDa:Array<Float>,
- vecXDb:Array<Float>
- ):Null<Bool>
+  
+  public static function vecXDfieldback(vecXDfield:Array<Array<Float>>):Array<Array<Float>>
 ```    
- return true if vectors paralleled and have same direction
- 
+  
+  return opposite vector field. [[1, 2], [3, -4]] return [[-1, -2], [-3, 4]]  
+  
 ---
 ```haxe  
- public static function vecXDparalleled_opposite(
- vecXDa:Array<Float>,
- vecXDb:Array<Float>
- ):Null<Bool>
+  
+  public static function vecXDparalleled_sameside(  
+   vecXDa:Array<Float>,  
+   vecXDb:Array<Float>  
+   ):Null<Bool>
 ```    
- return true if vectors paralleled and have opposite direction
- 
+  
+  return true if vectors paralleled and have same direction  
+  
 ---
 ```haxe  
- public static function vecXDparalleled(
- vecXDa:Array<Float>,
- vecXDb:Array<Float>
- ):Bool
+  
+  public static function vecXDparalleled_opposite(  
+   vecXDa:Array<Float>,  
+   vecXDb:Array<Float>  
+   ):Null<Bool>
 ```    
- return true if vectors paralleled
- 
+  
+  return true if vectors paralleled and have opposite direction  
+  
 ---
 ```haxe  
- public static function vecXDscalar(
- vecXDa:Array<Float>,
- vecXDb:Array<Float>
- ):Null<Float>
+  
+  public static function vecXDparalleled(  
+   vecXDa:Array<Float>,  
+   vecXDb:Array<Float>  
+   ):Bool
 ```    
- return scalar product of vectors
- 
+  
+  return true if vectors paralleled  
+  
 ---
 ```haxe  
- public static function vecXDcos(
- vecXDa:Array<Float>,
- vecXDb:Array<Float>
- ):Null<Float>
+  
+  public static function vecXDscalar(  
+   vecXDa:Array<Float>,  
+   vecXDb:Array<Float>  
+   ):Null<Float>
 ```    
- return cos between vectors
- 
+  
+  return scalar product of vectors  
+  
 ---
 ```haxe  
- public static function vecXDangle(
- vecXDa:Array<Float>,
- vecXDb:Array<Float>,
- rad:Bool 
+  
+  public static function vecXDcos(  
+   vecXDa:Array<Float>,  
+   vecXDb:Array<Float>  
+   ):Null<Float>
 ```    
- return angle between vectors
- 
+  
+  return cos between vectors  
+  
 ---
 ```haxe  
- public static function vec3Dnormal(
- vec3Da:Array<Float>,
- vec3Db:Array<Float>
- ):Array<Float>
+  
+  public static function vecXDangle(  
+   vecXDa:Array<Float>,  
+   vecXDb:Array<Float>,  
+   rad:Bool = false  
+   ):Null<Float>
 ```    
- return vector 3D, which is result of cross product of vectors (normal vector of plane based on two vectors). 
- Result vector placed so if you will see from end of result vector, then the rotating direction will be 
- CCW from vec3Da to vec3Db
- 
+  
+  return angle between vectors  
+  
 ---
 ```haxe  
- public static function vec3Dfieldnormal(vec3Dfield:Array<Array<Float>>):Array<Float>
+  
+  public static function vec3Dnormal(  
+   vec3Da:Array<Float>,  
+   vec3Db:Array<Float>  
+   ):Array<Float>
 ```    
- return vector 3D, which is result of step by step cross product for each next vector 3D 
- from vector field with previous cross product result vector 3D
- 
+  
+  return vector 3D, which is result of cross product of vectors (normal vector of plane based on two vectors).  
+  Result vector placed so if you will see from end of result vector, then the rotating direction will be  
+  CCW from vec3Da to vec3Db  
+  
 ---
 ```haxe  
- public static function vecXDmiddle(
- vecXDa:Array<Float>,
- vecXDb:Array<Float>
- ):Array<Float>
+  
+  public static function vec3Dfieldnormal(vec3Dfield:Array<Array<Float>>):Array<Float>
 ```    
- return vector with middle value. Just call middle_xF([vecXDa, vecXDb])
- 
+  
+  return vector 3D, which is result of step by step cross product for each next vector 3D  
+  from vector field with previous cross product result vector 3D  
+  
 ---
 ```haxe  
- public static function vecXDfieldmiddle(vecXDfield:Array<Array<Float>>):Array<Float>
+  
+  public static function vecXDmiddle(  
+   vecXDa:Array<Float>,  
+   vecXDb:Array<Float>  
+   ):Array<Float>
 ```    
- return vector with middle value. Just call middle_xF(vecXDfield)
- 
+  
+  return vector with middle value. Just call middle_xF([vecXDa, vecXDb])  
+  
 ---
 ```haxe  
- public static function vecXDsamesize(
- vecXDa:Array<Float>,
- vecXDb:Array<Float>
- ):Null<Bool>
+  
+  public static function vecXDfieldmiddle(vecXDfield:Array<Array<Float>>):Array<Float>
 ```    
- return true if vectors have same size. Bonus function. Just call same_size_F([vecXDa, vecXDb])
- 
+  
+  return vector with middle value. Just call middle_xF(vecXDfield)  
+  
 ---
 ```haxe  
- public static function vecXDfieldsamesize(vecXDfield:Array<Array<Float>>):Null<Bool>
+  
+  public static function vecXDsamesize(  
+   vecXDa:Array<Float>,  
+   vecXDb:Array<Float>  
+   ):Null<Bool>
 ```    
- return true if vector from vector field have same size. Bonus function. Just call same_size_F(vecXDfield)
- 
+  
+  return true if vectors have same size. Bonus function. Just call same_size_F([vecXDa, vecXDb])  
+  
 ---
 ```haxe  
- public static function dotXDoffset(
- dotXD:Array<Float>,
- vecXD:Array<Float>,
- t:Float
- ):Array<Float>
+  
+  public static function vecXDfieldsamesize(vecXDfield:Array<Array<Float>>):Null<Bool>
 ```    
- return dot, which result of offset dotXD along vecXD to t
- 
+  
+  return true if vector from vector field have same size. Bonus function. Just call same_size_F(vecXDfield)  
+  
 ---
 ```haxe  
- public static function dot3Dline3D_x_plane3D(
- dot3D0:Array<Float>,
- vec3D0:Array<Float>,
- vec3Dplane:Array<Float>,
- dplane:Float 
+  
+  public static function dotXDoffset(  
+   dotXD:Array<Float>,  
+   vecXD:Array<Float>,  
+   t:Float  
+   ):Array<Float>
 ```    
- return dot 3D, which is intersection dot for line3D(dot3D0, vec3D0) and plane3D(vec3Dplane, dplane)
- 
+  
+  return dot, which result of offset dotXD along vecXD to t  
+  
 ---
 ```haxe  
- public static function projection_dot3D_on_plane3D(
- dot3D:Array<Float>,
- plane3D:Array<Float>
- ):Array<Float>
+  
+  public static function dot3Dline3D_x_plane3D(  
+   dot3D0:Array<Float>,  
+   vec3D0:Array<Float>,  
+   vec3Dplane:Array<Float>,  
+   dplane:Float = 0  
+   ):Array<Float>
 ```    
- return dot 3D, which is projection of dot3D to plane3D
- 
+  
+  return dot 3D, which is intersection dot for line3D(dot3D0, vec3D0) and plane3D(vec3Dplane, dplane)  
+  
 ---
 ```haxe  
- public static function dot3D_to_dot2Dviewplane(
- dot3D:Array<Float>,
- dot3Dviewplanecenter:Array<Float>, vec3Dviewplane:Array<Float>,
- vec3Dviewplane_ox:Array<Float>
- ):Array<Float>
+  
+  public static function projection_dot3D_on_plane3D(  
+   dot3D:Array<Float>,  
+   plane3D:Array<Float>  
+   ):Array<Float>
 ```    
- return dot 2D (x, y) from dot3D projected on view plane, View plane determined by coordinate axes center plane 3D dot, and plane 3D normal vector. 
- View plane vector 3D of axis ox, will be projected to view plane. Incoming value can not be strictly belongs to the view plane.
- 
+  
+  return dot 3D, which is projection of dot3D to plane3D  
+  
 ---
 ```haxe  
- public static function dotXDscale(
- dotXD:Array<Float>,
- scaleXD:Array<Float>,
- dotXDc:Array<Float>
- ):Array<Float>
+  
+  public static function dot3D_to_dot2Dviewplane(  
+   dot3D:Array<Float>,  
+   dot3Dviewplanecenter:Array<Float>, vec3Dviewplane:Array<Float>,  
+   vec3Dviewplane_ox:Array<Float>  
+   ):Array<Float>
 ```    
- returns dot with scaled values relative to the scaling center
- 
+  
+  return dot 2D (x, y) from dot3D projected on view plane, View plane determined by coordinate axes center plane 3D dot, and plane 3D normal vector.  
+  View plane vector 3D of axis ox, will be projected to view plane. Incoming value can not be strictly belongs to the view plane.  
+  
 ---
 ```haxe  
- public static function vec3Drotate(
- vec3D:Array<Float>,
- vec3Daxis:Array<Float>,
- angle:Float,
- rad:Bool 
+  
+  public static function dotXDscale(  
+   dotXD:Array<Float>,  
+   scaleXD:Array<Float>,  
+   dotXDc:Array<Float>  
+   ):Array<Float>
 ```    
- returns vector 3D, rotated around axis vector to angle
- 
+  
+  returns dot with scaled values relative to the scaling center  
+  
 ---
 ```haxe  
- public static function vec3Dfield_rotate_around_vec3Daxes(
- vec3Dfield:Array<Array<Float>>,
- vec3Daxes:Array<Array<Float>>,
- angles:Array<Float>,
- rad:Bool 
+  
+  public static function vec3Drotate(  
+   vec3D:Array<Float>,  
+   vec3Daxis:Array<Float>,  
+   angle:Float,  
+   rad:Bool = false  
+   ):Array<Float>
 ```    
- returns vector 3D field, each vector of which rotated to own angle, around own axis
- 
+  
+  returns vector 3D, rotated around axis vector to angle  
+  
 ---
 ```haxe  
- public static function dot3Drotate(
- dot3D:Array<Float>,
- dot3Dc:Array<Float>,
- vec3D:Array<Float>,
- angle:Float,
- rad:Bool 
+  
+  public static function vec3Dfield_rotate_around_vec3Daxes(  
+   vec3Dfield:Array<Array<Float>>,  
+   vec3Daxes:Array<Array<Float>>,  
+   angles:Array<Float>,  
+   rad:Bool = false  
+  ):Array<Array<Float>>
 ```    
- returns dot 3D, rotated to angle, around center of rotation determined by dot and axis of rotation
- 
+  
+  returns vector 3D field, each vector of which rotated to own angle, around own axis  
+  
 ---
 ```haxe  
- public static function plane3D_dot3Dnormal(
- dot3D:Array<Float>,
- vec3D:Array<Float>
- ):Array<Float>
+  
+  public static function dot3Drotate(  
+   dot3D:Array<Float>,  
+   dot3Dc:Array<Float>,  
+   vec3D:Array<Float>,  
+   angle:Float,  
+   rad:Bool = false  
+   ):Array<Float>
 ```    
- returns plane 3D (a, b, c, d) determined by dot 3D and vector 3D.
- Where (a, b, c) is plane 3D normal vector, and (d) is displacement plane from (0, 0, 0)
- 
+  
+  returns dot 3D, rotated to angle, around center of rotation determined by dot and axis of rotation  
+  
 ---
 ```haxe  
- public static function plane3D_dot_vec_vec(
- dot3D:Array<Float>,
- vec3Da:Array<Float>,
- vec3Db:Array<Float>
- ):Array<Float>
+  
+  public static function plane3D_dot3Dnormal(  
+   dot3D:Array<Float>,  
+   vec3D:Array<Float>  
+   ):Array<Float>
 ```    
- returns plane 3D (a, b, c, d), determined by dot and two not paralleled vectors. 
- Where (a, b, c) is plane 3D normal vector, and (d) is displacement plane from (0, 0, 0)
- 
+  
+  returns plane 3D (a, b, c, d) determined by dot 3D and vector 3D.  
+  Where (a, b, c) is plane 3D normal vector, and (d) is displacement plane from (0, 0, 0)  
+  
 ---
 ```haxe  
- public static function plane3D_3dots(
- dot3D:Array<Float>,
- dot3Da:Array<Float>,
- dot3Db:Array<Float>
- ):Array<Float>
+  
+  public static function plane3D_dot_vec_vec(  
+   dot3D:Array<Float>,  
+   vec3Da:Array<Float>,  
+   vec3Db:Array<Float>  
+   ):Array<Float>
 ```    
- returns plane 3D (a, b, c, d), determined by three not equal dots. 
- Where (a, b, c) is plane 3D normal vector, and (d) is displacement plane from (0, 0, 0)
- 
+  
+  returns plane 3D (a, b, c, d), determined by dot and two not paralleled vectors.  
+  Where (a, b, c) is plane 3D normal vector, and (d) is displacement plane from (0, 0, 0)  
+  
 ---
 ```haxe  
- public static function plane3D_2dots(
- dot3D:Array<Float>,
- dot3Da:Array<Float>
- ):Array<Float>
+  
+  public static function plane3D_3dots(  
+   dot3D:Array<Float>,  
+   dot3Da:Array<Float>,  
+   dot3Db:Array<Float>  
+   ):Array<Float>
 ```    
- returns plane 3D (a, b, c, d), determined by two not equal dots. 
- Where (a, b, c) is plane 3D normal vector, and (d) is displacement plane from (0, 0, 0)
- 
+  
+  returns plane 3D (a, b, c, d), determined by three not equal dots.  
+  Where (a, b, c) is plane 3D normal vector, and (d) is displacement plane from (0, 0, 0)  
+  
 ---
 ```haxe  
- public static function distance_dot3D_plane3D(
- dot3D:Array<Float>,
- plane3D:Array<Float>
- ):Null<Float>
+  
+  public static function plane3D_2dots(  
+   dot3D:Array<Float>,  
+   dot3Da:Array<Float>  
+   ):Array<Float>
 ```    
- returns distance from dot 3D to plane 3D
- 
+  
+  returns plane 3D (a, b, c, d), determined by two not equal dots.  
+  Where (a, b, c) is plane 3D normal vector, and (d) is displacement plane from (0, 0, 0)  
+  
 ---
 ```haxe  
- public static function random_vec3D_in_plane3D(plane3D:Array<Float>):Array<Float>
+  
+  public static function distance_dot3D_plane3D(  
+   dot3D:Array<Float>,  
+   plane3D:Array<Float>  
+   ):Null<Float>
 ```    
- returns a random vector 3D paralleled to the plane 3D(lies on plane 3D)
- 
+  
+  returns distance from dot 3D to plane 3D  
+  
 ---
 ```haxe  
- public static function random_dot3D_in_plane3D(
- plane3D:Array<Float>,
- dot3D:Array<Float>,
- radius:Float
- ):Array<Float>
+  
+  public static function random_vec3D_in_plane3D(plane3D:Array<Float>):Array<Float>
 ```    
- returns random dot 3D belongs on plane 3D
- 
+  
+  returns a random vector 3D paralleled to the plane 3D(lies on plane 3D)  
+  
 ---
 ```haxe  
- public static function curve3D_4dots(
- dot3D1:Array<Float>,
- vec3D1:Array<Float>,
- distance1:Float,
- dot3D2:Array<Float>,
- vec3D2:Array<Float>,
- distance2:Float
- ):Array<Array<Float>>
+  
+  public static function random_dot3D_in_plane3D(  
+   plane3D:Array<Float>,  
+   dot3D:Array<Float>,  
+   radius:Float  
+   ):Array<Float>
 ```    
- returns curve 3D ((x, y, z), (x, y, z), (x, y, z), (x, y, z)) 
- with internal dots, calculated use offset from border dots along levers to distances. 
- The resul curve 3D have 4 dots 3D, two border dots incoming, and two internal dots calculated. 
- Result will [dot3D1, dot3D1offset, dot3D2offset, dot3D2]
- 
+  
+  returns random dot 3D belongs on plane 3D  
+  
 ---
 ```haxe  
- public static function curve3D_3dots(
- dot3D0:Array<Float>,
- dot3D1:Array<Float>,
- dot3D2:Array<Float>,
- lever1:Float 
+  
+  public static function curve3D_4dots(  
+   dot3D1:Array<Float>,  
+   vec3D1:Array<Float>,  
+   distance1:Float,  
+   dot3D2:Array<Float>,  
+   vec3D2:Array<Float>,  
+   distance2:Float  
+   ):Array<Array<Float>>
 ```    
- returns curve 3D ((x, y, z), (x, y, z), (x, y, z), (x, y, z)). 
- Shape of result curve will be close to arc (1/4 ellipse). 
- Allowed few variants of result curve modification(distortion).
- Default lever1 and lever2 values equal 0.55.
- The 0.55 value in case of bezier cubic 3D curve will create shape close to ellipse arc.
- 
+  
+  returns curve 3D ((x, y, z), (x, y, z), (x, y, z), (x, y, z))  
+  with internal dots, calculated use offset from border dots along levers to distances.  
+  The resul curve 3D have 4 dots 3D, two border dots incoming, and two internal dots calculated.  
+  Result will [dot3D1, dot3D1offset, dot3D2offset, dot3D2]  
+  
 ---
 ```haxe  
- public static function line3D_2dots(
- dot3D0:Array<Float>,
- dot3D1:Array<Float>
- ):Array<Array<Float>>
+  
+  public static function curve3D_3dots(  
+   dot3D0:Array<Float>,  
+   dot3D1:Array<Float>,  
+   dot3D2:Array<Float>,  
+   lever1:Float = 0.55,  
+   lever2:Float = 0.55,  
+   a_s:Int = -1  
+   ):Array<Array<Float>>
 ```    
- returns line 3D ((x, y, z), (x, y, z), (x, y, z), (x, y, z)). 
- Which is (dot3D0, 1/3 offset, 2/3 offset, dot3D1). 
- Comfort for use as bezier cubic curve 3D as straight line
- 
+  
+  returns curve 3D ((x, y, z), (x, y, z), (x, y, z), (x, y, z)).  
+  Shape of result curve will be close to arc (1/4 ellipse).  
+  Allowed few variants of result curve modification(distortion).  
+  Default lever1 and lever2 values equal 0.55.  
+  The 0.55 value in case of bezier cubic 3D curve will create shape close to ellipse arc.  
+  
 ---
 ```haxe  
- public static function line3D_dot_offset(
- dot3D:Array<Float>,
- vec3D:Array<Float>,
- distance:Float
- ):Array<Array<Float>>
+  
+  public static function line3D_2dots(  
+   dot3D0:Array<Float>,  
+   dot3D1:Array<Float>  
+   ):Array<Array<Float>>
 ```    
- returns line 3D ((x, y, z), (x, y, z), (x, y, z), (x, y, z)). 
- Just call line3D_2dots with precalculated second dot 3D
- 
+  
+  returns line 3D ((x, y, z), (x, y, z), (x, y, z), (x, y, z)).  
+  Which is (dot3D0, 1/3 offset, 2/3 offset, dot3D1).  
+  Comfort for use as bezier cubic curve 3D as straight line  
+  
 ---
 ```haxe  
- public static inline function curve3D_4to12(curve:Array<Array<Float>>):Array<Float>
+  
+  public static function line3D_dot_offset(  
+   dot3D:Array<Float>,  
+   vec3D:Array<Float>,  
+   distance:Float  
+   ):Array<Array<Float>>
 ```    
- returns curve 3D as 12 coordinates, recounted from 4 dots 3D. 
- [[x, y, z], [x, y, z], [x, y, z], [x, y, z]] return [x1, y1, z1, x2, y2, z2, x3, y3, z3, x4, y4, z4]
- 
+  
+  returns line 3D ((x, y, z), (x, y, z), (x, y, z), (x, y, z)).  
+  Just call line3D_2dots with precalculated second dot 3D  
+  
 ---
 ```haxe  
- public static inline function curve3D_12to4(curve:Array<Float>):Array<Array<Float>>
+  
+  public static inline function curve3D_4to12(curve:Array<Array<Float>>):Array<Float>
 ```    
- returns curve 3D as 4 dots 3D, recounted from 12 coordinates. 
- [x1, y1, z1, x2, y2, z2, x3, y3, z3, x4, y4, z4] return [[x, y, z], [x, y, z], [x, y, z], [x, y, z]]
- 
+  
+  returns curve 3D as 12 coordinates, recounted from 4 dots 3D.  
+  [[x, y, z], [x, y, z], [x, y, z], [x, y, z]] return [x1, y1, z1, x2, y2, z2, x3, y3, z3, x4, y4, z4]  
+  
 ---
 ```haxe  
- public static inline function beziercubic3D_derivativeparameters(curve:Array<Array<Float>>):Array<Array<Float>>
+  
+  public static inline function curve3D_12to4(curve:Array<Float>):Array<Array<Float>>
 ```    
- beziercubic3D_derivative bonus function. returns parameters for derivative calculation. 
- [[x1, y1, z1], [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]] return [[x1,x2,x3,x4],[y1,y2,y3,y4],[z1,z2,z3,z4]]
- 
+  
+  returns curve 3D as 4 dots 3D, recounted from 12 coordinates.  
+  [x1, y1, z1, x2, y2, z2, x3, y3, z3, x4, y4, z4] return [[x, y, z], [x, y, z], [x, y, z], [x, y, z]]  
+  
 ---
 ```haxe  
- public static inline function beziercubic_derivative(
- bcp:Array<Float>,
- p:Float
- ):Null<Float>
+  
+  public static inline function beziercubic3D_derivativeparameters(curve:Array<Array<Float>>):Array<Array<Float>>
 ```    
- return bezier cubic curve derivative for each dimension. Usual case `x` or `y` or `z`
- 
+  
+  beziercubic3D_derivative bonus function. returns parameters for derivative calculation.  
+  [[x1, y1, z1], [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]] return [[x1,x2,x3,x4],[y1,y2,y3,y4],[z1,z2,z3,z4]]  
+  
 ---
 ```haxe  
- public static function beziercubic3D_derivative(
- curve:Array<Array<Float>>,
- p:Float
- ):Array<Float>
+  
+  public static inline function beziercubic_derivative(  
+   bcp:Array<Float>,  
+   p:Float  
+   ):Null<Float>
 ```    
- returns bezier cubic curve 3D derivative
- 
+  
+  return bezier cubic curve derivative for each dimension. Usual case `x` or `y` or `z`  
+  
 ---
 ```haxe  
- public static inline function beziercubic_support_dot_one(beziercubic_one_axis_coordinates:Array<Float>):Null<Float>
+  
+  public static function beziercubic3D_derivative(  
+   curve:Array<Array<Float>>,  
+   p:Float  
+   ):Array<Float>
 ```    
- returns cubic bezier curve support dot one(first lever) paramater for each coordinate. Usual case `x` or `y` or `z`
- 
+  
+  returns bezier cubic curve 3D derivative  
+  
 ---
 ```haxe  
- public static function beziercubic3D_support_dot_one(curve3D_4dots:Array<Array<Float>>):Array<Float>
+  
+  public static inline function beziercubic_support_dot_one(beziercubic_one_axis_coordinates:Array<Float>):Null<Float>
 ```    
- returns dot 3D, which is bezier cubic curve 3D support dot one(first lever)
- 
+  
+  returns cubic bezier curve support dot one(first lever) paramater for each coordinate. Usual case `x` or `y` or `z`  
+  
 ---
 ```haxe  
- public static inline function beziercubic_support_dot_two(beziercubic_one_axis_coordinates:Array<Float>):Null<Float>
+  
+  public static function beziercubic3D_support_dot_one(curve3D_4dots:Array<Array<Float>>):Array<Float>
 ```    
- returns cubic bezier curve support dot two(second lever) paramater for each coordinate. Usual case `x` or `y` or `z`
- 
+  
+  returns dot 3D, which is bezier cubic curve 3D support dot one(first lever)  
+  
 ---
 ```haxe  
- public static function beziercubic3D_support_dot_two(curve3D_4dots:Array<Array<Float>>):Array<Float>
+  
+  public static inline function beziercubic_support_dot_two(beziercubic_one_axis_coordinates:Array<Float>):Null<Float>
 ```    
- returns dot 3D, which is bezier cubic curve 3D support dot two(second lever)
- 
+  
+  returns cubic bezier curve support dot two(second lever) paramater for each coordinate. Usual case `x` or `y` or `z`  
+  
 ---
 ```haxe  
- public static inline function beziercubic3D_follow_4dots_trajectory(dots:Array<Array<Float>>):Array<Array<Float>>
+  
+  public static function beziercubic3D_support_dot_two(curve3D_4dots:Array<Array<Float>>):Array<Float>
 ```    
- returns bezier cubic curve 3D, calculated from 4dots 3D(curve 3D trajectory)
- 
+  
+  returns dot 3D, which is bezier cubic curve 3D support dot two(second lever)  
+  
 ---
 ```haxe  
- public static inline function beziercubic_coordinate(
- beziercubic_one_axis_coordinates:Array<Float>,
- parameter:Float
- ):Null<Float>
+  
+  public static inline function beziercubic3D_follow_4dots_trajectory(dots:Array<Array<Float>>):Array<Array<Float>>
 ```    
- returns bezier cubic coordinate for each one axis. Usual case `x` or `y` or `z`
- 
+  
+  returns bezier cubic curve 3D, calculated from 4dots 3D(curve 3D trajectory)  
+  
 ---
 ```haxe  
- public static function beziercubic3Ddot(
- beziercubic3D:Array<Array<Float>>,
- parameter:Float
- ):Array<Float>
+  
+  public static inline function beziercubic_coordinate(  
+   beziercubic_one_axis_coordinates:Array<Float>,  
+   parameter:Float  
+   ):Null<Float>
 ```    
- returns dot 3D, belongs on bezier cubic curve 3D
- 
+  
+  returns bezier cubic coordinate for each one axis. Usual case `x` or `y` or `z`  
+  
 ---
 ```haxe  
- public static inline function curve3D_4dots_follow_beziercubic_trajectory(beziercubic3D:Array<Array<Float>>):Array<Array<Float>>
+  
+  public static function beziercubic3Ddot(  
+   beziercubic3D:Array<Array<Float>>,  
+   parameter:Float  
+   ):Array<Float>
 ```    
- returns curve 3D, which is 4 dots 3D bezier cubic curve, recounted to 4 dots 3D curve. 
- Two internal dots belongs on bezier cubic curve trajectory, with parameter 1/3 and 2/3
- 
+  
+  returns dot 3D, belongs on bezier cubic curve 3D  
+  
 ---
 ```haxe  
- public static inline function curve3Doffset(
- curve3D:Array<Array<Float>>,
- vec3D:Array<Float>,
- distance:Float
- ):Array<Array<Float>>
+  
+  public static inline function curve3D_4dots_follow_beziercubic_trajectory(beziercubic3D:Array<Array<Float>>):Array<Array<Float>>
 ```    
- returns curve 3D, offsetted along vector 3D to specified distance
- 
+  
+  returns curve 3D, which is 4 dots 3D bezier cubic curve, recounted to 4 dots 3D curve.  
+  Two internal dots belongs on bezier cubic curve trajectory, with parameter 1/3 and 2/3  
+  
 ---
 ```haxe  
- public static inline function curve3Drotate(
- curve3D:Array<Array<Float>>,
- dot3D:Array<Float>,
- vec3D:Array<Float>,
- angle:Float,
- rad:Bool 
+  
+  public static inline function curve3Doffset(  
+   curve3D:Array<Array<Float>>,  
+   vec3D:Array<Float>,  
+   distance:Float  
+  ):Array<Array<Float>>
 ```    
- returns curve 3D, rotated around axis(determined by dot 3D and vector 3D) to specified angle
- 
+  
+  returns curve 3D, offsetted along vector 3D to specified distance  
+  
 ---
 ```haxe  
- public static inline function curve3Dscale(
- curve3D:Array<Array<Float>>,
- scale_xyz:Array<Float>,
- dot3D:Array<Float>
- ):Array<Array<Float>>
+  
+  public static inline function curve3Drotate(  
+   curve3D:Array<Array<Float>>,  
+   dot3D:Array<Float>,  
+   vec3D:Array<Float>,  
+   angle:Float,  
+   rad:Bool = false  
+  ):Array<Array<Float>>
 ```    
- returns curve 3D, scaled relative base dot 3D, uses own scale for each axis
- 
+  
+  returns curve 3D, rotated around axis(determined by dot 3D and vector 3D) to specified angle  
+  
 ---
 ```haxe  
- public static inline function ellipse2Dperimeter_ramanujan(
- semiaxis_a:Float,
- semiaxis_b:Float
- ):Null<Float>
+  
+  public static inline function curve3Dscale(  
+   curve3D:Array<Array<Float>>,  
+   scale_xyz:Array<Float>,  
+   dot3D:Array<Float>  
+  ):Array<Array<Float>>
 ```    
- returns ellipse perimeter, calculated use ramanujan method.
- Result will be max from perimeters, calculated by two ramanujan methods, with negative errors
- 
+  
+  returns curve 3D, scaled relative base dot 3D, uses own scale for each axis  
+  
 ---
 ```haxe  
- public static function tangent_centered_ellipse2Ddot(
- semiaxis_a:Float,
- semiaxis_b:Float,
- ellipse_dot2D:Array<Float>
- ):Array<Array<Float>>
+  
+  public static inline function ellipse2Dperimeter_ramanujan(  
+   semiaxis_a:Float,  
+   semiaxis_b:Float  
+  ):Null<Float>
 ```    
- returns vector 2D, which is tangent of centered ellipse 2D
- 
+  
+  returns ellipse perimeter, calculated use ramanujan method.  
+  Result will be max from perimeters, calculated by two ramanujan methods, with negative errors  
+  
 ---
 ```haxe  
- public static inline function ellipse_e_parameter(
- semiaxis_a:Float,
- semiaxis_b:Float
- ):Null<Float>
+  
+  public static function tangent_centered_ellipse2Ddot(  
+   semiaxis_a:Float,  
+   semiaxis_b:Float,  
+   ellipse_dot2D:Array<Float>  
+  ):Array<Array<Float>>
 ```    
- returns ellipse e parameter (ellipse eccentricity)
- 
+  
+  returns vector 2D, which is tangent of centered ellipse 2D  
+  
 ---
 ```haxe  
- public static function ellipse_c_parameter(
- semiaxis_a:Float,
- semiaxis_b:Float
- ):Null<Float>
+  
+  public static inline function ellipse_e_parameter(  
+   semiaxis_a:Float,  
+   semiaxis_b:Float  
+  ):Null<Float>
 ```    
- returns ellipse c parameter (elipse foci) ... фокальное расстояние (полурасстояние между фокусами)
- 
+  
+  returns ellipse e parameter (ellipse eccentricity)  
+  
 ---
 ```haxe  
- public static function tangent_vec3D_in_plane_of_ellipse2D_placed_in_3Dspace(
- dot3D:Array<Float>,
- vec3Dnormal_ellipse_plane:Array<Float>,
- vec3Dsemiaxis_a_direction:Array<Float>,
- semiaxis_a:Float,
- semiaxis_b:Float,
- semiaxis_a_negative:Float,
- semiaxis_b_negative:Float,
- angle:Float,
- rad:Bool
- ):Array<Float>
+  
+  public static function ellipse_c_parameter(  
+   semiaxis_a:Float,  
+   semiaxis_b:Float  
+  ):Null<Float>
 ```    
- returns vector 3D, which is tangent of ellipse, belongs to the plane 3D
- 
+  
+  returns ellipse c parameter (elipse foci) ... фокальное расстояние (полурасстояние между фокусами)  
+  
 ---
 ```haxe  
- public static function ellipse3D_dots(
- dot3D:Array<Float>,
- vec3Dsemiaxes:Array<Array<Float>>,
- semiaxes:Array<Float>
- ):Array<Array<Float>>
+  
+  public static function tangent_vec3D_in_plane_of_ellipse2D_placed_in_3Dspace(  
+   dot3D:Array<Float>,  
+   vec3Dnormal_ellipse_plane:Array<Float>,  
+   vec3Dsemiaxis_a_direction:Array<Float>,  
+   semiaxis_a:Float,  
+   semiaxis_b:Float,  
+   semiaxis_a_negative:Float,  
+   semiaxis_b_negative:Float,  
+   angle:Float,  
+   rad:Bool  
+  ):Array<Float>
 ```    
- returns 9 dots 3D, ellipse center dot and 8 ellipse perimeter dots
- 
+  
+  returns vector 3D, which is tangent of ellipse, belongs to the plane 3D  
+  
 ---
 ```haxe  
- public static inline function ellipse2Ddot(
- angle:Float,
- semiaxis_a_ox:Float,
- semiaxis_b_oy:Float,
- rad:Bool 
+  
+  public static function ellipse3D_dots(  
+   dot3D:Array<Float>,  
+   vec3Dsemiaxes:Array<Array<Float>>,  
+   semiaxes:Array<Float>  
+   ):Array<Array<Float>>
 ```    
- returns dot 2D, which belongs to ellipse perimeter
- 
+  
+  returns 9 dots 3D, ellipse center dot and 8 ellipse perimeter dots  
+  
 ---
 ```haxe  
- public static function curve2D_4dots_elliptic_shape_restricted_to_quarter(
- angle0:Float,
- angle1:Float,
- semiaxis_a_ox:Float,
- semiaxis_b_oy:Float,
- rad:Bool 
+  
+  public static inline function ellipse2Ddot(  
+   angle:Float,  
+   semiaxis_a_ox:Float,  
+   semiaxis_b_oy:Float,  
+   rad:Bool = false  
+   ):Array<Float>
 ```    
- returns curve 2D, which have ellipse shape restricted to quarter
- 
+  
+  returns dot 2D, which belongs to ellipse perimeter  
+  
 ---
 ```haxe  
- public static function beziercubic3D_elliptic_shape_restricted_to_quarter(
- dot3Dc:Array<Float>,
- vec3D_a_ox:Array<Float>,
- vec3D_b_oy:Array<Float>,
- semiaxis_a_ox:Float,
- semiaxis_b_oy:Float,
- angle0:Float,
- angle1:Float,
- rad:Bool 
+  
+  public static function curve2D_4dots_elliptic_shape_restricted_to_quarter(  
+   angle0:Float,  
+   angle1:Float,  
+   semiaxis_a_ox:Float,  
+   semiaxis_b_oy:Float,  
+   rad:Bool = false  
+  ):Array<Array<Float>>
 ```    
- returns bezier curve 3D, which have ellipse shape restricted to quarter. 
- Result will have form [[x1, y1, z1], [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]]
- 
+  
+  returns curve 2D, which have ellipse shape restricted to quarter  
+  
 ---
 ```haxe  
- public static function angle_required_to_place_curve_on_ellipse(
- curve_length:Float,
- semiaxis_a_ox:Float,
- semiaxis_b_oy:Float,
- angle0:Float,
- rad:Bool 
+  
+  public static function beziercubic3D_elliptic_shape_restricted_to_quarter(  
+   dot3Dc:Array<Float>,  
+   vec3D_a_ox:Array<Float>,  
+   vec3D_b_oy:Array<Float>,  
+   semiaxis_a_ox:Float,  
+   semiaxis_b_oy:Float,  
+   angle0:Float,  
+   angle1:Float,  
+   rad:Bool = false  
+  ):Array<Array<Float>>
 ```    
- returns angle required to place curve on ellipse. 
- Max returned value is 360 degrees, or radians same value angle
- 
+  
+  returns bezier curve 3D, which have ellipse shape restricted to quarter.  
+  Result will have form [[x1, y1, z1], [x2, y2, z2], [x3, y3, z3], [x4, y4, z4]]  
+  
 ---
 ```haxe  
- public static function polygon3D_inside_ellipse(
- dot3D:Array<Float>,
- vec3Dsemiaxes:Array<Array<Float>>,
- semiaxes:Array<Float>,
- angle_proportions:Array<Float>
- ):Array<Array<Float>>
+  
+  public static function angle_required_to_place_curve_on_ellipse(  
+   curve_length:Float,  
+   semiaxis_a_ox:Float,  
+   semiaxis_b_oy:Float,  
+   angle0:Float,  
+   rad:Bool = false  
+  ):Null<Float>
 ```    
- returns polygon 3D dots array, which is poligon center dot and array of polygon perimeter dots. 
- Result will have form [`dot3D`, dot3D(1), ... ,dot3D(`angle_proportion.length`)]
- 
+  
+  returns angle required to place curve on ellipse.  
+  Max returned value is 360 degrees, or radians same value angle  
+  
 ---
 ```haxe  
- public static function polygon3D_vec3Dfield_distances(
- dot3D:Array<Float>,
- vec3Dfield:Array<Array<Float>>,
- distances:Array<Float>
- ):Array<Array<Float>>
+  
+  public static function polygon3D_inside_ellipse(  
+   dot3D:Array<Float>,  
+   vec3Dsemiaxes:Array<Array<Float>>,  
+   semiaxes:Array<Float>,  
+   angle_proportions:Array<Float>  
+  ):Array<Array<Float>>
 ```    
- polygon on vectors and displacements. Can be not belongs to one plane 3D.
- returns polygon 3D dots array, which is poligon center dot and array of polygon perimeter dots. 
- Result will have form [`dot3D`, dot3D(1), ... ,dot3D(`distances.length`)]
- 
+  
+  returns polygon 3D dots array, which is poligon center dot and array of polygon perimeter dots.  
+  Result will have form [`dot3D`, dot3D(1), ... ,dot3D(`angle_proportion.length`)]  
+  
 ---
 ```haxe  
- public static function polygon3D_in_plane(
- dot3D:Array<Float>,
- vec3Dplane_normal:Array<Float>,
- vec3Dsemiaxis_a_direction:Array<Float>,
- angle_proportions:Array<Float>,
- distances:Array<Float>
- ):Array<Array<Float>>
+  
+  public static function polygon3D_vec3Dfield_distances(  
+   dot3D:Array<Float>,  
+   vec3Dfield:Array<Array<Float>>,  
+   distances:Array<Float>  
+  ):Array<Array<Float>>
 ```    
- polygon belongs to plane 3D.
- returns polygon 3D dots array, which is poligon center dot and array of polygon perimeter dots. 
- Result will have form [`dot3D`, dot3D(1), ... ,dot3D(`angle_proportion.length`)]. 
- 
+  
+  polygon on vectors and displacements. Can be not belongs to one plane 3D.  
+  returns polygon 3D dots array, which is poligon center dot and array of polygon perimeter dots.  
+  Result will have form [`dot3D`, dot3D(1), ... ,dot3D(`distances.length`)]  
+  
 ---
 ```haxe  
- public static function polygon3D_to_vec3Dfield(
- polygon3D:Array<Array<Float>>
- ):Array<Array<Float>>
+  
+  public static function polygon3D_in_plane(  
+   dot3D:Array<Float>,  
+   vec3Dplane_normal:Array<Float>,  
+   vec3Dsemiaxis_a_direction:Array<Float>,  
+   angle_proportions:Array<Float>,  
+   distances:Array<Float>  
+  ):Array<Array<Float>>
 ```    
- returns vector field, which is vectors 3D, calculated from polygon center dot to each vertex. 
- Result will have form [[a, b, c], ... , [a, b, c]], depend of incoming data length
- 
+  
+  polygon belongs to plane 3D.  
+  returns polygon 3D dots array, which is poligon center dot and array of polygon perimeter dots.  
+  Result will have form [`dot3D`, dot3D(1), ... ,dot3D(`angle_proportion.length`)].  
+  
 ---
 ```haxe  
- public static function projection_vec3D_on_plane3D(
- vec3D:Array<Float>,
- plane3D:Array<Float>
- ):Array<Float>
+  
+  public static function polygon3D_to_vec3Dfield(  
+   polygon3D:Array<Array<Float>>  
+  ):Array<Array<Float>>
 ```    
- returns vector 3D, which is `vec3D` vector projection on `plane3D` plane
- 
+  
+  returns vector field, which is vectors 3D, calculated from polygon center dot to each vertex.  
+  Result will have form [[a, b, c], ... , [a, b, c]], depend of incoming data length  
+  
 ---
 ```haxe  
- public static function angle_vec3Dvec3D_projection_on_plane3D(
- vec3D1:Array<Float>,
- vec3D2:Array<Float>,
- plane3D:Array<Float>,
- rad:Bool 
+  
+  public static function projection_vec3D_on_plane3D(  
+   vec3D:Array<Float>,  
+   plane3D:Array<Float>  
+   ):Array<Float>
 ```    
- returns angle, which is projection of angle between `vec3D1` and `vec3D2` vectors to `plane3D`
- 
+  
+  returns vector 3D, which is `vec3D` vector projection on `plane3D` plane  
+  
+---
+```haxe  
+  
+  public static function angle_vec3Dvec3D_projection_on_plane3D(  
+   vec3D1:Array<Float>,  
+   vec3D2:Array<Float>,  
+   plane3D:Array<Float>,  
+   rad:Bool = false  
+   ):Null<Float>
+```    
+  
+  returns angle, which is projection of angle between `vec3D1` and `vec3D2` vectors to `plane3D`  
+  
