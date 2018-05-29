@@ -193,7 +193,7 @@ exe versions - portable, created use syntax
 
 source code links:
 
-https://github.com/lenivaya10001/data/tree/master/imagebatch/png
+https://github.com/3dformortals/data/tree/master/imagebatch/png
 
 https://bitbucket.org/lenivaya10001/data/src
 

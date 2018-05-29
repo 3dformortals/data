@@ -56,7 +56,7 @@ exe versions - portable, created use syntax
 
 source code links:
 
-https://github.com/lenivaya10001/data/tree/master/imagevideo
+https://github.com/3dformortals/data/tree/master/imagevideo
 
 https://bitbucket.org/lenivaya10001/data/src
 

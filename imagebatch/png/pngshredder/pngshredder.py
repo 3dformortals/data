@@ -134,5 +134,5 @@ try:
 	
 except:
 	print(sys.exc_info())
-print("source code placed on github\nhttps://github.com/lenivaya10001/data/tree/master/imagebatch/png")
+print("source code placed on github\nhttps://github.com/3dformortals/data/tree/master/imagebatch/png")
 input("done / enter to close")
