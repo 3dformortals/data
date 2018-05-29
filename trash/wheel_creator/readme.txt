@@ -1,7 +1,6 @@
 2018-05-08
 work in process, step by step use babylonjs
 
-
 2018-04-19
 just fckn black magic
 can't extrude bezier contour 2d along bezier contour 3D
