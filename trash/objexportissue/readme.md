@@ -51,5 +51,5 @@ The situation looks like all before export meshes to scene.obj work good.
 The difference between meshes is only position (angle of rotation in scene space and offset).  
 In my beginner opinion the reason of issues can be inside exporter to OBJ, or inside `.bakeCurrentTransformIntoVertices()` method. But it only my fantasy.  
 
-Hope it will be solved, i need this babylonjs functionality for my old project, which close to realization now.
+Hope it will be solved, i need this babylonjs functionality for my old project, which close to realization now.  
 20180530
