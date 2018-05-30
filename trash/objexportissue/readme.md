@@ -11,7 +11,7 @@ freecad meshlab
 - inside web folder run `start.html`  
 - use one of detected issue settings(see bottom) of `b4` and `b3`  
 - press `ok`, it draw mesh on screen and prepare the `mesh` link to download file `scene.obj`  
-- press `mesh` link and save file  
+- press `mesh obj` link and save file  
 - open freecad, create new document, then file - import - scene.obj  
 - or open meshlab, file - import mesh - scene.obj  
 
