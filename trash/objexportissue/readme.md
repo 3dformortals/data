@@ -49,6 +49,6 @@ These settings use `BABYLON.MeshBuilder.CreateCylinder` way and broken exported 
 
 The situation looks like all before export meshes to scene.obj work good.  
 The difference between meshes is only position (angle of rotation in scene space and offset).  
-in my beginner opinion the reason of issues can be inside exporter to OBJ, or inside `.bakeCurrentTransformIntoVertices()` method. But it only my fantasy.  
+In my beginner opinion the reason of issues can be inside exporter to OBJ, or inside `.bakeCurrentTransformIntoVertices()` method. But it only my fantasy.  
 
 Hope it will be solved, i need this babylonjs functionality for my old project, which close to realization now.
