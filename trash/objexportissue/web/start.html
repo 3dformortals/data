@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hello, World!</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
+        <script type="text/javascript" src="js/babylon.js"></script>
+        <script type="text/javascript" src="js/babylonjs.serializers.js"></script>
+        <script type="text/javascript" src="js/pep.js"></script>
+        <script type="text/javascript" src="js/geo.js"></script>
+    </head>
+    
+    <body>
+        Hello, World!
+        
+        <hr><br>
+        <table>
+            <tbody>
+                <tr>
+                    <td id="renderbox">
+                        <canvas id="renderCanvas" touch-action="none"></canvas>
+                        <script type="text/javascript" src="js/BoltsCreator.js"></script>
+                        <script type="text/javascript" src="js/wheelcreator.js"></script>
+                    </td>
+                    <td>
+                        <div id="div_ok"></div>
+                        <section class="tabs">
+                            <input class="x4menu" id="tab_1" type="radio" name="tab" checked="checked" />
+                            <input class="x4menu" id="tab_2" type="radio" name="tab" />
+                            <input class="x4menu" id="tab_3" type="radio" name="tab" />
+                            <input class="x4menu" id="tab_4" type="radio" name="tab" />
+                            <label for="tab_1" id="tab_l1">size</label>
+                            <label for="tab_2" id="tab_l2">look</label>
+                            <label for="tab_3" id="tab_l3">lamp</label>
+                            <label for="tab_4" id="tab_l4">help</label>
+                            <div style="clear:both"></div>
+                        
+                            <div class="tabs_cont">
+                                <div id="tab_c1"></div>
+                                <div id="tab_c2"></div>
+                                <div id="tab_c3"></div>
+                                <div id="tab_c4">
+                                    help
+                                </div>
+                            </div>
+                        </section>
+                        
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="button" onclick="change_camera_test(0,0,0)">(0,0,0)</button>
+        <button type="button" onclick="change_camera_test(0,1,0)">(0,1,0)</button>
+        <button type="button" onclick="change_camera_test(0,Math.PI/2,0)">(0,Math.PI/2,0)</button>
+        <button type="button" onclick="change_camera_test(1,0,0)">(1,0,0)</button>
+        <button type="button" onclick="change_camera_test(Math.PI/2,0,0)">(Math.PI/2,0,0)</button>
+        <button type="button" onclick="change_camera_test(1,1,1)">(1,1,1)</button>
+        <a href="" id="a">mesh obj</a>
+        
+        <script type="text/javascript" src="js/GuiCreator.js"></script>
+        <script type="text/javascript" src="js/GuiReader.js"></script>
+    </body>
+</html>
