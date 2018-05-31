@@ -149,6 +149,11 @@ function wheel_creator(){
 	h=d[0];w=d[1];b=d[2];s=d[3];g=d[4];
 	var angle = 0;
 	bolts = bolts_maker(h,w,s,b);
+	//glTF export
+	BABYLON.GLTF2Export.GLTFAsync(scene, "fileName").then((gltf) => {
+		gltf.downloadFiles();
+	});
+	//obj broken export
 	exportobjects = bolts.concat([]);
 	exportobjects = prepare_objects_for_export(exportobjects);
 	download(BABYLON.OBJExport.OBJ(exportobjects),"scene.obj","text/plain");

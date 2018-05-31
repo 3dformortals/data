@@ -52,4 +52,8 @@ The difference between meshes is only position (angle of rotation in scene space
 In my beginner opinion the reason of issues can be inside exporter to OBJ, or inside `.bakeCurrentTransformIntoVertices()` method. But it only my fantasy.  
 
 Hope it will be solved, i need this babylonjs functionality for my old project, which close to realization now.  
-20180530
+20180530  
+
+I tried export to glTF , and ... result is similar, some meshes is broken. But meshes created inside for loop (similar like clones), and later just moved + rotated to new scene position each. Feels like internal mathematics is broken(have holes). 
+![gltf after blender importing](png/gltf.png?raw=true "gltf after blender importing")  
+[gltf folder](obj/gltf)  
