@@ -52,22 +52,19 @@ def opposite(x):
     # print("after loop")
     return rez
 
-def loop():
-    x=input("type the text.  Ctrl+C to exit\n\n")
-    #clean
-    try:
-        # x=re.sub(r"[^a-zA-Z0-9]", "", x)
-        x = opposite(x)
-        x=mirror(x)
-        x=upanddown(x)
+x=input("input the text\n\n")
+#clean
+try:
+    # x=re.sub(r"[^a-zA-Z0-9]", "", x)
+    x = opposite(x)
+    x=mirror(x)
+    x=upanddown(x)
+    
+    print("\n\n")
+    print(x)
         
-        print("")
-        print(x)
-        print("")
-            
-        
-    except:
-        print(sys.exc_info())
-    loop()
+    
+except:
+    print(sys.exc_info())
+input("\n\nenter to close")
 
-loop()
