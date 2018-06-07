@@ -1,7 +1,7 @@
  # -*- coding: utf-8 -*-
 import tkinter
 from tkinter import ttk
-import sys,pickle,webbrowser
+import sys,os,pickle,webbrowser
 
 def on_linuxscrollup(event):
     try:
@@ -29,17 +29,23 @@ def on_mousewheel(event):
     except:
         print("base scroll ",sys.exc_info())
 
+if getattr(sys, 'frozen', False):
+    mydir = os.path.dirname(sys.executable)
+elif __file__:
+    mydir = os.path.dirname(os.path.abspath(__file__))
+print(str(mydir))
 def db_writer():
     """try write data to pickle file"""
     try:
-        with open("db.pickle","wb") as handle:pickle.dump(db,handle)
+        with open(mydir + os.sep + "db.pickle","wb") as handle:pickle.dump(db,handle)
     except:
         print("error db_writer",sys.exc_info())
 
 def db_reader():
     """try read the data from pickle file"""
     try:
-        with open("db.pickle","rb") as handle:
+        
+        with open(mydir + os.sep + "db.pickle","rb") as handle:
             db=pickle.load(handle)
             return db
     except:
