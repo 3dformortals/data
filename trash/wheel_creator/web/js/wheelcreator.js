@@ -8,6 +8,10 @@ var metal;
 var bolts=[];
 var tire;
 var grips=[];
+var track; //result track mesh, after subtract grips + oval shape
+var track_base; //base for subtracktion
+var track_tire; //tire shape for subtracktion from traks_base
+var tracks=[]; //flat placed grips for subtraction
 var canvas = document.getElementById("renderCanvas");
 canvas.width = 600;
 canvas.height = 600;
@@ -566,6 +570,7 @@ function wheel_creator(){
 	tire = tire_maker(h,w,s);
 	bolts = bolts_maker(h,w,s,b);
 	grips = grips_maker(h,w,s,g);
+	tracks = tracks_maker(h,w,s,g);
 	console.log("--------tire export trying--------");
 	// console.log(BABYLON.OBJExport.OBJ([tire]));
 	// alert(BABYLON.OBJExport.OBJ([metal]));
@@ -597,4 +602,3 @@ function change_camera_test(al,be,ra){
 	camera.alpha = al;
 	camera.beta = be;
 }
-

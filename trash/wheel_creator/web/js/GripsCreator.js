@@ -242,7 +242,7 @@ function grips_maker(h,w,s,g,hull=false){
         grips_width,
         grips_width_number,
         one_ghhole
-    )
+    );
     var cdots = grips_center_dots_counter(
         c,vn,geo.vecXDback(va),
         grips_center_radius,
