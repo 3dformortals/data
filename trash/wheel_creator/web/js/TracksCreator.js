@@ -1,3 +1,49 @@
+function base_subtrackt_tire_and_traks(){
+    var mat = new BABYLON.StandardMaterial("mat1", scene);
+	mat.alpha = 1.0;
+	mat.diffuseColor = new BABYLON.Color3(0.9, 0.5, 0.5);
+	mat.backFaceCulling = false;
+	// mat.wireframe = true;
+    
+    //tire cubtraction
+    var aCSG = BABYLON.CSG.FromMesh(track_base);
+    var bCSG = BABYLON.CSG.FromMesh(track_tire);
+    var subCSG = aCSG.subtract(bCSG);
+    var newMesh = subCSG.toMesh("csg", mat, scene);
+    track_base.dispose(false,true);
+    track_tire.dispose(false,true);
+    track_base = newMesh;
+    
+    //subtrackt grips
+    console.log("tracks.length = ",tracks.length, " before loop");
+    var sum_track = BABYLON.Mesh.MergeMeshes(tracks,true,true);
+    var aCSG = BABYLON.CSG.FromMesh(track_base);
+    var bCSG = BABYLON.CSG.FromMesh(sum_track);
+    var subCSG = aCSG.subtract(bCSG);
+    var newMesh = subCSG.toMesh("csg", mat, scene);
+    track_base.dispose(false,true);
+    sum_track.dispose(false,true);
+    track=newMesh;
+    track.material = mat;
+    
+    // for (i=0;i<tracks.length;i++){
+    //     var aCSG = BABYLON.CSG.FromMesh(track_base);
+    //     var bCSG = BABYLON.CSG.FromMesh(tracks[i]);
+    //     var subCSG = aCSG.subtract(bCSG);
+    //     var newMesh = subCSG.toMesh("csg", mat, scene);
+    //     track_base.dispose(false,true);
+    //     // tracks[i].dispose(false,true); //fail
+    //     console.log("wtf");
+    //     if (!scene.getMeshByName("track"+i.toString())){console.log("namefail");}
+    //     else{
+    //         console.log("namegood");
+    //         scene.getMeshByName("track"+i.toString()).dispose(false,true);
+    //     }
+        
+    //     track_base = newMesh;
+    // }
+}
+
 function tire_shape_for_track(h,w,s,c=[0,0,0]){
     //used when s1 + h2 * 2 < w1 or < w2
     //bsp - bezier (cubic 2D) spline
@@ -90,8 +136,9 @@ function track_tire_maker(h,w,s,c,va,vn,cdots,vz){
     
     var customExtrudeSettings={
 		shape: tire_shape,
-		path: tire_path,
-		ribbonCloseArray: true
+        path: tire_path,
+        cap:3,
+		// ribbonCloseArray: true
 	};
 	var extruded = BABYLON.MeshBuilder.ExtrudeShapeCustom("subtrackt_tire", customExtrudeSettings, scene);
     //rotate 180
@@ -107,7 +154,7 @@ function track_tire_maker(h,w,s,c,va,vn,cdots,vz){
 	mat.diffuseColor = new BABYLON.Color3(0.7, 0.7, 0.2);
 	mat.backFaceCulling = false;
 	// mat.wireframe = true;
-	extruded.material = mat;
+	// extruded.material = mat;
 	
 	console.log("tire for subtrackt done");
 	return extruded;
@@ -136,7 +183,7 @@ function track_base_maker(h,w,s,cdots,c,va){
 	mat.diffuseColor = new BABYLON.Color3(0.4, 0.4, 0.4);
 	mat.backFaceCulling = false;
 	// mat.wireframe = true;
-	box.material = mat;
+	// box.material = mat;
     console.log("box complete");
     return box;
 }
@@ -197,7 +244,7 @@ function track_maker(dot,u,gp,gs,c,vn,ns,gh,gt,ind){
 		scaleFunction: scaling
 		
 	};
-    var extruded = BABYLON.MeshBuilder.ExtrudeShapeCustom("track"+u.toString(), gripSettings, scene);
+    var extruded = BABYLON.MeshBuilder.ExtrudeShapeCustom("track"+ind.toString(), gripSettings, scene);
     
     if (gt == ">>>" || gt == ")))"){
         if(ind & 1 && !ns){ extruded.rotateAround(vec_maker(c),vec_maker(vn),geo.radians(180)); }
@@ -207,14 +254,14 @@ function track_maker(dot,u,gp,gs,c,vn,ns,gh,gt,ind){
     extruded.position = vec_maker(dot);
     // console.log(dot);
 	
-	var mat = new BABYLON.StandardMaterial("mat1", scene);
-	mat.alpha = 1.0;
-	mat.diffuseColor = new BABYLON.Color3(0.5, 0.8, 0.2);
-	mat.backFaceCulling = false;
+	// var mat = new BABYLON.StandardMaterial("mat1", scene);
+	// mat.alpha = 1.0;
+	// mat.diffuseColor = new BABYLON.Color3(0.5, 0.8, 0.2);
+	// mat.backFaceCulling = false;
 	// mat.wireframe = true;
-	extruded.material = mat;
+	// extruded.material = mat;
 	
-	console.log("endcode");
+	console.log("track done");
 	return extruded;
 }
 function tracks_maker(h,w,s,g,hull=false){
@@ -264,11 +311,13 @@ function tracks_maker(h,w,s,g,hull=false){
         one_gw,one_gh,one_ghhole
     );
     //include base for subtracktion
-    // track_base = track_base_maker(h,w,s,cdots,c,va);
+    track_base = track_base_maker(h,w,s,cdots,c,va);
     //create and subtract tire form from base
     track_tire = track_tire_maker(h,w,s,c,va,vn,cdots,vz);
+    
     //create track and subtrackt from base form
     var gal = grip_angles.length;
+    var ind = 0;
     for (var i = 0;i < gal;i++){
         var dots = cdots[i];
         var u = grip_angles[i];
@@ -278,9 +327,11 @@ function tracks_maker(h,w,s,g,hull=false){
         var gh = h[1];
         var gt = grips_type;
         for (var j = 0;j<dots.length;j++){
-            tracks.push(track_maker(dots[j],u,gp,gs,c,vn,ns,gh,gt,j));
+            
+            tracks.push(track_maker(dots[j],u,gp,gs,c,vn,ns,gh,gt,ind));
+            ind += 1;
         }
     }
-    
+    base_subtrackt_tire_and_traks();
     return tracks;
 }
