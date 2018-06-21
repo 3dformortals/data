@@ -1,4 +1,4 @@
-
+showme("preparing BoltsCreator.js");
 function bolt7_maker(neg,dot,u,b){
     var meshSettings={
         height:b[1] * 2,
@@ -298,3 +298,4 @@ function bolts_maker(h,w,s,b,hull=false){
     }
     return bolts;
 }
+showme("BoltsCreator.js ready");

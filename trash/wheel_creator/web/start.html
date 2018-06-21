@@ -5,13 +5,13 @@
         <meta charset="utf-8" />
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
         <!-- Include eel.js - note this file doesn't exist in the 'web' directory -->
-        <script type="text/javascript" src="/eel.js"></script>
+        <!-- <script type="text/javascript" src="/eel.js"></script> -->
         <script type="text/javascript" src="js/babylon.js"></script>
         <script type="text/javascript" src="js/babylonjs.serializers.js"></script>
         <script type="text/javascript" src="js/pep.js"></script>
         <script type="text/javascript" src="js/geo.js"></script>
         <script type="text/javascript" src="js/alert.js"></script>
-        <script type="text/javascript">
+        <!-- <script type="text/javascript">
         
         eel.expose(say_hello_js);               // Expose this function to Python
         function say_hello_js(x) {
@@ -21,13 +21,17 @@
         say_hello_js("Javascript World!");
         eel.say_hello_py("Javascript World!");  // Call a Python function
         
-        </script>
+        </script> -->
     </head>
     
     <body>
-        Hello, World!
-        
-        <hr><br>
+        <table id="infotable">
+            <tr>
+                <td class="mini">Wheel Creator from <a href="https://healingdrawing.github.io/" target="_blank">Healing Drawing</a></td>
+                <td><input id="info" readonly value="preparing"></td>
+            </tr>
+        </table>
+        <hr>
         <table>
             <tbody>
                 <tr>

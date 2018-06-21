@@ -1,3 +1,4 @@
+showme("preparing wheelcreator.js");
 var maxsize = 200; // radius max size for wheel , that scaling other sizes to camera field;
 
 var geo = new GeometryXD();
@@ -552,13 +553,24 @@ function tire_maker(h,w,s,hull=false){
 	return extruded;
 }
 
+
+
+// work but big
 function prepare_objects_for_export(objs){
 	var rez = []
 	for (i=0;i<objs.length;i++){
 		var fullmesh = objs[i].bakeCurrentTransformIntoVertices();
-		var mesh = fullmesh.clone("mesh"+i.toString());
-		rez.push(mesh);
-	}return rez;
+		// var mesh = fullmesh.clone("mesh"+i.toString());
+		// rez.push(fullmesh.clone("mesh"+i.toString())); //this make clone and white color
+		rez.push(fullmesh);
+		// mesh.dispose(false,true);
+	}
+	download(BABYLON.OBJExport.OBJ(rez),"scene.obj","text/plain");
+	for (i=0;i<rez.length;i++){
+		// rez[i].dispose(false,true);
+		// objs[i].dispose(false,true);
+	}
+	return rez;
 }
 
 function wheel_creator(){
@@ -574,9 +586,16 @@ function wheel_creator(){
 	console.log("--------tire export trying--------");
 	// console.log(BABYLON.OBJExport.OBJ([tire]));
 	// alert(BABYLON.OBJExport.OBJ([metal]));
-	var exportobjects = [metal,tire].concat(bolts.concat(grips));
+	
+	//need fix, looks like can't delete objects which created for export 
+	var exportobjects = [metal,tire,track].concat(bolts.concat(grips));
 	exportobjects = prepare_objects_for_export(exportobjects);
-	download(BABYLON.OBJExport.OBJ(exportobjects),"scene.obj","text/plain");
+	console.log("EO length",exportobjects.length);
+	// for (i=0;i<exportobjects.length;i++){exportobjects[i].dispose(false,true);}
+	console.log("EO length",exportobjects.length);
+	console.log(exportobjects);
+	// download(BABYLON.OBJExport.OBJ(exportobjects),"scene.obj","text/plain");
+	
 	// download(BABYLON.OBJExport.OBJ(exportobjects,true,"wheelmaterials",false),"scene.obj","text/plain");
 }
 
@@ -585,8 +604,9 @@ function clearall(){
 	else{
 		metal.dispose(false,true);
 		tire.dispose(false,true);
-		for(i=0;i<bolts.length;i++){bolts[i].dispose(false,true);}bolts=[];
-		for(i=0;i<grips.length;i++){grips[i].dispose(false,true);}grips=[];
+		track.dispose(false,true);
+		for(i=0;i<bolts.length;i++){bolts[i].dispose(false,true);} bolts=[];
+		for(i=0;i<grips.length;i++){grips[i].dispose(false,true);} grips=[];
 	}
 }
 //------------------------------
@@ -602,3 +622,4 @@ function change_camera_test(al,be,ra){
 	camera.alpha = al;
 	camera.beta = be;
 }
+showme("wheelcreator.js ready");

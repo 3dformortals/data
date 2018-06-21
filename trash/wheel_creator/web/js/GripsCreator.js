@@ -1,3 +1,4 @@
+showme("preparing GripsCreator.js");
 function grip_angles_counter(s6){
     rez = [];
     var step = 360/s6;
@@ -278,3 +279,4 @@ function grips_maker(h,w,s,g,hull=false){
     
     return grips;
 }
+showme("GripsCreator.js ready");

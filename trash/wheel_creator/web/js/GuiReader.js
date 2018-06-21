@@ -1,3 +1,4 @@
+showme("preparing GuiReader.js");
 function inputs_reader(ids,rez = []){
 	for (i=0;i<ids.length;i++){
 		rez.push(parseFloat(document.getElementById(ids[i]).value));
@@ -73,3 +74,5 @@ function gui_reader(){
 	console.log("scale = "+scale);
 	return [h,w,b,s,g];
 }
+showme("GuiReader.js ready");
+showme("ready");

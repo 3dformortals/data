@@ -1,3 +1,4 @@
+showme("preparing GuiCreator.js");
 function ok_gui_creator(){
     var box = document.getElementById('div_ok');
     var table = document.createElement('table');
@@ -383,3 +384,4 @@ size_gui_creator();
 look_gui_creator();
 lamp_gui_creator();
 start_data_writer();
+showme("GuiCreator.js ready");

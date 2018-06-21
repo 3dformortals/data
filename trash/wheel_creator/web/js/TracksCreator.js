@@ -1,3 +1,4 @@
+showme("preparing TracksCreator.js");
 function base_subtrackt_tire_and_traks(){
     var mat = new BABYLON.StandardMaterial("mat1", scene);
 	mat.alpha = 1.0;
@@ -16,13 +17,20 @@ function base_subtrackt_tire_and_traks(){
     
     //subtrackt grips
     console.log("tracks.length = ",tracks.length, " before loop");
-    var sum_track = BABYLON.Mesh.MergeMeshes(tracks,true,true);
+    
+    var sum_track = BABYLON.Mesh.MergeMeshes(tracks,true,true); //summary mesh
+    for (i=0;i<tracks.length;i++){ tracks[i].dispose(false,true); }//remove parts
+    tracks=[];
+    console.log("<<<REMOVE TRACKS RESULT = ",tracks,"\nREMOVE sum_track = ",sum_track);
+    
     var aCSG = BABYLON.CSG.FromMesh(track_base);
     var bCSG = BABYLON.CSG.FromMesh(sum_track);
     var subCSG = aCSG.subtract(bCSG);
-    var newMesh = subCSG.toMesh("csg", mat, scene);
+    var newMesh = subCSG.toMesh("track", mat, scene);//result mesh
+    //remove parts
     track_base.dispose(false,true);
     sum_track.dispose(false,true);
+    
     track=newMesh;
     track.material = mat;
     
@@ -265,6 +273,7 @@ function track_maker(dot,u,gp,gs,c,vn,ns,gh,gt,ind){
 	return extruded;
 }
 function tracks_maker(h,w,s,g,hull=false){
+    console.log("Flat track calculating. Just ingnore 'long running prompt'");
     var c = [0,0,0]; // center dot
     var vn = [1, 0, 0]; // normal vector
     var va = [0, 1, 0]; // vertical direction vector for 2D shape of grip
@@ -335,3 +344,4 @@ function tracks_maker(h,w,s,g,hull=false){
     base_subtrackt_tire_and_traks();
     return tracks;
 }
+showme("TracksCreator.js ready");
