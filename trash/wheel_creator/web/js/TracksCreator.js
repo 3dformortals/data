@@ -18,6 +18,21 @@ function base_subtrackt_tire_and_traks(){
     //subtrackt grips
     console.log("tracks.length = ",tracks.length, " before loop");
     
+    //new code trying loop each grip- super long... like hell), but result is clear
+    // var bCSG = BABYLON.CSG.FromMesh(tracks[0]);
+    // for (i=1;i<tracks.length;i++){
+    //     bCSG.unionInPlace(BABYLON.CSG.FromMesh(tracks[i]));
+    // }
+    // for (i=0;i<tracks.length;i++){ tracks[i].dispose(false,true); }//remove parts
+    // tracks=[];
+    // var aCSG = BABYLON.CSG.FromMesh(track_base);
+    // var subCSG = aCSG.subtract(bCSG);
+    // var newMesh = subCSG.toMesh("track", mat, scene);//result mesh
+    // //remove parts
+    // track_base.dispose(false,true);
+    //end new code without bug
+    
+    //old code with bug /half cutted hole, if * 1.02 in GripsCreator.js line 16
     var sum_track = BABYLON.Mesh.MergeMeshes(tracks,true,true); //summary mesh
     for (i=0;i<tracks.length;i++){ tracks[i].dispose(false,true); }//remove parts
     tracks=[];
@@ -30,6 +45,7 @@ function base_subtrackt_tire_and_traks(){
     //remove parts
     track_base.dispose(false,true);
     sum_track.dispose(false,true);
+    //end old code
     
     track=newMesh;
     track.material = mat;
@@ -272,6 +288,20 @@ function track_maker(dot,u,gp,gs,c,vn,ns,gh,gt,ind){
 	console.log("track done");
 	return extruded;
 }
+function merge_trackbox(trackbox){
+    //fail...still half cutted hole
+    
+    var bCSG = BABYLON.CSG.FromMesh(trackbox[0]);
+    
+    for (i=1;i<trackbox.length;i++){
+        bCSG.unionInPlace(BABYLON.CSG.FromMesh(trackbox[i]));
+    }
+    for (i=0;i<trackbox.length;i++){ trackbox[i].dispose(false,true); }//remove parts
+    trackbox=[];
+    var sum_track = bCSG.toMesh("track", null, scene);//result mesh
+    
+    return sum_track;
+}
 function tracks_maker(h,w,s,g,hull=false){
     console.log("Flat track calculating. Just ingnore 'long running prompt'");
     var c = [0,0,0]; // center dot
@@ -335,11 +365,14 @@ function tracks_maker(h,w,s,g,hull=false){
         var ns = need_scale;
         var gh = h[1];
         var gt = grips_type;
+        var trackbox = []; // box for one width line traks before merging
         for (var j = 0;j<dots.length;j++){
-            
-            tracks.push(track_maker(dots[j],u,gp,gs,c,vn,ns,gh,gt,ind));
+            trackbox.push(track_maker(dots[j],u,gp,gs,c,vn,ns,gh,gt,ind));
+            // tracks.push(track_maker(dots[j],u,gp,gs,c,vn,ns,gh,gt,ind));
             ind += 1;
         }
+        tracks.push(merge_trackbox(trackbox));
+        
     }
     base_subtrackt_tire_and_traks();
     return tracks;

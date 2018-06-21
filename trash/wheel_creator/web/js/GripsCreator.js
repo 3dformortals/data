@@ -7,13 +7,13 @@ function grip_angles_counter(s6){
 }
 function one_gw_counter(gt,gw,gwn,ghhole){
     var rez;
-    if (gt == "|||" || gt == "ooo"){ rez = (gw - ghhole) / gwn; }
+    if (gt == "|||" || gt == "ooo"){ rez = gw / (gwn * 2 - 1); }
     else{ rez = gw / gwn; }
     console.log("one_gw_counter = ",rez,"gt = ",gt,"gw = ",gw,"gwn = ",gwn,"ghhole = ",ghhole);
     return rez;
 }
 function column_internal(dc,nc,distance){
-    distance -= dc;
+    distance -= dc * 1.02; //after this * 1.02 track only half cutted...very strange ERROR BUG
     var xmax = distance / 2;
     var xmin = -xmax;
     var n = nc-2;
