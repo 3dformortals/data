@@ -565,7 +565,7 @@ function prepare_objects_for_export(objs){
 		rez.push(fullmesh);
 		// mesh.dispose(false,true);
 	}
-	download(BABYLON.OBJExport.OBJ(rez),"scene.obj","text/plain");
+	// download(BABYLON.OBJExport.OBJ(rez),"scene.obj","text/plain");
 	for (i=0;i<rez.length;i++){
 		// rez[i].dispose(false,true);
 		// objs[i].dispose(false,true);
@@ -590,6 +590,7 @@ function wheel_creator(){
 	//need fix, looks like can't delete objects which created for export 
 	var exportobjects = [metal,tire,track].concat(bolts.concat(grips));
 	exportobjects = prepare_objects_for_export(exportobjects);
+	OBJexport = exportobjects; //new for button trying
 	console.log("EO length",exportobjects.length);
 	// for (i=0;i<exportobjects.length;i++){exportobjects[i].dispose(false,true);}
 	console.log("EO length",exportobjects.length);
@@ -611,12 +612,27 @@ function clearall(){
 }
 //------------------------------
 
-function download(text, name, type) {
-	var a = document.getElementById("a");
+// function download(text, name, type) {
+// 	var a = document.getElementById("a");
+// 	var file = new Blob([text], {type: type});
+// 	a.href = URL.createObjectURL(file);
+// 	a.download = name;
+	
+//   }
+
+var OBJexport;
+function save_objmesh(){
+	// document.getElementById("a").click();
+	var a = document.getElementById('OBJexport');
+	var text = BABYLON.OBJExport.OBJ(OBJexport)
+	var type = "text/plain";
+	var name = "exported_wheel.obj";
 	var file = new Blob([text], {type: type});
 	a.href = URL.createObjectURL(file);
 	a.download = name;
-  }
+	a.click();
+}
+  
 
 function change_camera_test(al,be,ra){
 	camera.alpha = al;
