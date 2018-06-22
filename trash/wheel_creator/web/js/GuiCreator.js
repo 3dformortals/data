@@ -139,6 +139,7 @@ function size_gui_creator(){
 function td_cbox(cboxid, checked = false, title = ""){
     var td = document.createElement('td');
     var cbox = document.createElement('input');
+    cbox.id = cboxid;
     cbox.type = "checkbox";
     cbox.defaultChecked = checked;
     if (title != ""){cbox.title = title;}

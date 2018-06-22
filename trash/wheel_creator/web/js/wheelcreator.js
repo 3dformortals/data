@@ -555,6 +555,59 @@ function tire_maker(h,w,s,hull=false){
 
 
 
+
+function whatdraw(){
+	//metal,bolts,tire,grips,track
+	var rez = [];
+	for (i=1;i<6;i++){
+		rez.push(document.getElementById("cbox_s" + i.toString() ).checked);
+	}return rez;
+}
+function wheel_creator(){
+	clearall();
+	var dp = whatdraw(); //drawparts
+	d=gui_reader(); //GuiReader.js
+	h=d[0];w=d[1];b=d[2];s=d[3];g=d[4];
+	// var angle = 0;
+	if (dp[0]) { metal = metal_maker(h,w,s); }
+	if (dp[2]) { tire = tire_maker(h,w,s); }
+	if (dp[1]) { bolts = bolts_maker(h,w,s,b); }
+	if (dp[3]) { grips = grips_maker(h,w,s,g); }
+	if (dp[4]) { tracks = tracks_maker(h,w,s,g); }
+	// console.log("--------tire export trying--------");
+	// console.log(BABYLON.OBJExport.OBJ([tire]));
+	// alert(BABYLON.OBJExport.OBJ([metal]));
+	
+	// console.log("EO length",exportobjects.length);
+	// for (i=0;i<exportobjects.length;i++){exportobjects[i].dispose(false,true);}
+	// console.log("EO length",exportobjects.length);
+	// console.log(exportobjects);
+	// download(BABYLON.OBJExport.OBJ(exportobjects),"scene.obj","text/plain");
+	
+	// download(BABYLON.OBJExport.OBJ(exportobjects,true,"wheelmaterials",false),"scene.obj","text/plain");
+}
+
+function clearall(){
+	if (fresh) { fresh = false; }
+	else{
+		if(metal) { metal.dispose(false,true); metal = null; }
+		if(tire) { tire.dispose(false,true); metal = null; }
+		if(track) { track.dispose(false,true); track = null; }
+		if(bolts) { for(i=0;i<bolts.length;i++){bolts[i].dispose(false,true);} bolts=[]; }
+		if(grips) { for(i=0;i<grips.length;i++){grips[i].dispose(false,true);} grips=[]; }
+	}
+}
+//------------------------------
+
+// function download(text, name, type) {
+// 	var a = document.getElementById("a");
+// 	var file = new Blob([text], {type: type});
+// 	a.href = URL.createObjectURL(file);
+// 	a.download = name;
+	
+//   }
+
+var OBJexport;
 // work but big
 function prepare_objects_for_export(objs){
 	var rez = []
@@ -572,56 +625,17 @@ function prepare_objects_for_export(objs){
 	}
 	return rez;
 }
-
-function wheel_creator(){
-	clearall();
-	d=gui_reader(); //GuiReader.js
-	h=d[0];w=d[1];b=d[2];s=d[3];g=d[4];
-	// var angle = 0;
-	metal = metal_maker(h,w,s);
-	tire = tire_maker(h,w,s);
-	bolts = bolts_maker(h,w,s,b);
-	grips = grips_maker(h,w,s,g);
-	tracks = tracks_maker(h,w,s,g);
-	// console.log("--------tire export trying--------");
-	// console.log(BABYLON.OBJExport.OBJ([tire]));
-	// alert(BABYLON.OBJExport.OBJ([metal]));
-	
-	var exportobjects = [metal,tire,track].concat(bolts.concat(grips));
-	exportobjects = prepare_objects_for_export(exportobjects);
-	OBJexport = exportobjects; //new for button trying
-	console.log("EO length",exportobjects.length);
-	// for (i=0;i<exportobjects.length;i++){exportobjects[i].dispose(false,true);}
-	console.log("EO length",exportobjects.length);
-	console.log(exportobjects);
-	// download(BABYLON.OBJExport.OBJ(exportobjects),"scene.obj","text/plain");
-	
-	// download(BABYLON.OBJExport.OBJ(exportobjects,true,"wheelmaterials",false),"scene.obj","text/plain");
-}
-
-function clearall(){
-	if (fresh) { fresh = false; }
-	else{
-		metal.dispose(false,true);
-		tire.dispose(false,true);
-		track.dispose(false,true);
-		for(i=0;i<bolts.length;i++){bolts[i].dispose(false,true);} bolts=[];
-		for(i=0;i<grips.length;i++){grips[i].dispose(false,true);} grips=[];
-	}
-}
-//------------------------------
-
-// function download(text, name, type) {
-// 	var a = document.getElementById("a");
-// 	var file = new Blob([text], {type: type});
-// 	a.href = URL.createObjectURL(file);
-// 	a.download = name;
-	
-//   }
-
-var OBJexport;
 function save_objmesh(){
 	// document.getElementById("a").click();
+	var exportobjects = []; //exported mesh array
+	if (metal) { exportobjects.push(metal); }
+	if (tire) { exportobjects.push(tire); }
+	if (track) { exportobjects.push(track); }
+	if (bolts) { for (i=0;i<bolts.length;i++) { exportobjects.push(bolts[i]); } }
+	if (grips) { for (i=0;i<grips.length;i++) { exportobjects.push(grips[i]); } }
+	// var exportobjects = [metal,tire,track].concat(bolts.concat(grips));
+	OBJexport = prepare_objects_for_export(exportobjects);
+	
 	var a = document.getElementById('OBJexport');
 	var text = BABYLON.OBJExport.OBJ(OBJexport)
 	var type = "text/plain";
