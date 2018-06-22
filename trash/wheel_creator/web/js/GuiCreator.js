@@ -13,12 +13,16 @@ function ok_gui_creator(){
     var b_save = document.createElement('button');
     var b_load = document.createElement('button');
     //need set onclick attributes later
+        
     b_ok.className = "b50px";
     b_ok.textContent = "ok";
     b_ok.tabIndex = 1;
     b_ok.onclick = function() {wheel_creator();};
+    
     b_png.className = "b50px";
     b_png.textContent = "png";
+    b_png.onclick = function() { PNGexport(); }
+    
     b_save.className = "b50px";
     b_save.textContent = "save";
     b_load.className = "b50px";
@@ -43,13 +47,14 @@ function td_hr(colspan = 1){
     td.appendChild(document.createElement('hr'));
     return td;
 }
-function td_text(text, color = ""){
+function td_text(text, color = "",colspan = 1){
     var td = document.createElement('td');
     var style = "";
     if (color == ""){ style = "vertical-align:middle;"; }
     else{style = "vertical-align:middle;color:"+color+";";}
     td.setAttribute("style",style);
     td.innerHTML = text;
+    td.colSpan = colspan;
     return td;
 }
 function text_tag(text,color){
@@ -95,9 +100,14 @@ function td_input(id, title = ""){
 }
 function size_gui_tr(i){
     var tr = document.createElement('tr');
-    var td1 = td_text('h'+ i.toString());
+    if(i==9){
+        var td1 = td_text('png');
+        var td2 = td_input('export_resolution','export resolution');
+    }else{
+        var td1 = td_text('h'+ i.toString());
+        var td2 = td_input('h'+ i.toString());
+    }
     tr.appendChild(td1);
-    var td2 = td_input('h'+ i.toString());
     tr.appendChild(td2);
     if (i < 6){
         var td3 = td_input('w'+ i.toString());
@@ -197,23 +207,23 @@ function look_gui_tbody(){
     tr4.appendChild(td);
     
     var tr5 = document.createElement('tr');
-    tr5.appendChild(td_cbox("cbox_s1",true)); tr5.appendChild(td_color("c1","#808080"));
+    tr5.appendChild(td_cbox("cbox_s1",true,"metal")); tr5.appendChild(td_color("c1","#808080"));
     tr5.appendChild(td_input("s5","grips repeat by width")); tr5.appendChild(td_text("s5")); //repeat input
     
     var tr6 = document.createElement('tr');
-    tr6.appendChild(td_cbox("cbox_s2",true)); tr6.appendChild(td_color("c2","#808080"));
+    tr6.appendChild(td_cbox("cbox_s2",true,"bolts")); tr6.appendChild(td_color("c2","#808080"));
     tr6.appendChild(td_input("s6","grips number by lenght")); tr6.appendChild(td_text("s6")); //grips
     
     var tr7 = document.createElement('tr');
-    tr7.appendChild(td_cbox("cbox_s3",true)); tr7.appendChild(td_color("c3","#000000"));
+    tr7.appendChild(td_cbox("cbox_s3",true,"tire")); tr7.appendChild(td_color("c3","#000000"));
     tr7.appendChild(td_input("s7","grip % by grip + hole")); tr7.appendChild(td_text("s7")); //% grip from grip + hole = steps
     
     var tr8 = document.createElement('tr');
-    tr8.appendChild(td_cbox("cbox_s4",true)); tr8.appendChild(td_color("c4","#ffff00"));
+    tr8.appendChild(td_cbox("cbox_s4",true,"grips")); tr8.appendChild(td_color("c4","#ffff00"));
     tr8.appendChild(td_input("s8","bolt angles space separated")); tr8.appendChild(td_text("s8")); //bolt angles
     
     var tr9 = document.createElement('tr');
-    tr9.appendChild(td_cbox("cbox_s5",true)); tr9.appendChild(td_color("c5","#000000"));
+    tr9.appendChild(td_cbox("cbox_s5",false,"flat track")); tr9.appendChild(td_color("c5","#000000"));
     tr9.appendChild(td_button("mix","balert('testalerttext')","mix bolt angles")); tr9.appendChild(td_text("00"));
     
     var tbox = [tr1,tr2,tr3,tr4,tr5,tr6,tr7,tr8,tr9];
@@ -314,22 +324,29 @@ function lamp_gui_tbody(){
     tr14.appendChild(td_hr(4));
     
     var tr15 = document.createElement('tr');
-    tr15.appendChild(td_cbox_text_colspan("wireframe","hull",false));
-    tr15.appendChild(td_cbox_text_multicolor_colspan("axes",false,["x","y","z"],["red","green","blue"]));
-    tr15.appendChild(td_input("angle","wheel angle"));
-    tr15.appendChild(td_input("extrude","wheel extrude %"));
+    tr15.appendChild(td_cbox_text_colspan("wireframe","wireframe",false,2));
+    tr15.appendChild(td_cbox_text_multicolor_colspan("axes",false,["x","y","z"," axes"],["red","green","blue","black"],2));
     
     var tr16 = document.createElement('tr');
     tr16.appendChild(td_hr(4));
     
     var tr17 = document.createElement('tr');
-    tr17.appendChild(td_cbox_text_colspan("cbox_track","draw track",false,2));
-    tr17.appendChild(td_color("color_track","#808080"));
-    tr17.appendChild(td_input("length_track","track length"));
+    tr17.appendChild(td_text("background color","",4));
+    
+    var tr18 = document.createElement('tr');
+    tr18.appendChild(td_color("color_background","#ffffff"));
+    tr18.appendChild(td_cbox_text_colspan("transperent","render transperent",true,3));
+    
+    // tr17.appendChild(td_input("length_track","track length"));
+    
+    // var tr18 = document.createElement('tr');
+    // tr18.appendChild(td_cbox_text_colspan("cbox_track","draw track",false,2));
+    // tr18.appendChild(td_color("color_track","#808080"));
+    // tr18.appendChild(td_input("length_track","track length"));
     
     
     
-    var tbox = [tr1,tr2,tr3,tr4,tr5,tr6,tr7,tr8,tr9,tr10,tr11,tr12,tr13,tr14,tr15,tr16,tr17];
+    var tbox = [tr1,tr2,tr3,tr4,tr5,tr6,tr7,tr8,tr9,tr10,tr11,tr12,tr13,tr14,tr15,tr16,tr17,tr18];
     for (i=0;i<tbox.length;i++) {tbody.appendChild(tbox[i]);}
     return tbody;
 }
@@ -345,7 +362,7 @@ function id_value(id,value){
 }
 function start_data_writer(){
     var ids = [
-        "h1","h2","h3","h4","h5","h6","h7","h8","h9",
+        "h1","h2","h3","h4","h5","h6","h7","h8","export_resolution",
         "w1","w2","w3","w4","w5","b1","b2","b3","b4",
         "s1","s2","s3","s4","s5","s6","s7","s8",
         "intensity_ambient",
@@ -356,14 +373,12 @@ function start_data_writer(){
         "x_point","y_point","z_point",
         "distance_point","decay_point",
         "smsw_point","smsh_point","scn_point","scf_point",
-        "zoom_view","distance_view","y_view","z_view",
-        "angle","extrude",
-        "length_track"
+        "zoom_view","distance_view","y_view","z_view",//tr13
     ];
     var values = [
-        100,100,500,100,100,100,100,100,200,
+        100,100,500,100,100,100,100,100,900,
         500,600,550,100,550,50,50,6,0,
-        100,100,100,100,4,32,50,0,
+        900,100,100,100,4,4,50,0,//later back to more big numbers 4 4 - 4 32
         1,
         1,
         500,500,500,
@@ -372,9 +387,7 @@ function start_data_writer(){
         500,500,500,
         1000,2,
         512,512,0.5,500,
-        1,1000,0,0,
-        0,100,
-        1000
+        1,1000,0,0,//tr13 lamp
     ];
     for (i=0;i<ids.length;i++){id_value(ids[i],values[i])}
 }

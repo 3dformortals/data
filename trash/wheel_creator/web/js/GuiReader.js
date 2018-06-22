@@ -5,7 +5,7 @@ function inputs_reader(ids,rez = []){
 	}return rez;
 }
 function hsize_reader(prefix=[]){
-	var inputs = ["h1","h2","h3","h4","h5","h6","h7","h8","h9"];
+	var inputs = ["h1","h2","h3","h4","h5","h6","h7","h8"];
 	var invals = inputs_reader(inputs,prefix);
 	return invals;
 }
@@ -59,6 +59,9 @@ function rescale_h(h,scale){for (i=1;i<h.length;i++){h[i] *= scale;} return h;}
 function rescale_w(w,scale){for (i=1;i<w.length;i++){w[i] *= scale;} return w;}
 function rescale_b(b,scale){ b[1] *= scale; b[2] *= scale; return b; }
 function rescale_s(s,scale){ for (i=1;i<5;i++){s[i] *= scale;} return s; }
+function checkbox_reader(){
+	var cbox_name = ["undefined"]
+}
 function gui_reader(){
 	var h = hsize_reader(["undefined"]);
 	var w = wsize_reader(["undefined"]);

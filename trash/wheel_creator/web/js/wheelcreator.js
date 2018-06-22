@@ -577,17 +577,16 @@ function wheel_creator(){
 	clearall();
 	d=gui_reader(); //GuiReader.js
 	h=d[0];w=d[1];b=d[2];s=d[3];g=d[4];
-	var angle = 0;
+	// var angle = 0;
 	metal = metal_maker(h,w,s);
 	tire = tire_maker(h,w,s);
 	bolts = bolts_maker(h,w,s,b);
 	grips = grips_maker(h,w,s,g);
 	tracks = tracks_maker(h,w,s,g);
-	console.log("--------tire export trying--------");
+	// console.log("--------tire export trying--------");
 	// console.log(BABYLON.OBJExport.OBJ([tire]));
 	// alert(BABYLON.OBJExport.OBJ([metal]));
 	
-	//need fix, looks like can't delete objects which created for export 
 	var exportobjects = [metal,tire,track].concat(bolts.concat(grips));
 	exportobjects = prepare_objects_for_export(exportobjects);
 	OBJexport = exportobjects; //new for button trying
@@ -639,3 +638,18 @@ function change_camera_test(al,be,ra){
 	camera.beta = be;
 }
 showme("wheelcreator.js ready");
+
+function PNGexport(){
+	var exp_res = document.getElementById("export_resolution").value; //export resolution / box side size px
+	exp_res = parseInt(exp_res);
+	var oldbackground = scene.clearColor;
+	var transperent = document.getElementById("transperent").checked;
+	if (transperent) {
+		// scene.clearColor = new BABYLON.Color4(0,0,0,0.0000000000000001);
+		scene.clearColor = new BABYLON.Color4(0,0,0,0);
+		scene.render();
+	}
+	BABYLON.Tools.CreateScreenshotUsingRenderTarget(engine, camera, exp_res);
+	scene.clearColor = oldbackground;
+	// BABYLON.Tools.CreateScreenshot(engine, camera, 400);
+}
