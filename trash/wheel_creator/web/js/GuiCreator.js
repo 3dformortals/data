@@ -183,7 +183,7 @@ function look_gui_tbody(){
     tr1.appendChild(td_text("s1")); tr1.appendChild(td_input("s1"));
     var td = td_text("|||"); td.style.textAlign = "right";
     tr1.appendChild(td);
-    td = td_radio("g1","grip","|||",true);
+    td = td_radio("g1","grip","|||");
     tr1.appendChild(td);
     
     var tr2 = document.createElement('tr');
@@ -197,7 +197,7 @@ function look_gui_tbody(){
     tr3.appendChild(td_text("s3")); tr3.appendChild(td_input("s3"));
     td = td_text(")))"); td.style.textAlign = "right";
     tr3.appendChild(td);
-    td = td_radio("g3","grip",")))");
+    td = td_radio("g3","grip",")))",true);
     tr3.appendChild(td);
     
     var tr4 = document.createElement('tr');
@@ -208,15 +208,15 @@ function look_gui_tbody(){
     tr4.appendChild(td);
     
     var tr5 = document.createElement('tr');
-    tr5.appendChild(td_cbox("cbox_s1",true,"metal")); tr5.appendChild(td_color("c1","#808080"));
+    tr5.appendChild(td_cbox("cbox_s1",false,"metal")); tr5.appendChild(td_color("c1","#808080"));
     tr5.appendChild(td_input("s5","grips repeat by width")); tr5.appendChild(td_text("s5")); //repeat input
     
     var tr6 = document.createElement('tr');
-    tr6.appendChild(td_cbox("cbox_s2",true,"bolts")); tr6.appendChild(td_color("c2","#808080"));
+    tr6.appendChild(td_cbox("cbox_s2",false,"bolts")); tr6.appendChild(td_color("c2","#808080"));
     tr6.appendChild(td_input("s6","grips number by lenght")); tr6.appendChild(td_text("s6")); //grips
     
     var tr7 = document.createElement('tr');
-    tr7.appendChild(td_cbox("cbox_s3",true,"tire")); tr7.appendChild(td_color("c3","#000000"));
+    tr7.appendChild(td_cbox("cbox_s3",false,"tire")); tr7.appendChild(td_color("c3","#000000"));
     tr7.appendChild(td_input("s7","grip % by grip + hole")); tr7.appendChild(td_text("s7")); //% grip from grip + hole = steps
     
     var tr8 = document.createElement('tr');
@@ -379,7 +379,7 @@ function start_data_writer(){
     var values = [
         100,100,500,100,100,100,100,100,900,
         500,600,550,100,550,50,50,6,0,
-        900,100,100,100,4,4,50,0,//later back to more big numbers 4 4 - 4 32
+        900,100,100,100,1,5,10,0,//later back to more big numbers 1 5 10
         1,
         1,
         500,500,500,

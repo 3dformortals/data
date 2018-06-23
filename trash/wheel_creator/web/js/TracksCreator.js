@@ -252,7 +252,7 @@ function tracks_center_dots_counter( c,vn,vz, r, nw, na, gw, one_gw ){
     }return rez; //list of center dots lists for each polygon vertex
 }
 
-function track_maker(dot,u,gp,gs,c,vn,ns,gh,gt,ind){
+function track_maker(dot,u,gp,gs,c,vn,va,ns,gh,gt,ind){
     var scaling = function(i, distance) { return 1; };
     if (gt == "|||" || gt == "ooo"){
         if (ns){
@@ -271,6 +271,8 @@ function track_maker(dot,u,gp,gs,c,vn,ns,gh,gt,ind){
     var extruded = BABYLON.MeshBuilder.ExtrudeShapeCustom("track"+ind.toString(), gripSettings, scene);
     
     if (gt == ">>>" || gt == ")))"){
+        extruded.rotateAround(vec_maker(c),vec_maker(va),geo.radians(90));
+        extruded.rotateAround(vec_maker(c),vec_maker(vn),geo.radians(90));
         if(ind & 1 && !ns){ extruded.rotateAround(vec_maker(c),vec_maker(vn),geo.radians(180)); }
         else if(ns && !(ind & 1)){ extruded.rotateAround(vec_maker(c),vec_maker(vn),geo.radians(180)); }
     }
@@ -343,11 +345,11 @@ function tracks_maker(h,w,s,g,hull=false){
     var grips_shape;
     var grips_path;
     //code done not tested
-    grips_path = grips_path_counter(c,vz,h);
+    grips_path = grips_path_counter(c,vz,h,grips_type,one_ghhole,one_gw);
     grips_shape = grips_shape_counter(
         grips_type,
         c,vn,va,
-        one_gw,one_gh,one_ghhole
+        one_gw,one_gh,one_ghhole,h
     );
     //include base for subtracktion
     track_base = track_base_maker(h,w,s,cdots,c,va);
@@ -367,7 +369,7 @@ function tracks_maker(h,w,s,g,hull=false){
         var gt = grips_type;
         var trackbox = []; // box for one width line traks before merging
         for (var j = 0;j<dots.length;j++){
-            trackbox.push(track_maker(dots[j],u,gp,gs,c,vn,ns,gh,gt,ind));
+            trackbox.push(track_maker(dots[j],u,gp,gs,c,vn,va,ns,gh,gt,ind));
             // tracks.push(track_maker(dots[j],u,gp,gs,c,vn,ns,gh,gt,ind));
             ind += 1;
         }
