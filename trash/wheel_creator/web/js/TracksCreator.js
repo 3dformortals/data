@@ -46,11 +46,7 @@ function tracks_shape_counter(gt,c,vn,va,one_gw,one_gh,one_ghhole,h){
 
 
 function base_subtrackt_tire_and_traks(gt){
-    var mat = new BABYLON.StandardMaterial("mat1", scene);
-	mat.alpha = 1.0;
-	mat.diffuseColor = new BABYLON.Color3(0.9, 0.5, 0.5);
-	mat.backFaceCulling = false;
-	// mat.wireframe = true;
+    
     
     console.log("tracks.length = ",tracks.length, " before loop");
     
@@ -230,6 +226,8 @@ function tracks_center_dots_counter( c,vn,vz, r, nw, na, gw, one_gw ){
 }
 
 function track_maker(dot,u,gp,gs,c,vn,va,vz,ns,gh,gt,ind,fullind){
+    var mat = tracks_mat;
+    
     var scaling = function(i, distance) { return 1; };
     if (gt == "|||" || gt == "ooo"){
         if (ns){
@@ -263,6 +261,7 @@ function track_maker(dot,u,gp,gs,c,vn,va,vz,ns,gh,gt,ind,fullind){
     }
     
     extruded.position = vec_maker(dot);
+    extruded.material = mat;
     return extruded;
 }
 
@@ -334,7 +333,7 @@ function tracks_maker(h,w,s,g,hull=false){
         }
         
     }
-    base_subtrackt_tire_and_traks(grips_type);
+    // base_subtrackt_tire_and_traks(grips_type);
     return tracks;
 }
 showme("TracksCreator.js ready");

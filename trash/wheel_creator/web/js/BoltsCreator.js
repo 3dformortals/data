@@ -285,7 +285,7 @@ function bolts_maker(h,w,s,b,hull=false){
             else if(bt == 3){ bolts.push(bolt3_maker(neg,dot,u,b)) } //nohole
             else if(bt == 7){ bolts.push(bolt7_maker(neg,dot,u,b)) } //excentric
             else{ bolts.push(bolt_maker(neg,dot,u,b)) } //polygons
-            
+            bolts[i].material = bolts_mat;
         }
     }
     return bolts;

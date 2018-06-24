@@ -5,14 +5,15 @@ var geo = new GeometryXD();
 
 // alert(geo.vecXD([1,2,3],[4,5,6]));
 var fresh = true;
-var metal;
-var bolts=[];
-var tire;
-var grips=[];
+var metal; var metal_mat;
+var bolts=[]; var bolts_mat;
+var tire; var tire_mat;
+var grips=[]; var grips_mat;
 var track; //result track mesh, after subtract grips + oval shape
 var track_base; //base for subtracktion
 var track_tire; //tire shape for subtracktion from traks_base
-var tracks=[]; //flat placed grips for subtraction
+var tracks=[]; var tracks_mat;
+
 var canvas = document.getElementById("renderCanvas");
 canvas.width = 600;
 canvas.height = 600;
@@ -460,11 +461,7 @@ function metal_maker(h, w, s, hull=false,extrude=100){
 	var extruded = BABYLON.MeshBuilder.ExtrudeShapeCustom("ext", customExtrudeSettings, scene);
 	// var extruded = BABYLON.MeshBuilder.ExtrudeShape("ext", {shape: myShape, path: myPath}, scene);
 	
-	var mat = new BABYLON.StandardMaterial("mat1", scene);
-	mat.alpha = 1.0;
-	mat.diffuseColor = new BABYLON.Color3(0.5, 0.5, 0.5);
-	mat.backFaceCulling = false;
-	// mat.wireframe = true;
+	var mat = metal_mat;
 	extruded.material = mat;
 	
 	return extruded;
@@ -488,11 +485,7 @@ function tire_maker(h,w,s,hull=false){
 	};
 	var extruded = BABYLON.MeshBuilder.ExtrudeShapeCustom("ext", customExtrudeSettings, scene);
 	
-	var mat = new BABYLON.StandardMaterial("mat1", scene);
-	mat.alpha = 1.0;
-	mat.diffuseColor = new BABYLON.Color3(0.2, 0.2, 0.2);
-	mat.backFaceCulling = false;
-	// mat.wireframe = true;
+	var mat = tire_mat;
 	extruded.material = mat;
 	
 	return extruded;
@@ -502,18 +495,39 @@ function tire_maker(h,w,s,hull=false){
 
 
 function whatdraw(){
-	//metal,bolts,tire,grips,track
+	//metal,bolts,tire,grips,tracks
 	var rez = [];
 	for (i=1;i<6;i++){
 		rez.push(document.getElementById("cbox_s" + i.toString() ).checked);
 	}return rez;
 }
+
+function one_mat_maker(hull,id){
+	var mat = new BABYLON.StandardMaterial(id, scene);
+	mat.alpha = 1.0;
+	var htmlhexcolor = document.getElementById(id).value;
+	mat.diffuseColor = new BABYLON.Color3.FromHexString(htmlhexcolor);
+	mat.backFaceCulling = false;
+	if (hull) { mat.wireframe = true; } else { mat.wireframe = false; }
+	return mat;
+}
+function mat_maker(){
+	var hull = document.getElementById("wireframe").checked;
+	metal_mat = one_mat_maker(hull,"c1");
+	bolts_mat = one_mat_maker(hull,"c2");
+	tire_mat = one_mat_maker(hull,"c3");
+	grips_mat = one_mat_maker(hull,"c4");
+	tracks_mat = one_mat_maker(hull,"c5");
+}
+
 function wheel_creator(){
 	clearall();
 	var dp = whatdraw(); //drawparts
 	d=gui_reader(); //GuiReader.js
 	h=d[0];w=d[1];b=d[2];s=d[3];g=d[4];
 	// var angle = 0;
+	//need call to mat_maker()
+	mat_maker()
 	if (dp[0]) { metal = metal_maker(h,w,s); }
 	if (dp[2]) { tire = tire_maker(h,w,s); }
 	if (dp[1]) { bolts = bolts_maker(h,w,s,b); }
@@ -525,10 +539,10 @@ function clearall(){
 	if (fresh) { fresh = false; }
 	else{
 		if(metal) { metal.dispose(false,true); metal = null; }
-		if(tire) { tire.dispose(false,true); metal = null; }
-		if(track) { track.dispose(false,true); track = null; }
+		if(tire) { tire.dispose(false,true); tire = null; }
 		if(bolts) { for(i=0;i<bolts.length;i++){bolts[i].dispose(false,true);} bolts=[]; }
 		if(grips) { for(i=0;i<grips.length;i++){grips[i].dispose(false,true);} grips=[]; }
+		if(tracks) { for(i=0;i<tracks.length;i++){tracks[i].dispose(false,true);} tracks=[]; }
 	}
 }
 
@@ -547,10 +561,11 @@ function save_objmesh(){
 	var exportobjects = []; //exported mesh array
 	if (metal) { exportobjects.push(metal); }
 	if (tire) { exportobjects.push(tire); }
-	if (track) { exportobjects.push(track); }
+	
 	if (bolts) { for (i=0;i<bolts.length;i++) { exportobjects.push(bolts[i]); } }
 	if (grips) { for (i=0;i<grips.length;i++) { exportobjects.push(grips[i]); } }
-	// var exportobjects = [metal,tire,track].concat(bolts.concat(grips));
+	if (tracks) { for (i=0;i<tracks.length;i++) { exportobjects.push(tracks[i]); } }
+	
 	OBJexport = prepare_objects_for_export(exportobjects);
 	
 	var a = document.getElementById('OBJexport');

@@ -285,11 +285,7 @@ function grip_maker(dot,u,gp,gs,c,vn,va,ns,gh,gt,ind){
     extruded.rotateAround(vec_maker(c),vec_maker(vn),geo.radians(u));
     extruded.position = vec_maker(dot);
     
-	var mat = new BABYLON.StandardMaterial("mat1", scene);
-	mat.alpha = 1.0;
-	mat.diffuseColor = new BABYLON.Color3(0.8, 0.8, 0.2);
-	mat.backFaceCulling = false;
-	// mat.wireframe = true;
+	var mat = grips_mat;
 	extruded.material = mat;
 	
 	return extruded;
