@@ -39,7 +39,6 @@ function bolt7_maker(neg,dot,u,b){
     
     
 	
-	console.log("endcode bolt7");
 	return newMesh;
 }
 function bolt_maker(neg,dot,u,b){
@@ -82,7 +81,6 @@ function bolt_maker(neg,dot,u,b){
     
     
 	
-	console.log("endcode bolt4");
 	return newMesh;
 }
 function bolt3_maker(neg,dot,u,b){
@@ -115,7 +113,6 @@ function bolt3_maker(neg,dot,u,b){
     bolt3.material = mat;
     
     
-	console.log("endcode bolt3");
 	return bolt3;
 }
 function bolt2_maker(neg,dot,u,b){
@@ -165,7 +162,6 @@ function bolt2_maker(neg,dot,u,b){
     
     
 	
-	console.log("endcode bolt2");
 	return newMesh;
 }
 function bolt1_maker(neg,dot,u,b){
@@ -185,7 +181,6 @@ function bolt1_maker(neg,dot,u,b){
 	// mat.wireframe = true;
 	bolt1.material = mat;
 	
-	console.log("endcode bolt1");
 	return bolt1;
 }
 
@@ -212,7 +207,6 @@ function bolt0_maker(dot,b,hull=false){
 	// mat.wireframe = true;
 	bolt0.material = mat;
 	
-	console.log("endcode bolt0");
 	return bolt0;
 }
 function bolt16_maker(myPath,myShape,hull=false){
@@ -233,9 +227,7 @@ function bolt16_maker(myPath,myShape,hull=false){
 	// mat.wireframe = true;
 	extruded.material = mat;
 	
-    console.log("bolt position");
-    console.log(extruded.position);
-	return extruded;
+    return extruded;
 }
 function bolt_angles_counter(b3, s8){
     var rez;

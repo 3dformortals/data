@@ -103,7 +103,6 @@ function ring_trajectory(dot,vn,va,r){
 	var tb = geo.dotXDoffset(dot,vb,r);
 	var tad = geo.dotXDoffset(dot,vad,r);
 	var tbd = geo.dotXDoffset(dot,vbd,r);
-	console.log("a b ad bd",va,vb,vad,vbd);
 	var a1 = [];
 	var a2 = [];
 	var a3 = [];
@@ -123,21 +122,16 @@ function ring_trajectory(dot,vn,va,r){
 		a3.push(vec_maker(ac3[i]));
 		a4.push(vec_maker(ac4[i]));
 	};
-	console.log("arc1 curves use vec as dot");
-	console.log(a1); // look like done
 	
 	//bezier curves from vector arrays
 	var arc1 = bez_maker(a1);
 	var arc2 = bez_maker(a2);
 	var arc3 = bez_maker(a3);
 	var arc4 = bez_maker(a4);
-	console.log("arc1 bezier curve use babylon")
-	console.log(arc1);
 	
 	var arc14 = arc1.continue(arc2.continue(arc3.continue(arc4)));
 	var arc14mesh = BABYLON.Mesh.CreateLines("cbezier1", arc14.getPoints(), scene); arc14mesh.color = new BABYLON.Color3(1, 0.6, 0);
 	return arc14.getPoints();
-	// console.log(JSON.stringify(cp).toString());
 }
 
 
@@ -148,7 +142,6 @@ function metal_shape_for_extrusion(h,w,s,c=[0,0,0]){
 	var y=c[1];
 	// var sx = x+w[5]+2; var sy = y+h[8]+2;
 	sx=x+w[5]/2; sy=0;
-	console.log("shape before bezX");
 	var t1; var r1; var r2; var t2;
 	//h87h65
 	t1x = sx; t1y = sy;
@@ -289,47 +282,8 @@ function metal_shape_for_extrusion(h,w,s,c=[0,0,0]){
 	t2 = vec_maker([t2x,t2y, 0]);
 	var bez = bez.continue(bez_maker([t1,r1,r2,t2]));
 	
-	
-	// //
-	// t1x = ; t1y = ;
-	// t1 = vec_maker([t1x,t1y, 0]);
-	// r1x = ; r1y = ;
-	// r1 = vec_maker([r1x,r1y, 0]);
-	// r2x = ; r2y = ;
-	// r2 = vec_maker([r2x,r2y, 0]);
-	// t2x = ; t2y = ;
-	// t2 = vec_maker([t2x,t2y, 0]);
-	// var bez = bez.continue(bez_maker([t1,r1,r2,t2]));
-	
-	
-	//old triangle code , work done
-	// var bez1 = bez_maker([
-	// 	vec_maker([sx,sy,0]),
-	// 	vec_maker([sx,sy,0]),
-	// 	vec_maker([sx-w[5],sy,0]),
-	// 	vec_maker([sx-w[5],sy,0])
-	// ]);
-	// console.log("after bez1");
-	// var bez2 = bez_maker([
-	// 	vec_maker([sx-w[5],sy,0]),
-	// 	vec_maker([sx-w[5],sy,0]),
-	// 	vec_maker([sx,sy+geo.sum_F([h[8],h[7],h[6]]),0]),
-	// 	vec_maker([sx,sy+geo.sum_F([h[8],h[7],h[6]]),0])
-	// ]);
-	// var bez3 = bez_maker([
-	// 	vec_maker([sx,sy+geo.sum_F([h[8],h[7],h[6]]),0]),
-	// 	vec_maker([sx+20,sy+geo.sum_F([h[8],h[7],h[6]]),0]),
-	// 	vec_maker([sx,sy,0]),
-	// 	vec_maker([sx,sy,0])
-	// ]);
-	console.log("shape after bezX");
 	// var myshape = bez1.continue(bez2.continue(bez3));
 	var myshape = bez;
-	console.log("myshape");
-	console.log(myshape);
-	console.log("myshape closed");
-	console.log("myshape getPoints = ");
-	console.log(myshape.getPoints());
 	// var myshapemesh = BABYLON.Mesh.CreateLines("metalshape", myshape.getPoints(), scene); 
 	// myshapemesh.color = new BABYLON.Color3(1, 1, 1);
 	return myshape.getPoints();
@@ -340,7 +294,6 @@ function tire_shape_for_extrusion(h,w,s,c=[0,0,0]){
 	var y=c[1];
 	// var sx = x+w[5]+2; var sy = y+h[8]+2;
 	sx=x+w[3]/2; sy=0;
-	console.log("tire shape before bezX");
 	
 	var t1; var r1; var r2; var t2;
 	//h54h43
@@ -473,14 +426,8 @@ function tire_shape_for_extrusion(h,w,s,c=[0,0,0]){
 	// var bez = bez.continue(bez_maker([t1,r1,r2,t2]));
 	
 	
-	console.log("shape after bezX");
 	// var myshape = bez1.continue(bez2.continue(bez3));
 	var myshape = bez;
-	console.log("myshape");
-	console.log(myshape);
-	console.log("myshape closed");
-	console.log("myshape getPoints = ");
-	console.log(myshape.getPoints());
 	// var myshapemesh = BABYLON.Mesh.CreateLines("metalshape", myshape.getPoints(), scene); 
 	// myshapemesh.color = new BABYLON.Color3(1, 1, 1);
 	return myshape.getPoints();
@@ -520,7 +467,6 @@ function metal_maker(h, w, s, hull=false,extrude=100){
 	// mat.wireframe = true;
 	extruded.material = mat;
 	
-	console.log("endcode");
 	return extruded;
 }
 
@@ -549,7 +495,6 @@ function tire_maker(h,w,s,hull=false){
 	// mat.wireframe = true;
 	extruded.material = mat;
 	
-	console.log("endcode");
 	return extruded;
 }
 
@@ -574,17 +519,6 @@ function wheel_creator(){
 	if (dp[1]) { bolts = bolts_maker(h,w,s,b); }
 	if (dp[3]) { grips = grips_maker(h,w,s,g); }
 	if (dp[4]) { tracks = tracks_maker(h,w,s,g); }
-	// console.log("--------tire export trying--------");
-	// console.log(BABYLON.OBJExport.OBJ([tire]));
-	// alert(BABYLON.OBJExport.OBJ([metal]));
-	
-	// console.log("EO length",exportobjects.length);
-	// for (i=0;i<exportobjects.length;i++){exportobjects[i].dispose(false,true);}
-	// console.log("EO length",exportobjects.length);
-	// console.log(exportobjects);
-	// download(BABYLON.OBJExport.OBJ(exportobjects),"scene.obj","text/plain");
-	
-	// download(BABYLON.OBJExport.OBJ(exportobjects,true,"wheelmaterials",false),"scene.obj","text/plain");
 }
 
 function clearall(){
@@ -597,15 +531,6 @@ function clearall(){
 		if(grips) { for(i=0;i<grips.length;i++){grips[i].dispose(false,true);} grips=[]; }
 	}
 }
-//------------------------------
-
-// function download(text, name, type) {
-// 	var a = document.getElementById("a");
-// 	var file = new Blob([text], {type: type});
-// 	a.href = URL.createObjectURL(file);
-// 	a.download = name;
-	
-//   }
 
 var OBJexport;
 // work but big
@@ -613,15 +538,7 @@ function prepare_objects_for_export(objs){
 	var rez = []
 	for (i=0;i<objs.length;i++){
 		var fullmesh = objs[i].bakeCurrentTransformIntoVertices();
-		// var mesh = fullmesh.clone("mesh"+i.toString());
-		// rez.push(fullmesh.clone("mesh"+i.toString())); //this make clone and white color
 		rez.push(fullmesh);
-		// mesh.dispose(false,true);
-	}
-	// download(BABYLON.OBJExport.OBJ(rez),"scene.obj","text/plain");
-	for (i=0;i<rez.length;i++){
-		// rez[i].dispose(false,true);
-		// objs[i].dispose(false,true);
 	}
 	return rez;
 }
@@ -659,11 +576,9 @@ function PNGexport(){
 	var oldbackground = scene.clearColor;
 	var transperent = document.getElementById("transperent").checked;
 	if (transperent) {
-		// scene.clearColor = new BABYLON.Color4(0,0,0,0.0000000000000001);
 		scene.clearColor = new BABYLON.Color4(0,0,0,0);
 		scene.render();
 	}
 	BABYLON.Tools.CreateScreenshotUsingRenderTarget(engine, camera, exp_res);
 	scene.clearColor = oldbackground;
-	// BABYLON.Tools.CreateScreenshot(engine, camera, 400);
 }
