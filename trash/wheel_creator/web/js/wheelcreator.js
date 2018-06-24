@@ -94,7 +94,7 @@ engine.resize();
 
 //----------------geometry section
 function vec_maker(vec){ var vec3 = new BABYLON.Vector3(vec[0],vec[1],vec[2]); return vec3; }
-function bez_maker(arc){ var bez = BABYLON.Curve3.CreateCubicBezier(arc[0],arc[1],arc[2],arc[3],20); return bez; }
+function bez_maker(arc,mass=4){ var bez = BABYLON.Curve3.CreateCubicBezier(arc[0],arc[1],arc[2],arc[3],mass); return bez; }
 function ring_trajectory(dot,vn,va,r){
 	//vn=ox at this moment va = -oz
 	var vb = geo.vec3Drotate(va,vn,90);
@@ -125,10 +125,11 @@ function ring_trajectory(dot,vn,va,r){
 	};
 	
 	//bezier curves from vector arrays
-	var arc1 = bez_maker(a1);
-	var arc2 = bez_maker(a2);
-	var arc3 = bez_maker(a3);
-	var arc4 = bez_maker(a4);
+	var mass=8;
+	var arc1 = bez_maker(a1,mass);
+	var arc2 = bez_maker(a2,mass);
+	var arc3 = bez_maker(a3,mass);
+	var arc4 = bez_maker(a4,mass);
 	
 	var arc14 = arc1.continue(arc2.continue(arc3.continue(arc4)));
 	var arc14mesh = BABYLON.Mesh.CreateLines("cbezier1", arc14.getPoints(), scene); arc14mesh.color = new BABYLON.Color3(1, 0.6, 0);
@@ -557,11 +558,11 @@ function prepare_objects_for_export(objs){
 	return rez;
 }
 function save_objmesh(){
-	// document.getElementById("a").click();
+	var text = "Attention! If you try export bolts or grips or tracks, export can be super long or impossible,\ndepend of your environment and wheel configuration.\nBecause huge number objects have a huge data of numbers.\n\nFor example firefox javascript engine have RAM limit of usage, etc.\nYou can try use chrome/chromium, export the model piece by piece(\"LOOK\" tab checkboxes), that later to collect it in full.\n\nDefault configuration, which you can see when start the app (metal + bolts + tire + grips),\nuses PC configuration (dual core AMD APU with integrated video 1Gb , CPU 3.4 Ghz, 8Gb RAM),\ncan be rendered with result file have 35 mb size.\nIf wheel have huge number of elements (bolts or grips or tracks)\nfirefox can fail with error \"allocation size overflow\", which you can see after press \"F12\" keyboard.\n\nWhen you see message about \"long running script\", just ignore it, when script will be completed message disappear."
+	if (bolts || grips || tracks) { alert(text); }
 	var exportobjects = []; //exported mesh array
 	if (metal) { exportobjects.push(metal); }
 	if (tire) { exportobjects.push(tire); }
-	
 	if (bolts) { for (i=0;i<bolts.length;i++) { exportobjects.push(bolts[i]); } }
 	if (grips) { for (i=0;i<grips.length;i++) { exportobjects.push(grips[i]); } }
 	if (tracks) { for (i=0;i<tracks.length;i++) { exportobjects.push(tracks[i]); } }

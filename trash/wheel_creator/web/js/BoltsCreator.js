@@ -3,7 +3,7 @@ function bolt7_maker(neg,dot,u,b){
     var meshSettings={
         height:b[1] * 2,
         diameter:b[2] * 2,
-        tessellation:24
+        tessellation:16
     };
     var bolt7 = BABYLON.MeshBuilder.CreateCylinder("bolt", meshSettings, scene);
     bolt7.position = vec_maker(dot);
@@ -13,7 +13,7 @@ function bolt7_maker(neg,dot,u,b){
     var holeSettings={
         height:b[1] * 2,
         diameter:b[2] * 2 * 2 / 3,
-        tessellation:24
+        tessellation:16
     }
     var hole = BABYLON.MeshBuilder.CreateCylinder("holebolt", holeSettings, scene);
     var vn = [dot[0],0,0];
@@ -21,24 +21,14 @@ function bolt7_maker(neg,dot,u,b){
     var holedot = geo.dotXDoffset(dot,vn,d);
     hole.position = vec_maker(holedot);
     hole.rotateAround(vec_maker(holedot),new BABYLON.Vector3(0,0,1),geo.radians(90));
-    // hole.rotateAround(vec_maker(holedot),new BABYLON.Vector3(1,0,0),geo.radians(u));
-    var mat = new BABYLON.StandardMaterial("mat1", scene);
-	mat.alpha = 1.0;
-	mat.diffuseColor = new BABYLON.Color3(0.9, 0.5, 0.5);
-	mat.backFaceCulling = false;
-	// mat.wireframe = true;
-    
-    // bolt7.material = mat;
     
     var aCSG = BABYLON.CSG.FromMesh(bolt7);
     var bCSG = BABYLON.CSG.FromMesh(hole);
     var subCSG = aCSG.subtract(bCSG);
-    var newMesh = subCSG.toMesh("csg", mat, scene);
+    var newMesh = subCSG.toMesh("csg", null, scene);
     bolt7.dispose(false,true);
     hole.dispose(false,true);
     
-    
-	
 	return newMesh;
 }
 function bolt_maker(neg,dot,u,b){
@@ -64,13 +54,6 @@ function bolt_maker(neg,dot,u,b){
     hole.position = vec_maker(holedot);
     hole.rotateAround(vec_maker(holedot),new BABYLON.Vector3(0,0,1),geo.radians(90));
     hole.rotateAround(vec_maker(holedot),new BABYLON.Vector3(1,0,0),geo.radians(u));
-    var mat = new BABYLON.StandardMaterial("mat1", scene);
-	mat.alpha = 1.0;
-	mat.diffuseColor = new BABYLON.Color3(0.9, 0.5, 0.5);
-	mat.backFaceCulling = false;
-	// mat.wireframe = true;
-    
-    // bolt4.material = mat;
     
     var aCSG = BABYLON.CSG.FromMesh(bolt4);
     var bCSG = BABYLON.CSG.FromMesh(hole);
@@ -79,8 +62,6 @@ function bolt_maker(neg,dot,u,b){
     bolt4.dispose(false,true);
     hole.dispose(false,true);
     
-    
-	
 	return newMesh;
 }
 function bolt3_maker(neg,dot,u,b){
@@ -103,23 +84,13 @@ function bolt3_maker(neg,dot,u,b){
     bolt3.position = vec_maker(geo.dotXDoffset(dot,vx,b[1] / 2));
     bolt3.rotate(new BABYLON.Vector3(0,0,1),geo.radians(90),BABYLON.Space.LOCAL);
     bolt3.rotateAround(vec_maker(dot),new BABYLON.Vector3(1,0,0),geo.radians(u),BABYLON.Space.LOCAL);
-    
-    var mat = new BABYLON.StandardMaterial("mat1", scene);
-	mat.alpha = 1.0;
-	mat.diffuseColor = new BABYLON.Color3(0.4, 0.4, 0.4);
-	mat.backFaceCulling = false;
-	// mat.wireframe = true;
-    
-    bolt3.material = mat;
-    
-    
-	return bolt3;
+    return bolt3;
 }
 function bolt2_maker(neg,dot,u,b){
     var meshSettings={
         height:b[1] * 2,
         diameter:b[2] * 2,
-        tessellation:24
+        tessellation:16
     };
     var bolt2 = BABYLON.MeshBuilder.CreateCylinder("bolt", meshSettings, scene);
     bolt2.position = vec_maker(dot);
@@ -142,26 +113,17 @@ function bolt2_maker(neg,dot,u,b){
     cross2.rotateAround(vec_maker(crossdot),new BABYLON.Vector3(0,0,1),geo.radians(90));
     cross1.rotateAround(vec_maker(crossdot),new BABYLON.Vector3(1,0,0),geo.radians(u));
     cross2.rotateAround(vec_maker(crossdot),new BABYLON.Vector3(1,0,0),geo.radians(u));
-    var mat = new BABYLON.StandardMaterial("mat1", scene);
-	mat.alpha = 1.0;
-	mat.diffuseColor = new BABYLON.Color3(0.9, 0.5, 0.5);
-	mat.backFaceCulling = false;
-	// mat.wireframe = true;
-    
-    // bolt2.material = mat;
     
     var aCSG = BABYLON.CSG.FromMesh(bolt2);
     var bCSG = BABYLON.CSG.FromMesh(cross1);
     var cCSG = BABYLON.CSG.FromMesh(cross2);
     var subCSG = aCSG.subtract(bCSG);
     var subCSG = subCSG.subtract(cCSG);
-    var newMesh = subCSG.toMesh("csg", mat, scene);
+    var newMesh = subCSG.toMesh("csg", null, scene);
     bolt2.dispose(false,true);
     cross1.dispose(false,true);
     cross2.dispose(false,true);
     
-    
-	
 	return newMesh;
 }
 function bolt1_maker(neg,dot,u,b){
@@ -174,14 +136,7 @@ function bolt1_maker(neg,dot,u,b){
     bolt1.position = vec_maker(dot);
     var v = new BABYLON.Vector3(1,0,0);
     bolt1.rotate(v,geo.radians(u),BABYLON.Space.LOCAL);
-    var mat = new BABYLON.StandardMaterial("mat1", scene);
-	mat.alpha = 1.0;
-	mat.diffuseColor = new BABYLON.Color3(0.9, 0.5, 0.5);
-	mat.backFaceCulling = false;
-	// mat.wireframe = true;
-	bolt1.material = mat;
-	
-	return bolt1;
+    return bolt1;
 }
 
 function bolts_center_offset(bsdots,bolt_angles,c,vn,va, b2){
@@ -197,16 +152,9 @@ function bolts_center_offset(bsdots,bolt_angles,c,vn,va, b2){
 }
 function bolt0_maker(dot,b,hull=false){
 	
-	var ellipsoidSettings={diameter: b[2] * 2, diameterX: b[1] * 2};
+	var ellipsoidSettings={diameter: b[2] * 2, diameterX: b[1] * 2,segments:8};
     var bolt0 = BABYLON.MeshBuilder.CreateSphere("mySphere", ellipsoidSettings, scene);
     bolt0.position = vec_maker(dot);
-    var mat = new BABYLON.StandardMaterial("mat1", scene);
-	mat.alpha = 1.0;
-	mat.diffuseColor = new BABYLON.Color3(0.4, 0.4, 0.4);
-	mat.backFaceCulling = false;
-	// mat.wireframe = true;
-	bolt0.material = mat;
-	
 	return bolt0;
 }
 function bolt16_maker(myPath,myShape,hull=false){
@@ -219,15 +167,7 @@ function bolt16_maker(myPath,myShape,hull=false){
 		
 	};
 	var extruded = BABYLON.MeshBuilder.ExtrudeShapeCustom("bolt", customExtrudeSettings, scene);
-	
-	var mat = new BABYLON.StandardMaterial("mat1", scene);
-	mat.alpha = 1.0;
-	mat.diffuseColor = new BABYLON.Color3(0.5, 0.5, 0.5);
-	mat.backFaceCulling = false;
-	// mat.wireframe = true;
-	extruded.material = mat;
-	
-    return extruded;
+	return extruded;
 }
 function bolt_angles_counter(b3, s8){
     var rez;
