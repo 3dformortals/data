@@ -1,4 +1,50 @@
 showme("preparing TracksCreator.js");
+function tracks_path_counter(c,vz,h,gt,one_ghhole,one_gw){
+    var rez;
+    if (gt == "|||" || gt == "ooo"){
+        var t0 = vec_maker(geo.dotXDoffset(c,vz,h[1] / 2));
+        var t1 = vec_maker(geo.dotXDoffset(c,vz,-h[1] / 2));
+        rez = bez_maker([t0,t0,t1,t1]);
+    }else{
+        if (gt==">>>"){ rez = zigzag_counter(one_ghhole,one_gw); }
+        else{rez = snake_counter(one_ghhole,one_gw); }
+    }
+    return rez.getPoints();
+}
+function trackgs(c,one_gh,h){
+    var dx = one_gh / 2;
+    var dy = h[1] / 2;
+    
+    var t1 = [dx,-dy,0];
+    var t2 = [dx,dy,0];
+    var t3 = [-dx,dy,0];
+    var t4 = [-dx,-dy,0];
+    
+    
+    var dotspair = geo.chain_F([t1,t2,t3,t4],2,true);
+    var bez;
+    for (var i = 0 ; i < dotspair.length ; i++){
+        var v1 = vec_maker(dotspair[i][0]);
+        var v2 = vec_maker(dotspair[i][1]);
+        var vecs = [v1,v1,v2,v2];
+        if (i == 0){ bez = bez_maker(vecs); }else{ bez = bez.continue(bez_maker(vecs)); }
+    }
+    var bezmesh = BABYLON.Mesh.CreateLines("newgs2shape", bez.getPoints(), scene); 
+	bezmesh.color = new BABYLON.Color3(1, 0, 0);
+    
+    return bez.getPoints();
+}
+
+function tracks_shape_counter(gt,c,vn,va,one_gw,one_gh,one_ghhole,h){
+    var rez;
+    if (gt == "|||"){rez = gs1(c,one_gw,one_gh,vn,va);}
+    else if (gt == ">>>"){rez = trackgs(c,one_gh,h);}
+    else if (gt == ")))"){rez = trackgs(c,one_gh,h);}
+    else if (gt == "ooo"){rez = gs4(c,one_gw,one_gh,vn,va);}
+    return rez;
+}
+
+
 function base_subtrackt_tire_and_traks(gt){
     var mat = new BABYLON.StandardMaterial("mat1", scene);
 	mat.alpha = 1.0;
@@ -8,32 +54,38 @@ function base_subtrackt_tire_and_traks(gt){
     
     console.log("tracks.length = ",tracks.length, " before loop");
     
+    for (i=0;i<tracks.length;i++){
+        if(i==0) { var aCSG = BABYLON.CSG.FromMesh(tracks[i].bakeCurrentTransformIntoVertices() ); }
+        else{ aCSG.unionInPlace( BABYLON.CSG.FromMesh(tracks[i].bakeCurrentTransformIntoVertices()) ); }
+        tracks[i].dispose(false,true);
+    }
+    
     //NEW FLOW TIRE + TRACKS , and then subtrackt from base as CSG
-    if(gt==")))" || gt==">>>"){
-        track_base.dispose(false,true); //kick from scene
-        track_tire.dispose(false,true); //kick from scene
+    // if(gt==")))" || gt==">>>"){
+    //     track_base.dispose(false,true); //kick from scene
+    //     track_tire.dispose(false,true); //kick from scene
         
-        for (i=0;i<tracks.length;i++){
-            if(i==0) { var aCSG = BABYLON.CSG.FromMesh(tracks[i].bakeCurrentTransformIntoVertices() ); }
-            else{ aCSG.unionInPlace( BABYLON.CSG.FromMesh(tracks[i].bakeCurrentTransformIntoVertices()) ); }
-            tracks[i].dispose(false,true);
-        }
-    }else{
+    //     for (i=0;i<tracks.length;i++){
+    //         if(i==0) { var aCSG = BABYLON.CSG.FromMesh(tracks[i].bakeCurrentTransformIntoVertices() ); }
+    //         else{ aCSG.unionInPlace( BABYLON.CSG.FromMesh(tracks[i].bakeCurrentTransformIntoVertices()) ); }
+    //         tracks[i].dispose(false,true);
+    //     }
+    // }else{
         
-        //new code trying loop each grip- super long... like hell), but result is more clear for curves
-        track_base.bakeCurrentTransformIntoVertices();
-        var aCSG = BABYLON.CSG.FromMesh(track_base);
-        track_base.dispose(false,true); //kick from scene
+    //     //new code trying loop each grip- super long... like hell), but result is more clear for curves
+    //     track_base.bakeCurrentTransformIntoVertices();
+    //     var aCSG = BABYLON.CSG.FromMesh(track_base);
+    //     track_base.dispose(false,true); //kick from scene
         
-        track_tire.bakeCurrentTransformIntoVertices();
-        var bCSG = BABYLON.CSG.FromMesh(track_tire); //save to obj
-        track_tire.dispose(false,true); //kick from scene
-        aCSG.subtractInPlace(bCSG);
-        for (i=0;i<tracks.length;i++){
-            var aCSG = aCSG.subtract(BABYLON.CSG.FromMesh(tracks[i].bakeCurrentTransformIntoVertices()));
-            tracks[i].dispose(false,true);
-        }
-    } //have flat , tire + tracks
+    //     track_tire.bakeCurrentTransformIntoVertices();
+    //     var bCSG = BABYLON.CSG.FromMesh(track_tire); //save to obj
+    //     track_tire.dispose(false,true); //kick from scene
+    //     aCSG.subtractInPlace(bCSG);
+    //     for (i=0;i<tracks.length;i++){
+    //         var aCSG = aCSG.subtract(BABYLON.CSG.FromMesh(tracks[i].bakeCurrentTransformIntoVertices()));
+    //         tracks[i].dispose(false,true);
+    //     }
+    // } //have flat , tire + tracks
     tracks=[];
     track=aCSG.toMesh("track", mat, scene);
 }
@@ -156,12 +208,6 @@ function track_angles_counter(s6){
 }
 
 function tracks_center_dots_counter( c,vn,vz, r, nw, na, gw, one_gw ){
-    var va = vz;
-    var vb = geo.vec3Dnormal(vn,va);
-    var van = geo.vecXDback(va);
-    var vbn = geo.vecXDback(vb);
-    var vaxes = [va,vb,van,vbn];
-    var doli = geo.repeater_F_F(na,[1]);
     //new polygon code, now it straight line with dots
     var cdot = geo.dotXDoffset(c,vz,r);
     var flatstep = Math.PI * 2 * r / na;
@@ -183,7 +229,7 @@ function tracks_center_dots_counter( c,vn,vz, r, nw, na, gw, one_gw ){
     }return rez; //list of center dots lists for each polygon vertex
 }
 
-function track_maker(dot,u,gp,gs,c,vn,va,ns,gh,gt,ind){
+function track_maker(dot,u,gp,gs,c,vn,va,vz,ns,gh,gt,ind,fullind){
     var scaling = function(i, distance) { return 1; };
     if (gt == "|||" || gt == "ooo"){
         if (ns){
@@ -199,15 +245,23 @@ function track_maker(dot,u,gp,gs,c,vn,va,ns,gh,gt,ind){
 		scaleFunction: scaling
 		
 	};
-    var extruded = BABYLON.MeshBuilder.ExtrudeShapeCustom("track"+u.toString(), gripSettings, scene);
+    var extruded = BABYLON.MeshBuilder.ExtrudeShapeCustom("track"+fullind.toString(), gripSettings, scene);
+    
     
     if (gt == ">>>" || gt == ")))"){
+        // extruded.rotateAround(vec_maker(c),vec_maker(vz),geo.radians(90));
+        // extruded.rotateAround(vec_maker(c),vec_maker(vn),geo.radians(90));
+        
+        // if( ( ind/2 - Math.floor(ind/2) ) > 0 && ns==false){ extruded.rotateAround(vec_maker(c),vec_maker(vn),geo.radians(180)); }
+        if(ind & 1 && !ns){ extruded.rotateAround(vec_maker(c),vec_maker(vn),geo.radians(180)); }
+        else if(ns && !(ind & 1)){ extruded.rotateAround(vec_maker(c),vec_maker(vn),geo.radians(180)); }
+        extruded.rotateAround(vec_maker(c),vec_maker(vn),geo.radians(180));
         extruded.rotateAround(vec_maker(c),vec_maker(va),geo.radians(90));
-        extruded.rotateAround(vec_maker(c),vec_maker(vn),geo.radians(90));
-        // if(ind & 1 && !ns){ extruded.rotateAround(vec_maker(c),vec_maker(vn),geo.radians(180)); }
-        // else if(ns && !(ind & 1)){ extruded.rotateAround(vec_maker(c),vec_maker(vn),geo.radians(180)); }
+        
+    }else{
+        extruded.rotateAround(vec_maker(c),vec_maker(vn),geo.radians(u));
     }
-    extruded.rotateAround(vec_maker(c),vec_maker(vn),geo.radians(u));
+    
     extruded.position = vec_maker(dot);
     return extruded;
 }
@@ -222,7 +276,7 @@ function tracks_maker(h,w,s,g,hull=false){
     var grips_height = geo.sum_F([h[3] / 2, h[2], h[1]]);
     var grips_width = w[1];
     var grips_max_radius = geo.sum_F([h[8],h[7],h[6],h[5],h[4],h[3],h[2],h[1]]);
-    var grips_center_radius = geo.sum_F([h[8],h[7],h[6],h[5],h[4],h[3],h[2],h[1]]) - geo.sum_F([h[1],h[2],h[3] / 2]) / 2;
+    var grips_center_radius = geo.sum_F([h[8],h[7],h[6],h[5],h[4],h[3],h[2],h[1]]) - h[1] / 2;
     var grips_width_number = s[5];//how much per width
     var need_scale = false; //scale for g1 g4 and reverse for g2 g3
     if(grips_width_number < 0){
@@ -252,16 +306,16 @@ function tracks_maker(h,w,s,g,hull=false){
     var grips_shape;
     var grips_path;
     //code done not tested
-    grips_path = grips_path_counter(c,vz,h,grips_type,one_ghhole,one_gw);
-    grips_shape = grips_shape_counter(
+    grips_path = tracks_path_counter(c,vz,h,grips_type,one_ghhole,one_gw);
+    grips_shape = tracks_shape_counter(
         grips_type,
         c,vn,va,
         one_gw,one_gh,one_ghhole,h
     );
     //include base for subtracktion
-    track_base = track_base_maker(h,w,s,grips_max_radius,c,va);
+    // track_base = track_base_maker(h,w,s,grips_max_radius,c,va);
     //create and subtract tire form from base
-    track_tire = track_tire_maker(h,w,s,c,va,grips_max_radius,vz);
+    // track_tire = track_tire_maker(h,w,s,c,va,grips_max_radius,vz);
     
     //create track and subtrackt from base form
     var gal = grip_angles.length;
@@ -275,7 +329,7 @@ function tracks_maker(h,w,s,g,hull=false){
         var gh = h[1];
         var gt = grips_type;
         for (var j = 0;j<dots.length;j++){
-            tracks.push(track_maker(dots[j],u,gp,gs,c,vn,va,ns,gh,gt,i));
+            tracks.push(track_maker(dots[j],u,gp,gs,c,vn,va,vz,ns,gh,gt,j,ind));
             ind += 1;
         }
         

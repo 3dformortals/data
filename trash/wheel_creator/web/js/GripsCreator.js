@@ -12,7 +12,7 @@ function one_gw_counter(gt,gw,gwn,ghhole){
     return rez;
 }
 function column_internal(dc,nc,distance){
-    distance -= dc * 1.02; //after this * 1.02 track only half cutted...very strange ERROR BUG
+    distance -= dc * 1.02; //can be problems, because i don't know why)... wtf)
     var xmax = distance / 2;
     var xmin = -xmax;
     var n = nc-2;
