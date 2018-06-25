@@ -168,7 +168,18 @@ function mat_maker(){
 	grips_mat = one_mat_maker(hull,"c4");
 	tracks_mat = one_mat_maker(hull,"c5");
 }
-
+function mix_bolt_angles(){
+	var ba_input = document.getElementById("s8");
+	if (ba_input.value != "0"){ ba_input.value = "0"; }
+	else{
+		var rezbox = [];
+		for (i=0;i<4;i++){
+			rezbox.push( (Math.random() * 180).toString().split(".")[0] );
+		}
+		var rez= rezbox.join(" ");
+		ba_input.value = rez;
+	}
+}
 function wheel_creator(){
 	clearall();
 	var dp = whatdraw(); //drawparts

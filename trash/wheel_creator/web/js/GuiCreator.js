@@ -226,7 +226,7 @@ function look_gui_tbody(){
     
     var tr9 = document.createElement('tr');
     tr9.appendChild(td_cbox("cbox_s5",true,"flat track")); tr9.appendChild(td_color("c5","#3D9C8C"));
-    tr9.appendChild(td_button("mix","balert('testalerttext')","mix bolt angles")); tr9.appendChild(td_text("00"));
+    tr9.appendChild(td_button("mix","mix_bolt_angles()","mix bolt angles")); tr9.appendChild(td_text("00"));
     
     var tbox = [tr1,tr2,tr3,tr4,tr5,tr6,tr7,tr8,tr9];
     for (i=0;i<tbox.length;i++) {tbody.appendChild(tbox[i]);}

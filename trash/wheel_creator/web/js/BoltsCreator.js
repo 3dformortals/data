@@ -58,7 +58,7 @@ function bolt_maker(neg,dot,u,b){
     var aCSG = BABYLON.CSG.FromMesh(bolt4);
     var bCSG = BABYLON.CSG.FromMesh(hole);
     var subCSG = aCSG.subtract(bCSG);
-    var newMesh = subCSG.toMesh("csg", mat, scene);
+    var newMesh = subCSG.toMesh("csg", null, scene);
     bolt4.dispose(false,true);
     hole.dispose(false,true);
     
