@@ -66,7 +66,8 @@ function text_tag(text,color){
 function cbox_tag(id,checked = false){
     var cbox = document.createElement('input');
     cbox.type = "checkbox";
-    cbox.defaultChecked = checked;;
+    cbox.id = id;
+    cbox.defaultChecked = checked;
     return cbox;
 }
 function td_text_multicolor(texts = [], colors = []){
@@ -326,7 +327,7 @@ function lamp_gui_tbody(){
     
     var tr15 = document.createElement('tr');
     tr15.appendChild(td_cbox_text_colspan("wireframe","wireframe",false,2));
-    tr15.appendChild(td_cbox_text_multicolor_colspan("axes",false,["x","y","z"," axes"],["red","green","blue","black"],2));
+    tr15.appendChild(td_cbox_text_multicolor_colspan("axes",true,["x","y","z"," axes"],["red","green","blue","black"],2));
     
     var tr16 = document.createElement('tr');
     tr16.appendChild(td_hr(4));

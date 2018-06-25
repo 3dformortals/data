@@ -13,6 +13,7 @@ var track; //result track mesh, after subtract grips + oval shape
 var track_base; //base for subtracktion
 var track_tire; //tire shape for subtracktion from traks_base
 var tracks=[]; var tracks_mat;
+var axes=[]; //3mesh + 3 text
 
 var canvas = document.getElementById("renderCanvas");
 canvas.width = 600;
@@ -20,6 +21,44 @@ canvas.height = 600;
 var engine = new BABYLON.Engine(canvas, true);
 var scene;
 var camera;
+
+function axes_creator (size) {
+	var makeTextPlane = function (text, color, size) {
+		var dynamicTexture = new BABYLON.DynamicTexture("DynamicTexture", 50, scene, true);
+		dynamicTexture.hasAlpha = true;
+		dynamicTexture.drawText(text, 5, 40, "bold 36px Arial", color, "transparent", true);
+		var plane = BABYLON.Mesh.CreatePlane("TextPlane", size, scene, true);
+		plane.material = new BABYLON.StandardMaterial("TextPlaneMaterial", scene);
+		plane.material.backFaceCulling = false;
+		plane.material.specularColor = new BABYLON.Color3(0, 0, 0);
+		plane.material.diffuseTexture = dynamicTexture;
+		return plane;
+	};
+	var axisX = BABYLON.Mesh.CreateLines("axisX", [
+		BABYLON.Vector3.Zero(), new BABYLON.Vector3(size, 0, 0), new BABYLON.Vector3(size * 0.95, 0.05 * size, 0),
+		new BABYLON.Vector3(size, 0, 0), new BABYLON.Vector3(size * 0.95, -0.05 * size, 0)
+	], scene);
+	axisX.color = new BABYLON.Color3(1, 0, 0);
+	var xChar = makeTextPlane("X", "red", size / 10);
+	xChar.position = new BABYLON.Vector3(0.9 * size, -0.05 * size, 0);
+	var axisY = BABYLON.Mesh.CreateLines("axisY", [
+		BABYLON.Vector3.Zero(), new BABYLON.Vector3(0, size, 0), new BABYLON.Vector3(-0.05 * size, size * 0.95, 0),
+		new BABYLON.Vector3(0, size, 0), new BABYLON.Vector3(0.05 * size, size * 0.95, 0)
+	], scene);
+	axisY.color = new BABYLON.Color3(0, 1, 0);
+	var yChar = makeTextPlane("Y", "green", size / 10);
+	yChar.position = new BABYLON.Vector3(0, 0.9 * size, -0.05 * size);
+	var axisZ = BABYLON.Mesh.CreateLines("axisZ", [
+		BABYLON.Vector3.Zero(), new BABYLON.Vector3(0, 0, size), new BABYLON.Vector3(0, -0.05 * size, size * 0.95),
+		new BABYLON.Vector3(0, 0, size), new BABYLON.Vector3(0, 0.05 * size, size * 0.95)
+	], scene);
+	axisZ.color = new BABYLON.Color3(0, 0, 1);
+	var zChar = makeTextPlane("Z", "blue", size / 10);
+	zChar.position = new BABYLON.Vector3(0, 0.05 * size, 0.9 * size);
+	var axesbox = [xChar, yChar, zChar, axisX, axisY, axisZ];
+	for (i=0;i<axesbox.length;i++) { axes.push(axesbox[i]); }
+};
+
 var createScene = function () {
 
 	// Create the scene space
@@ -36,42 +75,7 @@ var createScene = function () {
 	// var light2 = new BABYLON.PointLight("light2", new BABYLON.Vector3(0, 1, -1), scene);
 	
 	
-	var showAxis = function (size) {
-        var makeTextPlane = function (text, color, size) {
-            var dynamicTexture = new BABYLON.DynamicTexture("DynamicTexture", 50, scene, true);
-            dynamicTexture.hasAlpha = true;
-            dynamicTexture.drawText(text, 5, 40, "bold 36px Arial", color, "transparent", true);
-            var plane = BABYLON.Mesh.CreatePlane("TextPlane", size, scene, true);
-            plane.material = new BABYLON.StandardMaterial("TextPlaneMaterial", scene);
-            plane.material.backFaceCulling = false;
-            plane.material.specularColor = new BABYLON.Color3(0, 0, 0);
-            plane.material.diffuseTexture = dynamicTexture;
-            return plane;
-        };
-        var axisX = BABYLON.Mesh.CreateLines("axisX", [
-            BABYLON.Vector3.Zero(), new BABYLON.Vector3(size, 0, 0), new BABYLON.Vector3(size * 0.95, 0.05 * size, 0),
-            new BABYLON.Vector3(size, 0, 0), new BABYLON.Vector3(size * 0.95, -0.05 * size, 0)
-        ], scene);
-        axisX.color = new BABYLON.Color3(1, 0, 0);
-        var xChar = makeTextPlane("X", "red", size / 10);
-        xChar.position = new BABYLON.Vector3(0.9 * size, -0.05 * size, 0);
-        var axisY = BABYLON.Mesh.CreateLines("axisY", [
-            BABYLON.Vector3.Zero(), new BABYLON.Vector3(0, size, 0), new BABYLON.Vector3(-0.05 * size, size * 0.95, 0),
-            new BABYLON.Vector3(0, size, 0), new BABYLON.Vector3(0.05 * size, size * 0.95, 0)
-        ], scene);
-        axisY.color = new BABYLON.Color3(0, 1, 0);
-        var yChar = makeTextPlane("Y", "green", size / 10);
-        yChar.position = new BABYLON.Vector3(0, 0.9 * size, -0.05 * size);
-        var axisZ = BABYLON.Mesh.CreateLines("axisZ", [
-            BABYLON.Vector3.Zero(), new BABYLON.Vector3(0, 0, size), new BABYLON.Vector3(0, -0.05 * size, size * 0.95),
-            new BABYLON.Vector3(0, 0, size), new BABYLON.Vector3(0, 0.05 * size, size * 0.95)
-        ], scene);
-        axisZ.color = new BABYLON.Color3(0, 0, 1);
-        var zChar = makeTextPlane("Z", "blue", size / 10);
-        zChar.position = new BABYLON.Vector3(0, 0.05 * size, 0.9 * size);
-    };
-
-    showAxis(400);
+	axes_creator(400);
 
 	// Add and manipulate meshes in the scene
 	// var sphere = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter:1}, scene);
@@ -142,7 +146,9 @@ function whatdraw(){
 	var rez = [];
 	for (i=1;i<6;i++){
 		rez.push(document.getElementById("cbox_s" + i.toString() ).checked);
-	}return rez;
+	}
+	rez.push(document.getElementById( "axes" ).checked)
+	return rez;
 }
 
 function one_mat_maker(hull,id){
@@ -171,6 +177,8 @@ function wheel_creator(){
 	// var angle = 0;
 	//need call to mat_maker()
 	mat_maker()
+	
+	if (dp[5]) { axes_creator(400); }
 	if (dp[0]) { metal = metal_maker(h,w,s); }
 	if (dp[2]) { tire = tire_maker(h,w,s); }
 	if (dp[1]) { bolts = bolts_maker(h,w,s,b); }
@@ -187,6 +195,7 @@ function clearall(){
 		if(grips) { for(i=0;i<grips.length;i++){grips[i].dispose(false,true);} grips=[]; }
 		if(tracks) { for(i=0;i<tracks.length;i++){tracks[i].dispose(false,true);} tracks=[]; }
 	}
+	if (axes){ for(i=0;i<axes.length;i++) { axes[i].dispose(false, true); } axes = []; }
 }
 
 var OBJexport;
