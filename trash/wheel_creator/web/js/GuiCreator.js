@@ -160,13 +160,14 @@ function td_radio(id, name, value, checked = false){
     td.appendChild(radio);
     return td;
 }
-function td_color(id, co = "#000000"){
+function td_color(id, co = "#000000",title = ""){
     var td = document.createElement('td');
     var color = document.createElement('input');
     color.type = "color";
     color.className = "guicolor";
     color.id = id;
     color.value = co;
+    color.title = title;
     td.appendChild(color);
     return td;
 }
@@ -259,89 +260,87 @@ function td_cbox_text_colspan(cboxid, text, checked = false, colspan = 1, align 
 }
 function lamp_gui_tbody(){
     var tbody = document.createElement('tbody');
+    
     var tr1 = document.createElement('tr');
-    tr1.appendChild(td_cbox_text_colspan("cbox_ambient","ambient",true,2));
-    tr1.appendChild(td_color("color_ambient","#ffffff"));
-    tr1.appendChild(td_input("intensity_ambient"));
+    tr1.appendChild(td_cbox_text_colspan("wireframe","wireframe",false,2,"left","need model recalculation"));
+    tr1.appendChild(td_cbox_text_multicolor_colspan("axes",true,["x","y","z"," axes"],["red","green","blue","black"],2,"need model recalculation"));
     
     var tr2 = document.createElement('tr');
     tr2.appendChild(td_hr(4));
     
     var tr3 = document.createElement('tr');
-    tr3.appendChild(td_cbox_text_colspan("cbox_directional","directional",true,2));
-    tr3.appendChild(td_color("color_directional","#ffffff"));
-    tr3.appendChild(td_input("intensity_directional"));
-    
+    tr3.appendChild(td_cbox_text_colspan("cbox_ambient","ambient",true,2));
+    tr3.appendChild(td_input("intensity_ambient","intensity"));
+    tr3.appendChild(td_color("color_ambient","#ffffff","color"));
     
     var tr4 = document.createElement('tr');
-    tr4.appendChild(td_input("x_directional","x"));
-    tr4.appendChild(td_input("y_directional","y"));
-    tr4.appendChild(td_input("z_directional","z"));
-    tr4.appendChild(td_cbox("shadow_directional",false,"shadow"));
+    tr4.appendChild(td_input("x_ambient","x direction"));
+    tr4.appendChild(td_input("y_ambient","y direction"));
+    tr4.appendChild(td_input("z_ambient","z direction"));
+    tr4.appendChild(td_color("color_ground_ambient","#ffffff","ground color"));
     
     var tr5 = document.createElement('tr');
-    tr5.appendChild(td_input("smsw_directional","shadow.mapSize.width"));
-    tr5.appendChild(td_input("smsh_directional","shadow.mapSize.height"));
-    tr5.appendChild(td_input("scn_directional","shadow.camera.near"));
-    tr5.appendChild(td_input("scf_directional","shadow.camera.far"));
+    tr5.appendChild(td_hr(4));
     
     var tr6 = document.createElement('tr');
-    tr6.appendChild(td_hr(4));
+    tr6.appendChild(td_cbox_text_colspan("cbox_directional","directional",false,2));
+    tr6.appendChild(td_input("intensity_directional","intensity"));
+    tr6.appendChild(td_color("color_directional","#ffffff"));
     
     var tr7 = document.createElement('tr');
-    tr7.appendChild(td_cbox_text_colspan("cbox_point","point",true,2));
-    tr7.appendChild(td_color("color_point","#ffffff"));
-    tr7.appendChild(td_input("intensity_point","intensity"));
+    tr7.appendChild(td_input("x_directional","x"));
+    tr7.appendChild(td_input("y_directional","y"));
+    tr7.appendChild(td_input("z_directional","z"));
+    tr7.appendChild(td_cbox("shadow_directional",false,"shadow"));
     
     var tr8 = document.createElement('tr');
-    tr8.appendChild(td_input("x_point","x"));
-    tr8.appendChild(td_input("y_point","y"));
-    tr8.appendChild(td_input("z_point","z"));
-    tr8.appendChild(td_cbox("marker_point",false,"show marker"));
+    tr8.appendChild(td_input("smsw_directional","shadow.mapSize.width"));
+    tr8.appendChild(td_input("smsh_directional","shadow.mapSize.height"));
+    tr8.appendChild(td_input("scn_directional","shadow.camera.near"));
+    tr8.appendChild(td_input("scf_directional","shadow.camera.far"));
     
     var tr9 = document.createElement('tr');
-    tr9.appendChild(td_input("distance_point","distance"));
-    tr9.appendChild(td_input("decay_point","decay"));
-    tr9.appendChild(td_text("00"));
-    tr9.appendChild(td_cbox("shadow_point",false,"shadow"));
+    tr9.appendChild(td_hr(4));
     
     var tr10 = document.createElement('tr');
-    tr10.appendChild(td_input("smsw_point","shadow.mapSize.width"));
-    tr10.appendChild(td_input("smsh_point","shadow.mapSize.height"));
-    tr10.appendChild(td_input("scn_point","shadow.camera.near"));
-    tr10.appendChild(td_input("scf_point","shadow.camera.far"));
-    
-    
+    tr10.appendChild(td_cbox_text_colspan("cbox_point","point",false,2));
+    tr10.appendChild(td_input("intensity_point","intensity"));
+    tr10.appendChild(td_color("color_point","#ffffff"));
     
     var tr11 = document.createElement('tr');
-    tr11.appendChild(td_hr(4));
-    
-    var tr12 = document.createElement('tr');
-    tr12.appendChild(td_cbox_text_colspan("wireframe","wireframe",false,2,"left","need model recalculation"));
-    tr12.appendChild(td_cbox_text_multicolor_colspan("axes",true,["x","y","z"," axes"],["red","green","blue","black"],2,"need model recalculation"));
+    tr11.appendChild(td_input("x_point","x"));
+    tr11.appendChild(td_input("y_point","y"));
+    tr11.appendChild(td_input("z_point","z"));
+    tr11.appendChild(td_cbox("shadow_point",false,"shadow"));
     
     var tr13 = document.createElement('tr');
-    tr13.appendChild(td_hr(4));
+    tr13.appendChild(td_input("smsw_point","shadow.mapSize.width"));
+    tr13.appendChild(td_input("smsh_point","shadow.mapSize.height"));
+    tr13.appendChild(td_input("scn_point","shadow.camera.near"));
+    tr13.appendChild(td_input("scf_point","shadow.camera.far"));
     
     var tr14 = document.createElement('tr');
-    tr14.appendChild(td_text("background color","",4));
+    tr14.appendChild(td_hr(4));
     
     var tr15 = document.createElement('tr');
-    tr15.appendChild(td_color("color_background","#ffffff"));
-    tr15.appendChild(td_cbox_text_colspan("transperent","render transperent",true,3));
+    tr15.appendChild(td_text("background color","",4));
     
     var tr16 = document.createElement('tr');
-    tr16.appendChild(td_hr(4));
+    tr16.appendChild(td_cbox_text_colspan("transperent","render transperent",true,3));
+    tr16.appendChild(td_color("color_background","#ffffff"));
     
     var tr17 = document.createElement('tr');
-    tr17.appendChild(td_text("camera view","",2));
-    tr17.appendChild(td_cbox_text_colspan("perspective_view","perspective",true,2,"center"));
+    tr17.appendChild(td_hr(4));
     
     var tr18 = document.createElement('tr');
-    tr18.appendChild(td_button("ok","refresh_lamp()","refresh scene"));
-    tr18.appendChild(td_input("distance_view","distance"));
-    tr18.appendChild(td_input("y_view","y angle degrees"));
-    tr18.appendChild(td_input("z_view","z angle degrees"));
+    tr18.appendChild(td_text("camera view","",2));
+    tr18.appendChild(td_cbox_text_colspan("perspective_view","perspective",true,2,"center"));
+    
+    var tr19 = document.createElement('tr');
+    tr19.appendChild(td_button("ok","refresh_lamp()","refresh scene"));
+    tr19.appendChild(td_input("distance_view","distance"));
+    tr19.appendChild(td_input("y_view","y angle degrees"));
+    tr19.appendChild(td_input("z_view","z angle degrees"));
     
     
     // tr17.appendChild(td_input("length_track","track length"));
@@ -353,7 +352,7 @@ function lamp_gui_tbody(){
     
     
     
-    var tbox = [tr12,tr13,tr1,tr2,tr3,tr4,tr5,tr6,tr7,tr8,tr9,tr10,tr11,tr14,tr15,tr16,tr17,tr18];
+    var tbox = [tr1,tr2,tr3,tr4,tr5,tr6,tr7,tr8,tr9,tr10,tr11,tr13,tr14,tr15,tr16,tr17,tr18,tr19];
     for (i=0;i<tbox.length;i++) {tbody.appendChild(tbox[i]);}
     return tbody;
 }
@@ -373,12 +372,12 @@ function start_data_writer(){
         "w1","w2","w3","w4","w5","b1","b2","b3","b4",
         "s1","s2","s3","s4","s5","s6","s7","s8",
         "intensity_ambient",
+        "x_ambient","y_ambient","z_ambient",
         "intensity_directional",
         "x_directional","y_directional","z_directional",
         "smsw_directional","smsh_directional","scn_directional","scf_directional",
         "intensity_point",
         "x_point","y_point","z_point",
-        "distance_point","decay_point",
         "smsw_point","smsh_point","scn_point","scf_point",
         "distance_view","y_view","z_view",//tr18
     ];
@@ -387,12 +386,12 @@ function start_data_writer(){
         500,600,550,100,550,50,50,6,0,
         900,100,100,100,-4,60,50,0,//later back to more big numbers 1 5 10
         1,
+        1,1,1,
         1,
         500,500,500,
         512,512,0.5,500,
-        1,
+        0.3,
         500,500,500,
-        1000,2,
         512,512,0.5,500,
         800,45,45//tr18 lamp
     ];

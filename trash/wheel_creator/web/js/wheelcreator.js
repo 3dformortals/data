@@ -21,6 +21,9 @@ canvas.height = 600;
 var engine = new BABYLON.Engine(canvas, true);
 var scene;
 var camera;
+var ambient_light;
+var directional_light;
+var point_light;
 
 function axes_creator (size) {
 	var makeTextPlane = function (text, color, size) {
@@ -59,6 +62,7 @@ function axes_creator (size) {
 	for (i=0;i<axesbox.length;i++) { axes.push(axesbox[i]); }
 };
 
+
 var createScene = function () {
 
 	// Create the scene space
@@ -70,10 +74,12 @@ var createScene = function () {
     camera.attachControl(canvas, true);
 	
 	// Add lights to the scene
-	var light1 = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(1, 1, 0), scene);
-	var light3 = new BABYLON.HemisphericLight("light3", new BABYLON.Vector3(0, -1,-1), scene);
-	// var light2 = new BABYLON.PointLight("light2", new BABYLON.Vector3(0, 1, -1), scene);
-	
+	ambient_light = new BABYLON.HemisphericLight("ambient_light", new BABYLON.Vector3(1, 1, 1), scene);
+	ambient_light.intensity = 1;
+	directional_light = new BABYLON.DirectionalLight("directional_light", new BABYLON.Vector3(-500, -500, -500), scene );
+	directional_light.intensity = 1; directional_light.setEnabled(false);
+	point_light = new BABYLON.PointLight("point_light", new BABYLON.Vector3(500, 500, 500), scene );
+	point_light.intensity = 0.3; point_light.setEnabled(false);
 	
 	axes_creator(400);
 
@@ -191,6 +197,39 @@ function refresh_lamp(){
 	camera.beta = geo.radians( parseFloat( document.getElementById("z_view").value ) );
 	camera.radius = parseFloat( document.getElementById("distance_view").value ) ;
 	if (document.getElementById("perspective_view").checked){camera.mode = BABYLON.Camera.PERSPECTIVE_CAMERA;}else{camera.mode =  BABYLON.Camera.ORTHOGRAPHIC_CAMERA;}
+	
+	ambient_light.direction = new BABYLON.Vector3(
+		parseFloat(document.getElementById("x_ambient").value),
+		parseFloat(document.getElementById("y_ambient").value),
+		parseFloat(document.getElementById("z_ambient").value)
+	);
+	ambient_light.intensity = parseFloat(document.getElementById("intensity_ambient").value);
+	if(document.getElementById("cbox_ambient").checked){ ambient_light.setEnabled(true); } else { ambient_light.setEnabled(false); }
+	var htmlhexcolor = document.getElementById("color_ambient").value;
+	ambient_light.diffuse = new BABYLON.Color3.FromHexString(htmlhexcolor);
+	htmlhexcolor = document.getElementById("color_ground_ambient").value;
+	ambient_light.groundColor = new BABYLON.Color3.FromHexString(htmlhexcolor);
+	
+	directional_light.direction = new BABYLON.Vector3(
+		parseFloat(document.getElementById("x_directional").value),
+		parseFloat(document.getElementById("y_directional").value),
+		parseFloat(document.getElementById("z_directional").value)
+	);
+	directional_light.intensity = parseFloat(document.getElementById("intensity_directional").value);
+	if(document.getElementById("cbox_directional").checked){ directional_light.setEnabled(true); } else { directional_light.setEnabled(false); }
+	htmlhexcolor = document.getElementById("color_directional").value;
+	directional_light.diffuse = new BABYLON.Color3.FromHexString(htmlhexcolor);
+	
+	point_light.position = new BABYLON.Vector3(
+		parseFloat(document.getElementById("x_point").value),
+		parseFloat(document.getElementById("y_point").value),
+		parseFloat(document.getElementById("z_point").value)
+	);
+	point_light.intensity = parseFloat(document.getElementById("intensity_point").value);
+	if(document.getElementById("cbox_point").checked){ point_light.setEnabled(true); } else { point_light.setEnabled(false); }
+	htmlhexcolor = document.getElementById("color_point").value;
+	point_light.diffuse = new BABYLON.Color3.FromHexString(htmlhexcolor);
+	
 }
 function wheel_creator(){
 	clearall();
