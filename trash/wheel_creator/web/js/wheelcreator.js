@@ -65,10 +65,10 @@ var createScene = function () {
 	scene = new BABYLON.Scene(engine);
 	scene.clearColor = new BABYLON.Color3(1, 1, 1);
 	// Add a camera to the scene and attach it to the canvas
-	camera = new BABYLON.ArcRotateCamera("Camera", 0, 0, 500, BABYLON.Vector3.Zero(), scene);
+	camera = new BABYLON.ArcRotateCamera("Camera", geo.radians(45), geo.radians(45), 800, BABYLON.Vector3.Zero(), scene);
 	// camera.setPosition(new BABYLON.Vector3(-400, -400, -400));
     camera.attachControl(canvas, true);
-
+	
 	// Add lights to the scene
 	var light1 = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(1, 1, 0), scene);
 	var light3 = new BABYLON.HemisphericLight("light3", new BABYLON.Vector3(0, -1,-1), scene);
@@ -180,6 +180,18 @@ function mix_bolt_angles(){
 		ba_input.value = rez;
 	}
 }
+function background_color(){
+	var colornow = scene.clearColor.toHexString();
+	var colornew = document.getElementById("color_background").value.toUpperCase();
+	if(colornow != colornew) { scene.clearColor = new BABYLON.Color3.FromHexString(colornew); console.log("background color changed from",colornow,"to",colornew);}
+}
+function refresh_lamp(){
+	background_color();
+	camera.alpha = geo.radians( parseFloat( document.getElementById("y_view").value ) );
+	camera.beta = geo.radians( parseFloat( document.getElementById("z_view").value ) );
+	camera.radius = parseFloat( document.getElementById("distance_view").value ) ;
+	if (document.getElementById("perspective_view").checked){camera.mode = BABYLON.Camera.PERSPECTIVE_CAMERA;}else{camera.mode =  BABYLON.Camera.ORTHOGRAPHIC_CAMERA;}
+}
 function wheel_creator(){
 	clearall();
 	var dp = whatdraw(); //drawparts
@@ -187,7 +199,7 @@ function wheel_creator(){
 	h=d[0];w=d[1];b=d[2];s=d[3];g=d[4];
 	// var angle = 0;
 	//need call to mat_maker()
-	mat_maker()
+	mat_maker();
 	
 	if (dp[5]) { axes_creator(400); }
 	if (dp[0]) { metal = metal_maker(h,w,s); }
@@ -242,9 +254,12 @@ function save_objmesh(){
 }
   
 
-function change_camera_test(al,be,ra){
-	camera.alpha = al;
-	camera.beta = be;
+function change_camera_test(al,be){
+	camera.alpha = geo.radians(al);
+	camera.beta = geo.radians(be);
+	document.getElementById("y_view").value = al;
+	document.getElementById("z_view").value = be;
+	
 }
 showme("wheelcreator.js ready");
 

@@ -72,12 +72,14 @@
             </tbody>
         </table>
         <button type="button" onclick="clearall()">remove mesh</button>
-        <button type="button" onclick="change_camera_test(0,0,0)">(0,0,0)</button>
-        <button type="button" onclick="change_camera_test(0,1,0)">(0,1,0)</button>
-        <button type="button" onclick="change_camera_test(0,Math.PI/2,0)">(0,Math.PI/2,0)</button>
-        <button type="button" onclick="change_camera_test(1,0,0)">(1,0,0)</button>
-        <button type="button" onclick="change_camera_test(Math.PI/2,0,0)">(Math.PI/2,0,0)</button>
-        <button type="button" onclick="change_camera_test(1,1,1)">(1,1,1)</button>
+        <button type="button" onclick="change_camera_test(0,0)">(0,0)</button>
+        <button type="button" onclick="change_camera_test(45,0)">(45,0)</button>
+        <button type="button" onclick="change_camera_test(0,45)">(0,45)</button>
+        <button type="button" onclick="change_camera_test(45,45)">(45,45)</button>
+        <button type="button" onclick="change_camera_test(180/Math.PI,0)">(rad,0)</button>
+        <button type="button" onclick="change_camera_test(0,180/Math.PI)">(0,rad)</button>
+        <button type="button" onclick="change_camera_test(180/Math.PI,180/Math.PI)">(rad,rad)</button>
+        
         <a href="" id="OBJexport" class="displaynone">mesh</a>
         <button type="button" onclick="save_objmesh()">OBJ</button>
         

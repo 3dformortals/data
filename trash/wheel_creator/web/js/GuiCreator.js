@@ -63,10 +63,11 @@ function text_tag(text,color){
     t.setAttribute("style", "vertical-align:middle;color:"+color+";");
     return t;
 }
-function cbox_tag(id,checked = false){
+function cbox_tag(id,checked = false, title = ""){
     var cbox = document.createElement('input');
     cbox.type = "checkbox";
     cbox.id = id;
+    cbox.title = title;
     cbox.defaultChecked = checked;
     return cbox;
 }
@@ -79,10 +80,10 @@ function td_text_multicolor(texts = [], colors = []){
     }
     return td;
 }
-function td_cbox_text_multicolor_colspan(id, checked = false, texts = [], colors = [], colspan = 1){
+function td_cbox_text_multicolor_colspan(id, checked = false, texts = [], colors = [], colspan = 1, title = ""){
     var td = document.createElement("td");
     td.colSpan = colspan;
-    td.appendChild(cbox_tag(id, checked));
+    td.appendChild(cbox_tag(id, checked, title));
     if (texts.length == colors.length){
         for (i=0;i<texts.length;i++){
             td.appendChild(text_tag(texts[i],colors[i]));
@@ -242,7 +243,7 @@ function look_gui_creator(){
     box.appendChild(img);
 }
 
-function td_cbox_text_colspan(cboxid, text, checked = false, colspan = 1, align = "left"){
+function td_cbox_text_colspan(cboxid, text, checked = false, colspan = 1, align = "left",title=""){
     var td = document.createElement('td');
     td.colSpan = colspan;
     td.setAttribute('style','text-align :'+align+';');
@@ -250,6 +251,7 @@ function td_cbox_text_colspan(cboxid, text, checked = false, colspan = 1, align 
     cbox.id = cboxid;
     cbox.type = "checkbox";
     cbox.checked = checked;
+    cbox.title = title;
     var text = document.createTextNode(text);
     td.appendChild(cbox);
     td.appendChild(text);
@@ -309,35 +311,38 @@ function lamp_gui_tbody(){
     tr10.appendChild(td_input("scn_point","shadow.camera.near"));
     tr10.appendChild(td_input("scf_point","shadow.camera.far"));
     
+    
+    
     var tr11 = document.createElement('tr');
     tr11.appendChild(td_hr(4));
     
     var tr12 = document.createElement('tr');
-    tr12.appendChild(td_text("view"));
-    tr12.appendChild(td_cbox_text_colspan("perspective_view","perspective",false,4,"center"));
+    tr12.appendChild(td_cbox_text_colspan("wireframe","wireframe",false,2,"left","need model recalculation"));
+    tr12.appendChild(td_cbox_text_multicolor_colspan("axes",true,["x","y","z"," axes"],["red","green","blue","black"],2,"need model recalculation"));
     
     var tr13 = document.createElement('tr');
-    tr13.appendChild(td_input("zoom_view","zoom"));
-    tr13.appendChild(td_input("distance_view","distance"));
-    tr13.appendChild(td_input("y_view","y angle degrees"));
-    tr13.appendChild(td_input("z_view","z angle degrees"));
+    tr13.appendChild(td_hr(4));
     
     var tr14 = document.createElement('tr');
-    tr14.appendChild(td_hr(4));
+    tr14.appendChild(td_text("background color","",4));
     
     var tr15 = document.createElement('tr');
-    tr15.appendChild(td_cbox_text_colspan("wireframe","wireframe",false,2));
-    tr15.appendChild(td_cbox_text_multicolor_colspan("axes",true,["x","y","z"," axes"],["red","green","blue","black"],2));
+    tr15.appendChild(td_color("color_background","#ffffff"));
+    tr15.appendChild(td_cbox_text_colspan("transperent","render transperent",true,3));
     
     var tr16 = document.createElement('tr');
     tr16.appendChild(td_hr(4));
     
     var tr17 = document.createElement('tr');
-    tr17.appendChild(td_text("background color","",4));
+    tr17.appendChild(td_text("camera view","",2));
+    tr17.appendChild(td_cbox_text_colspan("perspective_view","perspective",true,2,"center"));
     
     var tr18 = document.createElement('tr');
-    tr18.appendChild(td_color("color_background","#ffffff"));
-    tr18.appendChild(td_cbox_text_colspan("transperent","render transperent",true,3));
+    tr18.appendChild(td_button("ok","refresh_lamp()","refresh scene"));
+    tr18.appendChild(td_input("distance_view","distance"));
+    tr18.appendChild(td_input("y_view","y angle degrees"));
+    tr18.appendChild(td_input("z_view","z angle degrees"));
+    
     
     // tr17.appendChild(td_input("length_track","track length"));
     
@@ -348,7 +353,7 @@ function lamp_gui_tbody(){
     
     
     
-    var tbox = [tr1,tr2,tr3,tr4,tr5,tr6,tr7,tr8,tr9,tr10,tr11,tr12,tr13,tr14,tr15,tr16,tr17,tr18];
+    var tbox = [tr12,tr13,tr1,tr2,tr3,tr4,tr5,tr6,tr7,tr8,tr9,tr10,tr11,tr14,tr15,tr16,tr17,tr18];
     for (i=0;i<tbox.length;i++) {tbody.appendChild(tbox[i]);}
     return tbody;
 }
@@ -375,7 +380,7 @@ function start_data_writer(){
         "x_point","y_point","z_point",
         "distance_point","decay_point",
         "smsw_point","smsh_point","scn_point","scf_point",
-        "zoom_view","distance_view","y_view","z_view",//tr13
+        "distance_view","y_view","z_view",//tr18
     ];
     var values = [
         20,100,500,100,100,100,100,100,900,
@@ -389,7 +394,7 @@ function start_data_writer(){
         500,500,500,
         1000,2,
         512,512,0.5,500,
-        1,1000,0,0,//tr13 lamp
+        800,45,45//tr18 lamp
     ];
     for (i=0;i<ids.length;i++){id_value(ids[i],values[i])}
 }
