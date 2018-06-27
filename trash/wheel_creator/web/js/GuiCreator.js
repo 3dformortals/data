@@ -16,6 +16,7 @@ function ok_gui_creator(){
         
     b_ok.className = "b50px";
     b_ok.textContent = "ok";
+    // b_ok.title = "calculate model";
     b_ok.tabIndex = 1;
     b_ok.onclick = function() {wheel_creator();};
     
@@ -334,7 +335,7 @@ function lamp_gui_tbody(){
     tr19.appendChild(td_cbox_text_colspan("perspective_view","perspective",true,2,"center"));
     
     var tr20 = document.createElement('tr');
-    tr20.appendChild(td_button("ok","refresh_lamp()","refresh scene"));
+    tr20.appendChild(td_button("ok","refresh_lamp()","refresh scene\nbackground\nand lights"));
     tr20.appendChild(td_input("distance_view","distance"));
     tr20.appendChild(td_input("y_view","y angle degrees"));
     tr20.appendChild(td_input("z_view","z angle degrees"));
