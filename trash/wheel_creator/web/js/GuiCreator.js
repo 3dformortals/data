@@ -25,8 +25,11 @@ function ok_gui_creator(){
     
     b_save.className = "b50px";
     b_save.textContent = "save";
+    b_save.onclick = function() { save_data_to_txt(); }
+    
     b_load.className = "b50px";
     b_load.textContent = "load";
+    b_load.onclick = function() { load_data_from_txt(); }
     
     td1.appendChild(b_ok);
     td2.appendChild(b_png);
@@ -174,9 +177,9 @@ function td_color(id, co = "#000000",title = ""){
 function balert(x){
     alert(x);//need two
 }
-function td_button(text, callback, title = ""){
+function td_button(text, callback, title = "",bclass="b50px"){
     var td = document.createElement('td');
-    var btn = "<button title=\""+title+"\" onclick=\""+callback+"\">"+text+"</button>";
+    var btn = "<button class=\""+bclass+"\" title=\""+title+"\" onclick=\""+callback+"\">"+text+"</button>";
     td.innerHTML = btn;
     return td;
 }
@@ -372,7 +375,7 @@ function start_data_writer(){
         
         "intensity_point",
         "x_point","y_point","z_point",
-        "distance_view","y_view","z_view",//tr18
+        "distance_view","y_view","z_view" //tr18
     ];
     var values = [
         20,100,500,100,100,100,100,100,900,
@@ -388,6 +391,66 @@ function start_data_writer(){
         800,45,45//tr18 lamp
     ];
     for (i=0;i<ids.length;i++){id_value(ids[i],values[i])}
+}
+
+function save_data_to_txt(){
+    ids=[
+        "h1","h2","h3","h4","h5","h6","h7","h8","export_resolution",
+        "w1","w2","w3","w4","w5","b1","b2","b3","b4",
+        "s1","s2","s3","s4","s5","s6","s7","s8",
+        
+        "intensity_ambient",
+        
+        "x_ambient","y_ambient","z_ambient",
+        "intensity_directional",
+        "x_directional","y_directional","z_directional",
+        
+        "intensity_point",
+        "x_point","y_point","z_point",
+        "distance_view","y_view","z_view",
+        
+        "c1","c2","c3","c4","c5",
+        "color_ambient","color_ground_ambient","color_directional","color_point","color_background"
+    ];
+    var output = "wheel creator gui data from " + Date() + " https://healingdrawing.github.io/\n";
+    for (i=0;i<ids.length;i++){ output += ids[i]+" "+document.getElementById(ids[i]).value+"\n"; }
+    var a = document.getElementById('GUIexport');
+	
+	var type = "text/plain";
+	var name = "exported_wheel.txt";
+	var file = new Blob([output], {type: type});
+	a.href = URL.createObjectURL(file);
+	a.download = name;
+	a.click();
+}
+
+
+var import_input = document.getElementById('GUIimport');
+function load_data_from_txt(){ import_input.click(); }
+var handleFileSelect = function(evt) {
+    var files = evt.target.files;
+    var reader = new FileReader();
+    reader.onload = function(e) { 
+        write_data_to_gui(reader.result);
+    };
+    reader.readAsText(files[0]);
+    // console.log(reader.result);
+}
+import_input.addEventListener('change', handleFileSelect, false);
+import_input.value = "";
+scene.onDisposeObservable.add(function(){ import_input.removeEventListener('change', handleFileSelect); }) //looks like no need in my case, but added as part of example
+
+function write_data_to_gui(text){
+    console.log(text);
+    text = text.split("\n");
+    var oneline;
+    for (i=1;i<text.length;i++){
+        if (text[i]){
+            oneline = text[i].split(" ");
+            document.getElementById(oneline[0]).value = oneline[1];
+        }
+    }
+    document.getElementById("info").value = "GUI loaded from " + text[0];
 }
 
 ok_gui_creator();

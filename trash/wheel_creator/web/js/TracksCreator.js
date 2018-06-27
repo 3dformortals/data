@@ -29,8 +29,8 @@ function trackgs(c,one_gh,h){
         var vecs = [v1,v1,v2,v2];
         if (i == 0){ bez = bez_maker(vecs); }else{ bez = bez.continue(bez_maker(vecs)); }
     }
-    var bezmesh = BABYLON.Mesh.CreateLines("newgs2shape", bez.getPoints(), scene); 
-	bezmesh.color = new BABYLON.Color3(1, 0, 0);
+    // var bezmesh = BABYLON.Mesh.CreateLines("newgs2shape", bez.getPoints(), scene); 
+	// bezmesh.color = new BABYLON.Color3(1, 0, 0);
     
     return bez.getPoints();
 }

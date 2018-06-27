@@ -142,7 +142,7 @@ function ring_trajectory(dot,vn,va,r){
 	var arc4 = bez_maker(a4,mass);
 	
 	var arc14 = arc1.continue(arc2.continue(arc3.continue(arc4)));
-	var arc14mesh = BABYLON.Mesh.CreateLines("cbezier1", arc14.getPoints(), scene); arc14mesh.color = new BABYLON.Color3(1, 0.6, 0);
+	// var arc14mesh = BABYLON.Mesh.CreateLines("cbezier1", arc14.getPoints(), scene); arc14mesh.color = new BABYLON.Color3(1, 0.6, 0);
 	return arc14.getPoints();
 }
 //----------------end geometry section
@@ -229,15 +229,14 @@ function refresh_lamp(){
 	if(document.getElementById("cbox_point").checked){ point_light.setEnabled(true); } else { point_light.setEnabled(false); }
 	htmlhexcolor = document.getElementById("color_point").value;
 	point_light.diffuse = new BABYLON.Color3.FromHexString(htmlhexcolor);
-	
+	showme("\"LAMP\" tab data was applied");
 }
 function wheel_creator(){
 	clearall();
 	var dp = whatdraw(); //drawparts
 	d=gui_reader(); //GuiReader.js
 	h=d[0];w=d[1];b=d[2];s=d[3];g=d[4];
-	// var angle = 0;
-	//need call to mat_maker()
+	// var angle = 0; //not used, looks hard to realise, because need additional displacement of tracks etc , and not looks benefit... head pain
 	mat_maker();
 	
 	if (dp[5]) { axes_creator(400); }
@@ -246,6 +245,7 @@ function wheel_creator(){
 	if (dp[1]) { bolts = bolts_maker(h,w,s,b); }
 	if (dp[3]) { grips = grips_maker(h,w,s,g); }
 	if (dp[4]) { tracks = tracks_maker(h,w,s,g); }
+	showme("complete");
 }
 
 function clearall(){
@@ -283,7 +283,7 @@ function save_objmesh(){
 	OBJexport = prepare_objects_for_export(exportobjects);
 	
 	var a = document.getElementById('OBJexport');
-	var text = BABYLON.OBJExport.OBJ(OBJexport)
+	var text = BABYLON.OBJExport.OBJ(OBJexport);
 	var type = "text/plain";
 	var name = "exported_wheel.obj";
 	var file = new Blob([text], {type: type});

@@ -57,9 +57,9 @@ function zigzag_counter(one_ghhole,one_gw){
     var bez = bez_maker([vx[0],vx[0],vx[1],vx[1]]);
     bez = bez.continue(bez_maker([vx[1],vx[2],vx[3],vx[4]]));
     bez = bez.continue(bez_maker([vx[4],vx[4],vx[5],vx[5]]));
-    // var bez = bez_maker(vx);
-    var bezmesh = BABYLON.Mesh.CreateLines("zigzagpath", bez.getPoints(), scene); 
-	bezmesh.color = new BABYLON.Color3(0, 0, 1);
+    
+    // var bezmesh = BABYLON.Mesh.CreateLines("zigzagpath", bez.getPoints(), scene); 
+	// bezmesh.color = new BABYLON.Color3(0, 0, 1);
     return bez;
 }
 function snake_counter(one_ghhole,one_gw){
@@ -78,9 +78,9 @@ function snake_counter(one_ghhole,one_gw){
     var bez = bez_maker([vx[0],vx[0],vx[1],vx[1]]);
     bez = bez.continue(bez_maker([vx[1],vx[2],vx[3],vx[4]]));
     bez = bez.continue(bez_maker([vx[4],vx[4],vx[5],vx[5]]));
-    // var bez = bez_maker(vx);
-    var bezmesh = BABYLON.Mesh.CreateLines("snakepath", bez.getPoints(), scene); 
-	bezmesh.color = new BABYLON.Color3(0, 0, 1);
+    
+    // var bezmesh = BABYLON.Mesh.CreateLines("snakepath", bez.getPoints(), scene); 
+	// bezmesh.color = new BABYLON.Color3(0, 0, 1);
     return bez;
 }
 function grips_path_counter(c,vz,h,gt,one_ghhole,one_gw){
@@ -115,8 +115,8 @@ function gs1(c,gw,gh,vx,vy){
     t1 = vec_maker([t1x,t1y,0]); t2 = vec_maker([t2x,t2y,0]);
     var bez = bez.continue(bez_maker([t1,t1,t2,t2]));
     
-    var bezmesh = BABYLON.Mesh.CreateLines("metalshape", bez.getPoints(), scene); 
-	bezmesh.color = new BABYLON.Color3(1, 0, 0);
+    // var bezmesh = BABYLON.Mesh.CreateLines("metalshape", bez.getPoints(), scene); 
+	// bezmesh.color = new BABYLON.Color3(1, 0, 0);
     
     return bez.getPoints();
 }
@@ -138,8 +138,8 @@ function gs2(c,one_gw,one_gh,one_ghhole,vn,va){
         var vecs = [v1,v1,v2,v2];
         if (i == 0){ bez = bez_maker(vecs); }else{ bez = bez.continue(bez_maker(vecs)); }
     }
-    var bezmesh = BABYLON.Mesh.CreateLines("gs2shape", bez.getPoints(), scene); 
-	bezmesh.color = new BABYLON.Color3(1, 0, 0);
+    // var bezmesh = BABYLON.Mesh.CreateLines("gs2shape", bez.getPoints(), scene); 
+	// bezmesh.color = new BABYLON.Color3(1, 0, 0);
     
     return bez.getPoints();
 }
@@ -161,8 +161,8 @@ function newgs2(c,one_gh,h){
         var vecs = [v1,v1,v2,v2];
         if (i == 0){ bez = bez_maker(vecs); }else{ bez = bez.continue(bez_maker(vecs)); }
     }
-    var bezmesh = BABYLON.Mesh.CreateLines("newgs2shape", bez.getPoints(), scene); 
-	bezmesh.color = new BABYLON.Color3(1, 0, 0);
+    // var bezmesh = BABYLON.Mesh.CreateLines("newgs2shape", bez.getPoints(), scene); 
+	// bezmesh.color = new BABYLON.Color3(1, 0, 0);
     
     return bez.getPoints();
 }
@@ -192,8 +192,8 @@ function gs3(c,one_gw,one_gh,one_ghhole,vn,va){
     for (var i = 0 ; i < dotsbox.length ; i++){
         if (i == 0){ bez = bez_maker(dotsbox[i]); }else{ bez = bez.continue(bez_maker(dotsbox[i])); }
     }
-    var bezmesh = BABYLON.Mesh.CreateLines("gs3shape", bez.getPoints(), scene); 
-	bezmesh.color = new BABYLON.Color3(1, 0, 0);
+    // var bezmesh = BABYLON.Mesh.CreateLines("gs3shape", bez.getPoints(), scene); 
+	// bezmesh.color = new BABYLON.Color3(1, 0, 0);
     
     return bez.getPoints();
 }
@@ -215,8 +215,8 @@ function newgs3(c,one_gh,h){
         var vecs = [v1,v1,v2,v2];
         if (i == 0){ bez = bez_maker(vecs); }else{ bez = bez.continue(bez_maker(vecs)); }
     }
-    var bezmesh = BABYLON.Mesh.CreateLines("newgs2shape", bez.getPoints(), scene); 
-	bezmesh.color = new BABYLON.Color3(1, 0, 0);
+    // var bezmesh = BABYLON.Mesh.CreateLines("newgs2shape", bez.getPoints(), scene); 
+	// bezmesh.color = new BABYLON.Color3(1, 0, 0);
     
     return bez.getPoints();
 }
@@ -236,8 +236,8 @@ function gs4(c,gw,gh,vx,vy){
         if (i == 0){ bez = bez_maker(vecs); }else{ bez = bez.continue(bez_maker(vecs)); }
     }
     
-    var bezmesh = BABYLON.Mesh.CreateLines("metalshape", bez.getPoints(), scene); 
-	bezmesh.color = new BABYLON.Color3(1, 0, 0);
+    // var bezmesh = BABYLON.Mesh.CreateLines("gripshape", bez.getPoints(), scene); 
+	// bezmesh.color = new BABYLON.Color3(1, 0, 0);
     
     return bez.getPoints();
 }

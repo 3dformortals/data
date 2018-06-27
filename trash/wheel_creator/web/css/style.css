@@ -140,6 +140,7 @@ td {width:50px;text-align: center;}
 button.b50px{
 	width:46px;height:24px;
 	text-align: center;
+	margin:0px !important;
 	margin-bottom: 4px;
 	padding: 0;
 	border-width:0;}
