@@ -292,7 +292,13 @@ function save_objmesh(){
 	a.click();
 }
   
-
+function get_camera_data_from_screen(){
+	document.getElementById("y_view").value = geo.degrees(camera.alpha);
+	document.getElementById("z_view").value = geo.degrees(camera.beta);
+	document.getElementById("distance_view").value = camera.radius;
+	
+	
+}
 function change_camera_test(al,be){
 	camera.alpha = geo.radians(al);
 	camera.beta = geo.radians(be);

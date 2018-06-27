@@ -263,7 +263,7 @@ function lamp_gui_tbody(){
     
     var tr1 = document.createElement('tr');
     tr1.appendChild(td_cbox_text_colspan("wireframe","wireframe",false,2,"left","need model recalculation"));
-    tr1.appendChild(td_cbox_text_multicolor_colspan("axes",true,["x","y","z"," axes"],["red","green","blue","black"],2,"need model recalculation"));
+    tr1.appendChild(td_cbox_text_multicolor_colspan("axes",true,["x","y","z"," axes"],["red","green","blue",""],2,"need model recalculation"));
     
     var tr2 = document.createElement('tr');
     tr2.appendChild(td_hr(4));
@@ -291,13 +291,9 @@ function lamp_gui_tbody(){
     tr7.appendChild(td_input("x_directional","x"));
     tr7.appendChild(td_input("y_directional","y"));
     tr7.appendChild(td_input("z_directional","z"));
-    tr7.appendChild(td_cbox("shadow_directional",false,"shadow"));
+    tr7.appendChild(td_text("vector"));
     
-    var tr8 = document.createElement('tr');
-    tr8.appendChild(td_input("smsw_directional","shadow.mapSize.width"));
-    tr8.appendChild(td_input("smsh_directional","shadow.mapSize.height"));
-    tr8.appendChild(td_input("scn_directional","shadow.camera.near"));
-    tr8.appendChild(td_input("scf_directional","shadow.camera.far"));
+    
     
     var tr9 = document.createElement('tr');
     tr9.appendChild(td_hr(4));
@@ -311,13 +307,7 @@ function lamp_gui_tbody(){
     tr11.appendChild(td_input("x_point","x"));
     tr11.appendChild(td_input("y_point","y"));
     tr11.appendChild(td_input("z_point","z"));
-    tr11.appendChild(td_cbox("shadow_point",false,"shadow"));
-    
-    var tr13 = document.createElement('tr');
-    tr13.appendChild(td_input("smsw_point","shadow.mapSize.width"));
-    tr13.appendChild(td_input("smsh_point","shadow.mapSize.height"));
-    tr13.appendChild(td_input("scn_point","shadow.camera.near"));
-    tr13.appendChild(td_input("scf_point","shadow.camera.far"));
+    tr11.appendChild(td_text_multicolor(["x","y","z"],["red","green","blue"]));
     
     var tr14 = document.createElement('tr');
     tr14.appendChild(td_hr(4));
@@ -333,14 +323,18 @@ function lamp_gui_tbody(){
     tr17.appendChild(td_hr(4));
     
     var tr18 = document.createElement('tr');
-    tr18.appendChild(td_text("camera view","",2));
-    tr18.appendChild(td_cbox_text_colspan("perspective_view","perspective",true,2,"center"));
+    tr18.appendChild(td_button("get","get_camera_data_from_screen()",""));
+    tr18.appendChild(td_text("screen camera view","",3));
     
     var tr19 = document.createElement('tr');
-    tr19.appendChild(td_button("ok","refresh_lamp()","refresh scene"));
-    tr19.appendChild(td_input("distance_view","distance"));
-    tr19.appendChild(td_input("y_view","y angle degrees"));
-    tr19.appendChild(td_input("z_view","z angle degrees"));
+    tr19.appendChild(td_text("camera view","",2));
+    tr19.appendChild(td_cbox_text_colspan("perspective_view","perspective",true,2,"center"));
+    
+    var tr20 = document.createElement('tr');
+    tr20.appendChild(td_button("ok","refresh_lamp()","refresh scene"));
+    tr20.appendChild(td_input("distance_view","distance"));
+    tr20.appendChild(td_input("y_view","y angle degrees"));
+    tr20.appendChild(td_input("z_view","z angle degrees"));
     
     
     // tr17.appendChild(td_input("length_track","track length"));
@@ -352,7 +346,7 @@ function lamp_gui_tbody(){
     
     
     
-    var tbox = [tr1,tr2,tr3,tr4,tr5,tr6,tr7,tr8,tr9,tr10,tr11,tr13,tr14,tr15,tr16,tr17,tr18,tr19];
+    var tbox = [tr1,tr2,tr3,tr4,tr5,tr6,tr7,tr9,tr10,tr11,tr14,tr15,tr16,tr17,tr18,tr19,tr20];
     for (i=0;i<tbox.length;i++) {tbody.appendChild(tbox[i]);}
     return tbody;
 }
@@ -375,10 +369,9 @@ function start_data_writer(){
         "x_ambient","y_ambient","z_ambient",
         "intensity_directional",
         "x_directional","y_directional","z_directional",
-        "smsw_directional","smsh_directional","scn_directional","scf_directional",
+        
         "intensity_point",
         "x_point","y_point","z_point",
-        "smsw_point","smsh_point","scn_point","scf_point",
         "distance_view","y_view","z_view",//tr18
     ];
     var values = [
@@ -389,10 +382,9 @@ function start_data_writer(){
         1,1,1,
         1,
         500,500,500,
-        512,512,0.5,500,
+        
         0.3,
         500,500,500,
-        512,512,0.5,500,
         800,45,45//tr18 lamp
     ];
     for (i=0;i<ids.length;i++){id_value(ids[i],values[i])}
