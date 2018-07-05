@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Wheel Creator 2018</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
+        <!-- Include eel.js - note this file doesn't exist in the 'web' directory -->
+        <!-- <script type="text/javascript" src="/eel.js"></script> -->
+        <script type="text/javascript" src="js/babylon.js"></script>
+        <script type="text/javascript" src="js/babylonjs.serializers.js"></script>
+        <script type="text/javascript" src="js/pep.js"></script>
+        <script type="text/javascript" src="js/GeometryCreator.js"></script>
+        <script type="text/javascript" src="js/geo.js"></script>
+        <script type="text/javascript" src="js/alert.js"></script>
+        <!-- <script type="text/javascript">
+        
+        eel.expose(say_hello_js);               // Expose this function to Python
+        function say_hello_js(x) {
+            console.log("Hello from " + x);
+        }
+        
+        say_hello_js("Javascript World!");
+        eel.say_hello_py("Javascript World!");  // Call a Python function
+        
+        </script> -->
+    </head>
+    
+    <body>
+        <table id="infotable">
+            <tr>
+                <td class="mini">Wheel Creator from <a href="https://healingdrawing.github.io/" target="_blank">Healing Drawing</a></td>
+                <td><input id="info" readonly value="preparing"></td>
+            </tr>
+        </table>
+        <hr>
+        <table>
+            <tbody>
+                <tr>
+                    <td id="renderbox">
+                        <canvas id="renderCanvas" touch-action="none"></canvas>
+                        <script type="text/javascript" src="js/MetalCreator.js"></script>
+                        <script type="text/javascript" src="js/TireCreator.js"></script>
+                        <script type="text/javascript" src="js/BoltsCreator.js"></script>
+                        <script type="text/javascript" src="js/GripsCreator.js"></script>
+                        <script type="text/javascript" src="js/TracksCreator.js"></script>
+                        <script type="text/javascript" src="js/wheelcreator.js"></script>
+                    </td>
+                    <td>
+                        <div id="div_ok"></div>
+                        <section class="tabs">
+                            <input class="x4menu" id="tab_1" type="radio" name="tab" checked="checked" />
+                            <input class="x4menu" id="tab_2" type="radio" name="tab" />
+                            <input class="x4menu" id="tab_3" type="radio" name="tab" />
+                            <input class="x4menu" id="tab_4" type="radio" name="tab" />
+                            <label for="tab_1" id="tab_l1">size</label>
+                            <label for="tab_2" id="tab_l2">look</label>
+                            <label for="tab_3" id="tab_l3">lamp</label>
+                            <label for="tab_4" id="tab_l4">help</label>
+                            <div style="clear:both"></div>
+                        
+                            <div class="tabs_cont">
+                                <div id="tab_c1"></div>
+                                <div id="tab_c2"></div>
+                                <div id="tab_c3"></div>
+                                <div id="tab_c4">
+                                    ok -&gt; calculate wheel model
+                                    <br>png -&gt; render scene to PNG file
+                                    <br>save -&gt; save gui settings as txt
+                                    <br>load -&gt; load txt into gui settings
+                                    <br>OBJ -&gt; export model to OBJ file
+                                    <hr>
+                                    Lot of sizes is relative
+                                    <br>and must be positive
+                                    <hr>
+                                    "SIZE" -&gt; "b4" can be 0.
+                                    <hr>
+                                    "LOOK" -&gt; "s5"
+                                    <br>can be negative.
+                                    <hr>
+                                    "wireframe" and "xyz axes"
+                                    <br>checboxes changes need
+                                    <br>need full model recalculation
+                                    <hr>
+                                    tested uses Firefox / chromium
+                                    <br>release date 28-06-2018
+                                    <hr>
+                                    <a href="mailto:lenivaya10003@mail.ru">developer contact email</a>
+                                    <hr>
+                                    <a href="https://healingdrawing.github.io">https://healingdrawing.github.io</a>
+                                </div>
+                            </div>
+                        </section>
+                        
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="button" onclick="clearall()">remove mesh</button>
+        <button type="button" onclick="change_camera_test(0,0)">(0,0)</button>
+        <button type="button" onclick="change_camera_test(45,0)">(45,0)</button>
+        <button type="button" onclick="change_camera_test(0,45)">(0,45)</button>
+        <button type="button" onclick="change_camera_test(45,45)">(45,45)</button>
+        <button type="button" onclick="change_camera_test(135,0)">(135,0)</button>
+        <button type="button" onclick="change_camera_test(0,135)">(0,135)</button>
+        <button type="button" onclick="change_camera_test(135,45)">(135,45)</button>
+        
+        <input type="file" id="GUIimport" class="displaynone">
+        <a href="" id="GUIexport" class="displaynone">GUI</a>
+        <a href="" id="OBJexport" class="displaynone">mesh</a>
+        <button type="button" onclick="save_objmesh()">OBJ</button>
+        
+        <script type="text/javascript" src="js/GuiCreator.js"></script>
+        <script type="text/javascript" src="js/GuiReader.js"></script>
+    </body>
+</html>
