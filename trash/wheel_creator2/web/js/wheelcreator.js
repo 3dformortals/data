@@ -269,7 +269,6 @@ function prepare_objects_for_export(objs){
 		
 		rez.push(fullmesh);
 	}
-	alert(objs.length);
 	return rez;
 }
 function save_objmesh(){

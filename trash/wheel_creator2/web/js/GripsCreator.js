@@ -376,20 +376,27 @@ function zigzag_ribbon_grip_maker(c, cdot, vn, ns, gn, gd, gw, gh, global_ind){
     
     //getPoints from bezier to skeleton
     var zigzag_skeleton = bez_array_getPoints([zigzag_bez,zigzag_cap_bez].reverse()); // may be need reverse() need test
+    
     //create cap ribbon mesh
-    grips.push( new BABYLON.Mesh("meshExp_cap_"+global_ind.toString() , scene) );
-    var ind = grips.length-1;
-    createRibbon(grips[ind], zigzag_skeleton, false);
+    // grips.push( new BABYLON.Mesh("meshExp_cap_"+global_ind.toString() , scene) );
+    // var ind = grips.length-1;
+    // createRibbon(grips[ind], zigzag_skeleton, false);
     // console.log(grips[ind]);
+    grips.push( BABYLON.MeshBuilder.CreateRibbon("meshExp_cap_"+global_ind.toString(), { pathArray: zigzag_skeleton },  scene ) );
+    var ind = grips.length-1;
+    
     grips[ind].material = grips_mat;
     
     //radial ribbon
     var zigzag_radial_bez_array = bez_array_maker(zigzag_radial);
     // var zigzag_radial_bez = bez_array_to_one_bez(zigzag_radial_bez_array);
     var zigzag_radial_skeleton = bez_array_getPoints(zigzag_radial_bez_array); // may be need reverse() need test
-    grips.push( new BABYLON.Mesh("meshExp_radial_"+global_ind.toString() , scene) );
+    
+    // grips.push( new BABYLON.Mesh("meshExp_radial_"+global_ind.toString() , scene) );
+    // var ind = grips.length-1;
+    // createRibbon(grips[ind], zigzag_radial_skeleton, false);
+    grips.push( BABYLON.MeshBuilder.CreateRibbon("meshExp_radial_"+global_ind.toString(), { pathArray: zigzag_radial_skeleton },  scene ) );
     var ind = grips.length-1;
-    createRibbon(grips[ind], zigzag_radial_skeleton, false);
     // console.log(grips[ind]);
     grips[ind].material = grips_mat;
 }
