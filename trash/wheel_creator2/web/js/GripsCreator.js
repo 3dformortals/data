@@ -327,7 +327,7 @@ function zigzag_ribbon_grip_maker(c, cdot, vn, ns, gn, gd, gw, gh, global_ind){
     // console.log("zig",zigzag); // ok
     // console.log("zig_cap",zigzag_cap);
     
-    
+    //------------------------------------
     //array of start dots for radial direction closed ribbon
     var zigzag_radial_s_dots = [];
     var zigzag_around_s_dots = [];
@@ -339,17 +339,23 @@ function zigzag_ribbon_grip_maker(c, cdot, vn, ns, gn, gd, gw, gh, global_ind){
     //plus last points for both
     zigzag_around_s_dots.push( zigzag[zigzag.length-1][3] );
     zigzag_cap_around_s_dots.push( zigzag_cap[zigzag.length-1][3] );
+    // console.log(JSON.stringify( zigzag_around_s_dots ) );//ok
+    
     //reverse cap dots
     zigzag_cap_around_s_dots.reverse();
     //close the ribbon skeleton start dots
     zigzag_cap_around_s_dots.push( zigzag_around_s_dots[0] );
+    // console.log(JSON.stringify( zigzag_cap_around_s_dots ) );//ok
+    
     //create array of start dots of radial ribbon skeleton
     for(var i = 0;i < zigzag_around_s_dots.length;i++) { zigzag_radial_s_dots.push( zigzag_around_s_dots[i] ); }
     for(var i = 0;i < zigzag_cap_around_s_dots.length;i++) { zigzag_radial_s_dots.push( zigzag_cap_around_s_dots[i] ); }
+    // console.log(JSON.stringify( zigzag_radial_s_dots ) );//ok
+    
     //create array of arcs for zigzag radial ribbon
     var zigzag_radial = [];
     for(var i = 0;i < zigzag_radial_s_dots.length;i++) { zigzag_radial.push( geo.line3D_dot_offset(zigzag_radial_s_dots[i],vr,-gd) ); }
-    
+    // console.log(JSON.stringify( zigzag_radial ) );//ok
     
     
     //creation of ribbons
@@ -378,7 +384,14 @@ function zigzag_ribbon_grip_maker(c, cdot, vn, ns, gn, gd, gw, gh, global_ind){
     grips[ind].material = grips_mat;
     
     //radial ribbon
-    
+    var zigzag_radial_bez_array = bez_array_maker(zigzag_radial);
+    // var zigzag_radial_bez = bez_array_to_one_bez(zigzag_radial_bez_array);
+    var zigzag_radial_skeleton = bez_array_getPoints(zigzag_radial_bez_array); // may be need reverse() need test
+    grips.push( new BABYLON.Mesh("meshExp_radial_"+global_ind.toString() , scene) );
+    var ind = grips.length-1;
+    createRibbon(grips[ind], zigzag_radial_skeleton, false);
+    // console.log(grips[ind]);
+    grips[ind].material = grips_mat;
 }
 function ribbon_grip_maker(c, cdot, vn, gt, ns, gn, gd, gw, gh, ind){
     
