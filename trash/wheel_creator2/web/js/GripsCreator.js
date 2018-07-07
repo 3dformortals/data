@@ -160,7 +160,8 @@ function zigzag_ribbon_grip_maker(c, cdot, vn, ns, gn, gd, gw, gh, global_ind){
     // console.log("zigzag",zigzag);//ok
     showPathArray([bez_maker([c,c,cdot,cdot]).getPoints()]);
     //mirror if need_scale == true
-    if (ns) { for(var i = 0;i < zigzag.length;i++) { zigzag[i] = geo.curve3Drotate(zigzag[i],cdot,vn,180); } }
+    var rdot = geo.dotXDoffset(cdot,va,-co / 2);
+    if (ns) { for(var i = 0;i < zigzag.length;i++) { zigzag[i] = geo.curve3Drotate(zigzag[i],rdot,vn,180); } }
     // console.log("zigzag",zigzag)//ok
     
     //second contour for grip cap ribbon
@@ -261,7 +262,7 @@ function snake_ribbon_grip_maker(c, cdot, vn, ns, gn, gd, gw, gh, global_ind){
     for (var i = 0;i < gn;i++){
         var dot1 = geo.dotXDoffset(dot0,vn,ew);
         //чет нечет
-        if(i % 2) {/*1up*/ dot1 = geo.dotXDoffset(dot1,va,eh); }else{/*2dn*/ dot1 = geo.dotXDoffset(dot1,va,-eh); }
+        if(i % 2) {/*1dn*/ dot1 = geo.dotXDoffset(dot1,va,-eh); }else{/*2up*/ dot1 = geo.dotXDoffset(dot1,va,eh); }
         var lever0 = geo.dotXDoffset(dot0,vn,ew / 2);
         var lever1 = geo.dotXDoffset(dot1,vn,-ew / 2);
         var snake_arc = [dot0,lever0,lever1,dot1];
@@ -271,7 +272,8 @@ function snake_ribbon_grip_maker(c, cdot, vn, ns, gn, gd, gw, gh, global_ind){
     // console.log("zigzag",zigzag);//ok
     
     //mirror if need_scale == true
-    if (ns) { for(var i = 0;i < zigzag.length;i++) { zigzag[i] = geo.curve3Drotate(zigzag[i],cdot,vn,180); } }
+    var rdot = geo.dotXDoffset(cdot,va,-co / 2);
+    if (ns) { for(var i = 0;i < zigzag.length;i++) { zigzag[i] = geo.curve3Drotate(zigzag[i],rdot,vn,180); } }
     // console.log("zigzag",zigzag)//ok
     
     //second contour for grip cap ribbon
