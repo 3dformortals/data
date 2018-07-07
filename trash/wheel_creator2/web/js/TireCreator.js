@@ -132,7 +132,7 @@ function tire_maker(h,w,s,hull=false){
 	var oy = [0,1,0];
 	var c = [0,0,0];
 	var dot = [0,0,0]; var vn = [1,0,0]; var va = [0,1,0]; r = geo.sum_F([h[8],h[7],h[6],h[5]]) ;
-	var myPath = ring_trajectory(dot, vn, va, r);
+	var myPath = ring_trajectory(dot, vn, va, r, 16);
 	var myShape = tire_shape_for_extrusion(h,w,s,c);//bezier cubic spline for extrusion
 	var customExtrudeSettings={
 		shape: myShape,

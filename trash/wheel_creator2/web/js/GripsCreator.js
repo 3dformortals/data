@@ -6,9 +6,7 @@ function grip_angles_counter(s6){
     return rez;
 }
 function one_gw_counter(gt,gw,gwn,ghhole){
-    var rez;
-    if (gt == "|||" || gt == "ooo"){ rez = gw / (gwn * 2 - 1); }
-    else{ rez = gw / gwn; }
+    var rez = gw / (gwn * 2 - 1);
     return rez;
 }
 function column_internal(dc,nc,distance){
@@ -30,7 +28,6 @@ function grips_center_dots_counter( c,vn,vz, r, nw, na, gw, one_gw ){
     var doli = geo.repeater_F_F(na,[1]);
     var polygon = geo.polygon3D_inside_ellipse(c,vaxes,[r,r,r,r],doli);
     polygon.shift();//contour without center dot
-    // var one_gw = gw / (2 * nw - 1);//one_grip_width
     
     var offsets = column_internal(one_gw,nw,gw);//side offsets(along vn)
     var rez = [];
@@ -41,58 +38,12 @@ function grips_center_dots_counter( c,vn,vz, r, nw, na, gw, one_gw ){
         }rez.push(xrez);
     }return rez; //list of center dots lists for each polygon vertex
 }
-function zigzag_counter(one_ghhole,one_gw){
-    var dx = one_ghhole / 2;
-    var dz = one_gw / 2;
-    //t1,r1,r2,t2
-    var t0 = [-dx, 0, -dz*1.01];
-    var t1 = [-dx, 0, -dz];
-    var r1 = [-dx, 0, -dz];
-    var r2 = [dx, 0, dz];
-    var t2 = [dx, 0, dz];
-    var t3 = [dx, 0, dz*1.01];
-    var tx = [t0,t1,r1,r2,t2,t3]; // края для прямых отрезков
-    var vx = [];
-    for (i=0;i<tx.length;i++){vx.push(vec_maker(tx[i]));}
-    var bez = bez_maker_from_vectors([vx[0],vx[0],vx[1],vx[1]]);
-    bez = bez.continue(bez_maker_from_vectors([vx[1],vx[2],vx[3],vx[4]]));
-    bez = bez.continue(bez_maker_from_vectors([vx[4],vx[4],vx[5],vx[5]]));
-    
-    // var bezmesh = BABYLON.Mesh.CreateLines("zigzagpath", bez.getPoints(), scene); 
-	// bezmesh.color = new BABYLON.Color3(0, 0, 1);
-    return bez;
-}
-function snake_counter(one_ghhole,one_gw){
-    var dx = one_ghhole / 2;
-    var dz = one_gw / 2;
-    //t1,r1,r2,t2
-    var t0 = [-dx, 0, -dz*1.01];
-    var t1 = [-dx, 0, -dz];
-    var r1 = [-dx, 0, 0];
-    var r2 = [dx, 0, 0];
-    var t2 = [dx, 0, dz];
-    var t3 = [dx, 0, dz*1.01];
-    var tx = [t0,t1,r1,r2,t2,t3]; // края для прямых отрезков
-    var vx = [];
-    for (i=0;i<tx.length;i++){vx.push(vec_maker(tx[i]));}
-    var bez = bez_maker_from_vectors([vx[0],vx[0],vx[1],vx[1]]);
-    bez = bez.continue(bez_maker_from_vectors([vx[1],vx[2],vx[3],vx[4]]));
-    bez = bez.continue(bez_maker_from_vectors([vx[4],vx[4],vx[5],vx[5]]));
-    
-    // var bezmesh = BABYLON.Mesh.CreateLines("snakepath", bez.getPoints(), scene); 
-	// bezmesh.color = new BABYLON.Color3(0, 0, 1);
-    return bez;
-}
-function grips_path_counter(c,vz,h,gt,one_ghhole,one_gw){
+
+function grips_path_counter(c,vz,h){
     var rez;
-    if (gt == "|||" || gt == "ooo"){
-        var t0 = vec_maker(geo.dotXDoffset(c,vz,geo.sum_F([h[1],h[2],h[3] / 2]) / 2));
-        var t1 = vec_maker(geo.dotXDoffset(c,vz,-geo.sum_F([h[1],h[2],h[3] / 2]) / 2));
-        rez = bez_maker_from_vectors([t0,t0,t1,t1]);
-    }else{
-        if (gt==">>>"){ rez = zigzag_counter(one_ghhole,one_gw); }
-        else{rez = snake_counter(one_ghhole,one_gw); }
-    }
+    var t0 = vec_maker(geo.dotXDoffset(c,vz,geo.sum_F([h[1],h[2],h[3] / 2]) / 2));
+    var t1 = vec_maker(geo.dotXDoffset(c,vz,-geo.sum_F([h[1],h[2],h[3] / 2]) / 2));
+    rez = bez_maker_from_vectors([t0,t0,t1,t1]);
     return rez.getPoints();
 }
 function gs1(c,gw,gh,vx,vy){
@@ -116,106 +67,6 @@ function gs1(c,gw,gh,vx,vy){
     var bez = bez.continue(bez_maker_from_vectors([t1,t1,t2,t2]));
     
     // var bezmesh = BABYLON.Mesh.CreateLines("metalshape", bez.getPoints(), scene); 
-	// bezmesh.color = new BABYLON.Color3(1, 0, 0);
-    
-    return bez.getPoints();
-}
-function gs2(c,one_gw,one_gh,one_ghhole,vn,va){
-    var dx = one_gw / 2;
-    var dy_min = (one_gh + one_ghhole) / 2 - one_gh;
-    var dy_max = (one_gh + one_ghhole) / 2;
-    
-    var t1 = [dx,dy_min,0];
-    var t2 = [dx,dy_max,0];
-    var t3 = [-dx,-dy_min,0];
-    var t4 = [-dx,-dy_max,0];
-    
-    var dotspair = geo.chain_F([t1,t2,t3,t4],2,true);
-    var bez;
-    for (var i = 0 ; i < dotspair.length ; i++){
-        var v1 = vec_maker(dotspair[i][0]);
-        var v2 = vec_maker(dotspair[i][1]);
-        var vecs = [v1,v1,v2,v2];
-        if (i == 0){ bez = bez_maker_from_vectors(vecs); }else{ bez = bez.continue(bez_maker_from_vectors(vecs)); }
-    }
-    // var bezmesh = BABYLON.Mesh.CreateLines("gs2shape", bez.getPoints(), scene); 
-	// bezmesh.color = new BABYLON.Color3(1, 0, 0);
-    
-    return bez.getPoints();
-}
-function newgs2(c,one_gh,h){
-    var dx = one_gh / 2;
-    var dy = (h[1] + h[2] + h[3] / 2 ) / 2;
-    
-    var t1 = [dx,-dy,0];
-    var t2 = [dx,dy,0];
-    var t3 = [-dx,dy,0];
-    var t4 = [-dx,-dy,0];
-    
-    
-    var dotspair = geo.chain_F([t1,t2,t3,t4],2,true);
-    var bez;
-    for (var i = 0 ; i < dotspair.length ; i++){
-        var v1 = vec_maker(dotspair[i][0]);
-        var v2 = vec_maker(dotspair[i][1]);
-        var vecs = [v1,v1,v2,v2];
-        if (i == 0){ bez = bez_maker_from_vectors(vecs); }else{ bez = bez.continue(bez_maker_from_vectors(vecs)); }
-    }
-    // var bezmesh = BABYLON.Mesh.CreateLines("newgs2shape", bez.getPoints(), scene); 
-	// bezmesh.color = new BABYLON.Color3(1, 0, 0);
-    
-    return bez.getPoints();
-}
-
-function gs3(c,one_gw,one_gh,one_ghhole,vn,va){
-    var dx = one_gw / 2;
-    var dy_min = (one_gh + one_ghhole) / 2 - one_gh;
-    var dy_max = (one_gh + one_ghhole) / 2;
-    
-    var t1 = vec_maker([dx,dy_min,0]);
-    var t2 = vec_maker([dx,dy_max,0]);
-    var r2 = vec_maker([-dx / 2,dy_max,0]);
-    var r3 = vec_maker([0,-dy_min,0]);
-    var t3 = vec_maker([-dx,-dy_min,0]);
-    var t4 = vec_maker([-dx,-dy_max,0]);
-    var r4 = vec_maker([dx / 2,-dy_max,0]);
-    var r1 = vec_maker([0,dy_min,0]);
-    
-    var dotsbox = [
-        [t1,t1,t2,t2],
-        [t2,r2,r3,t3],
-        [t3,t3,t4,t4],
-        [t4,r4,r1,t1]
-    ];
-    
-    var bez;
-    for (var i = 0 ; i < dotsbox.length ; i++){
-        if (i == 0){ bez = bez_maker_from_vectors(dotsbox[i]); }else{ bez = bez.continue(bez_maker_from_vectors(dotsbox[i])); }
-    }
-    // var bezmesh = BABYLON.Mesh.CreateLines("gs3shape", bez.getPoints(), scene); 
-	// bezmesh.color = new BABYLON.Color3(1, 0, 0);
-    
-    return bez.getPoints();
-}
-function newgs3(c,one_gh,h){
-    var dx = one_gh / 2;
-    var dy = (h[1] + h[2] + h[3] / 2 ) / 2;
-    
-    var t1 = [dx,-dy,0];
-    var t2 = [dx,dy,0];
-    var t3 = [-dx,dy,0];
-    var t4 = [-dx,-dy,0];
-    
-    
-    var dotspair = geo.chain_F([t1,t2,t3,t4],2,true);
-    var bez;
-    for (var i = 0 ; i < dotspair.length ; i++){
-        var v1 = vec_maker(dotspair[i][0]);
-        var v2 = vec_maker(dotspair[i][1]);
-        var vecs = [v1,v1,v2,v2];
-        if (i == 0){ bez = bez_maker_from_vectors(vecs); }else{ bez = bez.continue(bez_maker_from_vectors(vecs)); }
-    }
-    // var bezmesh = BABYLON.Mesh.CreateLines("newgs2shape", bez.getPoints(), scene); 
 	// bezmesh.color = new BABYLON.Color3(1, 0, 0);
     
     return bez.getPoints();
@@ -248,22 +99,18 @@ function gs4(c,gw,gh,vx,vy){
  * @param {Number} gw grip width
  * @param {Number} ga grips around number
  */
-function grips_shape_counter(gt,c,vn,va,one_gw,one_gh,one_ghhole,h){
+function grips_shape_counter(gt,c,vn,va,one_gw,one_gh){
     var rez;
     if (gt == "|||"){rez = gs1(c,one_gw,one_gh,vn,va);}
-    else if (gt == ">>>"){rez = newgs2(c,one_gh,h);}
-    else if (gt == ")))"){rez = newgs3(c,one_gh,h);}
     else if (gt == "ooo"){rez = gs4(c,one_gw,one_gh,vn,va);}
     return rez;
 }
 function grip_maker(dot,u,gp,gs,c,vn,va,ns,gh,gt,ind){
     var scaling = function(i, distance) { return 1; };
-    if (gt == "|||" || gt == "ooo"){
-        if (ns){
-            scaling = function(i, distance) {
-                if (distance < gh){ return distance / gh; }else{ return 1; }
-            };
-        }
+    if (ns){
+        scaling = function(i, distance) {
+            if (distance < gh){ return distance / gh; }else{ return 1; }
+        };
     }
     var gripSettings={
 		shape: gs,
@@ -276,12 +123,6 @@ function grip_maker(dot,u,gp,gs,c,vn,va,ns,gh,gt,ind){
 	};
     var extruded = BABYLON.MeshBuilder.ExtrudeShapeCustom("grip"+u.toString(), gripSettings, scene);
     
-    if (gt == ">>>" || gt == ")))"){
-        extruded.rotateAround(vec_maker(c),vec_maker(va),geo.radians(90));
-        extruded.rotateAround(vec_maker(c),vec_maker(vn),geo.radians(90));
-        if(ind & 1 && !ns){ extruded.rotateAround(vec_maker(c),vec_maker(vn),geo.radians(180)); }
-        else if(ns && !(ind & 1)){ extruded.rotateAround(vec_maker(c),vec_maker(vn),geo.radians(180)); }
-    }
     extruded.rotateAround(vec_maker(c),vec_maker(vn),geo.radians(u));
     extruded.position = vec_maker(dot);
     
@@ -297,12 +138,13 @@ function zigzag_ribbon_grip_maker(c, cdot, vn, ns, gn, gd, gw, gh, global_ind){
     var eh = 2 * gh / 3; //contour height
     var co = gh / 3; // contour offset
     var vr = geo.vecXD(c,cdot); //vec from center to radius dot
+    console.log(JSON.stringify( vr));
+    cdot = geo.dotXDoffset(cdot,vr,gd/2);//offset from center to longest grip dot
     var va = geo.vec3Dnormal(vn,vr); // vec around wheel direction up axis
     // console.log("vr",vr,"va",va);//ok
     var dx0 = -gw / 2;//start offset along side axis vn
     var dy0 = -gh / 2;//start offset along up axis va
     
-    cdot = geo.dotXDoffset(cdot,vr,gd/2);//offset from center to longest grip dot
     var dot0 = geo.dotXDoffset(cdot,vn,dx0);
     dot0 = geo.dotXDoffset(dot0,va,dy0);//start dot for zigzag contour
     // console.log("dot0",dot0);//ok
@@ -310,13 +152,13 @@ function zigzag_ribbon_grip_maker(c, cdot, vn, ns, gn, gd, gw, gh, global_ind){
     for (var i = 0;i < gn;i++){
         var dot1 = geo.dotXDoffset(dot0,vn,ew);
         //чет нечет
-        if(i % 2) {/*1up*/ dot1 = geo.dotXDoffset(dot1,va,eh); }else{/*2dn*/ dot1 = geo.dotXDoffset(dot1,va,-eh); }
+        if(i % 2) {/*1dn*/ dot1 = geo.dotXDoffset(dot1,va,-eh); }else{/*2up*/ dot1 = geo.dotXDoffset(dot1,va,eh); }
         var strait_arc = geo.line3D_2dots(dot0,dot1);
         zigzag.push(strait_arc);
         dot0 = dot1;
     }
     // console.log("zigzag",zigzag);//ok
-    
+    showPathArray([bez_maker([c,c,cdot,cdot]).getPoints()]);
     //mirror if need_scale == true
     if (ns) { for(var i = 0;i < zigzag.length;i++) { zigzag[i] = geo.curve3Drotate(zigzag[i],cdot,vn,180); } }
     // console.log("zigzag",zigzag)//ok
@@ -400,10 +242,101 @@ function zigzag_ribbon_grip_maker(c, cdot, vn, ns, gn, gd, gw, gh, global_ind){
     // console.log(grips[ind]);
     grips[ind].material = grips_mat;
 }
+function snake_ribbon_grip_maker(c, cdot, vn, ns, gn, gd, gw, gh, global_ind){
+    // console.log("c",c,"cdot",cdot,"vn",vn,"ns",ns,"gn",gn,"gd",gd,"gw",gw,"gh",gh,"ind",global_ind);//ok
+    var ew = gw / gn; //contour width
+    var eh = 2 * gh / 3; //contour height
+    var co = gh / 3; // contour offset (may be this should be minus)
+    var vr = geo.vecXD(c,cdot); //vec from center to radius dot
+    var va = geo.vec3Dnormal(vn,vr); // vec around wheel direction up axis
+    // console.log("vr",vr,"va",va);//ok
+    var dx0 = -gw / 2;//start offset along side axis vn
+    var dy0 = -gh / 2;//start offset along up axis va
+    
+    cdot = geo.dotXDoffset(cdot,vr,gd/2);//offset from center to longest grip dot
+    var dot0 = geo.dotXDoffset(cdot,vn,dx0);
+    dot0 = geo.dotXDoffset(dot0,va,dy0);//start dot for zigzag contour
+    // console.log("dot0",dot0);//ok
+    var zigzag = [];
+    for (var i = 0;i < gn;i++){
+        var dot1 = geo.dotXDoffset(dot0,vn,ew);
+        //чет нечет
+        if(i % 2) {/*1up*/ dot1 = geo.dotXDoffset(dot1,va,eh); }else{/*2dn*/ dot1 = geo.dotXDoffset(dot1,va,-eh); }
+        var lever0 = geo.dotXDoffset(dot0,vn,ew / 2);
+        var lever1 = geo.dotXDoffset(dot1,vn,-ew / 2);
+        var snake_arc = [dot0,lever0,lever1,dot1];
+        zigzag.push(snake_arc);
+        dot0 = dot1;
+    }
+    // console.log("zigzag",zigzag);//ok
+    
+    //mirror if need_scale == true
+    if (ns) { for(var i = 0;i < zigzag.length;i++) { zigzag[i] = geo.curve3Drotate(zigzag[i],cdot,vn,180); } }
+    // console.log("zigzag",zigzag)//ok
+    
+    //second contour for grip cap ribbon
+    var zigzag_cap = [];
+    for(var i = 0;i < zigzag.length;i++) { zigzag_cap.push( geo.curve3Doffset(zigzag[i],va,co) ); }
+    // console.log("zig",zigzag); // ok
+    // console.log("zig_cap",zigzag_cap);
+    //creation of cap ribbon
+    var mass = 16;//bezier curve dots number (default 4)
+    var zigzag_bez_array = bez_array_maker(zigzag,mass);
+    var zigzag_cap_bez_array = bez_array_maker(zigzag_cap,mass);
+    var zigzag_bez = bez_array_to_one_bez(zigzag_bez_array);
+    var zigzag_cap_bez = bez_array_to_one_bez(zigzag_cap_bez_array);
+    var zigzag_skeleton = bez_array_getPoints([zigzag_bez,zigzag_cap_bez].reverse()); // may be need reverse() need test
+    grips.push( BABYLON.MeshBuilder.CreateRibbon("meshExp_cap_"+global_ind.toString(), { pathArray: zigzag_skeleton },  scene ) );
+    var ind = grips.length-1;
+    grips[ind].material = grips_mat;
+    
+    //------------------------------------
+    //array of start dots for radial direction closed ribbon
+    var gp_zigzag_bez= zigzag_bez.getPoints();
+    var gp_zigzag_cap_bez= zigzag_cap_bez.getPoints();
+    // console.log(JSON.stringify(gp_zigzag_bez));
+    var zigzag_radial_s_dots = [];
+    var zigzag_around_s_dots = [];
+    var zigzag_cap_around_s_dots = [];
+    for(var i = 0;i < gp_zigzag_bez.length;i++){ zigzag_around_s_dots.push( [ gp_zigzag_bez[i].x,gp_zigzag_bez[i].y,gp_zigzag_bez[i].z ]); }
+    for(var i = 0;i < gp_zigzag_cap_bez.length;i++){ zigzag_cap_around_s_dots.push( [ gp_zigzag_cap_bez[i].x,gp_zigzag_cap_bez[i].y,gp_zigzag_cap_bez[i].z ]); }
+    
+    //reverse cap dots
+    zigzag_cap_around_s_dots.reverse();
+    //close the ribbon skeleton start dots
+    zigzag_cap_around_s_dots.push( zigzag_around_s_dots[0] );
+    // console.log(JSON.stringify( zigzag_cap_around_s_dots ) );//ok
+    
+    //create array of start dots of radial ribbon skeleton
+    for(var i = 0;i < zigzag_around_s_dots.length;i++) { zigzag_radial_s_dots.push( zigzag_around_s_dots[i] ); }
+    for(var i = 0;i < zigzag_cap_around_s_dots.length;i++) { zigzag_radial_s_dots.push( zigzag_cap_around_s_dots[i] ); }
+    // console.log(JSON.stringify( zigzag_radial_s_dots ) );//ok
+    
+    //create array of arcs for zigzag radial ribbon
+    var zigzag_radial = [];
+    for(var i = 0;i < zigzag_radial_s_dots.length;i++) { zigzag_radial.push( geo.line3D_dot_offset(zigzag_radial_s_dots[i],vr,-gd) ); }
+    // console.log(JSON.stringify( zigzag_radial ) );//ok
+    
+    
+    
+    
+    //radial ribbon
+    var zigzag_radial_bez_array = bez_array_maker(zigzag_radial);
+    // var zigzag_radial_bez = bez_array_to_one_bez(zigzag_radial_bez_array);
+    var zigzag_radial_skeleton = bez_array_getPoints(zigzag_radial_bez_array); // may be need reverse() need test
+    
+    // grips.push( new BABYLON.Mesh("meshExp_radial_"+global_ind.toString() , scene) );
+    // var ind = grips.length-1;
+    // createRibbon(grips[ind], zigzag_radial_skeleton, false);
+    grips.push( BABYLON.MeshBuilder.CreateRibbon("meshExp_radial_"+global_ind.toString(), { pathArray: zigzag_radial_skeleton },  scene ) );
+    var ind = grips.length-1;
+    // console.log(grips[ind]);
+    grips[ind].material = grips_mat;
+}
 function ribbon_grip_maker(c, cdot, vn, gt, ns, gn, gd, gw, gh, ind){
     
-    if (gt==">>>"){zigzag_ribbon_grip_maker(c, cdot, vn, ns, gn, gd, gw, gh, ind); }
-    else{  }
+    if (gt==">>>"){ zigzag_ribbon_grip_maker(c, cdot, vn, ns, gn, gd, gw, gh, ind); }
+    else{ snake_ribbon_grip_maker(c, cdot, vn, ns, gn, gd, gw, gh, ind);  }
     
 }
 
@@ -445,11 +378,11 @@ function grips_maker(h,w,s,g,hull=false){
     var grips_shape;
     var grips_path;
     //code done not tested
-    grips_path = grips_path_counter(c,vz,h,grips_type,one_ghhole,one_gw);
+    grips_path = grips_path_counter(c,vz,h);
     grips_shape = grips_shape_counter(
         grips_type,
         c,vn,va,
-        one_gw,one_gh,one_ghhole,h
+        one_gw,one_gh
     );
     var gal = grip_angles.length;
     // console.log(cdots);
@@ -468,7 +401,7 @@ function grips_maker(h,w,s,g,hull=false){
         }else{
             //new code place
             var cdot = [c[0],cdots[i][0][1],cdots[i][0][2]];
-            var gt=grips_type;
+            var gt = grips_type;
             var ns = need_scale;
             var gn = grips_width_number;
             var gd = grips_height; //grips deep

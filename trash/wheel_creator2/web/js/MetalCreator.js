@@ -154,7 +154,7 @@ function metal_maker(h, w, s, hull=false,extrude=100){
 	var oy = [0,1,0];
 	var c = [0,0,0];
 	var dot = [0,0,0]; var vn = [1,0,0]; var va = [0,1,0]; r = h[8];
-	var myPath = ring_trajectory(dot, vn, va, r);
+	var myPath = ring_trajectory(dot, vn, va, r, 16);
 	var myShape = metal_shape_for_extrusion(h,w,s,c);//bezier cubic spline for extrusion
 	var customExtrudeSettings={
 		shape: myShape,
