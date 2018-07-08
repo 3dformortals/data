@@ -158,7 +158,7 @@ function zigzag_ribbon_grip_maker(c, cdot, vn, ns, gn, gd, gw, gh, global_ind){
         dot0 = dot1;
     }
     // console.log("zigzag",zigzag);//ok
-    showPathArray([bez_maker([c,c,cdot,cdot]).getPoints()]);
+    // showPathArray([bez_maker([c,c,cdot,cdot]).getPoints()]);
     //mirror if need_scale == true
     var rdot = geo.dotXDoffset(cdot,va,-co / 2);
     if (ns) { for(var i = 0;i < zigzag.length;i++) { zigzag[i] = geo.curve3Drotate(zigzag[i],rdot,vn,180); } }
