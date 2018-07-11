@@ -39,11 +39,13 @@ function grips_center_dots_counter( c,vn,vz, r, nw, na, gw, one_gw ){
     }return rez; //list of center dots lists for each polygon vertex
 }
 
-function grips_path_counter(c,vz,h){
+function grips_path_counter(c,vz,gh){
     var rez;
-    var t0 = vec_maker(geo.dotXDoffset(c,vz,geo.sum_F([h[1],h[2],h[3] / 2]) / 2));
-    var t1 = vec_maker(geo.dotXDoffset(c,vz,-geo.sum_F([h[1],h[2],h[3] / 2]) / 2));
+    var t0 = vec_maker(c);
+    var t1 = vec_maker(geo.dotXDoffset(c,vz,-gh));
     rez = bez_maker_from_vectors([t0,t0,t1,t1]);
+    console.log(c,vz,gh);
+    console.log(rez.getPoints());
     return rez.getPoints();
 }
 function gs1(c,gw,gh,vx,vy){
@@ -138,7 +140,7 @@ function zigzag_ribbon_grip_maker(c, cdot, vn, ns, gn, gd, gw, gh, global_ind){
     var eh = 2 * gh / 3; //contour height
     var co = gh / 3; // contour offset
     var vr = geo.vecXD(c,cdot); //vec from center to radius dot
-    cdot = geo.dotXDoffset(cdot,vr,gd/2);//offset from center to longest grip dot
+    // cdot = geo.dotXDoffset(cdot,vr,gd/2);//offset from center to longest grip dot
     var va = geo.vec3Dnormal(vn,vr); // vec around wheel direction up axis
     // console.log("vr",vr,"va",va);//ok
     var dx0 = -gw / 2;//start offset along side axis vn
@@ -350,7 +352,7 @@ function grips_maker(h,w,s,g,hull=false){
     var grips_height = geo.sum_F([h[3] / 2, h[2], h[1]]);
     var grips_width = w[1];
     var grips_max_radius = geo.sum_F([h[8],h[7],h[6],h[5],h[4],h[3],h[2],h[1]]);
-    var grips_center_radius = grips_max_radius - grips_height / 2;
+    // var grips_center_radius = grips_max_radius - grips_height / 2;
     var grips_width_number = Math.ceil(s[5]);//how much per width
     var need_scale = false; //scale for g1 g4 and reverse for g2 g3
     if(grips_width_number < 0){
@@ -370,7 +372,7 @@ function grips_maker(h,w,s,g,hull=false){
     );
     var cdots = grips_center_dots_counter(
         c,vn,geo.vecXDback(va),
-        grips_center_radius,
+        grips_max_radius,
         grips_width_number,
         grips_around_number,
         grips_width,
@@ -379,7 +381,7 @@ function grips_maker(h,w,s,g,hull=false){
     var grips_shape;
     var grips_path;
     //code done not tested
-    grips_path = grips_path_counter(c,vz,h);
+    grips_path = grips_path_counter(c,vz,grips_height);
     grips_shape = grips_shape_counter(
         grips_type,
         c,vn,va,
