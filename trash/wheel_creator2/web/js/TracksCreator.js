@@ -76,7 +76,6 @@ function zigzag_ribbon_track_maker(c, cdot, vn, ns, gn, gd, gw, gh, global_ind){
     var eh = 2 * gh / 3; //contour height
     var co = gh / 3; // contour offset
     var vr = geo.vecXD(c,cdot); //vec from center to radius dot
-    console.log(JSON.stringify( vr));
     cdot = geo.dotXDoffset(cdot,vr,gd/2);//offset from center to longest grip dot
     var va = geo.vec3Dnormal(vn,vr); // vec around wheel direction up axis
     // console.log("vr",vr,"va",va);//ok

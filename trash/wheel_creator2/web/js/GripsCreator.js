@@ -138,7 +138,6 @@ function zigzag_ribbon_grip_maker(c, cdot, vn, ns, gn, gd, gw, gh, global_ind){
     var eh = 2 * gh / 3; //contour height
     var co = gh / 3; // contour offset
     var vr = geo.vecXD(c,cdot); //vec from center to radius dot
-    console.log(JSON.stringify( vr));
     cdot = geo.dotXDoffset(cdot,vr,gd/2);//offset from center to longest grip dot
     var va = geo.vec3Dnormal(vn,vr); // vec around wheel direction up axis
     // console.log("vr",vr,"va",va);//ok
@@ -351,14 +350,14 @@ function grips_maker(h,w,s,g,hull=false){
     var grips_height = geo.sum_F([h[3] / 2, h[2], h[1]]);
     var grips_width = w[1];
     var grips_max_radius = geo.sum_F([h[8],h[7],h[6],h[5],h[4],h[3],h[2],h[1]]);
-    var grips_center_radius = geo.sum_F([h[8],h[7],h[6],h[5],h[4],h[3],h[2],h[1]]) - geo.sum_F([h[1],h[2],h[3] / 2]) / 2;
+    var grips_center_radius = grips_max_radius - grips_height / 2;
     var grips_width_number = Math.ceil(s[5]);//how much per width
     var need_scale = false; //scale for g1 g4 and reverse for g2 g3
     if(grips_width_number < 0){
         grips_width_number = -grips_width_number;
         need_scale = true;
     }
-    var grips_around_number = s[6];//how much around
+    var grips_around_number = Math.ceil(s[6]);//how much around
     var grip_angles = grip_angles_counter(s[6]);// may be need minus case for back direction etc
     //need extrude back to -oz per h2 + h1 + h3 / 2
     var one_gh = Math.PI * 2 * grips_max_radius * s[7] / 100 / grips_around_number; // around grip height

@@ -144,6 +144,13 @@ button.b50px{
 	margin-bottom: 4px;
 	padding: 0;
 	border-width:0;}
+button.b200px{
+	width:196px;height:24px;
+	text-align: center;
+	margin:0px !important;
+	margin-bottom: 4px;
+	padding: 0;
+	border-width:0;}
 button:hover{
 	background-color: #333;
 }
