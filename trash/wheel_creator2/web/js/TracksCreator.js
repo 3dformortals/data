@@ -1,8 +1,8 @@
 showme("preparing TracksCreator.js");
-function tracks_path_counter(c,vz,h){
+function tracks_path_counter(c,vz,gh){
     var rez;
-    var t0 = vec_maker(geo.dotXDoffset(c,vz,h[1] / 2));
-    var t1 = vec_maker(geo.dotXDoffset(c,vz,-h[1] / 2));
+    var t0 = vec_maker(c);
+    var t1 = vec_maker(geo.dotXDoffset(c,vz,-gh));
     rez = bez_maker_from_vectors([t0,t0,t1,t1]);
     return rez.getPoints();
 }
@@ -76,7 +76,7 @@ function zigzag_ribbon_track_maker(c, cdot, vn, ns, gn, gd, gw, gh, global_ind){
     var eh = 2 * gh / 3; //contour height
     var co = gh / 3; // contour offset
     var vr = geo.vecXD(c,cdot); //vec from center to radius dot
-    cdot = geo.dotXDoffset(cdot,vr,gd/2);//offset from center to longest grip dot
+    // cdot = geo.dotXDoffset(cdot,vr,gd/2);//offset from center to longest grip dot
     var va = geo.vec3Dnormal(vn,vr); // vec around wheel direction up axis
     // console.log("vr",vr,"va",va);//ok
     var dx0 = -gw / 2;//start offset along side axis vn
@@ -191,7 +191,7 @@ function snake_ribbon_track_maker(c, cdot, vn, ns, gn, gd, gw, gh, global_ind){
     var dx0 = -gw / 2;//start offset along side axis vn
     var dy0 = -gh / 2;//start offset along up axis va
     
-    cdot = geo.dotXDoffset(cdot,vr,gd/2);//offset from center to longest grip dot
+    // cdot = geo.dotXDoffset(cdot,vr,gd/2);//offset from center to longest grip dot
     var dot0 = geo.dotXDoffset(cdot,vn,dx0);
     dot0 = geo.dotXDoffset(dot0,va,dy0);//start dot for zigzag contour
     // console.log("dot0",dot0);//ok
@@ -286,10 +286,10 @@ function tracks_maker(h,w,s,g,hull=false){
     var va = [0, 1, 0]; // vertical direction vector for 2D shape of grip
     var vz = [0, 0, 1]; // vector for extrude grip shape
     var grips_type = g; // "g1"..."g4"
-    var grips_height = geo.sum_F([h[3] / 2, h[2], h[1]]);
+    var grips_height = h[1];
     var grips_width = w[1];
     var grips_max_radius = geo.sum_F([h[8],h[7],h[6],h[5],h[4],h[3],h[2],h[1]]);
-    var grips_center_radius = geo.sum_F([h[8],h[7],h[6],h[5],h[4],h[3],h[2],h[1]]) - h[1] / 2;
+    // var grips_center_radius = geo.sum_F([h[8],h[7],h[6],h[5],h[4],h[3],h[2],h[1]]) - h[1] / 2;
     var grips_width_number = Math.ceil(s[5]);//how much per width
     var need_scale = false; //scale for g1 g4 and reverse for g2 g3
     if(grips_width_number < 0){
@@ -309,7 +309,7 @@ function tracks_maker(h,w,s,g,hull=false){
     );
     var cdots = tracks_center_dots_counter(
         c,vn,geo.vecXDback(va),
-        grips_center_radius,
+        grips_max_radius,
         grips_width_number,
         grips_around_number,
         grips_width,
@@ -318,14 +318,14 @@ function tracks_maker(h,w,s,g,hull=false){
     var grips_shape;
     var grips_path;
     //code done not tested
-    grips_path = tracks_path_counter(c,vz,h,grips_type,one_ghhole,one_gw);
+    grips_path = tracks_path_counter(c,vz,grips_height);
     grips_shape = tracks_shape_counter(
         grips_type,
         c,vn,va,
         one_gw,one_gh
     );
     
-    //create track and subtrackt from base form
+    //create track
     var gal = grip_angles.length;
     var ind = 0;
     for (var i = 0;i < gal;i++){

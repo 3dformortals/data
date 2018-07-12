@@ -32,7 +32,7 @@ function tire_shape_for_extrusion(h,w,s,c=[0,0,0]){
 	t1 = vec_maker([t1x,t1y, 0]);
 	r1x = t1x; r1y = t1y+s[2]/2 ;
 	r1 = vec_maker([r1x,r1y, 0]);
-	r2x = x+w[2]/2 ; r2y = t2y+s[2]/2 ;
+	r2x = x+w[2]/2 ; r2y = t2y+h[3]/2 ; //fixed
 	r2 = vec_maker([r2x,r2y, 0]);
 	t2x = r2x; t2y = r2y;
 	t2 = vec_maker([t2x,t2y, 0]);
@@ -80,9 +80,9 @@ function tire_shape_for_extrusion(h,w,s,c=[0,0,0]){
 	t1 = vec_maker([t1x,t1y, 0]);
 	r1x = t1x; r1y = t1y;
 	r1 = vec_maker([r1x,r1y, 0]);
-	r2x = x-s[1]/2-h[2] ; r2y = r1y-h[3]/2+s[2]/2 ;
+	r2x = x-s[1]/2-h[2] ; r2y = r1y-h[3]/2+s[2]/2 ; //fixed
 	r2 = vec_maker([r2x,r2y, 0]);
-	t2x = r2x; t2y = r2y-s[2]/2 ;
+	t2x = r2x; t2y = r2y-h[3]/2 ;
 	t2 = vec_maker([t2x,t2y, 0]);
 	var bez = bez.continue(bez_maker_from_vectors([t1,r1,r2,t2]));
 	

@@ -44,8 +44,6 @@ function grips_path_counter(c,vz,gh){
     var t0 = vec_maker(c);
     var t1 = vec_maker(geo.dotXDoffset(c,vz,-gh));
     rez = bez_maker_from_vectors([t0,t0,t1,t1]);
-    console.log(c,vz,gh);
-    console.log(rez.getPoints());
     return rez.getPoints();
 }
 function gs1(c,gw,gh,vx,vy){
@@ -255,7 +253,7 @@ function snake_ribbon_grip_maker(c, cdot, vn, ns, gn, gd, gw, gh, global_ind){
     var dx0 = -gw / 2;//start offset along side axis vn
     var dy0 = -gh / 2;//start offset along up axis va
     
-    cdot = geo.dotXDoffset(cdot,vr,gd/2);//offset from center to longest grip dot
+    // cdot = geo.dotXDoffset(cdot,vr,gd/2);//offset from center to longest grip dot
     var dot0 = geo.dotXDoffset(cdot,vn,dx0);
     dot0 = geo.dotXDoffset(dot0,va,dy0);//start dot for zigzag contour
     // console.log("dot0",dot0);//ok
