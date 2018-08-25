@@ -1238,9 +1238,11 @@ class GeometryXD{
         vecXDa:Array<Float>,
         vecXDb:Array<Float>
         ):Null<Bool>{
-        var rez:Null<Bool> = null;
-        if (vecXDa.length != vecXDb.length){ return rez; }
-        return vecXDsame(vecXDone(vecXDa), vecXDone(vecXDb));
+        var rez:Null<Bool> = false;
+        if (vecXDa.length != vecXDb.length){ rez = null; }
+        else if (vecXDangle(vecXDa,vecXDb) == 0){ rez = true; }
+        else{ rez = vecXDsame(vecXDone(vecXDa), vecXDone(vecXDb)); }
+        return rez;
     }
     /**
      return true if vectors paralleled and have opposite direction
