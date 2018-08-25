@@ -2399,11 +2399,12 @@ class geometryxd_GeometryXD:
     @staticmethod
     def dotXDoffset(dotXD,vecXD,t):
         rez = None
-        if (t != 0):
+        vnorm = geometryxd_GeometryXD.vecXDnorm(vecXD)
+        if ((t != 0) and ((vnorm > 0))):
             lv = len(vecXD)
             if (len(dotXD) == lv):
                 rez = []
-                t = (t / geometryxd_GeometryXD.vecXDnorm(vecXD))
+                t = (t / vnorm)
                 _g1 = 0
                 _g = lv
                 while (_g1 < _g):
@@ -2597,6 +2598,8 @@ class geometryxd_GeometryXD:
         t1 = geometryxd_GeometryXD.dotXDoffset(t0,vb,(geometryxd_GeometryXD.vecXDnorm(v) * ((Math.NaN if (((angle == Math.POSITIVE_INFINITY) or ((angle == Math.NEGATIVE_INFINITY)))) else python_lib_Math.sin(angle)))))
         t1 = geometryxd_GeometryXD.dotXDoffset(t1,vc,(geometryxd_GeometryXD.vecXDnorm(v) * ((Math.NaN if (((angle == Math.POSITIVE_INFINITY) or ((angle == Math.NEGATIVE_INFINITY)))) else python_lib_Math.cos(angle)))))
         rez = geometryxd_GeometryXD.vecXD(t,t1)
+        if (geometryxd_GeometryXD.vecXDnorm(rez) == 0):
+            rez = vec3D
         return rez
 
     @staticmethod

@@ -1401,11 +1401,12 @@ class GeometryXD{
         t:Float
         ):Array<Float>{
         var rez:Array<Float> = null;
-        if (t != 0){
+        var vnorm:Float = vecXDnorm(vecXD);
+        if (t != 0 && vnorm > 0){
             var lv:Int = vecXD.length;
             if (dotXD.length == lv){
                 rez = [];
-                t = t / vecXDnorm(vecXD);
+                t = t / vnorm;
                 for (i in 0...lv){
                     rez.push(dotXD[i] + vecXD[i] * t);
                 }
@@ -1566,6 +1567,7 @@ class GeometryXD{
         t1 = dotXDoffset(t0, vb, vecXDnorm(v) * Math.sin(angle));
         t1 = dotXDoffset(t1, vc, vecXDnorm(v) * Math.cos(angle));
         rez = vecXD(t, t1);
+        if (vecXDnorm(rez) == 0){ rez = vec3D; }
         return rez;
     }
     /**

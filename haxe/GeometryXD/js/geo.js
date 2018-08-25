@@ -2277,11 +2277,12 @@ GeometryXD.prototype = {
 	}
 	,dotXDoffset: function(dotXD,vecXD,t) {
 		var rez = null;
-		if(t != 0) {
+		var vnorm = this.vecXDnorm(vecXD);
+		if(t != 0 && vnorm > 0) {
 			var lv = vecXD.length;
 			if(dotXD.length == lv) {
 				rez = [];
-				t /= this.vecXDnorm(vecXD);
+				t /= vnorm;
 				var _g1 = 0;
 				var _g = lv;
 				while(_g1 < _g) {
@@ -2489,6 +2490,9 @@ GeometryXD.prototype = {
 		t1 = this.dotXDoffset(t0,vb,this.vecXDnorm(v) * Math.sin(angle));
 		t1 = this.dotXDoffset(t1,vc,this.vecXDnorm(v) * Math.cos(angle));
 		rez = this.vecXD(t,t1);
+		if(this.vecXDnorm(rez) == 0) {
+			rez = vec3D;
+		}
 		return rez;
 	}
 	,vec3Dfield_rotate_around_vec3Daxes: function(vec3Dfield,vec3Daxes,angles,rad) {
