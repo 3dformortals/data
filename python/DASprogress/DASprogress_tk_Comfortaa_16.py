@@ -51,10 +51,10 @@ def db_reader():
     except:
         print("db_reader error\n",sys.exc_info())
         db={}
-        db["dorama"]=[["","http://helpmedraw.pythonanywhere.com/","0/0"] for i in range(33)]
-        db["anime"]=[["","http://helpmedraw.pythonanywhere.com/","0/0"] for i in range(33)]
-        db["series"]=[["","http://helpmedraw.pythonanywhere.com/","0/0"] for i in range(33)]
-        db["other"]=[["","http://helpmedraw.pythonanywhere.com/","0/0"] for i in range(33)]
+        db["dorama"]=[["","https://healingdrawing.github.io","0/0"] for i in range(33)]
+        db["anime"]=[["","https://healingdrawing.github.io","0/0"] for i in range(33)]
+        db["series"]=[["","https://healingdrawing.github.io","0/0"] for i in range(33)]
+        db["other"]=[["","https://healingdrawing.github.io","0/0"] for i in range(33)]
         return db
 
 def tabdata_maker(tabname):
@@ -63,7 +63,7 @@ def tabdata_maker(tabname):
         return db[tabname]
     except:
         print("tabdatamaker error", sys.exc_info())
-        return [["noname","http://helpmedraw.pythonanywhere.com/","0/0"] for i in range(33)]
+        return [["noname","https://healingdrawing.github.io","0/0"] for i in range(33)]
         pass
 
 class MyDialog(object):
@@ -73,6 +73,10 @@ class MyDialog(object):
         
         font=('Comfortaa', 16)
         
+        g10="gray10"
+        g30="gray20"
+        g50="gray30"
+        
         self.tabname=tabname
         self.ind=ind
         self.value=None
@@ -80,16 +84,22 @@ class MyDialog(object):
         self.iname = tkinter.StringVar(value=db[self.tabname][self.ind][0])
         self.ihref = tkinter.StringVar(value=db[self.tabname][self.ind][1])
         self.idone = tkinter.StringVar(value=db[self.tabname][self.ind][2])
-        label = tkinter.Label(self.toplevel, text=prompt, font=font)
-        lname = tkinter.Label(self.toplevel, text="Name:", font=font)
-        lhref = tkinter.Label(self.toplevel, text="Web link:", font=font)
-        ldone = tkinter.Label(self.toplevel, text="Viewed:", font=font)
-        ename = tkinter.Entry(self.toplevel, width=40, textvariable=self.iname, font=font)
-        ehref = tkinter.Entry(self.toplevel, width=40, textvariable=self.ihref, font=font)
-        edone = tkinter.Entry(self.toplevel, width=40, textvariable=self.idone, font=font)
-        button = tkinter.Button(self.toplevel, text="OK", font=font)
+        label = tkinter.Label(self.toplevel, text=prompt, font=font, background=bg,foreground=fg)
+        lname = tkinter.Label(self.toplevel, text="Name:", font=font, background=bg,foreground=fg)
+        lhref = tkinter.Label(self.toplevel, text="Web link:", font=font, background=bg,foreground=fg)
+        ldone = tkinter.Label(self.toplevel, text="Viewed:", font=font, background=bg,foreground=fg)
+        ename = tkinter.Entry(self.toplevel, width=40, textvariable=self.iname, font=font, background=g10,foreground=fg,
+            insertbackground=fg, highlightbackground=g30, highlightcolor=g50, highlightthickness=2)
+        ehref = tkinter.Entry(self.toplevel, width=40, textvariable=self.ihref, font=font, background=g10,foreground=fg,
+            insertbackground=fg, highlightbackground=g30, highlightcolor=g50, highlightthickness=2)
+        edone = tkinter.Entry(self.toplevel, width=40, textvariable=self.idone, font=font, background=g10,foreground=fg,
+            insertbackground=fg, highlightbackground=g30, highlightcolor=g50, highlightthickness=2)
+        button = tkinter.Button(self.toplevel, text="OK",font=font,
+            background="black",foreground="DarkGoldenrod3",highlightbackground="black",activebackground="gray10",
+            activeforeground="DarkGoldenrod3")
         button.bind("<Button-1>",self.onclick_ok)
         self.toplevel.geometry("%dx%d+%d+%d" % (700, 200, mainframe_width, mainframe_heigth))
+        self.toplevel.configure(background=bg)
         label.grid(row=0, column=0,columnspan=2)
         lname.grid(row=1,column=0,sticky=tkinter.W)
         ename.grid(row=1,column=1,sticky=tkinter.W +tkinter.E)
@@ -221,7 +231,7 @@ def href_maker(name,tabname):
 def del_maker(name,tabname,tab):
     sind=name.split("del",1)[1]
     ind=int(sind);
-    db[tabname][ind]=["","http://helpmedraw.pythonanywhere.com/","0/0"]
+    db[tabname][ind]=["","https://healingdrawing.github.io","0/0"]
     btn_href,btn_plus=None,None
     for children in tab.children.values():
         if children.name == "href"+sind:btn_href=children
@@ -250,7 +260,7 @@ def global_click_manager(event):
 def cocoa_click(event):
     webbrowser.open("https://3dformortals.github.io/development/index.html")
 
-class MyButton(ttk.Button):
+class MyButton(tkinter.Button):
     def __init__(self, parent, name, *args, **kwargs):
         super(MyButton, self).__init__(parent, *args, **kwargs)
         self.name=name
@@ -272,7 +282,9 @@ class MyButtonFrame(ttk.Frame):
                 else: btext=btexts[c]
                 bx=colsx[c]
                 by=rowsy[r]
-                b=MyButton(self,bname,text=btext)
+                b=MyButton(self,bname,text=btext,font=("Comfortaa",16),
+                    background="black",foreground="DarkGoldenrod3",highlightbackground="black",activebackground="gray10",
+                    activeforeground="DarkGoldenrod3")
                 b.place(width=bwidths[c],height=rowsy[1],x=bx,y=by)
                 b.bind("<Button-1>",global_click_manager)
         pass
@@ -286,6 +298,7 @@ mainframe_heigth = (mainframe.winfo_screenheight() / 2 - 300)
 mainframe.geometry("%dx%d+%d+%d" % (1000, 600, mainframe_width, mainframe_heigth))
 mainframe.title('DAS progress 132')
 mainframe.resizable(False,True)
+mainframe.configure(background="black")
 n_book = ttk.Notebook(mainframe)
 n_book.pack(fill='both', expand='yes')
 n_book.pressed_index = None
@@ -316,8 +329,10 @@ for i in range(4):
     x_container.append(tkinter.Frame(n_book))
     x_container[i].pack(fill=tkinter.BOTH, expand=True)
     n_book.add(x_container[i], text=x_name[i]) # add container to note book
-    x_canvas.append(tkinter.Canvas(x_container[i], width=cw, height=ch)) # add canvas to container
-    x_scroll.append(tkinter.Scrollbar(x_container[i], command=x_canvas[i].yview)) # add scroll to container
+    x_canvas.append(tkinter.Canvas(x_container[i], width=cw, height=ch, bg="black")) # add canvas to container
+    x_scroll.append(tkinter.Scrollbar(x_container[i], command=x_canvas[i].yview
+        , bg="black", troughcolor="black", highlightcolor="black", highlightbackground="black"
+        ,activebackground="black")) # add scroll to container
     x_canvas[i].config(yscrollcommand=x_scroll[i].set, scrollregion=sr)
     x_canvas[i].pack(side=tkinter.LEFT, fill=tkinter.BOTH, expand=True)
     x_scroll[i].config(width=240)
@@ -330,11 +345,22 @@ for i in range(4):
     x_canvas[i].bind_all("<Button-4>", on_linuxscrollup)
     x_canvas[i].bind_all("<Button-5>", on_linuxscrolldn)
 
+ft=('Comfortaa', 16)
+bg="black"
+fg="DarkGoldenrod3"
 style = ttk.Style(mainframe)
-style.configure("TButton", font=('Comfortaa', 16))
-style.configure("TNotebook.Tab", font=('Comfortaa', 16))
+style.configure("TButton", font=ft, background=bg, foreground=fg, highlightcolor=bg, darkcolor=bg,
+        lightcolor=bg, bordercolor=bg, activebackground=bg, highlightbackground=bg, activeforeground=fg,
+        insertBackground=bg)
+style.configure("TNotebook", background=bg, foreground=fg)
+style.map("TNotebook.Tab", background=[("selected", "gray10")], foreground=[("selected", fg)])
+style.configure("TNotebook.Tab", font=ft, background=bg, foreground=fg, activebackground=bg)
+style.configure("TFrame", background=bg, foreground=fg)
+style.configure("TScrollbar", background=bg, foreground=fg, arrowcolor=fg, bordercolor=bg, darkcolor=bg, lightcolor=fg, troughcolor=bg)
 
-cocoa = ttk.Button(mainframe,text="(: на какао разработчику (мое топливо)") # add button to mainframe - worked
+cocoa = tkinter.Button(mainframe,text="(: на какао разработчику (мое топливо)",font=("Comfortaa",16),
+                    background="black",foreground="DarkGoldenrod3",highlightbackground="black",activebackground="gray10",
+                    activeforeground="DarkGoldenrod3") # add button to mainframe - worked
 cocoa.place(width=600,relx=0.4,rely=0)
 cocoa.bind("<Button-1>",cocoa_click)
 mainframe.mainloop()
