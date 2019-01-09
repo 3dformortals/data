@@ -99,7 +99,7 @@ class MyDialog(object):
         self.toplevel = tkinter.Toplevel(parent)
         self.iname = tkinter.StringVar(value=db[self.tabname][self.ind][0])
         self.ihref = tkinter.StringVar(value=db[self.tabname][self.ind][1])
-        self.idone = tkinter.StringVar(value=db[self.tabname][self.ind][2])
+        self.idone = tkinter.StringVar(value=db[self.tabname][self.ind][3])
         label = tkinter.Label(self.toplevel, text=prompt, font=font, background=bg,foreground=fg)
         lname = tkinter.Label(self.toplevel, text="Name:", font=font, background=bg,foreground=fg)
         lhref = tkinter.Label(self.toplevel, text="Web link:", font=font, background=bg,foreground=fg)
@@ -143,7 +143,7 @@ def i_maker(name,tabname,tab):
     global buffer
     d=buffer
     if d:
-        db[tabname][ind]=d[0:2]+["0"]+[d[2]]
+        db[tabname][ind]=d[0:2]+[db[tabname][ind][2]]+[d[-1]]
         btn_href,btn_day,btn_plus=None,None,None
         hrefname="href"+str(ind)
         dayname="day"+str(ind)
@@ -154,7 +154,6 @@ def i_maker(name,tabname,tab):
             elif chi.name == dayname:btn_day=chi
             elif btn_href and btn_day and btn_plus:break
         btn_href.configure(text=d[0])
-        btn_day.configure(text="?")
         btn_plus.configure(text=d[2])
         db_writer()
 
