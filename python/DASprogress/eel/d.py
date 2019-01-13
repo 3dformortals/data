@@ -2,6 +2,7 @@
 
 import eel
 eel.init('static_web')
+eel.start('main.html')
 
 import sys,os,pickle
 
@@ -39,5 +40,5 @@ def db_writer():
     except:
         print("error db_writer",sys.exc_info())
 
-db=db_reader()
-eel.start('main.html')
+# db=db_reader()
+
