@@ -16,6 +16,10 @@ elif __file__:
 print(str(mydir))
 
 @eel.expose
+def testpythonfromjs():
+    print("wtfeelyoudoing")
+
+@eel.expose
 def db_reader():
     """try read the data from pickle file"""
     try:
