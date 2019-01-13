@@ -40,5 +40,5 @@ def db_writer():
     except:
         print("error db_writer",sys.exc_info())
 
-# db=db_reader()
+db=db_reader()
 
