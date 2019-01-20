@@ -9,6 +9,7 @@ pyinstaller --onefile source.py
 2019  
 svg2pngeachlayersamename - export each layer from each inkscape svg file to png file named as layer, except layer which name started from "-" (minus) or " " (space).  
 Will be used only script folder level svg files. No subfolders will be used.  
+Need inkscape installed.
 
 --------------------------------------------------  
 
