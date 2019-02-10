@@ -2,6 +2,10 @@
 import tkinter
 from tkinter import ttk
 import sys,os,pickle,webbrowser
+import html
+import codecs
+import requests
+import string
 
 def on_linuxscrollup(event):
     try:
@@ -82,7 +86,21 @@ def tabdata_maker(tabname):
         return [["noname","https://healingdrawing.github.io","?","0/0"] for i in range(33)]
         pass
 
+
+def gethtml(url):
+    try:
+        r = requests.get(url, data='cmd=date +%Y%m%d', headers={
+            'User-Agent': 'Mozilla/5.0 (Windows NT 6.0; WOW64; rv:24.0) Gecko/20100101 Firefox/24.0'})
+        # text=r.content.decode("unicode_escape","ignore")
+        text = html.unescape(r.text)
+        # print("text------------------\n",text)
+        return text
+    except:
+        print(sys.exc_info())
+        input("error enter to continue")
+
 def web_scanner(done,url):
+    print(gethtml(url.get()))
     intdone = int(done.get().split("/")[0].split(" ")[0])
     webname = "testwebname"
     website = "testwebsite"
