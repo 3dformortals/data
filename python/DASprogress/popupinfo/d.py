@@ -3,8 +3,9 @@ import tkinter
 from tkinter import ttk
 import sys,os,pickle,webbrowser
 import html
-import codecs
 import requests
+from bs4 import BeautifulSoup as BS4
+import codecs
 import string
 
 def on_linuxscrollup(event):
@@ -99,14 +100,26 @@ def gethtml(url):
         print(sys.exc_info())
         input("error enter to continue")
 
+def animevost_org_scanner(url):
+    # done 20190211
+    html = gethtml(url.get())
+    soup = BS4(html,"html5lib")
+    webname = soup.title.string.split("[")[0] or "parsing_error"
+    website = "animevost.org"
+    webready = soup.title.string.split("[")[1].split("]")[0].split("из")[0] or "parsing_error"
+    webready = webready.split("-")[1] if "-" in webready else webready or "parsing_error"
+    webready = int(webready.split(" ")[0]) or -1
+    canscan = "yes"
+    scanstatus = "good" if "parsing_error" != webname and webready > -1 else "bad" or "parsing_error"
+    return webname, website, canscan, scanstatus, webready
+
+
 def web_scanner(done,url):
     print(gethtml(url.get()))
+    if "animevost.org" in url.get().lower(): data = animevost_org_scanner(url)
+    else: data = ["testwebname","testwebsite","testcanscan","testscanstatus",111]
+    webname, website, canscan, scanstatus, webready = data
     intdone = int(done.get().split("/")[0].split(" ")[0])
-    webname = "testwebname"
-    website = "testwebsite"
-    canscan = "testcanscan"
-    scanstatus = "testscanstatus"
-    webready = 111
     webnew = str(webready-intdone)
     return [webname, website, canscan, scanstatus, str(webready), webnew]
 
@@ -136,7 +149,7 @@ class ItemScanner(object):
         text+="\ncan scan: "+canscan
         text+="\nscan status: "+scanstatus
         text+="\nweb ready: "+webready
-        text+="\nnew: "+webnew
+        text+="\n\nnew: "+webnew
         label = tkinter.Label(self.toplevel, text=prompt, font=font, background=bg, foreground=fg)
         linfo = tkinter.Label(self.toplevel, text=text, font=font, background=bg, foreground=fg)
         button = tkinter.Button(self.toplevel, text="OK", font=font,
@@ -149,7 +162,7 @@ class ItemScanner(object):
                                 highlightbackground="black", activebackground="gray10",
                                 activeforeground="DarkGoldenrod3")
         button_web.bind("<Button-1>", self.onclick_web)
-        self.toplevel.geometry("%dx%d+%d+%d" % (700, 300, mainframe_width, mainframe_heigth))
+        self.toplevel.geometry("%dx%d+%d+%d" % (1040, 300, mainframe_width, mainframe_heigth))
         self.toplevel.configure(background=bg)
         label.grid(row=0, column=0, columnspan=2)
         linfo.grid(row=1, column=0, columnspan=2)
@@ -177,13 +190,13 @@ class MyDialog(object):
     def __init__(self, parent, prompt, tabname, ind):
         global buffer
         buffer=None
-        
+
         font=('Comfortaa', 16)
-        
+
         g10="gray10"
         g30="gray20"
         g50="gray30"
-        
+
         self.tabname=tabname
         self.ind=ind
         self.value=None
@@ -222,7 +235,7 @@ class MyDialog(object):
         self.toplevel.wait_window()
         # value = [self.iname.get(),self.ihref.get(),self.idone.get()]
         # return value
-    
+
     def onclick_ok(self,event):
         global buffer
         buffer = [self.iname.get(),self.ihref.get(),self.idone.get()]
@@ -266,7 +279,7 @@ def refresh_tab(tabname,tab):
     bhref.sort(key=hrefsort)
     bday.sort(key=daysort)
     bplus.sort(key=plussort)
-    
+
     for r in range(brows):
         hrefname="href"+str(r)
         dayname="day"+str(r)
@@ -406,7 +419,7 @@ def global_click_manager(event):
     elif name in hrefnames:href_maker(name,tabname)
     elif name in downnames:down_maker(name,tabname,tab)
     elif name in delnames:del_maker(name,tabname,tab)
-    
+
     pass
 
 def cocoa_click(event):
