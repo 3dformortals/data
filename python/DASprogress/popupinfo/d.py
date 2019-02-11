@@ -5,6 +5,7 @@ import sys,os,pickle,webbrowser
 import html
 import requests
 from bs4 import BeautifulSoup as BS4
+import re
 import codecs
 import string
 
@@ -131,10 +132,25 @@ def shikimori_org_scanner(url):
     scanstatus = "good" if "parsing_error" != webname and webready > -1 else "bad" or "parsing_error"
     return webname, website, canscan, scanstatus, webready
 
+def anistar_me_scanner(url):
+    # done 20190211
+    html = gethtml(url.get())
+    soup = BS4(html, "html5lib")
+
+    webname = soup.find("h1", itemprop="name").string or "parsing_error"
+    website = "anistar.me"
+    webready = soup.find("p", class_="reason").string
+    print("webready = ", webready, flush=True)
+    webready = int(re.findall('\d+', webready )[0]) or -1
+    canscan = "yes"
+    scanstatus = "good" if "parsing_error" != webname and webready > -1 else "bad" or "parsing_error"
+    return webname, website, canscan, scanstatus, webready
+
 def web_scanner(done,url):
     print(gethtml(url.get()))
     if "animevost.org" in url.get().lower(): data = animevost_org_scanner(url)
     elif "shikimori.org" in url.get().lower(): data = shikimori_org_scanner(url)
+    elif "anistar.me" in url.get().lower(): data = anistar_me_scanner(url)
     else: data = ["testwebname","testwebsite","testcanscan","testscanstatus",111]
     webname, website, canscan, scanstatus, webready = data
     intdone = int(done.get().split("/")[0].split(" ")[0])
