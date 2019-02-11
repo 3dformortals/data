@@ -113,10 +113,28 @@ def animevost_org_scanner(url):
     scanstatus = "good" if "parsing_error" != webname and webready > -1 else "bad" or "parsing_error"
     return webname, website, canscan, scanstatus, webready
 
+def shikimori_org_scanner(url):
+    # done 20190211
+    html = gethtml(url.get())
+    soup = BS4(html, "html5lib")
+
+    webname = soup.find("header", class_="head").meta["content"] or "parsing_error"
+    website = "shikimori.org"
+    maxready = 0
+    span_ep_num = soup.find_all('span',class_="episode-num")
+    for span_ep in span_ep_num:
+        nextSpan = span_ep.findNext('span',class_="episode-kinds").string
+        epNum = int(span_ep.string.split("#")[1]) or -1
+        if "озвучка" in nextSpan and epNum > maxready: maxready = epNum
+    webready = maxready
+    canscan = "yes"
+    scanstatus = "good" if "parsing_error" != webname and webready > -1 else "bad" or "parsing_error"
+    return webname, website, canscan, scanstatus, webready
 
 def web_scanner(done,url):
     print(gethtml(url.get()))
     if "animevost.org" in url.get().lower(): data = animevost_org_scanner(url)
+    elif "shikimori.org" in url.get().lower(): data = shikimori_org_scanner(url)
     else: data = ["testwebname","testwebsite","testcanscan","testscanstatus",111]
     webname, website, canscan, scanstatus, webready = data
     intdone = int(done.get().split("/")[0].split(" ")[0])
