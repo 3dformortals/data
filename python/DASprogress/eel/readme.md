@@ -1,1 +1,3 @@
 20181228 not working , even basic technique. FA-king black magic...
+20190212 alive and can be exported to executable uses  
+`python3 -m eel d.py web --onefile --noconsole`  
