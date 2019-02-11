@@ -182,15 +182,11 @@ def anilibria_tv_scanner(url):
     html = gethtml(url.get(),True)
     soup = BS4(html, "html5lib")
 
-    print("before webname",flush=True)
     webname = soup.find("h1", class_='title-rus').text or "parsing_error"
-    print("webname = ",webname,flush=True)
     webname +=" / "+ soup.find("h3", class_='title-original').text or "parsing_error"
-    print("webname = ", webname, flush=True)
 
     website = "anilibria.tv"
     webready = 0
-    print("before textready",flush=True)
     textready = soup.find("div", class_='torrent-first-col').span.text or "parsing_error"
     text = textready.split(" ",1)[1]
     text = text.split(" ")[0].split("[")[0]
@@ -201,7 +197,7 @@ def anilibria_tv_scanner(url):
     return webname, website, canscan, scanstatus, webready
 
 def web_scanner(done,url):
-    print(gethtml(url.get()))
+    # print(gethtml(url.get()))
     if "animevost.org" in url.get().lower(): data = animevost_org_scanner(url)
     elif "shikimori.org" in url.get().lower(): data = shikimori_org_scanner(url)
     elif "anistar.me" in url.get().lower(): data = anistar_me_scanner(url)
