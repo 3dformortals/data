@@ -89,9 +89,11 @@ def tabdata_maker(tabname):
         pass
 
 
-def gethtml(url):
+def gethtml(url,post=False):
     try:
-        r = requests.get(url, data='cmd=date +%Y%m%d', headers={
+        if post: r = requests.post(url, data='cmd=date +%Y%m%d', headers={
+            'User-Agent': 'Mozilla/5.0 (Windows NT 6.0; WOW64; rv:24.0) Gecko/20100101 Firefox/24.0'})
+        else:r = requests.get(url, data='cmd=date +%Y%m%d', headers={
             'User-Agent': 'Mozilla/5.0 (Windows NT 6.0; WOW64; rv:24.0) Gecko/20100101 Firefox/24.0'})
         # text=r.content.decode("unicode_escape","ignore")
         text = html.unescape(r.text)
@@ -99,7 +101,7 @@ def gethtml(url):
         return text
     except:
         print(sys.exc_info())
-        input("error enter to continue")
+        input("get html error enter to continue")
 
 def animevost_org_scanner(url):
     # done 20190211
@@ -146,11 +148,25 @@ def anistar_me_scanner(url):
     scanstatus = "good" if "parsing_error" != webname and webready > -1 else "bad" or "parsing_error"
     return webname, website, canscan, scanstatus, webready
 
+def vk_com_scanner(url):
+    # done 20190211
+    html = gethtml(url.get(),True)
+    soup = BS4(html, "html5lib")
+
+    webname = soup.find("div", class_="ui_crumb").text or "parsing_error"
+    website = "vk.com"
+    webready = soup.find("span", class_="_video_subtitle_counter").string
+    webready = int(webready.split(" ")[0]) or -1
+    canscan = "yes"
+    scanstatus = "good" if "parsing_error" != webname and webready > -1 else "bad" or "parsing_error"
+    return webname, website, canscan, scanstatus, webready
+
 def web_scanner(done,url):
     print(gethtml(url.get()))
     if "animevost.org" in url.get().lower(): data = animevost_org_scanner(url)
     elif "shikimori.org" in url.get().lower(): data = shikimori_org_scanner(url)
     elif "anistar.me" in url.get().lower(): data = anistar_me_scanner(url)
+    elif "vk.com" in url.get().lower(): data = vk_com_scanner(url)
     else: data = ["testwebname","testwebsite","testcanscan","testscanstatus",111]
     webname, website, canscan, scanstatus, webready = data
     intdone = int(done.get().split("/")[0].split(" ")[0])
