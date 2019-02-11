@@ -200,6 +200,7 @@ class ItemScanner(object):
         text+="\nscan status: "+scanstatus
         text+="\nweb ready: "+webready
         text+="\n\nnew: "+webnew
+        text+="\n"
         label = tkinter.Label(self.toplevel, text=prompt, font=font, background=bg, foreground=fg)
         linfo = tkinter.Label(self.toplevel, text=text, font=font, background=bg, foreground=fg)
         button = tkinter.Button(self.toplevel, text="OK", font=font,
@@ -214,10 +215,15 @@ class ItemScanner(object):
         button_web.bind("<Button-1>", self.onclick_web)
         self.toplevel.geometry("%dx%d+%d+%d" % (1040, 300, mainframe_width, mainframe_heigth))
         self.toplevel.configure(background=bg)
-        label.grid(row=0, column=0, columnspan=2)
-        linfo.grid(row=1, column=0, columnspan=2)
-        button.grid(row=2, column=0, columnspan=1)
-        button_web.grid(row=2, column=1, columnspan=1)
+        self.toplevel.grid_columnconfigure(0, weight=6)
+        self.toplevel.grid_columnconfigure(1, weight=1)
+        self.toplevel.grid_columnconfigure(2, weight=5)
+        label.grid(row=0, column=0, columnspan=3)
+        linfo.grid(row=1, column=0, columnspan=3)
+        button.grid(sticky="e",row=2, column=0)
+        button_web.grid(sticky="w",row=2, column=2)
+        # splitter=tkinter.Label(self.toplevel, text="", font=font, background=bg, foreground=fg)
+        # splitter.grid(row=2, column=1)
 
     def show(self):
         self.toplevel.wait_visibility()
