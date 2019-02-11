@@ -161,12 +161,53 @@ def vk_com_scanner(url):
     scanstatus = "good" if "parsing_error" != webname and webready > -1 else "bad" or "parsing_error"
     return webname, website, canscan, scanstatus, webready
 
+def green_tea_scanner(url):
+    # done 20190211
+    html = gethtml(url.get(),True)
+    soup = BS4(html, "html5lib")
+
+    webname = soup.find("meta", itemprop="name")["content"] or "parsing_error"
+    website = "green-teatv.com"
+    webready = 0
+    for div in soup.find_all("div",class_="info-label"):
+        if div.text == "Длительность:":
+            webready = int(div.findNext("div",class_="info-desc").text.split("из")[0]) or -1
+            break
+    canscan = "yes"
+    scanstatus = "good" if "parsing_error" != webname and webready > -1 else "bad" or "parsing_error"
+    return webname, website, canscan, scanstatus, webready
+
+def anilibria_tv_scanner(url):
+    # done 20190211
+    html = gethtml(url.get(),True)
+    soup = BS4(html, "html5lib")
+
+    print("before webname",flush=True)
+    webname = soup.find("h1", class_='title-rus').text or "parsing_error"
+    print("webname = ",webname,flush=True)
+    webname +=" / "+ soup.find("h3", class_='title-original').text or "parsing_error"
+    print("webname = ", webname, flush=True)
+
+    website = "anilibria.tv"
+    webready = 0
+    print("before textready",flush=True)
+    textready = soup.find("div", class_='torrent-first-col').span.text or "parsing_error"
+    text = textready.split(" ",1)[1]
+    text = text.split(" ")[0].split("[")[0]
+    if "-" in text: text=text.split("-")[1]
+    webready = int(text) or -1
+    canscan = "yes"
+    scanstatus = "good" if "parsing_error" != webname and webready > -1 else "bad" or "parsing_error"
+    return webname, website, canscan, scanstatus, webready
+
 def web_scanner(done,url):
     print(gethtml(url.get()))
     if "animevost.org" in url.get().lower(): data = animevost_org_scanner(url)
     elif "shikimori.org" in url.get().lower(): data = shikimori_org_scanner(url)
     elif "anistar.me" in url.get().lower(): data = anistar_me_scanner(url)
     elif "vk.com" in url.get().lower(): data = vk_com_scanner(url)
+    elif "anilibria.tv" in url.get().lower(): data = anilibria_tv_scanner(url)
+    elif "green-teatv.com" in url.get().lower(): data = green_tea_scanner(url)
     else: data = ["testwebname","testwebsite","testcanscan","testscanstatus",111]
     webname, website, canscan, scanstatus, webready = data
     intdone = int(done.get().split("/")[0].split(" ")[0])
