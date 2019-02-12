@@ -186,11 +186,26 @@ def anilibria_tv_scanner(url):
     webname +=" / "+ soup.find("h3", class_='title-original').text or "parsing_error"
 
     website = "anilibria.tv"
-    webready = 0
     textready = soup.find("div", class_='torrent-first-col').span.text or "parsing_error"
     text = textready.split(" ",1)[1]
     text = text.split(" ")[0].split("[")[0]
     if "-" in text: text=text.split("-")[1]
+    webready = int(text) or -1
+    canscan = "yes"
+    scanstatus = "good" if "parsing_error" != webname and webready > -1 else "bad" or "parsing_error"
+    return webname, website, canscan, scanstatus, webready
+
+def lostfilm_tv_scanner(url):
+    # done 20190211
+    html = gethtml(url.get(),True)
+    soup = BS4(html, "html5lib")
+
+    webname = soup.find("div", class_='title-ru').text or "parsing_error"
+    webname +=" / "+ soup.find("div", class_='title-en').text or "parsing_error"
+
+    website = "lostfilm.tv"
+    textready = soup.find("div", class_="details").text or "parsing_error"
+    text = textready.split("серий: ",1)[1].split(" ")[0]
     webready = int(text) or -1
     canscan = "yes"
     scanstatus = "good" if "parsing_error" != webname and webready > -1 else "bad" or "parsing_error"
@@ -204,6 +219,7 @@ def web_scanner(done,url):
     elif "vk.com" in url.get().lower(): data = vk_com_scanner(url)
     elif "anilibria.tv" in url.get().lower(): data = anilibria_tv_scanner(url)
     elif "green-teatv.com" in url.get().lower(): data = green_tea_scanner(url)
+    elif "lostfilm.tv" in url.get().lower(): data = lostfilm_tv_scanner(url)
     else: data = ["testwebname","testwebsite","testcanscan","testscanstatus",111]
     webname, website, canscan, scanstatus, webready = data
     intdone = int(done.get().split("/")[0].split(" ")[0])
