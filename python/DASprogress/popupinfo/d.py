@@ -88,6 +88,9 @@ def tabdata_maker(tabname):
         return [["noname","https://healingdrawing.github.io","?","0/0"] for i in range(33)]
         pass
 
+def safeint(x):
+    try:return int(x)
+    except:return None
 
 def gethtml(url,post=False):
     try:
@@ -111,7 +114,7 @@ def animevost_org_scanner(url):
     website = "animevost.org"
     webready = soup.title.string.split("[")[1].split("]")[0].split("из")[0] or "parsing_error"
     webready = webready.split("-")[1] if "-" in webready else webready or "parsing_error"
-    webready = int(webready.split(" ")[0]) or -1
+    webready = safeint(webready.split(" ")[0]) or -1
     canscan = "yes"
     scanstatus = "good" if "parsing_error" != webname and webready > -1 else "bad" or "parsing_error"
     return webname, website, canscan, scanstatus, webready
@@ -127,7 +130,7 @@ def shikimori_org_scanner(url):
     span_ep_num = soup.find_all('span',class_="episode-num")
     for span_ep in span_ep_num:
         nextSpan = span_ep.findNext('span',class_="episode-kinds").string
-        epNum = int(span_ep.string.split("#")[1]) or -1
+        epNum = safeint(span_ep.string.split("#")[1]) or -1
         if "озвучка" in nextSpan and epNum > maxready: maxready = epNum
     webready = maxready
     canscan = "yes"
@@ -143,7 +146,7 @@ def anistar_me_scanner(url):
     website = "anistar.me"
     webready = soup.find("p", class_="reason").string
     print("webready = ", webready, flush=True)
-    webready = int(re.findall('\d+', webready )[0]) or -1
+    webready = safeint(re.findall('\d+', webready )[0]) or -1
     canscan = "yes"
     scanstatus = "good" if "parsing_error" != webname and webready > -1 else "bad" or "parsing_error"
     return webname, website, canscan, scanstatus, webready
@@ -156,7 +159,7 @@ def vk_com_scanner(url):
     webname = soup.find("div", class_="ui_crumb").text or "parsing_error"
     website = "vk.com"
     webready = soup.find("span", class_="_video_subtitle_counter").string
-    webready = int(webready.split(" ")[0]) or -1
+    webready = safeint(webready.split(" ")[0]) or -1
     canscan = "yes"
     scanstatus = "good" if "parsing_error" != webname and webready > -1 else "bad" or "parsing_error"
     return webname, website, canscan, scanstatus, webready
@@ -171,7 +174,7 @@ def green_tea_scanner(url):
     webready = 0
     for div in soup.find_all("div",class_="info-label"):
         if div.text == "Длительность:":
-            webready = int(div.findNext("div",class_="info-desc").text.split("из")[0]) or -1
+            webready = safeint(div.findNext("div",class_="info-desc").text.split("из")[0]) or -1
             break
     canscan = "yes"
     scanstatus = "good" if "parsing_error" != webname and webready > -1 else "bad" or "parsing_error"
@@ -190,7 +193,7 @@ def anilibria_tv_scanner(url):
     text = textready.split(" ",1)[1]
     text = text.split(" ")[0].split("[")[0]
     if "-" in text: text=text.split("-")[1]
-    webready = int(text) or -1
+    webready = safeint(text) or -1
     canscan = "yes"
     scanstatus = "good" if "parsing_error" != webname and webready > -1 else "bad" or "parsing_error"
     return webname, website, canscan, scanstatus, webready
@@ -206,7 +209,7 @@ def lostfilm_tv_scanner(url):
     website = "lostfilm.tv"
     textready = soup.find("div", class_="details").text or "parsing_error"
     text = textready.split("серий: ",1)[1].split(" ")[0]
-    webready = int(text) or -1
+    webready = safeint(text) or -1
     canscan = "yes"
     scanstatus = "good" if "parsing_error" != webname and webready > -1 else "bad" or "parsing_error"
     return webname, website, canscan, scanstatus, webready
@@ -222,7 +225,7 @@ def web_scanner(done,url):
     elif "lostfilm.tv" in url.get().lower(): data = lostfilm_tv_scanner(url)
     else: data = ["testwebname","testwebsite","testcanscan","testscanstatus",111]
     webname, website, canscan, scanstatus, webready = data
-    intdone = int(done.get().split("/")[0].split(" ")[0])
+    intdone = safeint(done.get().split("/")[0].split(" ")[0])
     webnew = str(webready-intdone)
     return [webname, website, canscan, scanstatus, str(webready), webnew]
 
@@ -351,7 +354,7 @@ class MyDialog(object):
         self.toplevel.destroy()
 
 def i_maker(name,tabname,tab):
-    ind=int(name.split("i",1)[1])
+    ind= safeint(name.split("i",1)[1])
     MyDialog(mainframe,"element editor",tabname,ind).show()
     global buffer
     d=buffer
@@ -371,11 +374,11 @@ def i_maker(name,tabname,tab):
         db_writer()
 
 def hrefsort(obj):
-    return int(obj.name.split("href",1)[1])
+    return safeint(obj.name.split("href",1)[1])
 def daysort(obj):
-    return int(obj.name.split("day",1)[1])
+    return safeint(obj.name.split("day",1)[1])
 def plussort(obj):
-    return int(obj.name.split("plus",1)[1])
+    return safeint(obj.name.split("plus",1)[1])
 
 def refresh_tab(tabname,tab):
     bhref=[]
@@ -399,14 +402,14 @@ def refresh_tab(tabname,tab):
     db_writer()
 
 def up_maker(name,tabname,tab):
-    ind=int(name.split("up",1)[1])
+    ind= safeint(name.split("up",1)[1])
     mylist=db[tabname]
     mylist.insert(0, mylist.pop(ind))
     db[tabname]=mylist
     refresh_tab(tabname,tab)
 
 def down_maker(name,tabname,tab):
-    ind=int(name.split("down",1)[1])
+    ind= safeint(name.split("down",1)[1])
     mylist=db[tabname]
     size = len(mylist)
     if ind < size-1:
@@ -421,7 +424,7 @@ def btn_day_increment_maker(oldlabel):
         try:
             day = oldlabel
             if day in "1234567":
-                day = int(oldlabel)
+                day = safeint(oldlabel)
             else:day = 0
             if day<7:return str(day+1)
             elif day == 7:return "?"
@@ -430,7 +433,7 @@ def btn_day_increment_maker(oldlabel):
 
 
 def day_maker(name,btn,tabname,tab):
-    ind=int(name.split("day",1)[1])
+    ind= safeint(name.split("day",1)[1])
     newtext=btn_day_increment_maker(btn["text"])
     btn.configure(text=newtext)
     mylist=db[tabname]
@@ -444,9 +447,9 @@ def btn_plus_increment_maker(oldlabel):
             oldlabel=oldlabel.replace("из","/")
             if ("/" in oldlabel):
                 done,summa=oldlabel.split("/",1)
-                done=int(float(done))
+                done= safeint(float(done))
             else:
-                done=int(float(oldlabel))
+                done= safeint(float(oldlabel))
                 summa=False
             done+=1
             if summa:return str(done)+"/"+summa
@@ -455,7 +458,7 @@ def btn_plus_increment_maker(oldlabel):
             return "0/0"
 
 def plus_maker(name,btn,tabname,tab):
-    ind=int(name.split("plus",1)[1])
+    ind= safeint(name.split("plus",1)[1])
     newtext=btn_plus_increment_maker(btn["text"])
     btn.configure(text=newtext)
     mylist=db[tabname]
@@ -468,9 +471,9 @@ def btn_minus_increment_maker(oldlabel):
             oldlabel=oldlabel.replace("из","/")
             if ("/" in oldlabel):
                 done,summa=oldlabel.split("/",1)
-                done=int(float(done))
+                done= safeint(float(done))
             else:
-                done=int(float(oldlabel))
+                done= safeint(float(oldlabel))
                 summa=False
             done-=1
             if summa:return str(done)+"/"+summa
@@ -479,7 +482,7 @@ def btn_minus_increment_maker(oldlabel):
             return "0/0"
 
 def minus_maker(name,tabname,tab):
-    ind=int(name.split("minus",1)[1])
+    ind= safeint(name.split("minus",1)[1])
     btn=None;plusname="plus"+str(ind)
     for children in tab.children.values():
         if children.name == plusname:
@@ -493,14 +496,14 @@ def minus_maker(name,tabname,tab):
 
 def href_maker(name,tabname):
     try:
-        ind = int(name.split("href", 1)[1])
+        ind = safeint(name.split("href", 1)[1])
         ItemScanner(mainframe, "Web Scanner", tabname, ind).show()
     except:
         print("error href_maker\n",sys.exc_info())
 
 def del_maker(name,tabname,tab):
     sind=name.split("del",1)[1]
-    ind=int(sind)
+    ind= safeint(sind)
     db[tabname][ind]=["","https://healingdrawing.github.io","?","0/0"]
     btn_href,btn_day,btn_plus=None,None,None
     for children in tab.children.values():
