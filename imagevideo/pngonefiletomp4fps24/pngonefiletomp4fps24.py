@@ -2,10 +2,10 @@ import os,sys,datetime
 from PIL import Image
 from moviepy.editor import *
 
-if getattr(sys, 'frozen', False): # windows executable case (pyinstaller)
+if getattr(sys, 'frozen', False):
     mydir = os.path.dirname(sys.executable)
-elif __file__: # python3 script case
-    mydir = os.path.dirname(__file__)
+elif __file__:
+    mydir = os.path.dirname(os.path.abspath(__file__))
 
 print("------------mydir------------")
 print(mydir)
