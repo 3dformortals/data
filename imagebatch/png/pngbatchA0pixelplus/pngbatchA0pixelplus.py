@@ -2,9 +2,9 @@ import os,sys,datetime
 from PIL import Image
 
 if getattr(sys, 'frozen', False):
-	mydir = os.path.dirname(sys.executable)
+    mydir = os.path.dirname(sys.executable)
 elif __file__:
-	mydir = os.path.dirname(__file__)
+    mydir = os.path.dirname(os.path.abspath(__file__))
 
 print("------------mydir------------")
 print(mydir)
