@@ -27,13 +27,13 @@ def gethtml(url,post=False):
         return "python - gethtml error \n" + str(sys.exc_info())
 
 @eel.expose
-def readyoutube(x):
-    var url=""
+def readyoutube(x,post=False):
+    url=""
     if x == 1: url=""
-    if x == 2: url=""
-    if x == 3: url=""
-    if x == 4: url=""
-    if x == 5: url=""
-    return gethtml(url)
+    elif x == 2: url=""
+    elif x == 3: url=""
+    elif x == 4: url=""
+    elif x == 5: url=""
+    return gethtml(url,post)
 
 eel.start('main.html')
