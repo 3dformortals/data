@@ -1,13 +1,9 @@
  # -*- coding: utf-8 -*-
-import tkinter
-from tkinter import ttk
-import sys,os,pickle,webbrowser
+import sys,os,webbrowser
 import html
 import requests
 from bs4 import BeautifulSoup as BS4
 import re
-import codecs
-import string
 
 import eel
 eel.init('web')
@@ -21,6 +17,7 @@ def gethtml(url,post=False):
         # text=r.content.decode("unicode_escape","ignore")
         text = html.unescape(r.text)
         # print("text------------------\n",text)
+        print(text)
         return text
     except:
         print(sys.exc_info())
@@ -29,11 +26,12 @@ def gethtml(url,post=False):
 @eel.expose
 def readyoutube(x,post=False):
     url=""
-    if x == 1: url=""  
-    elif x == 2: url=""
-    elif x == 3: url=""
-    elif x == 4: url=""
-    elif x == 5: url=""
+    # if x == 1: url="https://www.youtube.com/channel/UCt6nsWw2kQNszwpuuHoxBLA/videos"
+    if x == 1: url="http://animevost.org/"
+    elif x == 2: url="https://www.youtube.com/channel/UC_nKsYiigmY9OskmITBXdBQ/videos"
+    elif x == 3: url="https://www.youtube.com/user/NavalnyRu/videos"
+    elif x == 4: url="https://www.youtube.com/channel/UCgxTPTFbIbCWfTR9I2-5SeQ/videos"
+    elif x == 5: url="https://www.youtube.com/user/kamikadzedead/videos"
     return gethtml(url,post)
 
 eel.start('main.html')
