@@ -1,0 +1,11 @@
+* {
+    
+    background: black !important;
+    background-color: black !important;
+    background-image: none !important;
+    color: hsl(34, 50%, 50%) !important;
+    font-family:comfortaa !important;
+}
+a {text-decoration: none;}
+a:visited{color:hsl(34, 50%, 25%) !important;}
+/* a:link{color:hsl(34, 50%, 25%) !important;} */

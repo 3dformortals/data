@@ -1,1 +1,0 @@
-youtube not be comfort readed... it want that users eat more shit
