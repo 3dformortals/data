@@ -6,7 +6,7 @@ async function show(x){
     for(var i=1;i<11;i++){
         var tr = document.createElement("tr")
         var td1 = document.createElement("td")
-        var atext = text[i].split("\"  aria-describedby",1)[0]
+        var atext = text[i].split("\"  aria-describedby",1)[0].replace(/&quot;/g, '\"')
         var ahref = "https://www.youtube.com" + text[i].split("href=\"")[1].split("\"")[0]
         var a = document.createElement("a")
         a.href = ahref
