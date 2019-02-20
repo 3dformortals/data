@@ -1,5 +1,6 @@
 worked at 20190219  
 # this is eel python programm, which need chrome/chromium installed  
+![screenshot](screenshot.gif)  
 ![screenshot](screenshot.png)  
 Can be executed from source `ase.py`.  
 `dist` folder include executable for kubuntu 18.04 .  
