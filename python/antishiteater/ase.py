@@ -45,5 +45,5 @@ def readyoutube(x,post=False):
     result = gethtml2(url)
     return result
 
-eel.start('main.html', options={'mode': 'default'})
-# eel.start('main.html') # for chromium/chrome using(if installed) vs default system web browser
+eel.start('main.html', options={'mode': 'default','chromeFlags': ['--disable-http-cache']})
+# eel.start('main.html') # for chromium/chrome using(if installed) vs default system web browser and cache storing
