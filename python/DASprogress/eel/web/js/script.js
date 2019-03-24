@@ -8,7 +8,7 @@ async function read_db(){
 }
 
 function nCleaner(txt){
-    return txt.replace("\n"," ")
+    return txt.replace("\n","<br>")
 }
 
 async function addonItem(){
@@ -22,7 +22,7 @@ async function addonItem(){
     var dbtxt = await eel.pythonAddonItem(name, url, viewed)() //text from txt file returned
     txtToObject(dbtxt)
     infoDivDataCreator()
-    alert(dbtxt)
+    hideAddonItem()
 }
 
 var db = {}
@@ -52,6 +52,7 @@ function objectToTxt(){
 async function loadProcess(){
     var txt = await eel.pythonShow()() //read db first time
     txtToObject(txt) //now it can be used as database
+    hideAddonItem() //hide first time after start programm
     infoDivDataCreator()
 }
 
@@ -71,11 +72,35 @@ function viewedItem(key,saw){
 }
 
 function editItem(key){
-    alert("editItem(key) in development")
+    alert(key)
+    document.getElementById('editTable'+key).style.display = "inline"
+}
+
+function saveItem(key){
+    db[key]['name'] = document.getElementById('itemName'+key).value
+    db[key]['url'] = document.getElementById('itemUrl'+key).value
+    db[key]['saw'] = document.getElementById('itemViewed'+key).value
+    infoDivDataCreator()
+    eel.pythonFixChanges(objectToTxt(db))()
+}
+
+function cancelItem(key){
+    document.getElementById('editTable'+key).style.display = "none"
+    document.getElementById('itemName'+key).value = db[key]['name']
+    document.getElementById('itemUrl'+key).value = db[key]['url']
+    document.getElementById('itemViewed'+key).value = db[key]['saw']
 }
 
 function firstItem(key){
     alert("firstItem(key) in development")
+}
+
+function inputCreator(id,value,inputtype='text'){
+    var input = document.createElement('input')
+    input.setAttribute('type',inputtype)
+    input.setAttribute('id',id)
+    input.value = value
+    return input
 }
 
 function itemDivCreator(key,item){
@@ -122,6 +147,67 @@ function itemDivCreator(key,item){
         tr.appendChild(td)
         table.appendChild(tr)
         div.appendChild(table)
+        
+        //edit table
+        var table = document.createElement('table')
+        table.setAttribute('id','editTable'+key)
+        table.style.display = 'none'
+        //name
+        var tr = document.createElement('tr')
+        var td = document.createElement('td')
+        var text = document.createElement('text')
+        text.setAttribute('id','itemNameText'+key)
+        text.innerHTML = "name: "
+        td.appendChild(text)
+        tr.appendChild(td)
+        var td = document.createElement('td')
+        var input = inputCreator('itemName'+key, db[key]['name'])
+        td.appendChild(input)
+        tr.appendChild(td)
+        table.appendChild(tr)
+        //url
+        var tr = document.createElement('tr')
+        var td = document.createElement('td')
+        var text = document.createElement('text')
+        text.setAttribute('id','itemUrlText'+key)
+        text.innerHTML = "url: "
+        td.appendChild(text)
+        tr.appendChild(td)
+        var td = document.createElement('td')
+        var input = inputCreator('itemUrl'+key, db[key]['url'])
+        td.appendChild(input)
+        tr.appendChild(td)
+        table.appendChild(tr)
+        //viewed
+        var tr = document.createElement('tr')
+        var td = document.createElement('td')
+        var text = document.createElement('text')
+        text.setAttribute('id','itemViewedText'+key)
+        text.innerHTML = "viewed: "
+        td.appendChild(text)
+        tr.appendChild(td)
+        var td = document.createElement('td')
+        var input = inputCreator('itemViewed'+key, db[key]['saw'])
+        td.appendChild(input)
+        tr.appendChild(td)
+        table.appendChild(tr)
+        //controls
+        var tr = document.createElement('tr')
+        var td = document.createElement('td')
+        var saveButton = document.createElement('button')
+        saveButton.onclick = function() {saveItem(key)}
+        saveButton.innerHTML = "save"
+        td.appendChild(saveButton)
+        tr.appendChild(td)
+        var td = document.createElement('td')
+        var cancelButton = document.createElement('button')
+        cancelButton.onclick = function() {cancelItem(key)}
+        cancelButton.innerHTML = "cancel"
+        td.appendChild(cancelButton)
+        tr.appendChild(td)
+        table.appendChild(tr)
+        div.appendChild(table)
+        
     }else{var div = null}
     return div
 }
