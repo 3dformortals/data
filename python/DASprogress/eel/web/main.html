@@ -10,6 +10,27 @@
 <body>
     <h1>testing html text</h1>
     <button onclick="read_db()">wtfeel?</button>
+    <button onclick="showAddonItem()">add</button> <text id="itemProcessText">process: </text><text id="itemProcess"></text>
+    <div id="addItem">
+        <table>
+            <tr>
+                <td><text id="itemNameText">name: </text></td><td><input type="text" id="itemName"></td>
+            </tr>
+            <tr>
+                <td><text id="itemUrlText">url: </text></td><td><input type="text" id="itemUrl"></td>
+            </tr>
+            <tr>
+                <td><text id="itemViewedText">viewed: </text></td><td><input type="text" id="itemViewed"></td>
+            </tr>
+            <tr>
+                <td><button id="addonButton" onclick="addonItem()">addon</button></td><td><button id="cancelButton" onclick="hideAddonItem()">cancel</button></td>
+            </tr>
+        </table>
+    </div>
+    
+    <div id="infodiv">
+        
+    </div>
 </body>
 
 </html>
