@@ -92,7 +92,18 @@ function cancelItem(key){
 }
 
 function firstItem(key){
-    alert("firstItem(key) in development")
+    alert("firstItem(key) = "+key)
+    var newdb = {}
+    var newind = 0
+    newdb[newind] = db[key]
+    delete db[key]
+    for (var ind in db){
+        newind++
+        newdb[newind] = db[ind]
+    }
+    db = newdb
+    infoDivDataCreator()
+    eel.pythonFixChanges(objectToTxt(db))()
 }
 
 function inputCreator(id,value,inputtype='text'){
