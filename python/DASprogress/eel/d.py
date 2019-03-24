@@ -33,11 +33,6 @@ def itemCreator(name, url, viewed):
     return text
 
 @eel.expose
-def python_method():
-    print("wtfeelyoudoing?")
-    return 44
-
-@eel.expose
 def pythonAddonItem(name, url, viewed):
     dbTxt = dbReader()
     newTxt = itemCreator(name, url, viewed)

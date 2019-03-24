@@ -1,12 +1,4 @@
 
-
-async function read_db(){
-    console.log("message from javascript file , before calling python function") //this printed
-    var pyresponse = await eel.python_method()()// not working - print eel.python_method is not a function
-    console.log( parseInt(pyresponse) *2)
-    
-}
-
 function nCleaner(txt){
     return txt.replace("\n","<br>")
 }
@@ -72,7 +64,6 @@ function viewedItem(key,saw){
 }
 
 function editItem(key){
-    alert(key)
     document.getElementById('editTable'+key).style.display = "inline"
 }
 
@@ -92,7 +83,6 @@ function cancelItem(key){
 }
 
 function firstItem(key){
-    alert("firstItem(key) = "+key)
     var newdb = {}
     var newind = 0
     newdb[newind] = db[key]
@@ -240,9 +230,13 @@ function clearAddonItem(){
 }
 function showAddonItem(){
     clearAddonItem()
+    document.getElementById("addButton").style.display = "none"
     document.getElementById("addItem").style.display = "inline"
 }
-function hideAddonItem(){document.getElementById("addItem").style.display = "none"}
+function hideAddonItem(){
+    document.getElementById("addItem").style.display = "none"
+    document.getElementById("addButton").style.display = "inline"
+}
 eel.expose(jSShowMessage)
 function jSShowMessage(message){document.getElementById("itemProcess").innerHTML = message}
 
