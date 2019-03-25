@@ -3,6 +3,8 @@
 `python3 -m eel videonote.py web --onefile --noconsole`  
 20190325 latest release date  
 
+![screenshot](screenshot.png)  
+
 # VideoNote  
 VideoNote - записная книжка с функцией поиска новых серий(эпизодов) аниме, дорам, сериалов.  
 Поддерживаемые сайты на момент релиза:  
