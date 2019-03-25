@@ -55,7 +55,9 @@ function scanOne(){
 async function scanAll(){
     for(var key in db){
         jSShowMessage('scanning - ' + db[key]['name'])
-        var output = await eel.pythonScan(db[key]['url']) //output is ready episodes number
+        var output = await eel.pythonScan(db[key]['url'])() //output is ready episodes number
+        // output = parseInt(output)
+        // alert(output)
         var color = ""
         if(output>0){//good condition
             var saw = parseInt(db[key]['saw'])
@@ -65,7 +67,7 @@ async function scanAll(){
         }else{color='red'}//something wrong etc
         //div coloring
         if(color!=""){
-            document.getElementById('itemDiv'+key).style.backgroundColor = color+' !important'
+            document.getElementById('itemDiv'+key).style.backgroundColor = color
         }
     }
 }

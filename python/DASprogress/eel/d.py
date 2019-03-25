@@ -75,7 +75,7 @@ def gethtml(url,post=False):
 
 def gethtml2(url):
     with urllib.request.urlopen(url) as response:
-        html = response.read().decode()
+        html = response.read().decode(errors='ignore')
     return html
 
 def animevost_org_scanner(url):
@@ -215,8 +215,8 @@ def pythonScan(url):
     out = -1 #something wrong etc
     try:
         print(url,flush=True)
-        out = test()
-        # out = int(web_scanner(url))
+        # out = test()
+        out = int(web_scanner(url))
         print("out = ",out, flush=True)
     except:
         pass
