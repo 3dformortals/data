@@ -1,0 +1,17 @@
+* {
+    
+    background: black;
+    background-color: black;
+    color: hsl(34, 50%, 50%) ;
+    font-family:comfortaa;
+}
+a {text-decoration: none;}
+a:visited{color:hsl(34, 50%, 25%);}
+/* a:link{color:hsl(34, 50%, 25%) !important;} */ 
+
+.good {background-color: darkgreen; color:black;}
+.muddy {background-color: olive; color:black;}
+.bad {background-color: darkred; color:black;}
+.itemDiv {
+    
+}

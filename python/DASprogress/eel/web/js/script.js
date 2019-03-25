@@ -48,26 +48,24 @@ async function loadProcess(){
     infoDivDataCreator()
 }
 
-function scanOne(){
-    eel.pythonScan(db[0]['url'])
-}
-
 async function scanAll(){
     for(var key in db){
         jSShowMessage('scanning - ' + db[key]['name'])
         var output = await eel.pythonScan(db[key]['url'])() //output is ready episodes number
         // output = parseInt(output)
         // alert(output)
-        var color = ""
+        var color = "black"
         if(output>0){//good condition
             var saw = parseInt(db[key]['saw'])
-            if( output>saw ){color='green'}
+            if( output>saw ){color='darkgreen'}
         }else if(output==0){//muddy condition
-            color='yellow'
-        }else{color='red'}//something wrong etc
+            color='olive'
+        }else{color='darkred'}//something wrong etc
         //div coloring
         if(color!=""){
             document.getElementById('itemDiv'+key).style.backgroundColor = color
+            document.getElementById('itemTable'+key).style.backgroundColor = color
+            document.getElementById('editTable'+key).style.backgroundColor = color
         }
     }
 }
@@ -133,7 +131,13 @@ function itemDivCreator(key,item){
         var div = document.createElement('div')
         var divid = 'itemDiv'+key
         div.setAttribute('id',divid)
+        div.setAttribute('class','itemDiv')
+        div.style.cssFloat = 'left'
+        div.style.padding = '4px'
+        div.style.margin = '1px'
+        div.style.border = '1px solid'
         var table = document.createElement('table')
+        table.setAttribute('id','itemTable'+key)
         
         var deleteButton = document.createElement('button')
         deleteButton.innerHTML = "x"
@@ -147,10 +151,12 @@ function itemDivCreator(key,item){
         var viewedButton = document.createElement('button')
         viewedButton.innerHTML = item["saw"]
         viewedButton.onclick = function() {viewedItem(key, item["saw"])}
+        viewedButton.setAttribute('title','+1')
         
         var editButton = document.createElement('button')
         editButton.innerHTML = "edit"
         editButton.onclick = function() {editItem(key)}
+        editButton.setAttribute('title','редактировать')
         
         var firstButton = document.createElement('button')
         firstButton.innerHTML = "&uArr;"

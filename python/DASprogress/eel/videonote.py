@@ -67,7 +67,6 @@ def gethtml(url,post=False):
             'User-Agent': 'Mozilla/5.0 (Windows NT 6.0; WOW64; rv:24.0) Gecko/20100101 Firefox/24.0'})
         # text=r.content.decode("unicode_escape","ignore")
         text = html.unescape(r.text)
-        # print("text------------------\n",text)
         return text
     except:
         print(sys.exc_info())
@@ -117,7 +116,6 @@ def anistar_me_scanner(url):
     webname = soup.find("h1", itemprop="name").string or "parsing_error"
     website = "anistar.me"
     webready = soup.find("p", class_="reason").string
-    print("webready = ", webready, flush=True)
     webready = safeint(re.findall('\d+', webready )[0]) or -1
     canscan = "yes"
     scanstatus = "good" if "parsing_error" != webname and webready > -1 else "bad" or "parsing_error"
@@ -125,7 +123,6 @@ def anistar_me_scanner(url):
 
 def vk_com_scanner(url):
     # done 20190211
-    print("inside vkcomscanner py",flush=True)
     # html = gethtml(url,True)
     html = gethtml2(url)
     soup = BS4(html, "html5lib")
@@ -189,10 +186,6 @@ def lostfilm_tv_scanner(url):
     return webname, website, canscan, scanstatus, webready
 
 def web_scanner(url):
-    print("inside webscanner py",flush=True)
-    print(url,flush=True)
-    print("url.get.lower() = ",url.lower())
-    # print(gethtml(url), flush=True)
     if "animevost.org" in url.lower(): data = animevost_org_scanner(url)
     elif "shikimori.org" in url.lower(): data = shikimori_org_scanner(url)
     elif "anistar.me" in url.lower(): data = anistar_me_scanner(url)
@@ -214,10 +207,7 @@ def test():
 def pythonScan(url):
     out = -1 #something wrong etc
     try:
-        print(url,flush=True)
-        # out = test()
         out = int(web_scanner(url))
-        print("out = ",out, flush=True)
     except:
         pass
     return out
