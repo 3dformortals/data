@@ -29,12 +29,19 @@ def gethtml2(url):
         html = response.read().decode(errors='ignore')
     return html
 
-def test():
+def test_vk():
     url="https://vk.com/videos-24440848?section=album_54694282"
     # html = gethtml(url,True)
     html = gethtml2(url)
     print(html)
     return html
 
-test()
+def test_shiki():
+    url="https://play.shikimori.org/animes/39191-wan-jie-shen-zhu/video_online"
+    # html = gethtml(url,True)
+    html = gethtml2(url)
+    print(html)
+    return html
+
+test_shiki()
 input("shittttttttttttttttt")

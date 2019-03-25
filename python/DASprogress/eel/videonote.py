@@ -1,7 +1,7 @@
  # -*- coding: utf-8 -*-
 
 import sys,os
-import html
+import html as HTML
 import requests
 from bs4 import BeautifulSoup as BS4
 import re
@@ -66,7 +66,7 @@ def gethtml(url,post=False):
         else:r = requests.get(url, data='cmd=date +%Y%m%d', headers={
             'User-Agent': 'Mozilla/5.0 (Windows NT 6.0; WOW64; rv:24.0) Gecko/20100101 Firefox/24.0'})
         # text=r.content.decode("unicode_escape","ignore")
-        text = html.unescape(r.text)
+        text = HTML.unescape(r.text)
         return text
     except:
         print(sys.exc_info())
@@ -79,7 +79,7 @@ def gethtml2(url):
 
 def animevost_org_scanner(url):
     # done 20190211
-    html = gethtml(url)
+    html = gethtml2(url)
     soup = BS4(html,"html5lib")
     webname = soup.title.string.split("[")[0] or "parsing_error"
     website = "animevost.org"
@@ -92,7 +92,7 @@ def animevost_org_scanner(url):
 
 def shikimori_org_scanner(url):
     # done 20190211
-    html = gethtml(url)
+    html = gethtml2(url)
     soup = BS4(html, "html5lib")
 
     webname = soup.find("header", class_="head").meta["content"] or "parsing_error"
@@ -110,7 +110,7 @@ def shikimori_org_scanner(url):
 
 def anistar_me_scanner(url):
     # done 20190211
-    html = gethtml(url)
+    html = gethtml2(url)
     soup = BS4(html, "html5lib")
 
     webname = soup.find("h1", itemprop="name").string or "parsing_error"
@@ -137,7 +137,8 @@ def vk_com_scanner(url):
 
 def green_tea_scanner(url):
     # done 20190211
-    html = gethtml(url,True)
+    html = gethtml2(url)
+    # html = gethtml(url,True)
     soup = BS4(html, "html5lib")
 
     webname = soup.find("meta", itemprop="name")["content"] or "parsing_error"
@@ -153,7 +154,8 @@ def green_tea_scanner(url):
 
 def anilibria_tv_scanner(url):
     # done 20190211
-    html = gethtml(url,True)
+    html = gethtml2(url)
+    # html = gethtml(url,True)
     soup = BS4(html, "html5lib")
 
     webname = soup.find("h1", class_='title-rus').text or "parsing_error"
@@ -171,7 +173,8 @@ def anilibria_tv_scanner(url):
 
 def lostfilm_tv_scanner(url):
     # done 20190211
-    html = gethtml(url,True)
+    html = gethtml2(url)
+    # html = gethtml(url,True)
     soup = BS4(html, "html5lib")
 
     webname = soup.find("div", class_='title-ru').text or "parsing_error"
