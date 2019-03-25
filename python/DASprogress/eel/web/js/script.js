@@ -68,6 +68,7 @@ async function scanAll(){
             document.getElementById('editTable'+key).style.backgroundColor = color
         }
     }
+    jSShowMessage('scanning complete')
 }
 
 function deleteItem(key){
