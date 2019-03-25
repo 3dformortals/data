@@ -8,25 +8,28 @@
 
 </head>
 <body>
-    <h1>testing html text</h1>
-    <button id="addButton" onclick="showAddonItem()">add</button> <text id="itemProcessText">process: </text><text id="itemProcess"></text>
+    <h1>testing html FFFFFFFFF text</h1>
+    <text id="itemProcessText">process: </text><text id="itemProcess"></text>
+    <button id="addButton" onclick="showAddonItem()" title="добавить запись">add</button>
+    <button id="scanButton" onclick="scanAll()" title="поиск новых серий">scan</button>
+    <button id="testButton" onclick="scanOne()" title="">TestScan</button>
     <div id="addItem">
         <table>
             <tr>
-                <td><text id="itemNameText">name: </text></td><td><input type="text" id="itemName"></td>
+                <td><text id="itemNameText" title="любое название">name: </text></td><td><input type="text" id="itemName"></td>
             </tr>
             <tr>
-                <td><text id="itemUrlText">url: </text></td><td><input type="text" id="itemUrl"></td>
+                <td><text id="itemUrlText" title="адрес сайта">url: </text></td><td><input type="text" id="itemUrl"></td>
             </tr>
             <tr>
-                <td><text id="itemViewedText">viewed: </text></td><td><input type="text" id="itemViewed"></td>
+                <td><text id="itemViewedText" title="сколько серий просмотрено">viewed: </text></td><td><input type="text" id="itemViewed"></td>
             </tr>
             <tr>
-                <td><button id="addonButton" onclick="addonItem()">addon</button></td><td><button id="cancelButton" onclick="hideAddonItem()">cancel</button></td>
+                <td><button id="addonButton" onclick="addonItem()" title="добавить в список">addon</button></td><td><button id="cancelButton" onclick="hideAddonItem()" title="отменить">cancel</button></td>
             </tr>
         </table>
     </div>
-    
+    <hr>
     <div id="infodiv">
         
     </div>

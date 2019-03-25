@@ -48,6 +48,28 @@ async function loadProcess(){
     infoDivDataCreator()
 }
 
+function scanOne(){
+    eel.pythonScan(db[0]['url'])
+}
+
+async function scanAll(){
+    for(var key in db){
+        jSShowMessage('scanning - ' + db[key]['name'])
+        var output = await eel.pythonScan(db[key]['url']) //output is ready episodes number
+        var color = ""
+        if(output>0){//good condition
+            var saw = parseInt(db[key]['saw'])
+            if( output>saw ){color='green'}
+        }else if(output==0){//muddy condition
+            color='yellow'
+        }else{color='red'}//something wrong etc
+        //div coloring
+        if(color!=""){
+            document.getElementById('itemDiv'+key).style.backgroundColor = color+' !important'
+        }
+    }
+}
+
 function deleteItem(key){
     if(key in db) {delete db[key]}
     infoDivDataCreator()
@@ -107,6 +129,8 @@ function inputCreator(id,value,inputtype='text'){
 function itemDivCreator(key,item){
     if("name" in item && "url" in item && "saw" in item){
         var div = document.createElement('div')
+        var divid = 'itemDiv'+key
+        div.setAttribute('id',divid)
         var table = document.createElement('table')
         
         var deleteButton = document.createElement('button')
@@ -231,11 +255,13 @@ function clearAddonItem(){
 function showAddonItem(){
     clearAddonItem()
     document.getElementById("addButton").style.display = "none"
+    document.getElementById("scanButton").style.display = "none"
     document.getElementById("addItem").style.display = "inline"
 }
 function hideAddonItem(){
     document.getElementById("addItem").style.display = "none"
     document.getElementById("addButton").style.display = "inline"
+    document.getElementById("scanButton").style.display = "inline"
 }
 eel.expose(jSShowMessage)
 function jSShowMessage(message){document.getElementById("itemProcess").innerHTML = message}
