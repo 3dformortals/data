@@ -79,7 +79,8 @@ def gethtml2(url):
 
 def animevost_org_scanner(url):
     # done 20190211
-    html = gethtml2(url)
+    # html = gethtml2(url) #fail with errors, don't know why
+    html = gethtml(url,True)
     soup = BS4(html,"html5lib")
     webname = soup.title.string.split("[")[0] or "parsing_error"
     website = "animevost.org"

@@ -43,5 +43,12 @@ def test_shiki():
     print(html)
     return html
 
-test_shiki()
+def test_animevost():
+    url="http://animevost.org/tip/tv/2228-kaguya-sama-wa-kokurasetai.html"
+    html = gethtml(url,True)
+    # html = gethtml2(url)
+    print(html)
+    return html
+
+test_animevost()
 input("shittttttttttttttttt")
