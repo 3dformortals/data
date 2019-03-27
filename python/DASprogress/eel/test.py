@@ -38,8 +38,29 @@ def test_vk():
 
 def test_shiki():
     url="https://play.shikimori.org/animes/39191-wan-jie-shen-zhu/video_online"
+    html = gethtml(url,True)
+    # html = gethtml2(url)
+    print(html)
+    return html
+
+def test_shiki_1():
+    url="https://play.shikimori.org/animes/39191-wan-jie-shen-zhu/video_online/1"
     # html = gethtml(url,True)
     html = gethtml2(url)
+    print(html)
+    return html
+    
+def test_shiki_2():
+    url="https://play.shikimori.org/animes/39191-wan-jie-shen-zhu/video_online/1"
+    # html = gethtml(url,True)
+    r = urllib.request.Request(url,headers={'User-Agent': 'Mozilla/5.0 (X11; Linux i686; rv:64.0) Gecko/20100101 Firefox/64.0'})
+    # r = urllib.request.Request(url, data='cmd=date +%Y%m%d',headers={'User-Agent': 'Mozilla/5.0 (X11; Linux i686; rv:64.0) Gecko/20100101 Firefox/64.0'})
+    html = gethtml2(r)
+    if html:pass
+    else:
+        r = urllib.request.Request(url,headers={'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:64.0) Gecko/20100101 Firefox/64.0'})
+        # r = urllib.request.Request(url, data='cmd=date +%Y%m%d',headers={'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:64.0) Gecko/20100101 Firefox/64.0'})
+        html = gethtml2(r)
     print(html)
     return html
 
@@ -50,5 +71,8 @@ def test_animevost():
     print(html)
     return html
 
-test_animevost()
+# test_animevost()
+# test_shiki()
+# test_shiki_1()
+test_shiki_2()
 input("shittttttttttttttttt")
