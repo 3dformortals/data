@@ -79,10 +79,12 @@ function deleteItem(key){
 
 function viewedItem(key,saw){
     if(key in db) {
-        var sawnumber = (parseInt(saw)+1).toString()
+        var isaw=parseInt(saw)+1
+        var sawnumber = isaw.toString()
         db[key]["saw"] = sawnumber
+        document.getElementById("itemSaw"+key).innerHTML = isaw
     }
-    infoDivDataCreator()
+    // infoDivDataCreator()
     eel.pythonFixChanges(objectToTxt(db))()
 }
 
@@ -150,6 +152,7 @@ function itemDivCreator(key,item){
         a.target = "_blank"
         
         var viewedButton = document.createElement('button')
+        viewedButton.setAttribute('id','itemSaw'+key)
         viewedButton.innerHTML = item["saw"]
         viewedButton.onclick = function() {viewedItem(key, item["saw"])}
         viewedButton.setAttribute('title','+1')

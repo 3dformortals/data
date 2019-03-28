@@ -93,7 +93,7 @@ def animevost_org_scanner(url):
 
 def shikimori_org_scanner(url):
     # done 20190211
-    time.sleep(3) #looks like need 2-3 sec pause, or server not response
+    # time.sleep(3) #looks like need 2-3 sec pause, or server not response
     # dt = datetime.datetime.today().strftime('%Y-%m-%d')
     r = urllib.request.Request(url,headers={'User-Agent': 'Mozilla/5.0 (X11; Linux i686; rv:64.0) Gecko/20100101 Firefox/64.0'})
     # r = urllib.request.Request(url, data='cmd=date +%Y%m%d',headers={'User-Agent': 'Mozilla/5.0 (X11; Linux i686; rv:64.0) Gecko/20100101 Firefox/64.0'})
