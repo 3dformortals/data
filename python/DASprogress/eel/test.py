@@ -71,8 +71,37 @@ def test_animevost():
     print(html)
     return html
 
+def safenumber(x):
+    print("-------------\n",x)
+    try:return int(float(x))
+    except:
+        print("x=",x," type(x)=",type(x)," str(x)=",str(x))
+        return 0
+
+def episode_extractor():
+    # textx = ["anime 01episode01 anime"]
+    textx = ["anime 01episode01 anime" ,gethtml2("https://www.youtube.com/playlist?list=PLyVKH-FrvxMBjQbkI9NXCZcrQrxs22joy") ]
+    regex = re.compile(r'\d* *(episode|серия|эпизод|выпуск) *\d*',flags=re.IGNORECASE|re.MULTILINE)
+    regexpair = re.compile(r' *episode|серия|эпизод|выпуск *',flags=re.IGNORECASE|re.MULTILINE)
+    # for text in textx:print(re.finditer(regex,text)) # only names without numbers... wtf python?!
+    for text in textx:
+        iter = re.finditer(regex,text) # only names without numbers... wtf python?!
+        for i in iter:
+            # print(type(i[0]))
+            
+            pair = re.split(regexpair,i[0])
+            print(pair)
+            # pair = re.split(regexpair,i[0],1)
+            ab = max([safenumber(x) for x in pair])
+            print(ab)
+    # for text in textx:print(re.findall(regex,text)) # only names without numbers... wtf python?!
+    # for text in textx:print(re.search(regex,text)) # only first
+    
+
 # test_animevost()
 # test_shiki()
 # test_shiki_1()
-test_shiki_2()
+# test_shiki_2()
+episode_extractor()
+
 input("shittttttttttttttttt")

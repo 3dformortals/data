@@ -59,6 +59,11 @@ def safeint(x):
     try:return int(x)
     except:return None
 
+def safenumber(x):
+    try:return int(float(x))
+    except:return 0
+        
+
 def gethtml(url,post=False):
     try:
         if post: r = requests.post(url, data='cmd=date +%Y%m%d', headers={
@@ -76,6 +81,23 @@ def gethtml2(url):
     with urllib.request.urlopen(url) as response:
         html = response.read().decode(errors='ignore')
     return html
+
+def youtube_scanner(url):
+    html = gethtml2(url)
+    regex = re.compile(r'\d* *(episode|серия|эпизод|выпуск) *\d*',flags=re.IGNORECASE|re.MULTILINE)
+    regexpair = re.compile(r' *episode|серия|эпизод|выпуск *',flags=re.IGNORECASE|re.MULTILINE)
+    # for text in textx:print(re.finditer(regex,text)) # only names without numbers... wtf python?!
+    webready = 0
+    iter = re.finditer(regex,html)
+    for i in iter:
+        # print(type(i[0]))
+        
+        pair = re.split(regexpair,i[0])
+        ab = max([safenumber(x) for x in pair])
+        print(ab)
+        if ab>webready:webready = ab
+    return [0,1,2,3,webready]
+    
 
 def animevost_org_scanner(url):
     # done 20190211
@@ -208,6 +230,7 @@ def web_scanner(url):
     elif "anilibria.tv" in url.lower(): data = anilibria_tv_scanner(url)
     elif "green-teatv.com" in url.lower(): data = green_tea_scanner(url)
     elif "lostfilm.tv" in url.lower(): data = lostfilm_tv_scanner(url)
+    elif "https://www.youtube.com/playlist?list=" in url.lower(): data = youtube_scanner(url)
     else: data = ["testwebname","testwebsite","testcanscan","testscanstatus",-1]
     webname, website, canscan, scanstatus, webready = data
     return str(webready)
