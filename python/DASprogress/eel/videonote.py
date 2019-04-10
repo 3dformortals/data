@@ -222,6 +222,18 @@ def lostfilm_tv_scanner(url):
     scanstatus = "good" if "parsing_error" != webname and webready > -1 else "bad" or "parsing_error"
     return webname, website, canscan, scanstatus, webready
 
+def animaunt_tv_scanner(url):
+    r = urllib.request.Request(url,headers={'User-Agent': 'Mozilla/5.0 (X11; Linux i686; rv:64.0) Gecko/20100101 Firefox/64.0'})
+    html = gethtml2(r)
+    if html:pass
+    else:
+        r = urllib.request.Request(url,headers={'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:64.0) Gecko/20100101 Firefox/64.0'})
+        html = gethtml2(r)
+    # html = gethtml(url,True)
+    html = html.split('<li class="vis"><span>Эпизоды:</span>',1)[1].split("из",1)[0]
+    webready = safenumber(html)
+    return [0,1,2,3,webready]
+
 def web_scanner(url):
     if "animevost.org" in url.lower(): data = animevost_org_scanner(url)
     elif "shikimori.org" in url.lower(): data = shikimori_org_scanner(url)
@@ -230,6 +242,7 @@ def web_scanner(url):
     elif "anilibria.tv" in url.lower(): data = anilibria_tv_scanner(url)
     elif "green-teatv.com" in url.lower(): data = green_tea_scanner(url)
     elif "lostfilm.tv" in url.lower(): data = lostfilm_tv_scanner(url)
+    elif "https://animaunt.tv" in url.lower(): data = animaunt_tv_scanner(url)
     elif "https://www.youtube.com/playlist?list=" in url.lower(): data = youtube_scanner(url)
     else: data = ["testwebname","testwebsite","testcanscan","testscanstatus",-1]
     webname, website, canscan, scanstatus, webready = data
