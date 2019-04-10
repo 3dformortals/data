@@ -16,7 +16,7 @@ VideoNote - записная книжка с функцией поиска но�
 - `anilibria.tv`
 - `lostfilm.tv`  
 - `animaunt.tv`  
-- `youtube`  (ищет максимальную цифру в лейлисте(VIEW FULL PLAYLIST link), могут быть ошибки)
+- `youtube`  (ищет максимальную цифру в плейлисте(VIEW FULL PLAYLIST link), могут быть ошибки)
 Примеры ссылок расположены ниже (example).  
   
 VideoNote is notebook with scan functionality, for few video services, which target is storing data about viewed episodes of anime doramas series etc, and scan sources that detect new episodes. This is `HTML` version of `DASprogress 132` python3 app, based on `eel python` library.  
