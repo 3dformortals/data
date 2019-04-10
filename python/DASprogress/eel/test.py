@@ -71,6 +71,13 @@ def test_animevost():
     print(html)
     return html
 
+def test_animaunttv():
+    url="https://animaunt.tv/1794-vanpanchmen-2-sezon.html"
+    html = gethtml(url,True)
+    html = html.split('<li class="vis"><span>Эпизоды:</span>',1)[1].split("из",1)[0]
+    print(int(html))
+    return html
+
 def safenumber(x):
     print("-------------\n",x)
     try:return int(float(x))
@@ -102,6 +109,7 @@ def episode_extractor():
 # test_shiki()
 # test_shiki_1()
 # test_shiki_2()
-episode_extractor()
+# episode_extractor()
+test_animaunttv()
 
 input("shittttttttttttttttt")

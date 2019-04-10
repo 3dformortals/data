@@ -94,7 +94,7 @@ def youtube_scanner(url):
         
         pair = re.split(regexpair,i[0])
         ab = max([safenumber(x) for x in pair])
-        print(ab)
+        # print(ab)
         if ab>webready:webready = ab
     return [0,1,2,3,webready]
     

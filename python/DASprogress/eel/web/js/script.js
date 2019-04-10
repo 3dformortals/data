@@ -49,6 +49,7 @@ async function loadProcess(){
 }
 
 async function scanAll(){
+    hideScanButton()
     for(var key in db){
         jSShowMessage('scanning - ' + db[key]['name'])
         var output = await eel.pythonScan(db[key]['url'])() //output is ready episodes number
@@ -69,6 +70,7 @@ async function scanAll(){
         }
     }
     jSShowMessage('scanning complete')
+    showScanButton()
 }
 
 function deleteItem(key){
@@ -90,6 +92,7 @@ function viewedItem(key,saw){
 
 function editItem(key){
     document.getElementById('editTable'+key).style.display = "inline"
+    document.getElementById('itemViewed'+key).value = db[key]['saw']
 }
 
 function saveItem(key){
@@ -272,6 +275,14 @@ function showAddonItem(){
 }
 function hideAddonItem(){
     document.getElementById("addItem").style.display = "none"
+    document.getElementById("addButton").style.display = "inline"
+    document.getElementById("scanButton").style.display = "inline"
+}
+function hideScanButton(){
+    document.getElementById("addButton").style.display = "none"
+    document.getElementById("scanButton").style.display = "none"
+}
+function showScanButton(){
     document.getElementById("addButton").style.display = "inline"
     document.getElementById("scanButton").style.display = "inline"
 }
