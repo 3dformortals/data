@@ -15,6 +15,7 @@ VideoNote - записная книжка с функцией поиска но�
 - `green-teatv.com`
 - `anilibria.tv`
 - `lostfilm.tv`  
+- `animaunt.tv`  
 - `youtube`  (ищет максимальную цифру в лейлисте(VIEW FULL PLAYLIST link), могут быть ошибки)
 Примеры ссылок расположены ниже (example).  
   
@@ -29,4 +30,5 @@ VideoNote is notebook with scan functionality, for few video services, which tar
 - `green-teatv.com` - example: `http://green-teatv.com/5865-uborka-so-strastyu-clean-with-passion-for-now.html`
 - `anilibria.tv` - example: `https://www.anilibria.tv/release/ueno-san-wa-bukiyou.html`
 - `lostfilm.tv` - example: `https://www.lostfilm.tv/series/Future_Man/season_2/`  
+- `animaunt.tv` - example: `https://animaunt.tv/1794-vanpanchmen-2-sezon.html`  
 - `youtube` - example: `https://www.youtube.com/playlist?list=PLyVKH-FrvxMBjQbkI9NXCZcrQrxs22joy`  
