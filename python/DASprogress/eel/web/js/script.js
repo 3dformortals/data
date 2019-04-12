@@ -75,7 +75,8 @@ async function scanAll(){
 
 function deleteItem(key){
     if(key in db) {delete db[key]}
-    infoDivDataCreator()
+    // infoDivDataCreator()
+    document.getElementById('itemDiv'+key).style.display = 'none'
     eel.pythonFixChanges(objectToTxt(db))()
 }
 
@@ -99,7 +100,8 @@ function saveItem(key){
     db[key]['name'] = document.getElementById('itemName'+key).value
     db[key]['url'] = document.getElementById('itemUrl'+key).value
     db[key]['saw'] = document.getElementById('itemViewed'+key).value
-    infoDivDataCreator()
+    // infoDivDataCreator()
+    document.getElementById('editTable'+key).style.display = "none"
     eel.pythonFixChanges(objectToTxt(db))()
 }
 
