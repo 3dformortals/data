@@ -97,6 +97,8 @@ function editItem(key){
 }
 
 function saveItem(key){
+    document.getElementById('aName'+key).text = document.getElementById('itemName'+key).value
+    document.getElementById('itemSaw'+key).innerHTML = document.getElementById('itemViewed'+key).value
     db[key]['name'] = document.getElementById('itemName'+key).value
     db[key]['url'] = document.getElementById('itemUrl'+key).value
     db[key]['saw'] = document.getElementById('itemViewed'+key).value
@@ -152,6 +154,7 @@ function itemDivCreator(key,item){
         deleteButton.onclick = function() {deleteItem(key)}
         
         var a = document.createElement('a')
+        a.setAttribute('id','aName'+key)
         a.href = item["url"]
         a.text = item["name"]
         a.target = "_blank"
