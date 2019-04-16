@@ -108,8 +108,8 @@ def episode_extractor():
 # test_animevost()
 # test_shiki()
 # test_shiki_1()
-# test_shiki_2()
+test_shiki_2()
 # episode_extractor()
-test_animaunttv()
+# test_animaunttv()
 
 input("shittttttttttttttttt")

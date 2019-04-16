@@ -66,20 +66,23 @@ def safenumber(x):
 
 def gethtml(url,post=False):
     try:
-        if post: r = requests.post(url, data='cmd=date +%Y%m%d', headers={
+        timeout=5 #sec to kill request if problem
+        if post: r = requests.post(url, data='cmd=date +%Y%m%d', timeout=timeout, headers={
             'User-Agent': 'Mozilla/5.0 (Windows NT 6.0; WOW64; rv:24.0) Gecko/20100101 Firefox/24.0'})
-        else:r = requests.get(url, data='cmd=date +%Y%m%d', headers={
+        else:r = requests.get(url, data='cmd=date +%Y%m%d', timeout=timeout, headers={
             'User-Agent': 'Mozilla/5.0 (Windows NT 6.0; WOW64; rv:24.0) Gecko/20100101 Firefox/24.0'})
         # text=r.content.decode("unicode_escape","ignore")
         text = HTML.unescape(r.text)
         return text
-    except:
-        print(sys.exc_info())
-        input("get html error enter to continue")
+    except TimeoutError:
+        return 0
 
 def gethtml2(url):
-    with urllib.request.urlopen(url) as response:
-        html = response.read().decode(errors='ignore')
+    try:
+        with urllib.request.urlopen(url,None,5) as response:
+            html = response.read().decode(errors='ignore')
+    except TimeoutError:
+        html=0
     return html
 
 def youtube_scanner(url):
@@ -117,12 +120,13 @@ def shikimori_org_scanner(url):
     # done 20190211
     # time.sleep(3) #looks like need 2-3 sec pause, or server not response
     # dt = datetime.datetime.today().strftime('%Y-%m-%d')
-    r = urllib.request.Request(url,headers={'User-Agent': 'Mozilla/5.0 (X11; Linux i686; rv:64.0) Gecko/20100101 Firefox/64.0'})
+    timeout = 5
+    r = urllib.request.Request(url ,headers={'User-Agent': 'Mozilla/5.0 (X11; Linux i686; rv:64.0) Gecko/20100101 Firefox/64.0'})
     # r = urllib.request.Request(url, data='cmd=date +%Y%m%d',headers={'User-Agent': 'Mozilla/5.0 (X11; Linux i686; rv:64.0) Gecko/20100101 Firefox/64.0'})
     html = gethtml2(r)
     if html:pass
     else:
-        r = urllib.request.Request(url,headers={'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:64.0) Gecko/20100101 Firefox/64.0'})
+        r = urllib.request.Request(url ,headers={'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:64.0) Gecko/20100101 Firefox/64.0'})
         # r = urllib.request.Request(url, data='cmd=date +%Y%m%d',headers={'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:64.0) Gecko/20100101 Firefox/64.0'})
         html = gethtml2(r)
         
@@ -230,7 +234,7 @@ def animaunt_tv_scanner(url):
         r = urllib.request.Request(url,headers={'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:64.0) Gecko/20100101 Firefox/64.0'})
         html = gethtml2(r)
     # html = gethtml(url,True)
-    html = html.split('<li class="vis"><span>Эпизоды:</span>',1)[1].split("из",1)[0]
+    html = html.split('<li class="vis"><span>Эпизоды:</span>',1)[1].split("из",1)[0] or "0"
     webready = safenumber(html)
     return [0,1,2,3,webready]
 
