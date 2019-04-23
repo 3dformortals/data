@@ -210,21 +210,17 @@ def anilibria_tv_scanner(url):
     return webname, website, canscan, scanstatus, webready
 
 def lostfilm_tv_scanner(url):
-    # done 20190211
-    html = gethtml2(url)
-    # html = gethtml(url,True)
-    soup = BS4(html, "html5lib")
-
-    webname = soup.find("div", class_='title-ru').text or "parsing_error"
-    webname +=" / "+ soup.find("div", class_='title-en').text or "parsing_error"
-
-    website = "lostfilm.tv"
-    textready = soup.find("div", class_="details").text or "parsing_error"
-    text = textready.split("серий: ",1)[1].split(" ")[0]
-    webready = safeint(text) or -1
-    canscan = "yes"
-    scanstatus = "good" if "parsing_error" != webname and webready > -1 else "bad" or "parsing_error"
-    return webname, website, canscan, scanstatus, webready
+    # done 20190423
+    r = urllib.request.Request(url,headers={'User-Agent': 'Mozilla/5.0 (X11; Linux i686; rv:64.0) Gecko/20100101 Firefox/64.0'})
+    html = gethtml2(r)
+    if html:pass
+    else:
+        r = urllib.request.Request(url,headers={'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:64.0) Gecko/20100101 Firefox/64.0'})
+        html = gethtml2(r)
+    
+    text = html.split("серий: ",1)[1].split(" ")[0]
+    webready = safenumber(text) or -1
+    return [0,1,2,3,webready]
 
 def animaunt_tv_scanner(url):
     r = urllib.request.Request(url,headers={'User-Agent': 'Mozilla/5.0 (X11; Linux i686; rv:64.0) Gecko/20100101 Firefox/64.0'})

@@ -64,6 +64,20 @@ def test_shiki_2():
     print(html)
     return html
 
+def test_lost():
+    url="http://www.lostfilm.tv/series/What_We_Do_in_the_Shadow/season_1/"
+    # html = gethtml(url,True)
+    r = urllib.request.Request(url,headers={'User-Agent': 'Mozilla/5.0 (X11; Linux i686; rv:64.0) Gecko/20100101 Firefox/64.0'})
+    # r = urllib.request.Request(url, data='cmd=date +%Y%m%d',headers={'User-Agent': 'Mozilla/5.0 (X11; Linux i686; rv:64.0) Gecko/20100101 Firefox/64.0'})
+    html = gethtml2(r)
+    if html:pass
+    else:
+        r = urllib.request.Request(url,headers={'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:64.0) Gecko/20100101 Firefox/64.0'})
+        # r = urllib.request.Request(url, data='cmd=date +%Y%m%d',headers={'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:64.0) Gecko/20100101 Firefox/64.0'})
+        html = gethtml2(r)
+    print(html)
+    return html
+
 def test_animevost():
     url="http://animevost.org/tip/tv/2228-kaguya-sama-wa-kokurasetai.html"
     html = gethtml(url,True)
@@ -108,8 +122,9 @@ def episode_extractor():
 # test_animevost()
 # test_shiki()
 # test_shiki_1()
-test_shiki_2()
+# test_shiki_2()
 # episode_extractor()
 # test_animaunttv()
+test_lost()
 
 input("shittttttttttttttttt")
