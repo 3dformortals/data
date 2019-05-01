@@ -148,7 +148,14 @@ def shikimori_org_scanner(url):
 
 def anistar_me_scanner(url):
     # done 20190211
-    html = gethtml2(url)
+    r = urllib.request.Request(url ,headers={'User-Agent': 'Mozilla/5.0 (X11; Linux i686; rv:64.0) Gecko/20100101 Firefox/64.0'})
+    # r = urllib.request.Request(url, data='cmd=date +%Y%m%d',headers={'User-Agent': 'Mozilla/5.0 (X11; Linux i686; rv:64.0) Gecko/20100101 Firefox/64.0'})
+    html = gethtml2(r)
+    if html:pass
+    else:
+        r = urllib.request.Request(url ,headers={'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:64.0) Gecko/20100101 Firefox/64.0'})
+        # r = urllib.request.Request(url, data='cmd=date +%Y%m%d',headers={'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:64.0) Gecko/20100101 Firefox/64.0'})
+        html = gethtml2(r)
     soup = BS4(html, "html5lib")
 
     webname = soup.find("h1", itemprop="name").string or "parsing_error"
