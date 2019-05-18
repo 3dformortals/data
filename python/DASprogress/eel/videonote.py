@@ -244,7 +244,8 @@ def animaunt_tv_scanner(url):
 def web_scanner(url):
     if "animevost.org" in url.lower(): data = animevost_org_scanner(url)
     elif "shikimori.org" in url.lower(): data = shikimori_org_scanner(url)
-    elif "anistar.me" in url.lower(): data = anistar_me_scanner(url)
+    elif "anistar.me" in url.lower(): data = anistar_me_scanner(url) # was banned from government on rus territory 2019-05-15
+    elif "anistar.org" in url.lower(): data = anistar_me_scanner(url)
     elif "vk.com" in url.lower(): data = vk_com_scanner(url)
     elif "anilibria.tv" in url.lower(): data = anilibria_tv_scanner(url)
     elif "green-teatv.com" in url.lower(): data = green_tea_scanner(url)
