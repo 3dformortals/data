@@ -1,7 +1,7 @@
 20181228 not working , even basic technique. FA-king black magic...  
 20190212 alive and can be exported to executable uses  
 `python3 -m eel videonote.py web --onefile --noconsole`  
-20190501 latest release date  
+20190518 latest release date  
 
 ![screenshot](screenshot.png)  
 
@@ -10,7 +10,7 @@ VideoNote - записная книжка с функцией поиска но�
 Подерживаемые сайты на момент релиза:  
 - `animevost.org`
 - `play.shikimori.org`
-- `anistar.me`
+- `anistar.me` was blocked in 2019-05-18 . Switched to `anistar.org`
 - `vk.com` (только открытые альбомы и только считает число видеозаписей)
 - `green-teatv.com`
 - `anilibria.tv`
