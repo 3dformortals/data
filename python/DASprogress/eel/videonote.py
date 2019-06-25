@@ -146,6 +146,31 @@ def shikimori_org_scanner(url):
     scanstatus = "good" if "parsing_error" != webname and webready > -1 else "bad" or "parsing_error"
     return webname, website, canscan, scanstatus, webready
 
+def shikimori_one_scanner(url):
+    # done 20190625
+    # time.sleep(3) #looks like need 2-3 sec pause, or server not response
+    # dt = datetime.datetime.today().strftime('%Y-%m-%d')
+    timeout = 5
+    r = urllib.request.Request(url ,headers={'User-Agent': 'Mozilla/5.0 (X11; Linux i686; rv:64.0) Gecko/20100101 Firefox/64.0'})
+    # r = urllib.request.Request(url, data='cmd=date +%Y%m%d',headers={'User-Agent': 'Mozilla/5.0 (X11; Linux i686; rv:64.0) Gecko/20100101 Firefox/64.0'})
+    html = gethtml2(r)
+    if html:pass
+    else:
+        r = urllib.request.Request(url ,headers={'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:64.0) Gecko/20100101 Firefox/64.0'})
+        # r = urllib.request.Request(url, data='cmd=date +%Y%m%d',headers={'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:64.0) Gecko/20100101 Firefox/64.0'})
+        html = gethtml2(r)
+        
+    soup = BS4(html, "html5lib")
+    htmltext = str(soup)
+    webready = -1 #error etc
+    episodes = htmltext.split("Эпизоды:",1)[1].split("class=\"value\">",1)[1].split("<",1)[0].split("/")[0] or False
+    if episodes: webready = safenumber(episodes) or webready
+    fullSeason = soup.find("span",{"data-text":"вышло"}) or False
+    if fullSeason: webready = 0 # keep it for full season released etc, for shikimori.one only
+    print(webready)
+    return 0, 0, 0, 0, webready
+
+
 def anistar_me_scanner(url):
     # done 20190211
     r = urllib.request.Request(url ,headers={'User-Agent': 'Mozilla/5.0 (X11; Linux i686; rv:64.0) Gecko/20100101 Firefox/64.0'})
@@ -243,7 +268,8 @@ def animaunt_tv_scanner(url):
 
 def web_scanner(url):
     if "animevost.org" in url.lower(): data = animevost_org_scanner(url)
-    elif "shikimori.org" in url.lower(): data = shikimori_org_scanner(url)
+    elif "shikimori.org" in url.lower(): data = shikimori_one_scanner(url) #was banned on rus territory 2019-05
+    elif "shikimori.one" in url.lower(): data = shikimori_one_scanner(url)
     elif "anistar.me" in url.lower(): data = anistar_me_scanner(url) # was banned from government on rus territory 2019-05-15
     elif "anistar.org" in url.lower(): data = anistar_me_scanner(url)
     elif "vk.com" in url.lower(): data = vk_com_scanner(url)

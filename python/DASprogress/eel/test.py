@@ -118,6 +118,34 @@ def episode_extractor():
     # for text in textx:print(re.findall(regex,text)) # only names without numbers... wtf python?!
     # for text in textx:print(re.search(regex,text)) # only first
     
+def shikimori_one_scanner(url):
+    # done 20190625
+    # time.sleep(3) #looks like need 2-3 sec pause, or server not response
+    # dt = datetime.datetime.today().strftime('%Y-%m-%d')
+    timeout = 5
+    r = urllib.request.Request(url ,headers={'User-Agent': 'Mozilla/5.0 (X11; Linux i686; rv:64.0) Gecko/20100101 Firefox/64.0'})
+    # r = urllib.request.Request(url, data='cmd=date +%Y%m%d',headers={'User-Agent': 'Mozilla/5.0 (X11; Linux i686; rv:64.0) Gecko/20100101 Firefox/64.0'})
+    html = gethtml2(r)
+    if html:pass
+    else:
+        r = urllib.request.Request(url ,headers={'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:64.0) Gecko/20100101 Firefox/64.0'})
+        # r = urllib.request.Request(url, data='cmd=date +%Y%m%d',headers={'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:64.0) Gecko/20100101 Firefox/64.0'})
+        html = gethtml2(r)
+        
+    soup = BS4(html, "html5lib")
+    htmltext = str(soup)
+    
+    webready = -1 #error etc
+    print("Эпизоды:" in htmltext)
+    episodes = htmltext.split("Эпизоды:",1)[1]
+    episodes = episodes.split("class=\"value\">",1)[1]
+    episodes = episodes.split("<",1)[0].split("/")[0]
+    print("эпизоды === ",episodes,flush=True)
+    if episodes: webready = safenumber(episodes) or webready
+    fullSeason = soup.find("span",{"data-text":"вышло"}) or False
+    if fullSeason: webready = 0 # keep it for full season released etc, for shikimori.one only
+    print(webready)
+    return 0, 0, 0, 0, webready
 
 # test_animevost()
 # test_shiki()
@@ -125,6 +153,7 @@ def episode_extractor():
 # test_shiki_2()
 # episode_extractor()
 # test_animaunttv()
-test_lost()
+# test_lost()
+shikimori_one_scanner("https://shikimori.one/animes/9253-steins-gate")
 
 input("shittttttttttttttttt")

@@ -9,7 +9,7 @@
 VideoNote - записная книжка с функцией поиска новых серий(эпизодов) аниме, дорам, сериалов.  
 Подерживаемые сайты на момент релиза:  
 - `animevost.org`
-- `play.shikimori.org`
+- `play.shikimori.org` was blocked. Now `shikimori.one`
 - `anistar.me` was blocked in 2019-05-18 . Switched to `anistar.org`
 - `vk.com` (только открытые альбомы и только считает число видеозаписей)
 - `green-teatv.com`
@@ -24,7 +24,8 @@ VideoNote is notebook with scan functionality, for few video services, which tar
 
 # This version can scan sites uses links:  
 - `animevost.org` - example: `http://animevost.org/tip/tv/2167-tensei-shitara-slime-datta-ken.html`
-- `play.shikimori.org`  - example: `https://play.shikimori.org/animes/35790-tate-no-yuusha-no-nariagari` - example: `https://play.shikimori.org/animes/35790-tate-no-yuusha-no-nariagari/video_online/1`  
+- ~~`play.shikimori.org`  - example: `https://play.shikimori.org/animes/35790-tate-no-yuusha-no-nariagari` - example: `https://play.shikimori.org/animes/35790-tate-no-yuusha-no-nariagari/video_online/1`~~**was blocked**  
+- `play.shikimori.one`  - example: `https://shikimori.one/animes/9253-steins-gate`  
 - `anistar.me` - example: `https://anistar.me/6695-o-moem-pererozhdenii-v-sliz-tensei-shitara-slime-datta-ken.html`
 - `vk.com` - example: `https://vk.com/videos-24440848?section=album_54694282` (only opened albums/number videos inside)
 - `green-teatv.com` - example: `http://green-teatv.com/5865-uborka-so-strastyu-clean-with-passion-for-now.html`
