@@ -90,7 +90,7 @@ def youtube_scanner(url):
     regex = re.compile(r'\d* *(episode|серия|эпизод|выпуск) *\d*',flags=re.IGNORECASE|re.MULTILINE)
     regexpair = re.compile(r' *episode|серия|эпизод|выпуск *',flags=re.IGNORECASE|re.MULTILINE)
     # for text in textx:print(re.finditer(regex,text)) # only names without numbers... wtf python?!
-    webready = 0
+    webready = -1
     iter = re.finditer(regex,html)
     for i in iter:
         # print(type(i[0]))
@@ -213,7 +213,7 @@ def green_tea_scanner(url):
 
     webname = soup.find("meta", itemprop="name")["content"] or "parsing_error"
     website = "green-teatv.com"
-    webready = 0
+    webready = -1
     for div in soup.find_all("div",class_="info-label"):
         if div.text == "Длительность:":
             webready = safeint(div.findNext("div",class_="info-desc").text.split("из")[0]) or -1
