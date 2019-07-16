@@ -163,12 +163,13 @@ def shikimori_one_scanner(url):
     soup = BS4(html, "html5lib")
     htmltext = str(soup)
     webready = -1 #error etc
-    episodes = htmltext.split("Эпизоды:",1)[1].split("class=\"value\">",1)[1].split("<",1)[0].split("/")[0] or False
-    if episodes: webready = safenumber(episodes) or webready
     fullSeason = soup.find("span",{"data-text":"вышло"}) or False
     if fullSeason: webready = 0 # keep it for full season released etc, for shikimori.one only
     anons = soup.find("span",{"data-text":"анонс"}) or False
     if anons: webready = -2 #anons case shikimori.one only
+    if (not(anons or fullSeason)):
+        episodes = htmltext.split("Эпизоды:",1)[1].split("class=\"value\">",1)[1].split("<",1)[0].split("/")[0] or False
+        if episodes: webready = safenumber(episodes) or webready
     print(webready)
     return 0, 0, 0, 0, webready
 
