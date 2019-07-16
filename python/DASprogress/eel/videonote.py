@@ -167,6 +167,8 @@ def shikimori_one_scanner(url):
     if episodes: webready = safenumber(episodes) or webready
     fullSeason = soup.find("span",{"data-text":"вышло"}) or False
     if fullSeason: webready = 0 # keep it for full season released etc, for shikimori.one only
+    anons = soup.find("span",{"data-text":"анонс"}) or False
+    if anons: webready = -2 #anons case shikimori.one only
     print(webready)
     return 0, 0, 0, 0, webready
 

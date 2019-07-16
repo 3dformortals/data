@@ -61,6 +61,8 @@ async function scanAll(){
             if( output>saw ){color='darkgreen'}
         }else if(output==0){//muddy condition
             color='olive'
+        }else if(output == -2){
+            //nothing changed, because anons in shikimori.one
         }else{color='darkred'}//something wrong etc
         //div coloring
         if(color!=""){
