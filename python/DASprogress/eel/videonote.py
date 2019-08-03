@@ -174,7 +174,11 @@ def shikimori_one_scanner(url):
                 webready = safenumber(episodes)
             except:
                 pass
-        if webready > 1: webready-=1 #that make week(one episode) waiting period for dubbing
+        if webready > 1:
+            webready-=1 #that make week(one episode) waiting period for dubbing
+        elif webready == 0 and not fullSeason:
+            # something like 0/8 ready only for shiki
+            webready = -2 #nothing will changed on screen
     print(webready)
     return 0, 0, 0, 0, webready
 
