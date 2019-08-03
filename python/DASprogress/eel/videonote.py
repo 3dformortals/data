@@ -169,7 +169,11 @@ def shikimori_one_scanner(url):
     if anons: webready = -2 #anons case shikimori.one only
     if (not(anons or fullSeason)):
         episodes = htmltext.split("Эпизоды:",1)[1].split("class=\"value\">",1)[1].split("<",1)[0].split("/")[0] or False
-        if episodes: webready = safenumber(episodes) or webready
+        if episodes:
+            try:
+                webready = safenumber(episodes)
+            except:
+                pass
         if webready > 1: webready-=1 #that make week(one episode) waiting period for dubbing
     print(webready)
     return 0, 0, 0, 0, webready
