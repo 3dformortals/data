@@ -63,6 +63,8 @@ async function scanAll(){
             color='olive'
         }else if(output == -2){
             //nothing changed, because anons in shikimori.one
+        }else if(output == -3){
+            color = 'darkslategray'
         }else{color='darkred'}//something wrong etc
         //div coloring
         if(color!=""){

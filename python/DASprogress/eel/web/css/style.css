@@ -12,6 +12,7 @@ a:visited{color:hsl(34, 50%, 25%);}
 .good {background-color: darkgreen; color:black;}
 .muddy {background-color: olive; color:black;}
 .bad {background-color: darkred; color:black;}
+.another {background-color: darkslategray; color:black;}
 .itemDiv {
     
 }

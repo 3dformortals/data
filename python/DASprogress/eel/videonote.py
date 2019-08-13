@@ -290,7 +290,7 @@ def web_scanner(url):
     elif "lostfilm.tv" in url.lower(): data = lostfilm_tv_scanner(url)
     elif "https://animaunt.tv" in url.lower(): data = animaunt_tv_scanner(url)
     elif "https://www.youtube.com/playlist?list=" in url.lower(): data = youtube_scanner(url)
-    else: data = ["testwebname","testwebsite","testcanscan","testscanstatus",-1]
+    else: data = ["testwebname","testwebsite","testcanscan","testscanstatus",-3]
     webname, website, canscan, scanstatus, webready = data
     return str(webready)
 
