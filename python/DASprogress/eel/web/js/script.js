@@ -146,10 +146,6 @@ function itemDivCreator(key,item){
         var divid = 'itemDiv'+key
         div.setAttribute('id',divid)
         div.setAttribute('class','itemDiv')
-        div.style.cssFloat = 'left'
-        div.style.padding = '4px'
-        div.style.margin = '1px'
-        div.style.border = '1px solid'
         var table = document.createElement('table')
         table.setAttribute('id','itemTable'+key)
         
@@ -170,7 +166,7 @@ function itemDivCreator(key,item){
         viewedButton.setAttribute('title','+1')
         
         var editButton = document.createElement('button')
-        editButton.innerHTML = "edit"
+        editButton.innerHTML = ".."
         editButton.onclick = function() {editItem(key)}
         editButton.setAttribute('title','редактировать')
         

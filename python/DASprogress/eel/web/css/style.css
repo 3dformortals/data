@@ -9,10 +9,19 @@ a {text-decoration: none;}
 a:visited{color:hsl(34, 50%, 25%);}
 /* a:link{color:hsl(34, 50%, 25%) !important;} */ 
 
+button {
+    outline: none !important;
+    box-shadow: none !important; /*remove button 3d effect not work*/
+    border: 1px solid;
+}
+
 .good {background-color: darkgreen; color:black;}
 .muddy {background-color: olive; color:black;}
 .bad {background-color: darkred; color:black;}
 .another {background-color: darkslategray; color:black;}
 .itemDiv {
-    
+    border: 1px solid;
+    margin: 4px ;
+    padding: 4px;
+    float: left;
 }

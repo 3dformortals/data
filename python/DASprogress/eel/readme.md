@@ -1,7 +1,7 @@
 20181228 not working , even basic technique. FA-king black magic...  
 20190212 alive and can be exported to executable uses  
 `python3 -m eel videonote.py web --onefile --noconsole`  
-20190813 latest release date  
+20190830 latest release date  
 
 ![screenshot](screenshot.png)  
 
