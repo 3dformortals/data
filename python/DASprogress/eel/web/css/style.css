@@ -10,10 +10,12 @@ a:visited{color:hsl(34, 50%, 25%);}
 /* a:link{color:hsl(34, 50%, 25%) !important;} */ 
 
 button {
-    outline: none !important;
-    box-shadow: none !important; /*remove button 3d effect not work*/
+    /* outline: none; */
+    /* box-shadow: none; */
     border: 1px solid;
 }
+
+input{border: 1px solid;}
 
 .good {background-color: darkgreen; color:black;}
 .muddy {background-color: olive; color:black;}
