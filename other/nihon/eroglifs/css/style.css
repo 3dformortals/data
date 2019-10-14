@@ -1,0 +1,33 @@
+@font-face {
+    font-family: "body";
+    src: url("../font/togoshi-mincho.ttf");
+    }
+body{
+    background:white !important;
+    color:black !important;
+    font-family: "body";
+    font-size: 24px;
+}
+table{
+    border:1px solid ;
+    border-collapse: collapse;
+    margin:2px;
+    float: left;
+}
+td{
+    border:1px solid;
+    padding:2px ;
+    
+}
+div.eroglif{
+    border:1px solid;
+    padding:2px ;
+    margin:2px;
+    float: left;
+}
+div.reading{
+    border:1px solid;
+    padding:2px ;
+    margin:2px;
+    float: left;
+}
