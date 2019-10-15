@@ -2,6 +2,10 @@
     font-family: "body";
     src: url("../font/togoshi-mincho.ttf");
     }
+@font-face{
+    font-family: "body1";
+    src: url("../font/KosugiMaru-Regular.ttf");
+}
 body{
     background:white !important;
     color:black !important;
@@ -18,6 +22,24 @@ td{
     border:1px solid;
     padding:2px ;
     
+}
+button, input{
+    font-size:8px;
+    margin:0px;
+    padding:0px;
+    width:24px;
+    height:12px;
+}
+@media print
+{
+.noprint {display:none;}
+}
+div#title{
+    border:1px solid;
+    padding:2px ;
+    margin:2px;
+    /* float: left; */
+    font-size: 8px;
 }
 div.eroglif{
     border:1px solid;

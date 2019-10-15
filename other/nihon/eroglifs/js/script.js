@@ -1,3 +1,10 @@
+function bodyFontSize(){
+    document.body.style.fontSize = document.getElementById('fontSize').value + "px"
+}
+function bodySwitchFont(){
+    if(document.body.style.fontFamily == "body") document.body.style.fontFamily = "body1"
+    else document.body.style.fontFamily = "body"
+}
 function tableMaker(){
     var ero = document.getElementById("eroglifs")
     var text = ero.innerText
@@ -19,6 +26,5 @@ function tableMaker(){
             ero.appendChild(div)
         }
     }
-    
 }
 tableMaker()
