@@ -25,7 +25,7 @@ onefolder = input("input 1 to collect result in one folder, input 0 or nothing t
 Layers with names started from \" \"(space) and \"-\"(minus) will be IGNORED.\n \
 Developed/tested only with inkscape svg format.\n \
 All layers inside svg must be UNLOCKED and VISIBLE, or can be empty png result.\n \
-Empty layer in inkscape svg file rise infinity recursion.\n \
+Empty layer inside inkscape svg file begin infinite recursion.\n \
 That print empty layer add to layer rectangle/circle out of canvas(printed area).\n \
 That break process press \"Ctrl+C\"\n \
 REMOVE ALL PNG FILES from result FOLDER, BEFORE every START SCRIPT!!! Or remove result folder.\n \
