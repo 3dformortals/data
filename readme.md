@@ -1,3 +1,9 @@
+repository data available under an [OSBORDUC FPL](https://healingdrawing.github.io/info/license/fpl.html) license.
+
+[Privacy Policy](https://healingdrawing.github.io/info/pp/fppp.html)
+
+---
+
 201805011949 - was detected wrong result for python3 linux `__file__` detection  
 inside python / imagebatch / imagevideo folder scripts. Need test and add  
 ```
