@@ -1,0 +1,20 @@
+[Desktop Entry]
+Comment[en_US]=antishiteater
+Comment=antishiteater
+Exec= /home/user/python3apps/antishiteater/dist/aset
+GenericName[en_US]=
+GenericName=
+Icon=/home/user/python3apps/python.svg
+MimeType=
+Name[en_US]=ase
+Name=ase
+Name[ru]=ase
+Path=
+StartupNotify=true
+Terminal=true
+TerminalOptions=
+Type=Application
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=
