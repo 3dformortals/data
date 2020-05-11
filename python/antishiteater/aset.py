@@ -1,10 +1,6 @@
+# -*- coding: utf-8 -*-
 # terminal version
- # -*- coding: utf-8 -*-
-import sys,os,webbrowser
-import html
-import requests
-from bs4 import BeautifulSoup as BS4
-import re
+import webbrowser
 import urllib.request #second test
 
 def gethtml2(url):
@@ -12,28 +8,9 @@ def gethtml2(url):
         html = response.read().decode()
     return html
 
-def gethtml(url,post=False):
-    try:
-        print("before post/get",flush=True) # this last printed
-        if post: r = requests.post(url, data='cmd=date +%Y%m%d', headers={
-            'User-Agent': 'Mozilla/5.0 (Windows NT 6.0; WOW64; rv:24.0) Gecko/20100101 Firefox/24.0'})
-        else: r = requests.get(url, data='cmd=date +%Y%m%d', headers={
-            'User-Agent': 'Mozilla/5.0 (Windows NT 6.0; WOW64; rv:24.0) Gecko/20100101 Firefox/24.0'})
-        # text=r.content.decode("unicode_escape","ignore")
-        print("before r.text",flush=True)
-        text = html.unescape(r.text)
-        # print("text------------------\n",text)
-        print(text)
-        return text
-    except:
-        print(sys.exc_info())
-        return "python - gethtml error \n" + str(sys.exc_info())
-
 def readyoutube(url,post=False):
     result = gethtml2(url)
     return result
-
-# new code
 
 sources={
     11:"https://www.youtube.com/channel/UCIpvyH9GKI54X1Ww2BDnEgg/videos", #bit
@@ -72,7 +49,8 @@ while(want != 0):
         print(names[want])
         for i in range(len(items)): #get title , create dict of titles and hrefs
             title = items[i].split("\"  aria-describedby",1)[0]
-            title = title.replace("&quot;", '\"')[:100]
+            title = title.replace("&quot;", '\"')[:72]
+            if (len(title)==72): title += "..."
             href = "https://www.youtube.com" + items[i].split("href=\"")[1].split("\"",1)[0]
             titles[i]=title
             hrefs[i]=href
