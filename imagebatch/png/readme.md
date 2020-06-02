@@ -11,6 +11,10 @@ png batch edit / пакетное редактирование png.
 Тестировалось под pillow 3.4.2, python 3.4.4 win7x64
 
 --------------------------------------------------
+## pngos
+- **recursively** open and save png images, include all subfolders. This can fix f.e. empty png files , compressed using FileOptimizer, which incorrect displayed inside texture atlas as black color filled.  
+
+--------------------------------------------------
 
 ## pngshredder
 - разрезает каждый png файл в папке на несколько слоев. Каждый слой содержит уникальные фрагменты. Число слоев и размер фрагмента можно изменять.
