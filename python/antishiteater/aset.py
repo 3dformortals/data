@@ -79,13 +79,18 @@ while(want != 0):
             title = items[i].split("\"simpleText\":\"",1)[1].split("\"},\"publishedTimeText\"",1)[0]
             title = title.replace("&quot;", '\"')[:72]
             if (len(title)==72): title += "..."
-            href = "https://www.youtube.com" + items[i].split("\"},\"publishedTimeText\":{\"simpleText\":\"",1)[0].split("\"simpleText\":\"",1)[1]
+            
+            href = "https://www.youtube.com" + items[i].split("\":{\"url\":\"",1)[1].split("\"")[0]
             titles[i]=title
             hrefs[i]=href
             print(str(i+1) + "  "+titles[i])
         print(headtext)
     elif (want in range(1,len(hrefs)+1)): #show element in browser
-        webbrowser.open(hrefs[want-1],2)
+        try:
+            webbrowser.open(hrefs[want-1],2, True)
+        except webbrowser.Error as e:
+            # print(str(e))
+            pass
     else :
         print(headtext)
         print(helptext)
