@@ -1,4 +1,6 @@
-import os,sys,datetime,colorsys
+
+#fail because result looks like poor quality trash
+import os,sys,datetime
 from PIL import Image
 from PIL.Image import ADAPTIVE
 
@@ -29,19 +31,13 @@ def nextH(h,step):
     if nh>255:nh -= 255
     return nh
 
-def nextRGB(r,g,b,step):
-    h,s,v = colorsys.rgb_to_hsv(r/255,g/255,b/255)
-    nh = nextH(int(255*h),step)/255
-    nr,ng,nb = colorsys.hsv_to_rgb(nh,s,v)
-    return int(255*nr),int(255*ng),int(255*nb)
-
 try:
     hueStep = int(hueStep)
-    if hueStep not in variants: hueStep = 128
-    print("value not from sequence, will used 128")
+    if hueStep not in variants: hueStep = 16
+    print("value not from sequence, will used 16")
 except:
-    hueStep = 128
-    print("bad incoming data, will used 128")
+    hueStep = 16
+    print("bad incoming data, will used 16")
     print(sys.exc_info())
 
 steps = [hueStep * i for i in range(int(256/hueStep))]
@@ -66,30 +62,31 @@ try:
 
         adres=mydir+os.sep+fname
         print(adres)
-        im = Image.open(adres)
+        im = Image.open(adres).convert(mode='RGBA',palette=ADAPTIVE,colors=16777216)
         print("Format: {0}\nSize: {1}\nMode: {2}".format(im.format, im.size, im.mode))
-        im.convert(mode='RGB')#,palette=ADAPTIVE,colors=16777216)
 
         #hsv
+        A = im.getchannel('A')
         # print([a for a in A.getdata(0)])
-        # im.convert('RGB').convert(mode='HSV',palette=ADAPTIVE,colors=16777216)
-        R = im.getdata(0)
-        G = im.getdata(1)
-        B = im.getdata(2)
-        # A = im.getdata(3)
+        im.convert('RGB').convert(mode='HSV',palette=ADAPTIVE,colors=16777216)
+        H = im.getdata(0)
+
+        newS = im.getdata(1)
+        newV = im.getdata(2)
 
         for sind in range(len(steps)):
+            newH = []
+            for h in H:
+                newH.append(nextH(h,steps[sind]))
             nim = []
-            for i in range(len(R)):
-                r,g,b = nextRGB(R[i],G[i],B[i],steps[sind])
-                nim.append((r,g,b))
-                # nim.append((r,g,b,A[i]))
-            RGB = Image.new('RGB',im.size)
-            RGB.putdata(nim)
-            
-            # RGB = HSV.convert('RGB',palette=ADAPTIVE,colors=16777216)
-            # R,G,B = HSV.convert('RGB').split()
-            # RGBA = Image.merge('RGBA',(R,G,B,A))
+            for i in range(len(newH)):
+                nim.append((newH[i],newS[i],newV[i]))
+            # print([i for i in H])
+            # print(newH)
+            HSV = Image.new('HSV',im.size,)
+            HSV.putdata(nim)
+            R,G,B = HSV.convert('RGB').split()
+            RGBA = Image.merge('RGBA',(R,G,B,A))
 
             print(str(sind+1)+"/"+str(len(steps)))
             print("recount complete")
@@ -97,8 +94,7 @@ try:
             print("------------------ V ----------------------")
 
             finaldir = namedir+fname.split(".")[0]+"_"+str(sind)+"."+fname.split(".")[1]
-            RGB.save(finaldir,'PNG')
-            # RGBA.save(finaldir,'PNG')
+            RGBA.save(finaldir,'PNG')
             print("save image complete")
             print(datetime.datetime.now().time())
             print("------------------ V ----------------------")
