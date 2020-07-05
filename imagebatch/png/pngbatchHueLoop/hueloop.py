@@ -9,11 +9,12 @@ elif __file__:
 print("------------mydir------------")
 print(mydir)
 print("------------------------")
-maskdir = mydir+os.sep+"mask"+os.sep
-print("new files will be placed inside ",maskdir, "path")
+loopdir = mydir+os.sep+"loop"+os.sep
+print("new files will be placed inside ",loopdir, "path")
 print("------------------------")
 
-color = input("new color for pixels which had alpha > 0 (R G B A 255) space separated, default '255 255 255' white with old alpha ")
+variants = [2,4,8,16,32,64,128]
+hueStep = input("hue step "+" ".join([str(x) for x in variants])+" ")
 
 def pv(x):
     """parse string to int value between 0...255"""
@@ -22,41 +23,22 @@ def pv(x):
     if (v>255) : v=255
     return v
 
-def nextH(h):
-    nh = h + 50
+def nextH(h,step):
+    nh = h + step
     if nh>255:nh -= 255
     return nh
 
 try:
-    color=color.split(" ")
-    print(color)
-    if len(color)==1:#only alpha will be changed
-        _r=None
-        _g=None
-        _b=None
-        _a=pv(color[0])
-    elif len(color)==2:#gray and alpha will be changed
-        _r=pv(color[0])
-        _g=pv(color[0])
-        _b=pv(color[0])
-        _a=pv(color[1])
-    elif len(color)==3:
-        _r=pv(color[0])
-        _g=pv(color[1])
-        _b=pv(color[2])
-        _a=None
-    else:
-        _r = pv(color[0])
-        _g = pv(color[1])
-        _b = pv(color[2])
-        _a = pv(color[3])
+    hueStep = int(hueStep)
+    if hueStep not in variants: hueStep = 16
+    print("value not from sequence, will used 16")
 except:
-    print("bad incoming color, will be used white color with old alpha")
+    hueStep = 16
+    print("bad incoming data, will used 16")
     print(sys.exc_info())
-    _r,_g,_b,_a=255,255,255,None
 
+steps = [hueStep * i for i in range(int(256/hueStep))]
 
-print("new pixel colors will be RGBA(",_r,_g,_b,_a,")")
 try:
     print(datetime.datetime.now().time())
     print("------------------ beginning ----------------------")
@@ -67,10 +49,13 @@ try:
     print(fnames)
     
     if len(fnames) > 0:
-        if not os.path.exists(maskdir):
-            os.makedirs(maskdir)
+        if not os.path.exists(loopdir):
+            os.makedirs(loopdir)
     
     for fname in fnames:
+        namedir = loopdir+os.sep+fname.split(".",1)[0]+os.sep
+        if not os.path.exists(namedir):
+            os.makedirs(namedir)
 
         adres=mydir+os.sep+fname
         print(adres)
@@ -78,57 +63,37 @@ try:
 
         #hsv
         A = im.getchannel('A')
-        print([a for a in A.getdata(0)])
+        # print([a for a in A.getdata(0)])
         im.convert('RGB').convert('HSV')
         H = im.getdata(0)
 
         newS = im.getdata(1)
         newV = im.getdata(2)
 
-        newH = []
-        for h in H:
-            newH.append(nextH(h))
-        nim = []
-        for i in range(len(newH)):
-            nim.append((newH[i],newS[i],newV[i]))
-        # print([i for i in H])
-        # print(newH)
-        HSV = Image.new('HSV',im.size)
-        HSV.putdata(nim)
-        R,G,B = HSV.convert('RGB').split()
-        RGBA = Image.merge('RGBA',(R,G,B,A))
+        for sind in range(len(steps)):
+            newH = []
+            for h in H:
+                newH.append(nextH(h,steps[sind]))
+            nim = []
+            for i in range(len(newH)):
+                nim.append((newH[i],newS[i],newV[i]))
+            # print([i for i in H])
+            # print(newH)
+            HSV = Image.new('HSV',im.size)
+            HSV.putdata(nim)
+            R,G,B = HSV.convert('RGB').split()
+            RGBA = Image.merge('RGBA',(R,G,B,A))
 
+            print(str(sind+1)+"/"+str(len(steps)))
+            print("recount complete")
+            print(datetime.datetime.now().time())
+            print("------------------ V ----------------------")
 
-
-        # im.load()
-        # w,h=im.size
-        # w=range(w)
-        # h=range(h)
-
-        # R=list(im.getdata(0))
-        # G=list(im.getdata(1))
-        # B=list(im.getdata(2))
-        # alp=list(im.getdata(3)) #alpha tuple 0...255 кортеж прозрачности пикселей
-        # newalp=[]
-        # for i in range(len(alp)):
-        #     r=_r if alp[i]>0 and _r is not None else R[i]
-        #     g=_g if alp[i]>0 and _g is not None else G[i]
-        #     b=_b if alp[i]>0 and _b is not None else B[i]
-        #     a=_a if alp[i]>0 and _a is not None else alp[i]
-        #     newalp.append((r,g,b,a))
-
-        print("recount complete")
-        print(datetime.datetime.now().time())
-        print("------------------ V ----------------------")
-        # im.putdata(newalp)
-        print("load image data complete")
-        print(datetime.datetime.now().time())
-        print("------------------ V ----------------------")
-        # im.save("_"+fname)
-        RGBA.save(maskdir+fname)
-        print("save image complete")
-        print(datetime.datetime.now().time())
-        print("------------------ V ----------------------")
+            RGBA.save(namedir+fname.split(".")[0]+"_"+str(sind)+"."+fname.split(".")[1])
+            print("save image complete")
+            print(datetime.datetime.now().time())
+            print("------------------ V ----------------------")
+            
 
 except:
     print(sys.exc_info())
