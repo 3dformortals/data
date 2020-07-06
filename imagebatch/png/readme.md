@@ -13,7 +13,7 @@ png batch edit / пакетное редактирование png.
 --------------------------------------------------
 
 ## pngbatchHueLoop
-![original](vid/hueloop.webm?raw=true "before")
+[original](vid/hueloop.webm)
 - opens each png file in a folder. Creates a looping sequence of numbered frames. Each subsequent frame is distinguished by shifting the HSV `Hue` component of each pixel by the same step.
 - открывает каждый png файл в папке. Создает зацикленую последовательность пронумерованых кадров. Каждый следующий кадр отличается смещением HSV `Hue` компонента каждогопикселя на одинаковый шаг.
 
