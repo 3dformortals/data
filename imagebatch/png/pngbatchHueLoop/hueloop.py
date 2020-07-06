@@ -14,8 +14,10 @@ loopdir = mydir+os.sep+"loop"+os.sep
 print("new files will be placed inside ",loopdir, "path")
 print("------------------------")
 
-variants = [2,4,8,16,32,64,128]
-hueStep = input("hue step "+" ".join([str(x) for x in variants])+" ")
+variants = [2,4,8,16,32,64,128,-2,-4,-8,-16,-32,-64,-128]
+hueStep = input("hue step "+" ".join([str(x) for x in variants])+
+"\nNegative values for add reversed(except first and last) frames after general.\n"
+)
 
 def pv(x):
     """parse string to int value between 0...255"""
@@ -36,9 +38,14 @@ def nextRGB(r,g,b,step):
     return int(255*nr),int(255*ng),int(255*nb)
 
 try:
+    addBack = False
     hueStep = int(hueStep)
-    if hueStep not in variants: hueStep = 128
-    print("value not from sequence, will used 128")
+    if hueStep not in variants:
+        hueStep = 128
+        print("value not from sequence, will used 128")
+    if hueStep<0:
+        addBack = True
+        hueStep = abs(hueStep)
 except:
     hueStep = 128
     print("bad incoming data, will used 128")
@@ -98,6 +105,11 @@ try:
 
             finaldir = namedir+fname.split(".")[0]+"_"+str(sind)+"."+fname.split(".")[1]
             RGB.save(finaldir,'PNG')
+            
+            if addBack and sind not in [0,len(steps)]:
+                tailind = str(2*(len(steps)-1)-sind)
+                finalTail =  namedir+fname.split(".")[0]+"_"+tailind+"."+fname.split(".")[1]
+                RGB.save(finalTail,'PNG')
             # RGBA.save(finaldir,'PNG')
             print("save image complete")
             print(datetime.datetime.now().time())

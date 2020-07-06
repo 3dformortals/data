@@ -11,6 +11,14 @@ png batch edit / пакетное редактирование png.
 Тестировалось под pillow 3.4.2, python 3.4.4 win7x64
 
 --------------------------------------------------
+
+## pngbatchHueLoop
+![original](vid/hueloop.webm?raw=true "before")
+- opens each png file in a folder. Creates a looping sequence of numbered frames. Each subsequent frame is distinguished by shifting the HSV `Hue` component of each pixel by the same step.
+- открывает каждый png файл в папке. Создает зацикленую последовательность пронумерованых кадров. Каждый следующий кадр отличается смещением HSV `Hue` компонента каждогопикселя на одинаковый шаг.
+
+--------------------------------------------------
+
 ## pngos
 - **recursively** open and save png images, include all subfolders. This can fix f.e. empty png files , compressed using FileOptimizer, which incorrect displayed inside texture atlas as black color filled.  
 
