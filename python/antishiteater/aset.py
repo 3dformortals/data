@@ -70,6 +70,7 @@ want = -1
 while(want != 0):
     if (want in range(11,17)):
         webtext = readyoutube(sources[want])
+        print(webtext)
         items = webtext.split("\"title\":{\"accessibility\":{\"accessibilityData\":{\"label\":\"",11)[1:10] #up to 9 elements
         hrefs.clear()
         titles.clear()
