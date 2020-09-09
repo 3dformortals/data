@@ -1,15 +1,14 @@
 [Desktop Entry]
-Comment[en_US]=antishiteater
-Comment=antishiteater
-Exec= /home/user/python3apps/antishiteater/dist/aset
+Comment[en_US]=
+Comment=
+Exec=/usr/bin/python /mnt/sda3/development/codehost/data/python/antishiteater/aset.py
 GenericName[en_US]=
 GenericName=
-Icon=/home/user/python3apps/python.svg
+Icon=system-run
 MimeType=
-Name[en_US]=ase
-Name=ase
-Name[ru]=ase
-Path=
+Name[en_US]=aset
+Name=aset
+Path=/tmp
 StartupNotify=true
 Terminal=true
 TerminalOptions=
