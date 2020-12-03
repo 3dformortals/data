@@ -1,0 +1,19 @@
+turbulence 0.3
+seeds
+1565167
+1565176
+
+1565181
+1565182
+1565183
+1565184
+
+1565190
+1565205
+1565208
+
+inkscape
+fill contour
+overlays rubber stamp
+overlays water color
+overlays speckle/dots transparency(not rendered correctly)
