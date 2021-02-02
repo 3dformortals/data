@@ -1,0 +1,47 @@
+<html>
+
+<head>
+    <script src="cb.js"></script>
+    <style type="text/css">
+        table {
+            border-collapse: collapse;
+        }
+
+        td,
+        th {
+            padding: 3px;
+            border: 1px solid black;
+        }
+    </style>
+    <title>cb test compiled to javascript</title>
+</head>
+
+<body>
+    <table style="border:1px solid black;">
+        <script>
+            function p(name = "noname", head = false) {
+                if (!head) {
+                    var n = name.split("(")[1];
+                    document.write("<tr><td>f(" + n + "</td><td>" + JSON.stringify(eval(name)).split(",").join(", ") + "</td></tr>");
+
+                } else {
+                    document.write("<tr><td colspan='2'>" + name + "</td></tr>");
+                }
+            }
+            var cb = new Codebox();
+            p("Codebox functions test. cb.f(...)", "test value", "testing result");
+
+            p("mix('gogogirls')", true);
+            p("cb.mix('gogogirls')");
+            p("mix('testFunction')", true);
+            p("cb.mix('testFunction')");
+
+
+
+    // p("cb.()",cb.(),);
+    // alert(cb.mix('alert'));
+        </script>
+    </table>
+</body>
+
+</html>
